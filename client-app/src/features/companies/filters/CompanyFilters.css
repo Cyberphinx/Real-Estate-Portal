@@ -1,0 +1,19 @@
+.company-filters-container {
+  height: 60px;
+  width: calc((100vw / 3) * 2);
+  overflow-y: hidden;
+  overflow-x: hidden;
+  position: fixed;
+  bottom: 0px;
+  left: calc(100vw /3);
+  z-index: 20;
+  background: #f5f5f5;
+  border: none;
+  display: grid;
+}
+
+.company-filters {
+  /* border: 1px solid black; */
+  border-top: 1px solid #dcdcdc;
+  padding: 8px 0px 0px 20px;
+}

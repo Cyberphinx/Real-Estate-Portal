@@ -1,0 +1,39 @@
+.dashboard-container {
+  display: grid;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  grid-template-columns: auto auto;
+}
+
+.tabs-container {
+  position: relative;
+}
+
+.loading-container {
+  width: calc(100vw / 3);
+  height: calc(100vh - 65px);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  overflow-y: scroll;
+  overflow-x: hidden; 
+  display: grid;
+}
+
+
+.collapsible {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  width: 1.5vw;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: #555;
+}
+
+.collapsible img {
+  width: 8px;
+}

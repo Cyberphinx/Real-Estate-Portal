@@ -1,0 +1,47 @@
+.company-profile-container {
+  margin: auto;
+  padding: 0px 60px;
+  /* border: 1px solid rgba(0, 0, 0, 0.2); */
+  overflow-y: scroll;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.company-profile-contents {
+  text-align: left;
+  padding: 0px 20px;
+}
+
+.company-page-title-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  position: relative;
+}
+
+.company-profile-details {
+  text-align: left;
+}
+
+.company-details-logo {
+  width: 50%;
+}
+
+/* EDIT BUTTON START */
+.edit-company-button {
+  position: absolute;
+  top: 25px;
+  right: 20px;
+  background-color: #fff;
+  color: #000;
+  font-size: 16px;
+  padding: 5px 10px;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.edit-company-button:hover {
+  background-color: #000;
+  color: #fff;
+  border: 1px solid black;
+}
+/* EDIT BUTTON END */

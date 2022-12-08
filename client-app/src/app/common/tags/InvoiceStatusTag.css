@@ -1,0 +1,30 @@
+/* TAG */
+.payment-tag {
+    position: absolute;
+    bottom: 3px;
+    right: 0px;
+    font-size: 12px;
+    z-index: 10;
+    padding: 3px 5px;
+    /* border: 1px solid black; */
+    border-radius: 3px;
+    font-weight: 600;
+  }
+  
+  .pending {
+    background-color: #81a489;
+    color: #fff;
+  }
+  
+  .received {
+    background-color: #3597dc;
+    color: #fff;
+  }
+  
+  .failed {
+    background-color: #f2c572;
+    color: #fff;
+  }
+  /* TAG */
+
+  

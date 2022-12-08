@@ -1,0 +1,29 @@
+.tag {
+  font-size: 14px;
+  z-index: 10;
+  padding: 3px 6px;
+  border: none;
+  border-radius: 3px;
+  font-weight: 600;
+  background-color: #dcdcdc;
+  color: #000;
+  margin: 10px 8px;
+}
+
+.tag:hover {
+  cursor: pointer;
+  background: grey;
+  color: #fff;
+}
+
+.tag-selected {
+  font-size: 14px;
+  z-index: 10;
+  padding: 3px 6px;
+  border: none;
+  border-radius: 3px;
+  font-weight: 600;
+  background-color: grey;
+  color: #fff;
+  margin: 9px 8px;
+}

@@ -1,0 +1,51 @@
+.listing-bookmark {
+  position: absolute;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.listing-bookmark-container {
+  width: calc((100vw / 3) - 20px);
+  height: 50px;
+  padding: 10px 10px 0px 10px;
+  display: grid;
+  grid-gap: 0px;
+  grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(60px, 1fr);
+  overflow-x: auto;
+}
+
+.multiple-index {
+}
+
+.index-button {
+  margin: 5px;
+  background: #fff;
+  border: 1px solid #000;
+  border-radius: 3px;
+  padding: 0px 5px;
+}
+.index-button:hover {
+  cursor: pointer;
+  background: #000;
+  color: #fff;
+}
+.selected-index-button {
+  margin: 4px;
+  background: #fff;
+  border: 2px solid #000;
+  border-radius: 3px;
+  padding: 0px 5px;
+  font-weight: 600;
+}
+.index-numbering {
+  padding: 5px 0px;
+  margin: 0px;
+  font-size: 12px;
+}
+.index-description {
+  padding: 3px;
+  margin: 0px;
+  font-size: 12px;
+}

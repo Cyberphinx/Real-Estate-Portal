@@ -1,0 +1,6 @@
+.company-images {
+  width: 20rem;
+  height: 20rem;
+  object-fit: cover;
+  border-radius: 50%;
+}

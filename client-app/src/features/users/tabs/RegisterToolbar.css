@@ -1,0 +1,46 @@
+.register-toolbar {
+  /* border: 1px solid red; */
+  position: relative;
+  top: -20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 0px;
+}
+
+.individual {
+  /* border: 1px solid blue; */
+  font-weight: 600;
+  background: #fff;
+}
+.individual:hover{
+  padding-right: 2px;
+  background:#000;
+  color:#fff;
+  cursor: pointer;
+}
+.individual-selected {
+  /* border: 1px solid blue; */
+  border-bottom: 2px solid black;
+  font-weight: 600;
+  background: #fff;
+  /* box-shadow: 2px -2px 3px rgba(0, 0, 0, 0.2); */
+}
+
+.agent {
+  /* border: 1px solid blue; */
+  font-weight: 600;
+  background: #fff;
+}
+.agent:hover{
+  padding-left: 1px;
+  background:#000;
+  color:#fff;
+  cursor: pointer;
+}
+.agent-selected {
+  /* border: 1px solid blue; */
+  border-bottom: 2px solid black;
+  font-weight: 600;
+  background: #fff;
+  /* box-shadow: -2px -2px 3px rgba(0, 0, 0, 0.2); */
+}

@@ -1,0 +1,12 @@
+.agency-tag {
+    position: absolute;
+    right: 0px;
+    font-size: 12px;
+    z-index: 10;
+    padding: 3px 6px;
+    /* border: 1px solid black; */
+    border-radius: 3px;
+    font-weight: 600;
+    background-color: #000;
+    color: #fff;
+  }

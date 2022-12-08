@@ -1,0 +1,139 @@
+.services-hub {
+  height: 100vh;
+  width: calc((100vw / 3) * 2);
+  background: #ebecee;
+  color: #000;
+}
+
+.forum-toolbar {
+  height: 30px;
+  background: #dedfe2;
+  margin: 0px;
+  padding: 10px 20px;
+  border-bottom: 1px solid #91959c;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+}
+
+.forum-toolbar > section {
+  /* border: 1px dashed #000; */
+}
+
+.post-job-button {
+  width: 180px;
+  background: #f8f8f9;
+  color: #000;
+  border: 1px solid #91959c;
+  border-radius: 3px;
+  padding: 5px 20px;
+}
+.post-job-button:hover {
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+}
+
+.ask-question-button {
+  width: 180px;
+  background: #f8f8f9;
+  color: #000;
+  border: 1px solid #91959c;
+  border-radius: 3px;
+  padding: 5px 20px;
+}
+.ask-question-button:hover {
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+}
+
+.forum-container {
+  height: calc(100vh - 90px);
+  overflow-y: scroll;
+  display: grid;
+  margin: 0px;
+  padding: 20px 20px 0px 20px;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-gap: 10px;
+}
+
+.thread-container {
+  position: relative;
+  background: #f8f8f9;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  display: grid;
+  grid-template-columns: 40px auto;
+  grid-gap: 20px;
+}
+
+.thread-post {
+  border-radius: 5px;
+}
+
+.job-tag {
+  background: #ccc;
+  color: #000;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 2px 10px;
+  border-radius: 20px;
+}
+
+.question-tag {
+  background: #FFC300;
+  color: #000;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 2px 10px;
+  border-radius: 20px;
+}
+
+.posted-by {
+  font-size: 12px;
+}
+
+.thread-title {
+  font-weight: 600;
+}
+
+.thread-location {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.thread-content {
+  font-size: 14px;
+}
+
+.thread-author {
+  padding: 5px;
+}
+
+.default-user-icon {
+  width: 40px;
+  border: 1px solid grey;
+  border-radius: 50%;
+}
+
+.channel-profile > article {
+  padding: 10px;
+  background: #f8f8f9;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.thread-button {
+  border: 1px solid #91959c;
+  border-radius: 3px;
+  background: none;
+  padding: 5px 10px;
+}
+.thread-button:hover {
+  cursor: pointer;
+  background: #000;
+  color: #fff;
+}

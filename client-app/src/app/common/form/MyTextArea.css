@@ -1,0 +1,24 @@
+.text-area-input-container {
+  padding: 0 0 10px 0;
+}
+
+.text-area-input {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: white;
+  padding: 12px 10px 12px 10px;
+}
+
+.login-error {
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: #fff6f6;
+  width: 80%;
+  margin: 10px auto 0 auto;
+  padding: 5px;
+  font-size: 14px;
+  color: #800020;
+}

@@ -1,0 +1,101 @@
+.branch-form-container {
+  position: relative;
+}
+
+.branch-form {
+  height: calc(100vh - 100px);
+  overflow: scroll;
+  padding: 20px;
+  background: none;
+}
+
+.branch-form-contents > article {
+  /* border: 1px solid #ccc; */
+  border-radius: 5px;
+  background: #fff;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+}
+.branch-form-subtitle {
+  padding: 20px;
+  background: #dcdcdc;
+  color: #000;
+  border-radius: 3px;
+  font-size: 18px;
+}
+.branch-form-label {
+  padding: 10px 0px;
+  margin: 0px;
+}
+.branch-form-input {
+  width: calc(100vw / 3);
+  font-size: 16px;
+  padding: 10px;
+  margin: 10px 0px;
+  border: 1px solid #000;
+  border-radius: 3px;
+}
+.branch-form-input-small {
+  width: calc(100vw / 3);
+  font-size: 16px;
+  padding: 10px;
+  margin: 0px;
+  border: 1px solid #000;
+  border-radius: 3px;
+}
+.branch-form-select {
+  width: calc((100vw / 3) + 21px);
+  font-size: 16px;
+  padding: 10px;
+  margin: 0px -5px;
+  border: 1px solid #000;
+  border-radius: 3px;
+  background: none;
+}
+
+.branch-form-help {
+  position: absolute;
+  left: calc(100vw / 3);
+  top: 10px;
+  border: 1px solid black;
+  border-radius: 3px;
+  padding: 3px 6px 3px 6px;
+}
+.branch-form-help:hover {
+  cursor: pointer;
+}
+.branch-form-help:hover + .branch-form-tooltip {
+  visibility: visible;
+}
+.branch-form-tooltip {
+  visibility: visible;
+  position: absolute;
+  left: calc((100vw / 3) + 60px);
+  top: 58px;
+  max-width: calc((100vw / 4) - 5px);
+  border: 1px solid black;
+  border-radius: 3px;
+  padding: 3px 6px 3px 6px;
+  background: #f5f5f5;
+  font-size: 14px;
+}
+
+.branch-form-error {
+  border-radius: 3px;
+  background-color: #dc3545;
+  padding: 5px;
+  font-size: 14px;
+  color: #fff;
+  position: absolute;
+  left: calc((100vw / 3) + 40px);
+  top: 10px;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+}
+
+.submission-error {
+  border-radius: 3px;
+  background-color: #dc3545;
+  color: #fff;
+  padding: 5px;
+  font-size: 14px;
+}

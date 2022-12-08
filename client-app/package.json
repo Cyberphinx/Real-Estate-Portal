@@ -1,0 +1,69 @@
+{
+  "name": "client-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/user-event": "^14.4.3",
+    "@types/geojson": "^7946.0.10",
+    "@types/jest": "^29.0.0",
+    "@types/leaflet-geosearch": "^3.0.0",
+    "@types/leaflet.locatecontrol": "^0.74.0",
+    "@types/node": "^18.7.14",
+    "@types/react": "^18.0.18",
+    "@types/react-calendar": "^3.5.2",
+    "@types/react-dom": "^18.0.6",
+    "@types/uuid": "^8.3.4",
+    "axios": "^0.27.2",
+    "date-fns": "^2.29.2",
+    "formik": "^2.2.9",
+    "leaflet": "^1.8.0",
+    "leaflet-control-geocoder": "^2.4.0",
+    "leaflet-geosearch": "^3.7.0",
+    "leaflet.locatecontrol": "^0.79.0",
+    "mobx": "^6.6.1",
+    "mobx-react-lite": "^3.4.0",
+    "react": "^18.2.0",
+    "react-calendar": "^3.7.0",
+    "react-dom": "^18.2.0",
+    "react-leaflet": "^4.0.2",
+    "react-leaflet-cluster": "^2.0.0",
+    "react-router-dom": "^6.3.0",
+    "react-scripts": "^5.0.1",
+    "typescript": "^4.8.2",
+    "use-debounce": "^8.0.4",
+    "use-supercluster": "^0.4.0",
+    "uuid": "^8.3.2",
+    "web-vitals": "^3.0.1",
+    "yup": "^0.32.11"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "postbuild": "move build ../API/wwwroot",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/leaflet": "^1.7.11"
+  }
+}

@@ -1,0 +1,31 @@
+.back-home-button {
+  display: block;
+  color: #fff;
+  background-color: #000;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  width: 150px;
+  margin: auto;
+}
+
+.back-home-button:hover {
+  color: #000;
+  background-color: #fff;
+}
+
+.server-error-container {
+  /* border: 5px solid #FFFF00; */
+  text-align: center;
+}
+
+.server-error {
+    display: block;
+    margin: auto;
+    width: 1000px;
+    padding: 10px 50px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    text-align: left;
+}

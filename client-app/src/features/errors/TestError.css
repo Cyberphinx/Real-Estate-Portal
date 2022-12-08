@@ -1,0 +1,29 @@
+.test-error-modal {
+  position: absolute;
+  z-index: 20;
+  margin: 100px calc(100vw / 4);
+  background-color: #fff;
+  width: 50%;
+  border-radius: 5px;
+  padding: 50px;
+}
+
+.close-container {
+  margin: 40px 0px;
+  position: relative;
+}
+
+.close-modal-button {
+  position: absolute;
+  right: -30px;
+  bottom: -25px;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.close-modal-button:hover,
+.close-modal-button:focus {
+  color: red;
+  cursor: pointer;
+}

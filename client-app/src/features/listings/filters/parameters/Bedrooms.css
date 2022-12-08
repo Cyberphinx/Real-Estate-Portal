@@ -1,0 +1,70 @@
+.bedrooms-form {
+  position: absolute;
+  left: -93px;
+  bottom: 63px;
+  width: 250px;
+  background: #FFC300;
+  border-radius: 5px;
+  padding: 0px 10px;
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  z-index: 22;
+}
+.bedrooms-form-hidden {
+  visibility: hidden;
+  position: fixed;
+  right: calc(100vw / 3);
+  bottom: 60px;
+  width: 250px;
+  background: rgba(245, 245, 245, 0.8);
+  border-radius: 5px;
+  padding: 0px 20px;
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+}
+
+.bedrooms-input {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 24px;
+  background-color: white;
+  padding: 12px 6px 6px 6px;
+  margin-top: 8px;
+}
+
+.beds-dash {
+    font-size: 20px;
+    padding: 0px 5px 0px 5px;
+    color: #fff;
+    margin-top: 16px;
+  }
+
+/* .sb:before {
+  content: "";
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid rgba(65, 74, 76, 0.5);
+  border-bottom: 10px solid transparent;
+  right: 50%;
+  bottom: -23px;
+  z-index: 22;
+} */
+
+.sb:after {
+  content: "";
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #FFC300;
+  border-bottom: 10px solid transparent;
+  right: 50%;
+  bottom: -18px;
+  z-index: 22;
+}

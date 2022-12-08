@@ -1,0 +1,161 @@
+.branches-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, calc(100vw / 8));
+  gap: 50px;
+  padding: 20px;
+}
+
+.branch {
+  border: none;
+  border-radius: 5px;
+  background: #fff;
+  width: calc(100vw / 8);
+  height: calc(100vw / 8);
+  position: relative;
+  text-align: center;
+}
+.branch:hover {
+  cursor: pointer;
+  background: #f5f5f5;
+}
+.create-button {
+  border: none;
+  border-radius: 5px;
+  background: #fff;
+  width: calc(100vw / 8);
+  height: calc(100vw / 8);
+  position: relative;
+  text-align: center;
+}
+.create-button:hover {
+  cursor: pointer;
+  background: #f5f5f5;
+}
+.create-button:hover .bar {
+  background-color: #000;
+}
+.add-folder {
+  position: absolute;
+  top: calc(100vw / 26);
+  left: calc(100vw / 22);
+  width: 50px;
+}
+.bar {
+  margin: 0 auto;
+  position: absolute;
+  background-color: grey;
+}
+.horizontal {
+  width: 30%;
+  height: 3%;
+  left: 35%;
+  top: 48%;
+}
+.vertical {
+  width: 3%;
+  height: 30%;
+  left: 49%;
+  top: 35%;
+}
+.branch-text-container {
+  padding: 20px 20px 0px 20px;
+}
+.branch-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+.branch-subtitle {
+  font-size: 12px;
+}
+
+.branch-button {
+  background: none;
+  color: #000;
+  border: none;
+  border-radius: 3px;
+}
+.branch-button:hover {
+  cursor: pointer;
+  background: #000;
+  color: #fff;
+}
+.branch-button:hover .branch-button-icon {
+  filter: invert(1);
+}
+.branch-button-icon {
+  width: 25px;
+}
+.branch:hover .edit {
+  visibility: visible;
+}
+.edit {
+  position: absolute;
+  top: 5px;
+  right: 40px;
+}
+.delete {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.folder-1 {
+  position: absolute;
+  height: 21px;
+  width: calc(100vw / 16);
+  border-top: none;
+  border-left: none;
+  border-right: 1px solid black;
+  border-bottom: none;
+  border-radius: 5px 5px 0px 0px;
+  background: #fff;
+  z-index: 2;
+}
+.folder-2 {
+  position: absolute;
+  top: 10px;
+  height: 10px;
+  right: 0px;
+  width: calc((100vw / 16) - 1px);
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+  border-radius: 0px 20px 0px 0px;
+  background: #fff;
+}
+.folder-3 {
+  position: absolute;
+  top: 40px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+  border-raius: 5px;
+  width: calc(100vw / 8);
+  height: calc((100vw / 8) - 40px);
+  background: none;
+}
+
+.branch:hover .folder-1 {
+  cursor: pointer;
+  background: #f5f5f5;
+}
+.branch:hover .folder-2 {
+  cursor: pointer;
+  background: #f5f5f5;
+}
+.branch:hover .folder-3 {
+  cursor: pointer;
+}
+
+.date-tag-position {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+}
+
+
+.loading-branches {
+  position: relative;
+}

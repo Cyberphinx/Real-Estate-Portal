@@ -1,0 +1,29 @@
+.my-buyer-order {
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 0px 20px;
+  margin: 0px 20px 20px 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+.my-buyer-order-section {
+  padding: 25px;
+}
+
+.my-buyer-order-section h2 {
+  padding: 0px 0px 20px 0px;
+}
+
+.buyer-order-divider {
+  border-width: 0.5px;
+  border-style: inset;
+  color: #F5F5F5;
+  margin-bottom: 25px;
+}
+
+.buyer-payments-title {
+  font-weight: 600;
+  font-size: 15px;
+}

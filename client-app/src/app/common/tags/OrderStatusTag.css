@@ -1,0 +1,44 @@
+/* TAG */
+.order-tag {
+    position: absolute;
+    left: 20px;
+    font-size: 14px;
+    z-index: 10;
+    padding: 6px 10px;
+    /* border: 1px solid black; */
+    border-radius: 5px;
+    font-weight: 600;
+  }
+  
+  .processing {
+    background-color: #81a489;
+    color: #fff;
+  }
+  
+  .completed {
+    background-color: #3597dc;
+    color: #fff;
+  }
+  
+  .cancelled {
+    background-color: #7f7f7f;
+    color: #fff;
+  }
+  
+  .failed {
+    background-color: #f2c572;
+    color: #fff;
+  }
+
+  .expired {
+    background-color: #b2a2c7;
+    color: #fff;
+  }
+
+  .onhold {
+    background-color: #c04c31;
+    color: #fff;
+  }
+  /* TAG */
+
+  

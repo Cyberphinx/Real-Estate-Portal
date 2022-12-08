@@ -1,0 +1,40 @@
+.close-button {
+  position: relative;
+  top: 3px;
+  right: 3px;
+  background: none;
+  color: #000;
+  border: none;
+  cursor: pointer;
+  margin: auto;
+  text-align: center;
+}
+
+.close-button:hover .x-tooltip {
+  visibility: visible;
+}
+
+.x {
+  width: 20px;
+  object-fit: contain;
+}
+
+.x:hover {
+  filter: invert(17%) sepia(67%) saturate(7492%) hue-rotate(357deg) brightness(90%) contrast(128%);
+}
+
+.x-tooltip {
+  visibility: hidden;
+  position: absolute;
+  width: 80px;
+  height: auto;
+  top: 27px;
+  right: -30px;
+  padding: 3px 6px;
+  border-radius: 3px;
+  background-color: #ffc300;
+  color: #000;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+}

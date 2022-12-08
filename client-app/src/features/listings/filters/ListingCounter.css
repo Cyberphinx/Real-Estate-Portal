@@ -1,0 +1,29 @@
+.listing-counter {
+  z-index: 21;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  background-color: #fff;
+  padding: 3px 3px 3px 10px;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 10px;
+  z-index: 1;
+}
+
+.load-button{
+  border: none;
+  border-radius: 3px;
+  background: #000;
+  color: #fff;
+  padding: 5px;
+}
+.load-button:hover:enabled{
+  background: #ffc300;
+  color: #000;
+  cursor: pointer;
+}
+.load-button:disabled{
+  cursor: not-allowed;
+}

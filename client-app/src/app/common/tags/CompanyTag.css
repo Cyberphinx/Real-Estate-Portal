@@ -1,0 +1,36 @@
+.category-tag {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    font-size: 12px;
+    z-index: 10;
+    padding: 3px 6px;
+    /* border: 1px solid black; */
+    border-radius: 3px;
+    font-weight: 600;
+  }
+  
+  .handyman {
+    background-color: #cc3399;
+    color: #fff;
+  }
+  
+  .gardening {
+    background-color: green;
+    color: #fff;
+  }
+  
+  .moving {
+    background-color: #ffcc00;
+    color: #000;
+  }
+  
+  .cleaning {
+    background-color: #3399cc;
+    color: #fff;
+  }
+
+  .electrician {
+    background-color:  #900C3F ;
+    color: #fff;
+  }

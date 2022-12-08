@@ -1,0 +1,47 @@
+.toolbar-container {
+  border-top: 2px solid black;
+  border-right: 1px solid black;
+  border-bottom: none;
+  border-left: 1px solid black;
+  height: 30px;
+  width: calc(100vw / 3);
+  position: fixed;
+  top: 0px;
+  left: calc(100vw / 3);
+  color: #000;
+  background: #fff;
+  margin: auto;
+  padding: 0;
+  display: inline-grid;
+  grid-template-columns: auto 50px 50px 50px;
+  z-index: 20;
+}
+
+.toolbar-content {
+  list-style-type: none;
+}
+
+.toolbar-title {
+  /* border: 1px solid black; */
+  position: relative;
+  top: -10px;
+  padding-left: 20px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.toolbar-locate {
+  /* border: 1px solid black; */
+  text-align: right;
+}
+
+.toolbar-newtab {
+  /* border: 1px solid black; */
+  text-align: right;
+}
+
+.toolbar-x {
+  /* border: 1px solid black; */
+  text-align: right;
+}

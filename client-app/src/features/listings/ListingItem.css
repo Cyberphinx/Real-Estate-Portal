@@ -1,0 +1,213 @@
+.cards {
+  margin: auto;
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  height: auto;
+  /* border: 1px solid #000; */
+  border-radius: 3px;
+  color: #000;
+  background-color: #f5f5f5;
+  /* box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2); */
+}
+.card:hover {
+  border: 1px solid #000;
+  margin: -1px;
+}
+.card-selected {
+  position: relative;
+  overflow: hidden;
+  height: auto;
+  border: 2px solid #000;
+  margin: -2px;
+  border-radius: 5px;
+  color: #000;
+  background-color: #f5f5f5;
+  /* box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2); */
+}
+
+
+
+.gallery {
+  /* border: 1px solid black; */
+  display: grid;
+  grid-template-rows: calc(100vh / 6) calc(100vh / 18);
+  grid-gap: 5px;
+  overflow: hidden;
+  position: relative;
+}
+.gallery:hover .right-arr {
+  visibility: visible;
+}
+.gallery:hover .left-arr {
+  visibility: visible;
+}
+.gallery:hover .img-numbering {
+  visibility: visible;
+}
+.gallery:hover .numbering {
+  visibility: visible;
+}
+.card-image {
+  /* border: 1px solid black; */
+  width: 100%;
+  height: calc(100vh / 6);
+  border-radius: 5px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  object-fit: cover;
+  z-index: 1;
+}
+.img-numbering{
+  visibility: hidden;
+  position: absolute;
+  left: 50%;
+  bottom: 5px;
+  border-radius: 3px;
+  padding: 0px 3px 2px 3px;
+  background: #fff;
+  color: #000;
+  font-size: 12px;
+  z-index: 2;
+  transform: translate(-50%, 0);
+}
+
+
+.right-arr {
+  visibility: hidden;
+  position: absolute;
+  top: 50%;
+  right: 3px;
+  z-index: 2;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.5);
+}
+.right-arr:hover {
+  background: rgba(255,255,255,1);
+}
+.right-ico {
+  padding-top: 3px;
+  padding-left: 3px;
+  width: 15px;
+}
+.right-ico:hover {
+  filter: invert(17%) sepia(67%) saturate(7492%) hue-rotate(357deg)
+    brightness(90%) contrast(128%);
+    cursor: pointer;
+}
+
+.left-arr {
+  visibility: hidden;
+  position: absolute;
+  top: 50%;
+  left: 3px;
+  z-index: 2;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.5);
+}
+.left-arr:hover {
+  background: rgba(255,255,255,1);
+}
+.left-ico {
+  padding-top: 3px;
+  padding-right: 3px;
+  width: 15px;
+}
+.left-ico:hover {
+  filter: invert(17%) sepia(67%) saturate(7492%) hue-rotate(357deg)
+    brightness(90%) contrast(128%);
+    cursor: pointer;
+}
+
+
+.right-arr-thumbnails {
+  position: absolute;
+  bottom: 10px;
+  right: 3px;
+  z-index: 2;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.5);
+}
+.right-arr-thumbnails:hover {
+  background: rgba(255,255,255,1);
+}
+.left-arr-thumbnails {
+  position: absolute;
+  bottom: 10px;
+  left: 3px;
+  z-index: 2;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.5);
+}
+.left-arr-thumbnails:hover {
+  background: rgba(255,255,255,1);
+}
+
+
+.carousel {
+  /* border: 1px solid black; */
+  display: grid;
+  grid-gap: 3px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+.thumbnail {
+  width: 100%;
+  height: calc(100vh / 20);
+  border-radius: 3px;
+  object-fit: cover;
+  z-index: 1;
+}
+.thumbnail:hover + .numbering{
+  background: #ffc300;
+}
+.numbering{
+  visibility: hidden;
+  position: absolute;
+  left: 1px;
+  top: 0px;
+  padding: 0px 3px 2px 3px;
+  border-radius: 3px;
+  background: #fff;
+  color: #000;
+  font-size: 12px;
+  z-index: 2;
+}
+
+.card-overlay{
+  /* border: 1px solid black; */
+  height: 40px;
+  display: grid;
+  grid-template-columns: 1fr 1.8fr;
+  padding: 10px 5px 0px 5px;
+}
+
+.card-price {
+  /* border: 1px solid black; */
+  text-align: left;
+}
+
+.card-attribute {
+  /* border: 1px solid black; */
+  text-align: right;
+}
+
+.card-description{
+  /* border: 1px solid black; */
+  height: 30px;
+  text-align: left;
+  padding: 5px 5px 10px 5px;
+}
+
+.card-function{
+  padding: 5px;
+}

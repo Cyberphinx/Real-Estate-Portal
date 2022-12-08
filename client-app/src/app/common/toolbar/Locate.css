@@ -1,0 +1,40 @@
+.locate-button {
+  position: relative;
+  top: 0px;
+  right: 0px;
+  background: none;
+  color: #000;
+  border: none;
+  cursor: pointer;
+  margin: auto;
+  text-align: center;
+}
+
+.locate-button:hover .locate-tooltip {
+  visibility: visible;
+}
+
+.locate-icon {
+  width: 25px;
+  object-fit: contain;
+}
+
+.locate-icon:hover {
+  filter: invert(17%) sepia(67%) saturate(7492%) hue-rotate(357deg) brightness(90%) contrast(128%);
+}
+
+.locate-tooltip {
+  visibility: hidden;
+  position: absolute;
+  width: 110px;
+  height: auto;
+  top: 30px;
+  right: -45px;
+  padding: 3px 6px;
+  border-radius: 3px;
+  background-color: #ffc300;
+  color: #000;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+}

@@ -1,0 +1,105 @@
+.img-placeholder {
+  margin: 20px;
+  max-width: auto;
+  min-height: auto;
+  background-color: #eee;
+}
+
+.thumb-placeholder {
+  max-width: auto;
+  min-height: auto;
+  background-color: #eee;
+  border-radius: 5px;
+}
+
+.s-placeholder {
+  margin: 20px;
+  width: 40%;
+  min-height: auto;
+  background-color: #eee;
+}
+
+.m-placeholder {
+  margin: 20px;
+  width: 60%;
+  min-height: auto;
+  background-color: #eee;
+}
+
+.l-placeholder {
+  margin: 20px;
+  width: 80%;
+  min-height: auto;
+  background-color: #eee;
+}
+
+@keyframes placeHolderShimmer {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
+
+.img-animated-background {
+  animation-duration: 1.25s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeHolderShimmer;
+  animation-timing-function: linear;
+  background: darkgray;
+  background: linear-gradient(to right, #eeeeee 10%, #dddddd 18%, #eeeeee 33%);
+  background-size: 800px 104px;
+  height: 200px;
+  position: relative;
+}
+
+.text-animated-background {
+  animation-duration: 1.25s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeHolderShimmer;
+  animation-timing-function: linear;
+  background: darkgray;
+  background: linear-gradient(to right, #eeeeee 10%, #dddddd 18%, #eeeeee 33%);
+  background-size: 800px 104px;
+  height: 10px;
+  position: relative;
+}
+
+.marker-snippet-placeholder {
+  width: 220px;
+  min-height: auto;
+  background-color: #eee;
+}
+.marker-title-placeholder {
+  width: 220px;
+  min-height: auto;
+  background-color: #eee;
+}
+.snippet-animated-background {
+  animation-duration: 1.25s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeHolderShimmer;
+  animation-timing-function: linear;
+  background: darkgray;
+  background: linear-gradient(to right, #eeeeee 10%, #dddddd 18%, #eeeeee 33%);
+  background-size: 800px 104px;
+  height: 100px;
+  position: relative;
+}
+
+.branch-animated-background {
+  animation-duration: 1.25s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeHolderShimmer;
+  animation-timing-function: linear;
+  background: darkgray;
+  background: linear-gradient(to right, #eeeeee 10%, #dddddd 18%, #eeeeee 33%);
+  background-size: 800px 104px;
+  height: calc(100vw / 8);
+  position: relative;
+}

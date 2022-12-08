@@ -1,0 +1,14 @@
+.errors-container {
+    display: block;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 80%;
+    margin: 10px auto 0 auto;
+    padding: 0px;
+    background-color: #fff6f6;
+}
+
+.error-element {
+    font-size: 14px;
+    color: #800020;
+}
