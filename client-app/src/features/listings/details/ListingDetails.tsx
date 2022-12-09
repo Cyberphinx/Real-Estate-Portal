@@ -8,7 +8,7 @@ import AgencyTags from "../../../app/common/tags/AgencyTag";
 import ContactForm from "../contactForm/ContactForm";
 import { DetailedDescription, UnitOfLength } from "../../../app/model/ListingAggregate/Objects/DetailedDescription";
 import { Content } from "../../../app/model/ListingAggregate/Objects/Content";
-import Toolbar from "../../../app/common/toolbar/Toolbar";
+import Toolbar from "../../map/toolbar/Toolbar";
 import { propertyType } from "../../../app/model/ListingAggregate/ListingEnums";
 import ListingBookmark from "./ListingBookmark";
 import priceFormatter from "../../../app/common/PriceFormatter";
@@ -35,7 +35,6 @@ export default observer(function ListingDetails({ listing }: Props) {
     };
 
     const addedDate = new Date(listing!.addedOn);
-
     const title = `Added on ${addedDate.toLocaleDateString()}`
 
     const address = `${listing?.listingLocation.propertyNumberOrName && (listing?.listingLocation.propertyNumberOrName + ", ")}
@@ -69,7 +68,7 @@ export default observer(function ListingDetails({ listing }: Props) {
 
     return (
         <div className="details-container" >
-            <Toolbar close={cancelSelectListing} title={title} selectedItem={listing} />
+            {/* <Toolbar close={cancelSelectListing} title={title} selectedItem={listing} /> */}
             {multiListings.length > 1 && <ListingBookmark multiListings={multiListings} />}
             <div className="details-contents" style={(multiListings.length > 1) ? { marginTop: "60px" } : {}}>
                 <AgencyTags listing={listing} />

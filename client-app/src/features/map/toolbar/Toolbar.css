@@ -14,7 +14,7 @@
   padding: 0;
   display: inline-grid;
   grid-template-columns: auto 50px 50px 50px;
-  z-index: 20;
+  z-index: 1000;
 }
 
 .toolbar-content {

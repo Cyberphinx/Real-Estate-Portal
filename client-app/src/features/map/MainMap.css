@@ -1,6 +1,7 @@
 .leaflet-container {
   height: calc(100vh - 60px);
   width: calc((100vw / 3) * 2);
+  /* width: 100vw; */
   overflow: hidden;
   background-color: #fff;
   z-index: 1;
@@ -15,3 +16,7 @@
   position: relative;
   padding-top: calc(50vh + 200px);
 }
+
+.leaflet-control { z-index: 2 !important}
+.leaflet-pane { z-index: 2 !important}
+.leaflet-top, .leaflet-bottom {z-index: 2 !important}

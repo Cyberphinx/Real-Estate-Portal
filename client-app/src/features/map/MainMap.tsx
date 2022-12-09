@@ -10,17 +10,19 @@ import UpdateMap from "./UpdateMap";
 import { Listing } from "../../app/model/ListingAggregate/Listing";
 import LocateControl from "./LocateControl";
 import LeafletGeosearch from "./LeafletGeosearch";
+import Toolbar from "./toolbar/Toolbar";
 
 interface Props {
     points: GeoJSON.Feature[];
     clusters: any;
     supercluster: any;
-    listing: Listing | undefined;
 }
 
-export default observer(function MainMap({ points, clusters, supercluster, listing }: Props) {
-    const { featureStore } = useStore();
+export default observer(function MainMap({ points, clusters, supercluster }: Props) {
+    const { featureStore, listingStore } = useStore();
     const { activeFeature } = featureStore;
+    const { selectedListing } = listingStore;
+
     const apikey = process.env.REACT_APP_LOCATION_IQ;
     const locationIQLink = `https://{s}-tiles.locationiq.com/v3/streets/r/{z}/{x}/{y}.png?key=${apikey}`;
 
@@ -52,7 +54,8 @@ export default observer(function MainMap({ points, clusters, supercluster, listi
                 {activeFeature === 1 ? (<CompanyMarker />) : null}
                 <ListingMarker points={points} clusters={clusters} supercluster={supercluster} />
                 {/* <GeoJSON data={eer} style={{color:"purple", weight:2, opacity:1, fillOpacity:0.1}} /> */}
-                <UpdateMap listing={listing} />
+                {selectedListing && <Toolbar />}
+                <UpdateMap listing={selectedListing} />
                 <LeafletGeosearch apikey={apikey} />
                 <LocateControl />
             </MapContainer>

@@ -7,7 +7,7 @@ import NavBar from "../../../app/layout/NavBar";
 import LoadingComponent from "../../../app/common/loading/LoadingComponent";
 import { Content } from "../../../app/model/ListingAggregate/Objects/Content";
 import { DetailedDescription } from "../../../app/model/ListingAggregate/Objects/DetailedDescription";
-import Close from "../../../app/common/toolbar/Close";
+import Close from "../../map/toolbar/Close";
 
 export default observer(function SalesDetailsPage() {
     const { id } = useParams<string>();

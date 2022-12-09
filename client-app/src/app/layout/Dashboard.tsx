@@ -64,10 +64,10 @@ export default observer(function Dashboard() {
     return (
         <div style={{position: "relative"}}>
             <Nav />
-            <div className="dashboard-container">
+            <div className="dashboard-container-grid">
                 {features[activeFeature]}
                 {activeFeature > 0 ? null 
-                : <MainMap points={points} clusters={clusters} supercluster={supercluster} listing={selectedListing} /> }
+                : <MainMap points={points} clusters={clusters} supercluster={supercluster} /> }
                 {activeFeature === 1 && <ServicesHub />}
             </div>
                 {selectedListing && <ListingDetails listing={selectedListing} />}

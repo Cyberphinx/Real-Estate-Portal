@@ -24,15 +24,5 @@ export default function UpdateMap({listing}: Props) {
         }
     }, [listing, lat, long]);
 
-    useEffect(() => {
-        if (listing && !isLocked) {
-            map.flyTo([listing!.listingLocation.coordinates.latitude, listing!.listingLocation.coordinates.longitude], 14, {
-                duration: 3
-            });
-            setLat(0);
-            setLong(0);
-        };
-    }, [lat, long]);
-
     return null;
 }

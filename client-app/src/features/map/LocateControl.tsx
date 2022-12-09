@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useMap } from "react-leaflet";
+import './MainMap.css';
 
 
 export default function LocateControl() {
