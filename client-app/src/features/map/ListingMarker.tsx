@@ -7,6 +7,7 @@ import { useStore } from "../../app/stores/store";
 import { propertyType, rentFrequency } from "../../app/model/ListingAggregate/ListingEnums";
 import nFormatter from "../../app/common/nFormatter";
 import priceFormatter from "../../app/common/PriceFormatter";
+import * as ReactDOMServer from 'react-dom/server';
 
 interface Props {
     points: GeoJSON.Feature[];
@@ -35,50 +36,73 @@ export default observer(function ListingMarker({ points, clusters, supercluster 
 
     const icons: any = {};
     const clusterIcon = (count: number, size: number) => {
-        let style = "";
-        if (count > 30) style = "low-density";
-        if (count > 60) style = "med-density";
-        if (count > 90) style = "high-density";
+        let density = "";
+        if (count > 30) density = "cluster-marker low-density";
+        if (count > 60) density = "cluster-marker med-density";
+        if (count > 90) density = "cluster-marker high-density";
 
+        // if (!icons[count]) {
+        //     icons[count] = L.divIcon({
+        //         html: `<div class="cluster-marker ${density}" style="width: ${size}px; height: ${size}px;">
+        //       ${count}
+        //     </div>`
+        //     });
+        // }
         if (!icons[count]) {
             icons[count] = L.divIcon({
-                html: `<div class="cluster-marker ${style}" style="width: ${size}px; height: ${size}px;">
-              ${count}
-            </div>`
+                html: ReactDOMServer.renderToString(
+                    <div className={`cluster-marker ${density}`} style={{ width: `${size}px`, height: `${size}px` }}>
+                        {count}
+                    </div>
+                )
             });
         }
         return icons[count];
     };
-    const activeClusterIcon = (count: number, size: number) => {
-        let style = "";
-        if (count > 30) style = "low-density";
-        if (count > 60) style = "med-density";
-        if (count > 90) style = "high-density";
 
+    const activeClusterIcon = (count: number, size: number) => {
+        let density = "";
+        if (count > 30) density = "low-density";
+        if (count > 60) density = "med-density";
+        if (count > 90) density = "high-density";
+
+        // const icon = L.divIcon({
+        //     html: `<div class="cluster-marker ${density}" style="width: ${size}px; height: ${size}px; color: #000; background: #00FF00;">
+        //       ${count}
+        //     </div>`
+        // });
         const icon = L.divIcon({
-                html: `<div class="cluster-marker ${style}" style="width: ${size}px; height: ${size}px; color: #000; background: #00FF00;">
-              ${count}
-            </div>`
-            });
-        
+            html: ReactDOMServer.renderToString(
+                <div className={`cluster-marker ${density}`} style={{ width: `${size}px`, height: `${size}px`, color: "#000", background: "#00FF00" }}>
+                    {count}
+                </div>
+            )
+        });
         return icon;
     };
 
     const priceIcon = (id: string, price: string, size: number) => {
         const icon = L.divIcon({
-            html: `<div class="point-marker-price" style="width: calc(7px * ${size}); height: 16px;">
-            ${price}
-            </div>`
+            html: ReactDOMServer.renderToString(
+                <div className="point-marker-price" style={{ width: `calc(7px * ${size})`, height: '16px' }}>
+                    {price}
+                </div>
+            )
         });
         const iconActive = L.divIcon({
-            html: `<div class="point-marker-price-active" style="width: calc(7px * ${size}); height: 16px;">
-            ${price}
-            </div>`
+            html: ReactDOMServer.renderToString(
+                <div className="point-marker-price-active" style={{width: `calc(7px * ${size})`, height: '16px'}}>
+                    {price}
+                </div>
+            )
+
         });
         const iconSelected = L.divIcon({
-            html: `<div class="point-marker-price-selected" style="width: calc(7px * ${size}); height: 16px;">
-            ${price}
-            </div>`
+            html: ReactDOMServer.renderToString(
+                <div className="point-marker-price-selected" style={{width: `calc(7px * ${size})`, height: '16px'}}>
+                    {price}
+                </div>
+            )
         });
         if (activeListing?.id === id) {
             return iconActive;

@@ -20,6 +20,8 @@ export default observer(function PropertyTypes({ items, checked, onChange }: Pro
         onChange(newChecked);
     }
 
+    
+
     return (
         <div className="types-container">
             {items.map((propertyType: string) => (
@@ -29,7 +31,6 @@ export default observer(function PropertyTypes({ items, checked, onChange }: Pro
                     onClick={() => handleChecked(propertyType)}>
                     <img className="types-icon" src={`/assets/property-icons/${propertyType.toLowerCase()}.svg`} alt={propertyType} />
                     <span className={checkedItems.includes(propertyType) ? "types-dot-selected" : "types-dot"}></span>
-                    {/* <img className="check-mark" src="/assets/check-mark.png" /> */}
                     <span className="types-tooltip">{propertyType}</span>
                 </button>
             ))}

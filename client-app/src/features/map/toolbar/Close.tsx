@@ -11,7 +11,7 @@ export default function Close({ close }: Props) {
         <div>
             <button className="close-button" onClick={close} >
                 <img className="x" src="/assets/close.svg" alt="X" />
-                <span className="x-tooltip">Close panel</span>
+                {/* <span className="x-tooltip">Close panel</span> */}
             </button>
         </div>
     )

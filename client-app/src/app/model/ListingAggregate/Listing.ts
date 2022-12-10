@@ -1,6 +1,5 @@
 import { Company } from './../CompanyAggregate/Company';
 import { AccessStatus } from "../AccessStatus";
-import { Geocoding } from "../Geocoding";
 import {
     Category, CentralHeating, CookerType, CouncilTaxBand, DecorativeCondition, FurnishedState, Incentive,
     LifeCycleStatus, ListedBuildingGrade, OutsideSpace, Parking, PropertyType, RentalTerm, Tenure, Utility

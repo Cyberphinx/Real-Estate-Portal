@@ -7,6 +7,7 @@ import { observer } from "mobx-react-lite";
 import { useStore } from "../../app/stores/store";
 import { Company } from "../../app/model/CompanyAggregate/Company";
 import { ServiceCategory } from "../../app/model/ServiceCategory";
+import ReactDOMServer from "react-dom/server";
 
 // const mapMarker = new L.Icon({
 //     iconUrl: "/assets/circle.svg",
@@ -22,9 +23,11 @@ const icons: any = {};
 const fetchIcon = (count: number, size: number) => {
     if (!icons[count]) {
         icons[count] = L.divIcon({
-            html: `<div class="company-marker" style="width: ${size}px; height: ${size}px;">
-          ${count}
-        </div>`
+            html: ReactDOMServer.renderToString(
+                <div className="company-marker" style={{ width: `${size}px`, height: `${size}px` }}>
+                    {count}
+                </div>
+            )
         });
     }
     return icons[count];
@@ -38,12 +41,14 @@ export default observer(function CompanyMarker() {
     const [bounds, setBounds] = useState<any>();
 
     const companyIcon = (company: Company) => {
-            // const size = ServiceCategory[company.serviceCategory].length;
-            const icon = L.divIcon({
-                html: `<div class="point-marker-company" style="width: 80px; height: 15px;">
-              ${ServiceCategory[company.serviceCategory]}
-            </div>`
-            });
+        // const size = ServiceCategory[company.serviceCategory].length;
+        const icon = L.divIcon({
+            html: ReactDOMServer.renderToString(
+                <div className="point-marker-company" style={{width: '80px', height: '15px'}}>
+                    {ServiceCategory[company.serviceCategory]}
+                </div>
+            )
+        });
         return icon;
     };
 
