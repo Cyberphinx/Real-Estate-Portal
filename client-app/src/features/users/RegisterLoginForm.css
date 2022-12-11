@@ -107,3 +107,24 @@
   color: red;
   cursor: pointer;
 }
+
+.register-input-style {
+  padding: 5px;
+  margin: 10px;
+  width: 60%;
+  height: 20px;
+}
+
+.register-error-style {
+  position: absolute;
+  top: 40px;
+  left: 100px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: #fff6f6;
+  width: 200px;
+  margin: 10px auto auto auto;
+  padding: 3px;
+  font-size: 14px;
+  color: #800020;
+}

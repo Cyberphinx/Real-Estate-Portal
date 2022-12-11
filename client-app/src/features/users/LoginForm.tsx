@@ -26,7 +26,7 @@ export default observer(function LoginForm() {
                 >
                     {({ handleSubmit, isSubmitting, errors, isValid, dirty }) => (
                         <Form onSubmit={handleSubmit} autoComplete="off">
-                            <MyTextInput inputclassname='input-style' errorclassname='error-style' name="email" placeholder="Email" />
+                            <MyTextInput inputclassname='login-input-style' errorclassname='error-style' name="email" placeholder="Email" />
                             <br />
                             <MyTextInput inputclassname='input-style' errorclassname='error-style' name="password" placeholder="Password" type="password" />
                             <button type="submit">Login</button>

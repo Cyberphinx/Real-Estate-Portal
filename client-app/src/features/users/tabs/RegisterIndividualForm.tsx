@@ -26,11 +26,11 @@ export default observer(function RegisterIndividualForm() {
             {({ handleSubmit, isSubmitting, errors, isValid, dirty }) => {
                 return (
                     <Form onSubmit={handleSubmit} autoComplete="off">
-                        <MyTextInput inputclassname='input-style' errorclassname='error-style'  name="username" placeholder="Username" />
+                        <MyTextInput inputclassname='register-input-style' errorclassname='register-error-style'  name="username" placeholder="Username" />
                         <br />
-                        <MyTextInput inputclassname='input-style' errorclassname='error-style'  name="email" placeholder="Email" />
+                        <MyTextInput inputclassname='register-input-style' errorclassname='register-error-style'  name="email" placeholder="Email" />
                         <br />
-                        <MyTextInput inputclassname='input-style' errorclassname='error-style'  name="password" placeholder="Password" type="password" />
+                        <MyTextInput inputclassname='register-input-style' errorclassname='register-error-style'  name="password" placeholder="Password" type="password" />
                         <br />
 
                         <button disabled={!isValid || !dirty || isSubmitting} className="button" type="submit">
