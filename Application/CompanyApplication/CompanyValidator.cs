@@ -11,8 +11,8 @@ namespace Application.CompanyApplication
     {
         public CompanyValidator()
         {
-            RuleFor(x => x.CompanyName).NotEmpty();
-            RuleFor(x => x.Usernames).NotEmpty();
+            RuleFor(x => x.LegalName).NotEmpty();
+            RuleFor(x => x.Username).NotEmpty();
             RuleFor(x => x.CompanyContacts.Email).NotEmpty();
         }
     }

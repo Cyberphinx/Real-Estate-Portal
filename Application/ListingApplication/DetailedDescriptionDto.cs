@@ -7,7 +7,7 @@ namespace Application.ListingApplication
 {
     public class DetailedDescriptionDto
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public int Index { get; set; }
         public string Heading { get; set; }
         public DimensionsDto Dimensions { get; set; }

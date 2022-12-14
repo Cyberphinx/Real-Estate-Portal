@@ -19,15 +19,16 @@ namespace Persistence
             {
                 new Company
                 {
-                    Usernames = new List<string>{"savills", "savills_london", "savills_bristol"},
+                    AccessStatus = AccessStatus.Public,
+                    Username = "savills",
                     CompanyReference = "savills",
-                    CompanyName = "Savills",
+                    DisplayName = "Savills",
+                    LegalName = "Savills (UK) Limited",
                     CompanyContacts = new CompanyContacts
                     {
                         Phone = "+44 (0) 20 8877 1222",
-                        Email = "wandsworth@savills.com"
+                        Email = "info@savills.com"
                     },
-                    AccessStatus = AccessStatus.Public,
                     CompanyAddress = new CompanyAddress
                     {
                         PropertyNumberOrName = "33",
@@ -42,16 +43,21 @@ namespace Persistence
                             Latitude = 51.51654265291029,
                             Longitude = -0.14291257284437422
                         },
-                        PafUdprn = "",
                         What3words = "remark.taps.trails"
+                    },
+                    ServiceCategories = new List<ServiceCategory>
+                    {
+                        ServiceCategory.EstateAgent
                     }
                 },
-                
+
                 new Company
                 {
-                    Usernames = new List<string>{"purple1", "purple2"},
+                    Username = "purple",
                     CompanyReference = "purplebricks",
-                    CompanyName = "Purple Bricks",
+                    DisplayName = "Purple Bricks",
+                    LegalName = "Purplebricks Group PLC",
+                    CompanyRegistrationNumber = "8047368",
                     CompanyContacts = new CompanyContacts
                     {
                         Phone = "+44 (0) 117 910 2200",
@@ -69,23 +75,18 @@ namespace Persistence
                         Country = Country.UnitedKingdom,
                         Coordinates = new Coordinates
                         {
-                            Latitude = 52.40066044491819, 
+                            Latitude = 52.40066044491819,
                             Longitude = -1.8066908304837104
                         },
-                        PafUdprn = "",
                         What3words = "drain.spirit.drives"
+                    },
+                    ServiceCategories = new List<ServiceCategory>
+                    {
+                        ServiceCategory.EstateAgent
                     }
                 },
                 new Company
                 {
-                    Usernames = new List<string>{"rogerparry", "rogerparry_welshpool"},
-                    CompanyReference = "rogerparry",
-                    CompanyName = "Roger Parry",
-                    CompanyContacts = new CompanyContacts
-                    {
-                        Phone = "01938 554499",
-                        Email = "welshpool@rogerparry.com"
-                    },
                     AccessStatus = AccessStatus.Public,
                     CompanyAddress = new CompanyAddress
                     {
@@ -101,15 +102,32 @@ namespace Persistence
                             Latitude = 52.60740391205163,
                             Longitude = -2.9450937943182147
                         },
-                        PafUdprn = "",
                         What3words = "bypassed.magnetic.reserves"
+                    },
+                    CompanyContacts = new CompanyContacts
+                    {
+                        Phone = "01938 554499",
+                        Email = "info@rogerparry.com",
+                        Website = "https://www.rogerparry.net/"
+                    },
+                    CompanyReference = "rogerparry",
+                    CompanyRegistrationNumber = "OC312203",
+                    DisplayName = "Roger Parry",
+                    LegalName = "Roger Parry & Partners LLP",
+                    Username ="rogerparry",
+                    SummaryDescription = "",
+                    ServiceCategories = new List<ServiceCategory>
+                    {
+                        ServiceCategory.EstateAgent
                     }
                 },
                 new Company
                 {
-                    Usernames = new List<string>{"ewe"},
+                    Username = "ewe",
                     CompanyReference = "ewemove",
-                    CompanyName = "Ewe Move",
+                    DisplayName = "Ewe move Hebden Bridge and Sowerby",
+                    LegalName = "Caine-Knight Property Limited",
+                    CompanyRegistrationNumber = "11470075",
                     CompanyContacts = new CompanyContacts
                     {
                         Phone = "020 3953 8023",
@@ -127,18 +145,22 @@ namespace Persistence
                         Country = Country.UnitedKingdom,
                         Coordinates = new Coordinates
                         {
-                            Latitude = 50.722980159789316, 
+                            Latitude = 50.722980159789316,
                             Longitude = -1.8829559728734109
                         },
-                        PafUdprn = "",
                         What3words = "bypassed.magnetic.reserves"
+                    },
+                    ServiceCategories = new List<ServiceCategory>
+                    {
+                        ServiceCategory.EstateAgent
                     }
                 },
                 new Company
                 {
-                    Usernames = new List<string>{"hunters"},
+                    Username = "hunters",
                     CompanyReference = "hunters",
-                    CompanyName = "Hunters",
+                    DisplayName = "Hunters",
+                    LegalName = "Hunters (Midlands) Limited",
                     CompanyContacts = new CompanyContacts
                     {
                         Phone = "+44 (0) 1564 770707",
@@ -156,21 +178,29 @@ namespace Persistence
                         Country = Country.UnitedKingdom,
                         Coordinates = new Coordinates
                         {
-                            Latitude = 50.72308467556089, 
+                            Latitude = 50.72308467556089,
                             Longitude =  -1.8824440593814602
                         },
-                        PafUdprn = "",
                         What3words = "remark.taps.trails"
+                    },
+                    CompanyRegistrationNumber = "",
+                    ServiceCategories = new List<ServiceCategory>
+                    {
+                        ServiceCategory.EstateAgent
                     }
                 },
                 new Company
                 {
-                    CompanyName = "Moving Mountains",
+                    DisplayName = "Moving Mountains",
+                    LegalName = "Moving Mountains Limited",
                     CompanyReference = "movingmountains",
-                    Usernames = new List<string>{"movingmountains"},
+                    Username = "movingmountains",
                     AddedOn = new DateTime(2022,07,15),
                     AccessStatus = AccessStatus.Public,
-                    ServiceCategory = ServiceCategory.Moving,
+                    ServiceCategories = new List<ServiceCategory>
+                    {
+                        ServiceCategory.Removals
+                    },
                     CompanyAddress = new CompanyAddress
                     {
                         PropertyNumberOrName = "53",
@@ -185,22 +215,7 @@ namespace Persistence
                             Latitude = 51.40264956734864,
                             Longitude = -0.24979083392406543
                         },
-                        PafUdprn = "",
                         What3words = "cloth.august.length"
-                    },
-                    CompanyDetails = new CompanyDetails
-                    {
-                        CompanyType = "Private Limited Company",
-                        VatRegistered = true,
-                        VatNumber = "259728946",
-                        CompanyNumber = "09399584",
-                        RegisteredIn = "England and Wales",
-                        BusinessOwner = "Tom",
-                        IdChecked = true,
-                        AddressVerified = true,
-                        SortCode = 309966,
-                        AccountNumber = 61977168,
-                        BankName = "Lloyds Bank"
                     },
                     CompanyContacts = new CompanyContacts
                     {
@@ -217,8 +232,6 @@ namespace Persistence
                         }
                     },
                     ServiceLocations = "UK and international",
-                    ServiceScope = "Domestic Move, Commercial Move, International Move, Packing and Storage services",
-                    Logo = "/assets/company-logos/MovingMountains.JPG",
                     CompanyContents = new List<CompanyContent>
                     {
                         new CompanyContent
@@ -240,56 +253,38 @@ namespace Persistence
                             Caption = "Image Three"
                         }
                     },
-                    Availabilities = new List<Availability>
-                    {
-                        new Availability
-                        {
-                            Available = false,
-                            StartTime = new DateTime(2022,07,10),
-                            EndTime = new DateTime(2022,07,15),
-                        },
-                        new Availability
-                        {
-                            Available = false,
-                            StartTime = new DateTime(2022,08,01),
-                            EndTime = new DateTime(2022,08,02),
-                        },
-                        new Availability
-                        {
-                            Available = false,
-                            StartTime = new DateTime(2022,06,25),
-                            EndTime = new DateTime(2022,06,27),
-                        }
-                    },
                     Insurances = new List<Insurance>
                     {
                         new Insurance
                         {
-                            Type = "Removers Insurance",
-                            Insurer = "AXA",
-                            Amount = "50,000",
-                            StartDate = new DateTime(2021,01,30),
-                            EndDate = new DateTime(2023,01,30)
+                            Type = InsuranceType.ProfessionalIndemnity,
+                            Provider = "AXA",
+                            IndemnityLimit = "50,000",
+                            Expiry = new DateTime(2023,01,30)
                         },
                         new Insurance
                         {
-                            Type = "Public Liability Insurance",
-                            Insurer = "Allianz",
-                            Amount = "1,000,000",
-                            StartDate = new DateTime(2020,01,05),
-                            EndDate = new DateTime(2025,01,05)
+                            Type = InsuranceType.PublicLiability,
+                            Provider = "Allianz",
+                            IndemnityLimit = "1,000,000",
+                            Expiry = new DateTime(2025,01,05)
                         }
                     }
                 },
 
                 new Company
                 {
-                    CompanyName = "CAE Electrical",
+                    AccessStatus = AccessStatus.Public,
+                    DisplayName = "CAE Electrical",
+                    LegalName = "CAE Electrical",
                     CompanyReference = "cae",
-                    Usernames = new List<string> {"cae"},
-                    AccessStatus = AccessStatus.Private,
+                    Username = "electrician1",
                     AddedOn = new DateTime(2022,03,15),
-                    ServiceCategory = ServiceCategory.Electrician,
+                    ServiceCategories = new List<ServiceCategory>
+                    {
+                        ServiceCategory.Electrical,
+                        ServiceCategory.GasWork
+                    },
                     CompanyAddress = new CompanyAddress
                     {
                         PropertyNumberOrName = "Suite 3 Warren House",
@@ -304,22 +299,7 @@ namespace Persistence
                             Latitude = 51.60137056764931,
                             Longitude = 0.6534702269086803
                         },
-                        PafUdprn = "",
                         What3words = "searching.volunteered.milder"
-                    },
-                    CompanyDetails = new CompanyDetails
-                    {
-                        CompanyType = "Private Limited Company",
-                        VatRegistered = true,
-                        VatNumber = "259728946",
-                        CompanyNumber = "09399584",
-                        RegisteredIn = "England and Wales",
-                        BusinessOwner = "Tom",
-                        IdChecked = true,
-                        AddressVerified = true,
-                        SortCode = 309966,
-                        AccountNumber = 61977168,
-                        BankName = "Lloyds Bank"
                     },
                     CompanyContacts = new CompanyContacts
                     {
@@ -336,8 +316,6 @@ namespace Persistence
                         }
                     },
                     ServiceLocations = "UK and international",
-                    ServiceScope = "Domestic Move, Commercial Move, International Move, Packing and Storage services",
-                    Logo = "/assets/company-logos/MovingMountains.JPG",
                     CompanyContents = new List<CompanyContent>
                     {
                         new CompanyContent
@@ -358,32 +336,22 @@ namespace Persistence
                             Type = CompanyMediaType.Image,
                             Caption = "Image Three"
                         }
-                    },
-                    Availabilities = new List<Availability>
-                    {
-                        new Availability
-                        {
-                            Available = false,
-                            StartTime = new DateTime(2022,06,10),
-                            EndTime = new DateTime(2022,06,10),
-                        },
-                        new Availability
-                        {
-                            Available = false,
-                            StartTime = new DateTime(2022,07,15),
-                            EndTime = new DateTime(2022,07,16),
-                        }
                     }
                 },
 
                 new Company
                 {
-                    CompanyName = "Cleaning OCD",
+                    DisplayName = "Cleaning OCD",
+                    LegalName = "Cleaning OCD",
                     CompanyReference = "cleaning",
-                    Usernames = new List<string> {"cleaning"},
+                    Username = "cleaning1",
                     AccessStatus = AccessStatus.Public,
                     AddedOn = new DateTime(2022,03,15),
-                    ServiceCategory = ServiceCategory.Cleaning,
+                    ServiceCategories = new List<ServiceCategory>
+                    {
+                        ServiceCategory.Cleaning,
+                        ServiceCategory.WasteClearance
+                    },
                     CompanyAddress = new CompanyAddress
                     {
                         PropertyNumberOrName = "6",
@@ -398,22 +366,7 @@ namespace Persistence
                             Latitude = 52.643914264497965,
                             Longitude = 1.2797135271974041
                         },
-                        PafUdprn = "",
                         What3words = "searching.volunteered.milder"
-                    },
-                    CompanyDetails = new CompanyDetails
-                    {
-                        CompanyType = "Private Limited Company",
-                        VatRegistered = true,
-                        VatNumber = "259728946",
-                        CompanyNumber = "09399584",
-                        RegisteredIn = "England and Wales",
-                        BusinessOwner = "Tom",
-                        IdChecked = true,
-                        AddressVerified = true,
-                        SortCode = 309966,
-                        AccountNumber = 61977168,
-                        BankName = "Lloyds Bank"
                     },
                     CompanyContacts = new CompanyContacts
                     {
@@ -430,8 +383,6 @@ namespace Persistence
                         }
                     },
                     ServiceLocations = "UK",
-                    ServiceScope = "Domestic Move, Commercial Move, International Move, Packing and Storage services",
-                    Logo = "/assets/company-logos/MovingMountains.JPG",
                     CompanyContents = new List<CompanyContent>
                     {
                         new CompanyContent
@@ -452,32 +403,22 @@ namespace Persistence
                             Type = CompanyMediaType.Image,
                             Caption = "Image Three"
                         }
-                    },
-                    Availabilities = new List<Availability>
-                    {
-                        new Availability
-                        {
-                            Available = false,
-                            StartTime = new DateTime(2022,06,10),
-                            EndTime = new DateTime(2022,06,10),
-                        },
-                        new Availability
-                        {
-                            Available = false,
-                            StartTime = new DateTime(2022,07,15),
-                            EndTime = new DateTime(2022,07,16),
-                        }
                     }
                 },
 
                 new Company
                 {
-                    CompanyName = "Birch landscapes",
-                    CompanyReference = "birch",
-                    Usernames = new List<string> {"birch"},
+                    DisplayName = "Bridge heating",
+                    LegalName = "Bridge heating",
+                    CompanyReference = "bridge-heat",
+                    Username = "plumber1",
                     AccessStatus = AccessStatus.Public,
                     AddedOn = new DateTime(2022,03,15),
-                    ServiceCategory = ServiceCategory.Gardening,
+                    ServiceCategories = new List<ServiceCategory>
+                    {
+                        ServiceCategory.CentralHeating,
+                        ServiceCategory.Pluming
+                    },
                     CompanyAddress = new CompanyAddress
                     {
                         PropertyNumberOrName = "4",
@@ -492,22 +433,7 @@ namespace Persistence
                             Latitude = 52.05661506461248,
                             Longitude = -0.8533489730745938
                         },
-                        PafUdprn = "",
                         What3words = "searching.volunteered.milder"
-                    },
-                    CompanyDetails = new CompanyDetails
-                    {
-                        CompanyType = "Private Limited Company",
-                        VatRegistered = true,
-                        VatNumber = "259728946",
-                        CompanyNumber = "09399584",
-                        RegisteredIn = "England and Wales",
-                        BusinessOwner = "Tom",
-                        IdChecked = true,
-                        AddressVerified = true,
-                        SortCode = 309966,
-                        AccountNumber = 61977168,
-                        BankName = "Lloyds Bank"
                     },
                     CompanyContacts = new CompanyContacts
                     {
@@ -524,8 +450,6 @@ namespace Persistence
                         }
                     },
                     ServiceLocations = "UK",
-                    ServiceScope = "Domestic Move, Commercial Move, International Move, Packing and Storage services",
-                    Logo = "https://www.birchlandscapes.co.uk/wp-content/uploads/2017/09/logo.png",
                     CompanyContents = new List<CompanyContent>
                     {
                         new CompanyContent
@@ -546,32 +470,22 @@ namespace Persistence
                             Type = CompanyMediaType.Image,
                             Caption = "Image Three"
                         }
-                    },
-                    Availabilities = new List<Availability>
-                    {
-                        new Availability
-                        {
-                            Available = false,
-                            StartTime = new DateTime(2022,06,10),
-                            EndTime = new DateTime(2022,06,10),
-                        },
-                        new Availability
-                        {
-                            Available = false,
-                            StartTime = new DateTime(2022,07,15),
-                            EndTime = new DateTime(2022,07,16),
-                        }
                     }
                 },
 
                 new Company
                 {
-                    CompanyName = "J.A. Steel & Son",
+                    DisplayName = "J.A. Steel & Son",
+                    LegalName = "J.A. Steel & Son",
                     CompanyReference = "steel",
-                    Usernames = new List<string> {"steel"},
+                    Username = "handyman1",
                     AccessStatus = AccessStatus.Public,
                     AddedOn = new DateTime(2022,03,15),
-                    ServiceCategory = ServiceCategory.Moving,
+                    ServiceCategories = new List<ServiceCategory>
+                    {
+                        ServiceCategory.Removals,
+                        ServiceCategory.WasteClearance
+                    },
                     CompanyAddress = new CompanyAddress
                     {
                         PropertyNumberOrName = "Steel House",
@@ -586,22 +500,7 @@ namespace Persistence
                             Latitude = 51.659803529028075,
                             Longitude = -0.027048244003053896
                         },
-                        PafUdprn = "",
                         What3words = "searching.volunteered.milder"
-                    },
-                    CompanyDetails = new CompanyDetails
-                    {
-                        CompanyType = "Private Limited Company",
-                        VatRegistered = true,
-                        VatNumber = "259728946",
-                        CompanyNumber = "09399584",
-                        RegisteredIn = "England and Wales",
-                        BusinessOwner = "Tom",
-                        IdChecked = true,
-                        AddressVerified = true,
-                        SortCode = 309966,
-                        AccountNumber = 61977168,
-                        BankName = "Lloyds Bank"
                     },
                     CompanyContacts = new CompanyContacts
                     {
@@ -618,8 +517,6 @@ namespace Persistence
                         }
                     },
                     ServiceLocations = "UK",
-                    ServiceScope = "Domestic Move, Commercial Move, International Move, Packing and Storage services",
-                    Logo = "https://www.birchlandscapes.co.uk/wp-content/uploads/2017/09/logo.png",
                     CompanyContents = new List<CompanyContent>
                     {
                         new CompanyContent
@@ -639,21 +536,6 @@ namespace Persistence
                             Url = "https://www.jasteelandson.co.uk/assets/images/content-img_move3.jpg",
                             Type = CompanyMediaType.Image,
                             Caption = "Image Three"
-                        }
-                    },
-                    Availabilities = new List<Availability>
-                    {
-                        new Availability
-                        {
-                            Available = false,
-                            StartTime = new DateTime(2022,06,10),
-                            EndTime = new DateTime(2022,06,10),
-                        },
-                        new Availability
-                        {
-                            Available = false,
-                            StartTime = new DateTime(2022,07,15),
-                            EndTime = new DateTime(2022,07,16),
                         }
                     }
                 },

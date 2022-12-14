@@ -9,6 +9,8 @@ namespace API.DTOs
 {
     public class RegisterDto
     {
+        public string DisplayName { get; set; }
+
         [Required]
         [EmailAddress]
         public string Email { get; set; }
@@ -19,12 +21,8 @@ namespace API.DTOs
 
         [Required]
         public string Username { get; set; }
-        public bool Agency { get; set; }
-        public DateTime RegistrationDate { get; set; }
-        public string CompanyName { get; set; }
-        public string CompanyPostalCode { get; set; }
-        public RedressScheme RedressScheme { get; set; }
-        public Membership Membership { get; set; }
-    
+
+        public string PhoneNumber { get; set; }
+        public AccountType AccountType { get; set; }
     }
 }

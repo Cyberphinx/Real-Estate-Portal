@@ -40,14 +40,14 @@ namespace Application.CompanyApplication
                 var company = await _context.Companies
                     .ProjectTo<CompanyDto>(_mapper.ConfigurationProvider)
                     .AsNoTracking()
-                    .FirstOrDefaultAsync(x => x.Usernames.Contains(_userAccessor.GetUsername()));
+                    .FirstOrDefaultAsync(x => x.Username == _userAccessor.GetUsername());
 
                 if (company == null)
                 {
                     company = new CompanyDto
                     {
-                        CompanyName = "",
-                        Usernames = new List<string> {_userAccessor.GetUsername()},
+                        LegalName = "",
+                        Username = _userAccessor.GetUsername(),
                         AccessStatus = AccessStatus.Private,
                         CompanyContacts = new CompanyContacts
                         {

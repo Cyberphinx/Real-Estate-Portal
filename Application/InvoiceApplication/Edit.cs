@@ -8,7 +8,6 @@ using Application.Interfaces;
 using AutoMapper;
 using Domain;
 using Domain.InvoiceAggregate;
-using Domain.OrderAggregate;
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

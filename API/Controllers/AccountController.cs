@@ -72,13 +72,13 @@ namespace API.Controllers
             {
                 Email = registerDto.Email,
                 UserName = registerDto.Username,
-                LastLoginTime = DateTime.Now,
-                RegistrationDate = DateTime.Now
+                PhoneNumber = registerDto.PhoneNumber
             };
 
             var result = await _userManager.CreateAsync(user, registerDto.Password);
 
-            if (registerDto.Agency == true) await _userManager.AddToRoleAsync(user, "Agency");
+            if (registerDto.AccountType == AccountType.Agent) await _userManager.AddToRoleAsync(user, "Agency");
+            if (registerDto.AccountType == AccountType.Company) await _userManager.AddToRoleAsync(user, "Company");
             else await _userManager.AddToRoleAsync(user, "Customer");
 
             if (result.Succeeded)
@@ -147,13 +147,12 @@ namespace API.Controllers
         {
             return new UserDto
             {
-                Image = null,
                 Token = await _tokenService.CreateToken(user),
                 Username = user.UserName,
                 Email = user.Email,
                 Role = _userManager.GetRolesAsync(user).Result.ToArray(),
-                LastLoginTime = user.LastLoginTime,
-                RegistrationDate = user.RegistrationDate
+                PhoneNumber = user.PhoneNumber,
+                Image = user?.Photos?.FirstOrDefault(x => x.IsMain)?.Url,
             };
         }
     }

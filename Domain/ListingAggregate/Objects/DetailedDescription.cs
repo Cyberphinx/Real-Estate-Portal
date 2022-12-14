@@ -8,8 +8,7 @@ namespace Domain.ListingAggregate.Objects
 {
     public class DetailedDescription
     {
-        public Guid Id { get; set; }
-        public int Index { get; set; }
+        public int Id { get; set; }
         public string Heading { get; set; }
         public Dimensions Dimensions { get; set; }
         public string Text { get; set; }

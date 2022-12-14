@@ -7,7 +7,7 @@ namespace Domain.CompanyAggregate
 {
     public class CompanyDescription
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string Heading { get; set; }
         public string Text { get; set; }
         public Guid CompanyId { get; set; }

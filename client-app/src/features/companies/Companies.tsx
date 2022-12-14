@@ -68,17 +68,13 @@ export default observer(function Companies() {
                 </article>
                 <article className="service-index">
                     <div className="service-icon"></div>
-                    <p className="service-title">Builders</p>
-                </article>
-                <article className="service-index">
-                    <div className="service-icon"></div>
-                    <p className="service-title">Logistics</p>
+                    <p className="service-title">Traders</p>
                 </article>
             </section>
             <section className="subservice-container">
                 <article className="subservice-toolbar">
                     <div>
-                        <p className="subservice-toolbar-text">Builders</p>
+                        <p className="subservice-toolbar-text">Traders</p>
                     </div>
                     <div style={{padding:"12.5px 20px", textAlign:"right"}}>
                         <input className="subservice-toolbar-search" placeholder="Filter by tag name" />

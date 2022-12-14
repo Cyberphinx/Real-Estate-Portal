@@ -20,7 +20,7 @@ namespace Persistence
 
             Random rnd = new Random();
             int month = rnd.Next(1, 13);  // creates a number between 1 and 12
-            int day = rnd.Next(1, 30);  // creates a number between 1 and 12
+            int day = rnd.Next(1, 30);  // creates a number between 1 and 30
 
             for (int x = 1; x <= seedAmount; x++)
             {
@@ -72,105 +72,90 @@ namespace Persistence
                     {
                         new Content
                         {
-                            Index = 1,
                             Url = "https://picsum.photos/300/200?random=1",
                             Type = MediaType.Image,
                             Caption = "Photo 1"
                         },
                         new Content
                         {
-                            Index = 2,
                             Url = "https://picsum.photos/300/200?random=2",
                             Type = MediaType.Image,
                             Caption = "Photo 2"
                         },
                         new Content
                         {
-                            Index = 3,
                             Url = "https://picsum.photos/300/200?random=3",
                             Type = MediaType.Image,
                             Caption = "Photo 3"
                         },
                         new Content
                         {
-                            Index = 4,
                             Url = "https://picsum.photos/300/200?random=4",
                             Type = MediaType.Image,
                             Caption = "Photo 4"
                         },
                         new Content
                         {
-                            Index = 5,
                             Url = "https://picsum.photos/300/200?random=5",
                             Type = MediaType.Image,
                             Caption = "Photo 5"
                         },
                         new Content
                         {
-                            Index = 6,
                             Url = "https://picsum.photos/300/200?random=6",
                             Type = MediaType.Image,
                             Caption = "Photo 6"
                         },
                         new Content
                         {
-                            Index = 7,
                             Url = "https://picsum.photos/300/200?random=7",
                             Type = MediaType.Image,
                             Caption = "Photo 7"
                         },
                         new Content
                         {
-                            Index = 8,
                             Url = "https://picsum.photos/300/200?random=8",
                             Type = MediaType.Image,
                             Caption = "Photo 8"
                         },
                         new Content
                         {
-                            Index = 9,
                             Url = "https://picsum.photos/300/200?random=9",
                             Type = MediaType.Image,
                             Caption = "Photo 9"
                         },
                         new Content
                         {
-                            Index = 10,
                             Url = "https://picsum.photos/300/200?random=10",
                             Type = MediaType.Image,
                             Caption = "Photo 10"
                         },
                         new Content
                         {
-                            Index = 11,
                             Url = "https://picsum.photos/300/200?random=11",
                             Type = MediaType.Image,
                             Caption = "Photo 11"
                         },
                         new Content
                         {
-                            Index = 12,
                             Url = "https://picsum.photos/300/200?random=12",
                             Type = MediaType.Image,
                             Caption = "Photo 12"
                         },
                         new Content
                         {
-                            Index = 13,
                             Url = "https://picsum.photos/300/200?random=13",
                             Type = MediaType.Image,
                             Caption = "Photo 13"
                         },
                         new Content
                         {
-                            Index = 14,
                             Url = "https://picsum.photos/300/200?random=14",
                             Type = MediaType.Image,
                             Caption = "Photo 14"
                         },
                         new Content
                         {
-                            Index = 15,
                             Url = "https://picsum.photos/300/200?random=15",
                             Type = MediaType.Image,
                             Caption = "Photo 15"
@@ -184,14 +169,12 @@ namespace Persistence
                     {
                         new DetailedDescription
                         {
-                            Index = 1,
                             Heading = "Summary",
                             Dimensions = null,
                             Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ultricies turpis mi, at ultrices urna finibus eget. Pellentesque a magna lectus. Pellentesque molestie mollis justo eu congue. Donec nibh leo, tempor eu interdum sit amet, lobortis vitae justo. Quisque mollis nisl risus, sed iaculis diam lobortis vel. Pellentesque nisl tortor, scelerisque aliquam purus fringilla, blandit dictum orci. Cras cursus lacinia erat vel mattis. Proin vehicula mi in risus accumsan, at finibus magna laoreet. Cras nisl turpis, lobortis et arcu eget, tincidunt tempor lacus. Praesent posuere elit at felis lacinia, sed venenatis tellus convallis. Duis vel rhoncus nisl, nec lobortis dui. Sed sed convallis odio. Proin convallis mi ut eros accumsan interdum. Etiam elementum diam at sagittis aliquam. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc et faucibus nisi, lobortis venenatis mi.",
                         },
                         new DetailedDescription
                         {
-                            Index = 2,
                             Heading = "Room One",
                             Dimensions = new Dimensions
                             {
@@ -203,7 +186,6 @@ namespace Persistence
                         },
                         new DetailedDescription
                         {
-                            Index = 3,
                             Heading = "Room Two",
                             Dimensions = new Dimensions
                             {
@@ -215,7 +197,6 @@ namespace Persistence
                         },
                         new DetailedDescription
                         {
-                            Index = 4,
                             Heading = "Room Three",
                             Dimensions = new Dimensions
                             {
@@ -227,7 +208,6 @@ namespace Persistence
                         },
                         new DetailedDescription
                         {
-                            Index = 5,
                             Heading = "Room Four",
                             Dimensions = new Dimensions
                             {
@@ -239,7 +219,6 @@ namespace Persistence
                         },
                         new DetailedDescription
                         {
-                            Index = 6,
                             Heading = "Room Five",
                             Dimensions = new Dimensions
                             {
@@ -282,7 +261,6 @@ namespace Persistence
                                 Latitude = rnd.NextDouble() * (59 - 49) + 49,
                                 Longitude = rnd.NextDouble() * (2 - -10) + -10
                             },
-                            PafUdprn = "",
                             What3words = "basic.bubble.slim"
                         };
                 newListing.Pricing = new Pricing
@@ -391,105 +369,90 @@ namespace Persistence
                     {
                         new Content
                         {
-                            Index = 1,
                             Url = "https://picsum.photos/300/200?random=1",
                             Type = MediaType.Image,
                             Caption = "Photo 1"
                         },
                         new Content
                         {
-                            Index = 2,
                             Url = "https://picsum.photos/300/200?random=2",
                             Type = MediaType.Image,
                             Caption = "Photo 2"
                         },
                         new Content
                         {
-                            Index = 3,
                             Url = "https://picsum.photos/300/200?random=3",
                             Type = MediaType.Image,
                             Caption = "Photo 3"
                         },
                         new Content
                         {
-                            Index = 4,
                             Url = "https://picsum.photos/300/200?random=4",
                             Type = MediaType.Image,
                             Caption = "Photo 4"
                         },
                         new Content
                         {
-                            Index = 5,
                             Url = "https://picsum.photos/300/200?random=5",
                             Type = MediaType.Image,
                             Caption = "Photo 5"
                         },
                         new Content
                         {
-                            Index = 6,
                             Url = "https://picsum.photos/300/200?random=6",
                             Type = MediaType.Image,
                             Caption = "Photo 6"
                         },
                         new Content
                         {
-                            Index = 7,
                             Url = "https://picsum.photos/300/200?random=7",
                             Type = MediaType.Image,
                             Caption = "Photo 7"
                         },
                         new Content
                         {
-                            Index = 8,
                             Url = "https://picsum.photos/300/200?random=8",
                             Type = MediaType.Image,
                             Caption = "Photo 8"
                         },
                         new Content
                         {
-                            Index = 9,
                             Url = "https://picsum.photos/300/200?random=9",
                             Type = MediaType.Image,
                             Caption = "Photo 9"
                         },
                         new Content
                         {
-                            Index = 10,
                             Url = "https://picsum.photos/300/200?random=10",
                             Type = MediaType.Image,
                             Caption = "Photo 10"
                         },
                         new Content
                         {
-                            Index = 11,
                             Url = "https://picsum.photos/300/200?random=11",
                             Type = MediaType.Image,
                             Caption = "Photo 11"
                         },
                         new Content
                         {
-                            Index = 12,
                             Url = "https://picsum.photos/300/200?random=12",
                             Type = MediaType.Image,
                             Caption = "Photo 12"
                         },
                         new Content
                         {
-                            Index = 13,
                             Url = "https://picsum.photos/300/200?random=13",
                             Type = MediaType.Image,
                             Caption = "Photo 13"
                         },
                         new Content
                         {
-                            Index = 14,
                             Url = "https://picsum.photos/300/200?random=14",
                             Type = MediaType.Image,
                             Caption = "Photo 14"
                         },
                         new Content
                         {
-                            Index = 15,
                             Url = "https://picsum.photos/300/200?random=15",
                             Type = MediaType.Image,
                             Caption = "Photo 15"
@@ -503,14 +466,12 @@ namespace Persistence
                     {
                         new DetailedDescription
                         {
-                            Index = 1,
                             Heading = "Summary",
                             Dimensions = null,
                             Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ultricies turpis mi, at ultrices urna finibus eget. Pellentesque a magna lectus. Pellentesque molestie mollis justo eu congue. Donec nibh leo, tempor eu interdum sit amet, lobortis vitae justo. Quisque mollis nisl risus, sed iaculis diam lobortis vel. Pellentesque nisl tortor, scelerisque aliquam purus fringilla, blandit dictum orci. Cras cursus lacinia erat vel mattis. Proin vehicula mi in risus accumsan, at finibus magna laoreet. Cras nisl turpis, lobortis et arcu eget, tincidunt tempor lacus. Praesent posuere elit at felis lacinia, sed venenatis tellus convallis. Duis vel rhoncus nisl, nec lobortis dui. Sed sed convallis odio. Proin convallis mi ut eros accumsan interdum. Etiam elementum diam at sagittis aliquam. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc et faucibus nisi, lobortis venenatis mi.",
                         },
                         new DetailedDescription
                         {
-                            Index = 2,
                             Heading = "Room One",
                             Dimensions = new Dimensions
                             {
@@ -522,7 +483,6 @@ namespace Persistence
                         },
                         new DetailedDescription
                         {
-                            Index = 3,
                             Heading = "Room Two",
                             Dimensions = new Dimensions
                             {
@@ -534,7 +494,6 @@ namespace Persistence
                         },
                         new DetailedDescription
                         {
-                            Index = 4,
                             Heading = "Room Three",
                             Dimensions = new Dimensions
                             {
@@ -546,7 +505,6 @@ namespace Persistence
                         },
                         new DetailedDescription
                         {
-                            Index = 5,
                             Heading = "Room Four",
                             Dimensions = new Dimensions
                             {
@@ -558,7 +516,6 @@ namespace Persistence
                         },
                         new DetailedDescription
                         {
-                            Index = 6,
                             Heading = "Room Five",
                             Dimensions = new Dimensions
                             {
@@ -601,7 +558,6 @@ namespace Persistence
                                 Latitude = rnd.NextDouble() * (59 - 49) + 49,
                                 Longitude = rnd.NextDouble() * (2 - -10) + -10
                             },
-                            PafUdprn = "",
                             What3words = "basic.bubble.slim"
                         };
                 newListing.Pricing = new Pricing

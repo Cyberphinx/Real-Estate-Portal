@@ -44,7 +44,7 @@ namespace Infrastructure.Security
 
             if (company == null) return Task.CompletedTask;
 
-            if (company.Usernames.Contains(username)) context.Succeed(requirement);
+            if (company.Username == username) context.Succeed(requirement);
 
             return Task.CompletedTask;
         }

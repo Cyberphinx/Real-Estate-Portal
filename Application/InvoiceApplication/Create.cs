@@ -10,7 +10,6 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Domain.CompanyAggregate;
 using Domain.InvoiceAggregate;
-using Domain.OrderAggregate;
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

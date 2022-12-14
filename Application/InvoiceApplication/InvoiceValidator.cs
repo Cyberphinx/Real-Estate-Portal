@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Domain.CompanyAggregate;
-using Domain.OrderAggregate;
 using Domain.InvoiceAggregate;
 using FluentValidation;
 
@@ -13,7 +12,7 @@ namespace Application.InvoiceApplication
     {
         public InvoiceValidator()
         {
-            RuleFor(x => x.Total).NotEmpty();
+            RuleFor(x => x.Amount).NotEmpty();
         }
     }
 }

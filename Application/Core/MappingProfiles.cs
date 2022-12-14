@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Application.CompanyApplication;
 using Application.ListingApplication;
-using Application.OrderApplication;
+using Application.InvoiceApplication;
 using AutoMapper;
 using Domain;
 using Domain.InvoiceAggregate;
@@ -12,7 +12,7 @@ using Domain.CompanyAggregate;
 using Domain.ListingAggregate;
 using Domain.ListingAggregate.Objects;
 using Domain.LocationAggregate;
-using Domain.OrderAggregate;
+using Application.JobApplication;
 
 namespace Application.Core
 {
@@ -22,7 +22,6 @@ namespace Application.Core
         {
             CreateMap<Listing, Listing>();
             CreateMap<Company, Company>();
-            CreateMap<Order, Order>();
 
             CreateMap<Listing, ListingDto>()
                 .ForMember(x => x.Company, o => o.MapFrom(s => s.Company))
@@ -37,26 +36,22 @@ namespace Application.Core
 
             CreateMap<Company, Owner>()
                 .ForMember(x => x.CompanyReference, o => o.MapFrom(s => s.CompanyReference))
-                .ForMember(x => x.CompanyName, o => o.MapFrom(s => s.CompanyName))
+                .ForMember(x => x.LegalName, o => o.MapFrom(s => s.LegalName))
                 .ForMember(x => x.CompanyAddress, o => o.MapFrom(s => s.CompanyAddress))
                 .ForMember(x => x.RedressScheme, o => o.MapFrom(s => s.RedressScheme));
 
             CreateMap<Company, CompanyDto>()
-                .ForMember(x => x.Orders, o => o.MapFrom(s => s.Orders));
+                .ForMember(x => x.Listings, o => o.MapFrom(s => s.Listings));
 
             CreateMap<Company, Seller>();
 
-            CreateMap<Order, OrderDto>()
-                .ForMember(x => x.Invoices, o => o.MapFrom(s => s.Invoices))
-                .ForMember(x => x.Company, o => o.MapFrom(s => s.Company));
-
             CreateMap<Invoice, InvoiceDto>()
-                .ForMember(x => x.Total, o => o.MapFrom(s => s.Total))
+                .ForMember(x => x.Amount, o => o.MapFrom(s => s.Amount))
                 .ForMember(x => x.Items, o => o.MapFrom(s => s.Items))
                 .ForMember(x => x.PaymentStatus, o => o.MapFrom(s => s.PaymentStatus));
 
             CreateMap<InvoiceItem, InvoiceItemDto>()
-                .ForMember(x => x.Total, o => o.MapFrom(s => s.Total))
+                .ForMember(x => x.Amount, o => o.MapFrom(s => s.Amount))
                 .ForMember(x => x.Description, o => o.MapFrom(s => s.Description));
 
         }

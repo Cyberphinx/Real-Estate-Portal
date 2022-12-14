@@ -10,7 +10,8 @@ namespace Domain
         Unpaid,
         Pending,
         Paid,
-        Failed,
+        Cancelled,
+        Refunded,
         Waived
     }
 }

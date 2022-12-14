@@ -22,7 +22,7 @@ namespace API.Services
             var service = new PaymentIntentService();
 
             var intent = new PaymentIntent();
-            var subtotal = currentInvoice.Total;
+            var subtotal = currentInvoice.Amount;
 
             if (string.IsNullOrEmpty(currentInvoice.PaymentIntentId))
             {

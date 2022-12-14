@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Application.InvoiceApplication;
 using Domain.InvoiceAggregate;
 using Domain.CompanyAggregate;
-using Domain.OrderAggregate;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

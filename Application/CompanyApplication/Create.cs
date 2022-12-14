@@ -41,7 +41,7 @@ namespace Application.CompanyApplication
 
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
-                request.Company.Usernames.Contains(_userAccessor.GetUsername());
+                request.Company.Username = _userAccessor.GetUsername();
 
                 await _context.Companies.AddAsync(request.Company);
 
