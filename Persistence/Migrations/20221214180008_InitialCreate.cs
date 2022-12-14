@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Persistence.Migrations
 {
-    public partial class PostgresInitial : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -105,7 +105,8 @@ namespace Persistence.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     AppUserId = table.Column<string>(type: "text", nullable: true),
-                    ReviewerName = table.Column<string>(type: "text", nullable: true),
+                    ReviewerDisplayName = table.Column<string>(type: "text", nullable: true),
+                    ReviewerUsername = table.Column<string>(type: "text", nullable: true),
                     ReviewerEmail = table.Column<string>(type: "text", nullable: true),
                     ReviewerPhone = table.Column<string>(type: "text", nullable: true),
                     AddedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -350,7 +351,8 @@ namespace Persistence.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     CompanyId = table.Column<Guid>(type: "uuid", nullable: true),
-                    ReviewerName = table.Column<string>(type: "text", nullable: true),
+                    ReviewerDisplayName = table.Column<string>(type: "text", nullable: true),
+                    ReviewerUsername = table.Column<string>(type: "text", nullable: true),
                     ReviewerEmail = table.Column<string>(type: "text", nullable: true),
                     ReviewerPhone = table.Column<string>(type: "text", nullable: true),
                     AddedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -564,7 +566,8 @@ namespace Persistence.Migrations
                 name: "JobContent",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Url = table.Column<string>(type: "text", nullable: true),
                     Type = table.Column<int>(type: "integer", nullable: false),
                     Caption = table.Column<string>(type: "text", nullable: true),
@@ -686,10 +689,10 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "1", "36fc89f5-7379-44c7-9b0d-5454134d58b7", "Company", "COMPANY" },
-                    { "2", "c5105057-06b0-4f61-a7ba-de925d3ee40d", "Customer", "CUSTOMER" },
-                    { "3", "10a2e11e-b8a6-45b8-a665-87d750dfde53", "Agency", "AGENCY" },
-                    { "4", "22dd9f1f-638e-475d-a4bc-c5b2bbb5bf1a", "Admin", "ADMIN" }
+                    { "1", "595fa6e1-42e0-4c4b-b1cf-142270cd240c", "Company", "COMPANY" },
+                    { "2", "4407b454-1f49-48c8-9ce6-a26de9c1864b", "Customer", "CUSTOMER" },
+                    { "3", "c9b1a810-4792-4a59-a48c-fd96970ea8c7", "Agency", "AGENCY" },
+                    { "4", "8aa62dac-8b52-4f80-9b09-5e53c46cf3dc", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.CreateIndex(

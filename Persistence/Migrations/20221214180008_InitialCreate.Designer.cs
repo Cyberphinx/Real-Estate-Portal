@@ -13,8 +13,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20221214164732_PostgresInitial")]
-    partial class PostgresInitial
+    [Migration("20221214180008_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -119,13 +119,16 @@ namespace Persistence.Migrations
                     b.Property<int>("ReviewStatus")
                         .HasColumnType("integer");
 
+                    b.Property<string>("ReviewerDisplayName")
+                        .HasColumnType("text");
+
                     b.Property<string>("ReviewerEmail")
                         .HasColumnType("text");
 
-                    b.Property<string>("ReviewerName")
+                    b.Property<string>("ReviewerPhone")
                         .HasColumnType("text");
 
-                    b.Property<string>("ReviewerPhone")
+                    b.Property<string>("ReviewerUsername")
                         .HasColumnType("text");
 
                     b.Property<int[]>("ServiceCategories")
@@ -292,13 +295,16 @@ namespace Persistence.Migrations
                     b.Property<int>("ReviewStatus")
                         .HasColumnType("integer");
 
+                    b.Property<string>("ReviewerDisplayName")
+                        .HasColumnType("text");
+
                     b.Property<string>("ReviewerEmail")
                         .HasColumnType("text");
 
-                    b.Property<string>("ReviewerName")
+                    b.Property<string>("ReviewerPhone")
                         .HasColumnType("text");
 
-                    b.Property<string>("ReviewerPhone")
+                    b.Property<string>("ReviewerUsername")
                         .HasColumnType("text");
 
                     b.Property<int[]>("ServiceCategories")
@@ -455,9 +461,11 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.JobAggregate.JobContent", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Caption")
                         .HasColumnType("text");
@@ -853,28 +861,28 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "36fc89f5-7379-44c7-9b0d-5454134d58b7",
+                            ConcurrencyStamp = "595fa6e1-42e0-4c4b-b1cf-142270cd240c",
                             Name = "Company",
                             NormalizedName = "COMPANY"
                         },
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "c5105057-06b0-4f61-a7ba-de925d3ee40d",
+                            ConcurrencyStamp = "4407b454-1f49-48c8-9ce6-a26de9c1864b",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
                             Id = "3",
-                            ConcurrencyStamp = "10a2e11e-b8a6-45b8-a665-87d750dfde53",
+                            ConcurrencyStamp = "c9b1a810-4792-4a59-a48c-fd96970ea8c7",
                             Name = "Agency",
                             NormalizedName = "AGENCY"
                         },
                         new
                         {
                             Id = "4",
-                            ConcurrencyStamp = "22dd9f1f-638e-475d-a4bc-c5b2bbb5bf1a",
+                            ConcurrencyStamp = "8aa62dac-8b52-4f80-9b09-5e53c46cf3dc",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

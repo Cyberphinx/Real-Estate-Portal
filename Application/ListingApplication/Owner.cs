@@ -25,6 +25,7 @@ namespace Application.ListingApplication
         public string ServiceLocations { get; set; }
         public string SummaryDescription { get; set; }
         public List<ServiceCategory> ServiceCategories { get; set; }
+        public int ListingsCount { get; set; }
 
     }
 }

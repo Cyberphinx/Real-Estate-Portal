@@ -9,7 +9,8 @@ namespace Domain
 {
     public class Review
     {
-        public string ReviewerName { get; set; }
+        public string ReviewerDisplayName { get; set; }
+        public string ReviewerUsername { get; set; }
         public string ReviewerEmail { get; set; }
         public string ReviewerPhone { get; set; }
         public DateTime AddedOn { get; set; }

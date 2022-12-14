@@ -10,7 +10,7 @@ namespace Domain.JobAggregate
 {
     public class JobContent
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string Url { get; set; }
         public JobMediaType Type { get; set; }
         public string Caption { get; set; }

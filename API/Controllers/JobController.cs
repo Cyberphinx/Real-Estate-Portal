@@ -19,6 +19,7 @@ namespace API.Controllers
             _db = db;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetJobs()
         {
