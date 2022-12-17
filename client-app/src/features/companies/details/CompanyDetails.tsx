@@ -6,7 +6,6 @@ import { useStore } from "../../../app/stores/store";
 import { Company, CompanyContent, CompanyDescription } from "../../../app/model/CompanyAggregate/Company";
 import AgencyTagForCompany from "../../../app/common/tags/AgencyTagForCompany";
 import CompanyBookmark from "./CompanyBookmark";
-import { ServiceCategory } from "../../../app/model/ServiceCategory";
 
 interface Props {
     company: Company | undefined;

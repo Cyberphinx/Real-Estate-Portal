@@ -3,9 +3,6 @@ import './NavBar.css';
 import { Link } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../stores/store";
-import priceFormatter from "../common/PriceFormatter";
-import { priceQualifier, propertyType } from "../model/ListingAggregate/ListingEnums";
-import { ServiceCategory } from "../model/ServiceCategory";
 
 export default observer(function NavBarForCompany() {
     const { companyStore, featureStore } = useStore();
