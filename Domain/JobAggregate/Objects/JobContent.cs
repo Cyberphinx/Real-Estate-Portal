@@ -6,7 +6,7 @@ using Domain.CompanyAggregate.Enums;
 using Microsoft.EntityFrameworkCore;
 using Domain.JobAggregate.Enums;
 
-namespace Domain.JobAggregate
+namespace Domain.JobAggregate.Objects
 {
     public class JobContent
     {

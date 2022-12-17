@@ -21,12 +21,9 @@ export default observer(function Portfolio({ selectedPortfolio }: Props) {
         <div className="agency-listings-container">
             <button className="create-listing-button" onClick={() => setActiveAgencyPanel(3)}>
                 <img src="/assets/add.svg" alt="create" className="add-listing-icon" />
-                <div style={{ paddingTop: "calc(100vw / 13)", fontSize: "16px" }}>
-                    <p>Create listing</p>
-                    <b>{selectedPortfolio?.companyName}</b>
-                </div>
+                <p style={{ paddingTop: "calc(100vw / 13)", fontSize: "16px" }}>Create listing</p>
             </button>
-            {listings.filter(x => x.companyReference === "savills").map((item: Listing) => (
+            {listings.filter(x => x.companyReference === selectedPortfolio?.companyReference).map((item: Listing) => (
                 <div key={item.listingReference} style={{ cursor: "pointer", marginTop:"1px" }}>
                     <ListingItem listing={item} predicate={predicate} />
                 </div>

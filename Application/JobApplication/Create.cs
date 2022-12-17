@@ -10,6 +10,9 @@ using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
+using Domain;
+using Domain.Enums;
+using Domain.InvoiceAggregate;
 
 namespace Application.JobApplication
 {
@@ -40,13 +43,21 @@ namespace Application.JobApplication
 
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
+                var user = await _context.Users.FirstOrDefaultAsync(x => x.UserName == _userAccessor.GetUsername());
+
                 request.Job.AddedOn = DateTime.Now;
 
-                DateTime localFinishTime = request.Job.FinishBy.ToLocalTime();
-                // DateTime localEndTime = request.Order.EndTime.ToLocalTime();
+                var customer = new JobNetwork()
+                {
+                    AppUser = user,
+                    Job = request.Job,
+                    Invoice = null,
+                    Role = JobNetworkRole.Customer
+                };
+                request.Job.Networks.Add(customer);
 
+                DateTime localFinishTime = request.Job.FinishBy.ToLocalTime();
                 request.Job.FinishBy = localFinishTime;
-                // request.Order.EndTime = localEndTime;
 
                 await _context.Jobs.AddAsync(request.Job);
 

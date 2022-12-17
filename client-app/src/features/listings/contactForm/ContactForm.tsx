@@ -11,7 +11,7 @@ export default function ContactForm({listing}:Props) {
 
     return (
         <div className="agent-contacts-container">
-            <h4>{listing?.company.companyName}</h4>
+            <h4>{listing?.company.displayName}</h4>
             <p>Phone: {listing?.company.companyContacts.phone}</p>
             <p>Email: {listing?.company.companyContacts.email}</p>
         </div>

@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Domain;
+using Domain.Enums;
 using Domain.CompanyAggregate;
 using Domain.ListingAggregate;
 using Domain.LocationAggregate;
+using Domain;
+using Application.CompanyApplication;
 
 namespace Application.ListingApplication
 {
@@ -15,17 +17,11 @@ namespace Application.ListingApplication
         public DateTime AddedOn { get; set; }
         public CompanyAddress CompanyAddress { get; set; }
         public CompanyContacts CompanyContacts { get; set; }
-        public ICollection<CompanyContent> CompanyContents { get; set; }
-        public ICollection<CompanyDescription> CompanyDescriptions { get; set; }
         public string LegalName { get; set; }
         public string CompanyReference { get; set; }
         public string DisplayName { get; set; }
-        public ICollection<Insurance> Insurances { get; set; }
-        public RedressScheme RedressScheme { get; set; } 
-        public string ServiceLocations { get; set; }
+        public List<RedressScheme> RedressSchemes { get; set; } 
         public string SummaryDescription { get; set; }
-        public List<ServiceCategory> ServiceCategories { get; set; }
-        public int ListingsCount { get; set; }
 
     }
 }

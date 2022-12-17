@@ -18,6 +18,5 @@ namespace Domain.LocationAggregate
         public string PostalCode { get; set; }
         public Country Country { get; set; }
         public Coordinates Coordinates { get; set; }
-        public string What3words { get; set; }
     }
 }

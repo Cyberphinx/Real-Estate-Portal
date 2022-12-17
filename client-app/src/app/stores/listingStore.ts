@@ -10,9 +10,7 @@ import { store } from './store';
 export default class ListingStore {
   listingRegistry = new Map<string, Listing>();
   allListingRegistry = new Map<string, Listing>();
-  companyRegistry = new Map<string, Company>();
   selectedListing: Listing | undefined = undefined;
-  selectedCompany: Company | undefined = undefined;
   loading = false;
   loadingInitial = false;
   loadingAllListingsAtOnce = false;
@@ -153,21 +151,6 @@ export default class ListingStore {
     }
   }
 
-  loadCompanies = async () => {
-    this.setLoadingInitial(true);
-    // Asynchronous code is inside Try Catch block
-    try {
-      const companies = await agent.Companies.list();
-      companies.forEach(company => {
-        this.companyRegistry.set(company.id, company);
-      })
-      this.setLoadingInitial(false);
-    } catch (error) {
-      console.log(error);
-      this.setLoadingInitial(false);
-    }
-  };
-
   setLoadingInitial = (state: boolean) => {
     this.loadingInitial = state;
   }
@@ -198,22 +181,13 @@ export default class ListingStore {
 
   selectListing = (id: string) => {
     this.selectedListing = this.listingRegistry.get(id);
-    // this.selectedListing = this.listings.find(x => x.id === id);
   }
 
   cancelSelectListing = () => {
     this.selectedListing = undefined;
   }
 
-  selectCompany = (id: string) => {
-    this.selectedCompany = this.companies.find(c => c.id === id);
-  }
-
-  cancelSelectCompany = () => {
-    this.selectedCompany = undefined;
-  }
   // LOAD LISTINGS END
-
 
 
   // PREPARE LISTING MAP DATA FOR VIEW - START
@@ -228,10 +202,6 @@ export default class ListingStore {
 
   get allListings() {
     return Array.from(this.allListingRegistry.values());
-  }
-
-  get companies() {
-    return Array.from(this.companyRegistry.values());
   }
 
   get maxValues() {
@@ -272,17 +242,20 @@ export default class ListingStore {
 
   // CRUD Listing - START
   createListing = async (listing: ListingFormValues) => {
-    const user = store.userStore.user;
+    // const user = store.userStore.user;
     try {
       await agent.Listings.create(listing);
       const newListing = new Listing(listing);
-      newListing.company.usernames.push(user!.username);
       this.setListing(newListing);
       runInAction(() => {
         this.selectedListing = newListing;
+        this.loading = false;
       });
     } catch (error) {
       console.log(error);
+      runInAction(() => {
+        this.loading = false;
+      })
     }
   };
 

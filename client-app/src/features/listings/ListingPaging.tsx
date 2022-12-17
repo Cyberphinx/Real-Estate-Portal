@@ -11,9 +11,10 @@ interface Props {
 }
 
 export default observer(function ListingPaging({ clusters, supercluster }: Props) {
-    const { listingStore, featureStore } = useStore();
-    const { predicate, listings, selectListing, contacts, setContacts, cancelSelectCompany,
+    const { listingStore, featureStore, companyStore } = useStore();
+    const { predicate, listings, selectListing, contacts, setContacts,
         cancelSelectListing, selectedListing, combinedListing } = listingStore;
+    const { cancelSelectCompany } = companyStore;
     const { isLocked } = featureStore;
 
     // Set page limits

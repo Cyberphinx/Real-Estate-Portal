@@ -1,14 +1,12 @@
 import { MaxValue } from './../model/MaxValue';
-import { Availability } from './../model/Availability';
 import { User, UserFormValues, RoleFormValues } from './../model/User';
 import axios, { AxiosResponse } from "axios";
 import { Company, CompanyFormValues } from '../model/CompanyAggregate/Company';
-import { Order, OrderFormValues } from '../model/OrderAggregate/Order';
 import { store } from '../stores/store';
 import { history } from '../..';
 import { PaginatedResult } from '../model/Pagination';
 import { Listing, ListingFormValues } from '../model/ListingAggregate/Listing';
-import { City } from '../model/City';
+import { Job, JobFormValues } from '../model/JobAggregate/Job';
 
 // adding fake delay
 const sleep = (delay: number) => {
@@ -97,7 +95,7 @@ const Listings = {
 };
 
 const Companies = {
-  list: () => requests.get<Company[]>("/company"),
+  list: (params: URLSearchParams) => axios.get<PaginatedResult<Company[]>>("/company", {params}).then(responseBody),
   details: (id: string) => requests.get<Company>(`/company/${id}`),
   detailsmycompany: () => requests.get<Company>(`/company/owner`),
   create: (company: CompanyFormValues) => requests.post<Company>('/company', company),
@@ -105,33 +103,19 @@ const Companies = {
   delete: (id: string) => requests.del<void>(`/company/${id}`),
 };
 
-const Orders = {
-  list: () => requests.get<Order[]>("/order"),
-  listMyOrdersAsBuyer: () => requests.get<Order[]>("/order/buyer"),
-  listMyOrdersAsSeller: () => requests.get<Order[]>("/order/seller"),
-  details: (id: string) => requests.get<Order>(`/order/${id}`),
-  create: (order: OrderFormValues) => requests.post<void>('/order', order),
-  update: (order: OrderFormValues) => requests.put<void>(`/order/${order.id}`, order),
-  delete: (id: string) => requests.del<void>(`/order/${id}`),
-}
-
-const Availabilities = {
-  create: (entry: Availability) => requests.post<void>("/availability", entry),
-  delete: (id: number) => requests.del<void>(`/availability/${id}`)
-}
-
-const Cities = {
-  // list: () => requests.get<City[]>("/city")
-  list: (params: URLSearchParams) => axios.get<City[]>("/city", {params}).then(responseBody),
+const Jobs = {
+  list: () => requests.get<Job[]>("/job"),
+  details: (id: string) => requests.get<Job>(`/job/${id}`),
+  create: (job: JobFormValues) => requests.post<void>('/job', job),
+  update: (job: JobFormValues) => requests.put<void>(`/job/${job.id}`, job),
+  delete: (id: string) => requests.del<void>(`/job/${id}`),
 }
 
 const agent = {
   Account,
   Listings,
   Companies,
-  Orders,
-  Availabilities,
-  Cities
+  Jobs
 };
 
 export default agent;

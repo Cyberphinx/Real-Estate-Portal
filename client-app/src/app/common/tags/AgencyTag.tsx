@@ -1,4 +1,5 @@
 import React from "react";
+import { Company } from "../../model/CompanyAggregate/Company";
 import { Listing } from "../../model/ListingAggregate/Listing";
 import './AgencyTag.css';
 
@@ -11,7 +12,7 @@ export default function AgencyTag({ listing }: Props) {
     return (
         <div style={{ position: "relative" }}>
             <span className="agency-tag" >
-                {listing?.company.companyName}
+                {listing?.company.displayName}
             </span>
         </div>
     );

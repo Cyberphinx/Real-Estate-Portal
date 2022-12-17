@@ -8,9 +8,10 @@ import { useStore } from "../../../../app/stores/store";
 import './BranchForm.css';
 import * as Yup from 'yup';
 import { v4 as uuid } from 'uuid';
-import { Country } from "../../../../app/model/LocationAggregate/Location";
+import { Country } from "../../../../app/model/Location";
 import MySelectInput from "../../../../app/common/form/MySelectInput";
 import { countryOptions } from "../../../../app/common/form/countryOptions";
+import { UnitOfTime } from "../../../../app/model/Membership";
 
 interface Props {
     setBranchForm: any;
@@ -23,14 +24,8 @@ export default observer(function BranchForm({ setBranchForm }: Props) {
 
     const initialValues = {
         id: uuid(),
-        companyName: user!.companyName,
-        companyReference: "",
-        displayName: "",
-        usernames: [user!.username],
         accessStatus: AccessStatus.Public,
         addedOn: new Date(),
-        serviceCategory: ServiceCategory.EstateAgent,
-        // companyMembership: {},
         companyAddress: {
             propertyNumberOrName: "",
             streetName: "",
@@ -43,24 +38,42 @@ export default observer(function BranchForm({ setBranchForm }: Props) {
                 latitude: 0,
                 longitude: 0
             },
-            PafUdprn: "",
             what3words: "",
         },
-        // companyDetails: {},
         companyContacts: {
             phone: "",
             email: user!.email,
-            website: "",
+            website: ""
         },
-        brief: "",
-        description: "",
+        companyContents: [],
+        commpanyDescriptions: [],
+        companyReference: "",
+        companyRegistrationNumber: "",
+        displayName: "",
+        insurances: [],
+        lastModified: new Date(),
+        legalName: "",
+        membership: {
+            id: uuid(),
+            companyReference: "",
+            contractLength: 1,
+            memberSince: new Date(),
+            expiry: new Date(2050),
+            description: "",
+            price: 0,
+            invoices: [],
+            isActive: true,
+            unit: UnitOfTime.Years,
+            username: user!.username,
+            vatPercentage: 20
+        },
+        jobs: [],
+        redressSchemes: [],
+        reviews: [],
         serviceLocations: "",
-        serviceScope: "",
-        logo: "",
-        // companyContents: [],
-        // availabilities: [],
-        // insurances: [],
-        // orders: [],
+        summaryDescription: "",
+        serviceCategories: [ServiceCategory.EstateAgent],
+        username: user!.username,
         error: null,
     }
 

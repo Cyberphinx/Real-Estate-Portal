@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using API.Services;
 using Domain;
+using Domain.AppUserAggregate;
 using Domain.InvoiceAggregate;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;

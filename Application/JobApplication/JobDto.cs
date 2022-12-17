@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Domain;
+using Domain.Enums;
 using Domain.CompanyAggregate;
-using Domain.JobAggregate;
+using Domain.JobAggregate.Objects;
 using Domain.JobAggregate.Enums;
 
 namespace Application.JobApplication

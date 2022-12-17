@@ -3,8 +3,6 @@ import './Dashboard.css';
 import { useStore } from "../stores/store";
 import { observer } from "mobx-react-lite";
 import Nav from "./Nav";
-import CompanyTab from "../../features/companies/details/CompanyTab";
-import MainMap from "../../features/map/MainMap";
 import Listings from "../../features/listings/Listings";
 import Companies from "../../features/companies/Companies";
 import ControlPanel from "../../features/users/controlPanel/ControlPanel";
@@ -12,23 +10,28 @@ import AdminPanel from "../../features/users/controlPanel/AdminPanel";
 import ListingDetails from "../../features/listings/details/ListingDetails";
 import useSupercluster from "use-supercluster";
 import { Listing } from "../model/ListingAggregate/Listing";
-import ServicesHub from "../../features/companies/servicesHub/ServicesHub";
+import { Company } from "../model/CompanyAggregate/Company";
+import CompanyDetails from "../../features/companies/details/CompanyDetails";
 
 export default observer(function Dashboard() {
-    const { featureStore, listingStore, mapStore } = useStore();
+    const { featureStore, listingStore, mapStore, jobStore, companyStore } = useStore();
     const { activeFeature } = featureStore;
-    const { listings, selectedListing, selectedCompany } = listingStore;
+    const { loadJobs, jobRegistry } = jobStore;
+    const { listings, selectedListing, listingRegistry, loadListings } = listingStore;
+    const { companies, selectedCompany, loadCompanies, companyRegistry } = companyStore;
     const { zoom, bounds } = mapStore;
 
     useEffect(() => {
-        listingStore.loadListings();
-        // listingStore.loadMaxValues();
-        // listingStore.loadCompanies();
-    }, [listingStore])
+        if (listingRegistry.size <= 1) loadListings();
+    }, [loadListings, listingRegistry.size])
 
-    // useEffect(() => {
-    //     cityStore.loadCities();
-    // }, [cityStore])
+    useEffect(() => {
+        if (jobRegistry.size <= 1) loadJobs();
+    }, [loadJobs, jobRegistry.size])
+
+    useEffect(() => {
+        if (companyRegistry.size <= 1) loadCompanies();
+    }, [loadCompanies, companyRegistry.size])
 
     // map data into "feature" GeoJson objects
     const points: GeoJSON.Feature[] = listings.map(
@@ -46,32 +49,43 @@ export default observer(function Dashboard() {
         })
     );
 
-     // get clusters
-     const { clusters, supercluster } = useSupercluster({
+    const companyPoints: GeoJSON.Feature[] = companies.map(
+        (company: Company) => ({
+            type: "Feature",
+            properties: {
+                cluster: false,
+                company: company
+            },
+            geometry: {
+                type: "Point",
+                coordinates: [company.companyAddress.coordinates.longitude, company.companyAddress.coordinates.latitude],
+
+            }
+        })
+    );
+
+    // get clusters
+    const { clusters, supercluster } = useSupercluster({
         points: points,
         bounds: bounds,
         zoom: zoom,
         options: { radius: 100, maxZoom: 20 }
     });
+    
 
     const features = [
-        <Listings clusters={clusters} supercluster={supercluster} />,
+        <Listings clusters={clusters} supercluster={supercluster} points={points} companyPoints={companyPoints} />,
         <Companies />,
         <ControlPanel />,
         <AdminPanel />
     ]
 
     return (
-        <div style={{position: "relative"}}>
+        <div style={{ position: "relative" }}>
             <Nav />
-            <div className="dashboard-container-grid">
-                {features[activeFeature]}
-                {activeFeature > 0 ? null 
-                : <MainMap points={points} clusters={clusters} supercluster={supercluster} /> }
-                {activeFeature === 1 && <ServicesHub />}
-            </div>
-                {selectedListing && <ListingDetails listing={selectedListing} />}
-                {selectedCompany && <CompanyTab />}
+            {features[activeFeature]}
+            {selectedListing && <ListingDetails listing={selectedListing} />}
+            {selectedCompany && <CompanyDetails company={selectedCompany} />}
         </div>
     )
 });

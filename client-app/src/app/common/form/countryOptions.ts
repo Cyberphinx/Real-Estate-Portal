@@ -1,4 +1,4 @@
-import { Country } from './../../model/LocationAggregate/Location';
+import { Country } from '../../model/Location';
 
 export const countryOptions = [
     {text: 'United Kingdom', value: Country.unitedkingdom},

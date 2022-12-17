@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Domain;
-using Domain.AppUserAggregate;
+using Domain.AppUserAggregate.Enums;
+using Domain.AppUserAggregate.Objects;
 using Domain.CompanyAggregate;
 using Microsoft.AspNetCore.Identity;
 
-namespace Domain
+namespace Domain.AppUserAggregate
 {
     public class AppUser : IdentityUser
     {

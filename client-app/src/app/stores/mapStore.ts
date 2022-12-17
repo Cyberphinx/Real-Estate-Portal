@@ -12,6 +12,7 @@ export default class MapStore {
     supercluster: any;
     lat: number = 51.5072;
     long: number = 0.1276;
+    displayAgents = true;
 
     mapRef: any = createRef();
 
@@ -31,5 +32,7 @@ export default class MapStore {
     setLong = (value: number) => { this.long = value };
 
     setMapListings = (values: any) => { this.mapListings = values };
+
+    setDisplayAgents = () => { this.displayAgents = !this.displayAgents };
     
 }

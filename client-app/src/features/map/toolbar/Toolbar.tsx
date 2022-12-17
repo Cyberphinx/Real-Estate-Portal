@@ -17,10 +17,10 @@ export default function Toolbar() {
 
     return (
         <div className="toolbar-container">
-            <section className="toolbar-title"><p>{title}</p></section>
+            <section className="toolbar-title"><p># {selectedListing?.listingReference}</p></section>
             <section className="toolbar-locate"><Locate selectedItem={selectedListing} /></section>
             <section className="toolbar-newtab">
-                <Link to={`/listings/${selectedListing?.id}`} target="_blank" > <NewTab /> </Link>
+                <Link to={`/listing/${selectedListing?.id}`} target="_blank" > <NewTab /> </Link>
             </section>
             <section className="toolbar-x"><Close close={cancelSelectListing} /></section>
         </div>

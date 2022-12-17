@@ -4,13 +4,12 @@ import { Listing } from "../../app/model/ListingAggregate/Listing";
 import { Currency } from "../../app/model/ListingAggregate/Objects/Pricing";
 import AgencyTag from "../../app/common/tags/AgencyTag";
 import { Content } from "../../app/model/ListingAggregate/Objects/Content";
-import DateTag from "../../app/common/tags/DateTag";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../app/stores/store";
 import { priceQualifier, propertyType, rentFrequency } from "../../app/model/ListingAggregate/ListingEnums";
 
 interface Props {
-    listing: Listing;
+    listing: Listing | undefined;
     predicate: Map<any, any>;
 }
 
@@ -19,9 +18,9 @@ export default observer(function ListingItem({ listing, predicate }: Props) {
     const { setActiveListing } = mapStore;
     const { selectedListing } = listingStore;
 
-    const priceFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: Currency[listing.pricing.currency].toUpperCase(), minimumFractionDigits: 0 });
+    const priceFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: Currency[listing!.pricing.currency].toUpperCase(), minimumFractionDigits: 0 });
 
-    const [image, setImage] = useState<Content>(listing.contents[0]);
+    const [image, setImage] = useState<Content>(listing!.contents[0]);
     function handleImage(event: SyntheticEvent, state: Content) {
         event.stopPropagation();
         setImage(state);
@@ -62,12 +61,12 @@ export default observer(function ListingItem({ listing, predicate }: Props) {
 
     return (
         <div className="cards"
-            onMouseEnter={() => setActiveListing(listing)}
+            onMouseEnter={() => setActiveListing(listing!)}
             onMouseLeave={() => setActiveListing(null)}
         >
-            <div className={selectedListing?.id === listing.id ? "card-selected" : "card"} >
+            <div className={selectedListing?.id === listing!.id ? "card-selected" : "card"} >
                 <AgencyTag listing={listing} />
-                <DateTag listing={listing} />
+                {/* <DateTag listing={listing} /> */}
                 <section className="gallery">
                     <div style={{ position: "relative" }}>
                         <img src={image?.url} className="card-image" alt="property" />
@@ -75,7 +74,7 @@ export default observer(function ListingItem({ listing, predicate }: Props) {
                         <button className="left-arr" onClick={(e) => handlePrev(e)}><img className="left-ico" src="/assets/previous.svg" alt="previous" /></button>
                         <button className="right-arr" onClick={(e) => handleNext(e)}><img className="right-ico" src="/assets/next.svg" alt="next" /></button>
                     </div>
-                    <div className="carousel" style={{ gridTemplateColumns: `repeat(${listing.contents.length}, calc(100vh / 13))` }} ref={scrollRef}>
+                    <div className="carousel" style={{ gridTemplateColumns: `repeat(${listing!.contents.length}, calc(100vh / 13))` }} ref={scrollRef}>
                             {listing?.contents.map((content: Content, index: number) => (
                                 <div style={{ position: "relative" }} key={content.id}>
                                     <img className="thumbnail" src={content.url} alt={content.caption} onClick={(e) => handleImage(e, content)} />
@@ -87,12 +86,12 @@ export default observer(function ListingItem({ listing, predicate }: Props) {
                     <button className="right-arr-thumbnails" onClick={(e) => scroll(e, 120)}><img className="right-ico" src="/assets/next.svg" alt="next" /></button>
                 </section>
                 <section className="card-overlay">
-                    <div className="card-price" title={`${priceQualifier(listing)} in ${Currency[listing.pricing.currency].toUpperCase()}`}>
-                        <b style={{ fontSize: "18px" }}>{priceFormat.format(listing.pricing.price)}</b>
-                        {predicate.get("channel") === "sale" ? null : <sup> {rentFrequency(listing)}</sup>}
+                    <div className="card-price" title={`${priceQualifier(listing!)} in ${Currency[listing!.pricing.currency].toUpperCase()}`}>
+                        <b style={{ fontSize: "18px" }}>{priceFormat.format(listing!.pricing.price)}</b>
+                        {predicate.get("channel") === "sale" ? null : <sup> {rentFrequency(listing!)}</sup>}
                     </div>
                     <div className="card-attribute">
-                        <p style={{ fontSize: "16px", padding: "0px", margin: "0px" }}>{listing.totalBedrooms} Beds {propertyType(listing)}</p>
+                        <p style={{ fontSize: "16px", padding: "0px", margin: "0px" }}>{listing!.totalBedrooms} Beds {propertyType(listing!)}</p>
                     </div>
                 </section>
                 <section className="card-description">

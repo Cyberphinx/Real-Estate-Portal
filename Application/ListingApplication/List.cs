@@ -7,7 +7,7 @@ using Application.Core;
 using Application.Extensions;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Domain;
+using Domain.Enums;
 using Domain.ListingAggregate.Enums;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

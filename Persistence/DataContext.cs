@@ -4,7 +4,7 @@ using Domain.InvoiceAggregate;
 using Domain.JobAggregate;
 using Domain.ListingAggregate;
 using Domain.ListingAggregate.Enums;
-using Domain.ListingAggregate.Objects;
+using Domain.AppUserAggregate;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -46,6 +46,7 @@ namespace Persistence
                 .WithMany(x => x.Listings)
                 .HasForeignKey(x => x.CompanyReference)
                 .HasPrincipalKey(x => x.CompanyReference);
+
 
             builder.Entity<JobNetwork>(x => x.HasKey(x => new {x.AppUserId, x.JobId}));
             

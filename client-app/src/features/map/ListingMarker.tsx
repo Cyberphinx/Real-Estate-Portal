@@ -8,6 +8,7 @@ import { propertyType, rentFrequency } from "../../app/model/ListingAggregate/Li
 import nFormatter from "../../app/common/nFormatter";
 import priceFormatter from "../../app/common/PriceFormatter";
 import * as ReactDOMServer from 'react-dom/server';
+import AgencyTag from "../../app/common/tags/AgencyTag";
 
 interface Props {
     points: GeoJSON.Feature[];
@@ -17,13 +18,13 @@ interface Props {
 
 
 export default observer(function ListingMarker({ points, clusters, supercluster }: Props) {
-    const { mapStore, listingStore } = useStore();
+    const { mapStore, listingStore, companyStore } = useStore();
     const { selectListing, contacts, setContacts, cancelSelectListing, selectedListing, predicate } = listingStore;
     const { setZoom, activeListing, setBounds } = mapStore;
+    const { selectedCompany, cancelSelectCompany} = companyStore;
 
     const maxZoom = 20;
     const map = useMap();
-    // const [t, setT] = useState<number | null>(null);
 
     const [imgLoaded, setImgLoaded] = useState<boolean>(false);
 
@@ -41,13 +42,6 @@ export default observer(function ListingMarker({ points, clusters, supercluster 
         if (count > 60) density = "cluster-marker med-density";
         if (count > 90) density = "cluster-marker high-density";
 
-        // if (!icons[count]) {
-        //     icons[count] = L.divIcon({
-        //         html: `<div class="cluster-marker ${density}" style="width: ${size}px; height: ${size}px;">
-        //       ${count}
-        //     </div>`
-        //     });
-        // }
         if (!icons[count]) {
             icons[count] = L.divIcon({
                 html: ReactDOMServer.renderToString(
@@ -66,11 +60,6 @@ export default observer(function ListingMarker({ points, clusters, supercluster 
         if (count > 60) density = "med-density";
         if (count > 90) density = "high-density";
 
-        // const icon = L.divIcon({
-        //     html: `<div class="cluster-marker ${density}" style="width: ${size}px; height: ${size}px; color: #000; background: #00FF00;">
-        //       ${count}
-        //     </div>`
-        // });
         const icon = L.divIcon({
             html: ReactDOMServer.renderToString(
                 <div className={`cluster-marker ${density}`} style={{ width: `${size}px`, height: `${size}px`, color: "#000", background: "#00FF00" }}>
@@ -198,6 +187,7 @@ export default observer(function ListingMarker({ points, clusters, supercluster 
 
                                     if (leavesOverlap(cluster.id)) {
                                         const leaves = supercluster.getLeaves(cluster.id, Infinity, 0);
+                                        if (selectedCompany) cancelSelectCompany();
                                         if (selectedListing?.id === leaves[0].properties.listing.id) {
                                             cancelSelectListing();
                                         } else {
@@ -235,6 +225,7 @@ export default observer(function ListingMarker({ points, clusters, supercluster 
                         icon={priceIcon(cluster.properties.listing.id, nFormatter(cluster.properties.listing.pricing.price, 1), cluster.properties.listing.pricing.price.toString().length)}
                         eventHandlers={{
                             click: () => {
+                                if (selectedCompany) cancelSelectCompany();
                                 if (selectedListing?.id === cluster.properties.listing.id) {
                                     cancelSelectListing();
                                 } else {
@@ -245,6 +236,7 @@ export default observer(function ListingMarker({ points, clusters, supercluster 
                         }}
                     >
                         <Tooltip direction="bottom" offset={[10, 8]}>
+                            <AgencyTag listing={cluster.properties.listing} />
                             <img className="marker-snippet"
                                 src={cluster.properties.listing.contents[0].url}
                                 alt="listing"

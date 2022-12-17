@@ -2,9 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Domain.InvoiceAggregate;
+using Domain.Enums;
 using Domain.JobAggregate;
 using Domain.ListingAggregate;
+using Domain;
 
 namespace Domain.CompanyAggregate
 {
@@ -25,8 +26,7 @@ namespace Domain.CompanyAggregate
         public string LegalName { get; set; }
         public ICollection<Listing> Listings { get; set; }
         public Membership Membership { get; set; }
-        public ICollection<Job> Jobs  { get; set; }
-        public RedressScheme RedressScheme { get; set; } 
+        public List<RedressScheme> RedressSchemes { get; set; } 
         public ICollection<CompanyReview> Reviews { get; set; }
         public string ServiceLocations { get; set; }
         public string SummaryDescription { get; set; }

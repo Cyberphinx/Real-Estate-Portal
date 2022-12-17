@@ -10,6 +10,7 @@ import ServerError from './features/errors/ServerError';
 import TestErrors from './features/errors/TestError';
 import LoginForm from './features/users/LoginForm';
 import ListingDetailsPage from './features/listings/newTab/ListingDetailsPage';
+import CompanyDetailsPage from './features/companies/newTab/CompanyDetailsPage';
 
 function App() {
   const {commonStore, userStore} = useStore();
@@ -29,7 +30,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate replace to="/dashboard" />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path='/listings/:id' element={<ListingDetailsPage />} />
+        <Route path='/listing/:id' element={<ListingDetailsPage />} />
+        <Route path='/company/:id' element={<CompanyDetailsPage />} />
         <Route path='/login' element={<LoginForm />} />
         <Route path='/errors' element={<TestErrors />}/>
         <Route path='/server-error' element={<ServerError />} />

@@ -5,7 +5,8 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using API.DTOs;
 using API.Services;
-using Domain;
+using Domain.AppUserAggregate;
+using Domain.AppUserAggregate.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -150,9 +151,9 @@ namespace API.Controllers
                 Token = await _tokenService.CreateToken(user),
                 Username = user.UserName,
                 Email = user.Email,
-                Role = _userManager.GetRolesAsync(user).Result.ToArray(),
+                Role = _userManager.GetRolesAsync(user).Result.ToList(),
                 PhoneNumber = user.PhoneNumber,
-                Image = user?.Photos?.FirstOrDefault(x => x.IsMain)?.Url,
+                Image = user?.Photos?.FirstOrDefault(x => x.IsMain)?.Url
             };
         }
     }

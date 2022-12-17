@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Domain;
+using Domain.Enums;
 using Domain.ListingAggregate;
 using Domain.ListingAggregate.Enums;
 using Domain.ListingAggregate.Objects;
@@ -23,20 +23,20 @@ namespace Application.ListingApplication
         public DateTime AvailableFromDate { get; set; }
         public bool Basement { get; set; }
         public int Bathrooms { get; set; }
-        public ICollection<Utility> BillsIncluded { get; set; }
+        public List<Utility> BillsIncluded { get; set; }
         public bool BurglarAlarm { get; set; }
         public bool BusinessForSale { get; set; }
-        public ICollection<Incentive> BuyerIncentives { get; set; }
+        public List<Incentive> BuyerIncentives { get; set; }
         public Owner Company { get; set; }
         public string CompanyReference { get; set; }
         public Category Category { get; set; }
         public CentralHeating CentralHeating { get; set; }
         public bool ChainFree { get; set; }
-        public ICollection<string> CommercialUseClass { get; set; }
-        public ICollection<Utility> ConnectedUtilities { get; set; }
+        public List<string> CommercialUseClass { get; set; }
+        public List<Utility> ConnectedUtilities { get; set; }
         public bool Conservatory { get; set; }
         public int ConstructionYear { get; set; }
-        public ICollection<Content> Contents { get; set; }
+        public ICollection<ContentDto> Contents { get; set; }
         public CookerType CookerType { get; set; }
         public CouncilTaxBand CouncilTaxBand { get; set; }
         public DecorativeCondition DecorativeCondition { get; set; }
@@ -44,10 +44,10 @@ namespace Application.ListingApplication
         public ICollection<DetailedDescriptionDto> DetailedDescriptions { get; set; }
         public bool DoubleGlazing { get; set; }
         public EpcRatings EpcRatings { get; set; }
-        public ICollection<string> FeatureList { get; set; }
+        public List<string> FeatureList { get; set; }
         public bool Fireplace { get; set; }
         public bool FishingRights { get; set; }
-        public ICollection<int> FloorLevels { get; set; }
+        public List<int> FloorLevels { get; set; }
         public int Floors { get; set; }
         public FurnishedState FurnishedState { get; set; }
         public bool Freezer { get; set; }
@@ -65,8 +65,8 @@ namespace Application.ListingApplication
         public bool NewBuild { get; set; }
         public DateTime OpenDay { get; set; }
         public bool Outbuildings { get; set; }
-        public ICollection<OutsideSpace> OutsideSpaces { get; set; }
-        public ICollection<Parking> Parking { get; set; }
+        public List<OutsideSpace> OutsideSpaces { get; set; }
+        public List<Parking> Parking { get; set; }
         public bool PetsAllowed { get; set; }
         public bool PorterSecurity { get; set; }
         public Pricing Pricing { get; set; }

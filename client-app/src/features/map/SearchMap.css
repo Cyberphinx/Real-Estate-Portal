@@ -34,15 +34,14 @@
   grid-gap: 5px;
 }
 .search-map:hover {
-  color: #fff;
-  background: #000;
+  background: #f5f5f5;
 }
 .search-map:hover .refresh-tooltip {
   visibility: visible;
 }
-.search-map:hover .refresh-icon {
+/* .search-map:hover .refresh-icon {
   filter:  brightness(0) invert(1);
-}
+} */
 .search-map > span{
   padding: 8px 0px 0px 10px;
 }

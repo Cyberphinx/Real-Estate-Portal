@@ -9,7 +9,8 @@ export default observer(function UserDropdown() {
     const { logout, user } = userStore;
     const { setActiveFeature, setActiveAgencyPanel } = featureStore;
     const { myCompany, } = companyStore;
-    const { cancelSelectListing, cancelSelectCompany } = listingStore;
+    const { cancelSelectListing } = listingStore;
+    const { cancelSelectCompany } = companyStore;
     const { openModal } = modalStore;
 
     return (
@@ -20,7 +21,7 @@ export default observer(function UserDropdown() {
 
             {user?.role.includes("Company") &&
                 <>
-                    {myCompany?.companyName === ""
+                    {myCompany?.displayName === ""
                         ? <button className="user-drop-button" onClick={() => openModal(<CreateCompany />)}>Create Company</button>
                         : null}
                 </>}

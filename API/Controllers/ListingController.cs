@@ -73,10 +73,10 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new DeleteRange.Command{CompanyReference = companyReference}));
         }
 
-        [HttpPost("seed/{amount}")]
-        public async Task Seed(int amount)
+        [HttpPost("seed/{companyReference}/{amount}")]
+        public async Task Seed(string companyReference, int amount)
         {
-            await SeedRandomListings.SeedRandomData(_db, amount);
+            await SeedRandomListings.SeedRandomData(_db, companyReference, amount);
         }
 
     }

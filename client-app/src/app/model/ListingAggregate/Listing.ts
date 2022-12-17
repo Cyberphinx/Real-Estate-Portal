@@ -1,4 +1,3 @@
-import { Company } from './../CompanyAggregate/Company';
 import { AccessStatus } from "../AccessStatus";
 import {
     Category, CentralHeating, CookerType, CouncilTaxBand, DecorativeCondition, FurnishedState, Incentive,
@@ -14,6 +13,7 @@ import { MinimumContractLength } from "./Objects/MinimumContractLength";
 import { Pricing } from "./Objects/Pricing";
 import { ServiceCharge } from "./Objects/ServiceCharge";
 import { TenantEligibility } from "./Objects/TenantEligibility";
+import { Owner } from './Objects/Owner';
 
 export interface Listing {
     id: string;
@@ -28,11 +28,11 @@ export interface Listing {
     basement: boolean;
     bathrooms: number;
     billsIncluded: Utility[];
-    company: Company;
-    companyReference: string;
     burglarAlarm: boolean;
     businessForSale: boolean;
     buyerIncentives: Incentive[];
+    company: Owner;
+    companyReference: string;
     category: Category;
     centralHeating: CentralHeating;
     chainFree: boolean;
@@ -48,6 +48,7 @@ export interface Listing {
     detailedDescriptions: DetailedDescription[];
     doubleGlazing: boolean;
     epcRatings: EpcRatings;
+    featureProperty: boolean;
     featureList: string[];
     fireplace: boolean;
     fishingRights: boolean;
@@ -114,7 +115,7 @@ export class ListingFormValues {
     basement?: boolean;
     bathrooms?: number;
     billsIncluded?: Utility[];
-    company?: Company;
+    company?: Owner;
     companyReference: string = "";
     burglarAlarm?: boolean;
     businessForSale?: boolean;

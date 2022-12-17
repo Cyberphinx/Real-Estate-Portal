@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import './CompanyMarker.css';
 import { Marker, useMap, Tooltip } from 'react-leaflet';
 import L from "leaflet";
@@ -9,22 +9,16 @@ import { Company } from "../../app/model/CompanyAggregate/Company";
 import { ServiceCategory } from "../../app/model/ServiceCategory";
 import ReactDOMServer from "react-dom/server";
 
-// const mapMarker = new L.Icon({
-//     iconUrl: "/assets/circle.svg",
-//     iconSize: [25, 25]
-// });
-
-// const mapMarker = new L.DivIcon({
-//     html: `<div class="company-marker-small" style="width: 15px; height: 15px;">
-//   </div>`
-// });
+interface Props {
+    points: GeoJSON.Feature[];
+}
 
 const icons: any = {};
-const fetchIcon = (count: number, size: number) => {
+const clusterIcon = (count: number, size: number) => {
     if (!icons[count]) {
         icons[count] = L.divIcon({
             html: ReactDOMServer.renderToString(
-                <div className="company-marker" style={{ width: `${size}px`, height: `${size}px` }}>
+                <div className="company-cluster-marker" style={{ width: `${size}px`, height: `${size}px` }}>
                     {count}
                 </div>
             )
@@ -33,46 +27,36 @@ const fetchIcon = (count: number, size: number) => {
     return icons[count];
 };
 
-export default observer(function CompanyMarker() {
-    const { featureStore: { zoom, setZoom }, listingStore } = useStore();
-    const { companies, selectCompany } = listingStore;
+export default observer(function CompanyMarker({ points }: Props) {
+    const { companyStore, mapStore, listingStore } = useStore();
+    const { companies, selectCompany, cancelSelectCompany, selectedCompany, predicate} = companyStore;
+    const { zoom, setZoom, activeListing, setBounds, bounds } = mapStore;
+    const { selectedListing, cancelSelectListing } = listingStore;
 
+    const maxZoom = 20;
     const map = useMap();
-    const [bounds, setBounds] = useState<any>();
+    // const [bounds, setBounds] = useState<any>();
 
     const companyIcon = (company: Company) => {
         // const size = ServiceCategory[company.serviceCategory].length;
         const icon = L.divIcon({
             html: ReactDOMServer.renderToString(
-                <div className="point-marker-company" style={{width: '80px', height: '15px'}}>
-                    {ServiceCategory[company.serviceCategory]}
+                <div className="point-marker-company">
+                    {/* {company.displayName} */}
                 </div>
             )
         });
-        return icon;
-    };
 
-    // map data into "feature" GeoJson objects
-    const points = companies.map(
-        (company: Company) => ({
-            type: "Feature",
-            properties: {
-                cluster: false,
-                company: company,
-                companyId: company.id,
-                companyName: company.companyName,
-                addedOn: company.addedOn,
-                serviceCategory: company.serviceCategory,
-                companyAddress: company.companyAddress,
-                logo: company.logo,
-                companyContents: company.companyContents,
-            },
-            geometry: {
-                type: "Point",
-                coordinates: [company.companyAddress.coordinates.longitude, company.companyAddress.coordinates.latitude],
-            }
-        })
-    );
+        const iconActive = L.divIcon({
+            html: ReactDOMServer.renderToString(
+                <div className="point-marker-company-active">
+                </div>
+            )
+        });
+
+        if (company.id === selectedCompany?.id) return iconActive;
+        else return icon;
+    };
 
     // get map bounds
     function updateMap() {
@@ -91,21 +75,39 @@ export default observer(function CompanyMarker() {
     }, []);
 
     // get clusters
-    const { clusters } = useSupercluster({
-        points,
-        bounds,
-        zoom,
-        options: { radius: 75, maxZoom: 20 }
+    // const { clusters } = useSupercluster({
+    //     points,
+    //     bounds,
+    //     zoom,
+    //     options: { radius: 75, maxZoom: 20 }
+    // });
+
+    const { clusters, supercluster } = useSupercluster({
+        points: points,
+        bounds: bounds,
+        zoom: zoom,
+        options: { radius: 100, maxZoom: 20 }
     });
 
     map.on("move", updateMap);
+
+    function leavesOverlap(id: any) {
+        const leaves = supercluster.getLeaves(id, Infinity, 0);
+        const [long0, lat0] = leaves[0].geometry.coordinates;
+        const [long1, lat1] = leaves[leaves.length - 1].geometry.coordinates;
+        if (long0 === long1 && lat0 === lat1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     // debounce: to avoid making too much changes to bounds
     // const [debouncedDataBounds] = useDebounce(bounds, 200);
 
     return (
         <div>
-            {clusters.map(cluster => {
+            {clusters.map((cluster: any) => {
                 // every cluster point has coordinates
                 const [longitude, latitude] = cluster.geometry.coordinates;
                 // the point may be either a cluster or a single point
@@ -120,12 +122,46 @@ export default observer(function CompanyMarker() {
                         <Marker
                             key={`cluster-${cluster.id}`}
                             position={[latitude, longitude]}
-                            icon={fetchIcon(
+                            icon={clusterIcon(
                                 pointCount,
                                 10 + (pointCount / points.length) * 40
                             )}
+                            eventHandlers={{
+                                click: () => {
+                                    // split points upon click
+                                    const expansionZoom = Math.min(
+                                        supercluster.getClusterExpansionZoom(cluster.id),
+                                        maxZoom
+                                    );
+                                    map.setView([latitude, longitude], expansionZoom, {
+                                        animate: true,
+                                    });
+
+                                    if (leavesOverlap(cluster.id)) {
+                                        const leaves = supercluster.getLeaves(cluster.id, Infinity, 0);
+                                        if (selectedListing) cancelSelectListing();
+                                        if (selectedCompany?.id === leaves[0].properties.company.id) {
+                                            cancelSelectCompany();
+                                        } else {
+                                            selectCompany(leaves[0].properties.company.id);
+                                        }
+                                        // if (contacts === true) setContacts(false);
+                                    }
+                                },
+                            }}
                         >
-                            {/* <Tooltip offset={[25, 10]}>{latitude}</Tooltip> */}
+                            {leavesOverlap(cluster.id) &&
+                                <Tooltip direction="top" offset={[14, -8]}>
+                                    <div className="snippets-container" style={{ gridTemplateColumns: `repeat(${supercluster.getLeaves(cluster.id, Infinity, 0).length}, 1fr)` }}>
+                                        {supercluster.getLeaves(cluster.id, Infinity, 0).map((item: any) => (
+                                            <div key={item.properties.company.id} className="snippet-container">
+                                                <article className="marker-text">
+                                                    <b>{item.properties.company.listings.length}</b>
+                                                </article>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </Tooltip>}
                         </Marker>
                     );
                 }
@@ -133,18 +169,25 @@ export default observer(function CompanyMarker() {
                 // we have a single point to render
                 return (
                     <Marker
-                        key={`company-${cluster.properties.companyId}`}
+                        key={`company-${cluster.properties.company.id}`}
                         position={[latitude, longitude]}
                         icon={companyIcon(cluster.properties.company)}
                         eventHandlers={{
                             click: () => {
-                                selectCompany(cluster.properties.companyId);
+                                if (selectedListing) cancelSelectListing();
+                                if (selectedCompany?.id === cluster.properties.company.id) {
+                                    cancelSelectCompany();
+                                } else {
+                                    selectCompany(cluster.properties.company.id);
+                                }
                             }
                         }}
                     >
                         <Tooltip offset={[10, 0]}>
-                            <b>{cluster.properties.companyName}</b>
-                            <p>{ServiceCategory[cluster.properties.serviceCategory]} Company</p>
+                            <b>{cluster.properties.company.displayName}</b>
+                            <p style={{margin:"0px",padding:"0px", fontSize:"10px", color:"grey"}}>#{ServiceCategory[cluster.properties.company.serviceCategories[0]]}</p>
+                            <p style={{margin:"0px",padding:"0px",fontSize:"10px"}}>Listings: {cluster.properties.company.listings.length}</p>
+                            {/* <p style={{margin:"0px",padding:"0px",fontSize:"12px"}}>{cluster.properties.companyContacts.email}</p> */}
                             {/* <img src={cluster.properties.logo} style={{ width: "100px" }} /> */}
                         </Tooltip>
                     </Marker>

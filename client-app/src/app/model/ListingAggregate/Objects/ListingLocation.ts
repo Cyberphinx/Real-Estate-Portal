@@ -1,4 +1,4 @@
-import { Location } from "../../LocationAggregate/Location";
+import { Location } from "../../Location";
 
 export interface ListingLocation extends Location {
     

@@ -1,16 +1,21 @@
-import { PaymentStatus } from './PaymentStatus';
-import { UnitOfTime } from './UnitOfTime';
+import { Invoice } from './JobAggregate/Invoice';
 
 export interface Membership {
     id: string;
-    username: string;
     companyReference: string;
     contractLength: number;
-    contractStart: Date;
-    contractEnd: Date;
-    price: number;
-    unit: UnitOfTime;
-    paymentStatus: PaymentStatus;
-    comissionPercentage: number;
+    memberSince: Date;
+    expiry: Date;
     description: string;
+    price: number;
+    invoices: Invoice[]
+    isActive: boolean;
+    unit: UnitOfTime;
+    username: string;
+    vatPercentage: number;
+}
+
+export enum UnitOfTime {
+    Months,
+    Years
 }

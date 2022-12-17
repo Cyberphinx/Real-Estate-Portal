@@ -12,13 +12,13 @@ namespace Application.Extensions
     {
         public static IQueryable<Listing> Sort(this IQueryable<Listing> query, string orderBy)
         {
-            if (string.IsNullOrWhiteSpace(orderBy)) return query.OrderByDescending(p => p.AddedOn);
+            if (string.IsNullOrWhiteSpace(orderBy)) return query.OrderByDescending(p => p.AddedOn).ThenByDescending(p => p.Id);
 
             query = orderBy switch
             {
                 "price" => query.OrderBy(p => p.Pricing.Price).ThenBy(p => p.Id),
                 "priceDesc" => query.OrderByDescending(p => p.Pricing.Price).ThenByDescending(p => p.Id),
-                _ => query.OrderBy(p => p.AddedOn).ThenByDescending(p => p.Id)
+                _ => query.OrderByDescending(p => p.AddedOn).ThenByDescending(p => p.Id)
             };
 
             return query;

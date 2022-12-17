@@ -18,9 +18,9 @@ export default function CompanyItem({ company }: Props) {
                     <img src={company.companyContents[0]?.url} className="company-profile-pic" alt="profile" />
                 </div>
                 <div style={{ paddingLeft: "10px" }}>
-                    <h2>{company.companyName}</h2>
+                    <h2>{company.displayName}</h2>
                     <br />
-                    <p style={{ fontSize: "14px" }}><b>Services:</b> {company.serviceScope}</p>
+                    <p style={{ fontSize: "14px" }}><b>Summary:</b> {company.summaryDescription}</p>
                 </div>
             </div>
         </div>

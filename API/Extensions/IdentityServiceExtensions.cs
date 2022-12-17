@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using API.Services;
 using Domain;
+using Domain.AppUserAggregate;
 using Infrastructure.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;

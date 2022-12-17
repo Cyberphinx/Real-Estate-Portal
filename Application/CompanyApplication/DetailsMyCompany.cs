@@ -9,6 +9,7 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Domain;
 using Domain.CompanyAggregate;
+using Domain.Enums;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;

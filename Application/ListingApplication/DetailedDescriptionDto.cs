@@ -12,6 +12,5 @@ namespace Application.ListingApplication
         public string Heading { get; set; }
         public DimensionsDto Dimensions { get; set; }
         public string Text { get; set; }
-        public Guid ListingId { get; set; }
     }
 }

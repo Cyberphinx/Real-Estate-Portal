@@ -1,26 +1,27 @@
-import { Membership } from "./Membership";
-
 export interface User {
-    username: string;
+    displayName: string;
     token: string;
-    image?: string;
+    username: string;
     email: string;
+    phoneNumber: string;
     role: string[];
-    companyName: string;
-    companyPostalCode: string;
-    redressScheme: RedressScheme;
-    membership: Membership;
-    lastLoginTime: Date;
-    registrationDate: Date;
+    image?: string;
 }
 
 export interface UserFormValues {
+    displayName?: string;
     email: string;
     password: string;
     username?: string;
-    agency?: boolean;
-    companyName?: string;
-    companyPostalCode?: string;
+    phoneNumber?: string;
+    accountType?: AccountType;
+}
+
+export enum AccountType {
+    Admin,
+    Agent,
+    Company,
+    Customer
 }
 
 export interface RoleFormValues {
@@ -28,11 +29,5 @@ export interface RoleFormValues {
     role: string;
 }
 
-export enum RedressScheme {
-    ThePropertyOmbudsman,
-    ThePropertyRedressScheme,
-    ScottishLettingAgentRegister,
-    PropertyServicesRegulatoryAuthorityIreland, 
-    Other
-}
+
 

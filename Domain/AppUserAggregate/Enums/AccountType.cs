@@ -1,4 +1,4 @@
-namespace Domain
+namespace Domain.AppUserAggregate.Enums
 {
     public enum AccountType
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Domain.CompanyAggregate.Enums;
-using Domain.AppUserAggregate;
+using Domain.Enums;
 
 namespace Domain
 {

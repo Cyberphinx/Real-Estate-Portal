@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Domain.CompanyAggregate;
 using Domain.ListingAggregate.Enums;
 using Domain.ListingAggregate.Objects;
-using Domain.LocationAggregate;
+using Domain.Enums;
 
 namespace Domain.ListingAggregate
 {

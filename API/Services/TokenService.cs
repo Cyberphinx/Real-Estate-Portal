@@ -9,6 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Identity;
+using Domain.AppUserAggregate;
 
 namespace API.Services
 {

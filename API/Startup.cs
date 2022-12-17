@@ -95,6 +95,7 @@ namespace API
                     "https://a-tiles.locationiq.com",
                     "https://b-tiles.locationiq.com",
                     "https://c-tiles.locationiq.com",
+                    "https://unpkg.com/leaflet@1.8.0/",
                     "https://picsum.photos/",
                     "https://i.picsum.photos",
                     "https://res.cloudinary.com"

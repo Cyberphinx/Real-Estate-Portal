@@ -2,11 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Domain;
+using Domain.Enums;
+using Domain.AppUserAggregate;
 using Domain.JobAggregate;
 using Domain.JobAggregate.Enums;
+using Domain.JobAggregate.Objects;
 using Domain.LocationAggregate;
 using Microsoft.AspNetCore.Identity;
+using Domain;
 
 namespace Persistence
 {
@@ -163,8 +166,7 @@ namespace Persistence
                             {
                                 Latitude = 53.51009443733918,
                                 Longitude = -2.3425652500267837,
-                            },
-                            What3words = "",
+                            }
                         },
                         Networks = new List<JobNetwork>
                         {
@@ -240,8 +242,7 @@ namespace Persistence
                             {
                                 Latitude = 51.5573059904951, 
                                 Longitude = -0.046689965146428675,
-                            },
-                            What3words = "",
+                            }
                         },
                         Networks = new List<JobNetwork>
                         {
@@ -341,8 +342,7 @@ namespace Persistence
                             {
                                 Latitude = 53.51009443733918,
                                 Longitude = -2.3425652500267837,
-                            },
-                            What3words = "",
+                            }
                         },
                         Networks = new List<JobNetwork>
                         {

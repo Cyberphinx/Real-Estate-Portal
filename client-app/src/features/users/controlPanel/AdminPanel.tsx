@@ -4,18 +4,17 @@ import { observer } from "mobx-react-lite";
 import { useStore } from "../../../app/stores/store";
 import { User } from "../../../app/model/User";
 import { Company } from "../../../app/model/CompanyAggregate/Company";
-import { ServiceCategory } from "../../../app/model/ServiceCategory";
 import LoadingComponent from "../../../app/common/loading/LoadingComponent";
 
 export default observer(function AdminPanel() {
     const { listingStore, userStore, companyStore } = useStore();
-    const { companies, pagination, loadingInitial } = listingStore;
-    const { deleteCompany } = companyStore;
+    const { pagination, loadingInitial } = listingStore;
+    const { companies, deleteCompany } = companyStore;
     const { user, users, getAllUsers, isLoggedIn, loadingUsers } = userStore;
 
-    useEffect(() => {
-        listingStore.loadCompanies();
-    }, [listingStore])
+    // useEffect(() => {
+    //     companyStore.loadCompanies();
+    // }, [companyStore])
 
     useEffect(() => {
         if (isLoggedIn && user?.role.includes("Admin")) getAllUsers();
@@ -50,10 +49,8 @@ export default observer(function AdminPanel() {
                             <ol>
                                 {companies?.map((company: Company) => (
                                     <li key={company.id}>
-                                        <div>{ServiceCategory[company.serviceCategory]} - {company.companyName} :
-                                            <div>Owners: {company.usernames.map((item: string) => (
-                                                <span key={item}>{item} , </span>
-                                            ))}</div></div>
+                                        <div>{company.companyReference} - {company.displayName} :
+                                            <div>Owner: {company.username}</div></div>
                                         <span>: {company.companyContacts.email} </span>
                                         <button onClick={() => deleteCompany(company.id)}>Delete</button>
                                     </li>

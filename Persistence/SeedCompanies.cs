@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Domain;
+using Domain.Enums;
 using Domain.CompanyAggregate;
 using Domain.CompanyAggregate.Enums;
 using Domain.LocationAggregate;
@@ -20,9 +20,9 @@ namespace Persistence
                 new Company
                 {
                     AccessStatus = AccessStatus.Public,
+                    CompanyReference = "savills5186",
                     Username = "savills",
-                    CompanyReference = "savills",
-                    DisplayName = "Savills",
+                    DisplayName = "Savills - London",
                     LegalName = "Savills (UK) Limited",
                     CompanyContacts = new CompanyContacts
                     {
@@ -42,20 +42,180 @@ namespace Persistence
                         {
                             Latitude = 51.51654265291029,
                             Longitude = -0.14291257284437422
+                        }
+                    },
+                    CompanyContents = new List<CompanyContent>()
+                    {
+                        new CompanyContent
+                        {
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671215966/Placeholder/CompanyContents/real-estate-agency_wrm90i.jpg",
+                            Type = CompanyMediaType.Image,
+                            Caption = "Agency Image",
+                            IsMain = true,
+                            IsLogo = false
                         },
-                        What3words = "remark.taps.trails"
+                        new CompanyContent
+                        {
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/Screenshot_2022-12-16_184526_gilzvg.jpg",
+                            Type = CompanyMediaType.Image,
+                            Caption = "Agency Image",
+                            IsMain = false,
+                            IsLogo = false
+                        },
+                        new CompanyContent
+                        {
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/realtor-showing-young-family-around-property-for-PUTL8G4-e1516618996652_zfgphc.jpg",
+                            Type = CompanyMediaType.Image,
+                            Caption = "Agency Image",
+                            IsMain = false,
+                            IsLogo = false
+                        }
                     },
                     ServiceCategories = new List<ServiceCategory>
                     {
                         ServiceCategory.EstateAgent
+                    },
+                    SummaryDescription = "Estate agency based in UK. Eco friendly and competitive approach to all customers.",
+                    CompanyDescriptions = new List<CompanyDescription>
+                    {
+                        new CompanyDescription
+                        {
+                            Heading = "We're experts",
+                            Text = "Information and communication are vital strengths in these unprecedented times. Our experts provide up-to-date market insight and analysis across all property markets via our insight & opinion hub.",
+                        },
+                        new CompanyDescription
+                        {
+                            Heading = "We value relationships",
+                            Text = "Our business is built on trust and integrity. This is intrinsic in everything we do, and is what gives our clients, colleagues, suppliers, partners and investors the confidence to work with us. We treat everyone individually, offering bespoke advice, which in turn builds long-term relationships and helps them to make better property decisions.",
+                        },
+                        new CompanyDescription
+                        {
+                            Heading = "How can we help?",
+                            Text = "We're here to provide you with more information, answer any questions you may have, or connect you with the right people to help with your needs. Use our general enquiry form to get in touch today.",
+                        }
+                    },
+                    ServiceLocations = "UK and international",
+                    Insurances = new List<Insurance>
+                    {
+                        new Insurance
+                        {
+                            Type = InsuranceType.ProfessionalIndemnity,
+                            Provider = "AXA",
+                            IndemnityLimit = "1,000,000",
+                            Expiry = new DateTime(2023,01,30)
+                        },
+                        new Insurance
+                        {
+                            Type = InsuranceType.PublicLiability,
+                            Provider = "Allianz",
+                            IndemnityLimit = "5,000,000",
+                            Expiry = new DateTime(2025,01,05)
+                        }
+                    }
+                },
+
+                new Company
+                {
+                    AccessStatus = AccessStatus.Public,
+                    CompanyReference = "savills6648",
+                    Username = "savills",
+                    DisplayName = "Savills - Edinburgh",
+                    LegalName = "Savills (UK) Limited",
+                    CompanyContacts = new CompanyContacts
+                    {
+                        Phone = "+44 (0) 20 8877 1222",
+                        Email = "info@savills.com"
+                    },
+                    CompanyAddress = new CompanyAddress
+                    {
+                        PropertyNumberOrName = "33",
+                        StreetName = "Margaret Street",
+                        Locality = "",
+                        TownOrCity = "London",
+                        County = "City of London",
+                        PostalCode = "W1G 0JD",
+                        Country = Country.UnitedKingdom,
+                        Coordinates = new Coordinates
+                        {
+                            Latitude = 55.95435353799718,
+                            Longitude = -3.2067211982100288
+                        }
+                    },
+                    CompanyContents = new List<CompanyContent>()
+                    {
+                        new CompanyContent
+                        {
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671215966/Placeholder/CompanyContents/real-estate-agency_wrm90i.jpg",
+                            Type = CompanyMediaType.Image,
+                            Caption = "Agency Image",
+                            IsMain = true,
+                            IsLogo = false
+                        },
+                        new CompanyContent
+                        {
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/Screenshot_2022-12-16_184526_gilzvg.jpg",
+                            Type = CompanyMediaType.Image,
+                            Caption = "Agency Image",
+                            IsMain = false,
+                            IsLogo = false
+                        },
+                        new CompanyContent
+                        {
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/realtor-showing-young-family-around-property-for-PUTL8G4-e1516618996652_zfgphc.jpg",
+                            Type = CompanyMediaType.Image,
+                            Caption = "Agency Image",
+                            IsMain = false,
+                            IsLogo = false
+                        }
+                    },
+                    ServiceCategories = new List<ServiceCategory>
+                    {
+                        ServiceCategory.EstateAgent
+                    },
+                    SummaryDescription = "Estate agency based in UK. Eco friendly and competitive approach to all customers.",
+                    CompanyDescriptions = new List<CompanyDescription>
+                    {
+                        new CompanyDescription
+                        {
+                            Heading = "We're experts",
+                            Text = "Information and communication are vital strengths in these unprecedented times. Our experts provide up-to-date market insight and analysis across all property markets via our insight & opinion hub.",
+                        },
+                        new CompanyDescription
+                        {
+                            Heading = "We value relationships",
+                            Text = "Our business is built on trust and integrity. This is intrinsic in everything we do, and is what gives our clients, colleagues, suppliers, partners and investors the confidence to work with us. We treat everyone individually, offering bespoke advice, which in turn builds long-term relationships and helps them to make better property decisions.",
+                        },
+                        new CompanyDescription
+                        {
+                            Heading = "How can we help?",
+                            Text = "We're here to provide you with more information, answer any questions you may have, or connect you with the right people to help with your needs. Use our general enquiry form to get in touch today.",
+                        }
+                    },
+                    ServiceLocations = "UK and international",
+                    Insurances = new List<Insurance>
+                    {
+                        new Insurance
+                        {
+                            Type = InsuranceType.ProfessionalIndemnity,
+                            Provider = "AXA",
+                            IndemnityLimit = "1,000,000",
+                            Expiry = new DateTime(2023,01,30)
+                        },
+                        new Insurance
+                        {
+                            Type = InsuranceType.PublicLiability,
+                            Provider = "Allianz",
+                            IndemnityLimit = "5,000,000",
+                            Expiry = new DateTime(2025,01,05)
+                        }
                     }
                 },
 
                 new Company
                 {
                     Username = "purple",
-                    CompanyReference = "purplebricks",
-                    DisplayName = "Purple Bricks",
+                    CompanyReference = "purple2453",
+                    DisplayName = "Purple Bricks 1",
                     LegalName = "Purplebricks Group PLC",
                     CompanyRegistrationNumber = "8047368",
                     CompanyContacts = new CompanyContacts
@@ -77,17 +237,180 @@ namespace Persistence
                         {
                             Latitude = 52.40066044491819,
                             Longitude = -1.8066908304837104
+                        }
+                    },
+                    CompanyContents = new List<CompanyContent>()
+                    {
+                        new CompanyContent
+                        {
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671215966/Placeholder/CompanyContents/real-estate-agency_wrm90i.jpg",
+                            Type = CompanyMediaType.Image,
+                            Caption = "Agency Image",
+                            IsMain = true,
+                            IsLogo = false
                         },
-                        What3words = "drain.spirit.drives"
+                        new CompanyContent
+                        {
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/Screenshot_2022-12-16_184526_gilzvg.jpg",
+                            Type = CompanyMediaType.Image,
+                            Caption = "Agency Image",
+                            IsMain = false,
+                            IsLogo = false
+                        },
+                        new CompanyContent
+                        {
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/realtor-showing-young-family-around-property-for-PUTL8G4-e1516618996652_zfgphc.jpg",
+                            Type = CompanyMediaType.Image,
+                            Caption = "Agency Image",
+                            IsMain = false,
+                            IsLogo = false
+                        }
                     },
                     ServiceCategories = new List<ServiceCategory>
                     {
                         ServiceCategory.EstateAgent
+                    },
+                    SummaryDescription = "Estate agency based in UK. Eco friendly and competitive approach to all customers.",
+                    CompanyDescriptions = new List<CompanyDescription>
+                    {
+                        new CompanyDescription
+                        {
+                            Heading = "We're experts",
+                            Text = "Information and communication are vital strengths in these unprecedented times. Our experts provide up-to-date market insight and analysis across all property markets via our insight & opinion hub.",
+                        },
+                        new CompanyDescription
+                        {
+                            Heading = "We value relationships",
+                            Text = "Our business is built on trust and integrity. This is intrinsic in everything we do, and is what gives our clients, colleagues, suppliers, partners and investors the confidence to work with us. We treat everyone individually, offering bespoke advice, which in turn builds long-term relationships and helps them to make better property decisions.",
+                        },
+                        new CompanyDescription
+                        {
+                            Heading = "How can we help?",
+                            Text = "We're here to provide you with more information, answer any questions you may have, or connect you with the right people to help with your needs. Use our general enquiry form to get in touch today.",
+                        }
+                    },
+                    ServiceLocations = "UK and international",
+                    Insurances = new List<Insurance>
+                    {
+                        new Insurance
+                        {
+                            Type = InsuranceType.ProfessionalIndemnity,
+                            Provider = "AXA",
+                            IndemnityLimit = "1,000,000",
+                            Expiry = new DateTime(2023,01,30)
+                        },
+                        new Insurance
+                        {
+                            Type = InsuranceType.PublicLiability,
+                            Provider = "Allianz",
+                            IndemnityLimit = "5,000,000",
+                            Expiry = new DateTime(2025,01,05)
+                        }
                     }
                 },
+
+                new Company
+                {
+                    Username = "purple",
+                    CompanyReference = "purple1345",
+                    DisplayName = "Purple Bricks 2",
+                    LegalName = "Purplebricks Group PLC",
+                    CompanyRegistrationNumber = "8047368",
+                    CompanyContacts = new CompanyContacts
+                    {
+                        Phone = "+44 (0) 117 910 2200",
+                        Email = "info@purple.com"
+                    },
+                    AccessStatus = AccessStatus.Public,
+                    CompanyAddress = new CompanyAddress
+                    {
+                        PropertyNumberOrName = "Suite 7 Cranmore Place",
+                        StreetName = "Cranmore Drive Shirley",
+                        Locality = "",
+                        TownOrCity = "Solihull",
+                        County = "West Midlands",
+                        PostalCode = "B90 4RZ",
+                        Country = Country.UnitedKingdom,
+                        Coordinates = new Coordinates
+                        {
+                            Latitude = 54.39231504142715,
+                            Longitude = -2.371760263326141
+                        }
+                    },
+                    CompanyContents = new List<CompanyContent>()
+                    {
+                        new CompanyContent
+                        {
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671215966/Placeholder/CompanyContents/real-estate-agency_wrm90i.jpg",
+                            Type = CompanyMediaType.Image,
+                            Caption = "Agency Image",
+                            IsMain = true,
+                            IsLogo = false
+                        },
+                        new CompanyContent
+                        {
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/Screenshot_2022-12-16_184526_gilzvg.jpg",
+                            Type = CompanyMediaType.Image,
+                            Caption = "Agency Image",
+                            IsMain = false,
+                            IsLogo = false
+                        },
+                        new CompanyContent
+                        {
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/realtor-showing-young-family-around-property-for-PUTL8G4-e1516618996652_zfgphc.jpg",
+                            Type = CompanyMediaType.Image,
+                            Caption = "Agency Image",
+                            IsMain = false,
+                            IsLogo = false
+                        }
+                    },
+                    ServiceCategories = new List<ServiceCategory>
+                    {
+                        ServiceCategory.EstateAgent
+                    },
+                    SummaryDescription = "Estate agency based in UK. Eco friendly and competitive approach to all customers.",
+                    CompanyDescriptions = new List<CompanyDescription>
+                    {
+                        new CompanyDescription
+                        {
+                            Heading = "We're experts",
+                            Text = "Information and communication are vital strengths in these unprecedented times. Our experts provide up-to-date market insight and analysis across all property markets via our insight & opinion hub.",
+                        },
+                        new CompanyDescription
+                        {
+                            Heading = "We value relationships",
+                            Text = "Our business is built on trust and integrity. This is intrinsic in everything we do, and is what gives our clients, colleagues, suppliers, partners and investors the confidence to work with us. We treat everyone individually, offering bespoke advice, which in turn builds long-term relationships and helps them to make better property decisions.",
+                        },
+                        new CompanyDescription
+                        {
+                            Heading = "How can we help?",
+                            Text = "We're here to provide you with more information, answer any questions you may have, or connect you with the right people to help with your needs. Use our general enquiry form to get in touch today.",
+                        }
+                    },
+                    ServiceLocations = "UK and international",
+                    Insurances = new List<Insurance>
+                    {
+                        new Insurance
+                        {
+                            Type = InsuranceType.ProfessionalIndemnity,
+                            Provider = "AXA",
+                            IndemnityLimit = "1,000,000",
+                            Expiry = new DateTime(2023,01,30)
+                        },
+                        new Insurance
+                        {
+                            Type = InsuranceType.PublicLiability,
+                            Provider = "Allianz",
+                            IndemnityLimit = "5,000,000",
+                            Expiry = new DateTime(2025,01,05)
+                        }
+                    }
+                },
+
                 new Company
                 {
                     AccessStatus = AccessStatus.Public,
+                    CompanyReference = "rogerparry3456",
                     CompanyAddress = new CompanyAddress
                     {
                         PropertyNumberOrName = "Hogstow Hall",
@@ -101,8 +424,34 @@ namespace Persistence
                         {
                             Latitude = 52.60740391205163,
                             Longitude = -2.9450937943182147
+                        }
+                    },
+                    CompanyContents = new List<CompanyContent>()
+                    {
+                        new CompanyContent
+                        {
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671215966/Placeholder/CompanyContents/real-estate-agency_wrm90i.jpg",
+                            Type = CompanyMediaType.Image,
+                            Caption = "Agency Image",
+                            IsMain = true,
+                            IsLogo = false
                         },
-                        What3words = "bypassed.magnetic.reserves"
+                        new CompanyContent
+                        {
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/Screenshot_2022-12-16_184526_gilzvg.jpg",
+                            Type = CompanyMediaType.Image,
+                            Caption = "Agency Image",
+                            IsMain = false,
+                            IsLogo = false
+                        },
+                        new CompanyContent
+                        {
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/realtor-showing-young-family-around-property-for-PUTL8G4-e1516618996652_zfgphc.jpg",
+                            Type = CompanyMediaType.Image,
+                            Caption = "Agency Image",
+                            IsMain = false,
+                            IsLogo = false
+                        }
                     },
                     CompanyContacts = new CompanyContacts
                     {
@@ -110,21 +459,56 @@ namespace Persistence
                         Email = "info@rogerparry.com",
                         Website = "https://www.rogerparry.net/"
                     },
-                    CompanyReference = "rogerparry",
                     CompanyRegistrationNumber = "OC312203",
                     DisplayName = "Roger Parry",
                     LegalName = "Roger Parry & Partners LLP",
                     Username ="rogerparry",
-                    SummaryDescription = "",
                     ServiceCategories = new List<ServiceCategory>
                     {
                         ServiceCategory.EstateAgent
+                    },
+                    SummaryDescription = "Estate agency based in UK. Eco friendly and competitive approach to all customers.",
+                    CompanyDescriptions = new List<CompanyDescription>
+                    {
+                        new CompanyDescription
+                        {
+                            Heading = "We're experts",
+                            Text = "Information and communication are vital strengths in these unprecedented times. Our experts provide up-to-date market insight and analysis across all property markets via our insight & opinion hub.",
+                        },
+                        new CompanyDescription
+                        {
+                            Heading = "We value relationships",
+                            Text = "Our business is built on trust and integrity. This is intrinsic in everything we do, and is what gives our clients, colleagues, suppliers, partners and investors the confidence to work with us. We treat everyone individually, offering bespoke advice, which in turn builds long-term relationships and helps them to make better property decisions.",
+                        },
+                        new CompanyDescription
+                        {
+                            Heading = "How can we help?",
+                            Text = "We're here to provide you with more information, answer any questions you may have, or connect you with the right people to help with your needs. Use our general enquiry form to get in touch today.",
+                        }
+                    },
+                    ServiceLocations = "UK and international",
+                    Insurances = new List<Insurance>
+                    {
+                        new Insurance
+                        {
+                            Type = InsuranceType.ProfessionalIndemnity,
+                            Provider = "AXA",
+                            IndemnityLimit = "1,000,000",
+                            Expiry = new DateTime(2023,01,30)
+                        },
+                        new Insurance
+                        {
+                            Type = InsuranceType.PublicLiability,
+                            Provider = "Allianz",
+                            IndemnityLimit = "5,000,000",
+                            Expiry = new DateTime(2025,01,05)
+                        }
                     }
                 },
                 new Company
                 {
                     Username = "ewe",
-                    CompanyReference = "ewemove",
+                    CompanyReference = "ewe8594",
                     DisplayName = "Ewe move Hebden Bridge and Sowerby",
                     LegalName = "Caine-Knight Property Limited",
                     CompanyRegistrationNumber = "11470075",
@@ -147,19 +531,83 @@ namespace Persistence
                         {
                             Latitude = 50.722980159789316,
                             Longitude = -1.8829559728734109
+                        }
+                    },
+                    CompanyContents = new List<CompanyContent>()
+                    {
+                        new CompanyContent
+                        {
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671215966/Placeholder/CompanyContents/real-estate-agency_wrm90i.jpg",
+                            Type = CompanyMediaType.Image,
+                            Caption = "Agency Image",
+                            IsMain = true,
+                            IsLogo = false
                         },
-                        What3words = "bypassed.magnetic.reserves"
+                        new CompanyContent
+                        {
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/Screenshot_2022-12-16_184526_gilzvg.jpg",
+                            Type = CompanyMediaType.Image,
+                            Caption = "Agency Image",
+                            IsMain = false,
+                            IsLogo = false
+                        },
+                        new CompanyContent
+                        {
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/realtor-showing-young-family-around-property-for-PUTL8G4-e1516618996652_zfgphc.jpg",
+                            Type = CompanyMediaType.Image,
+                            Caption = "Agency Image",
+                            IsMain = false,
+                            IsLogo = false
+                        }
                     },
                     ServiceCategories = new List<ServiceCategory>
                     {
                         ServiceCategory.EstateAgent
+                    },
+                    SummaryDescription = "Estate agency based in UK. Eco friendly and competitive approach to all customers.",
+                    CompanyDescriptions = new List<CompanyDescription>
+                    {
+                        new CompanyDescription
+                        {
+                            Heading = "We're experts",
+                            Text = "Information and communication are vital strengths in these unprecedented times. Our experts provide up-to-date market insight and analysis across all property markets via our insight & opinion hub.",
+                        },
+                        new CompanyDescription
+                        {
+                            Heading = "We value relationships",
+                            Text = "Our business is built on trust and integrity. This is intrinsic in everything we do, and is what gives our clients, colleagues, suppliers, partners and investors the confidence to work with us. We treat everyone individually, offering bespoke advice, which in turn builds long-term relationships and helps them to make better property decisions.",
+                        },
+                        new CompanyDescription
+                        {
+                            Heading = "How can we help?",
+                            Text = "We're here to provide you with more information, answer any questions you may have, or connect you with the right people to help with your needs. Use our general enquiry form to get in touch today.",
+                        }
+                    },
+                    ServiceLocations = "UK and international",
+                    Insurances = new List<Insurance>
+                    {
+                        new Insurance
+                        {
+                            Type = InsuranceType.ProfessionalIndemnity,
+                            Provider = "AXA",
+                            IndemnityLimit = "1,000,000",
+                            Expiry = new DateTime(2023,01,30)
+                        },
+                        new Insurance
+                        {
+                            Type = InsuranceType.PublicLiability,
+                            Provider = "Allianz",
+                            IndemnityLimit = "5,000,000",
+                            Expiry = new DateTime(2025,01,05)
+                        }
                     }
                 },
+
                 new Company
                 {
                     Username = "hunters",
-                    CompanyReference = "hunters",
-                    DisplayName = "Hunters",
+                    CompanyReference = "hunters3546",
+                    DisplayName = "Hunters 1",
                     LegalName = "Hunters (Midlands) Limited",
                     CompanyContacts = new CompanyContacts
                     {
@@ -180,20 +628,182 @@ namespace Persistence
                         {
                             Latitude = 50.72308467556089,
                             Longitude =  -1.8824440593814602
+                        }
+                    },
+                    CompanyContents = new List<CompanyContent>()
+                    {
+                        new CompanyContent
+                        {
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671215966/Placeholder/CompanyContents/real-estate-agency_wrm90i.jpg",
+                            Type = CompanyMediaType.Image,
+                            Caption = "Agency Image",
+                            IsMain = true,
+                            IsLogo = false
                         },
-                        What3words = "remark.taps.trails"
+                        new CompanyContent
+                        {
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/Screenshot_2022-12-16_184526_gilzvg.jpg",
+                            Type = CompanyMediaType.Image,
+                            Caption = "Agency Image",
+                            IsMain = false,
+                            IsLogo = false
+                        },
+                        new CompanyContent
+                        {
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/realtor-showing-young-family-around-property-for-PUTL8G4-e1516618996652_zfgphc.jpg",
+                            Type = CompanyMediaType.Image,
+                            Caption = "Agency Image",
+                            IsMain = false,
+                            IsLogo = false
+                        }
                     },
                     CompanyRegistrationNumber = "",
                     ServiceCategories = new List<ServiceCategory>
                     {
                         ServiceCategory.EstateAgent
+                    },
+                    SummaryDescription = "Estate agency based in UK. Eco friendly and competitive approach to all customers.",
+                    CompanyDescriptions = new List<CompanyDescription>
+                    {
+                        new CompanyDescription
+                        {
+                            Heading = "We're experts",
+                            Text = "Information and communication are vital strengths in these unprecedented times. Our experts provide up-to-date market insight and analysis across all property markets via our insight & opinion hub.",
+                        },
+                        new CompanyDescription
+                        {
+                            Heading = "We value relationships",
+                            Text = "Our business is built on trust and integrity. This is intrinsic in everything we do, and is what gives our clients, colleagues, suppliers, partners and investors the confidence to work with us. We treat everyone individually, offering bespoke advice, which in turn builds long-term relationships and helps them to make better property decisions.",
+                        },
+                        new CompanyDescription
+                        {
+                            Heading = "How can we help?",
+                            Text = "We're here to provide you with more information, answer any questions you may have, or connect you with the right people to help with your needs. Use our general enquiry form to get in touch today.",
+                        }
+                    },
+                    ServiceLocations = "UK and international",
+                    Insurances = new List<Insurance>
+                    {
+                        new Insurance
+                        {
+                            Type = InsuranceType.ProfessionalIndemnity,
+                            Provider = "AXA",
+                            IndemnityLimit = "1,000,000",
+                            Expiry = new DateTime(2023,01,30)
+                        },
+                        new Insurance
+                        {
+                            Type = InsuranceType.PublicLiability,
+                            Provider = "Allianz",
+                            IndemnityLimit = "5,000,000",
+                            Expiry = new DateTime(2025,01,05)
+                        }
                     }
                 },
+
+                new Company
+                {
+                    Username = "hunters",
+                    CompanyReference = "hunters7412",
+                    DisplayName = "Hunters 2",
+                    LegalName = "Hunters (Midlands) Limited",
+                    CompanyContacts = new CompanyContacts
+                    {
+                        Phone = "+44 (0) 1564 770707",
+                        Email = "sales@hunters.com"
+                    },
+                    AccessStatus = AccessStatus.Public,
+                    CompanyAddress = new CompanyAddress
+                    {
+                        PropertyNumberOrName = "2 St Stephens Court",
+                        StreetName = "St. Stephens Road",
+                        Locality = "",
+                        TownOrCity = "Bournemouth",
+                        County = "England",
+                        PostalCode = "BH2 6LA",
+                        Country = Country.UnitedKingdom,
+                        Coordinates = new Coordinates
+                        {
+                            Latitude = 53.297230105069126, 
+                            Longitude =  -1.3833799280677688
+                        }
+                    },
+                    CompanyContents = new List<CompanyContent>()
+                    {
+                        new CompanyContent
+                        {
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671215966/Placeholder/CompanyContents/real-estate-agency_wrm90i.jpg",
+                            Type = CompanyMediaType.Image,
+                            Caption = "Agency Image",
+                            IsMain = true,
+                            IsLogo = false
+                        },
+                        new CompanyContent
+                        {
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/Screenshot_2022-12-16_184526_gilzvg.jpg",
+                            Type = CompanyMediaType.Image,
+                            Caption = "Agency Image",
+                            IsMain = false,
+                            IsLogo = false
+                        },
+                        new CompanyContent
+                        {
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/realtor-showing-young-family-around-property-for-PUTL8G4-e1516618996652_zfgphc.jpg",
+                            Type = CompanyMediaType.Image,
+                            Caption = "Agency Image",
+                            IsMain = false,
+                            IsLogo = false
+                        }
+                    },
+                    CompanyRegistrationNumber = "",
+                    ServiceCategories = new List<ServiceCategory>
+                    {
+                        ServiceCategory.EstateAgent
+                    },
+                    SummaryDescription = "Estate agency based in UK. Eco friendly and competitive approach to all customers.",
+                    CompanyDescriptions = new List<CompanyDescription>
+                    {
+                        new CompanyDescription
+                        {
+                            Heading = "We're experts",
+                            Text = "Information and communication are vital strengths in these unprecedented times. Our experts provide up-to-date market insight and analysis across all property markets via our insight & opinion hub.",
+                        },
+                        new CompanyDescription
+                        {
+                            Heading = "We value relationships",
+                            Text = "Our business is built on trust and integrity. This is intrinsic in everything we do, and is what gives our clients, colleagues, suppliers, partners and investors the confidence to work with us. We treat everyone individually, offering bespoke advice, which in turn builds long-term relationships and helps them to make better property decisions.",
+                        },
+                        new CompanyDescription
+                        {
+                            Heading = "How can we help?",
+                            Text = "We're here to provide you with more information, answer any questions you may have, or connect you with the right people to help with your needs. Use our general enquiry form to get in touch today.",
+                        }
+                    },
+                    ServiceLocations = "UK and international",
+                    Insurances = new List<Insurance>
+                    {
+                        new Insurance
+                        {
+                            Type = InsuranceType.ProfessionalIndemnity,
+                            Provider = "AXA",
+                            IndemnityLimit = "1,000,000",
+                            Expiry = new DateTime(2023,01,30)
+                        },
+                        new Insurance
+                        {
+                            Type = InsuranceType.PublicLiability,
+                            Provider = "Allianz",
+                            IndemnityLimit = "5,000,000",
+                            Expiry = new DateTime(2025,01,05)
+                        }
+                    }
+                },
+
                 new Company
                 {
                     DisplayName = "Moving Mountains",
+                    CompanyReference = "movingmountains2478",
                     LegalName = "Moving Mountains Limited",
-                    CompanyReference = "movingmountains",
                     Username = "movingmountains",
                     AddedOn = new DateTime(2022,07,15),
                     AccessStatus = AccessStatus.Public,
@@ -214,24 +824,8 @@ namespace Persistence
                         {
                             Latitude = 51.40264956734864,
                             Longitude = -0.24979083392406543
-                        },
-                        What3words = "cloth.august.length"
-                    },
-                    CompanyContacts = new CompanyContacts
-                    {
-                        Phone = "020 3488 2208",
-                        Email = "info@wemovemountains.co.uk"
-                    },
-                    SummaryDescription = "International House and Office Removal and Clearance Services based in London. Eco friendly and competitive approach to all customers.",
-                    CompanyDescriptions = new List<CompanyDescription>
-                    {
-                        new CompanyDescription
-                        {
-                            Heading = "Who we are",
-                            Text = "We are a removal company with over 10 years of experience and expertise. We position ourselves as environmentally friendly company. We reuse and recycle as much as possible to save real mountains on this planet, not to create the landfill ones.",
                         }
                     },
-                    ServiceLocations = "UK and international",
                     CompanyContents = new List<CompanyContent>
                     {
                         new CompanyContent
@@ -253,6 +847,21 @@ namespace Persistence
                             Caption = "Image Three"
                         }
                     },
+                    CompanyContacts = new CompanyContacts
+                    {
+                        Phone = "020 3488 2208",
+                        Email = "info@wemovemountains.co.uk"
+                    },
+                    SummaryDescription = "International House and Office Removal and Clearance Services based in London. Eco friendly and competitive approach to all customers.",
+                    CompanyDescriptions = new List<CompanyDescription>
+                    {
+                        new CompanyDescription
+                        {
+                            Heading = "Who we are",
+                            Text = "We are a removal company with over 10 years of experience and expertise. We position ourselves as environmentally friendly company. We reuse and recycle as much as possible to save real mountains on this planet, not to create the landfill ones.",
+                        }
+                    },
+                    ServiceLocations = "UK and international",
                     Insurances = new List<Insurance>
                     {
                         new Insurance
@@ -275,9 +884,9 @@ namespace Persistence
                 new Company
                 {
                     AccessStatus = AccessStatus.Public,
+                    CompanyReference = "electrician17485",
                     DisplayName = "CAE Electrical",
                     LegalName = "CAE Electrical",
-                    CompanyReference = "cae",
                     Username = "electrician1",
                     AddedOn = new DateTime(2022,03,15),
                     ServiceCategories = new List<ServiceCategory>
@@ -298,8 +907,7 @@ namespace Persistence
                         {
                             Latitude = 51.60137056764931,
                             Longitude = 0.6534702269086803
-                        },
-                        What3words = "searching.volunteered.milder"
+                        }
                     },
                     CompanyContacts = new CompanyContacts
                     {
@@ -342,8 +950,8 @@ namespace Persistence
                 new Company
                 {
                     DisplayName = "Cleaning OCD",
+                    CompanyReference = "cleaning13485",
                     LegalName = "Cleaning OCD",
-                    CompanyReference = "cleaning",
                     Username = "cleaning1",
                     AccessStatus = AccessStatus.Public,
                     AddedOn = new DateTime(2022,03,15),
@@ -365,8 +973,7 @@ namespace Persistence
                         {
                             Latitude = 52.643914264497965,
                             Longitude = 1.2797135271974041
-                        },
-                        What3words = "searching.volunteered.milder"
+                        }
                     },
                     CompanyContacts = new CompanyContacts
                     {
@@ -409,8 +1016,8 @@ namespace Persistence
                 new Company
                 {
                     DisplayName = "Bridge heating",
+                    CompanyReference = "plumber117345",
                     LegalName = "Bridge heating",
-                    CompanyReference = "bridge-heat",
                     Username = "plumber1",
                     AccessStatus = AccessStatus.Public,
                     AddedOn = new DateTime(2022,03,15),
@@ -432,8 +1039,7 @@ namespace Persistence
                         {
                             Latitude = 52.05661506461248,
                             Longitude = -0.8533489730745938
-                        },
-                        What3words = "searching.volunteered.milder"
+                        }
                     },
                     CompanyContacts = new CompanyContacts
                     {
@@ -476,8 +1082,8 @@ namespace Persistence
                 new Company
                 {
                     DisplayName = "J.A. Steel & Son",
+                    CompanyReference = "handyman17586",
                     LegalName = "J.A. Steel & Son",
-                    CompanyReference = "steel",
                     Username = "handyman1",
                     AccessStatus = AccessStatus.Public,
                     AddedOn = new DateTime(2022,03,15),
@@ -499,8 +1105,7 @@ namespace Persistence
                         {
                             Latitude = 51.659803529028075,
                             Longitude = -0.027048244003053896
-                        },
-                        What3words = "searching.volunteered.milder"
+                        }
                     },
                     CompanyContacts = new CompanyContacts
                     {

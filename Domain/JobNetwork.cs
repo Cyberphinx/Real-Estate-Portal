@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Domain.JobAggregate;
 using Domain.InvoiceAggregate;
+using Domain.AppUserAggregate;
+using Domain.Enums;
 
 namespace Domain
 {

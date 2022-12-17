@@ -19,8 +19,9 @@ export default observer(function Nav() {
     const [sortingActive, setSortingActive] = useDetectOutsideClick(sortingRef, false);
     const toggleSorting = () => setSortingActive(!sortingActive);
 
-    const { listingStore, featureStore, userStore } = useStore();
-    const { cancelSelectListing, cancelSelectCompany } = listingStore;
+    const { listingStore, featureStore, userStore, companyStore } = useStore();
+    const { cancelSelectListing } = listingStore;
+    const { cancelSelectCompany } = companyStore;
     const { activeFeature, setActiveFeature, isLocked, setLocked } = featureStore;
     const { isLoggedIn } = userStore;
 
@@ -32,13 +33,13 @@ export default observer(function Nav() {
                 <li className="nav-bar-item"><Link to="/">SANCTUM</Link></li>
                 <li className="nav-bar-item">
                     <button className={activeFeature === 0 ? "nav-button-selected" : "nav-button"}
-                        onClick={() => { cancelSelectCompany(); setActiveFeature(0) }}>
+                        onClick={() => { setActiveFeature(0) }}>
                         Map
                     </button>
                 </li>
                 <li className="nav-bar-item">
                     <button className={activeFeature === 1 ? "nav-button-selected" : "nav-button"}
-                        onClick={() => { cancelSelectListing(); setActiveFeature(1) }}>
+                        onClick={() => { cancelSelectListing(); cancelSelectCompany(); setActiveFeature(1) }}>
                         Services
                     </button>
                 </li>

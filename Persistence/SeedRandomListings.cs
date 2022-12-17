@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Domain;
+using Domain.Enums;
 using Domain.ListingAggregate;
 using Domain.ListingAggregate.Enums;
 using Domain.ListingAggregate.Objects;
@@ -12,7 +12,7 @@ namespace Persistence
 {
     public class SeedRandomListings
     {
-        public static async Task SeedRandomData(DataContext context, int seedAmount)
+        public static async Task SeedRandomData(DataContext context, string companyReference, int seedAmount)
         {
             // if (context.Listings.Any()) return;
 
@@ -56,7 +56,7 @@ namespace Persistence
                 newListing.BurglarAlarm = true;
                 newListing.BusinessForSale = false;
                 newListing.BuyerIncentives = null;
-                newListing.CompanyReference = "savills";
+                newListing.CompanyReference = companyReference;
                 newListing.Category = Category.Residential;
                 newListing.CentralHeating = CentralHeating.Full;
                 newListing.ChainFree = true;
@@ -72,91 +72,91 @@ namespace Persistence
                     {
                         new Content
                         {
-                            Url = "https://picsum.photos/300/200?random=1",
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157050/Placeholder/Listings/ronnie-george-9gGvNWBeOq4_zzpq0z.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 1"
                         },
                         new Content
                         {
-                            Url = "https://picsum.photos/300/200?random=2",
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/webaliser-_TPTXZd9mOo_yxhvvk.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 2"
                         },
                         new Content
                         {
-                            Url = "https://picsum.photos/300/200?random=3",
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/bailey-anselme-Bkp3gLygyeA_jbeyqw.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 3"
                         },
                         new Content
                         {
-                            Url = "https://picsum.photos/300/200?random=4",
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/avi-waxman-f9qZuKoZYoY_fpqamd.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 4"
                         },
                         new Content
                         {
-                            Url = "https://picsum.photos/300/200?random=5",
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157050/Placeholder/Listings/chuttersnap-awL_YCtPGv4_mevzcz.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 5"
                         },
                         new Content
                         {
-                            Url = "https://picsum.photos/300/200?random=6",
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/sean-pollock-PhYq704ffdA_juovuh.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 6"
                         },
                         new Content
                         {
-                            Url = "https://picsum.photos/300/200?random=7",
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/jason-briscoe-UV81E0oXXWQ_d1oc5k.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 7"
                         },
                         new Content
                         {
-                            Url = "https://picsum.photos/300/200?random=8",
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/etienne-beauregard-riverin-B0aCvAVSX8E_epmt4d.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 8"
                         },
                         new Content
                         {
-                            Url = "https://picsum.photos/300/200?random=9",
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/francesca-tosolini-tHkJAMcO3QE_y8pp1o.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 9"
                         },
                         new Content
                         {
-                            Url = "https://picsum.photos/300/200?random=10",
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/grant-lemons-jTCLppdwSEc_gvvge5.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 10"
                         },
                         new Content
                         {
-                            Url = "https://picsum.photos/300/200?random=11",
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/naomi-hebert-MP0bgaS_d1c_izjtsb.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 11"
                         },
                         new Content
                         {
-                            Url = "https://picsum.photos/300/200?random=12",
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157299/Placeholder/Listings/ionut-vlad-idXQEOxhmvU_svt1mo.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 12"
                         },
                         new Content
                         {
-                            Url = "https://picsum.photos/300/200?random=13",
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/krystal-black-V5OEpF12pzw_ekn1te.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 13"
                         },
                         new Content
                         {
-                            Url = "https://picsum.photos/300/200?random=14",
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/ronnie-george-9gGvNWBeOq4_yuw3yd.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 14"
                         },
                         new Content
                         {
-                            Url = "https://picsum.photos/300/200?random=15",
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/roam-in-color-z3QZ6gjGRt4_evs1kc.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 15"
                         },
@@ -260,8 +260,7 @@ namespace Persistence
                             {
                                 Latitude = rnd.NextDouble() * (59 - 49) + 49,
                                 Longitude = rnd.NextDouble() * (2 - -10) + -10
-                            },
-                            What3words = "basic.bubble.slim"
+                            }
                         };
                 newListing.Pricing = new Pricing
                         {
@@ -353,7 +352,7 @@ namespace Persistence
                 newListing.BurglarAlarm = true;
                 newListing.BusinessForSale = false;
                 newListing.BuyerIncentives = null;
-                newListing.CompanyReference = "savills";
+                newListing.CompanyReference = companyReference;
                 newListing.Category = Category.Residential;
                 newListing.CentralHeating = CentralHeating.Full;
                 newListing.ChainFree = true;
@@ -369,91 +368,91 @@ namespace Persistence
                     {
                         new Content
                         {
-                            Url = "https://picsum.photos/300/200?random=1",
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/naomi-hebert-MP0bgaS_d1c_izjtsb.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 1"
                         },
                         new Content
                         {
-                            Url = "https://picsum.photos/300/200?random=2",
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/krystal-black-V5OEpF12pzw_ekn1te.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 2"
                         },
                         new Content
                         {
-                            Url = "https://picsum.photos/300/200?random=3",
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/roam-in-color-z3QZ6gjGRt4_evs1kc.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 3"
                         },
                         new Content
                         {
-                            Url = "https://picsum.photos/300/200?random=4",
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157299/Placeholder/Listings/ionut-vlad-idXQEOxhmvU_svt1mo.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 4"
                         },
                         new Content
                         {
-                            Url = "https://picsum.photos/300/200?random=5",
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/webaliser-_TPTXZd9mOo_yxhvvk.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 5"
                         },
                         new Content
                         {
-                            Url = "https://picsum.photos/300/200?random=6",
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/ronnie-george-9gGvNWBeOq4_yuw3yd.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 6"
                         },
                         new Content
                         {
-                            Url = "https://picsum.photos/300/200?random=7",
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/bailey-anselme-Bkp3gLygyeA_jbeyqw.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 7"
                         },
                         new Content
                         {
-                            Url = "https://picsum.photos/300/200?random=8",
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/jason-briscoe-UV81E0oXXWQ_d1oc5k.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 8"
                         },
                         new Content
                         {
-                            Url = "https://picsum.photos/300/200?random=9",
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/etienne-beauregard-riverin-B0aCvAVSX8E_epmt4d.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 9"
                         },
                         new Content
                         {
-                            Url = "https://picsum.photos/300/200?random=10",
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/francesca-tosolini-tHkJAMcO3QE_y8pp1o.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 10"
                         },
                         new Content
                         {
-                            Url = "https://picsum.photos/300/200?random=11",
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/grant-lemons-jTCLppdwSEc_gvvge5.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 11"
                         },
                         new Content
                         {
-                            Url = "https://picsum.photos/300/200?random=12",
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/sean-pollock-PhYq704ffdA_juovuh.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 12"
                         },
                         new Content
                         {
-                            Url = "https://picsum.photos/300/200?random=13",
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157050/Placeholder/Listings/chuttersnap-awL_YCtPGv4_mevzcz.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 13"
                         },
                         new Content
                         {
-                            Url = "https://picsum.photos/300/200?random=14",
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/avi-waxman-f9qZuKoZYoY_fpqamd.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 14"
                         },
                         new Content
                         {
-                            Url = "https://picsum.photos/300/200?random=15",
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/sean-pollock-PhYq704ffdA_w9meyd.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 15"
                         },
@@ -557,8 +556,7 @@ namespace Persistence
                             {
                                 Latitude = rnd.NextDouble() * (59 - 49) + 49,
                                 Longitude = rnd.NextDouble() * (2 - -10) + -10
-                            },
-                            What3words = "basic.bubble.slim"
+                            }
                         };
                 newListing.Pricing = new Pricing
                         {

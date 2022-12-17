@@ -22,9 +22,16 @@ namespace API.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public async Task<IActionResult> GetCompanies()
+        public async Task<IActionResult> GetCompanies([FromQuery]CompanyParams param)
         {
-            return HandleResult(await Mediator.Send(new List.Query()));
+            return HandlePagedResult(await Mediator.Send(new List.Query{Params = param}));
+        }
+
+        [AllowAnonymous]
+        [HttpGet("all")]
+        public async Task<IActionResult> GetAllCompanies()
+        {
+            return HandleResult(await Mediator.Send(new ListAll.Query()));
         }
         
         [AllowAnonymous]
@@ -63,6 +70,12 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new Delete.Command{Id = id}));
         }
 
+        [HttpDelete("all")]
+        public async Task<IActionResult> DeleteListings()
+        {
+            return HandleResult(await Mediator.Send(new DeleteRange.Command()));
+        }
+
         [Authorize(Roles = "Admin")]
         [HttpPost("{seed}")]
         public async Task Seed()
@@ -70,10 +83,5 @@ namespace API.Controllers
             await SeedCompanies.SeedData(_db);
         }
 
-        // [HttpGet("{id}/orders")]
-        // public async Task<IActionResult> GetCompanyOrders(string id, string predicate)
-        // {
-        //     return HandleResult(await Mediator.Send(new ListOrders.Query{Id = id, Predicate = predicate}));
-        // }
     }
 }

@@ -1,4 +1,4 @@
-import { UnitOfTime } from "../../UnitOfTime";
+import { UnitOfTime } from "../../Membership";
 
 export interface MinimumContractLength {
     minimumLength: number;

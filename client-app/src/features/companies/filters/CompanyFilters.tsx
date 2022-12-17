@@ -4,8 +4,8 @@ import { useStore } from "../../../app/stores/store";
 import './CompanyFilters.css';
 
 export default observer(function CompanyFilters() {
-    const { listingStore } = useStore();
-    const { companies } = listingStore;
+    const { companyStore } = useStore();
+    const { companies } = companyStore;
 
     return (
         <div className="company-filters-container">

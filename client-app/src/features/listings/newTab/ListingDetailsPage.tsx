@@ -6,10 +6,10 @@ import { useStore } from "../../../app/stores/store";
 import NavBar from "../../../app/layout/NavBar";
 import LoadingComponent from "../../../app/common/loading/LoadingComponent";
 import { Content } from "../../../app/model/ListingAggregate/Objects/Content";
-import { DetailedDescription } from "../../../app/model/ListingAggregate/Objects/DetailedDescription";
+import { DetailedDescription, UnitOfLength } from "../../../app/model/ListingAggregate/Objects/DetailedDescription";
 import Close from "../../map/toolbar/Close";
 
-export default observer(function SalesDetailsPage() {
+export default observer(function ListingDetailsPage() {
     const { id } = useParams<string>();
     const { listingStore: { loadedListing, loadListing, loadingListing }, featureStore } = useStore();
     const { description, setDescription, contacts, setContacts } = featureStore;
@@ -37,12 +37,18 @@ export default observer(function SalesDetailsPage() {
                         <div className="close-position">
                             <Close close={() => setDescription()} />
                         </div>
-                        {loadedListing.detailedDescriptions.map((description: DetailedDescription) => (
-                            <div key={description.id} className="listing-descriptions-container">
-                                <h1>{description.heading}</h1>
-                                <p>{description.text}</p>
-                            </div>
-                        ))}
+                        <div className="listing-descriptions-container">
+                            {loadedListing.detailedDescriptions.map((description: DetailedDescription) => (
+                                <article key={description.id} >
+                                    <h1>{description.heading}</h1>
+                                    <span>
+                                        {description.dimensions !== null
+                                            && ` (${description.dimensions?.length} x ${description.dimensions?.width} = ${description.dimensions?.area} sq ${UnitOfLength[description.dimensions?.unit]})`}
+                                    </span>
+                                    <p>{description.text}</p>
+                                </article>
+                            ))}
+                        </div>
                     </section>}
 
                 {contacts &&

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Domain.CompanyAggregate;
-using Domain.InvoiceAggregate;
+using Domain.Enums;
 using Domain.JobAggregate.Enums;
+using Domain.JobAggregate.Objects;
 
 namespace Domain.JobAggregate
 {

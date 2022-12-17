@@ -44,6 +44,7 @@ namespace API.Extensions
                 {
                     // Use connection string from file.
                     connStr = config.GetConnectionString("DefaultConnection");
+                    options.UseNpgsql(connStr).UseSnakeCaseNamingConvention();
                 }
                 else
                 {

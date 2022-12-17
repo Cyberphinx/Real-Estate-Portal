@@ -14,7 +14,7 @@
   border-radius: 5px;
   background: #fff;
   width: calc(100vw / 8);
-  height: auto;
+  height: calc((100vw / 8) + 65px);
   position: relative;
   text-align: center;
 }
@@ -28,7 +28,7 @@
 
 .add-listing-icon {
   position: absolute;
-  top: calc(100vw / 20);
+  top: calc(100vw / 26);
   left: calc(100vw / 22);
   width: 50px;
 }

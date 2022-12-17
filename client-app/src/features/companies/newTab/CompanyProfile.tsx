@@ -18,10 +18,10 @@ export default function CompanyProfile({ company, user, setEditMode }: Props) {
                 <div className="company-page-title-container">
                     <CompanyImages company={company} />
                     <div style={{ padding: "0px 40px" }}>
-                        {user?.role.includes("Company") && company?.usernames.includes(user.username) &&
+                        {user?.role.includes("Company") && company?.username === user.username &&
                             <button className="edit-company-button" onClick={() => setEditMode(true)}>Edit Profile</button>
                         }
-                        <h1>{company?.companyName}</h1>
+                        <h1>{company?.displayName}</h1>
                         <p><b>{company?.summaryDescription}</b></p>
                     </div>
                 </div>
@@ -33,13 +33,10 @@ export default function CompanyProfile({ company, user, setEditMode }: Props) {
                     <hr className="page-divider" />
                     <h3>Service details: </h3>
                     <p>Location: {company?.companyAddress.townOrCity}, {company?.companyAddress.country}</p>
-                    <p>Business name: {company?.companyName}</p>
+                    <p>Business name: {company?.legalName}</p>
                     <p>Area serviced: {company?.serviceLocations}</p>
-                    <p>Service offered: {company?.serviceScope}</p>
+                    <p>Summary: {company?.summaryDescription}</p>
                     <hr className="page-divider" />
-                    <h3>Company status: </h3>
-                    <p>Business owner: {company?.companyDetails.businessOwner}</p>
-                    <p>Business type: {company?.companyDetails.type}</p>
                     <h3>Company insurances: </h3>
                     <div>{company?.insurances.map((insurance: Insurance) => (
                         <div key={insurance.id}>

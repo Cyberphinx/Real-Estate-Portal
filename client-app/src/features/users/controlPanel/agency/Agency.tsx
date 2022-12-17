@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 import React, { useEffect, useState } from "react";
-import { Company } from "../../../../app/model/CompanyAggregate/Company";
-import { RedressScheme, User } from "../../../../app/model/User";
+import { Company, RedressScheme } from "../../../../app/model/CompanyAggregate/Company";
+import { User } from "../../../../app/model/User";
 import { useStore } from "../../../../app/stores/store";
 import './Agency.css';
 import BranchForm from "./BranchForm";
@@ -14,17 +14,13 @@ interface Props {
 }
 
 export default observer(function Agency({ user }: Props) {
-    const { listingStore, featureStore } = useStore();
-    const { companies } = listingStore;
+    const { companyStore, featureStore } = useStore();
+    const { companies } = companyStore;
     const { activeAgencyPanel, setActiveAgencyPanel } = featureStore;
     const [branchForm, setBranchForm] = useState(false);
     const [listingForm, setListingForm] = useState(false);
     const [selectedPortfolio, setSelectedPortfolio] = useState<Company | null>(null);
     const [portfolio, setPortfolio] = useState(false);
-
-    useEffect(() => {
-        listingStore.loadCompanies();
-    }, [listingStore])
 
     const titles = [
         <p className="agency-toolbar-title">
@@ -37,7 +33,7 @@ export default observer(function Agency({ user }: Props) {
         </div>,
 
         <div style={{ position: "relative" }}>
-            <p className="agency-toolbar-title">{selectedPortfolio?.companyName}</p>
+            <p className="agency-toolbar-title">{selectedPortfolio?.displayName}</p>
             <button className="back" onClick={() => setActiveAgencyPanel(0)}>Back</button>
         </div>,
 
@@ -60,13 +56,6 @@ export default observer(function Agency({ user }: Props) {
         <ListingForm />
     ]
 
-    const added = new Date(user?.registrationDate!).toLocaleDateString();
-    const addedNewDate = new Date(user?.registrationDate!);
-    const addedTimeStamp = `${addedNewDate.getHours()}:${addedNewDate.getMinutes()}:${addedNewDate.getSeconds()}`;
-    const lastLogin = new Date(user?.lastLoginTime!).toLocaleDateString();
-    const lastLoginNewDate = new Date(user?.lastLoginTime!);
-    const lastLoginTimeStamp = `${lastLoginNewDate.getHours()}:${lastLoginNewDate.getMinutes()}:${lastLoginNewDate.getSeconds()}`;
-
     return (
         <div className="agency-container">
             <section className="agency-section-one">
@@ -74,15 +63,9 @@ export default observer(function Agency({ user }: Props) {
                     <button className="agency-button-edit">
                         <img className="branch-button-icon" src="/assets/edit.svg" alt="edit" />
                     </button>
-                    <p className="agency-title">{user?.companyName}</p>
+                    <p className="agency-title">{user?.displayName}</p>
                     <p>Username: {user?.username}</p>
-                    <p>Date registered: {added} {addedTimeStamp}</p>
-                    <p>Last login: {lastLogin} {lastLoginTimeStamp}</p>
                     <p>Email: {user?.email}</p>
-                    <p>Company name: {user?.companyName}</p>
-                    <p>Company postcode: {user?.companyPostalCode}</p>
-                    <p>Company reference: {user?.companyPostalCode}</p>
-                    {user && <p>Redress scheme: {RedressScheme[user.redressScheme]}</p>}
                 </article>
                 <article>
                     <button className="agency-button-edit">

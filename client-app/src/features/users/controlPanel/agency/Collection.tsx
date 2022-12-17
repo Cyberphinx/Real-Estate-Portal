@@ -41,7 +41,7 @@ export default observer(function Collection({ setBranchForm, setPortfolio, setSe
                     <BranchPlaceholder />
                 </div>
             }
-            {companies.filter(x => x.usernames.includes(user!.username)).map(item => (
+            {companies.filter(x => x.username === user!.username).map((item) => (
                 <div className="branch" key={item.id} onClick={() => { setActiveAgencyPanel(2); setSelectedPortfolio(item); }}>
                     <div className="date-tag-position">
                         <DateTag listing={item} />
@@ -54,7 +54,7 @@ export default observer(function Collection({ setBranchForm, setPortfolio, setSe
                     </button>
                     <div className="folder-3">
                         <article className="branch-text-container">
-                            <p className="branch-title">{item.companyName}</p>
+                            <p className="branch-title">{item.displayName}</p>
                             <p className="branch-subtitle">{item.companyReference}</p>
                         </article>
                     </div>

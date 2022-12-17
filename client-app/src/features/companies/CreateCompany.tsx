@@ -4,13 +4,14 @@ import * as Yup from 'yup';
 import { v4 as uuid } from 'uuid';
 import { ServiceCategory } from "../../app/model/ServiceCategory";
 import { AccessStatus } from "../../app/model/AccessStatus";
-import { Country } from "../../app/model/LocationAggregate/Location";
+import { Country } from "../../app/model/Location";
 import { Form, Formik } from 'formik';
 import MyTextInput from '../../app/common/form/MyTextInput';
 import MySelectInput from '../../app/common/form/MySelectInput';
 import ValidationErrors from '../errors/ValidationErrors';
 import { categoryOptions } from '../../app/common/form/categoryOptions';
 import { observer } from 'mobx-react-lite';
+import { UnitOfTime } from '../../app/model/Membership';
 
 
 
@@ -22,14 +23,8 @@ export default observer(function CreateCompany() {
 
     const initialValues = {
         id: uuid(),
-        companyName: "",
-        companyReference: "",
-        displayName: "",
-        usernames: [user!.username],
-        accessStatus: AccessStatus.Private,
+        accessStatus: AccessStatus.Public,
         addedOn: new Date(),
-        serviceCategory: ServiceCategory.Moving,
-        // companyMembership: {},
         companyAddress: {
             propertyNumberOrName: "",
             streetName: "",
@@ -42,31 +37,48 @@ export default observer(function CreateCompany() {
                 latitude: 0,
                 longitude: 0
             },
-            PafUdprn: "",
             what3words: "",
         },
-        // companyDetails: {},
         companyContacts: {
             phone: "",
             email: user!.email,
             website: ""
         },
-        brief: "",
-        description: "",
+        companyContents: [],
+        commpanyDescriptions: [],
+        companyReference: "",
+        companyRegistrationNumber: "",
+        displayName: "",
+        insurances: [],
+        lastModified: new Date(),
+        legalName: "",
+        membership: {
+            id: uuid(),
+            companyReference: "",
+            contractLength: 1,
+            memberSince: new Date(),
+            expiry: new Date(2050),
+            description: "",
+            price: 0,
+            invoices: [],
+            isActive: true,
+            unit: UnitOfTime.Years,
+            username: user!.username,
+            vatPercentage: 20
+        },
+        jobs: [],
+        redressSchemes: [],
+        reviews: [],
         serviceLocations: "",
-        serviceScope: "",
-        logo: "",
-        // companyContents: [],
-        // availabilities: [],
-        // insurances: [],
-        // orders: [],
+        summaryDescription: "",
+        serviceCategories: [ServiceCategory.EstateAgent],
+        username: user!.username,
         error: null,
     }
 
     const validationSchema = Yup.object({
-        companyName: Yup.string().required('The company name is required'),
-        category: Yup.string().required(),
-        postcode: Yup.string().required(),
+        legalName: Yup.string().required('The legal company name is required'),
+        postalCode: Yup.string().required(),
         email: Yup.string().required("The email is required").email(),
         phone: Yup.string().required("The phone is required"),
     })

@@ -1,7 +1,22 @@
-import React from "react";
+import { observer } from "mobx-react-lite";
+import React, { useEffect } from "react";
+import LoadingComponent from "../../../app/common/loading/LoadingComponent";
+import LoadingPlaceholder from "../../../app/common/loading/LoadingPlaceholder";
+import { Job, JobFormValues, NetworkDto } from "../../../app/model/JobAggregate/Job";
+import { ServiceCategory } from "../../../app/model/ServiceCategory";
+import { useStore } from "../../../app/stores/store";
 import './ServicesHub.css';
 
-export default function ServicesHub() {
+export default observer(function ServicesHub() {
+    const { jobStore, listingStore } = useStore();
+    const { jobs, loadingJobs } = jobStore;
+    const { loadingInitial, loadingNext } = listingStore;
+
+    function dateFormatter(date: Date) {
+        return new Date(date).toLocaleString();
+    }
+
+    console.log(loadingJobs);
 
     return (
         <div className="services-hub">
@@ -11,12 +26,43 @@ export default function ServicesHub() {
                 </section>
                 <section style={{ textAlign: "right", display: "grid", gridTemplateColumns: "auto auto", gridGap: "10px" }}>
                     <input placeholder="Search..." style={{ padding: "5px", width: "calc(100vw / 6)" }} />
-                    <button className="post-job-button">CREATE JOB +</button>
+                    <button className="post-job-button">Post a job</button>
                 </section>
             </div>
+
             <div className="forum-container">
                 <section>
-                    <article className="thread-container">
+                    {loadingJobs ?
+                        <div className='placeh-container'>
+                            <LoadingPlaceholder />
+                            <LoadingPlaceholder />
+                            <LoadingPlaceholder />
+                            <LoadingPlaceholder />
+                        </div>
+                        : jobs.map((job: Job) => (
+                            <article className="thread-container" key={job.id}>
+                                <div className="thread-author">
+                                    <img className="default-user-icon" src="/assets/default-user-icon.jpg" alt="user" />
+                                </div>
+                                <div className="thread-post">
+                                    <div className="thread-subtitle">
+                                        <span className="thread-location">
+                                            {job.jobLocation.townOrCity}
+                                        </span> - Posted by {job.networks[0].username} - {dateFormatter(job.addedOn)}
+                                    </div>
+                                    <p className="thread-title">{job.title} </p>
+                                    <p className="thread-subtitle">{job.serviceCategories.map((category: ServiceCategory, index: number) => (
+                                        <span className="job-tag" key={index}># {ServiceCategory[category].replace(/[A-Z]/g, ' $&').trim()} </span>
+                                    ))}</p>
+                                    <p className="thread-content">{job.description}</p>
+                                    <div style={{ display: "inline-grid", gridTemplateColumns: "auto auto", gridGap: "20px" }}>
+                                        <button className="thread-button">Apply</button>
+                                        <button className="thread-button">Share</button>
+                                    </div>
+                                </div>
+                            </article>
+                        ))}
+                    {/* <article className="thread-container">
                         <div className="thread-author">
                             <img className="default-user-icon" src="/assets/default-user-icon.jpg" alt="user" />
                         </div>
@@ -93,7 +139,7 @@ export default function ServicesHub() {
                                 <button className="thread-button">Share</button>
                             </div>
                         </div>
-                    </article>
+                    </article> */}
                 </section>
 
                 <section className="channel-profile">
@@ -125,4 +171,4 @@ export default function ServicesHub() {
             </div>
         </div>
     )
-}
+})

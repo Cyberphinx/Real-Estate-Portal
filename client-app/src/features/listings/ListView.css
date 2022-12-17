@@ -1,0 +1,48 @@
+.listings-container {
+  height: calc(100vh - 60px);
+  width: calc(100vw / 3);
+  overflow-y: scroll;
+  overflow-x: hidden;
+  position: relative;
+  margin-top: 50px;
+  padding-top: 10px;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
+  /* background-color: rgba(27, 18, 18, 1); */
+  background-color: #dcdcdc;
+}
+
+.list-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  grid-auto-rows: auto;
+  padding: 0px 10px;
+}
+
+.ph-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  /* grid-auto-rows: 1fr; */
+  padding: 0px 10px;
+}
+
+.single-point {
+  border: 1px solid black;
+}
+.cluster-group {
+  /* border: 1px solid black; */
+}
+.cluster-leaf {
+  border: 1px solid black;
+}
+
+.listing-counter-container {
+  /* border: 1px solid #ccc; */
+  position: fixed;
+  left: calc(((100vw / 3) * 2) - 200px);
+  bottom: 70px;
+  z-index: 21;
+  margin-left: auto;
+  margin-right: auto;
+}

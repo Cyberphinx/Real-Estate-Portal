@@ -1,96 +1,31 @@
 import { observer } from "mobx-react-lite";
-import React from "react";
+import React, { useEffect } from "react";
+import { Job } from "../../app/model/JobAggregate/Job";
+import { ServiceCategory } from "../../app/model/ServiceCategory";
+import { useStore } from "../../app/stores/store";
 import './Companies.css';
+import ServicesHub from "./servicesHub/ServicesHub";
+import SideBar from "./SideBar";
 
 export default observer(function Companies() {
+    const { jobStore } = useStore();
+    const { jobs, loadingJobs, jobRegistry, loadJobs } = jobStore;
 
-    const trades = [
-        "Architectural Services",
-        "Bathroom Fitting",
-        "Bricklaying",
-        "Building",
-        "Carpentry",
-        "Carpets &  Lino",
-        "Central Heating",
-        "Chimney & Fireplaces",
-        "Conservatories",
-        "Conversions General",
-        "Cleaning",
-        "Damp Proofing",
-        "Decking",
-        "Demolition & Clearing",
-        "Driveways",
-        "Electrical",
-        "Extensions",
-        "Fascias & Soffits",
-        "Fencing",
-        "Fireplaces & Flues",
-        "Garden Maintenance",
-        "Gas Work",
-        "Groundwork & Foundations",
-        "Guttering",
-        "Handyman",
-        "Hard Flooring",
-        "Insulation",
-        "Kitchen Fitting",
-        "Landscape & Gardening",
-        "Locksmiths",
-        "Loft Conversions",
-        "New Builds",
-        "Painting & Decorating",
-        "Plastering",
-        "Pluming",
-        "Removals",
-        "Repointing",
-        "Restoration & Refurbishment",
-        "Roofing Flat",
-        "Roofing Pitched",
-        "Security Systems",
-        "Stonemasonry",
-        "Storage",
-        "Tiling",
-        "Tree Surgery",
-        "Waste Clearance",
-        "Windows & Doors",
+    const currentTrades = [
+        ServiceCategory.BathroomFitting,
+        ServiceCategory.CentralHeating,
+        ServiceCategory.Cleaning,
+        ServiceCategory.Electrical,
+        ServiceCategory.EstateAgent,
+        ServiceCategory.GasWork,
+        ServiceCategory.Handyman,
+        ServiceCategory.Removals,
     ]
 
     return (
-        <div className="companies-container">
-            <section className="service-container">
-                <article className="service-index" style={{ marginBottom: "0px" }}>
-                    <div className="service-icon"></div>
-                    <p className="service-title">Direct Messages</p>
-                </article>
-                <hr style={{ margin: "5px 5px", width: "80%" }} />
-                <article className="service-index">
-                    <div className="service-icon"></div>
-                    <p className="service-title">Estate Agents</p>
-                </article>
-                <article className="service-index">
-                    <div className="service-icon"></div>
-                    <p className="service-title">Traders</p>
-                </article>
-            </section>
-            <section className="subservice-container">
-                <article className="subservice-toolbar">
-                    <div>
-                        <p className="subservice-toolbar-text">Traders</p>
-                    </div>
-                    <div style={{padding:"12.5px 20px", textAlign:"right"}}>
-                        <input className="subservice-toolbar-search" placeholder="Filter by tag name" />
-                    </div>
-                </article>
-                <article className="subservice-list-container">
-                    {trades.map((trade: string, index: number) => (
-                        <article key={index}>
-                            <div className="subservice-title">
-                                {/* <input type="checkbox" /> */}
-                                <span ># {trade} ({Math.floor(Math.random() * 500)})</span>
-                            </div>
-                        </article>
-                    ))}
-                </article>
-            </section>
+        <div className="companies-grid">
+            <SideBar />
+            <ServicesHub />
         </div>
     );
 });

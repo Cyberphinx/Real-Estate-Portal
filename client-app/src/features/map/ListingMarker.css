@@ -14,7 +14,7 @@
 }
 .cluster-marker:hover {
   color: #000;
-  background: #00FF00;
+  background: yellow;
 }
 .low-density {
   color: #fff;
@@ -31,7 +31,7 @@
 
 .active-low-density {
   color: #fff;
-  background: #00FF00;
+  background: yellow;
 }
 
 .point-marker-price {
@@ -48,11 +48,11 @@
 }
 .point-marker-price:hover {
   color: #000;
-  background: #00FF00;
+  background: yellow;
 }
 .point-marker-price-active {
   color: #000;
-  background: #00FF00;
+  background: yellow;
   border: none;
   border-radius: 5px;
   padding: 0px;
@@ -64,7 +64,8 @@
 }
 .point-marker-price-selected {
   color: #000;
-  background: #00FF00;
+  /* background: #00FF00; */
+  background: yellow;
   border: none;
   border-radius: 5px;
   padding: 0px;
