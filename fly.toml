@@ -1,4 +1,4 @@
-# fly.toml file generated for houseapp on 2022-12-08T09:18:52Z
+# fly.toml file generated for houseapp on 2022-12-17T08:52:15Z
 
 app = "houseapp"
 kill_signal = "SIGINT"
@@ -6,7 +6,7 @@ kill_timeout = 5
 processes = []
 
 [env]
-  ASPNETCORE_URLS="http://+:8080"
+  ASPNETCORE_URLS = "http://+:8080"
 
 [experimental]
   allowed_public_ports = []
