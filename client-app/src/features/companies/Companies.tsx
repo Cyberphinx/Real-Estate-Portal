@@ -11,17 +11,6 @@ export default observer(function Companies() {
     const { jobStore } = useStore();
     const { jobs, loadingJobs, jobRegistry, loadJobs } = jobStore;
 
-    const currentTrades = [
-        ServiceCategory.BathroomFitting,
-        ServiceCategory.CentralHeating,
-        ServiceCategory.Cleaning,
-        ServiceCategory.Electrical,
-        ServiceCategory.EstateAgent,
-        ServiceCategory.GasWork,
-        ServiceCategory.Handyman,
-        ServiceCategory.Removals,
-    ]
-
     return (
         <div className="companies-grid">
             <SideBar />

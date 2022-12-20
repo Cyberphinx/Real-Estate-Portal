@@ -50,6 +50,40 @@ export enum DecorativeCondition {
     needsModernisation
 }
 
+export enum Eligibility {
+    aAccepted,
+    excluded,
+    only
+}
+
+export enum Frequency {
+    perPersonPerWeek,
+    perWeek,
+    perMonth,
+    perQuarter,
+    perYear,
+    notApplicable
+}
+
+export const rentFrequency = (listing: Listing) => {
+    switch (listing.pricing.rentFrequency) {
+        case 0:
+            return "/person/week"
+        case 1:
+            return "/week"
+        case 2:
+            return "/month"
+        case 3:
+            return "/quarter"
+        case 4:
+            return "/year"
+        case 5:
+            return ""
+        default:
+            return ""
+    }
+}
+
 export enum FurnishedState {
     furnished,
     furnishedOrUnfurnished,
@@ -89,6 +123,19 @@ export enum ListedBuildingGrade {
     locallyListed
 }
 
+export enum MediaType {
+    audioTour,
+    brochure,
+    document,
+    epcGraph,
+    epcReport,
+    floorPlan,
+    homePack,
+    image,
+    sitePlan,
+    virtualTour
+}
+
 export enum OutsideSpace {
     balcony,
     communalGarden,
@@ -103,6 +150,40 @@ export enum Parking {
     residentsParking,
     singleGarage,
     underground
+}
+
+export enum PriceQualifier {
+    fixedPrice,
+    from,
+    guidePrice,
+    nonQuoting,
+    offersInTheRegionOf,
+    offersOver,
+    priceOnApplication,
+    saleByTender
+}
+
+export const priceQualifier = (listing: Listing) => {
+    switch (listing.pricing.priceQualifier) {
+        case 0:
+            return "Fixed price"
+        case 1:
+            return "From"
+        case 2:
+            return "Guide price"
+        case 3:
+            return "Non quoting"
+        case 4:
+            return "Offers in the region of"
+        case 5:
+            return "Offers over"
+        case 6:
+            return "Price on application"
+        case 7:
+            return "Sale by tender"
+        default:
+            return ""
+    }
 }
 
 export enum PropertyType {
@@ -180,6 +261,24 @@ export enum Tenure {
     shareOfFreehold
 }
 
+export enum TransactionType {
+    rent,
+    sale
+}
+
+export enum UnitOfArea {
+    SqFeet,
+    SqYard,
+    SqMetres,
+    Acres,
+    Hectares
+}
+
+export enum UnitOfLength {
+    feet,
+    metres
+}
+
 export enum Utility {
     electricity,
     gas,
@@ -190,44 +289,5 @@ export enum Utility {
     water
 }
 
-export const rentFrequency = (listing: Listing) => {
-    switch (listing.pricing.rentFrequency) {
-        case 0:
-            return "/person/week"
-        case 1:
-            return "/week"
-        case 2:
-            return "/month"
-        case 3:
-            return "/quarter"
-        case 4:
-            return "/year"
-        case 5:
-            return ""
-        default:
-            return ""
-    }
-}
 
-export const priceQualifier = (listing: Listing) => {
-    switch (listing.pricing.priceQualifier) {
-        case 0:
-            return "Fixed price"
-        case 1:
-            return "From"
-        case 2:
-            return "Guide price"
-        case 3:
-            return "Non quoting"
-        case 4:
-            return "Offers in the region of"
-        case 5:
-            return "Offers over"
-        case 6:
-            return "Price on application"
-        case 7:
-            return "Sale by tender"
-        default:
-            return ""
-    }
-}
+

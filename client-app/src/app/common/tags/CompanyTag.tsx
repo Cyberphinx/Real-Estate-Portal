@@ -1,5 +1,5 @@
 import React from "react";
-import { Company } from "../../model/CompanyAggregate/Company";
+import { Company } from "../../model/Company";
 import { ServiceCategory } from "../../model/ServiceCategory";
 import './CompanyTag.css';
 

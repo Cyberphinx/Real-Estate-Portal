@@ -6,6 +6,7 @@ using Domain.Enums;
 using Domain.CompanyAggregate;
 using Domain.CompanyAggregate.Enums;
 using Domain.LocationAggregate;
+using Domain.CompanyAggregate.Objects;
 
 namespace Persistence
 {
@@ -38,11 +39,8 @@ namespace Persistence
                         County = "City of London",
                         PostalCode = "W1G 0JD",
                         Country = Country.UnitedKingdom,
-                        Coordinates = new Coordinates
-                        {
-                            Latitude = 51.51654265291029,
-                            Longitude = -0.14291257284437422
-                        }
+                        Latitude = 51.51654265291029,
+                        Longitude = -0.14291257284437422
                     },
                     CompanyContents = new List<CompanyContent>()
                     {
@@ -135,11 +133,8 @@ namespace Persistence
                         County = "City of London",
                         PostalCode = "W1G 0JD",
                         Country = Country.UnitedKingdom,
-                        Coordinates = new Coordinates
-                        {
-                            Latitude = 55.95435353799718,
-                            Longitude = -3.2067211982100288
-                        }
+                        Latitude = 55.95435353799718,
+                        Longitude = -3.2067211982100288
                     },
                     CompanyContents = new List<CompanyContent>()
                     {
@@ -233,11 +228,198 @@ namespace Persistence
                         County = "West Midlands",
                         PostalCode = "B90 4RZ",
                         Country = Country.UnitedKingdom,
-                        Coordinates = new Coordinates
+                        Latitude = 52.40066044491819,
+                        Longitude = -1.8066908304837104
+                    },
+                    CompanyContents = new List<CompanyContent>()
+                    {
+                        new CompanyContent
                         {
-                            Latitude = 52.40066044491819,
-                            Longitude = -1.8066908304837104
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671215966/Placeholder/CompanyContents/real-estate-agency_wrm90i.jpg",
+                            Type = CompanyMediaType.Image,
+                            Caption = "Agency Image",
+                            IsMain = true,
+                            IsLogo = false
+                        },
+                        new CompanyContent
+                        {
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/Screenshot_2022-12-16_184526_gilzvg.jpg",
+                            Type = CompanyMediaType.Image,
+                            Caption = "Agency Image",
+                            IsMain = false,
+                            IsLogo = false
+                        },
+                        new CompanyContent
+                        {
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/realtor-showing-young-family-around-property-for-PUTL8G4-e1516618996652_zfgphc.jpg",
+                            Type = CompanyMediaType.Image,
+                            Caption = "Agency Image",
+                            IsMain = false,
+                            IsLogo = false
                         }
+                    },
+                    ServiceCategories = new List<ServiceCategory>
+                    {
+                        ServiceCategory.EstateAgent
+                    },
+                    SummaryDescription = "Estate agency based in UK. Eco friendly and competitive approach to all customers.",
+                    CompanyDescriptions = new List<CompanyDescription>
+                    {
+                        new CompanyDescription
+                        {
+                            Heading = "We're experts",
+                            Text = "Information and communication are vital strengths in these unprecedented times. Our experts provide up-to-date market insight and analysis across all property markets via our insight & opinion hub.",
+                        },
+                        new CompanyDescription
+                        {
+                            Heading = "We value relationships",
+                            Text = "Our business is built on trust and integrity. This is intrinsic in everything we do, and is what gives our clients, colleagues, suppliers, partners and investors the confidence to work with us. We treat everyone individually, offering bespoke advice, which in turn builds long-term relationships and helps them to make better property decisions.",
+                        },
+                        new CompanyDescription
+                        {
+                            Heading = "How can we help?",
+                            Text = "We're here to provide you with more information, answer any questions you may have, or connect you with the right people to help with your needs. Use our general enquiry form to get in touch today.",
+                        }
+                    },
+                    ServiceLocations = "UK and international",
+                    Insurances = new List<Insurance>
+                    {
+                        new Insurance
+                        {
+                            Type = InsuranceType.ProfessionalIndemnity,
+                            Provider = "AXA",
+                            IndemnityLimit = "1,000,000",
+                            Expiry = new DateTime(2023,01,30)
+                        },
+                        new Insurance
+                        {
+                            Type = InsuranceType.PublicLiability,
+                            Provider = "Allianz",
+                            IndemnityLimit = "5,000,000",
+                            Expiry = new DateTime(2025,01,05)
+                        }
+                    }
+                },
+
+                new Company
+                {
+                    Username = "purple",
+                    CompanyReference = "purple1253",
+                    DisplayName = "Purple Bricks 2",
+                    LegalName = "Purplebricks Group PLC",
+                    CompanyRegistrationNumber = "8047368",
+                    CompanyContacts = new CompanyContacts
+                    {
+                        Phone = "+44 (0) 117 910 2200",
+                        Email = "info@purple.com"
+                    },
+                    AccessStatus = AccessStatus.Public,
+                    CompanyAddress = new CompanyAddress
+                    {
+                        PropertyNumberOrName = "Suite 7 Cranmore Place",
+                        StreetName = "Cranmore Drive Shirley",
+                        Locality = "",
+                        TownOrCity = "Solihull",
+                        County = "West Midlands",
+                        PostalCode = "B90 4RZ",
+                        Country = Country.UnitedKingdom,
+                        Latitude = 52.40066044491819,
+                        Longitude = -1.8066908304837104
+                    },
+                    CompanyContents = new List<CompanyContent>()
+                    {
+                        new CompanyContent
+                        {
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671215966/Placeholder/CompanyContents/real-estate-agency_wrm90i.jpg",
+                            Type = CompanyMediaType.Image,
+                            Caption = "Agency Image",
+                            IsMain = true,
+                            IsLogo = false
+                        },
+                        new CompanyContent
+                        {
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/Screenshot_2022-12-16_184526_gilzvg.jpg",
+                            Type = CompanyMediaType.Image,
+                            Caption = "Agency Image",
+                            IsMain = false,
+                            IsLogo = false
+                        },
+                        new CompanyContent
+                        {
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/realtor-showing-young-family-around-property-for-PUTL8G4-e1516618996652_zfgphc.jpg",
+                            Type = CompanyMediaType.Image,
+                            Caption = "Agency Image",
+                            IsMain = false,
+                            IsLogo = false
+                        }
+                    },
+                    ServiceCategories = new List<ServiceCategory>
+                    {
+                        ServiceCategory.EstateAgent
+                    },
+                    SummaryDescription = "Estate agency based in UK. Eco friendly and competitive approach to all customers.",
+                    CompanyDescriptions = new List<CompanyDescription>
+                    {
+                        new CompanyDescription
+                        {
+                            Heading = "We're experts",
+                            Text = "Information and communication are vital strengths in these unprecedented times. Our experts provide up-to-date market insight and analysis across all property markets via our insight & opinion hub.",
+                        },
+                        new CompanyDescription
+                        {
+                            Heading = "We value relationships",
+                            Text = "Our business is built on trust and integrity. This is intrinsic in everything we do, and is what gives our clients, colleagues, suppliers, partners and investors the confidence to work with us. We treat everyone individually, offering bespoke advice, which in turn builds long-term relationships and helps them to make better property decisions.",
+                        },
+                        new CompanyDescription
+                        {
+                            Heading = "How can we help?",
+                            Text = "We're here to provide you with more information, answer any questions you may have, or connect you with the right people to help with your needs. Use our general enquiry form to get in touch today.",
+                        }
+                    },
+                    ServiceLocations = "UK and international",
+                    Insurances = new List<Insurance>
+                    {
+                        new Insurance
+                        {
+                            Type = InsuranceType.ProfessionalIndemnity,
+                            Provider = "AXA",
+                            IndemnityLimit = "1,000,000",
+                            Expiry = new DateTime(2023,01,30)
+                        },
+                        new Insurance
+                        {
+                            Type = InsuranceType.PublicLiability,
+                            Provider = "Allianz",
+                            IndemnityLimit = "5,000,000",
+                            Expiry = new DateTime(2025,01,05)
+                        }
+                    }
+                },
+
+                new Company
+                {
+                    Username = "purple",
+                    CompanyReference = "purple6321",
+                    DisplayName = "Purple Bricks 3",
+                    LegalName = "Purplebricks Group PLC",
+                    CompanyRegistrationNumber = "8047368",
+                    CompanyContacts = new CompanyContacts
+                    {
+                        Phone = "+44 (0) 117 910 2200",
+                        Email = "info@purple.com"
+                    },
+                    AccessStatus = AccessStatus.Public,
+                    CompanyAddress = new CompanyAddress
+                    {
+                        PropertyNumberOrName = "Suite 7 Cranmore Place",
+                        StreetName = "Cranmore Drive Shirley",
+                        Locality = "",
+                        TownOrCity = "Solihull",
+                        County = "West Midlands",
+                        PostalCode = "B90 4RZ",
+                        Country = Country.UnitedKingdom,
+                        Latitude = 52.40066044491819,
+                        Longitude = -1.8066908304837104
                     },
                     CompanyContents = new List<CompanyContent>()
                     {
@@ -313,7 +495,7 @@ namespace Persistence
                 {
                     Username = "purple",
                     CompanyReference = "purple1345",
-                    DisplayName = "Purple Bricks 2",
+                    DisplayName = "Purple Bricks 4",
                     LegalName = "Purplebricks Group PLC",
                     CompanyRegistrationNumber = "8047368",
                     CompanyContacts = new CompanyContacts
@@ -331,11 +513,8 @@ namespace Persistence
                         County = "West Midlands",
                         PostalCode = "B90 4RZ",
                         Country = Country.UnitedKingdom,
-                        Coordinates = new Coordinates
-                        {
-                            Latitude = 54.39231504142715,
-                            Longitude = -2.371760263326141
-                        }
+                        Latitude = 54.39231504142715,
+                        Longitude = -2.371760263326141
                     },
                     CompanyContents = new List<CompanyContent>()
                     {
@@ -420,11 +599,8 @@ namespace Persistence
                         County = "Shropshire",
                         PostalCode = "SY5 0HZ",
                         Country = Country.UnitedKingdom,
-                        Coordinates = new Coordinates
-                        {
-                            Latitude = 52.60740391205163,
-                            Longitude = -2.9450937943182147
-                        }
+                        Latitude = 52.60740391205163,
+                        Longitude = -2.9450937943182147
                     },
                     CompanyContents = new List<CompanyContent>()
                     {
@@ -527,11 +703,8 @@ namespace Persistence
                         County = "England",
                         PostalCode = "BH2 6LA",
                         Country = Country.UnitedKingdom,
-                        Coordinates = new Coordinates
-                        {
-                            Latitude = 50.722980159789316,
-                            Longitude = -1.8829559728734109
-                        }
+                        Latitude = 50.722980159789316,
+                        Longitude = -1.8829559728734109
                     },
                     CompanyContents = new List<CompanyContent>()
                     {
@@ -624,11 +797,8 @@ namespace Persistence
                         County = "England",
                         PostalCode = "BH2 6LA",
                         Country = Country.UnitedKingdom,
-                        Coordinates = new Coordinates
-                        {
-                            Latitude = 50.72308467556089,
-                            Longitude =  -1.8824440593814602
-                        }
+                        Latitude = 50.72308467556089,
+                        Longitude =  -1.8824440593814602
                     },
                     CompanyContents = new List<CompanyContent>()
                     {
@@ -722,11 +892,8 @@ namespace Persistence
                         County = "England",
                         PostalCode = "BH2 6LA",
                         Country = Country.UnitedKingdom,
-                        Coordinates = new Coordinates
-                        {
-                            Latitude = 53.297230105069126, 
-                            Longitude =  -1.3833799280677688
-                        }
+                        Latitude = 53.297230105069126,
+                        Longitude =  -1.3833799280677688
                     },
                     CompanyContents = new List<CompanyContent>()
                     {
@@ -820,11 +987,8 @@ namespace Persistence
                         County = "England",
                         PostalCode = "KT3 4HX",
                         Country = Country.UnitedKingdom,
-                        Coordinates = new Coordinates
-                        {
-                            Latitude = 51.40264956734864,
-                            Longitude = -0.24979083392406543
-                        }
+                        Latitude = 51.40264956734864,
+                        Longitude = -0.24979083392406543
                     },
                     CompanyContents = new List<CompanyContent>
                     {
@@ -903,11 +1067,8 @@ namespace Persistence
                         County = "England",
                         PostalCode = "SS5 4QS",
                         Country = Country.UnitedKingdom,
-                        Coordinates = new Coordinates
-                        {
-                            Latitude = 51.60137056764931,
-                            Longitude = 0.6534702269086803
-                        }
+                        Latitude = 51.60137056764931,
+                        Longitude = 0.6534702269086803
                     },
                     CompanyContacts = new CompanyContacts
                     {
@@ -969,11 +1130,8 @@ namespace Persistence
                         County = "England",
                         PostalCode = "NR3 2DB",
                         Country = Country.UnitedKingdom,
-                        Coordinates = new Coordinates
-                        {
-                            Latitude = 52.643914264497965,
-                            Longitude = 1.2797135271974041
-                        }
+                        Latitude = 52.643914264497965,
+                        Longitude = 1.2797135271974041
                     },
                     CompanyContacts = new CompanyContacts
                     {
@@ -1035,11 +1193,8 @@ namespace Persistence
                         County = "England",
                         PostalCode = "MK11 1FB",
                         Country = Country.UnitedKingdom,
-                        Coordinates = new Coordinates
-                        {
-                            Latitude = 52.05661506461248,
-                            Longitude = -0.8533489730745938
-                        }
+                        Latitude = 52.05661506461248,
+                        Longitude = -0.8533489730745938
                     },
                     CompanyContacts = new CompanyContacts
                     {
@@ -1101,11 +1256,8 @@ namespace Persistence
                         County = "England",
                         PostalCode = "EN3 7PY",
                         Country = Country.UnitedKingdom,
-                        Coordinates = new Coordinates
-                        {
-                            Latitude = 51.659803529028075,
-                            Longitude = -0.027048244003053896
-                        }
+                        Latitude = 51.659803529028075,
+                        Longitude = -0.027048244003053896
                     },
                     CompanyContacts = new CompanyContacts
                     {

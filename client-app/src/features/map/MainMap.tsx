@@ -44,7 +44,7 @@ export default observer(function MainMap({ points, clusters, supercluster, compa
                 {selectedListing && <Toolbar />}
                 {selectedCompany && <ToolbarForCompany />}
                 
-                <ZoomControl position="topleft" />
+                <ZoomControl position="bottomright" />
                 <SearchMap />
                 <LayersControl />
                 <UpdateMap listing={selectedListing} />

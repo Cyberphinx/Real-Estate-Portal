@@ -1,16 +1,15 @@
 import { Form, Formik } from "formik";
 import { observer } from "mobx-react-lite";
-import React, { useState } from "react";
+import React, { MutableRefObject, useState } from "react";
 import MyTextInput from "../../../../app/common/form/MyTextInput";
 import { useStore } from "../../../../app/stores/store";
 import './Bedrooms.css';
 
 interface Props {
     onChange: (items: string[]) => void;
-    bedsPanel: boolean;
 }
 
-export default observer(function Bedrooms({ onChange, bedsPanel }: Props) {
+export default observer(function Bedrooms({ onChange }: Props) {
     const { listingStore } = useStore();
     const { predicate, maxValues } = listingStore;
 
@@ -32,27 +31,38 @@ export default observer(function Bedrooms({ onChange, bedsPanel }: Props) {
     }
 
     return (
+        // <h1 style={{color:"red"}}>BEDROOMS</h1>
         <Formik
             initialValues={{ minBeds: "", maxBeds: "" }}
             onSubmit={(values) => {
                 handleSetMinMax(values.minBeds, values.maxBeds);
             }}
         >
-            {({ handleSubmit, isSubmitting, resetForm, setFieldValue, isValid, dirty }) => (
-                <Form onSubmit={handleSubmit} autoComplete="off" className={bedsPanel ? "bedrooms-form sb" : "bedrooms-form-hidden"}>
+            {({ handleSubmit, resetForm }) => (
+                <Form onSubmit={handleSubmit} autoComplete="off" className="bedrooms-form" >
                     <div style={{ position: "relative" }}>
-                        <span className="price-label">min</span>
-                        <MyTextInput placeholder={""} name={"minBeds"} type="number" inputclassname="bedrooms-input" errorclassname="bedrooms-error" />
+                        <span className="bedrooms-label">min</span>
+                        <MyTextInput 
+                        placeholder={predicate.has("minMaxBeds") ? predicate.get("minMaxBeds")[0].toString() : ""}
+                            name={"minBeds"} type="number" inputclassname="bedrooms-input"
+                            errorclassname="bedrooms-error" />
                     </div>
                     <span className="beds-dash"> - </span>
                     <div style={{ position: "relative" }}>
-                        <span className="price-label">max</span>
-                        <MyTextInput placeholder={""} name={"maxBeds"} type="number" inputclassname="bedrooms-input" errorclassname="bedrooms-error" />
+                        <span className="bedrooms-label">max</span>
+                        <MyTextInput 
+                        placeholder={predicate.has("minMaxBeds") ? predicate.get("minMaxBeds")[1].toString() : ""}
+                            name={"maxBeds"} type="number" inputclassname="bedrooms-input"
+                            errorclassname="bedrooms-error" />
                     </div>
-                    <button className="reset-button" type="button" onClick={() => {resetForm();predicate.delete("minMaxBeds");}}>
+                    <button className="beds-reset-button" type="button"
+                        onClick={() => {
+                            resetForm();
+                            predicate.delete("minMaxBeds");
+                        }}>
                         Reset
                     </button>
-                    <button className="apply-button" type="submit">
+                    <button className="beds-apply-button" type="submit">
                         Apply
                     </button>
                 </Form>

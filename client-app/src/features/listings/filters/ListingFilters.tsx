@@ -6,49 +6,132 @@ import './ListingFilters.css';
 import Price from "./parameters/Price";
 import PropertyTypes from "./parameters/PropertyTypes";
 import Bedrooms from "./parameters/Bedrooms";
+import OrderBy from "./parameters/OrderBy";
 
 export default observer(function ListingFilters() {
-    const { listingStore } = useStore();
+    const { listingStore, featureStore, userStore, companyStore } = useStore();
     const { predicate, setPredicate } = listingStore;
+    const { cancelSelectCompany } = companyStore;
+    const { isLocked, setLocked } = featureStore;
+    const { isLoggedIn } = userStore;
 
     const items = ["Detached", "SemiDetached", "Terraced", "Flat", "Land"];
 
     const bedsRef = useRef(null);
     const [bedsPanel, setBedsPanel] = useDetectOutsideClick(bedsRef, false);
-    const toggleBeds = () => setBedsPanel(!bedsPanel);
+    const toggleBeds = () => {
+        setBedsPanel(!bedsPanel);
+    };
+
+    const priceRef = useRef(null);
+    const [pricePanel, setPricePanel] = useDetectOutsideClick(priceRef, false);
+    const togglePrice = () => {
+        setBedsPanel(false);
+        setPricePanel(!pricePanel);
+    };
+
+    const typesRef = useRef(null);
+    const [typesPanel, setTypesPanel] = useDetectOutsideClick(typesRef, false);
+    const toggleTypes = () => {
+        setBedsPanel(false);
+        setPricePanel(false);
+        setTypesPanel(!typesPanel);
+    };
+
+    const sortingRef = useRef(null);
+    const [sortingActive, setSortingActive] = useDetectOutsideClick(sortingRef, false);
+    const toggleSorting = () => setSortingActive(!sortingActive);
 
     return (
+        //     <section className="listing-filters-two">
+        //         <PropertyTypes items={items} checked={predicate.get("propertyTypes")} onChange={(items: string[]) => setPredicate("propertyTypes", items)} />
+        //     </section>
         <div className="filters-container">
-            <section className="listing-filters-two">
-                <article className="channel-container">
-                    <button
-                        className={predicate.get("channel") === "rent" ? "channel-button-selected rent" : "channel-button rent"}
+            <ul className="filters-buttons-container">
+                <li className="filters-item" >
+                    <button className={predicate.get("channel") === "rent" ? "filters-button-selected" : "filters-button"}
                         onClick={() => setPredicate("channel", "rent")}>
-                        RENT
+                        Rent
                     </button>
-                    <button
-                        className={predicate.get("channel") === "sale" ? "channel-button-selected sale" : "channel-button sale"}
+                </li>
+                <li className="filters-item" >
+                    <button className={predicate.get("channel") === "sale" ? "filters-button-selected" : "filters-button"}
                         onClick={() => setPredicate("channel", "sale")}>
-                        SALE
+                        Sale
                     </button>
-                </article>
-                <Price onChange={(values: string[]) => setPredicate("minMaxPrice", values)} />
-                <article className="bed-container" ref={bedsRef}>
+                </li>
+                <li className="filters-item" >
+                    <div ref={priceRef}>
+                        <button
+                            className={pricePanel ? "filters-button-selected"
+                                : (predicate.has("minMaxPrice") ? "filters-button-selected"
+                                    : "filters-button")}
+                            onClick={togglePrice}>
+                            Price
+                        </button>
+                        {pricePanel && <Price
+                            onChange={(inputs: string[]) => setPredicate("minMaxPrice", inputs)}
+                        />}
+                    </div>
 
-                    <button className="bed-button" onClick={toggleBeds}>
-                        <img className="bed-icon" src="/assets/property-icons/bedrooms.svg" alt="beds" />
-                        {/* <span className={bedsPanel ? "dot-selected" : "dot"}></span> */}
-                        {predicate.has("minMaxBeds") && (
-                            <>
-                                <span className="beds-dot">{predicate.get("minMaxBeds").toString().split(",")[0]}-{predicate.get("minMaxBeds").toString().split(",")[1]}</span>
-                            </>
-                        )}
-                        <span className="beds-tooltip">No. of Bedrooms</span>
+                </li>
+                <li className="filters-item" >
+                    <div ref={bedsRef}>
+                        <button
+                            className={bedsPanel ? "filters-button-selected"
+                                : (predicate.has("minMaxBeds") ? "filters-button-selected"
+                                    : "filters-button")}
+                            onClick={toggleBeds}>
+                            Beds
+                        </button>
+                        {bedsPanel && <Bedrooms
+                            onChange={(inputs: string[]) => setPredicate("minMaxBeds", inputs)}
+                        />}
+                    </div>
+
+                </li>
+                <li className="filters-item" >
+                    <div ref={typesRef}>
+                        <button
+                            className={typesPanel ? "filters-button-selected"
+                                : (predicate.has("propertyTypes") ? "filters-button-selected"
+                                    : "filters-button")}
+                            onClick={toggleTypes}>
+                            Property Type
+                        </button>
+                        {typesPanel && <PropertyTypes
+                            items={items}
+                            checked={predicate.get("propertyTypes")}
+                            onChange={(items: string[]) => setPredicate("propertyTypes", items)}
+                        />}
+                    </div>
+                </li>
+                <li className="filters-item" >
+                    <button className="filters-button">Filters</button>
+                </li>
+                <li className="filters-item-right">
+                    <button className="lock-button" onClick={() => setLocked()}>
+                        {isLocked === true ?
+                            <div>
+                                <img className="lock-icon" src="/assets/static.svg" alt="lock" />
+                                <span className="lock-tooltip">Static list </span>
+                            </div>
+                            : <div>
+                                <img className="lock-icon" src="/assets/dynamic.svg" alt="lock" />
+                                <span className="lock-tooltip">Dynamic list</span>
+                            </div>}
                     </button>
-                    <Bedrooms onChange={(inputs: string[]) => setPredicate("minMaxBeds", inputs)} bedsPanel={bedsPanel} />
-                </article>
-                <PropertyTypes items={items} checked={predicate.get("propertyTypes")} onChange={(items: string[]) => setPredicate("propertyTypes", items)} />
-            </section>
+                </li>
+                <li className="filters-item-right">
+                    <div className="sort-button-container" ref={sortingRef}>
+                        <button className="sort-button" onClick={toggleSorting}>
+                            <img className="sort-icon" src="/assets/sort.svg" alt="sort" />
+                            <span className="sort-tooltip">Sort by</span>
+                        </button>
+                        {sortingActive && <OrderBy />}
+                    </div>
+                </li>
+            </ul>
         </div>
     )
 })

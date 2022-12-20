@@ -1,8 +1,8 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
 import BranchPlaceholder from "../../../../app/common/loading/BranchPlaceholder";
-import DateTag from "../../../../app/common/tags/DateTag";
-import { Company } from "../../../../app/model/CompanyAggregate/Company";
+import DateTag from "../../../../app/common/tags/RefTag";
+import { Company } from "../../../../app/model/Company";
 import { User } from "../../../../app/model/User";
 import { useStore } from "../../../../app/stores/store";
 import './Collection.css';
@@ -43,9 +43,6 @@ export default observer(function Collection({ setBranchForm, setPortfolio, setSe
             }
             {companies.filter(x => x.username === user!.username).map((item) => (
                 <div className="branch" key={item.id} onClick={() => { setActiveAgencyPanel(2); setSelectedPortfolio(item); }}>
-                    <div className="date-tag-position">
-                        <DateTag listing={item} />
-                    </div>
                     <button className="branch-button edit">
                         <img className="branch-button-icon" src="/assets/edit.svg" alt="edit" />
                     </button>

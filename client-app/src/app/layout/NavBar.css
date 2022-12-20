@@ -9,7 +9,7 @@
   padding: 0;
   background-color: #fff;
   z-index: 2;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #ccc;
 }
 
 .nav-bar2-item {
@@ -33,7 +33,7 @@
   padding: 16px 16px;
   text-decoration: none;
   /* border: 1px solid black; */
-  border-right: 1px solid black;
+  border-right: 1px solid #ccc;
 }
 .nav-bar2-item a:hover {
   color: #fff;
@@ -44,7 +44,7 @@
   font-size: 16px;
   padding: 18px 16px;
   margin: 0px;
-  border-right: 1px solid black;
+  border-right: 1px solid #ccc;
 }
 .address-style {
   font-size: 16px;
@@ -60,7 +60,7 @@
   background: none;
   color: #000;
   padding: 18px 16px;
-  border-left: 1px solid black;
+  border-left: 1px solid #ccc;
   border-top: none;
   border-right: none;
   border-bottom: none;

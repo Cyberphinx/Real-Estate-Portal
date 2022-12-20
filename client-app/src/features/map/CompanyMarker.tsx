@@ -5,7 +5,7 @@ import L from "leaflet";
 import useSupercluster from "use-supercluster";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../app/stores/store";
-import { Company } from "../../app/model/CompanyAggregate/Company";
+import { Company } from "../../app/model/Company";
 import { ServiceCategory } from "../../app/model/ServiceCategory";
 import ReactDOMServer from "react-dom/server";
 
@@ -183,7 +183,7 @@ export default observer(function CompanyMarker({ points }: Props) {
                             }
                         }}
                     >
-                        <Tooltip offset={[10, 0]}>
+                        <Tooltip direction="top" offset={[3, -3]}>
                             <b>{cluster.properties.company.displayName}</b>
                             <p style={{margin:"0px",padding:"0px", fontSize:"10px", color:"grey"}}>#{ServiceCategory[cluster.properties.company.serviceCategories[0]]}</p>
                             <p style={{margin:"0px",padding:"0px",fontSize:"10px"}}>Listings: {cluster.properties.company.listings.length}</p>

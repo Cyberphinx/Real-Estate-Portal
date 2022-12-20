@@ -7,15 +7,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Domain.ListingAggregate.Objects
 {
-    [Owned]
     public class Pricing
     {
+        public int Id { get; set; }
         public TransactionType TransactionType { get; set; }
         public Currency Currency { get; set; }
         public double Price { get; set; }
-        public PricePerUnitArea PricePerUnitArea { get; set; }
+        public double PricePerUnitArea { get; set; }
         public Frequency RentFrequency { get; set; }
         public PriceQualifier PriceQualifier { get; set; }
         public bool Auction { get; set; }
+        public UnitOfArea AreaUnits { get; set; }
+        public Guid ListingId { get; set; }
+        public Listing Listing { get; set; }
     }
 }

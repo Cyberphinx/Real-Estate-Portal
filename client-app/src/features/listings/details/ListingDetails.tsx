@@ -11,6 +11,7 @@ import { Content } from "../../../app/model/ListingAggregate/Objects/Content";
 import { propertyType } from "../../../app/model/ListingAggregate/ListingEnums";
 import ListingBookmark from "./ListingBookmark";
 import priceFormatter from "../../../app/common/PriceFormatter";
+import RefTag from "../../../app/common/tags/RefTag";
 
 interface Props {
     listing: Listing | undefined;
@@ -57,7 +58,6 @@ export default observer(function ListingDetails({ listing }: Props) {
 
     function handleNext(event: SyntheticEvent) {
         event.stopPropagation();
-        console.log(listing!.contents.length);
         if (listing!.contents.indexOf(image) < listing!.contents.length - 1) {
             setImage(listing!.contents[listing!.contents.indexOf(image) + 1]);
         }
@@ -73,10 +73,10 @@ export default observer(function ListingDetails({ listing }: Props) {
             {multiListings.length > 1 && <ListingBookmark multiListings={multiListings} />}
             <div className="details-contents" style={(multiListings.length > 1) ? { marginTop: "60px" } : {}}>
                 <AgencyTags listing={listing} />
+                {/* <RefTag listing={listing} /> */}
                 <section className="details-gallery">
                     <div style={{ position: "relative" }}>
                         <Link to={`/listing/${listing?.id}`} target="_blank" >
-                            {/* <img className="details-image" src={image?.listingId !== listing?.id ? listing?.contents[0].url : image?.url} alt="cover" /> */}
                             <img className="details-image" src={image.url} alt="cover" />
                         </Link>
                         <span className="image-numbering">

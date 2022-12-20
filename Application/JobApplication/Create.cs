@@ -51,7 +51,6 @@ namespace Application.JobApplication
                 {
                     AppUser = user,
                     Job = request.Job,
-                    Invoice = null,
                     Role = JobNetworkRole.Customer
                 };
                 request.Job.Networks.Add(customer);

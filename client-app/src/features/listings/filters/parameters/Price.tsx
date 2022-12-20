@@ -37,11 +37,14 @@ export default observer(function Price({ onChange }: Props) {
                 handleSetMinMax(values.minPrice, values.maxPrice);
             }}
         >
-            {({ handleSubmit, isSubmitting, resetForm, setFieldValue, isValid, dirty }) => (
+            {({ handleSubmit, resetForm }) => (
                 <Form onSubmit={handleSubmit} autoComplete="off" className="price-form">
                     <div style={{ position: "relative" }}>
                         <span className="price-label">min price</span>
-                        <MyTextInput placeholder={""} name={"minPrice"} type="number" inputclassname="price-input" errorclassname="price-error" list="minList" />
+                        <MyTextInput 
+                        placeholder={predicate.has("minMaxPrice") ? predicate.get("minMaxPrice")[0].toString() : ""} 
+                        name={"minPrice"} type="number" inputclassname="price-input" 
+                        errorclassname="price-error" list="minList" />
                         <datalist id="minList">
                             {predicate.get("channel") === "sale" ? (
                                 <>
@@ -76,7 +79,10 @@ export default observer(function Price({ onChange }: Props) {
                     <span className="dash"> - </span>
                     <div style={{ position: "relative" }}>
                         <span className="price-label">max price</span>
-                        <MyTextInput placeholder={""} name={"maxPrice"} type="number" inputclassname="price-input" errorclassname="price-error" list="maxList" />
+                        <MyTextInput 
+                        placeholder={predicate.has("minMaxPrice") ? predicate.get("minMaxPrice")[1].toString() : ""} 
+                        name={"maxPrice"} type="number" inputclassname="price-input" 
+                        errorclassname="price-error" list="maxList" />
                         <datalist id="maxList">
                             {predicate.get("channel") === "sale" ? (
                                 <>
@@ -106,10 +112,12 @@ export default observer(function Price({ onChange }: Props) {
 
                         </datalist>
                     </div>
-                    <button className="reset-button" type="button" onClick={() => {
-                        resetForm();
-                    }}>
-                        Clear
+                    <button className="reset-button" type="button"
+                        onClick={() => {
+                            resetForm();
+                            predicate.delete("minMaxPrice");
+                        }}>
+                        Reset
                     </button>
                     <button className="apply-button" type="submit">
                         Apply

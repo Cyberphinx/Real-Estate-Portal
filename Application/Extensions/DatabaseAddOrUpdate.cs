@@ -36,7 +36,7 @@ namespace Application.Extensions
             {
                 // If an advert can no longer be found we remove the row
                 var advertExist = freshData.Find(x => x.ListingReference == item.ListingReference);
-                if (item.CompanyReference == agency && advertExist == null)
+                if (item.Company.CompanyReference == agency && advertExist == null)
                 {
                     Console.WriteLine($"REMOVED: {item.ListingReference} : {item.ListingLocation.PostalCode} : {item.Pricing.Price} GBP no longer available \n");
                     _context.Listings.Remove(item);

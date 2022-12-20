@@ -8,7 +8,7 @@ export default function LocateControl() {
 
     const Locate = require("leaflet.locatecontrol")
     const locateControl = new Locate({
-        position: "topleft"
+        position: "bottomright"
     });
 
     useEffect(() => {

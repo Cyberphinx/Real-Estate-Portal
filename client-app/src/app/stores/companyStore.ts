@@ -1,4 +1,4 @@
-import { Company, CompanyFormValues } from '../model/CompanyAggregate/Company';
+import { Company, CompanyFormValues } from '../model/Company';
 import { makeAutoObservable, reaction, runInAction } from "mobx";
 import agent from "../api/agent";
 import { history } from './../../index';

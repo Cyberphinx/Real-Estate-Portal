@@ -12,6 +12,7 @@ using Domain.ListingAggregate.Enums;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
+using Application.ListingApplication.ListingDtos;
 
 namespace Application.ListingApplication
 {
@@ -43,7 +44,6 @@ namespace Application.ListingApplication
                     .SearchMap(request.Params.MapBounds)
                     .Sort(request.Params.OrderBy)
                     .ProjectTo<ListingDto>(_mapper.ConfigurationProvider) //Automapper projection mapping is much better than .include in terms of SQL query efficiency
-                    .AsNoTracking()
                     .AsSplitQuery()
                     .AsQueryable();
 

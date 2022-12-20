@@ -1,4 +1,4 @@
-import { Company } from './../model/CompanyAggregate/Company';
+import { Company } from '../model/Company';
 import { PagingParams } from '../model/Pagination';
 import { makeAutoObservable, reaction, runInAction } from "mobx";
 import agent from "../api/agent";

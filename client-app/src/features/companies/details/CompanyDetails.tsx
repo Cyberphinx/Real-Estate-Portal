@@ -1,9 +1,9 @@
 import React, { SyntheticEvent, useEffect, useRef, useState } from "react";
-import './CompanyDetails.css';
+import '../../listings/details/ListingDetails.css';
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
 import { useStore } from "../../../app/stores/store";
-import { Company, CompanyContent, CompanyDescription } from "../../../app/model/CompanyAggregate/Company";
+import { Company, CompanyContent, CompanyDescription } from "../../../app/model/Company";
 import AgencyTagForCompany from "../../../app/common/tags/AgencyTagForCompany";
 import CompanyBookmark from "./CompanyBookmark";
 
@@ -13,7 +13,7 @@ interface Props {
 
 export default observer(function CompanyDetails({ company }: Props) {
     const { companyStore } = useStore();
-    const { companies, cancelSelectCompany } = companyStore;
+    const { companies } = companyStore;
 
     const [companyImage, setCompanyImage] = useState<CompanyContent>(company!.companyContents[0]);
     function handleImage(event: SyntheticEvent, state: CompanyContent) {
@@ -29,9 +29,6 @@ export default observer(function CompanyDetails({ company }: Props) {
     useEffect(() => {
         setCompanyImage(company!.companyContents[0]);
     }, [company])
-    
-    const addedDate = new Date(company!.addedOn);
-    const title = `Added on ${addedDate.toLocaleDateString()}`
 
     const address = `${company?.companyAddress.propertyNumberOrName && (company?.companyAddress.propertyNumberOrName + ", ")}
         ${company?.companyAddress.streetName && (company?.companyAddress.streetName + ", ")}
@@ -51,7 +48,6 @@ export default observer(function CompanyDetails({ company }: Props) {
 
     function handleNext(event: SyntheticEvent) {
         event.stopPropagation();
-        console.log(company!.companyContents.length);
         if (company!.companyContents.indexOf(companyImage) < company!.companyContents.length - 1) {
             setCompanyImage(company!.companyContents[company!.companyContents.indexOf(companyImage) + 1]);
         }
@@ -97,8 +93,10 @@ export default observer(function CompanyDetails({ company }: Props) {
                     <div className="header-one">
                         <span style={{ fontSize: "24px" }}>{company?.displayName}</span>
                     </div>
-                    <div className="header-two">
-                        {address}
+                    <div className="header-two" style={{paddingTop:"0px"}}>
+                        <p>Phone: {company?.companyContacts.phone}</p>
+                        <p>Email: {company?.companyContacts.email}</p>
+                        <p>Address: {address}</p>
                     </div>
                 </article>
 

@@ -43,38 +43,27 @@ export default observer(function Nav() {
                         Services
                     </button>
                 </li>
-                
-                {activeFeature === 0 ? <li className="nav-bar-item-right">
-                    <button className="lock-button" onClick={() => setLocked()}>
-                        {isLocked === true ?
-                            <div>
-                                <img className="lock-icon" src="/assets/static.svg" alt="lock" />
-                                <span className="lock-tooltip">Static list </span>
-                            </div>
-                            : <div>
-                                <img className="lock-icon" src="/assets/dynamic.svg" alt="lock" />
-                                <span className="lock-tooltip">Dynamic list</span>
-                            </div>}
+                <li className="nav-bar-item">
+                    <button className="nav-button"
+                        onClick={() => { cancelSelectListing(); cancelSelectCompany(); }}>
+                        Get Agent
                     </button>
-                </li> : null}
-                {activeFeature === 0 ? <li className="nav-bar-item-right">
-                    <div className="sort-button-container" ref={sortingRef}>
-                        <button className="sort-button" onClick={toggleSorting}>
-                            <img className="sort-icon" src="/assets/sort.svg" alt="sort" />
-                            <span className="sort-tooltip">Order by</span>
-                        </button>
-                        {sortingActive && <OrderBy />}
-                    </div>
-                </li> : null}
+                </li>
+                <li className="nav-bar-item">
+                    <button className="nav-button"
+                        onClick={() => { cancelSelectListing(); cancelSelectCompany(); }}>
+                        Get Moving
+                    </button>
+                </li>
 
                 {isLoggedIn
                     ? (
                         <>
                             <li className="nav-bar-item-right">
                                 <div className="dropdown-container" ref={dropdownRef}>
-                                    <button className="svg-button profile" onClick={toggle}>
-                                        <img className="svg-icon" src="/assets/user.svg" alt="user" />
-                                        <span className="svg-tooltip">User menu</span>
+                                    <button className="user-button profile" onClick={toggle}>
+                                        <img className="user-icon" src="/assets/user.svg" alt="user" />
+                                        <span className="user-tooltip">User menu</span>
                                     </button>
                                     {isActive && <UserDropdown />}
                                 </div>
@@ -85,9 +74,9 @@ export default observer(function Nav() {
                         <>
                             <li className="nav-bar-item-right">
                                 <div className="dropdown-container" ref={dropdownRef}>
-                                    <button className="svg-button profile" onClick={toggle}>
-                                        <img className="svg-icon" src="/assets/user.svg" alt="user" />
-                                        <span className="svg-tooltip">User menu</span>
+                                    <button className="user-button profile" onClick={toggle}>
+                                        <img className="user-icon" src="/assets/user.svg" alt="user" />
+                                        <span className="user-tooltip">User menu</span>
                                     </button>
                                     {isActive && <Dropdown />}
                                 </div>

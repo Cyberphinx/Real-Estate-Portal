@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Core;
+using Application.JobApplication.JobDtos;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Domain;
@@ -32,7 +33,7 @@ namespace Application.JobApplication
                 var jobs = await _context.Jobs
                     .OrderByDescending(x => x.AddedOn)
                     .ProjectTo<JobDto>(_mapper.ConfigurationProvider) //Automapper projection mapping is much better than .include in terms of SQL query efficiency
-                    .AsNoTracking()
+                    .AsSplitQuery()
                     .ToListAsync();
 
                 return Result<List<JobDto>>.Success(jobs);

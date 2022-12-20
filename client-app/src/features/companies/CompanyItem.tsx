@@ -1,6 +1,6 @@
 import React from "react";
 import CompanyTags from "../../app/common/tags/CompanyTag";
-import { Company } from "../../app/model/CompanyAggregate/Company";
+import { Company } from "../../app/model/Company";
 import './CompanyItem.css';
 
 interface Props {

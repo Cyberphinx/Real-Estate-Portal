@@ -45,6 +45,7 @@ namespace API.Extensions
                     // Use connection string from file.
                     connStr = config.GetConnectionString("DefaultConnection");
                     // options.UseNpgsql(connStr).UseSnakeCaseNamingConvention();
+                    options.UseNpgsql(connStr, p => p.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery));
                 }
                 else
                 {
@@ -67,7 +68,7 @@ namespace API.Extensions
 
                 // Whether the connection string came from the local development configuration file
                 // or from the environment variable from FlyIO, use it to set up your DbContext.
-                options.UseNpgsql(connStr);
+                options.UseNpgsql(connStr, p => p.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery));
             });
 
 

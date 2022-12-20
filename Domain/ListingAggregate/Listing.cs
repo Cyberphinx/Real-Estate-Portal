@@ -16,7 +16,8 @@ namespace Domain.ListingAggregate
         public DateTime AddedOn { get; set; }
         public string AdministrationFees { get; set; }
         public double AnnualBusinessRates { get; set; }
-        public Areas Areas { get; set; }
+        public double AreaTotal { get; set; }
+        public UnitOfArea AreaUnits { get; set; }
         public AccessStatus AccessStatus { get; set; }
         public int AvailableBedrooms { get; set; }
         public DateTime AvailableFromDate { get; set; }
@@ -26,8 +27,6 @@ namespace Domain.ListingAggregate
         public bool BurglarAlarm { get; set; }
         public bool BusinessForSale { get; set; }
         public List<Incentive> BuyerIncentives { get; set; }
-        public Company Company { get; set; }
-        public string CompanyReference { get; set; }
         public Category Category { get; set; }
         public CentralHeating CentralHeating { get; set; }
         public bool ChainFree { get; set; }
@@ -54,14 +53,15 @@ namespace Domain.ListingAggregate
         public bool Fridge { get; set; }
         public double GroundRent { get; set; }
         public bool Gym { get; set; }
-        public LeaseExpiry LeaseExpiry { get; set; }
+        public string LeaseExpiry { get; set; }
         public LifeCycleStatus LifeCycleStatus { get; set; }
         public ListedBuildingGrade ListedBuildingGrade { get; set; }
         public string ListingReference { get; set; }
         public ListingLocation ListingLocation { get; set; }
         public int LivingRooms { get; set; }
         public bool Loft { get; set; }
-        public MinimumContractLength MinimumContractLength { get; set; }
+        public int MinimumContractLength { get; set; }
+        public UnitOfTime MinimumContractLengthUnits { get; set; }
         public bool NewBuild { get; set; }
         public DateTime OpenDay { get; set; }
         public bool Outbuildings { get; set; }
@@ -82,13 +82,16 @@ namespace Domain.ListingAggregate
         public string SummaryDescription { get; set; }
         public bool SwimmingPool { get; set; }
         public bool Tenanted { get; set; }
-        public TenantEligibility TenantEligibility { get; set; }
+        public Eligibility TenantEligibilityDss { get; set; }
+        public Eligibility TenantEligibilityStudents { get; set; }
         public bool TennisCourt { get; set; }
         public Tenure Tenure { get; set; }
         public int TotalBedrooms { get; set; }
         public bool UtilityRoom { get; set; }
         public bool WaterFront { get; set; }
         public bool WoodFloors { get; set; }
-
+        public Guid CompanyId { get; set; }
+        public Company Company { get; set; }
+        public ICollection<ListingWatcher> Watchers { get; set; } = new List<ListingWatcher>();
     }
 }

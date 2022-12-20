@@ -15,7 +15,6 @@ namespace Domain
         public AppUser AppUser { get; set; }
         public Guid JobId { get; set; }
         public Job Job { get; set; }
-        public Invoice Invoice { get; set; }
         public JobNetworkRole Role { get; set; }
     }
 }

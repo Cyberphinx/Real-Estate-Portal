@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Company } from "../../../app/model/CompanyAggregate/Company";
+import { Company } from "../../../app/model/Company";
 import { Listing } from "../../../app/model/ListingAggregate/Listing";
 import { useStore } from "../../../app/stores/store";
 import Close from "./Close";
@@ -17,7 +17,7 @@ export default function Toolbar() {
 
     return (
         <div className="toolbar-container">
-            <section className="toolbar-title"><p># {selectedListing?.listingReference}</p></section>
+            <section className="toolbar-title">Listing Reference: #{selectedListing?.listingReference}</section>
             <section className="toolbar-locate"><Locate selectedItem={selectedListing} /></section>
             <section className="toolbar-newtab">
                 <Link to={`/listing/${selectedListing?.id}`} target="_blank" > <NewTab /> </Link>

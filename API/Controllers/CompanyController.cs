@@ -41,13 +41,6 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new Details.Query{Id = id}));
         }
 
-        [Authorize(Roles = "Agency, Company")]
-        [HttpGet("owner")]
-        public async Task<IActionResult> GetMyCompany()
-        {
-            return HandleResult(await Mediator.Send(new DetailsMyCompany.Query()));
-        }
-
         [Authorize(Roles = "Admin, Agency, Company")]
         [HttpPost]
         public async Task<IActionResult> CreateCompany(Company company)

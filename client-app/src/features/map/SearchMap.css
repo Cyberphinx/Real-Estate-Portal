@@ -3,7 +3,7 @@
   position: absolute;
   z-index: 401;
   right: calc((100vw / 3) - 90px);
-  top: 55px;
+  top: 75px;
 }
 
 .loading-markers {
@@ -23,7 +23,7 @@
 .search-map {
   min-width: 160px;
   /* box-sizing: border-box; */
-  border: 2px solid #ccc;
+  border: 2px solid rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   font-size: 14px;
   background: #fff;

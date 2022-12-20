@@ -1,9 +1,4 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Domain.ListingAggregate;
 
 namespace Domain.LocationAggregate
 {
@@ -17,6 +12,7 @@ namespace Domain.LocationAggregate
         [Required]
         public string PostalCode { get; set; }
         public Country Country { get; set; }
-        public Coordinates Coordinates { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
     }
 }

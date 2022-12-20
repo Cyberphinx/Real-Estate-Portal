@@ -1,7 +1,14 @@
-.types-container {
-  width: 300px;
-  display: grid;
-  grid-template-columns: auto auto auto auto auto auto auto auto;
+.types-dropdown {
+  position: absolute;
+  top: 39px;
+  left: 200px;
+  background: #f5f5f5;
+  padding: 6px 12px;
+  border: 1px solid #aaaeb3;
+  border-radius: 5px;
+  min-width: 150px;
+  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.2);
+  z-index: 100;
 }
 
 .types-button {

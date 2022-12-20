@@ -5,11 +5,12 @@ using System.Threading.Tasks;
 using Domain.LocationAggregate;
 using Microsoft.EntityFrameworkCore;
 
-namespace Domain.CompanyAggregate
+namespace Domain.CompanyAggregate.Objects
 {
-    [Owned]
     public class CompanyAddress : Location
     {
-        
+        public int Id { get; set; }
+        public Guid CompanyId { get; set; }
+        public Company Company { get; set; }
     }
 }

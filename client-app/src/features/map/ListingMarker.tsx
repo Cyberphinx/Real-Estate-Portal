@@ -9,6 +9,7 @@ import nFormatter from "../../app/common/nFormatter";
 import priceFormatter from "../../app/common/PriceFormatter";
 import * as ReactDOMServer from 'react-dom/server';
 import AgencyTag from "../../app/common/tags/AgencyTag";
+import RefTag from "../../app/common/tags/RefTag";
 
 interface Props {
     points: GeoJSON.Feature[];
@@ -62,7 +63,7 @@ export default observer(function ListingMarker({ points, clusters, supercluster 
 
         const icon = L.divIcon({
             html: ReactDOMServer.renderToString(
-                <div className={`cluster-marker ${density}`} style={{ width: `${size}px`, height: `${size}px`, color: "#000", background: "#00FF00" }}>
+                <div className={`cluster-marker ${density}`} style={{ width: `${size}px`, height: `${size}px`, color: "#fff", background: "#1F51FF" }}>
                     {count}
                 </div>
             )
@@ -148,11 +149,6 @@ export default observer(function ListingMarker({ points, clusters, supercluster 
         }
     }
 
-    // console.log(`current zoom is: ${zoom}`);
-    // console.log(`current cluster are: ${clusters.length}`);
-    // console.log(`current map bounds are: ${bounds}`);
-    // console.log(`Clusters shown in view: ${clusters.length}`);
-
     return (
         <div>
             {clusters.map((cluster: any) => {
@@ -237,6 +233,7 @@ export default observer(function ListingMarker({ points, clusters, supercluster 
                     >
                         <Tooltip direction="bottom" offset={[10, 8]}>
                             <AgencyTag listing={cluster.properties.listing} />
+                            <RefTag listing={cluster.properties.listing} />
                             <img className="marker-snippet"
                                 src={cluster.properties.listing.contents[0].url}
                                 alt="listing"

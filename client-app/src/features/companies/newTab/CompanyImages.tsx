@@ -1,5 +1,5 @@
 import React from "react";
-import { Company } from "../../../app/model/CompanyAggregate/Company";
+import { Company } from "../../../app/model/Company";
 import './CompanyImages.css';
 
 interface Props {

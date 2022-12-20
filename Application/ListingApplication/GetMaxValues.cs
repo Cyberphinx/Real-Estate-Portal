@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Core;
+using Application.ListingApplication.ListingDtos;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Domain.Enums;
@@ -37,9 +38,9 @@ namespace Application.ListingApplication
                 else
                 {
                     double maxPriceForSale = await _context.Listings
-                    .Where(a => a.AccessStatus == AccessStatus.Public)
-                    .Where(t => t.Pricing.TransactionType == TransactionType.Sale)
-                    .MaxAsync(p => p.Pricing.Price);
+                        .Where(a => a.AccessStatus == AccessStatus.Public)
+                        .Where(t => t.Pricing.TransactionType == TransactionType.Sale)
+                        .MaxAsync(p => p.Pricing.Price);
 
                     int maxBedroomsForSale = await _context.Listings
                         .Where(a => a.AccessStatus == AccessStatus.Public)

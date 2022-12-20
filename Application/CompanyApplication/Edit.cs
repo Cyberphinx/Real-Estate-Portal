@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Application.Core;
 using Application.Interfaces;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Domain.CompanyAggregate;
 using FluentValidation;
 using MediatR;
@@ -34,26 +35,25 @@ namespace Application.CompanyApplication
         {
             private readonly DataContext _context;
             private readonly IMapper _mapper;
-            private readonly IUserAccessor _userAccessor;
             public Handler(DataContext context, IMapper mapper, IUserAccessor userAccessor)
             {
                 _mapper = mapper;
                 _context = context;
-                _userAccessor = userAccessor;
             }
 
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
-                // var user = await _context.Users.FirstOrDefaultAsync(x => x.UserName == _userAccessor.GetUsername());
-                // if (user == null) return null;
+                // var company = await _context.Companies.FindAsync(request.Company.Id);
 
-                var company = await _context.Companies.FindAsync(request.Company.Id);
+                var company = await _context.Companies
+                    .Where(x => x.Id == request.Company.Id)
+                    .AsSplitQuery()
+                    .FirstOrDefaultAsync();
+
                 if (company == null) return null;
 
                 // matching the property from the request to the database entity, ie. updating it
                 _mapper.Map(request.Company, company);
-
-                // company.CompanyOwnerId = user.UserName;
 
                 var result = await _context.SaveChangesAsync() > 0;
 

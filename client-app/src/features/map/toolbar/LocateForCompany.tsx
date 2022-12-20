@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 import React, { useCallback } from "react";
 import { useMap } from "react-leaflet";
-import { Company } from "../../../app/model/CompanyAggregate/Company";
+import { Company } from "../../../app/model/Company";
 import { Listing } from "../../../app/model/ListingAggregate/Listing";
 import { useStore } from "../../../app/stores/store";
 import './Locate.css';

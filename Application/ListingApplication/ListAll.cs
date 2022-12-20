@@ -10,6 +10,7 @@ using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
+using Application.ListingApplication.ListingDtos;
 
 namespace Application.ListingApplication
 {

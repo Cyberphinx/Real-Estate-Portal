@@ -7,14 +7,22 @@ using Domain.ListingAggregate;
 using Domain.ListingAggregate.Enums;
 using Domain.ListingAggregate.Objects;
 using Domain.LocationAggregate;
+using Microsoft.EntityFrameworkCore;
 
 namespace Persistence
 {
     public class SeedRandomListings
     {
-        public static async Task SeedRandomData(DataContext context, string companyReference, int seedAmount)
+        public static async Task SeedRandomData(DataContext context, Guid companyId, int seedAmount)
         {
             // if (context.Listings.Any()) return;
+            
+            // Load one blog and its related posts.
+            var company = await context.Companies
+                .Where(x => x.Id == companyId)
+                .Include(l => l.Listings)
+                .AsSplitQuery()
+                .FirstOrDefaultAsync();
 
             var listings = new List<Listing>();
 
@@ -30,19 +38,8 @@ namespace Persistence
                 newListing.AddedOn = new DateTime(2022, month, day);
                 newListing.AdministrationFees = "200";
                 newListing.AnnualBusinessRates = 0;
-                newListing.Areas = new Areas
-                {
-                    External = new Area
-                    {
-                        Value = 50,
-                        Units = UnitOfArea.SqMetres
-                    },
-                    Internal = new Area
-                    {
-                        Value = 80,
-                        Units = UnitOfArea.SqMetres
-                    },
-                };
+                newListing.AreaTotal =  80;
+                newListing.AreaUnits = UnitOfArea.SqMetres;
                 newListing.AccessStatus = AccessStatus.Public;
                 newListing.AvailableBedrooms = 3;
                 newListing.AvailableFromDate = new DateTime(2022, month, day);
@@ -56,7 +53,7 @@ namespace Persistence
                 newListing.BurglarAlarm = true;
                 newListing.BusinessForSale = false;
                 newListing.BuyerIncentives = null;
-                newListing.CompanyReference = companyReference;
+                // newListing.CompanyReference = companyReference;
                 newListing.Category = Category.Residential;
                 newListing.CentralHeating = CentralHeating.Full;
                 newListing.ChainFree = true;
@@ -170,62 +167,46 @@ namespace Persistence
                         new DetailedDescription
                         {
                             Heading = "Summary",
-                            Dimensions = null,
                             Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ultricies turpis mi, at ultrices urna finibus eget. Pellentesque a magna lectus. Pellentesque molestie mollis justo eu congue. Donec nibh leo, tempor eu interdum sit amet, lobortis vitae justo. Quisque mollis nisl risus, sed iaculis diam lobortis vel. Pellentesque nisl tortor, scelerisque aliquam purus fringilla, blandit dictum orci. Cras cursus lacinia erat vel mattis. Proin vehicula mi in risus accumsan, at finibus magna laoreet. Cras nisl turpis, lobortis et arcu eget, tincidunt tempor lacus. Praesent posuere elit at felis lacinia, sed venenatis tellus convallis. Duis vel rhoncus nisl, nec lobortis dui. Sed sed convallis odio. Proin convallis mi ut eros accumsan interdum. Etiam elementum diam at sagittis aliquam. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc et faucibus nisi, lobortis venenatis mi.",
                         },
                         new DetailedDescription
                         {
                             Heading = "Room One",
-                            Dimensions = new Dimensions
-                            {
-                                Length = rnd.Next(10, 50),
-                                Width = 20,
-                                Unit = UnitOfLength.Metres
-                            },
+                            Length = rnd.Next(10, 50),
+                            Width = 20,
+                            Unit = UnitOfLength.Metres,
                             Text = "Pellentesque aliquet iaculis consequat. In finibus commodo feugiat. Pellentesque suscipit nunc et faucibus lobortis. Morbi vel ornare risus. Proin consequat metus et purus pulvinar, at efficitur sapien posuere. In pretium accumsan imperdiet. Aenean consectetur iaculis arcu eu ornare. Cras pretium tincidunt lacinia. Proin mattis molestie scelerisque.",
                         },
                         new DetailedDescription
                         {
                             Heading = "Room Two",
-                            Dimensions = new Dimensions
-                            {
-                                Length = 5,
-                                Width = 7,
-                                Unit = UnitOfLength.Metres
-                            },
+                            Length = 5,
+                            Width = 7,
+                            Unit = UnitOfLength.Metres,
                             Text = "Pellentesque aliquet iaculis consequat. In finibus commodo feugiat. Pellentesque suscipit nunc et faucibus lobortis. Morbi vel ornare risus. Proin consequat metus et purus pulvinar, at efficitur sapien posuere. In pretium accumsan imperdiet. Aenean consectetur iaculis arcu eu ornare. Cras pretium tincidunt lacinia. Proin mattis molestie scelerisque.",
                         },
                         new DetailedDescription
                         {
                             Heading = "Room Three",
-                            Dimensions = new Dimensions
-                            {
-                                Length = 12,
-                                Width = 25,
-                                Unit = UnitOfLength.Metres
-                            },
+                            Length = 12,
+                            Width = 25,
+                            Unit = UnitOfLength.Metres,
                             Text = "Pellentesque aliquet iaculis consequat. In finibus commodo feugiat. Pellentesque suscipit nunc et faucibus lobortis. Morbi vel ornare risus. Proin consequat metus et purus pulvinar, at efficitur sapien posuere. In pretium accumsan imperdiet. Aenean consectetur iaculis arcu eu ornare. Cras pretium tincidunt lacinia. Proin mattis molestie scelerisque.",
                         },
                         new DetailedDescription
                         {
                             Heading = "Room Four",
-                            Dimensions = new Dimensions
-                            {
-                                Length = 20,
-                                Width = 15,
-                                Unit = UnitOfLength.Metres
-                            },
+                            Length = 20,
+                            Width = 15,
+                                Unit = UnitOfLength.Metres,
                             Text = "Pellentesque aliquet iaculis consequat. In finibus commodo feugiat. Pellentesque suscipit nunc et faucibus lobortis. Morbi vel ornare risus. Proin consequat metus et purus pulvinar, at efficitur sapien posuere. In pretium accumsan imperdiet. Aenean consectetur iaculis arcu eu ornare. Cras pretium tincidunt lacinia. Proin mattis molestie scelerisque.",
                         },
                         new DetailedDescription
                         {
                             Heading = "Room Five",
-                            Dimensions = new Dimensions
-                            {
-                                Length = 13,
-                                Width = 8,
-                                Unit = UnitOfLength.Metres
-                            },
+                            Length = 13,
+                            Width = 8,
+                            Unit = UnitOfLength.Metres,
                             Text = "Pellentesque aliquet iaculis consequat. In finibus commodo feugiat. Pellentesque suscipit nunc et faucibus lobortis. Morbi vel ornare risus. Proin consequat metus et purus pulvinar, at efficitur sapien posuere. In pretium accumsan imperdiet. Aenean consectetur iaculis arcu eu ornare. Cras pretium tincidunt lacinia. Proin mattis molestie scelerisque.",
                         },
                     };
@@ -246,7 +227,7 @@ namespace Persistence
                     };
                 newListing.FurnishedState = FurnishedState.Unfurnished;
                 newListing.LifeCycleStatus = LifeCycleStatus.Available;
-                newListing.ListingReference = $"savills_{x}";
+                newListing.ListingReference = $"{company.DisplayName}_{x}";
                 newListing.ListingLocation = new ListingLocation
                         {
                             PropertyNumberOrName = "3",
@@ -256,18 +237,14 @@ namespace Persistence
                             County = "England",
                             PostalCode = "SW18 2DN",
                             Country = Country.UnitedKingdom,
-                            Coordinates = new Coordinates
-                            {
-                                Latitude = rnd.NextDouble() * (59 - 49) + 49,
-                                Longitude = rnd.NextDouble() * (2 - -10) + -10
-                            }
+                            Latitude = rnd.NextDouble() * (59 - 49) + 49,
+                            Longitude = rnd.NextDouble() * (2 - -10) + -10
                         };
                 newListing.Pricing = new Pricing
                         {
                             TransactionType = TransactionType.Rent,
                             Currency = Currency.GBP,
                             Price = rnd.Next(800, 8000),
-                            PricePerUnitArea = null,
                             RentFrequency = Frequency.NotApplicable,
                             PriceQualifier = PriceQualifier.FixedPrice,
                             Auction = false
@@ -276,7 +253,7 @@ namespace Persistence
                 newListing.TotalBedrooms = rnd.Next(0, 12);
 
                 listings.Add(newListing);
-
+                // company.Listings.Add(newListing);
                 
                         // Fireplace = false,
                         // FishingRights = false,
@@ -326,19 +303,8 @@ namespace Persistence
                 newListing.AddedOn = new DateTime(2022, month, day);
                 newListing.AdministrationFees = "200";
                 newListing.AnnualBusinessRates = 0;
-                newListing.Areas = new Areas
-                {
-                    External = new Area
-                    {
-                        Value = 50,
-                        Units = UnitOfArea.SqMetres
-                    },
-                    Internal = new Area
-                    {
-                        Value = 80,
-                        Units = UnitOfArea.SqMetres
-                    },
-                };
+                newListing.AreaTotal =  120;
+                newListing.AreaUnits = UnitOfArea.SqMetres;
                 newListing.AccessStatus = AccessStatus.Public;
                 newListing.AvailableBedrooms = 3;
                 newListing.AvailableFromDate = new DateTime(2022, month, day);
@@ -352,7 +318,7 @@ namespace Persistence
                 newListing.BurglarAlarm = true;
                 newListing.BusinessForSale = false;
                 newListing.BuyerIncentives = null;
-                newListing.CompanyReference = companyReference;
+                // newListing.CompanyReference = companyReference;
                 newListing.Category = Category.Residential;
                 newListing.CentralHeating = CentralHeating.Full;
                 newListing.ChainFree = true;
@@ -466,62 +432,46 @@ namespace Persistence
                         new DetailedDescription
                         {
                             Heading = "Summary",
-                            Dimensions = null,
                             Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ultricies turpis mi, at ultrices urna finibus eget. Pellentesque a magna lectus. Pellentesque molestie mollis justo eu congue. Donec nibh leo, tempor eu interdum sit amet, lobortis vitae justo. Quisque mollis nisl risus, sed iaculis diam lobortis vel. Pellentesque nisl tortor, scelerisque aliquam purus fringilla, blandit dictum orci. Cras cursus lacinia erat vel mattis. Proin vehicula mi in risus accumsan, at finibus magna laoreet. Cras nisl turpis, lobortis et arcu eget, tincidunt tempor lacus. Praesent posuere elit at felis lacinia, sed venenatis tellus convallis. Duis vel rhoncus nisl, nec lobortis dui. Sed sed convallis odio. Proin convallis mi ut eros accumsan interdum. Etiam elementum diam at sagittis aliquam. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc et faucibus nisi, lobortis venenatis mi.",
                         },
                         new DetailedDescription
                         {
                             Heading = "Room One",
-                            Dimensions = new Dimensions
-                            {
-                                Length = rnd.Next(10, 50),
-                                Width = 20,
-                                Unit = UnitOfLength.Metres
-                            },
+                            Length = rnd.Next(10, 50),
+                            Width = 20,
+                            Unit = UnitOfLength.Metres,
                             Text = "Pellentesque aliquet iaculis consequat. In finibus commodo feugiat. Pellentesque suscipit nunc et faucibus lobortis. Morbi vel ornare risus. Proin consequat metus et purus pulvinar, at efficitur sapien posuere. In pretium accumsan imperdiet. Aenean consectetur iaculis arcu eu ornare. Cras pretium tincidunt lacinia. Proin mattis molestie scelerisque.",
                         },
                         new DetailedDescription
                         {
                             Heading = "Room Two",
-                            Dimensions = new Dimensions
-                            {
-                                Length = 5,
-                                Width = 7,
-                                Unit = UnitOfLength.Metres
-                            },
+                            Length = 5,
+                            Width = 7,
+                            Unit = UnitOfLength.Metres,
                             Text = "Pellentesque aliquet iaculis consequat. In finibus commodo feugiat. Pellentesque suscipit nunc et faucibus lobortis. Morbi vel ornare risus. Proin consequat metus et purus pulvinar, at efficitur sapien posuere. In pretium accumsan imperdiet. Aenean consectetur iaculis arcu eu ornare. Cras pretium tincidunt lacinia. Proin mattis molestie scelerisque.",
                         },
                         new DetailedDescription
                         {
                             Heading = "Room Three",
-                            Dimensions = new Dimensions
-                            {
-                                Length = 12,
-                                Width = 25,
-                                Unit = UnitOfLength.Metres
-                            },
+                            Length = 12,
+                            Width = 25,
+                            Unit = UnitOfLength.Metres,
                             Text = "Pellentesque aliquet iaculis consequat. In finibus commodo feugiat. Pellentesque suscipit nunc et faucibus lobortis. Morbi vel ornare risus. Proin consequat metus et purus pulvinar, at efficitur sapien posuere. In pretium accumsan imperdiet. Aenean consectetur iaculis arcu eu ornare. Cras pretium tincidunt lacinia. Proin mattis molestie scelerisque.",
                         },
                         new DetailedDescription
                         {
                             Heading = "Room Four",
-                            Dimensions = new Dimensions
-                            {
-                                Length = 20,
-                                Width = 15,
-                                Unit = UnitOfLength.Metres
-                            },
+                            Length = 20,
+                            Width = 15,
+                            Unit = UnitOfLength.Metres,
                             Text = "Pellentesque aliquet iaculis consequat. In finibus commodo feugiat. Pellentesque suscipit nunc et faucibus lobortis. Morbi vel ornare risus. Proin consequat metus et purus pulvinar, at efficitur sapien posuere. In pretium accumsan imperdiet. Aenean consectetur iaculis arcu eu ornare. Cras pretium tincidunt lacinia. Proin mattis molestie scelerisque.",
                         },
                         new DetailedDescription
                         {
                             Heading = "Room Five",
-                            Dimensions = new Dimensions
-                            {
-                                Length = 13,
-                                Width = 8,
-                                Unit = UnitOfLength.Metres
-                            },
+                            Length = 13,
+                            Width = 8,
+                            Unit = UnitOfLength.Metres,
                             Text = "Pellentesque aliquet iaculis consequat. In finibus commodo feugiat. Pellentesque suscipit nunc et faucibus lobortis. Morbi vel ornare risus. Proin consequat metus et purus pulvinar, at efficitur sapien posuere. In pretium accumsan imperdiet. Aenean consectetur iaculis arcu eu ornare. Cras pretium tincidunt lacinia. Proin mattis molestie scelerisque.",
                         },
                     };
@@ -542,7 +492,7 @@ namespace Persistence
                     };
                 newListing.FurnishedState = FurnishedState.Unfurnished;
                 newListing.LifeCycleStatus = LifeCycleStatus.Available;
-                newListing.ListingReference = $"savills_{x}";
+                newListing.ListingReference = $"{company.DisplayName}_{x}";
                 newListing.ListingLocation = new ListingLocation
                         {
                             PropertyNumberOrName = "3",
@@ -552,18 +502,14 @@ namespace Persistence
                             County = "England",
                             PostalCode = "SW18 2DN",
                             Country = Country.UnitedKingdom,
-                            Coordinates = new Coordinates
-                            {
-                                Latitude = rnd.NextDouble() * (59 - 49) + 49,
-                                Longitude = rnd.NextDouble() * (2 - -10) + -10
-                            }
+                            Latitude = rnd.NextDouble() * (59 - 49) + 49,
+                            Longitude = rnd.NextDouble() * (2 - -10) + -10
                         };
                 newListing.Pricing = new Pricing
                         {
                             TransactionType = TransactionType.Sale,
                             Currency = Currency.GBP,
                             Price = rnd.Next(50000, 2000000),
-                            PricePerUnitArea = null,
                             RentFrequency = Frequency.NotApplicable,
                             PriceQualifier = PriceQualifier.FixedPrice,
                             Auction = false
@@ -572,6 +518,7 @@ namespace Persistence
                 newListing.TotalBedrooms = rnd.Next(0, 12);
 
                 listings.Add(newListing);
+                // company.Listings.Add(newListing);
 
                 
                         // Fireplace = false,
@@ -614,7 +561,11 @@ namespace Persistence
 
         };
 
-        await context.Listings.AddRangeAsync(listings);
+        foreach (var item in listings)
+        {
+            company.Listings.Add(item);
+        }
+
         await context.SaveChangesAsync();
     }
 }

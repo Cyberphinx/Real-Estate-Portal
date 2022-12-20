@@ -1,5 +1,5 @@
 import React from "react";
-import { Invoice } from "../../model/JobAggregate/Invoice";
+import { Invoice } from "../../model/Invoice";
 import { PaymentStatus } from "../../model/PaymentStatus";
 import './InvoiceStatusTag.css';
 

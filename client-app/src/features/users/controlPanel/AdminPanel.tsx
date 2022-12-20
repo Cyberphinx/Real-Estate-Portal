@@ -3,7 +3,7 @@ import './AdminPanel.css';
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../../app/stores/store";
 import { User } from "../../../app/model/User";
-import { Company } from "../../../app/model/CompanyAggregate/Company";
+import { Company } from "../../../app/model/Company";
 import LoadingComponent from "../../../app/common/loading/LoadingComponent";
 
 export default observer(function AdminPanel() {

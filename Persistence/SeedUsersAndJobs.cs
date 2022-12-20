@@ -21,7 +21,7 @@ namespace Persistence
             {
                 var companyUsers = new List<AppUser>
                 {
-                    new AppUser{UserName = "handyman1", Email = "handy1@test.com"},
+                    new AppUser{UserName = "handyman1", DisplayName = "handyman1", Email = "handy1@test.com"},
                     new AppUser{UserName = "handyman2", Email = "handy2@test.com"},
                     new AppUser{UserName = "handyman3", Email = "handy3@test.com"},
                     new AppUser{UserName = "handyman4", Email = "handy4@test.com"},
@@ -162,36 +162,29 @@ namespace Persistence
                             County = "England",
                             PostalCode = "M27 0WL",
                             Country = Country.UnitedKingdom,
-                            Coordinates = new Coordinates
-                            {
-                                Latitude = 53.51009443733918,
-                                Longitude = -2.3425652500267837,
-                            }
+                            Latitude = 53.51009443733918,
+                            Longitude = -2.3425652500267837,
                         },
                         Networks = new List<JobNetwork>
                         {
                             new JobNetwork
                             {
                                 AppUser = customerUsers[0],
-                                Invoice = null,
                                 Role = JobNetworkRole.Customer
                             },
                             new JobNetwork
                             {
                                 AppUser = companyUsers[0],
-                                Invoice = null,
                                 Role = JobNetworkRole.InterestedCompany
                             },
                             new JobNetwork
                             {
                                 AppUser = companyUsers[1],
-                                Invoice = null,
                                 Role = JobNetworkRole.InterestedCompany
                             },
                             new JobNetwork
                             {
                                 AppUser = companyUsers[2],
-                                Invoice = null,
                                 Role = JobNetworkRole.InterestedCompany
                             }
                         }
@@ -238,54 +231,44 @@ namespace Persistence
                             County = "England",
                             PostalCode = "E5 0LA",
                             Country = Country.UnitedKingdom,
-                            Coordinates = new Coordinates
-                            {
-                                Latitude = 51.5573059904951, 
-                                Longitude = -0.046689965146428675,
-                            }
+                            Latitude = 51.5573059904951, 
+                            Longitude = -0.046689965146428675
                         },
                         Networks = new List<JobNetwork>
                         {
                             new JobNetwork
                             {
                                 AppUser = customerUsers[4],
-                                Invoice = null,
                                 Role = JobNetworkRole.Customer
                             },
                             new JobNetwork
                             {
                                 AppUser = companyUsers[25],
-                                Invoice = null,
                                 Role = JobNetworkRole.InterestedCompany
                             },
                             new JobNetwork
                             {
                                 AppUser = companyUsers[26],
-                                Invoice = null,
                                 Role = JobNetworkRole.ShortlistedCompany
                             },
                             new JobNetwork
                             {
                                 AppUser = companyUsers[27],
-                                Invoice = null,
                                 Role = JobNetworkRole.ShortlistedCompany
                             },
                             new JobNetwork
                             {
                                 AppUser = companyUsers[28],
-                                Invoice = null,
-                                Role = JobNetworkRole.InvitedCompany
+                                Role = JobNetworkRole.InterestedCompany
                             },
                             new JobNetwork
                             {
                                 AppUser = companyUsers[29],
-                                Invoice = null,
                                 Role = JobNetworkRole.InterestedCompany
                             },
                             new JobNetwork
                             {
                                 AppUser = companyUsers[30],
-                                Invoice = null,
                                 Role = JobNetworkRole.InterestedCompany
                             }
                         }
@@ -338,42 +321,34 @@ namespace Persistence
                             County = "England",
                             PostalCode = "M27 0WL",
                             Country = Country.UnitedKingdom,
-                            Coordinates = new Coordinates
-                            {
-                                Latitude = 53.51009443733918,
-                                Longitude = -2.3425652500267837,
-                            }
+                            Latitude = 53.51009443733918,
+                            Longitude = -2.3425652500267837
                         },
                         Networks = new List<JobNetwork>
                         {
                             new JobNetwork
                             {
                                 AppUser = customerUsers[3],
-                                Invoice = null,
                                 Role = JobNetworkRole.Customer
                             },
                             new JobNetwork
                             {
                                 AppUser = companyUsers[19],
-                                Invoice = null,
                                 Role = JobNetworkRole.InterestedCompany
                             },
                             new JobNetwork
                             {
                                 AppUser = companyUsers[20],
-                                Invoice = null,
                                 Role = JobNetworkRole.ShortlistedCompany
                             },
                             new JobNetwork
                             {
-                                AppUser = companyUsers[21],
-                                Invoice = null,
+                                AppUser = companyUsers[21],                                
                                 Role = JobNetworkRole.ShortlistedCompany
                             },
                             new JobNetwork
                             {
-                                AppUser = companyUsers[22],
-                                Invoice = null,
+                                AppUser = companyUsers[22],                                
                                 Role = JobNetworkRole.InterestedCompany
                             }
                         }

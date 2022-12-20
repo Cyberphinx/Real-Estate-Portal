@@ -73,10 +73,16 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new DeleteRange.Command{CompanyReference = companyReference}));
         }
 
-        [HttpPost("seed/{companyReference}/{amount}")]
-        public async Task Seed(string companyReference, int amount)
+        [HttpPost("seed/{companyId}/{amount}")]
+        public async Task Seed(Guid companyId, int amount)
         {
-            await SeedRandomListings.SeedRandomData(_db, companyReference, amount);
+            await SeedRandomListings.SeedRandomData(_db, companyId, amount);
+        }
+
+        [HttpPost("{id}/watch")]
+        public async Task<IActionResult> Watch(Guid id)
+        {
+            return HandleResult(await Mediator.Send(new WatchListing.Command{Id = id}));
         }
 
     }

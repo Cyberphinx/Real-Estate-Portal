@@ -8,5 +8,8 @@ namespace Domain.AppUserAggregate.Objects
     public class AppUserReview : Review
     {
         public int Id { get; set; }
+        public string AppUserId { get; set; }
+        public AppUser AppUser { get; set; }
+    
     }
 }

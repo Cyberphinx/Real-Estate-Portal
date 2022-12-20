@@ -1,7 +1,7 @@
 import { MaxValue } from './../model/MaxValue';
 import { User, UserFormValues, RoleFormValues } from './../model/User';
 import axios, { AxiosResponse } from "axios";
-import { Company, CompanyFormValues } from '../model/CompanyAggregate/Company';
+import { Company, CompanyFormValues } from '../model/Company';
 import { store } from '../stores/store';
 import { history } from '../..';
 import { PaginatedResult } from '../model/Pagination';

@@ -6,10 +6,6 @@ export interface Location {
     county: string;
     postalCode: string;
     country: Country;
-    coordinates: Coordinates;
-}
-
-export interface Coordinates {
     latitude: number;
     longitude: number;
 }

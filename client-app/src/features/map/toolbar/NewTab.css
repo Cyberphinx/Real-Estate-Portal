@@ -2,8 +2,7 @@
   position: relative;
   top: 3px;
   right: 3px;
-  background-color: #fff;
-  color: #000;
+  background: none;
   border: none;
   cursor: pointer;
   margin: auto;

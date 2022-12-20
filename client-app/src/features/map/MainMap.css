@@ -1,5 +1,8 @@
 .leaflet-container {
-  height: calc(100vh - 60px);
+  position: fixed;
+  top: 20px;
+  right: 0px;
+  height: calc(100vh - 20px);
   width: calc((100vw / 3) * 2);
   /* width: 100vw; */
   overflow: hidden;
@@ -17,6 +20,15 @@
   padding-top: calc(50vh + 200px);
 }
 
-.leaflet-control { z-index: 2 !important}
-.leaflet-pane { z-index: 2 !important}
+.leaflet-control { 
+  z-index: 2 !important;
+  /* top: 20px; */
+}
+.leaflet-pane { 
+  z-index: 2 !important;
+}
 .leaflet-top, .leaflet-bottom {z-index: 2 !important}
+
+.leaflet-control-geosearch {
+  top: 20px;
+}

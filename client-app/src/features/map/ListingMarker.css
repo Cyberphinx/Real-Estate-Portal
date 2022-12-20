@@ -13,8 +13,8 @@
   font-size: 16px;
 }
 .cluster-marker:hover {
-  color: #000;
-  background: yellow;
+  color: #fff;
+  background: #1F51FF;
 }
 .low-density {
   color: #fff;
@@ -27,11 +27,6 @@
 .high-density {
   color: #fff;
   background: #581845;
-}
-
-.active-low-density {
-  color: #fff;
-  background: yellow;
 }
 
 .point-marker-price {
@@ -47,12 +42,12 @@
   font-size: 10px;
 }
 .point-marker-price:hover {
-  color: #000;
-  background: yellow;
+  color: #fff;
+  background: #1F51FF;
 }
 .point-marker-price-active {
-  color: #000;
-  background: yellow;
+  color: #fff;
+  background: #1F51FF;
   border: none;
   border-radius: 5px;
   padding: 0px;
@@ -63,9 +58,9 @@
   font-size: 10px;
 }
 .point-marker-price-selected {
-  color: #000;
+  color: #fff;
   /* background: #00FF00; */
-  background: yellow;
+  background: #1F51FF;
   border: none;
   border-radius: 5px;
   padding: 0px;
@@ -90,6 +85,7 @@
 }
 .marker-snippet {
   width: 220px;
+  border-radius: 3px;
 }
 .snippets-container {
   display: grid;

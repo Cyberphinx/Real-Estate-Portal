@@ -7,6 +7,8 @@ import { Content } from "../../app/model/ListingAggregate/Objects/Content";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../app/stores/store";
 import { priceQualifier, propertyType, rentFrequency } from "../../app/model/ListingAggregate/ListingEnums";
+import RefTag from "../../app/common/tags/RefTag";
+import { Country } from "../../app/model/Location";
 
 interface Props {
     listing: Listing | undefined;
@@ -37,7 +39,7 @@ export default observer(function ListingItem({ listing, predicate }: Props) {
         ${listing?.listingLocation.locality && (listing?.listingLocation.locality + ", ")}
         ${listing?.listingLocation.townOrCity && (listing?.listingLocation.townOrCity + ", ")}
         ${listing?.listingLocation.county && (listing?.listingLocation.county + ", ")}
-        ${listing?.listingLocation.postalCode && (listing?.listingLocation.postalCode + ", ")}
+        ${listing?.listingLocation.postalCode && (listing?.listingLocation.postalCode)}
         `;
 
     function handlePrev(event: SyntheticEvent) {
@@ -50,7 +52,6 @@ export default observer(function ListingItem({ listing, predicate }: Props) {
 
     function handleNext(event: SyntheticEvent) {
         event.stopPropagation();
-        console.log(listing!.contents.length);
         if (listing!.contents.indexOf(image) < listing!.contents.length - 1) {
             setImage(listing!.contents[listing!.contents.indexOf(image) + 1]);
         }
@@ -66,11 +67,11 @@ export default observer(function ListingItem({ listing, predicate }: Props) {
         >
             <div className={selectedListing?.id === listing!.id ? "card-selected" : "card"} >
                 <AgencyTag listing={listing} />
-                {/* <DateTag listing={listing} /> */}
+                <RefTag listing={listing} />
                 <section className="gallery">
                     <div style={{ position: "relative" }}>
                         <img src={image?.url} className="card-image" alt="property" />
-                        <span className="img-numbering">Image {image ? (listing!.contents.indexOf(image) + 1) : 1} of {listing?.contents.length}</span>
+                        <span className="img-numbering">Image {listing!.contents.indexOf(image) + 1} of {listing?.contents.length}</span>
                         <button className="left-arr" onClick={(e) => handlePrev(e)}><img className="left-ico" src="/assets/previous.svg" alt="previous" /></button>
                         <button className="right-arr" onClick={(e) => handleNext(e)}><img className="right-ico" src="/assets/next.svg" alt="next" /></button>
                     </div>

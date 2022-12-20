@@ -7,11 +7,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Domain.ListingAggregate.Objects
 {
-    [Owned]
     public class ServiceCharge
     {
+        public int Id { get; set; }
         public double Charge { get; set; }
         public UnitOfArea PerUnitAreaUnits { get; set; }
         public Frequency Frequency { get; set; }
+        public Guid ListingId { get; set; }
+        public Listing Listing { get; set; }
     }
 }

@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { useStore } from "../../../app/stores/store";
 import LoadingComponent from "../../../app/common/loading/LoadingComponent";
 import Close from "../../map/toolbar/Close";
-import { CompanyContent, CompanyDescription } from "../../../app/model/CompanyAggregate/Company";
+import { CompanyContent, CompanyDescription } from "../../../app/model/Company";
 import NavBarForCompany from "../../../app/layout/NavBarForCompany";
 
 export default observer(function CompanysDetailsPage() {

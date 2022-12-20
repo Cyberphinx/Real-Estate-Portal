@@ -7,9 +7,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Domain.JobAggregate.Objects
 {
-    [Owned]
     public class JobLocation : Location
     {
-        
+        public int Id { get; set; }
+        public Guid JobId { get; set; }
+        public Job Job { get; set; }
     }
 }

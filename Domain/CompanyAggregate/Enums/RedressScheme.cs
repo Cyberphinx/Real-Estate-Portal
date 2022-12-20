@@ -4,6 +4,8 @@ namespace Domain
     {
         ThePropertyOmbudsman,
         ThePropertyRedressScheme,
+        ScottishLettingAgentRegister,
+        PropertyServicesRegulatoryAuthorityIreland,
         None
     }
 }

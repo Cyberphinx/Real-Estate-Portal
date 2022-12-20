@@ -176,7 +176,6 @@ namespace Persistence.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("CompanyReference")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("CompanyRegistrationNumber")
@@ -190,9 +189,6 @@ namespace Persistence.Migrations
 
                     b.Property<string>("LegalName")
                         .HasColumnType("text");
-
-                    b.Property<Guid?>("MembershipId")
-                        .HasColumnType("uuid");
 
                     b.Property<int[]>("RedressSchemes")
                         .HasColumnType("integer[]");
@@ -211,12 +207,86 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MembershipId");
-
                     b.ToTable("Companies");
                 });
 
-            modelBuilder.Entity("Domain.CompanyAggregate.CompanyContent", b =>
+            modelBuilder.Entity("Domain.CompanyAggregate.Objects.CompanyAddress", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<Guid>("CompanyId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Country")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("County")
+                        .HasColumnType("text");
+
+                    b.Property<double>("Latitude")
+                        .HasColumnType("double precision");
+
+                    b.Property<string>("Locality")
+                        .HasColumnType("text");
+
+                    b.Property<double>("Longitude")
+                        .HasColumnType("double precision");
+
+                    b.Property<string>("PostalCode")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("PropertyNumberOrName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("StreetName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("TownOrCity")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompanyId")
+                        .IsUnique();
+
+                    b.ToTable("CompanyAddress");
+                });
+
+            modelBuilder.Entity("Domain.CompanyAggregate.Objects.CompanyContacts", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<Guid>("CompanyId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Website")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompanyId")
+                        .IsUnique();
+
+                    b.ToTable("CompanyContacts");
+                });
+
+            modelBuilder.Entity("Domain.CompanyAggregate.Objects.CompanyContent", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -249,7 +319,7 @@ namespace Persistence.Migrations
                     b.ToTable("CompanyContent");
                 });
 
-            modelBuilder.Entity("Domain.CompanyAggregate.CompanyDescription", b =>
+            modelBuilder.Entity("Domain.CompanyAggregate.Objects.CompanyDescription", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -273,7 +343,7 @@ namespace Persistence.Migrations
                     b.ToTable("CompanyDescription");
                 });
 
-            modelBuilder.Entity("Domain.CompanyAggregate.CompanyReview", b =>
+            modelBuilder.Entity("Domain.CompanyAggregate.Objects.CompanyReview", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -284,7 +354,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("AddedOn")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid?>("CompanyId")
+                    b.Property<Guid>("CompanyId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Description")
@@ -318,7 +388,7 @@ namespace Persistence.Migrations
                     b.ToTable("CompanyReview");
                 });
 
-            modelBuilder.Entity("Domain.CompanyAggregate.Insurance", b =>
+            modelBuilder.Entity("Domain.CompanyAggregate.Objects.Insurance", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -349,6 +419,47 @@ namespace Persistence.Migrations
                     b.ToTable("Insurance");
                 });
 
+            modelBuilder.Entity("Domain.CompanyAggregate.Objects.Membership", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("CompanyId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("ContractLength")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("Expiry")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("MemberSince")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<long>("Price")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("Unit")
+                        .HasColumnType("integer");
+
+                    b.Property<long>("VatPercentage")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompanyId")
+                        .IsUnique();
+
+                    b.ToTable("Membership");
+                });
+
             modelBuilder.Entity("Domain.InvoiceAggregate.Invoice", b =>
                 {
                     b.Property<Guid>("Id")
@@ -361,6 +472,9 @@ namespace Persistence.Migrations
                     b.Property<string>("ClientSecret")
                         .HasColumnType("text");
 
+                    b.Property<Guid?>("CompanyId")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
@@ -369,9 +483,6 @@ namespace Persistence.Migrations
 
                     b.Property<int>("InvoiceNumber")
                         .HasColumnType("integer");
-
-                    b.Property<Guid?>("MembershipId")
-                        .HasColumnType("uuid");
 
                     b.Property<string>("PaymentIntentId")
                         .HasColumnType("text");
@@ -390,7 +501,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MembershipId");
+                    b.HasIndex("CompanyId");
 
                     b.ToTable("Invoices");
                 });
@@ -479,6 +590,82 @@ namespace Persistence.Migrations
                     b.ToTable("JobContent");
                 });
 
+            modelBuilder.Entity("Domain.JobAggregate.Objects.JobLocation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Country")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("County")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("JobId")
+                        .HasColumnType("uuid");
+
+                    b.Property<double>("Latitude")
+                        .HasColumnType("double precision");
+
+                    b.Property<string>("Locality")
+                        .HasColumnType("text");
+
+                    b.Property<double>("Longitude")
+                        .HasColumnType("double precision");
+
+                    b.Property<string>("PostalCode")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("PropertyNumberOrName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("StreetName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("TownOrCity")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("JobId")
+                        .IsUnique();
+
+                    b.ToTable("JobLocation");
+                });
+
+            modelBuilder.Entity("Domain.JobAggregate.Objects.JobMessage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AuthorId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Body")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("JobId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
+
+                    b.HasIndex("JobId");
+
+                    b.ToTable("JobMessage");
+                });
+
             modelBuilder.Entity("Domain.JobNetwork", b =>
                 {
                     b.Property<string>("AppUserId")
@@ -487,19 +674,14 @@ namespace Persistence.Migrations
                     b.Property<Guid>("JobId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("InvoiceId")
-                        .HasColumnType("uuid");
-
                     b.Property<int>("Role")
                         .HasColumnType("integer");
 
                     b.HasKey("AppUserId", "JobId");
 
-                    b.HasIndex("InvoiceId");
-
                     b.HasIndex("JobId");
 
-                    b.ToTable("JobNetwork");
+                    b.ToTable("JobNetworks");
                 });
 
             modelBuilder.Entity("Domain.ListingAggregate.Listing", b =>
@@ -522,6 +704,12 @@ namespace Persistence.Migrations
 
                     b.Property<double>("AnnualBusinessRates")
                         .HasColumnType("double precision");
+
+                    b.Property<double>("AreaTotal")
+                        .HasColumnType("double precision");
+
+                    b.Property<int>("AreaUnits")
+                        .HasColumnType("integer");
 
                     b.Property<int>("AvailableBedrooms")
                         .HasColumnType("integer");
@@ -559,8 +747,8 @@ namespace Persistence.Migrations
                     b.Property<List<string>>("CommercialUseClass")
                         .HasColumnType("text[]");
 
-                    b.Property<string>("CompanyReference")
-                        .HasColumnType("text");
+                    b.Property<Guid>("CompanyId")
+                        .HasColumnType("uuid");
 
                     b.Property<int[]>("ConnectedUtilities")
                         .HasColumnType("integer[]");
@@ -619,6 +807,9 @@ namespace Persistence.Migrations
                     b.Property<bool>("Gym")
                         .HasColumnType("boolean");
 
+                    b.Property<string>("LeaseExpiry")
+                        .HasColumnType("text");
+
                     b.Property<int>("LifeCycleStatus")
                         .HasColumnType("integer");
 
@@ -633,6 +824,12 @@ namespace Persistence.Migrations
 
                     b.Property<bool>("Loft")
                         .HasColumnType("boolean");
+
+                    b.Property<int>("MinimumContractLength")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("MinimumContractLengthUnits")
+                        .HasColumnType("integer");
 
                     b.Property<bool>("NewBuild")
                         .HasColumnType("boolean");
@@ -685,6 +882,12 @@ namespace Persistence.Migrations
                     b.Property<bool>("SwimmingPool")
                         .HasColumnType("boolean");
 
+                    b.Property<int>("TenantEligibilityDss")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("TenantEligibilityStudents")
+                        .HasColumnType("integer");
+
                     b.Property<bool>("Tenanted")
                         .HasColumnType("boolean");
 
@@ -708,26 +911,9 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CompanyReference");
+                    b.HasIndex("CompanyId");
 
                     b.ToTable("Listings");
-                });
-
-            modelBuilder.Entity("Domain.ListingAggregate.Objects.Areas", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("ListingId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ListingId")
-                        .IsUnique();
-
-                    b.ToTable("Areas");
                 });
 
             modelBuilder.Entity("Domain.ListingAggregate.Objects.Content", b =>
@@ -771,11 +957,20 @@ namespace Persistence.Migrations
                     b.Property<string>("Heading")
                         .HasColumnType("text");
 
+                    b.Property<double>("Length")
+                        .HasColumnType("double precision");
+
                     b.Property<Guid>("ListingId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Text")
                         .HasColumnType("text");
+
+                    b.Property<int>("Unit")
+                        .HasColumnType("integer");
+
+                    b.Property<double>("Width")
+                        .HasColumnType("double precision");
 
                     b.HasKey("Id");
 
@@ -784,45 +979,200 @@ namespace Persistence.Migrations
                     b.ToTable("DetailedDescription");
                 });
 
-            modelBuilder.Entity("Domain.Membership", b =>
+            modelBuilder.Entity("Domain.ListingAggregate.Objects.EpcRatings", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("EerCurrentRating")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("EerPotentialRating")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("EirCurrentRating")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("EirPotentialRating")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("ListingId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ListingId")
+                        .IsUnique();
+
+                    b.ToTable("EpcRatings");
+                });
+
+            modelBuilder.Entity("Domain.ListingAggregate.Objects.ListingLocation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Country")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("County")
+                        .HasColumnType("text");
+
+                    b.Property<double>("Latitude")
+                        .HasColumnType("double precision");
+
+                    b.Property<Guid>("ListingId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Locality")
+                        .HasColumnType("text");
+
+                    b.Property<double>("Longitude")
+                        .HasColumnType("double precision");
+
+                    b.Property<string>("PostalCode")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("PropertyNumberOrName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("StreetName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("TownOrCity")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ListingId")
+                        .IsUnique();
+
+                    b.ToTable("ListingLocation");
+                });
+
+            modelBuilder.Entity("Domain.ListingAggregate.Objects.Pricing", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AreaUnits")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("Auction")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("Currency")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("ListingId")
+                        .HasColumnType("uuid");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("PricePerUnitArea")
+                        .HasColumnType("double precision");
+
+                    b.Property<int>("PriceQualifier")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("RentFrequency")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("TransactionType")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ListingId")
+                        .IsUnique();
+
+                    b.ToTable("Pricing");
+                });
+
+            modelBuilder.Entity("Domain.ListingAggregate.Objects.ServiceCharge", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<double>("Charge")
+                        .HasColumnType("double precision");
+
+                    b.Property<int>("Frequency")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("ListingId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("PerUnitAreaUnits")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ListingId")
+                        .IsUnique();
+
+                    b.ToTable("ServiceCharge");
+                });
+
+            modelBuilder.Entity("Domain.ListingWatcher", b =>
+                {
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("ListingId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("AppUserId", "ListingId");
+
+                    b.HasIndex("ListingId");
+
+                    b.ToTable("ListingWatchers");
+                });
+
+            modelBuilder.Entity("Domain.TrackingAggregate.Tracking", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("CompanyReference")
+                    b.Property<string>("App")
                         .HasColumnType("text");
 
-                    b.Property<int>("ContractLength")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Description")
+                    b.Property<string>("CompanyId")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("Expiry")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime>("MemberSince")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<long>("Price")
-                        .HasColumnType("bigint");
-
-                    b.Property<int>("Unit")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Username")
+                    b.Property<string>("Component")
                         .HasColumnType("text");
 
-                    b.Property<long>("VatPercentage")
-                        .HasColumnType("bigint");
+                    b.Property<string>("Count")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Event")
+                        .HasColumnType("text");
+
+                    b.Property<string>("JobId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ListingId")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Membership");
+                    b.ToTable("TrackingData");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -854,28 +1204,28 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "ecbdb05a-8ee2-4abe-9d8e-a63d4baded22",
+                            ConcurrencyStamp = "7ef3f462-52c9-4d43-b52a-eec75f1bc7c0",
                             Name = "Company",
                             NormalizedName = "COMPANY"
                         },
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "6832cb5b-cd2d-4dfd-b430-ca71ef6416be",
+                            ConcurrencyStamp = "b1ff3c3d-7323-4ca4-8a00-b47fddf63222",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
                             Id = "3",
-                            ConcurrencyStamp = "835f6522-0d42-47b0-a7fc-79686fd36f4d",
+                            ConcurrencyStamp = "1394b809-9739-4334-bbd6-260e4e42a896",
                             Name = "Agency",
                             NormalizedName = "AGENCY"
                         },
                         new
                         {
                             Id = "4",
-                            ConcurrencyStamp = "88383a9c-1c76-49f0-a4c2-6fcda96309d8",
+                            ConcurrencyStamp = "feeef611-9180-4f17-a3a1-ba96084c4f02",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -989,111 +1339,45 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.AppUserAggregate.Objects.AppUserReview", b =>
                 {
-                    b.HasOne("Domain.AppUserAggregate.AppUser", null)
+                    b.HasOne("Domain.AppUserAggregate.AppUser", "AppUser")
                         .WithMany("Reviews")
                         .HasForeignKey("AppUserId");
+
+                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("Domain.AppUserAggregate.Objects.Photo", b =>
                 {
-                    b.HasOne("Domain.AppUserAggregate.AppUser", null)
+                    b.HasOne("Domain.AppUserAggregate.AppUser", "AppUser")
                         .WithMany("Photos")
                         .HasForeignKey("AppUserId");
+
+                    b.Navigation("AppUser");
                 });
 
-            modelBuilder.Entity("Domain.CompanyAggregate.Company", b =>
+            modelBuilder.Entity("Domain.CompanyAggregate.Objects.CompanyAddress", b =>
                 {
-                    b.HasOne("Domain.Membership", "Membership")
-                        .WithMany()
-                        .HasForeignKey("MembershipId");
+                    b.HasOne("Domain.CompanyAggregate.Company", "Company")
+                        .WithOne("CompanyAddress")
+                        .HasForeignKey("Domain.CompanyAggregate.Objects.CompanyAddress", "CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.OwnsOne("Domain.CompanyAggregate.CompanyAddress", "CompanyAddress", b1 =>
-                        {
-                            b1.Property<Guid>("CompanyId")
-                                .HasColumnType("uuid");
-
-                            b1.Property<int>("Country")
-                                .HasColumnType("integer");
-
-                            b1.Property<string>("County")
-                                .HasColumnType("text");
-
-                            b1.Property<string>("Locality")
-                                .HasColumnType("text");
-
-                            b1.Property<string>("PostalCode")
-                                .IsRequired()
-                                .HasColumnType("text");
-
-                            b1.Property<string>("PropertyNumberOrName")
-                                .HasColumnType("text");
-
-                            b1.Property<string>("StreetName")
-                                .HasColumnType("text");
-
-                            b1.Property<string>("TownOrCity")
-                                .HasColumnType("text");
-
-                            b1.HasKey("CompanyId");
-
-                            b1.ToTable("Companies");
-
-                            b1.WithOwner()
-                                .HasForeignKey("CompanyId");
-
-                            b1.OwnsOne("Domain.LocationAggregate.Coordinates", "Coordinates", b2 =>
-                                {
-                                    b2.Property<Guid>("CompanyAddressCompanyId")
-                                        .HasColumnType("uuid");
-
-                                    b2.Property<double>("Latitude")
-                                        .HasColumnType("double precision");
-
-                                    b2.Property<double>("Longitude")
-                                        .HasColumnType("double precision");
-
-                                    b2.HasKey("CompanyAddressCompanyId");
-
-                                    b2.ToTable("Companies");
-
-                                    b2.WithOwner()
-                                        .HasForeignKey("CompanyAddressCompanyId");
-                                });
-
-                            b1.Navigation("Coordinates");
-                        });
-
-                    b.OwnsOne("Domain.CompanyAggregate.CompanyContacts", "CompanyContacts", b1 =>
-                        {
-                            b1.Property<Guid>("CompanyId")
-                                .HasColumnType("uuid");
-
-                            b1.Property<string>("Email")
-                                .IsRequired()
-                                .HasColumnType("text");
-
-                            b1.Property<string>("Phone")
-                                .HasColumnType("text");
-
-                            b1.Property<string>("Website")
-                                .HasColumnType("text");
-
-                            b1.HasKey("CompanyId");
-
-                            b1.ToTable("Companies");
-
-                            b1.WithOwner()
-                                .HasForeignKey("CompanyId");
-                        });
-
-                    b.Navigation("CompanyAddress");
-
-                    b.Navigation("CompanyContacts");
-
-                    b.Navigation("Membership");
+                    b.Navigation("Company");
                 });
 
-            modelBuilder.Entity("Domain.CompanyAggregate.CompanyContent", b =>
+            modelBuilder.Entity("Domain.CompanyAggregate.Objects.CompanyContacts", b =>
+                {
+                    b.HasOne("Domain.CompanyAggregate.Company", "Company")
+                        .WithOne("CompanyContacts")
+                        .HasForeignKey("Domain.CompanyAggregate.Objects.CompanyContacts", "CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Company");
+                });
+
+            modelBuilder.Entity("Domain.CompanyAggregate.Objects.CompanyContent", b =>
                 {
                     b.HasOne("Domain.CompanyAggregate.Company", "Company")
                         .WithMany("CompanyContents")
@@ -1104,7 +1388,7 @@ namespace Persistence.Migrations
                     b.Navigation("Company");
                 });
 
-            modelBuilder.Entity("Domain.CompanyAggregate.CompanyDescription", b =>
+            modelBuilder.Entity("Domain.CompanyAggregate.Objects.CompanyDescription", b =>
                 {
                     b.HasOne("Domain.CompanyAggregate.Company", "Company")
                         .WithMany("CompanyDescriptions")
@@ -1115,14 +1399,18 @@ namespace Persistence.Migrations
                     b.Navigation("Company");
                 });
 
-            modelBuilder.Entity("Domain.CompanyAggregate.CompanyReview", b =>
+            modelBuilder.Entity("Domain.CompanyAggregate.Objects.CompanyReview", b =>
                 {
-                    b.HasOne("Domain.CompanyAggregate.Company", null)
+                    b.HasOne("Domain.CompanyAggregate.Company", "Company")
                         .WithMany("Reviews")
-                        .HasForeignKey("CompanyId");
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Company");
                 });
 
-            modelBuilder.Entity("Domain.CompanyAggregate.Insurance", b =>
+            modelBuilder.Entity("Domain.CompanyAggregate.Objects.Insurance", b =>
                 {
                     b.HasOne("Domain.CompanyAggregate.Company", "Company")
                         .WithMany("Insurances")
@@ -1133,11 +1421,22 @@ namespace Persistence.Migrations
                     b.Navigation("Company");
                 });
 
+            modelBuilder.Entity("Domain.CompanyAggregate.Objects.Membership", b =>
+                {
+                    b.HasOne("Domain.CompanyAggregate.Company", "Company")
+                        .WithOne("Membership")
+                        .HasForeignKey("Domain.CompanyAggregate.Objects.Membership", "CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Company");
+                });
+
             modelBuilder.Entity("Domain.InvoiceAggregate.Invoice", b =>
                 {
-                    b.HasOne("Domain.Membership", null)
+                    b.HasOne("Domain.CompanyAggregate.Company", null)
                         .WithMany("Invoices")
-                        .HasForeignKey("MembershipId");
+                        .HasForeignKey("CompanyId");
                 });
 
             modelBuilder.Entity("Domain.InvoiceAggregate.InvoiceItem", b =>
@@ -1151,67 +1450,6 @@ namespace Persistence.Migrations
                     b.Navigation("Invoice");
                 });
 
-            modelBuilder.Entity("Domain.JobAggregate.Job", b =>
-                {
-                    b.OwnsOne("Domain.JobAggregate.Objects.JobLocation", "JobLocation", b1 =>
-                        {
-                            b1.Property<Guid>("JobId")
-                                .HasColumnType("uuid");
-
-                            b1.Property<int>("Country")
-                                .HasColumnType("integer");
-
-                            b1.Property<string>("County")
-                                .HasColumnType("text");
-
-                            b1.Property<string>("Locality")
-                                .HasColumnType("text");
-
-                            b1.Property<string>("PostalCode")
-                                .IsRequired()
-                                .HasColumnType("text");
-
-                            b1.Property<string>("PropertyNumberOrName")
-                                .HasColumnType("text");
-
-                            b1.Property<string>("StreetName")
-                                .HasColumnType("text");
-
-                            b1.Property<string>("TownOrCity")
-                                .HasColumnType("text");
-
-                            b1.HasKey("JobId");
-
-                            b1.ToTable("Jobs");
-
-                            b1.WithOwner()
-                                .HasForeignKey("JobId");
-
-                            b1.OwnsOne("Domain.LocationAggregate.Coordinates", "Coordinates", b2 =>
-                                {
-                                    b2.Property<Guid>("JobLocationJobId")
-                                        .HasColumnType("uuid");
-
-                                    b2.Property<double>("Latitude")
-                                        .HasColumnType("double precision");
-
-                                    b2.Property<double>("Longitude")
-                                        .HasColumnType("double precision");
-
-                                    b2.HasKey("JobLocationJobId");
-
-                                    b2.ToTable("Jobs");
-
-                                    b2.WithOwner()
-                                        .HasForeignKey("JobLocationJobId");
-                                });
-
-                            b1.Navigation("Coordinates");
-                        });
-
-                    b.Navigation("JobLocation");
-                });
-
             modelBuilder.Entity("Domain.JobAggregate.Objects.JobContent", b =>
                 {
                     b.HasOne("Domain.JobAggregate.Job", "Job")
@@ -1219,6 +1457,34 @@ namespace Persistence.Migrations
                         .HasForeignKey("JobId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Job");
+                });
+
+            modelBuilder.Entity("Domain.JobAggregate.Objects.JobLocation", b =>
+                {
+                    b.HasOne("Domain.JobAggregate.Job", "Job")
+                        .WithOne("JobLocation")
+                        .HasForeignKey("Domain.JobAggregate.Objects.JobLocation", "JobId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Job");
+                });
+
+            modelBuilder.Entity("Domain.JobAggregate.Objects.JobMessage", b =>
+                {
+                    b.HasOne("Domain.AppUserAggregate.AppUser", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId");
+
+                    b.HasOne("Domain.JobAggregate.Job", "Job")
+                        .WithMany("Messages")
+                        .HasForeignKey("JobId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Author");
 
                     b.Navigation("Job");
                 });
@@ -1231,10 +1497,6 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.InvoiceAggregate.Invoice", "Invoice")
-                        .WithMany()
-                        .HasForeignKey("InvoiceId");
-
                     b.HasOne("Domain.JobAggregate.Job", "Job")
                         .WithMany("Networks")
                         .HasForeignKey("JobId")
@@ -1243,8 +1505,6 @@ namespace Persistence.Migrations
 
                     b.Navigation("AppUser");
 
-                    b.Navigation("Invoice");
-
                     b.Navigation("Job");
                 });
 
@@ -1252,289 +1512,11 @@ namespace Persistence.Migrations
                 {
                     b.HasOne("Domain.CompanyAggregate.Company", "Company")
                         .WithMany("Listings")
-                        .HasForeignKey("CompanyReference")
-                        .HasPrincipalKey("CompanyReference");
-
-                    b.OwnsOne("Domain.ListingAggregate.Objects.EpcRatings", "EpcRatings", b1 =>
-                        {
-                            b1.Property<Guid>("ListingId")
-                                .HasColumnType("uuid");
-
-                            b1.Property<int>("EerCurrentRating")
-                                .HasColumnType("integer");
-
-                            b1.Property<int>("EerPotentialRating")
-                                .HasColumnType("integer");
-
-                            b1.Property<int>("EirCurrentRating")
-                                .HasColumnType("integer");
-
-                            b1.Property<int>("EirPotentialRating")
-                                .HasColumnType("integer");
-
-                            b1.HasKey("ListingId");
-
-                            b1.ToTable("Listings");
-
-                            b1.WithOwner()
-                                .HasForeignKey("ListingId");
-                        });
-
-                    b.OwnsOne("Domain.ListingAggregate.Objects.LeaseExpiry", "LeaseExpiry", b1 =>
-                        {
-                            b1.Property<Guid>("ListingId")
-                                .HasColumnType("uuid");
-
-                            b1.Property<string>("ExpiryDate")
-                                .HasColumnType("text");
-
-                            b1.Property<int>("YearsRemaining")
-                                .HasColumnType("integer");
-
-                            b1.HasKey("ListingId");
-
-                            b1.ToTable("Listings");
-
-                            b1.WithOwner()
-                                .HasForeignKey("ListingId");
-                        });
-
-                    b.OwnsOne("Domain.ListingAggregate.Objects.ListingLocation", "ListingLocation", b1 =>
-                        {
-                            b1.Property<Guid>("ListingId")
-                                .HasColumnType("uuid");
-
-                            b1.Property<int>("Country")
-                                .HasColumnType("integer");
-
-                            b1.Property<string>("County")
-                                .HasColumnType("text");
-
-                            b1.Property<string>("Locality")
-                                .HasColumnType("text");
-
-                            b1.Property<string>("PostalCode")
-                                .IsRequired()
-                                .HasColumnType("text");
-
-                            b1.Property<string>("PropertyNumberOrName")
-                                .HasColumnType("text");
-
-                            b1.Property<string>("StreetName")
-                                .HasColumnType("text");
-
-                            b1.Property<string>("TownOrCity")
-                                .HasColumnType("text");
-
-                            b1.HasKey("ListingId");
-
-                            b1.ToTable("Listings");
-
-                            b1.WithOwner()
-                                .HasForeignKey("ListingId");
-
-                            b1.OwnsOne("Domain.LocationAggregate.Coordinates", "Coordinates", b2 =>
-                                {
-                                    b2.Property<Guid>("ListingLocationListingId")
-                                        .HasColumnType("uuid");
-
-                                    b2.Property<double>("Latitude")
-                                        .HasColumnType("double precision");
-
-                                    b2.Property<double>("Longitude")
-                                        .HasColumnType("double precision");
-
-                                    b2.HasKey("ListingLocationListingId");
-
-                                    b2.ToTable("Listings");
-
-                                    b2.WithOwner()
-                                        .HasForeignKey("ListingLocationListingId");
-                                });
-
-                            b1.Navigation("Coordinates");
-                        });
-
-                    b.OwnsOne("Domain.ListingAggregate.Objects.MinimumContractLength", "MinimumContractLength", b1 =>
-                        {
-                            b1.Property<Guid>("ListingId")
-                                .HasColumnType("uuid");
-
-                            b1.Property<int>("MinimumLength")
-                                .HasColumnType("integer");
-
-                            b1.Property<int>("Units")
-                                .HasColumnType("integer");
-
-                            b1.HasKey("ListingId");
-
-                            b1.ToTable("Listings");
-
-                            b1.WithOwner()
-                                .HasForeignKey("ListingId");
-                        });
-
-                    b.OwnsOne("Domain.ListingAggregate.Objects.Pricing", "Pricing", b1 =>
-                        {
-                            b1.Property<Guid>("ListingId")
-                                .HasColumnType("uuid");
-
-                            b1.Property<bool>("Auction")
-                                .HasColumnType("boolean");
-
-                            b1.Property<int>("Currency")
-                                .HasColumnType("integer");
-
-                            b1.Property<double>("Price")
-                                .HasColumnType("double precision");
-
-                            b1.Property<int>("PriceQualifier")
-                                .HasColumnType("integer");
-
-                            b1.Property<int>("RentFrequency")
-                                .HasColumnType("integer");
-
-                            b1.Property<int>("TransactionType")
-                                .HasColumnType("integer");
-
-                            b1.HasKey("ListingId");
-
-                            b1.ToTable("Listings");
-
-                            b1.WithOwner()
-                                .HasForeignKey("ListingId");
-
-                            b1.OwnsOne("Domain.ListingAggregate.Objects.PricePerUnitArea", "PricePerUnitArea", b2 =>
-                                {
-                                    b2.Property<Guid>("PricingListingId")
-                                        .HasColumnType("uuid");
-
-                                    b2.Property<double>("Price")
-                                        .HasColumnType("double precision");
-
-                                    b2.Property<int>("Units")
-                                        .HasColumnType("integer");
-
-                                    b2.HasKey("PricingListingId");
-
-                                    b2.ToTable("Listings");
-
-                                    b2.WithOwner()
-                                        .HasForeignKey("PricingListingId");
-                                });
-
-                            b1.Navigation("PricePerUnitArea");
-                        });
-
-                    b.OwnsOne("Domain.ListingAggregate.Objects.ServiceCharge", "ServiceCharge", b1 =>
-                        {
-                            b1.Property<Guid>("ListingId")
-                                .HasColumnType("uuid");
-
-                            b1.Property<double>("Charge")
-                                .HasColumnType("double precision");
-
-                            b1.Property<int>("Frequency")
-                                .HasColumnType("integer");
-
-                            b1.Property<int>("PerUnitAreaUnits")
-                                .HasColumnType("integer");
-
-                            b1.HasKey("ListingId");
-
-                            b1.ToTable("Listings");
-
-                            b1.WithOwner()
-                                .HasForeignKey("ListingId");
-                        });
-
-                    b.OwnsOne("Domain.ListingAggregate.Objects.TenantEligibility", "TenantEligibility", b1 =>
-                        {
-                            b1.Property<Guid>("ListingId")
-                                .HasColumnType("uuid");
-
-                            b1.Property<int>("Dss")
-                                .HasColumnType("integer");
-
-                            b1.Property<int>("Students")
-                                .HasColumnType("integer");
-
-                            b1.HasKey("ListingId");
-
-                            b1.ToTable("Listings");
-
-                            b1.WithOwner()
-                                .HasForeignKey("ListingId");
-                        });
-
-                    b.Navigation("Company");
-
-                    b.Navigation("EpcRatings");
-
-                    b.Navigation("LeaseExpiry");
-
-                    b.Navigation("ListingLocation");
-
-                    b.Navigation("MinimumContractLength");
-
-                    b.Navigation("Pricing");
-
-                    b.Navigation("ServiceCharge");
-
-                    b.Navigation("TenantEligibility");
-                });
-
-            modelBuilder.Entity("Domain.ListingAggregate.Objects.Areas", b =>
-                {
-                    b.HasOne("Domain.ListingAggregate.Listing", "Listing")
-                        .WithOne("Areas")
-                        .HasForeignKey("Domain.ListingAggregate.Objects.Areas", "ListingId")
+                        .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("Domain.ListingAggregate.Objects.Area", "External", b1 =>
-                        {
-                            b1.Property<Guid>("AreasId")
-                                .HasColumnType("uuid");
-
-                            b1.Property<int>("Units")
-                                .HasColumnType("integer");
-
-                            b1.Property<double>("Value")
-                                .HasColumnType("double precision");
-
-                            b1.HasKey("AreasId");
-
-                            b1.ToTable("Areas");
-
-                            b1.WithOwner()
-                                .HasForeignKey("AreasId");
-                        });
-
-                    b.OwnsOne("Domain.ListingAggregate.Objects.Area", "Internal", b1 =>
-                        {
-                            b1.Property<Guid>("AreasId")
-                                .HasColumnType("uuid");
-
-                            b1.Property<int>("Units")
-                                .HasColumnType("integer");
-
-                            b1.Property<double>("Value")
-                                .HasColumnType("double precision");
-
-                            b1.HasKey("AreasId");
-
-                            b1.ToTable("Areas");
-
-                            b1.WithOwner()
-                                .HasForeignKey("AreasId");
-                        });
-
-                    b.Navigation("External");
-
-                    b.Navigation("Internal");
-
-                    b.Navigation("Listing");
+                    b.Navigation("Company");
                 });
 
             modelBuilder.Entity("Domain.ListingAggregate.Objects.Content", b =>
@@ -1556,29 +1538,68 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("Domain.ListingAggregate.Objects.Dimensions", "Dimensions", b1 =>
-                        {
-                            b1.Property<int>("DetailedDescriptionId")
-                                .HasColumnType("integer");
+                    b.Navigation("Listing");
+                });
 
-                            b1.Property<double>("Length")
-                                .HasColumnType("double precision");
+            modelBuilder.Entity("Domain.ListingAggregate.Objects.EpcRatings", b =>
+                {
+                    b.HasOne("Domain.ListingAggregate.Listing", "Listing")
+                        .WithOne("EpcRatings")
+                        .HasForeignKey("Domain.ListingAggregate.Objects.EpcRatings", "ListingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                            b1.Property<int>("Unit")
-                                .HasColumnType("integer");
+                    b.Navigation("Listing");
+                });
 
-                            b1.Property<double>("Width")
-                                .HasColumnType("double precision");
+            modelBuilder.Entity("Domain.ListingAggregate.Objects.ListingLocation", b =>
+                {
+                    b.HasOne("Domain.ListingAggregate.Listing", "Listing")
+                        .WithOne("ListingLocation")
+                        .HasForeignKey("Domain.ListingAggregate.Objects.ListingLocation", "ListingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                            b1.HasKey("DetailedDescriptionId");
+                    b.Navigation("Listing");
+                });
 
-                            b1.ToTable("DetailedDescription");
+            modelBuilder.Entity("Domain.ListingAggregate.Objects.Pricing", b =>
+                {
+                    b.HasOne("Domain.ListingAggregate.Listing", "Listing")
+                        .WithOne("Pricing")
+                        .HasForeignKey("Domain.ListingAggregate.Objects.Pricing", "ListingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                            b1.WithOwner()
-                                .HasForeignKey("DetailedDescriptionId");
-                        });
+                    b.Navigation("Listing");
+                });
 
-                    b.Navigation("Dimensions");
+            modelBuilder.Entity("Domain.ListingAggregate.Objects.ServiceCharge", b =>
+                {
+                    b.HasOne("Domain.ListingAggregate.Listing", "Listing")
+                        .WithOne("ServiceCharge")
+                        .HasForeignKey("Domain.ListingAggregate.Objects.ServiceCharge", "ListingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Listing");
+                });
+
+            modelBuilder.Entity("Domain.ListingWatcher", b =>
+                {
+                    b.HasOne("Domain.AppUserAggregate.AppUser", "AppUser")
+                        .WithMany("SavedListings")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.ListingAggregate.Listing", "Listing")
+                        .WithMany("Watchers")
+                        .HasForeignKey("ListingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
 
                     b.Navigation("Listing");
                 });
@@ -1641,17 +1662,27 @@ namespace Persistence.Migrations
                     b.Navigation("Photos");
 
                     b.Navigation("Reviews");
+
+                    b.Navigation("SavedListings");
                 });
 
             modelBuilder.Entity("Domain.CompanyAggregate.Company", b =>
                 {
+                    b.Navigation("CompanyAddress");
+
+                    b.Navigation("CompanyContacts");
+
                     b.Navigation("CompanyContents");
 
                     b.Navigation("CompanyDescriptions");
 
                     b.Navigation("Insurances");
 
+                    b.Navigation("Invoices");
+
                     b.Navigation("Listings");
+
+                    b.Navigation("Membership");
 
                     b.Navigation("Reviews");
                 });
@@ -1665,21 +1696,28 @@ namespace Persistence.Migrations
                 {
                     b.Navigation("JobContents");
 
+                    b.Navigation("JobLocation");
+
+                    b.Navigation("Messages");
+
                     b.Navigation("Networks");
                 });
 
             modelBuilder.Entity("Domain.ListingAggregate.Listing", b =>
                 {
-                    b.Navigation("Areas");
-
                     b.Navigation("Contents");
 
                     b.Navigation("DetailedDescriptions");
-                });
 
-            modelBuilder.Entity("Domain.Membership", b =>
-                {
-                    b.Navigation("Invoices");
+                    b.Navigation("EpcRatings");
+
+                    b.Navigation("ListingLocation");
+
+                    b.Navigation("Pricing");
+
+                    b.Navigation("ServiceCharge");
+
+                    b.Navigation("Watchers");
                 });
 #pragma warning restore 612, 618
         }

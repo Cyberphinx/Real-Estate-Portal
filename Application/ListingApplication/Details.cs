@@ -10,6 +10,7 @@ using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
+using Application.ListingApplication.ListingDtos;
 
 namespace Application.ListingApplication
 {
@@ -35,7 +36,7 @@ namespace Application.ListingApplication
             {
                 var advert =  await _context.Listings
                     .ProjectTo<ListingDto>(_mapper.ConfigurationProvider)
-                    .AsNoTracking()
+                    .AsSplitQuery()
                     .FirstOrDefaultAsync(x => x.Id == request.Id);
 
                 return Result<ListingDto>.Success(advert);

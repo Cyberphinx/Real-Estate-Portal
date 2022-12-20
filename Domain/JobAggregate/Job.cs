@@ -20,6 +20,7 @@ namespace Domain.JobAggregate
         public JobLifeCycle JobLifeCycle { get; set; }
         public ICollection<JobContent> JobContents { get; set; }
         public JobLocation JobLocation { get; set; }
-        public ICollection<JobNetwork> Networks { get; set; }
+        public ICollection<JobNetwork> Networks { get; set; } = new List<JobNetwork>();
+        public ICollection<JobMessage> Messages { get; set; } = new List<JobMessage>();
     }
 }

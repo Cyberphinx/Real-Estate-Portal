@@ -46,7 +46,6 @@ export default observer(function ListView({ clusters, supercluster }: Props) {
 
     return (
         <div className="listings-container" >
-            <ListingFilters />
             <div className='listing-counter-container'>
                 <ListingCounter loadMore={handleGetNext} />
             </div>
@@ -60,9 +59,6 @@ export default observer(function ListView({ clusters, supercluster }: Props) {
                     </div>
                 ) : (
                     <div>
-                        {/* <section>
-                            <ListingsDebug />
-                        </section> */}
                         <section>
                             <ListingPaging clusters={clusters} supercluster={supercluster} />
                         </section>
@@ -78,6 +74,9 @@ export default observer(function ListView({ clusters, supercluster }: Props) {
                         </section>
                     </div>
                 )}
+            </div>
+            <div style={{paddingTop:"10px"}}>
+                <p style={{textAlign:"center", fontSize:"12px"}}>© {new Date().getFullYear() } Sanctum Technology Limited, All Rights Reserved.</p>
             </div>
         </div>
     );

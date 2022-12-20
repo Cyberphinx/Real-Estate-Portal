@@ -18,6 +18,7 @@ namespace Domain.AppUserAggregate
         public ICollection<JobNetwork> Jobs { get; set; }
         public ICollection<Photo> Photos { get; set; }
         public ICollection<AppUserReview> Reviews { get; set; }
+        public ICollection<ListingWatcher> SavedListings { get; set; }
 
     }
 }

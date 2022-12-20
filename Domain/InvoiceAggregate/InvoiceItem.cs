@@ -10,9 +10,10 @@ namespace Domain.InvoiceAggregate
         public Guid Id { get; set; }
         public long Amount { get; set; }
         public string Description { get; set; }
-        public Invoice Invoice { get; set; }
-        public Guid InvoiceId { get; set; }
         public string Title { get; set; }
         public long VatPercentage { get; set; }
+        public Guid InvoiceId { get; set; }
+        public Invoice Invoice { get; set; }
+
     }
 }

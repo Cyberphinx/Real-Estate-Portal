@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.CompanyApplication.CompanyDtos;
 using Application.Core;
 using Application.Extensions;
 using AutoMapper;
@@ -42,7 +43,6 @@ namespace Application.CompanyApplication
                     .SearchCompaniesOnMap(request.Params.MapBounds)
                     .SortCompanies(request.Params.OrderBy)
                     .ProjectTo<CompanyDto>(_mapper.ConfigurationProvider) //Automapper projection mapping is much better than .include in terms of SQL query efficiency
-                    .AsNoTracking()
                     .AsSplitQuery()
                     .AsQueryable();
 

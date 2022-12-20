@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Application.CompanyApplication;
+using Application.CompanyApplication.CompanyDtos;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Domain.CompanyAggregate;

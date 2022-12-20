@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Application.Core;
 using Application.ListingApplication;
+using Application.ListingApplication.ListingDtos;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Domain.Enums;
@@ -35,7 +36,7 @@ namespace Application.CompanyApplication
             public async Task<Result<List<ListingDto>>> Handle(Query request, CancellationToken cancellationToken)
             {
                 var query = _context.Listings
-                    .Where(c => c.CompanyReference == request.CompanyRef)
+                    .Where(c => c.Company.CompanyReference == request.CompanyRef)
                     .OrderBy(x => x.AddedOn)
                     .ProjectTo<ListingDto>(_mapper.ConfigurationProvider)
                     .AsQueryable();

@@ -10,7 +10,7 @@ import AdminPanel from "../../features/users/controlPanel/AdminPanel";
 import ListingDetails from "../../features/listings/details/ListingDetails";
 import useSupercluster from "use-supercluster";
 import { Listing } from "../model/ListingAggregate/Listing";
-import { Company } from "../model/CompanyAggregate/Company";
+import { Company } from "../model/Company";
 import CompanyDetails from "../../features/companies/details/CompanyDetails";
 
 export default observer(function Dashboard() {

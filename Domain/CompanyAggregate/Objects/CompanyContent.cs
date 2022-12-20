@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Domain.CompanyAggregate.Enums;
 using Microsoft.EntityFrameworkCore;
 
-namespace Domain.CompanyAggregate
+namespace Domain.CompanyAggregate.Objects
 {
     public class CompanyContent
     {

@@ -1,17 +1,12 @@
-import { Invoice } from './JobAggregate/Invoice';
-
 export interface Membership {
     id: string;
-    companyReference: string;
     contractLength: number;
-    memberSince: Date;
-    expiry: Date;
     description: string;
-    price: number;
-    invoices: Invoice[]
+    expiry: Date;
     isActive: boolean;
+    memberSince: Date;
+    price: number;
     unit: UnitOfTime;
-    username: string;
     vatPercentage: number;
 }
 

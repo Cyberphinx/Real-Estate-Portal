@@ -23,15 +23,15 @@ export default observer(function PropertyTypes({ items, checked, onChange }: Pro
     
 
     return (
-        <div className="types-container">
-            {items.map((propertyType: string) => (
+        <div className="types-dropdown">
+            {items.map((propertyType: string, index:number) => (
                 <button
-                    key={propertyType}
+                    key={index}
                     className={checkedItems.includes(propertyType) ? "types-button-selected" : "types-button"}
                     onClick={() => handleChecked(propertyType)}>
-                    <img className="types-icon" src={`/assets/property-icons/${propertyType.toLowerCase()}.svg`} alt={propertyType} />
+                    <span>{propertyType}</span>
                     <span className={checkedItems.includes(propertyType) ? "types-dot-selected" : "types-dot"}></span>
-                    <span className="types-tooltip">{propertyType}</span>
+                    {/* <span className="types-tooltip">{propertyType}</span> */}
                 </button>
             ))}
         </div>

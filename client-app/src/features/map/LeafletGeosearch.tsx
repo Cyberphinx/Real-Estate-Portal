@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useMap } from "react-leaflet";
 import 'leaflet-geosearch/dist/geosearch.css';
 import { GeoSearchControl, LocationIQProvider } from 'leaflet-geosearch';
+import './MainMap.css';
 
 interface Props {
     apikey: string | undefined;

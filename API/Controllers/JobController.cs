@@ -52,6 +52,18 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new Delete.Command{Id = id}));
         }
 
+        [HttpPost("{id}/apply")]
+        public async Task<IActionResult> Apply(Guid id)
+        {
+            return HandleResult(await Mediator.Send(new ExpressInterest.Command{Id = id}));
+        }
+
+        [HttpPost("{id}/shortlist/{username}")]
+        public async Task<IActionResult> Shortlist(Guid id, string username)
+        {
+            return HandleResult(await Mediator.Send(new ShortlistApplicant.Command{Id = id, ApplicantUsername = username}));
+        }
+
         // [Authorize(Roles = "Admin")]
         // [HttpPost("{seed}")]
         // public async Task Seed()

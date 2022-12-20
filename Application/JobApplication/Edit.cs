@@ -46,7 +46,13 @@ namespace Application.JobApplication
             {
                 // var user = await _context.Users.FirstOrDefaultAsync(x => x.UserName == _userAccessor.GetUsername());
 
-                var job = await _context.Jobs.FindAsync(request.Job.Id);
+                // var job = await _context.Jobs.FindAsync(request.Job.Id);
+
+                var job = await _context.Jobs
+                    .Where(x => x.Id == request.Job.Id)
+                    .AsSplitQuery()
+                    .FirstOrDefaultAsync();
+
                 if (job == null) return null;
 
                 // request.Order.BuyerId = user.UserName;

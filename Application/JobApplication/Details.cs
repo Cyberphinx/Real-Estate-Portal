@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Core;
+using Application.JobApplication.JobDtos;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Domain;
@@ -35,7 +36,7 @@ namespace Application.JobApplication
             {
                 var order =  await _context.Jobs
                     .ProjectTo<JobDto>(_mapper.ConfigurationProvider)
-                    .AsNoTracking()
+                    .AsSplitQuery()
                     .FirstOrDefaultAsync(x => x.Id == request.Id);
 
                 return Result<JobDto>.Success(order);

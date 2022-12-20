@@ -16,11 +16,9 @@ export default observer(function ServicesHub() {
         return new Date(date).toLocaleString();
     }
 
-    console.log(loadingJobs);
-
     return (
         <div className="services-hub">
-            <div className="forum-toolbar">
+            {/* <div className="forum-toolbar">
                 <section>
                     <p style={{ margin: "2px 0px 0px 0px", fontSize: "20px" }}># Central Heating @ Manchester</p>
                 </section>
@@ -28,7 +26,7 @@ export default observer(function ServicesHub() {
                     <input placeholder="Search..." style={{ padding: "5px", width: "calc(100vw / 6)" }} />
                     <button className="post-job-button">Post a job</button>
                 </section>
-            </div>
+            </div> */}
 
             <div className="forum-container">
                 <section>

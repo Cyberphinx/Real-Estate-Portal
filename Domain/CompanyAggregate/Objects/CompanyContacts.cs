@@ -5,14 +5,16 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
-namespace Domain.CompanyAggregate
+namespace Domain.CompanyAggregate.Objects
 {
-    [Owned]
     public class CompanyContacts
     {
+        public int Id { get; set; }
         [Required]
         public string Email { get; set; }
         public string Phone { get; set; }
         public string Website { get; set; }
+        public Guid CompanyId { get; set; }
+        public Company Company { get; set; }
     }
 }

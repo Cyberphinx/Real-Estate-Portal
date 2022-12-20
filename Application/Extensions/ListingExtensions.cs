@@ -140,8 +140,8 @@ namespace Application.Extensions
             double MaxLatitude = Convert.ToDouble(bounds[3]);
             
             return query.Where(p => 
-            p.ListingLocation.Coordinates.Latitude > MinLatitude && p.ListingLocation.Coordinates.Longitude > MinLongitude 
-            && p.ListingLocation.Coordinates.Latitude < MaxLatitude && p.ListingLocation.Coordinates.Longitude < MaxLongitude);
+            p.ListingLocation.Latitude > MinLatitude && p.ListingLocation.Longitude > MinLongitude 
+            && p.ListingLocation.Latitude < MaxLatitude && p.ListingLocation.Longitude < MaxLongitude);
         }
     }
 }

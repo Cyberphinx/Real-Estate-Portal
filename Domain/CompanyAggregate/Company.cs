@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Domain.Enums;
-using Domain.JobAggregate;
+using Domain.InvoiceAggregate;
 using Domain.ListingAggregate;
-using Domain;
+using Domain.CompanyAggregate.Objects;
 
 namespace Domain.CompanyAggregate
 {
@@ -21,6 +21,7 @@ namespace Domain.CompanyAggregate
         public string CompanyReference { get; set; }
         public string CompanyRegistrationNumber { get; set; }
         public string DisplayName { get; set; }
+        public ICollection<Invoice> Invoices { get; set; }
         public ICollection<Insurance> Insurances { get; set; }
         public DateTime LastModified { get; set; }
         public string LegalName { get; set; }

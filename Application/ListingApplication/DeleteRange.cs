@@ -34,7 +34,7 @@ namespace Application.ListingApplication
                 foreach (Listing item in existingData)
                 {
                     // If an advert is from certain agency, remove the row
-                    if (item.CompanyReference == request.CompanyReference)
+                    if (item.Company.CompanyReference == request.CompanyReference)
                     {
                         Console.WriteLine($"REMOVED: {request.CompanyReference} adverts {item.ListingReference} : {item.Pricing.Price} GBP removed\n");
                         _context.Listings.Remove(item);

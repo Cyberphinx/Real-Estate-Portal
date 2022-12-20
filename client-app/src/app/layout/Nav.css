@@ -1,13 +1,14 @@
 .nav-bar {
-  /* border-bottom: 2px solid #008000; */
   position: fixed;
   list-style-type: none;
-  width: calc(100vw / 3);
-  height: 50px;
+  /* width: calc(100vw / 3); */
+  width: 100vw;
+  height: 39px;
   margin: auto;
   padding: 0;
-  /* background-color: #1B1212; */
-  background-color: #000;
+  color: #000;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #aaaeb3;
   z-index: 30;
 }
 
@@ -18,78 +19,73 @@
 
 .nav-bar-item {
   float: left;
-  font-size: 16px;
 }
 
 .nav-bar-item-right {
   float: right;
-  font-size: 16px;
 }
 
 .nav-bar-item a {
-  font-size: 20px;
+  color: #000;
+  font-size: 16px;
   font-weight: 600;
   letter-spacing: 1px;
   display: block;
-  color: #fff;
   text-align: center;
-  padding: 14px 16px;
+  padding: 10px 16px;
   text-decoration: none;
 }
 
 .nav-button {
+  color: #000;
   background: none;
-  /* background-clip: content-box; */
-  color: #fff;
-  padding: 10px 16px;
-  font-weight: 600;
-  font-size: 16px;
-  border: 0px solid #fff;
+  padding: 6px 10px;
+  font-weight: 400;
+  font-size: 14px;
+  border: 0px solid #000;
+  border-radius: 3px;
   cursor: pointer;
-  margin: 5px 5px;
+  margin: 5px 10px;
 }
 .nav-button:hover {
-  color: #fff;
-  background-color: #000;
-  border: 2px solid #fff;
-  border-radius: 5px;
-  margin: 3px 3px;
+  border: 1px solid #000;
+  border-radius: 3px;
+  margin: 4px 9px;
 }
-
 .nav-button-selected {
-  color: #fff;
+  color: #000;
   background: none;
   background-clip: padding-box;
-  border: 2px solid #fff;
-  border-radius: 5px;
-  padding: 10px 16px;
-  font-weight: 600;
-  font-size: 16px;
-  margin: 3px 3px;
+  border: 1px solid #000;
+  border-radius: 3px;
+  padding: 6px 10px;
+  font-weight: 400;
+  font-size: 14px;
+  margin: 4px 9px;
   cursor: default;
 }
 
 .dropdown-container {
   position: relative;
 }
-.svg-button {
-  padding: 8px 10px;
+.user-button {
+  padding: 6px 10px;
   border: none;
   background: none;
   cursor: pointer;
 }
-.svg-button:hover .svg-tooltip {
+.user-button:hover .user-tooltip {
   visibility: visible;
 }
-.svg-icon {
-  width: 30px;
+.user-icon {
+  width: 25px;
   float: right;
-  filter:  brightness(0) invert(1);
+  /* filter:  brightness(0) invert(1); */
 }
-.svg-icon:hover {
+.user-icon:hover {
   filter: invert(17%) sepia(67%) saturate(7492%) hue-rotate(357deg) brightness(90%) contrast(128%);
 }
-.svg-tooltip {
+.user-tooltip {
   visibility: hidden;
   position: absolute;
   width: 80px;
@@ -105,80 +101,6 @@
 }
 
 
-.sort-button-container {
-  /* border: 1px solid black; */
-  text-align: right;
-  position: relative;
-}
-.sort-button {
-  background: none;
-  color: #000;
-  border: none;
-  padding: 6px 10px 0px 0px;
-  text-align: center;
-  cursor: pointer;
-}
-.sort-button:hover .sort-tooltip {
-  visibility: visible;
-}
-.sort-icon{
-  width: 35px;
-  filter:  brightness(0) invert(1);
-}
-.sort-icon:hover {
-  filter: invert(17%) sepia(67%) saturate(7492%) hue-rotate(357deg)
-    brightness(90%) contrast(128%);
-}
-.sort-tooltip {
-  visibility: hidden;
-  position: absolute;
-  width: 60px;
-  top: 50px;
-  left: -20px;
-  padding: 3px 6px;
-  border-radius: 3px;
-  background-color: #ffc300;
-  color: #000;
-  font-size: 14px;
-  font-weight: 600;
-  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
-}
-
-
-.lock-button {
-  background: none;
-  color: #000;
-  border: none;
-  padding: 6px 10px 0px 0px;
-  text-align: center;
-  cursor: pointer;
-  position: relative;
-}
-.lock-button:hover .lock-tooltip {
-  visibility: visible;
-}
-.lock-icon {
-  width: 35px;
-  filter:  brightness(0) invert(1);
-}
-.lock-icon:hover {
-  filter: invert(17%) sepia(67%) saturate(7492%) hue-rotate(357deg)
-    brightness(90%) contrast(128%);
-}
-.lock-tooltip {
-  visibility: hidden;
-  position: absolute;
-  width: 90px;
-  top: 50px;
-  left: -40px;
-  padding: 3px 6px;
-  border-radius: 3px;
-  background-color: #ffc300;
-  color: #000;
-  font-size: 14px;
-  font-weight: 600;
-  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
-}
 
 
 .about-button {

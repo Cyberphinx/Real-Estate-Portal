@@ -14,7 +14,6 @@ namespace Application.ListingApplication
         {
             RuleFor(x => x.ListingLocation).NotEmpty();
             RuleFor(x => x.Pricing).NotEmpty();
-            RuleFor(x => x.CompanyReference).NotEmpty();
         }
     }
 }

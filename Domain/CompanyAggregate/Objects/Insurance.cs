@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Domain.CompanyAggregate.Enums;
 
-namespace Domain.CompanyAggregate
+namespace Domain.CompanyAggregate.Objects
 {
     public class Insurance
     {

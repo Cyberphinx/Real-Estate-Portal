@@ -1,19 +1,10 @@
 import { AccessStatus } from "../AccessStatus";
+import { UnitOfTime } from "../Membership";
 import {
-    Category, CentralHeating, CookerType, CouncilTaxBand, DecorativeCondition, FurnishedState, Incentive,
-    LifeCycleStatus, ListedBuildingGrade, OutsideSpace, Parking, PropertyType, RentalTerm, Tenure, Utility
+    Category, CentralHeating, CookerType, CouncilTaxBand, DecorativeCondition,  Eligibility, FurnishedState, Incentive,
+    LifeCycleStatus, ListedBuildingGrade, OutsideSpace, Parking, PropertyType, RentalTerm, Tenure, Utility, UnitOfArea 
 } from "./ListingEnums";
-import { Areas } from "./Objects/Areas";
-import { Content } from "./Objects/Content";
-import { DetailedDescription } from "./Objects/DetailedDescription";
-import { EpcRatings } from "./Objects/EpcRatings";
-import { LeaseExpiry } from "./Objects/LeaseExpiry";
-import { ListingLocation } from "./Objects/ListingLocation";
-import { MinimumContractLength } from "./Objects/MinimumContractLength";
-import { Pricing } from "./Objects/Pricing";
-import { ServiceCharge } from "./Objects/ServiceCharge";
-import { TenantEligibility } from "./Objects/TenantEligibility";
-import { Owner } from './Objects/Owner';
+import { Content, DetailedDescription, EpcRatings, ListingLocation, Owner, Pricing, ServiceCharge, WatcherDto, } from "./ListingObjects";
 
 export interface Listing {
     id: string;
@@ -21,7 +12,8 @@ export interface Listing {
     addedOn: Date;
     administrationFees: string;
     annualBusinessRates: number;
-    areas: Areas;
+    areaTotal: number;
+    areaUnits: UnitOfArea;
     accessStatus: AccessStatus;
     availableBedrooms: number;
     availableFromDate: Date;
@@ -59,14 +51,15 @@ export interface Listing {
     fridge: boolean;
     groundRent: number;
     gym: boolean;
-    leaseExpiry: LeaseExpiry;
+    leaseExpiry: string;
     lifeCycleStatus: LifeCycleStatus;
     listedBuildingGrade: ListedBuildingGrade;
     listingReference: string;
     listingLocation: ListingLocation;
     livingRooms: number;
     loft: boolean;
-    minimumContractLength: MinimumContractLength;
+    minimumContractLength: number;
+    minimumContractLengthUnits: UnitOfTime;
     newBuild: boolean;
     openDay: Date;
     outbiuldings: boolean;
@@ -87,13 +80,15 @@ export interface Listing {
     summaryDescription: string;
     swimmingPool: boolean;
     tenanted: boolean;
-    tenantEligibility: TenantEligibility;
+    tenantEligibilityDss: Eligibility;
+    tenantEligibilityStudents: Eligibility;
     tennisCourt: boolean;
     tenure: Tenure;
     totalBedrooms: number;
     utilityRoom: boolean;
     waterFront: boolean;
     woodFloors: boolean;
+    watchers: WatcherDto[];
 }
 
 export class Listing implements Listing {
@@ -108,7 +103,8 @@ export class ListingFormValues {
     addedOn: Date = new Date();
     administrationFees?: string;
     annualBusinessRates?: number;
-    areas?: Areas;
+    areasTotal?: number;
+    areasUnits?: UnitOfArea;
     accessStatus: AccessStatus = AccessStatus.Private;
     availableBedrooms?: number;
     availableFromDate?: Date;
@@ -145,14 +141,15 @@ export class ListingFormValues {
     fridge?: boolean;
     groundRent?: number;
     gym?: boolean;
-    leaseExpiry?: LeaseExpiry;
+    leaseExpiry?: string;
     lifeCycleStatus?: LifeCycleStatus;
     listedBuildingGrade?: ListedBuildingGrade;
     listingReference?: string;
     listingLocation?: ListingLocation;
     livingRooms?: number;
     loft?: boolean;
-    minimumContractLength?: MinimumContractLength;
+    minimumContractLength?: number;
+    minimumContractLengthUnits?: UnitOfTime;
     newBuild?: boolean;
     openDay?: Date;
     outbiuldings?: boolean;
@@ -173,7 +170,8 @@ export class ListingFormValues {
     summaryDescription?: string;
     swimmingPool?: boolean;
     tenanted?: boolean;
-    tenantEligibility?: TenantEligibility;
+    tenantEligibilityDss?: Eligibility;
+    tenantEligibilityStudents?: Eligibility;
     tennisCourt?: boolean;
     tenure?: Tenure;
     totalBedrooms?: number;
@@ -188,7 +186,7 @@ export class ListingFormValues {
             this.addedOn = listing.addedOn;
             this.administrationFees = listing.administrationFees;
             this.annualBusinessRates = listing.annualBusinessRates;
-            this.areas = listing.areas;
+            this.areasTotal = listing.areasTotal;
             this.accessStatus = listing.accessStatus;
             this.availableBedrooms = listing.availableBedrooms;
             this.availableFromDate = listing.availableFromDate;
@@ -253,7 +251,8 @@ export class ListingFormValues {
             this.summaryDescription = listing.summaryDescription;
             this.swimmingPool = listing.swimmingPool;
             this.tenanted = listing.tenanted;
-            this.tenantEligibility = listing.tenantEligibility;
+            this.tenantEligibilityDss = listing.tenantEligibilityDss;
+            this.tenantEligibilityStudents = listing.tenantEligibilityStudents;
             this.tennisCourt = listing.tennisCourt;
             this.tenure = listing.tenure;
             this.totalBedrooms = listing.totalBedrooms;
@@ -263,3 +262,6 @@ export class ListingFormValues {
         }
     }
 }
+
+
+

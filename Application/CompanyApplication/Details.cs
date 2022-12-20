@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.CompanyApplication.CompanyDtos;
 using Application.Core;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
@@ -34,7 +35,7 @@ namespace Application.CompanyApplication
             {
                 var company =  await _context.Companies
                     .ProjectTo<CompanyDto>(_mapper.ConfigurationProvider)
-                    .AsNoTracking()
+                    .AsSplitQuery()
                     .FirstOrDefaultAsync(x => x.Id == request.Id);
 
                 return Result<CompanyDto>.Success(company);
