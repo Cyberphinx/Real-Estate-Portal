@@ -1,6 +1,6 @@
 import { runInAction } from "mobx";
 import agent from "../api/agent";
-import { Job, JobFormValues } from "../model/JobAggregate/Job";
+import { Job, JobFormValues } from "../model/Job";
 
 export default class JobStore {
   jobRegistry = new Map<string, Job>();

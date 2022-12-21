@@ -1,7 +1,43 @@
-import { string } from 'yup';
 import { Location } from './Location';
 import { ServiceCategory } from './ServiceCategory';
-import { User } from './User';
+export enum JobLifeCycle {
+    Open,
+    Cancelled,
+    Completed
+}
+
+export interface JobContent {
+    id: number;
+    url: string;
+    type: JobMediaType;
+    caption: string;
+}
+
+export enum JobMediaType {
+    Audio,
+    Image,
+    Video
+}
+
+export interface JobLocation extends Location {
+    id: number;
+}
+
+export interface NetworkDto {
+    displayName: string;
+    description: string;
+    image: string;
+    jobsCount: number;
+    reviewsCount: number;
+    username: string;
+    role: JobNetworkRole;
+}
+
+export enum JobNetworkRole {
+    Customer,
+    InterestedCompany,
+    ShortlistedCompany
+}
 
 export interface Job {
     id: string;
@@ -50,41 +86,3 @@ export class JobFormValues {
     }
 }
 
-export enum JobLifeCycle {
-    Open,
-    Cancelled,
-    Completed
-}
-
-export interface JobContent {
-    id: number;
-    url: string;
-    type: JobMediaType;
-    caption: string;
-}
-
-export enum JobMediaType {
-    Audio,
-    Image,
-    Video
-}
-
-export interface JobLocation extends Location {
-    id: number;
-}
-
-export interface NetworkDto {
-    displayName: string;
-    description: string;
-    image: string;
-    jobsCount: number;
-    reviewsCount: number;
-    username: string;
-    role: JobNetworkRole;
-}
-
-export enum JobNetworkRole {
-    Customer,
-    InterestedCompany,
-    ShortlistedCompany
-}

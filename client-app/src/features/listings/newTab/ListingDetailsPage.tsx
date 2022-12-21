@@ -1,13 +1,13 @@
 import { observer } from "mobx-react-lite";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import './ListingDetailsPage.css';
 import { useParams } from "react-router-dom";
 import { useStore } from "../../../app/stores/store";
 import NavBar from "../../../app/layout/NavBar";
 import LoadingComponent from "../../../app/common/loading/LoadingComponent";
-import { Content } from "../../../app/model/ListingAggregate/Objects/Content";
-import { DetailedDescription, UnitOfLength } from "../../../app/model/ListingAggregate/Objects/DetailedDescription";
 import Close from "../../map/toolbar/Close";
+import { Content, DetailedDescription } from "../../../app/model/ListingAggregate/ListingObjects";
+import { UnitOfLength } from "../../../app/model/ListingAggregate/ListingEnums";
 
 export default observer(function ListingDetailsPage() {
     const { id } = useParams<string>();
@@ -42,8 +42,8 @@ export default observer(function ListingDetailsPage() {
                                 <article key={description.id} >
                                     <h1>{description.heading}</h1>
                                     <span>
-                                        {description.dimensions !== null
-                                            && ` (${description.dimensions?.length} x ${description.dimensions?.width} = ${description.dimensions?.area} sq ${UnitOfLength[description.dimensions?.unit]})`}
+                                        {description.area !== null
+                                            && ` (${description.length} x ${description.width} = ${description.area} sq ${UnitOfLength[description.unit]})`}
                                     </span>
                                     <p>{description.text}</p>
                                 </article>

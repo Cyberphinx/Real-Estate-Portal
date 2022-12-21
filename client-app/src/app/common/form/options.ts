@@ -1,7 +1,5 @@
 import { AccessStatus } from '../../model/AccessStatus';
-import { PriceQualifier, TransactionType } from '../../model/ListingAggregate/Objects/Pricing';
-import { Category, CookerType, FurnishedState, PropertyType } from '../../model/ListingAggregate/ListingEnums';
-import { MediaType } from '../../model/ListingAggregate/Objects/Content';
+import { Category, CookerType, FurnishedState, MediaType, PriceQualifier, PropertyType, TransactionType } from '../../model/ListingAggregate/ListingEnums';
 
 export const accessOptions = [
     {text: 'Private', value: AccessStatus.Private},

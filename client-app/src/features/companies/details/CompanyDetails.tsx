@@ -56,11 +56,10 @@ export default observer(function CompanyDetails({ company }: Props) {
         }
     }
 
-    const multiCompanies: Company[] = companies.filter(x => x.companyAddress.coordinates.latitude === company?.companyAddress.coordinates.latitude && x.companyAddress.coordinates.longitude === company?.companyAddress.coordinates.longitude);
+    const multiCompanies: Company[] = companies.filter(x => x.companyAddress.latitude === company?.companyAddress.latitude && x.companyAddress.longitude === company?.companyAddress.longitude);
 
     return (
         <div className="details-container" >
-            {/* <Toolbar close={cancelSelectListing} title={title} selectedItem={listing} /> */}
             {multiCompanies.length > 1 && <CompanyBookmark multiCompanies={multiCompanies} />}
             <div className="details-contents" style={(multiCompanies.length > 1) ? { marginTop: "60px" } : {}}>
                 <AgencyTagForCompany company={company} />

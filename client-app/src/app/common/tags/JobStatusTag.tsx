@@ -1,6 +1,6 @@
 import { format, parseISO } from "date-fns";
 import React from "react";
-import { Job, JobLifeCycle } from "../../model/JobAggregate/Job";
+import { Job, JobLifeCycle } from "../../model/Job";
 import './JobStatusTag.css';
 
 interface Props {

@@ -6,12 +6,10 @@ import { Listing } from "../../../app/model/ListingAggregate/Listing";
 import { useStore } from "../../../app/stores/store";
 import AgencyTags from "../../../app/common/tags/AgencyTag";
 import ContactForm from "../contactForm/ContactForm";
-import { DetailedDescription, UnitOfLength } from "../../../app/model/ListingAggregate/Objects/DetailedDescription";
-import { Content } from "../../../app/model/ListingAggregate/Objects/Content";
-import { propertyType } from "../../../app/model/ListingAggregate/ListingEnums";
+import { propertyType, UnitOfLength } from "../../../app/model/ListingAggregate/ListingEnums";
 import ListingBookmark from "./ListingBookmark";
 import priceFormatter from "../../../app/common/PriceFormatter";
-import RefTag from "../../../app/common/tags/RefTag";
+import { Content, DetailedDescription } from "../../../app/model/ListingAggregate/ListingObjects";
 
 interface Props {
     listing: Listing | undefined;
@@ -19,7 +17,7 @@ interface Props {
 
 export default observer(function ListingDetails({ listing }: Props) {
     const { listingStore } = useStore();
-    const { listings, cancelSelectListing, contacts, setContacts } = listingStore;
+    const { listings, contacts, setContacts } = listingStore;
 
     const [image, setImage] = useState<Content>(listing!.contents[0]);
     function handleImage(event: SyntheticEvent, state: Content) {
@@ -66,14 +64,14 @@ export default observer(function ListingDetails({ listing }: Props) {
         }
     }
 
-    const multiListings: Listing[] = listings.filter(x => x.listingLocation.coordinates.latitude === listing?.listingLocation.coordinates.latitude && x.listingLocation.coordinates.longitude === listing?.listingLocation.coordinates.longitude);
+    const multiListings: Listing[] = listings.filter(x => x.listingLocation.latitude === listing?.listingLocation.latitude && x.listingLocation.longitude === listing?.listingLocation.longitude);
 
     return (
         <div className="details-container" >
             {multiListings.length > 1 && <ListingBookmark multiListings={multiListings} />}
             <div className="details-contents" style={(multiListings.length > 1) ? { marginTop: "60px" } : {}}>
                 <AgencyTags listing={listing} />
-                {/* <RefTag listing={listing} /> */}
+                <button style={{position:"absolute"}}>Save</button>
                 <section className="details-gallery">
                     <div style={{ position: "relative" }}>
                         <Link to={`/listing/${listing?.id}`} target="_blank" >
@@ -121,8 +119,8 @@ export default observer(function ListingDetails({ listing }: Props) {
                         <div key={description.id}>
                             <b>{description.heading}</b>
                             <span>
-                                {description.dimensions !== null
-                                    && ` (${description.dimensions?.length} x ${description.dimensions?.width} = ${description.dimensions?.area} sq ${UnitOfLength[description.dimensions?.unit]})`}
+                                {description.area !== null
+                                    && ` (${description.length} x ${description.width} = ${description.area} sq ${UnitOfLength[description.unit]})`}
                             </span>
                             <p>{description.text}</p>
                         </div>

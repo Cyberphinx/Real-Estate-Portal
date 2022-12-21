@@ -27,6 +27,7 @@ export default observer(function BranchForm({ setBranchForm }: Props) {
         accessStatus: AccessStatus.Public,
         addedOn: new Date(),
         companyAddress: {
+            id: 0,
             propertyNumberOrName: "",
             streetName: "",
             locality: "",
@@ -34,13 +35,11 @@ export default observer(function BranchForm({ setBranchForm }: Props) {
             county: "",
             postalCode: "",
             country: Country.unitedkingdom,
-            coordinates: {
-                latitude: 0,
-                longitude: 0
-            },
-            what3words: "",
+            latitude: 0,
+            longitude: 0
         },
         companyContacts: {
+            id: 0,
             phone: "",
             email: user!.email,
             website: ""

@@ -10,9 +10,7 @@ import { v4 as uuid } from 'uuid';
 import MySelectInput from "../../../../app/common/form/MySelectInput";
 import { countryOptions } from "../../../../app/common/form/countryOptions";
 import { cookerOptions, furnishedOptions, mediaOptions, priceOptions, propertyOptions } from "../../../../app/common/form/options";
-import { TransactionType } from "../../../../app/model/ListingAggregate/Objects/Pricing";
-import { Category } from "../../../../app/model/ListingAggregate/ListingEnums";
-import { MediaType } from "../../../../app/model/ListingAggregate/Objects/Content";
+import { Category, MediaType, TransactionType } from "../../../../app/model/ListingAggregate/ListingEnums";
 
 export default function ListingForm() {
     const { listingStore } = useStore();
@@ -160,7 +158,7 @@ export default function ListingForm() {
                                                 <div key={index} style={{ margin: "20px 0px" }}>
                                                     <MyTextInput inputclassname="branch-form-input-small" errorclassname="branch-form-error" name={`contents[${index}].id`} placeholder="id" />
                                                     <MyTextInput inputclassname="branch-form-input-small" errorclassname="branch-form-error" name={`contents[${index}].url`} placeholder="url" />
-                                                    <MySelectInput selectclassname="branch-form-select" name="contents[${index}].type" placeholder="type" options={mediaOptions} />
+                                                    <MySelectInput selectclassname="branch-form-select" name={`contents[${index}].type`} placeholder="type" options={mediaOptions} />
                                                     <MyTextInput inputclassname="branch-form-input-small" errorclassname="branch-form-error" name={`contents[${index}].caption`} placeholder="caption" />
                                                     <MyTextInput inputclassname="branch-form-input-small" errorclassname="branch-form-error" name={`contents[${index}].listingId`} placeholder="listingId" />
 

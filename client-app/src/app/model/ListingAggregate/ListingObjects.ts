@@ -1,3 +1,4 @@
+import { Location } from './../Location';
 import { CompanyAddress, CompanyContacts, RedressScheme } from "../Company";
 import { Currency, Frequency, MediaType, PriceQualifier, TransactionType, UnitOfArea, UnitOfLength } from "./ListingEnums";
 

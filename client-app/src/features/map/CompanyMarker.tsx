@@ -29,8 +29,8 @@ const clusterIcon = (count: number, size: number) => {
 
 export default observer(function CompanyMarker({ points }: Props) {
     const { companyStore, mapStore, listingStore } = useStore();
-    const { companies, selectCompany, cancelSelectCompany, selectedCompany, predicate} = companyStore;
-    const { zoom, setZoom, activeListing, setBounds, bounds } = mapStore;
+    const { selectCompany, cancelSelectCompany, selectedCompany } = companyStore;
+    const { zoom, setZoom, setBounds, bounds } = mapStore;
     const { selectedListing, cancelSelectListing } = listingStore;
 
     const maxZoom = 20;
@@ -152,15 +152,17 @@ export default observer(function CompanyMarker({ points }: Props) {
                         >
                             {leavesOverlap(cluster.id) &&
                                 <Tooltip direction="top" offset={[14, -8]}>
-                                    <div className="snippets-container" style={{ gridTemplateColumns: `repeat(${supercluster.getLeaves(cluster.id, Infinity, 0).length}, 1fr)` }}>
-                                        {supercluster.getLeaves(cluster.id, Infinity, 0).map((item: any) => (
-                                            <div key={item.properties.company.id} className="snippet-container">
-                                                <article className="marker-text">
-                                                    <b>{item.properties.company.listings.length}</b>
-                                                </article>
-                                            </div>
-                                        ))}
-                                    </div>
+                                    <ul className="company-snippets-container"style={{listStyleType:"none"}}>
+                                            {supercluster.getLeaves(cluster.id, Infinity, 0).map((item: any) => (
+                                                <li key={item.properties.company.id} className="snippet-container">
+                                                    <article className="marker-text">
+                                                        <b>{item.properties.company.displayName}</b>
+                                                        <p style={{ margin: "0px", padding: "0px", fontSize: "10px" }}>{item.properties.company.companyReference}</p>
+                                                        <br />
+                                                    </article>
+                                                </li>
+                                            ))}
+                                    </ul>
                                 </Tooltip>}
                         </Marker>
                     );
@@ -185,8 +187,9 @@ export default observer(function CompanyMarker({ points }: Props) {
                     >
                         <Tooltip direction="top" offset={[3, -3]}>
                             <b>{cluster.properties.company.displayName}</b>
-                            <p style={{margin:"0px",padding:"0px", fontSize:"10px", color:"grey"}}>#{ServiceCategory[cluster.properties.company.serviceCategories[0]]}</p>
-                            <p style={{margin:"0px",padding:"0px",fontSize:"10px"}}>Listings: {cluster.properties.company.listings.length}</p>
+                            <p style={{ margin: "0px", padding: "0px", fontSize: "10px", color: "grey" }}>#{cluster.properties.company.companyReference}</p>
+                            {/* <p style={{ margin: "0px", padding: "0px", fontSize: "10px", color: "grey" }}>#{ServiceCategory[cluster.properties.company.serviceCategories[0]]}</p> */}
+                            <p style={{ margin: "0px", padding: "0px", fontSize: "10px" }}>Listings: {cluster.properties.company.listings.length}</p>
                             {/* <p style={{margin:"0px",padding:"0px",fontSize:"12px"}}>{cluster.properties.companyContacts.email}</p> */}
                             {/* <img src={cluster.properties.logo} style={{ width: "100px" }} /> */}
                         </Tooltip>

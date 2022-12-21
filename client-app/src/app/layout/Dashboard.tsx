@@ -43,7 +43,7 @@ export default observer(function Dashboard() {
             },
             geometry: {
                 type: "Point",
-                coordinates: [listing.listingLocation.coordinates.longitude, listing.listingLocation.coordinates.latitude],
+                coordinates: [listing.listingLocation.longitude, listing.listingLocation.latitude],
 
             }
         })
@@ -58,7 +58,7 @@ export default observer(function Dashboard() {
             },
             geometry: {
                 type: "Point",
-                coordinates: [company.companyAddress.coordinates.longitude, company.companyAddress.coordinates.latitude],
+                coordinates: [company.companyAddress.longitude, company.companyAddress.latitude],
 
             }
         })

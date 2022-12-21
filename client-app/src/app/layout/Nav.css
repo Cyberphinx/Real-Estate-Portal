@@ -13,8 +13,8 @@
 }
 
 .logo {
-  width: 30px;
-  margin: 8px 20px 0px 20px;
+  width: 25px;
+  margin: 6px -3px 0px 20px;
 }
 
 .nav-bar-item {
@@ -69,22 +69,28 @@
   position: relative;
 }
 .user-button {
-  padding: 6px 10px;
-  border: none;
+  margin: 4px 50px;
+  padding: 3px 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
   background: none;
   cursor: pointer;
 }
-.user-button:hover .user-tooltip {
-  visibility: visible;
+.user-button:hover{
+  border: 1px solid #000;
 }
 .user-icon {
-  width: 25px;
+  width: 20px;
+  margin: 2px 5px 0px 5px;
+  padding: 0px;
   float: right;
+  /* border: 1px solid black; */
+  border-radius: 50%
   /* filter:  brightness(0) invert(1); */
 }
-.user-icon:hover {
+/* .user-icon:hover {
   filter: invert(17%) sepia(67%) saturate(7492%) hue-rotate(357deg) brightness(90%) contrast(128%);
-}
+} */
 .user-tooltip {
   visibility: hidden;
   position: absolute;
@@ -117,4 +123,11 @@
 .about-button:hover {
   border: 2px solid #fff;
   margin: 3px 2px;
+}
+
+
+
+.hamburger-icon {
+  width: 15px;
+  margin: 5px 10px 0px 5px;
 }

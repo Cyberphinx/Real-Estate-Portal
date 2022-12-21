@@ -6,7 +6,7 @@ import { store } from '../stores/store';
 import { history } from '../..';
 import { PaginatedResult } from '../model/Pagination';
 import { Listing, ListingFormValues } from '../model/ListingAggregate/Listing';
-import { Job, JobFormValues } from '../model/JobAggregate/Job';
+import { Job, JobFormValues } from '../model/Job';
 
 // adding fake delay
 const sleep = (delay: number) => {

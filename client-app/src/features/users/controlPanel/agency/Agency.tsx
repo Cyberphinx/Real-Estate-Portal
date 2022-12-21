@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
-import React, { useEffect, useState } from "react";
-import { Company, RedressScheme } from "../../../../app/model/Company";
+import React, {  useState } from "react";
+import { Company  } from "../../../../app/model/Company";
 import { User } from "../../../../app/model/User";
 import { useStore } from "../../../../app/stores/store";
 import './Agency.css';

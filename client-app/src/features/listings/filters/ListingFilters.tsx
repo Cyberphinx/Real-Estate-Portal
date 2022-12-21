@@ -9,11 +9,9 @@ import Bedrooms from "./parameters/Bedrooms";
 import OrderBy from "./parameters/OrderBy";
 
 export default observer(function ListingFilters() {
-    const { listingStore, featureStore, userStore, companyStore } = useStore();
+    const { listingStore, featureStore } = useStore();
     const { predicate, setPredicate } = listingStore;
-    const { cancelSelectCompany } = companyStore;
     const { isLocked, setLocked } = featureStore;
-    const { isLoggedIn } = userStore;
 
     const items = ["Detached", "SemiDetached", "Terraced", "Flat", "Land"];
 

@@ -1,22 +1,22 @@
-.listing-bookmark {
+.company-bookmark {
   position: absolute;
   z-index: 1;
   background: rgba(255, 255, 255, 0.5);
+  margin: 0px;
+  padding:0px;
 }
 
-.listing-bookmark-container {
+.company-bookmark-container {
   width: calc((100vw / 3) - 20px);
   height: 50px;
-  padding: 10px 10px 0px 10px;
+  padding: 0px;
+  margin: 0px;
   display: grid;
   grid-gap: 0px;
-  grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
   grid-auto-flow: column;
-  grid-auto-columns: minmax(60px, 1fr);
+  grid-auto-columns: minmax(50px, 1fr);
   overflow-x: auto;
-}
-
-.multiple-index {
 }
 
 .index-button {
@@ -39,8 +39,8 @@
   padding: 0px 5px;
   font-weight: 600;
 }
-.index-numbering {
-  padding: 5px 0px;
+.company-index-numbering {
+  padding: 5px 5px;
   margin: 0px;
   font-size: 12px;
 }

@@ -1,7 +1,6 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
 import BranchPlaceholder from "../../../../app/common/loading/BranchPlaceholder";
-import DateTag from "../../../../app/common/tags/RefTag";
 import { Company } from "../../../../app/model/Company";
 import { User } from "../../../../app/model/User";
 import { useStore } from "../../../../app/stores/store";

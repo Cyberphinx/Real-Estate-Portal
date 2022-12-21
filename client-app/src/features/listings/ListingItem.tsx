@@ -1,14 +1,13 @@
 import React, { SyntheticEvent, useRef, useState } from "react";
 import './ListingItem.css';
 import { Listing } from "../../app/model/ListingAggregate/Listing";
-import { Currency } from "../../app/model/ListingAggregate/Objects/Pricing";
 import AgencyTag from "../../app/common/tags/AgencyTag";
-import { Content } from "../../app/model/ListingAggregate/Objects/Content";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../app/stores/store";
-import { priceQualifier, propertyType, rentFrequency } from "../../app/model/ListingAggregate/ListingEnums";
+import { Currency, priceQualifier, propertyType, rentFrequency } from "../../app/model/ListingAggregate/ListingEnums";
 import RefTag from "../../app/common/tags/RefTag";
-import { Country } from "../../app/model/Location";
+import { Content } from "../../app/model/ListingAggregate/ListingObjects";
+import WatchButton from "../../app/common/WatchButton";
 
 interface Props {
     listing: Listing | undefined;
@@ -67,7 +66,7 @@ export default observer(function ListingItem({ listing, predicate }: Props) {
         >
             <div className={selectedListing?.id === listing!.id ? "card-selected" : "card"} >
                 <AgencyTag listing={listing} />
-                <RefTag listing={listing} />
+                <WatchButton listing={listing} />
                 <section className="gallery">
                     <div style={{ position: "relative" }}>
                         <img src={image?.url} className="card-image" alt="property" />

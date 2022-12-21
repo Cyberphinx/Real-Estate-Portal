@@ -1,11 +1,9 @@
-import { Company } from '../model/Company';
 import { PagingParams } from '../model/Pagination';
 import { makeAutoObservable, reaction, runInAction } from "mobx";
 import agent from "../api/agent";
 import { Pagination } from '../model/Pagination';
 import { Listing, ListingFormValues } from '../model/ListingAggregate/Listing';
 import { MaxValue } from '../model/MaxValue';
-import { store } from './store';
 
 export default class ListingStore {
   listingRegistry = new Map<string, Listing>();

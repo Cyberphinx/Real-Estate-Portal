@@ -12,94 +12,31 @@
 }
 
 .types-button {
-  font-size: 12px;
+  font-size: 14px;
   padding: 3px 6px;
   border: none;
-  border-radius: 18px;
-  font-weight: 600;
-  background: none;
+  border-radius: 3px;
+  font-weight: 400;
+  background: #fff;
   color: #000;
   display: block;
-  position: relative;
+  margin: 12px auto;
 }
 .types-button:hover {
   cursor: pointer;
 }
 
-.types-dot {
-  visibility: hidden;
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  height: 14px;
-  width: 14px;
-  background-color: #000;
-  border-radius: 50%;
-  display: inline-block;
-}
-.types-dot-selected {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  height: 14px;
-  width: 14px;
-  background-color: #000;
-  border-radius: 50%;
-  display: inline-block;
-  color: #fff;
-}
-
 .types-button-selected {
-  font-size: 12px;
+  font-size: 14px;
   padding: 3px 6px;
-  border: none;
-  border-radius: 18px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
   font-weight: 600;
-  background: none;
+  background: #fff;
   color: #000;
   display: block;
-  position: relative;
+  margin: 12px auto;
 }
 .types-button-selected:hover {
   cursor: pointer;
-}
-
-.types-icon {
-  width: 35px;
-}
-.types-icon:hover {
-  filter: invert(17%) sepia(67%) saturate(7492%) hue-rotate(357deg)
-    brightness(90%) contrast(128%);
-}
-.types-icon:hover + .types-dot-selected {
-  background-color: red;
-}
-
-.types-button:hover .types-tooltip {
-  visibility: visible;
-}
-.types-button-selected:hover .types-tooltip {
-  visibility: visible;
-}
-
-.types-tooltip {
-  visibility: hidden;
-  position: absolute;
-  top: -20px;
-  right: 0px;
-  font-size: 12px;
-  z-index: 10;
-  padding: 3px 6px;
-  /* border: 1px solid black; */
-  border-radius: 3px;
-  font-weight: 600;
-  color: #000;
-  background-color: #FFC300;
-}
-
-.check-mark{
-  position: absolute;
-  top: 5px;
-  right: 0px;
-  width: 15px;
 }

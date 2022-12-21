@@ -1,10 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Company } from "../../../app/model/Company";
-import { Listing } from "../../../app/model/ListingAggregate/Listing";
 import { useStore } from "../../../app/stores/store";
 import Close from "./Close";
-import Locate from "./Locate";
 import LocateForCompany from "./LocateForCompany";
 import NewTab from "./NewTab";
 import './Toolbar.css';
@@ -13,8 +10,8 @@ export default function ToolbarForCompany() {
     const {companyStore} = useStore()
     const {selectedCompany, cancelSelectCompany} = companyStore;
 
-    const addedDate = new Date(selectedCompany!.addedOn);
-    const title = `Added on ${addedDate.toLocaleDateString()}`
+    // const addedDate = new Date(selectedCompany!.addedOn);
+    // const title = `Added on ${addedDate.toLocaleDateString()}`
 
     return (
         <div className="toolbar-container">

@@ -6,8 +6,7 @@ import { observer } from "mobx-react-lite";
 import { useStore } from "../stores/store";
 import ModalContainer from "../common/ModalContainer";
 import UserDropdown from "../../features/users/UserDropdown";
-import Dropdown from "./Dropdown";
-import OrderBy from "../../features/listings/filters/parameters/OrderBy";
+import Dropdown from "../../features/users/Dropdown";
 
 export default observer(function Nav() {
     const dropdownRef = useRef(null);
@@ -29,7 +28,7 @@ export default observer(function Nav() {
         <div>
             <ModalContainer />
             <ul className="nav-bar">
-                {/* <li className="nav-bar-item"><img className="logo" src="/assets/logo3.svg" alt="logo" /></li> */}
+                <li className="nav-bar-item"><img className="logo" src="/assets/sanctum.svg" alt="S" /></li>
                 <li className="nav-bar-item"><Link to="/">SANCTUM</Link></li>
                 <li className="nav-bar-item">
                     <button className={activeFeature === 0 ? "nav-button-selected" : "nav-button"}
@@ -63,7 +62,7 @@ export default observer(function Nav() {
                                 <div className="dropdown-container" ref={dropdownRef}>
                                     <button className="user-button profile" onClick={toggle}>
                                         <img className="user-icon" src="/assets/user.svg" alt="user" />
-                                        <span className="user-tooltip">User menu</span>
+                                        {/* <span className="user-tooltip">User menu</span> */}
                                     </button>
                                     {isActive && <UserDropdown />}
                                 </div>
@@ -76,7 +75,8 @@ export default observer(function Nav() {
                                 <div className="dropdown-container" ref={dropdownRef}>
                                     <button className="user-button profile" onClick={toggle}>
                                         <img className="user-icon" src="/assets/user.svg" alt="user" />
-                                        <span className="user-tooltip">User menu</span>
+                                        <img className="hamburger-icon" src="/assets/hamburger.svg" alt="dropdown" />
+                                        {/* <span className="user-tooltip">User menu</span> */}
                                     </button>
                                     {isActive && <Dropdown />}
                                 </div>

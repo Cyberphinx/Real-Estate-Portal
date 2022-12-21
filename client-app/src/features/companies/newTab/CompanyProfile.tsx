@@ -1,9 +1,8 @@
 import React from "react";
-import { Company } from "../../../app/model/Company";
+import { Company, Insurance } from "../../../app/model/Company";
 import { User } from "../../../app/model/User";
 import './CompanyProfile.css';
 import CompanyImages from "./CompanyImages";
-import { Insurance } from "../../../app/model/CompanyAggregate/Insurance";
 
 interface Props {
     company: Company | undefined;
@@ -40,7 +39,7 @@ export default function CompanyProfile({ company, user, setEditMode }: Props) {
                     <h3>Company insurances: </h3>
                     <div>{company?.insurances.map((insurance: Insurance) => (
                         <div key={insurance.id}>
-                            <p>{insurance.type} - {insurance.insurer}</p>
+                            <p>{insurance.type} - {insurance.provider}</p>
                         </div>
                     ))}</div>
                 </div>

@@ -14,7 +14,7 @@ export default observer(function Locate({selectedItem}: Props) {
     const map = useMap();
 
     const flyBack = useCallback(() => {
-        map.flyTo([selectedItem!.listingLocation.coordinates.latitude, selectedItem!.listingLocation.coordinates.longitude], 14, {
+        map.flyTo([selectedItem!.listingLocation.latitude, selectedItem!.listingLocation.longitude], 14, {
             duration: 3
         });
     }, [map, lat, long])
@@ -22,8 +22,8 @@ export default observer(function Locate({selectedItem}: Props) {
     return (
         <div className="locate-container">
             <button className="locate-button" onClick={() => {
-                setLat(selectedItem!.listingLocation.coordinates.latitude);
-                setLong(selectedItem!.listingLocation.coordinates.longitude);
+                setLat(selectedItem!.listingLocation.latitude);
+                setLong(selectedItem!.listingLocation.longitude);
                 flyBack();
             }}>
                 <img className="locate-icon" src="/assets/pin.svg" alt="locate" />

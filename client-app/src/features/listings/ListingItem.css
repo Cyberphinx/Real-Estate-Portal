@@ -128,7 +128,7 @@
 
 .right-arr-thumbnails {
   position: absolute;
-  bottom: 10px;
+  bottom: calc(100vh / 50);
   right: 3px;
   z-index: 2;
   border: none;
@@ -140,7 +140,7 @@
 }
 .left-arr-thumbnails {
   position: absolute;
-  bottom: 10px;
+  bottom: calc(100vh / 50);
   left: 3px;
   z-index: 2;
   border: none;

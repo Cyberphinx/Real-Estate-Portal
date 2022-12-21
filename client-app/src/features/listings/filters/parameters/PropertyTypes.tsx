@@ -20,19 +20,23 @@ export default observer(function PropertyTypes({ items, checked, onChange }: Pro
         onChange(newChecked);
     }
 
-    
+
 
     return (
         <div className="types-dropdown">
-            {items.map((propertyType: string, index:number) => (
-                <button
+            {items.map((propertyType: string, index: number) => (
+                <div
                     key={index}
                     className={checkedItems.includes(propertyType) ? "types-button-selected" : "types-button"}
-                    onClick={() => handleChecked(propertyType)}>
-                    <span>{propertyType}</span>
-                    <span className={checkedItems.includes(propertyType) ? "types-dot-selected" : "types-dot"}></span>
-                    {/* <span className="types-tooltip">{propertyType}</span> */}
-                </button>
+                    onClick={() => handleChecked(propertyType)}
+                >
+                    <input
+                        type="checkbox"
+                        checked={checkedItems.includes(propertyType) ? true : false}
+                        style={{ cursor: "pointer" }}
+                    />
+                    <label style={{ cursor: "pointer", paddingLeft:"3px" }}>{propertyType}</label>
+                </div>
             ))}
         </div>
     )

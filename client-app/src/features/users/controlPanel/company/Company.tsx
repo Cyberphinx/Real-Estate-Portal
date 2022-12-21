@@ -1,5 +1,4 @@
 import React from "react";
-import { RedressScheme } from "../../../../app/model/Company";
 import { User } from "../../../../app/model/User";
 import './Company.css';
 

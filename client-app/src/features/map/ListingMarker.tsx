@@ -232,8 +232,7 @@ export default observer(function ListingMarker({ points, clusters, supercluster 
                         }}
                     >
                         <Tooltip direction="bottom" offset={[10, 8]}>
-                            <AgencyTag listing={cluster.properties.listing} />
-                            <RefTag listing={cluster.properties.listing} />
+                            <AgencyTag listing={cluster.properties.listing} fontSize={"10px"} />
                             <img className="marker-snippet"
                                 src={cluster.properties.listing.contents[0].url}
                                 alt="listing"

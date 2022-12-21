@@ -16,7 +16,9 @@
   z-index: 23;
   background: white;
 }
-
+.details-contents {
+  
+}
 .details-contents > article {
   padding: 0px 20px;
 }

@@ -2,7 +2,6 @@ import { observer } from "mobx-react-lite";
 import React, { useCallback } from "react";
 import { useMap } from "react-leaflet";
 import { Company } from "../../../app/model/Company";
-import { Listing } from "../../../app/model/ListingAggregate/Listing";
 import { useStore } from "../../../app/stores/store";
 import './Locate.css';
 
@@ -15,7 +14,7 @@ export default observer(function Locate({selectedItem}: Props) {
     const map = useMap();
 
     const flyBack = useCallback(() => {
-        map.flyTo([selectedItem!.companyAddress.coordinates.latitude, selectedItem!.companyAddress.coordinates.longitude], 14, {
+        map.flyTo([selectedItem!.companyAddress.latitude, selectedItem!.companyAddress.longitude], 14, {
             duration: 3
         });
     }, [map, lat, long])
@@ -23,8 +22,8 @@ export default observer(function Locate({selectedItem}: Props) {
     return (
         <div className="locate-container">
             <button className="locate-button" onClick={() => {
-                setLat(selectedItem!.companyAddress.coordinates.latitude);
-                setLong(selectedItem!.companyAddress.coordinates.longitude);
+                setLat(selectedItem!.companyAddress.latitude);
+                setLong(selectedItem!.companyAddress.longitude);
                 flyBack();
             }}>
                 <img className="locate-icon" src="/assets/pin.svg" alt="locate" />
