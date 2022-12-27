@@ -8,6 +8,7 @@ using Domain.JobAggregate;
 using Domain.JobAggregate.Enums;
 using Domain.JobAggregate.Objects;
 using Domain.LocationAggregate;
+using Domain.AppUserAggregate.Enums;
 using Microsoft.AspNetCore.Identity;
 using Domain;
 
@@ -21,42 +22,42 @@ namespace Persistence
             {
                 var companyUsers = new List<AppUser>
                 {
-                    new AppUser{UserName = "handyman1", DisplayName = "handyman1", Email = "handy1@test.com"},
-                    new AppUser{UserName = "handyman2", Email = "handy2@test.com"},
-                    new AppUser{UserName = "handyman3", Email = "handy3@test.com"},
-                    new AppUser{UserName = "handyman4", Email = "handy4@test.com"},
-                    new AppUser{UserName = "handyman5", Email = "handy5@test.com"},
-                    new AppUser{UserName = "handyman6", Email = "handy6@test.com"},
-                    new AppUser{UserName = "moving1", Email = "move1@test.com"},
-                    new AppUser{UserName = "moving2", Email = "move2@test.com"},
-                    new AppUser{UserName = "moving3", Email = "move3@test.com"},
-                    new AppUser{UserName = "moving4", Email = "move4@test.com"},
-                    new AppUser{UserName = "moving5", Email = "move5@test.com"},
-                    new AppUser{UserName = "moving6", Email = "move6@test.com"},
-                    new AppUser{UserName = "cleaning1", Email = "cleaning1@test.com"},
-                    new AppUser{UserName = "cleaning2", Email = "cleaning2@test.com"},
-                    new AppUser{UserName = "cleaning3", Email = "cleaning3@test.com"},
-                    new AppUser{UserName = "cleaning4", Email = "cleaning4@test.com"},
-                    new AppUser{UserName = "cleaning5", Email = "cleaning5@test.com"},
-                    new AppUser{UserName = "cleaning6", Email = "cleaning6@test.com"},
-                    new AppUser{UserName = "electrician1", Email = "elec1@test.com"},
-                    new AppUser{UserName = "electrician2", Email = "elec2@test.com"},
-                    new AppUser{UserName = "electrician3", Email = "elec3@test.com"},
-                    new AppUser{UserName = "electrician4", Email = "elec4@test.com"},
-                    new AppUser{UserName = "electrician5", Email = "elec5@test.com"},
-                    new AppUser{UserName = "electrician6", Email = "elec6@test.com"},
-                    new AppUser{UserName = "plumber1", Email = "plumber1@test.com"},
-                    new AppUser{UserName = "plumber2", Email = "plumber2@test.com"},
-                    new AppUser{UserName = "plumber3", Email = "plumber3@test.com"},
-                    new AppUser{UserName = "plumber4", Email = "plumber4@test.com"},
-                    new AppUser{UserName = "plumber5", Email = "plumber5@test.com"},
-                    new AppUser{UserName = "plumber6", Email = "plumber6@test.com"},
-                    new AppUser{UserName = "architect1", Email = "architect1@test.com"},
-                    new AppUser{UserName = "architect2", Email = "architect2@test.com"},
-                    new AppUser{UserName = "architect3", Email = "architect3@test.com"},
-                    new AppUser{UserName = "architect4", Email = "architect4@test.com"},
-                    new AppUser{UserName = "architect5", Email = "architect5@test.com"},
-                    new AppUser{UserName = "architect6", Email = "architect6@test.com"},
+                    new AppUser{UserName = "handyman1", Email = "handy1@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "handyman2", Email = "handy2@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "handyman3", Email = "handy3@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "handyman4", Email = "handy4@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "handyman5", Email = "handy5@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "handyman6", Email = "handy6@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "moving1", Email = "move1@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "moving2", Email = "move2@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "moving3", Email = "move3@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "moving4", Email = "move4@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "moving5", Email = "move5@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "moving6", Email = "move6@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "cleaning1", Email = "cleaning1@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "cleaning2", Email = "cleaning2@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "cleaning3", Email = "cleaning3@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "cleaning4", Email = "cleaning4@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "cleaning5", Email = "cleaning5@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "cleaning6", Email = "cleaning6@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "electrician1", Email = "elec1@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "electrician2", Email = "elec2@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "electrician3", Email = "elec3@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "electrician4", Email = "elec4@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "electrician5", Email = "elec5@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "electrician6", Email = "elec6@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "plumber1", Email = "plumber1@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "plumber2", Email = "plumber2@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "plumber3", Email = "plumber3@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "plumber4", Email = "plumber4@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "plumber5", Email = "plumber5@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "plumber6", Email = "plumber6@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "architect1", Email = "architect1@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "architect2", Email = "architect2@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "architect3", Email = "architect3@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "architect4", Email = "architect4@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "architect5", Email = "architect5@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "architect6", Email = "architect6@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
                 };
 
                 foreach (var companyOwner in companyUsers)
@@ -68,15 +69,15 @@ namespace Persistence
 
                 var customerUsers = new List<AppUser>
                 {
-                    new AppUser{UserName = "lily", Email = "lily@test.com"},
-                    new AppUser{UserName = "jack", Email = "jack@test.com"},
-                    new AppUser{UserName = "ruby", Email = "ruby@test.com"},
-                    new AppUser{UserName = "lucy", Email = "lucy@test.com"},
-                    new AppUser{UserName = "tom", Email = "tom@test.com"},
-                    new AppUser{UserName = "peter", Email = "peter@test.com"},
-                    new AppUser{UserName = "mike", Email = "mike@test.com"},
-                    new AppUser{UserName = "lara", Email = "lara@test.com"},
-                    new AppUser{UserName = "sophie", Email = "sophie@test.com"}
+                    new AppUser{UserName = "lily", Email = "lily@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "Jack", Email = "jack@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "ruby", Email = "ruby@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "Lucy", Email = "lucy@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "Tom", Email = "tom@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "peter", Email = "peter@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "Mike", Email = "mike@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "lara", Email = "lara@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "sophie", Email = "sophie@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English}
                 };
 
                 foreach (var customer in customerUsers)
@@ -97,9 +98,11 @@ namespace Persistence
 
                 var agencyUsers = new List<AppUser>
                 {
-                    new AppUser{UserName = "savills", Email = "savills@test.com"},
-                    new AppUser{UserName = "hunters", Email = "hunters@test.com"},
-                    new AppUser{UserName = "rogerparry", Email = "rogerparry@test.com"},
+                    new AppUser{UserName = "savills", Email = "savills@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "hunters", Email = "hunters@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "RogerParry", Email = "rogerparry@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "Purple", Email = "purple@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
+                    new AppUser{UserName = "Ewe", Email = "ewe@test.com", AddedOn = DateTime.Now, Country = Country.UnitedKingdom, Language = Language.English},
                 };
 
                 foreach (var agent in agencyUsers)

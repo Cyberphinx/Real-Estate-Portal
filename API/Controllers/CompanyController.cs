@@ -62,7 +62,8 @@ namespace API.Controllers
         {
             return HandleResult(await Mediator.Send(new Delete.Command{Id = id}));
         }
-
+        
+        [Authorize(Roles = "Admin")]
         [HttpDelete("all")]
         public async Task<IActionResult> DeleteListings()
         {
@@ -74,6 +75,13 @@ namespace API.Controllers
         public async Task Seed()
         {
             await SeedCompanies.SeedData(_db);
+        }
+        
+        [Authorize(Policy = "IsCompanyOwner")]
+        [HttpGet("listings/{id}")]
+        public async Task<IActionResult> GetCompanyListings(Guid id, string predicate)
+        {
+            return HandleResult(await Mediator.Send(new ListListings.Query{CompanyId = id, Predicate = predicate}));
         }
 
     }

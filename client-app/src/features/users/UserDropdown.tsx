@@ -15,7 +15,7 @@ export default observer(function UserDropdown() {
 
     return (
         <div className="user-dropdown">
-            <button className="user-drop-button"
+            <button className="user-drop-button" style={{fontWeight:"600"}}
                 onClick={() => { cancelSelectListing(); cancelSelectCompany(); setActiveFeature(2); }}
             >Control Panel</button>
 

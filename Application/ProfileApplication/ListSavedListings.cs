@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Persistence;
 using Domain.JobAggregate.Enums;
 using Application.ProfileApplication.ProfileDtos;
+using Domain.ListingAggregate.Enums;
 
 namespace Application.ProfileApplication
 {
@@ -37,9 +38,18 @@ namespace Application.ProfileApplication
             {
                 var query = _context.ListingWatchers
                     .Where(u => u.AppUser.UserName == request.Username)
-                    .OrderBy(a => a.Listing.AddedOn)
+                    .OrderBy(x => x.Listing.AddedOn).ThenBy(x => x.Listing.Id)
                     .ProjectTo<WatcherListingDto>(_mapper.ConfigurationProvider)
                     .AsQueryable();
+
+                query = request.Predicate switch
+                {
+                    "price" => query.OrderBy(p => p.Price).ThenBy(p => p.Id),
+                    "priceDesc" => query.OrderByDescending(p => p.Price).ThenBy(p => p.Id),
+                    "rent" => query.Where(x => x.TransactionType == TransactionType.Rent),
+                    "sale" => query.Where(x => x.TransactionType == TransactionType.Sale),
+                    _ => query.OrderByDescending(p => p.AddedOn).ThenBy(p => p.Id)
+                };
 
                 var savedListings = await query.ToListAsync();
 

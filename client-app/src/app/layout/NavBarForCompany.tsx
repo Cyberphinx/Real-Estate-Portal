@@ -6,25 +6,25 @@ import { useStore } from "../stores/store";
 
 export default observer(function NavBarForCompany() {
     const { companyStore, featureStore } = useStore();
-    const { loadedCompany } = companyStore;
+    const { selectedCompany: company } = companyStore;
     const { setDescription, setContacts } = featureStore;
 
     const address = `
-        ${loadedCompany?.companyAddress.townOrCity && (loadedCompany?.companyAddress.townOrCity + ", ")}
-        ${loadedCompany?.companyAddress.county && (loadedCompany?.companyAddress.county + ", ")}
-        ${loadedCompany?.companyAddress.postalCode && (loadedCompany?.companyAddress.postalCode)}
+        ${company?.companyAddress.townOrCity && (company?.companyAddress.townOrCity + ", ")}
+        ${company?.companyAddress.county && (company?.companyAddress.county + ", ")}
+        ${company?.companyAddress.postalCode && (company?.companyAddress.postalCode)}
         `;
 
     return (
         <div>
             <ul className="nav-bar2">
-                {/* <li className="nav-bar-item"><img className="logo" src="/assets/logo3.svg" alt="logo" /></li> */}
+                <li className="nav-bar-item"><img className="logo-large" src="/assets/sanctum.svg" alt="S" /></li>
                 <li className="nav-bar2-item"><Link to="/">SANCTUM</Link></li>
                 <li className="nav-bar2-item"><p className="gist-style">
-                    {loadedCompany?.displayName}
+                    {company?.displayName}
                 </p></li>
                 <li className="nav-bar2-item"><p className="gist-style">
-                    #{loadedCompany?.companyReference}
+                    #{company?.companyReference}
                 </p></li>
                 <li className="nav-bar2-item"><p className="address-style">{address}</p></li>
 

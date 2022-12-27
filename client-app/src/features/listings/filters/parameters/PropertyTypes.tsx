@@ -1,5 +1,6 @@
 import { observer } from "mobx-react-lite";
 import React, { useState } from "react";
+import { useStore } from "../../../../app/stores/store";
 import './PropertyTypes.css';
 
 interface Props {
@@ -9,6 +10,9 @@ interface Props {
 }
 
 export default observer(function PropertyTypes({ items, checked, onChange }: Props) {
+    const { listingStore } = useStore();
+    const { predicate, maxValues } = listingStore;
+    
     const [checkedItems, setCheckedItems] = useState(checked || []);
 
     function handleChecked(value: string) {
@@ -38,6 +42,7 @@ export default observer(function PropertyTypes({ items, checked, onChange }: Pro
                     <label style={{ cursor: "pointer", paddingLeft:"3px" }}>{propertyType}</label>
                 </div>
             ))}
+            <button className="types-reset-button" onClick={() => predicate.delete("propertyTypes")}>Reset</button>
         </div>
     )
 });

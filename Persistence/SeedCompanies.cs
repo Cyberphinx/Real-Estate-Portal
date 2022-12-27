@@ -25,6 +25,7 @@ namespace Persistence
                     Username = "savills",
                     DisplayName = "Savills - London",
                     LegalName = "Savills (UK) Limited",
+                    IsMain = true,
                     CompanyContacts = new CompanyContacts
                     {
                         Phone = "+44 (0) 20 8877 1222",
@@ -119,6 +120,7 @@ namespace Persistence
                     Username = "savills",
                     DisplayName = "Savills - Edinburgh",
                     LegalName = "Savills (UK) Limited",
+                    IsMain = false,
                     CompanyContacts = new CompanyContacts
                     {
                         Phone = "+44 (0) 20 8877 1222",
@@ -212,6 +214,7 @@ namespace Persistence
                     CompanyReference = "purple2453",
                     DisplayName = "Purple Bricks 1",
                     LegalName = "Purplebricks Group PLC",
+                    IsMain = true,
                     CompanyRegistrationNumber = "8047368",
                     CompanyContacts = new CompanyContacts
                     {
@@ -308,6 +311,7 @@ namespace Persistence
                     DisplayName = "Purple Bricks 2",
                     LegalName = "Purplebricks Group PLC",
                     CompanyRegistrationNumber = "8047368",
+                    IsMain = false,
                     CompanyContacts = new CompanyContacts
                     {
                         Phone = "+44 (0) 117 910 2200",
@@ -402,6 +406,7 @@ namespace Persistence
                     CompanyReference = "purple6321",
                     DisplayName = "Purple Bricks 3",
                     LegalName = "Purplebricks Group PLC",
+                    IsMain = false,
                     CompanyRegistrationNumber = "8047368",
                     CompanyContacts = new CompanyContacts
                     {
@@ -496,6 +501,7 @@ namespace Persistence
                     Username = "purple",
                     CompanyReference = "purple1345",
                     DisplayName = "Purple Bricks 4",
+                    IsMain = false,
                     LegalName = "Purplebricks Group PLC",
                     CompanyRegistrationNumber = "8047368",
                     CompanyContacts = new CompanyContacts
@@ -589,6 +595,7 @@ namespace Persistence
                 new Company
                 {
                     AccessStatus = AccessStatus.Public,
+                    IsMain = true,
                     CompanyReference = "rogerparry3456",
                     CompanyAddress = new CompanyAddress
                     {
@@ -638,7 +645,7 @@ namespace Persistence
                     CompanyRegistrationNumber = "OC312203",
                     DisplayName = "Roger Parry",
                     LegalName = "Roger Parry & Partners LLP",
-                    Username ="rogerparry",
+                    Username ="RogerParry",
                     ServiceCategories = new List<ServiceCategory>
                     {
                         ServiceCategory.EstateAgent
@@ -687,6 +694,7 @@ namespace Persistence
                     CompanyReference = "ewe8594",
                     DisplayName = "Ewe move Hebden Bridge and Sowerby",
                     LegalName = "Caine-Knight Property Limited",
+                    IsMain = true,
                     CompanyRegistrationNumber = "11470075",
                     CompanyContacts = new CompanyContacts
                     {
@@ -782,6 +790,7 @@ namespace Persistence
                     CompanyReference = "hunters3546",
                     DisplayName = "Hunters 1",
                     LegalName = "Hunters (Midlands) Limited",
+                    IsMain = true,
                     CompanyContacts = new CompanyContacts
                     {
                         Phone = "+44 (0) 1564 770707",
@@ -877,6 +886,7 @@ namespace Persistence
                     CompanyReference = "hunters7412",
                     DisplayName = "Hunters 2",
                     LegalName = "Hunters (Midlands) Limited",
+                    IsMain = false,
                     CompanyContacts = new CompanyContacts
                     {
                         Phone = "+44 (0) 1564 770707",
@@ -973,6 +983,7 @@ namespace Persistence
                     LegalName = "Moving Mountains Limited",
                     Username = "movingmountains",
                     AddedOn = new DateTime(2022,07,15),
+                    IsMain = true,
                     AccessStatus = AccessStatus.Public,
                     ServiceCategories = new List<ServiceCategory>
                     {
@@ -1052,6 +1063,7 @@ namespace Persistence
                     DisplayName = "CAE Electrical",
                     LegalName = "CAE Electrical",
                     Username = "electrician1",
+                    IsMain = true,
                     AddedOn = new DateTime(2022,03,15),
                     ServiceCategories = new List<ServiceCategory>
                     {
@@ -1114,6 +1126,7 @@ namespace Persistence
                     CompanyReference = "cleaning13485",
                     LegalName = "Cleaning OCD",
                     Username = "cleaning1",
+                    IsMain = true,
                     AccessStatus = AccessStatus.Public,
                     AddedOn = new DateTime(2022,03,15),
                     ServiceCategories = new List<ServiceCategory>
@@ -1177,6 +1190,7 @@ namespace Persistence
                     CompanyReference = "plumber117345",
                     LegalName = "Bridge heating",
                     Username = "plumber1",
+                    IsMain = true,
                     AccessStatus = AccessStatus.Public,
                     AddedOn = new DateTime(2022,03,15),
                     ServiceCategories = new List<ServiceCategory>
@@ -1240,6 +1254,7 @@ namespace Persistence
                     CompanyReference = "handyman17586",
                     LegalName = "J.A. Steel & Son",
                     Username = "handyman1",
+                    IsMain = true,
                     AccessStatus = AccessStatus.Public,
                     AddedOn = new DateTime(2022,03,15),
                     ServiceCategories = new List<ServiceCategory>

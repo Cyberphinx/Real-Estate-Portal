@@ -40,3 +40,19 @@
 .types-button-selected:hover {
   cursor: pointer;
 }
+
+.types-reset-button {
+  font-size: 14px;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-weight: 400;
+  background: #fff;
+  color: #000;
+  display: block;
+  margin: 12px auto 6px auto;
+}
+.types-reset-button:hover {
+  cursor: pointer;
+  background: #f8f8f9;
+}

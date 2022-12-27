@@ -11,21 +11,23 @@ import { UnitOfLength } from "../../../app/model/ListingAggregate/ListingEnums";
 
 export default observer(function ListingDetailsPage() {
     const { id } = useParams<string>();
-    const { listingStore: { loadedListing, loadListing, loadingListing }, featureStore } = useStore();
+    const { listingStore, featureStore } = useStore();
+    const { selectedListing: listing, loadListing, loadingListing, cancelSelectListing } = listingStore;
     const { description, setDescription, contacts, setContacts } = featureStore;
 
     useEffect(() => {
         if (id) loadListing(id);
-    }, [id, loadListing])
+        return () => cancelSelectListing();
+    }, [id, loadListing, cancelSelectListing])
 
-    if (loadingListing || !loadedListing) return <LoadingComponent content={"Loading..."} />;
+    if (loadingListing || !listing) return <LoadingComponent content={"Loading..."} />;
 
     return (
         <div>
             <NavBar />
             <div style={{ position: "relative" }}>
                 <section className="listing-contents-container" >
-                    {loadedListing.contents.map((content: Content) => (
+                    {listing.contents.map((content: Content) => (
                         <div className="single-content-container" key={content.id}>
                             <img src={content.url} alt={content.caption} className="content-images" />
                         </div>
@@ -38,7 +40,7 @@ export default observer(function ListingDetailsPage() {
                             <Close close={() => setDescription()} />
                         </div>
                         <div className="listing-descriptions-container">
-                            {loadedListing.detailedDescriptions.map((description: DetailedDescription) => (
+                            {listing.detailedDescriptions.map((description: DetailedDescription) => (
                                 <article key={description.id} >
                                     <h1>{description.heading}</h1>
                                     <span>
@@ -56,12 +58,12 @@ export default observer(function ListingDetailsPage() {
                         <div className="close-position">
                             <Close close={() => setContacts()} />
                         </div>
-                        <div className="listing-contacts-container">
+                        <article className="listing-contacts-container">
                             <h1>Phone</h1>
-                            <p>{loadedListing.company.companyContacts.phone}</p>
+                            <p>{listing.company.companyContacts.phone}</p>
                             <h1>Email</h1>
-                            <p>{loadedListing.company.companyContacts.email}</p>
-                        </div>
+                            <p>{listing.company.companyContacts.email}</p>
+                        </article>
                     </section>}
             </div>
         </div>

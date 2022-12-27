@@ -7,16 +7,14 @@ import { MaxValue } from '../model/MaxValue';
 
 export default class ListingStore {
   listingRegistry = new Map<string, Listing>();
-  allListingRegistry = new Map<string, Listing>();
   selectedListing: Listing | undefined = undefined;
   loading = false;
   loadingInitial = false;
-  loadingAllListingsAtOnce = false;
   loadingListing = false;
-  loadedListing: Listing | undefined = undefined;
   contacts = false;
   combinedListing: Listing[] = [];
-  // listings: Listing[] = [];
+  loadingWatching = false;
+
 
   // Pagination
   pagination: Pagination | null = null;
@@ -24,8 +22,7 @@ export default class ListingStore {
   loadingNext = false;
 
   // Filtering
-  // predicate = new Map().set("searchTerm", "London").set("channel", "sale");
-  predicate = new Map().set("mapBounds", "").set("channel", "sale").set("orderBy", "_");
+  predicate = new Map().set("mapBounds", "").set("channel", "rent").set("orderBy", "_");
   loadingFilters = false;
   maxValueRegistry = new Map<string, number>();
 
@@ -38,7 +35,6 @@ export default class ListingStore {
         // restart from page 1
         this.pagingParams = new PagingParams(1, 100);
         this.listingRegistry.clear();
-        // this.listings = [];
         this.loadListings();
       }
     )
@@ -122,39 +118,30 @@ export default class ListingStore {
     }
   };
 
-  loadAllListings = async () => {
-    this.setLoadingAllAtOnce(true);
-    // Asynchronous code is inside Try Catch block
-    try {
-      const listings = await agent.Listings.listAll();
-      listings.forEach(listing => {
-        this.setAllListing(listing);
-      })
-      this.setLoadingAllAtOnce(false);
-    } catch (error) {
-      console.log(error);
-      this.setLoadingAllAtOnce(false);
-    }
-  };
-
   loadListing = async (id: string) => {
-    this.setLoadingListing(true);
-    try {
-      const listing = await agent.Listings.details(id);
-      this.loadedListing = listing;
-      this.setLoadingListing(false);
-    } catch (error) {
-      console.log(error);
-      this.setLoadingListing(false);
+    let listing = this.getListing(id);
+    if (listing) {
+      this.selectedListing = listing;
+      return listing;
     }
+    else {
+      this.setLoadingListing(true);
+      try {
+        listing = await agent.Listings.details(id);
+        this.setListing(listing);
+        runInAction(() => this.selectedListing = listing);
+        this.setLoadingListing(false);
+        return listing;
+      } catch (error) {
+        console.log(error);
+        this.setLoadingListing(false);
+      }
+    }
+
   }
 
   setLoadingInitial = (state: boolean) => {
     this.loadingInitial = state;
-  }
-
-  setLoadingAllAtOnce = (state: boolean) => {
-    this.loadingAllListingsAtOnce = state;
   }
 
   setLoadingListing = (state: boolean) => {
@@ -163,14 +150,11 @@ export default class ListingStore {
 
   // helper method to map the listings to listing registry
   private setListing = (listing: Listing) => {
-    // listing.addedOn = new Date(listing.addedOn!);
     this.listingRegistry.set(listing.id, listing);
   };
 
-  // helper method to map the listings to listing registry
-  private setAllListing = (listing: Listing) => {
-    // listing.addedOn = new Date(listing.addedOn!);
-    this.allListingRegistry.set(listing.id, listing);
+  private getListing = (id: string) => {
+    return this.listingRegistry.get(id);
   };
 
   setCombinedListing = (listings: Listing[]) => {
@@ -185,30 +169,15 @@ export default class ListingStore {
     this.selectedListing = undefined;
   }
 
-  // LOAD LISTINGS END
 
-
-  // PREPARE LISTING MAP DATA FOR VIEW - START
   get listings() {
     return Array.from(this.listingRegistry.values());
-  }
-
-  private getListing = (id: string) => {
-    return this.listingRegistry.get(id);
-    // return this.listings.find(x => x.id === id);
-  };
-
-  get allListings() {
-    return Array.from(this.allListingRegistry.values());
   }
 
   get maxValues() {
     return Array.from(this.maxValueRegistry.values());
   }
-  // PREPARE LISTING MAP DATA FOR VIEW - END
 
-
-  // GET MAXIMUM VALUES FOR FILTER - START
   loadMaxValues = async () => {
     this.setLoadingFilters(true);
     // Asynchronous code is inside Try Catch block
@@ -232,13 +201,24 @@ export default class ListingStore {
   private setMaxValueRegistry = (item: MaxValue) => {
     this.maxValueRegistry.set(item.name, item.value);
   };
-  // GET MAXIMUM VALUES FOR FILTER - END
 
   setContacts = (state: boolean) => {
     this.contacts = state;
   }
 
-  // CRUD Listing - START
+  watchListing = async (listingId: string) => {
+    this.loadingWatching = true;
+    try {
+        await agent.Listings.watchListing(listingId);
+        runInAction(() => {
+            this.loadingWatching = false;
+        })
+    } catch (error) {
+        console.log(error);
+        runInAction(() => this.loadingWatching = false);
+    }
+}
+
   createListing = async (listing: ListingFormValues) => {
     // const user = store.userStore.user;
     try {
@@ -264,7 +244,6 @@ export default class ListingStore {
         if (listing.id) {
           let updatedListing = { ...this.getListing(listing.id), ...listing }
           this.listingRegistry.set(listing.id, updatedListing as Listing);
-          // this.listings.push(updatedListing as Listing);
           this.selectedListing = updatedListing as Listing;
         }
       });
@@ -279,7 +258,6 @@ export default class ListingStore {
       await agent.Listings.delete(id);
       runInAction(() => {
         this.listingRegistry.delete(id);
-        // this.listings.splice(this.listings.indexOf(this.listings.find(x => x.id === id)!), 1);
         this.loading = false;
       });
     } catch (error) {
@@ -289,7 +267,5 @@ export default class ListingStore {
       });
     }
   };
-
-  // CRUD listing - END
 
 }

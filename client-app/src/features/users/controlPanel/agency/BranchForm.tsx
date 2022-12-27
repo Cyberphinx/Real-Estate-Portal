@@ -50,6 +50,7 @@ export default observer(function BranchForm({ setBranchForm }: Props) {
         companyRegistrationNumber: "",
         displayName: "",
         insurances: [],
+        isMain: false,
         lastModified: new Date(),
         legalName: "",
         membership: {

@@ -21,16 +21,22 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(command));
         }
 
-        [HttpGet("{username}/jobs")]
+        [HttpGet("jobs/{username}")]
         public async Task<IActionResult> GetUserJobs(string username, string predicate)
         {
             return HandleResult(await Mediator.Send(new ListJobs.Query{Username = username, Predicate = predicate}));
         }
 
-        [HttpGet("{username}/listings")]
+        [HttpGet("listings/{username}")]
         public async Task<IActionResult> GetUserSavedListings(string username, string predicate)
         {
             return HandleResult(await Mediator.Send(new ListSavedListings.Query{Username = username, Predicate = predicate}));
+        }
+
+        [HttpGet("companies/{username}")]
+        public async Task<IActionResult> GetUserCompanies(string username, string predicate)
+        {
+            return HandleResult(await Mediator.Send(new ListCompanies.Query{Username = username, Predicate = predicate}));
         }
     }
 }

@@ -5,13 +5,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Domain;
 using Domain.AppUserAggregate.Enums;
+using Domain.LocationAggregate;
 
 namespace API.DTOs
 {
     public class RegisterDto
     {
-        public string DisplayName { get; set; }
-
         [Required]
         [EmailAddress]
         public string Email { get; set; }
@@ -24,5 +23,8 @@ namespace API.DTOs
         public string Username { get; set; }
         public string PhoneNumber { get; set; }
         public AccountType AccountType { get; set; }
+        public DateTime AddedOn { get; set; }
+        public Country Country { get; set; }
+        public Language Language { get; set; }
     }
 }

@@ -4,7 +4,6 @@ import { useStore } from "../stores/store";
 import { observer } from "mobx-react-lite";
 import Nav from "./Nav";
 import Listings from "../../features/listings/Listings";
-import Companies from "../../features/companies/Companies";
 import ControlPanel from "../../features/users/controlPanel/ControlPanel";
 import AdminPanel from "../../features/users/controlPanel/AdminPanel";
 import ListingDetails from "../../features/listings/details/ListingDetails";
@@ -12,26 +11,35 @@ import useSupercluster from "use-supercluster";
 import { Listing } from "../model/ListingAggregate/Listing";
 import { Company } from "../model/Company";
 import CompanyDetails from "../../features/companies/details/CompanyDetails";
+import Services from "../../features/networks/Services";
 
 export default observer(function Dashboard() {
-    const { featureStore, listingStore, mapStore, jobStore, companyStore } = useStore();
+    const { featureStore, listingStore, mapStore, jobStore, companyStore, userStore, profileStore } = useStore();
     const { activeFeature } = featureStore;
-    const { loadJobs, jobRegistry } = jobStore;
-    const { listings, selectedListing, listingRegistry, loadListings } = listingStore;
-    const { companies, selectedCompany, loadCompanies, companyRegistry } = companyStore;
+    const { loadJobs, jobRegistry, loadingJobs } = jobStore;
+    const { listings, selectedListing, listingRegistry, loadListings, loadingInitial } = listingStore;
+    const { companies, selectedCompany, loadCompanies, companyRegistry, loadingCompanies } = companyStore;
     const { zoom, bounds } = mapStore;
+    const { user, isLoggedIn } = userStore;
+    const { loadProfile, profile, loadUserListings, setActiveTab, userListings, loadingUserListings } = profileStore;
 
     useEffect(() => {
-        if (listingRegistry.size <= 1) loadListings();
-    }, [loadListings, listingRegistry.size])
+        loadListings();
+    }, [loadListings])
 
     useEffect(() => {
-        if (jobRegistry.size <= 1) loadJobs();
-    }, [loadJobs, jobRegistry.size])
+        loadJobs();
+    }, [loadJobs])
 
     useEffect(() => {
-        if (companyRegistry.size <= 1) loadCompanies();
-    }, [loadCompanies, companyRegistry.size])
+        loadCompanies();
+    }, [loadCompanies])
+
+    useEffect(() => {
+        if (isLoggedIn) {
+            loadUserListings(user!.username);
+        };
+    }, [isLoggedIn, user])
 
     // map data into "feature" GeoJson objects
     const points: GeoJSON.Feature[] = listings.map(
@@ -71,11 +79,11 @@ export default observer(function Dashboard() {
         zoom: zoom,
         options: { radius: 100, maxZoom: 20 }
     });
-    
+
 
     const features = [
         <Listings clusters={clusters} supercluster={supercluster} points={points} companyPoints={companyPoints} />,
-        <Companies />,
+        <Services />,
         <ControlPanel />,
         <AdminPanel />
     ]

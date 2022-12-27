@@ -1,0 +1,103 @@
+.thread-container {
+  position: relative;
+  background: #f8f8f9;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 20px 0px;
+  display: grid;
+  grid-template-columns: 40px auto;
+  grid-gap: 20px;
+  text-decoration: none;
+  color: #000;
+}
+
+.thread-post {
+  border-radius: 5px;
+  margin: 10px;
+}
+
+
+.thread-subtitle {
+  font-size: 12px;
+}
+
+.thread-title {
+  font-weight: 600;
+}
+
+.thread-location {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.thread-content {
+  font-size: 14px;
+}
+
+.thread-author {
+  padding: 5px;
+}
+
+.default-user-icon {
+  width: 40px;
+  border: 1px solid grey;
+  border-radius: 50%;
+}
+
+.channel-profile > article {
+  padding: 10px;
+  background: #f8f8f9;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.thread-button {
+  border: 1px solid #91959c;
+  border-radius: 3px;
+  background: none;
+  padding: 5px 10px;
+}
+.thread-button:hover {
+  cursor: pointer;
+  background: #000;
+  color: #fff;
+}
+
+.thread-gallery {
+  /* border: 1px solid black; */
+  margin-right: 40px;
+  overflow: hidden;
+  position: relative;
+}
+
+.thread-carousel {
+  /* border: 1px solid black; */
+  display: grid;
+  grid-gap: 10px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+.job-thumbnail {
+  width: 100%;
+  height: calc(100vh / 6);
+  border-radius: 3px;
+  object-fit: cover;
+  z-index: 1;
+}
+.job-thumbnail:hover + .job-numbering {
+  background: #ffc300;
+}
+.job-numbering {
+  visibility: hidden;
+  position: absolute;
+  left: 1px;
+  top: 0px;
+  padding: 0px 3px 2px 3px;
+  border-radius: 3px;
+  background: #fff;
+  color: #000;
+  font-size: 12px;
+  z-index: 2;
+}

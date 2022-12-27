@@ -163,8 +163,8 @@ export enum PriceQualifier {
     saleByTender
 }
 
-export const priceQualifier = (listing: Listing) => {
-    switch (listing.pricing.priceQualifier) {
+export const priceQualifier = (priceQualifier: PriceQualifier) => {
+    switch (priceQualifier) {
         case 0:
             return "Fixed price"
         case 1:

@@ -34,8 +34,11 @@ namespace Persistence.Migrations
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
                     AccountType = table.Column<int>(type: "integer", nullable: false),
+                    AddedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: true),
                     DisplayName = table.Column<string>(type: "text", nullable: true),
+                    Country = table.Column<int>(type: "integer", nullable: false),
+                    Language = table.Column<int>(type: "integer", nullable: false),
                     UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
@@ -66,6 +69,7 @@ namespace Persistence.Migrations
                     CompanyReference = table.Column<string>(type: "text", nullable: true),
                     CompanyRegistrationNumber = table.Column<string>(type: "text", nullable: true),
                     DisplayName = table.Column<string>(type: "text", nullable: true),
+                    IsMain = table.Column<bool>(type: "boolean", nullable: false),
                     LastModified = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     LegalName = table.Column<string>(type: "text", nullable: true),
                     RedressSchemes = table.Column<int[]>(type: "integer[]", nullable: true),
@@ -855,10 +859,10 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "1", "7ef3f462-52c9-4d43-b52a-eec75f1bc7c0", "Company", "COMPANY" },
-                    { "2", "b1ff3c3d-7323-4ca4-8a00-b47fddf63222", "Customer", "CUSTOMER" },
-                    { "3", "1394b809-9739-4334-bbd6-260e4e42a896", "Agency", "AGENCY" },
-                    { "4", "feeef611-9180-4f17-a3a1-ba96084c4f02", "Admin", "ADMIN" }
+                    { "1", "117610db-02b1-4b50-a075-f708886232e7", "Company", "COMPANY" },
+                    { "2", "9c93bfbb-8681-401d-9a71-ccc820d6b4cb", "Customer", "CUSTOMER" },
+                    { "3", "a8c14c77-f66d-4ddb-823a-da73fb1b2eb7", "Agency", "AGENCY" },
+                    { "4", "f2009c60-df10-4dc5-a58c-87c7c5b57bb4", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.CreateIndex(

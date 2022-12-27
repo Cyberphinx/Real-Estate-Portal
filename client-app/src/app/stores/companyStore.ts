@@ -1,3 +1,4 @@
+import { Stock } from './../model/Company';
 import { Company, CompanyFormValues } from '../model/Company';
 import { makeAutoObservable, reaction, runInAction } from "mobx";
 import agent from "../api/agent";
@@ -9,17 +10,18 @@ export default class CompanyStore {
   companyRegistry = new Map<string, Company>();
   myCompany: Company | undefined = undefined;
   selectedCompany: Company | undefined = undefined;
-  loadedCompany: Company | undefined = undefined;
   loadingCompanies = false;
   loadingCompany = false;
+  loadingCompanyListings = false;
   editMode = false;
+  companyListings: Stock[] = [];
 
-   // Pagination
-   pagination: Pagination | null = null;
-   pagingParams = new PagingParams();
-   loadingNext = false;
+  // Pagination
+  pagination: Pagination | null = null;
+  pagingParams = new PagingParams();
+  loadingNext = false;
 
-    // Filtering
+  // Filtering
   predicate = new Map().set("mapBounds", "").set("serviceCategory", "17").set("orderBy", "_");
   loadingFilters = false;
 
@@ -38,67 +40,52 @@ export default class CompanyStore {
     )
   }
 
-// PAGINATION START
-setPagingParams = (pagingParams: PagingParams) => {
-  this.pagingParams = pagingParams;
-}
-
-setPredicate = (predicate: string, value: string | string[]) => {
-  switch (predicate) {
-    case "serviceCategory":
-      this.predicate.delete("serviceCategory");
-      this.predicate.set("serviceCategory", value);
-      break;
-    case "searchTerm":
-      this.predicate.delete("mapBounds");
-      this.predicate.delete("searchTerm");
-      this.predicate.set("searchTerm", value);
-      break;
-    case "mapBounds":
-      this.predicate.delete("mapBounds");
-      this.predicate.delete("searchTerm");
-      this.predicate.set("mapBounds", value);
-      break;
-    case "orderBy":
-      this.predicate.delete("orderBy");
-      this.predicate.set("orderBy", value);
-      break;
+  // PAGINATION START
+  setPagingParams = (pagingParams: PagingParams) => {
+    this.pagingParams = pagingParams;
   }
-}
 
-get axiosParams() {
-  const params = new URLSearchParams();
-  params.append("pageNumber", this.pagingParams.pageNumber.toString());
-  params.append("pageSize", this.pagingParams.pageSize.toString());
-  this.predicate.forEach((value, key) => {
-    params.append(key, value);
-  })
-  return params;
-}
+  setPredicate = (predicate: string, value: string | string[]) => {
+    switch (predicate) {
+      case "serviceCategory":
+        this.predicate.delete("serviceCategory");
+        this.predicate.set("serviceCategory", value);
+        break;
+      case "searchTerm":
+        this.predicate.delete("mapBounds");
+        this.predicate.delete("searchTerm");
+        this.predicate.set("searchTerm", value);
+        break;
+      case "mapBounds":
+        this.predicate.delete("mapBounds");
+        this.predicate.delete("searchTerm");
+        this.predicate.set("mapBounds", value);
+        break;
+      case "orderBy":
+        this.predicate.delete("orderBy");
+        this.predicate.set("orderBy", value);
+        break;
+    }
+  }
 
-setLoadingNext = (value: boolean) => {
-  this.loadingNext = value;
-}
+  get axiosParams() {
+    const params = new URLSearchParams();
+    params.append("pageNumber", this.pagingParams.pageNumber.toString());
+    params.append("pageSize", this.pagingParams.pageSize.toString());
+    this.predicate.forEach((value, key) => {
+      params.append(key, value);
+    })
+    return params;
+  }
 
-setPagination = (pagination: Pagination) => {
-  this.pagination = pagination;
-}
-// PAGINATION END
+  setLoadingNext = (value: boolean) => {
+    this.loadingNext = value;
+  }
 
-  // loadCompanies = async () => {
-  //   this.setLoadingCompanies(true);
-  //   // Asynchronous code is inside Try Catch block
-  //   try {
-  //     const companies = await agent.Companies.list();
-  //     companies.forEach(company => {
-  //       this.companyRegistry.set(company.id, company);
-  //     })
-  //     this.setLoadingCompanies(false);
-  //   } catch (error) {
-  //     runInAction(() => this.setLoadingCompanies(false));
-  //     console.log(error);
-  //   }
-  // };
+  setPagination = (pagination: Pagination) => {
+    this.pagination = pagination;
+  }
+  // PAGINATION END
 
   loadCompanies = async () => {
     this.setLoadingCompanies(true);
@@ -117,21 +104,34 @@ setPagination = (pagination: Pagination) => {
   };
 
   loadCompany = async (id: string) => {
-    this.setLoadingCompany(true);
-    try {
-      const company = await agent.Companies.details(id);
-      this.loadedCompany = company;
-      this.setLoadingCompany(false);
-    } catch (error) {
-      console.log(error);
-      this.setLoadingCompany(false);
+    let company = this.getCompany(id);
+    if (company) {
+      this.selectedCompany = company;
+      return company;
+    }
+    else {
+      this.setLoadingCompany(true);
+      try {
+        company = await agent.Companies.details(id);
+        this.setCompany(company);
+        runInAction(() => this.selectedCompany = company);
+        this.setLoadingCompany(false);
+        return company;
+      } catch (error) {
+        console.log(error);
+        this.setLoadingCompany(false);
+      }
     }
   }
 
-   // helper method to map the companies to company registry
-   private setCompany = (company: Company) => {
+  // helper method to map the companies to company registry
+  private setCompany = (company: Company) => {
     this.companyRegistry.set(company.id, company);
   };
+
+  private getCompany = (id: string) => {
+    return this.companyRegistry.get(id);
+  }
 
   setLoadingCompanies = (state: boolean) => {
     this.loadingCompanies = state;
@@ -156,7 +156,7 @@ setPagination = (pagination: Pagination) => {
   loadMyCompany = async () => {
     try {
       const myCompany = await agent.Companies.detailsmycompany();
-        this.myCompany = myCompany;
+      this.myCompany = myCompany;
     } catch (error) {
       console.log(error);
     }
@@ -194,7 +194,21 @@ setPagination = (pagination: Pagination) => {
       console.log(error);
     };
   }
-  
+
+  loadCompanyListings = async (id: string, predicate?: string) => {
+    this.loadingCompanyListings = true;
+    try {
+        const listings = await agent.Companies.listListings(id, predicate!);
+        runInAction(() => {
+            this.companyListings = listings;
+            this.loadingCompanyListings = false;
+        })
+    } catch (error) {
+        console.log(error);
+        runInAction(() => this.loadingCompanyListings = false);
+    }
+}
+
 }
 
 

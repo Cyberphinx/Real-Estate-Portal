@@ -13,7 +13,6 @@ export default observer(function Dropdown() {
         <div className="dropdown">
             <button className="drop-button" style={{fontWeight:"600"}} onClick={() => openModal(<Register />)}>Register</button>
             <button className="drop-button" onClick={() => openModal(<LoginForm />)}>Login</button>
-            {/* <li className="dropdown-item"><button className="drop-button" onClick={() => openModal(<RegisterForm />)}>Register</button></li> */}
             <button className="drop-button" >Dark Mode</button>
         </div>
     );

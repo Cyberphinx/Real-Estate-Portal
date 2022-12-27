@@ -23,6 +23,7 @@ namespace Domain.CompanyAggregate
         public string DisplayName { get; set; }
         public ICollection<Invoice> Invoices { get; set; }
         public ICollection<Insurance> Insurances { get; set; }
+        public bool IsMain { get; set; }
         public DateTime LastModified { get; set; }
         public string LegalName { get; set; }
         public ICollection<Listing> Listings { get; set; }

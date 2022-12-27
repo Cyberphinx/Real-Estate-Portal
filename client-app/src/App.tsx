@@ -11,6 +11,7 @@ import TestErrors from './features/errors/TestError';
 import LoginForm from './features/users/LoginForm';
 import ListingDetailsPage from './features/listings/newTab/ListingDetailsPage';
 import CompanyDetailsPage from './features/companies/newTab/CompanyDetailsPage';
+import JobDetailsPage from './features/networks/newTab/JobDetailsPage';
 
 function App() {
   const {commonStore, userStore} = useStore();
@@ -32,6 +33,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path='/listing/:id' element={<ListingDetailsPage />} />
         <Route path='/company/:id' element={<CompanyDetailsPage />} />
+        <Route path='/job/:id' element={<JobDetailsPage />} />
         <Route path='/login' element={<LoginForm />} />
         <Route path='/errors' element={<TestErrors />}/>
         <Route path='/server-error' element={<ServerError />} />

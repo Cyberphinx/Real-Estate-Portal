@@ -1,89 +1,75 @@
 import { observer } from "mobx-react-lite";
-import React, {  useState } from "react";
-import { Company  } from "../../../../app/model/Company";
+import React, { useEffect } from "react";
+import LoadingComponent from "../../../../app/common/loading/LoadingComponent";
+import { AccessStatus } from "../../../../app/model/AccessStatus";
 import { User } from "../../../../app/model/User";
 import { useStore } from "../../../../app/stores/store";
 import './Agency.css';
-import BranchForm from "./BranchForm";
-import Collection from "./Collection";
-import ListingForm from "./ListingForm";
-import Portfolio from "./Portfolio";
+import { capitalizeFirstLetter } from "../../../../app/common/HelperFunctions";
+import UserSettings from "../common/UserSettings";
+import PropertyWatchlist from "../common/PropertyWatchlist";
+import MyJobPosts from "../common/MyJobPosts";
+import Messages from "../common/Messages";
+import AgentListings from "./AgentListings";
+import UserCompanies from "../common/UserCompanies";
 
 interface Props {
     user: User | null;
 }
 
-export default observer(function Agency({ user }: Props) {
-    const { companyStore, featureStore } = useStore();
-    const { companies } = companyStore;
-    const { activeAgencyPanel, setActiveAgencyPanel } = featureStore;
-    const [branchForm, setBranchForm] = useState(false);
-    const [listingForm, setListingForm] = useState(false);
-    const [selectedPortfolio, setSelectedPortfolio] = useState<Company | null>(null);
-    const [portfolio, setPortfolio] = useState(false);
+export default observer(function Customer({ user }: Props) {
+    const { profileStore } = useStore();
+    const { loadProfile, loadingProfile, activeTab, setActiveTab } = profileStore;
 
-    const titles = [
-        <p className="agency-toolbar-title">
-            {user?.username} Portfolio
-        </p>,
+    useEffect(() => {
+        loadProfile(user!.username);
+        return () => {
+            setActiveTab(0);
+        }
+    }, [loadProfile, user!.username, setActiveTab])
 
-        <div style={{ position: "relative" }}>
-            <p className="agency-toolbar-title">Create a new branch</p>
-            <button className="back" onClick={() => setActiveAgencyPanel(0)}>Back</button>
-        </div>,
-
-        <div style={{ position: "relative" }}>
-            <p className="agency-toolbar-title">{selectedPortfolio?.displayName}</p>
-            <button className="back" onClick={() => setActiveAgencyPanel(0)}>Back</button>
-        </div>,
-
-        <div style={{ position: "relative" }}>
-            <p className="agency-toolbar-title">Create a new listing</p>
-            <button className="back" onClick={() => setActiveAgencyPanel(2)}>Back</button>
-        </div>,
-    ]
-
-    const features = [
-        <Collection
-            user={user}
-            setBranchForm={setBranchForm}
-            setPortfolio={setPortfolio}
-            companies={companies}
-            setSelectedPortfolio={setSelectedPortfolio}
-        />,
-        <BranchForm setBranchForm={setBranchForm} />,
-        <Portfolio selectedPortfolio={selectedPortfolio} listingForm={listingForm} setListingForm={setListingForm} />,
-        <ListingForm />
+    const panes = [
+        <UserSettings />,
+        <UserCompanies />,
+        <AgentListings />,
+        <MyJobPosts />,
+        <Messages />
     ]
 
     return (
-        <div className="agency-container">
-            <section className="agency-section-one">
-                <article>
-                    <button className="agency-button-edit">
-                        <img className="branch-button-icon" src="/assets/edit.svg" alt="edit" />
-                    </button>
-                    <p className="agency-title">{user?.displayName}</p>
-                    <p>Username: {user?.username}</p>
-                    <p>Email: {user?.email}</p>
-                </article>
-                <article>
-                    <button className="agency-button-edit">
-                        <img className="branch-button-icon" src="/assets/edit.svg" alt="edit" />
-                    </button>
-                    <p>Subscription</p>
-                    <p>Payment plan</p>
-                    <p>Billing</p>
-                </article>
-            </section>
-            <section className="agency-section-two">
-                <article className="agency-section-toolbar">
-                    {titles[activeAgencyPanel]}
-                </article>
-                <article className="agency-section-content">
-                    {features[activeAgencyPanel]}
-                </article>
-            </section>
+        <div className="customer-container">
+            {loadingProfile ? <LoadingComponent content='Loading profile...' /> :
+                <>
+                    <section className="customer-section-one">
+                        <h1 className="customer-title">{user?.displayName ? capitalizeFirstLetter(user?.displayName) : capitalizeFirstLetter(user!.username)}'s control panel</h1>
+                        <ul className="customer-menu">
+                            <li>
+                                <button
+                                    className={activeTab === 0 ? "customer-menu-button-active" : "customer-menu-button"}
+                                    onClick={() => setActiveTab(0)}>User settings</button>
+                            </li>
+                            <li>
+                                <button
+                                    className={activeTab === 1 ? "customer-menu-button-active" : "customer-menu-button"}
+                                    onClick={() => setActiveTab(1)}>Branches</button>
+                            </li>
+                            <li>
+                                <button
+                                    className={activeTab === 2 ? "customer-menu-button-active" : "customer-menu-button"}
+                                    onClick={() => setActiveTab(2)}>Property listings</button>
+                            </li>
+                            <li>
+                                <button
+                                    className={activeTab === 4 ? "customer-menu-button-active" : "customer-menu-button"}
+                                    onClick={() => setActiveTab(4)}>Messages</button>
+                            </li>
+                        </ul>
+                    </section>
+                    <section className="customer-section-two">
+                        {panes[activeTab]}
+                    </section>
+                </>
+            }
         </div>
     )
 })

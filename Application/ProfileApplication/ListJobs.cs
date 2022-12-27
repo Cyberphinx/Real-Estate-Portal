@@ -37,7 +37,7 @@ namespace Application.ProfileApplication
             {
                 var query = _context.JobNetworks
                     .Where(u => u.AppUser.UserName == request.Username)
-                    .OrderBy(a => a.Job.AddedOn)
+                    .OrderByDescending(a => a.Job.AddedOn).ThenBy(a => a.JobId)
                     .ProjectTo<UserJobDto>(_mapper.ConfigurationProvider)
                     .AsQueryable();
 

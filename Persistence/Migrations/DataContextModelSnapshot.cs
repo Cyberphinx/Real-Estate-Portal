@@ -35,9 +35,15 @@ namespace Persistence.Migrations
                     b.Property<int>("AccountType")
                         .HasColumnType("integer");
 
+                    b.Property<DateTime>("AddedOn")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("text");
+
+                    b.Property<int>("Country")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
@@ -51,6 +57,9 @@ namespace Persistence.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("boolean");
+
+                    b.Property<int>("Language")
+                        .HasColumnType("integer");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("boolean");
@@ -183,6 +192,9 @@ namespace Persistence.Migrations
 
                     b.Property<string>("DisplayName")
                         .HasColumnType("text");
+
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("boolean");
 
                     b.Property<DateTime>("LastModified")
                         .HasColumnType("timestamp with time zone");
@@ -1204,28 +1216,28 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "7ef3f462-52c9-4d43-b52a-eec75f1bc7c0",
+                            ConcurrencyStamp = "117610db-02b1-4b50-a075-f708886232e7",
                             Name = "Company",
                             NormalizedName = "COMPANY"
                         },
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "b1ff3c3d-7323-4ca4-8a00-b47fddf63222",
+                            ConcurrencyStamp = "9c93bfbb-8681-401d-9a71-ccc820d6b4cb",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
                             Id = "3",
-                            ConcurrencyStamp = "1394b809-9739-4334-bbd6-260e4e42a896",
+                            ConcurrencyStamp = "a8c14c77-f66d-4ddb-823a-da73fb1b2eb7",
                             Name = "Agency",
                             NormalizedName = "AGENCY"
                         },
                         new
                         {
                             Id = "4",
-                            ConcurrencyStamp = "feeef611-9180-4f17-a3a1-ba96084c4f02",
+                            ConcurrencyStamp = "f2009c60-df10-4dc5-a58c-87c7c5b57bb4",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

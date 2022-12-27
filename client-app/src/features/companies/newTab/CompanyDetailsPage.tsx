@@ -8,24 +8,25 @@ import Close from "../../map/toolbar/Close";
 import { CompanyContent, CompanyDescription } from "../../../app/model/Company";
 import NavBarForCompany from "../../../app/layout/NavBarForCompany";
 
-export default observer(function CompanysDetailsPage() {
+export default observer(function CompanyDetailsPage() {
     const { id } = useParams<string>();
     const { companyStore, featureStore } = useStore();
-    const { loadedCompany, loadCompany, loadingCompany } = companyStore;
+    const { selectedCompany: company, loadCompany, loadingCompany, cancelSelectCompany } = companyStore;
     const { description, setDescription, contacts, setContacts } = featureStore;
 
     useEffect(() => {
         if (id) loadCompany(id);
-    }, [id, loadCompany])
+        return () => cancelSelectCompany();
+    }, [id, loadCompany, cancelSelectCompany])
 
-    if (loadingCompany || !loadedCompany) return <LoadingComponent content={"Loading..."} />;
+    if (loadingCompany || !company) return <LoadingComponent content={"Loading..."} />;
 
     return (
         <div>
             <NavBarForCompany />
             <div style={{ position: "relative" }}>
                 <section className="listing-contents-container" >
-                    {loadedCompany.companyContents.map((content: CompanyContent) => (
+                    {company.companyContents.map((content: CompanyContent) => (
                         <div className="single-content-container" key={content.id}>
                             <img src={content.url} alt={content.caption} className="content-images" />
                         </div>
@@ -38,7 +39,7 @@ export default observer(function CompanysDetailsPage() {
                             <Close close={() => setDescription()} />
                         </div>
                         <div className="listing-descriptions-container">
-                            {loadedCompany.companyDescriptions.map((description: CompanyDescription) => (
+                            {company.companyDescriptions.map((description: CompanyDescription) => (
                                 <article key={description.id}>
                                     <h1>{description.heading}</h1>
                                     <p>{description.text}</p>
@@ -54,9 +55,9 @@ export default observer(function CompanysDetailsPage() {
                         </div>
                         <div className="listing-contacts-container">
                             <h1>Phone</h1>
-                            <p>{loadedCompany.companyContacts.phone}</p>
+                            <p>{company.companyContacts.phone}</p>
                             <h1>Email</h1>
-                            <p>{loadedCompany.companyContacts.email}</p>
+                            <p>{company.companyContacts.email}</p>
                         </div>
                     </section>}
             </div>

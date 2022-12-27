@@ -73,7 +73,8 @@ namespace API.Controllers
             {
                 Email = registerDto.Email,
                 UserName = registerDto.Username,
-                PhoneNumber = registerDto.PhoneNumber
+                PhoneNumber = registerDto.PhoneNumber,
+                AddedOn = DateTime.Now
             };
 
             var result = await _userManager.CreateAsync(user, registerDto.Password);
@@ -153,7 +154,10 @@ namespace API.Controllers
                 Email = user.Email,
                 Role = _userManager.GetRolesAsync(user).Result.ToList(),
                 PhoneNumber = user.PhoneNumber,
-                Image = user?.Photos?.FirstOrDefault(x => x.IsMain)?.Url
+                Image = user?.Photos?.FirstOrDefault(x => x.IsMain)?.Url,
+                Country = user.Country,
+                AddedOn = user.AddedOn,
+                Language = user.Language
             };
         }
     }

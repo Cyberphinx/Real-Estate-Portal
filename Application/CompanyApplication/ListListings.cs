@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Application.Core;
 using Application.ListingApplication;
-using Application.ListingApplication.ListingDtos;
+using Domain.ListingAggregate.Enums;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Domain.Enums;
@@ -17,13 +17,13 @@ namespace Application.CompanyApplication
 {
     public class ListListings
     {
-        public class Query : IRequest<Result<List<ListingDto>>> 
+        public class Query : IRequest<Result<List<Stock>>> 
         {
-            public string CompanyRef { get; set; }
+            public Guid CompanyId { get; set; }
             public string Predicate { get; set; }
         }
 
-        public class Handler : IRequestHandler<Query, Result<List<ListingDto>>>
+        public class Handler : IRequestHandler<Query, Result<List<Stock>>>
         {
             private readonly DataContext _context;
             private readonly IMapper _mapper;
@@ -33,24 +33,26 @@ namespace Application.CompanyApplication
                 _context = context;
             }
 
-            public async Task<Result<List<ListingDto>>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Result<List<Stock>>> Handle(Query request, CancellationToken cancellationToken)
             {
                 var query = _context.Listings
-                    .Where(c => c.Company.CompanyReference == request.CompanyRef)
-                    .OrderBy(x => x.AddedOn)
-                    .ProjectTo<ListingDto>(_mapper.ConfigurationProvider)
+                    .Where(c => c.Company.Id == request.CompanyId)
+                    .OrderByDescending(x => x.AddedOn).ThenBy(x => x.Id)
+                    .ProjectTo<Stock>(_mapper.ConfigurationProvider)
                     .AsQueryable();
 
                 query = request.Predicate switch
                 {
                     "public" => query.Where(x => x.AccessStatus == AccessStatus.Public),
                     "private" => query.Where(x => x.AccessStatus == AccessStatus.Private),
-                    _ => query
+                    "rent" => query.Where( c => c.Pricing.TransactionType == TransactionType.Rent),
+                    "sale" => query.Where( c => c.Pricing.TransactionType == TransactionType.Sale),
+                    _ => query.Where( c => c.Pricing.TransactionType == TransactionType.Rent)
                 };
 
                 var listings = await query.ToListAsync();
 
-                return Result<List<ListingDto>>.Success(listings);
+                return Result<List<Stock>>.Success(listings);
             }
         }
     }

@@ -47,11 +47,11 @@ namespace API.Controllers
         {
             return HandleResult(await Mediator.Send(new GetMaxValues.Query()));
         }
-
-        [HttpPost]
-        public async Task<IActionResult> CreateListing(Listing listing)
+        
+        [HttpPost("{companyId}")]
+        public async Task<IActionResult> CreateListing(Guid companyId, Listing listing)
         {
-            return HandleResult(await Mediator.Send(new Create.Command{Listing = listing}));
+            return HandleResult(await Mediator.Send(new Create.Command{CompanyId = companyId,Listing = listing}));
         }
 
         [HttpPut("{id}")]
@@ -67,10 +67,10 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new Delete.Command{Id = id}));
         }
 
-        [HttpDelete("agency/{companyReference}")]
-        public async Task<IActionResult> DeleteListings(string companyReference)
+        [HttpDelete("agency/{companyId}")]
+        public async Task<IActionResult> DeleteListings(Guid companyId)
         {
-            return HandleResult(await Mediator.Send(new DeleteRange.Command{CompanyReference = companyReference}));
+            return HandleResult(await Mediator.Send(new DeleteRange.Command{CompanyId = companyId}));
         }
 
         [HttpPost("seed/{companyId}/{amount}")]
@@ -79,7 +79,7 @@ namespace API.Controllers
             await SeedRandomListings.SeedRandomData(_db, companyId, amount);
         }
 
-        [HttpPost("{id}/watch")]
+        [HttpPost("watch/{id}")]
         public async Task<IActionResult> Watch(Guid id)
         {
             return HandleResult(await Mediator.Send(new WatchListing.Command{Id = id}));

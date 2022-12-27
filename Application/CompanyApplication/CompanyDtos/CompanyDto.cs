@@ -19,6 +19,7 @@ namespace Application.CompanyApplication.CompanyDtos
         public string DisplayName { get; set; }
         public ICollection<InvoiceDto> Invoices { get; set; }
         public ICollection<InsuranceDto> Insurances { get; set; }
+        public bool IsMain { get; set; }
         public DateTime LastModified { get; set; }
         public string LegalName { get; set; }
         public ICollection<Stock> Listings { get; set; }

@@ -54,6 +54,6 @@
 .company-snippets-container {
   padding: 0px 5px;
   margin: 0px;
-  height: 200px;
+  max-height: 200px;
   overflow-y: hidden;
 }

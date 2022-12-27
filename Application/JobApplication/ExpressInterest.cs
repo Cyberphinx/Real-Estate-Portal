@@ -33,6 +33,7 @@ namespace Application.JobApplication
 
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
+                // get the job and check if it exists
                 var job = await _context.Jobs
                     .Include(a => a.Networks)
                     .ThenInclude(u => u.AppUser)
@@ -40,15 +41,14 @@ namespace Application.JobApplication
 
                 if (job == null) return null;
 
+                // get current user and check if it exists
                 var user = await _context.Users.FirstOrDefaultAsync(x => x.UserName == _userAccessor.GetUsername());
-
                 if (user == null) return null;
 
+                // get the current job applicant
                 var networker = job.Networks.FirstOrDefault(x => x.AppUser.UserName == user.UserName);
-
-                if (networker != null)
-                    job.Networks.Remove(networker);
-
+                
+                // if current job applicant has not applied for the job, then add it to the job
                 if (networker == null)
                 {
                     networker = new JobNetwork

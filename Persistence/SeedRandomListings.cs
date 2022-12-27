@@ -17,7 +17,7 @@ namespace Persistence
         {
             // if (context.Listings.Any()) return;
             
-            // Load one blog and its related posts.
+            // Load one company and its related listings.
             var company = await context.Companies
                 .Where(x => x.Id == companyId)
                 .Include(l => l.Listings)
@@ -71,7 +71,8 @@ namespace Persistence
                         {
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157050/Placeholder/Listings/ronnie-george-9gGvNWBeOq4_zzpq0z.jpg",
                             Type = MediaType.Image,
-                            Caption = "Photo 1"
+                            Caption = "Photo 1",
+                            IsMain = true
                         },
                         new Content
                         {
@@ -230,12 +231,12 @@ namespace Persistence
                 newListing.ListingReference = $"{company.DisplayName}_{x}";
                 newListing.ListingLocation = new ListingLocation
                         {
-                            PropertyNumberOrName = "3",
-                            StreetName = "Barmouth Road",
-                            Locality = "Wandsworth",
+                            PropertyNumberOrName = "27",
+                            StreetName = "Lorem Ipsum Road",
+                            Locality = "Cras Ultricies",
                             TownOrCity = "London",
                             County = "England",
-                            PostalCode = "SW18 2DN",
+                            PostalCode = "SW27 9HL",
                             Country = Country.UnitedKingdom,
                             Latitude = rnd.NextDouble() * (59 - 49) + 49,
                             Longitude = rnd.NextDouble() * (2 - -10) + -10
@@ -336,7 +337,8 @@ namespace Persistence
                         {
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/naomi-hebert-MP0bgaS_d1c_izjtsb.jpg",
                             Type = MediaType.Image,
-                            Caption = "Photo 1"
+                            Caption = "Photo 1",
+                            IsMain = true
                         },
                         new Content
                         {
@@ -495,12 +497,12 @@ namespace Persistence
                 newListing.ListingReference = $"{company.DisplayName}_{x}";
                 newListing.ListingLocation = new ListingLocation
                         {
-                            PropertyNumberOrName = "3",
-                            StreetName = "Barmouth Road",
-                            Locality = "Wandsworth",
+                            PropertyNumberOrName = "27",
+                            StreetName = "Lorem Ipsum Road",
+                            Locality = "Cras Ultricies",
                             TownOrCity = "London",
                             County = "England",
-                            PostalCode = "SW18 2DN",
+                            PostalCode = "SW27 9HL",
                             Country = Country.UnitedKingdom,
                             Latitude = rnd.NextDouble() * (59 - 49) + 49,
                             Longitude = rnd.NextDouble() * (2 - -10) + -10
@@ -510,7 +512,7 @@ namespace Persistence
                             TransactionType = TransactionType.Sale,
                             Currency = Currency.GBP,
                             Price = rnd.Next(50000, 2000000),
-                            RentFrequency = Frequency.NotApplicable,
+                            RentFrequency = Frequency.PerMonth,
                             PriceQualifier = PriceQualifier.FixedPrice,
                             Auction = false
                         };

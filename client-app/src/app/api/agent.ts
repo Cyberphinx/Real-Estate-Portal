@@ -1,12 +1,14 @@
+import { Profile, WatcherListingDto, UserJobDto, UserCompanyDto } from './../model/Profile';
 import { MaxValue } from './../model/MaxValue';
 import { User, UserFormValues, RoleFormValues } from './../model/User';
 import axios, { AxiosResponse } from "axios";
-import { Company, CompanyFormValues } from '../model/Company';
+import { Company, CompanyFormValues, Stock } from '../model/Company';
 import { store } from '../stores/store';
 import { history } from '../..';
 import { PaginatedResult } from '../model/Pagination';
 import { Listing, ListingFormValues } from '../model/ListingAggregate/Listing';
 import { Job, JobFormValues } from '../model/Job';
+import { profile } from 'console';
 
 // adding fake delay
 const sleep = (delay: number) => {
@@ -84,23 +86,37 @@ const Account = {
   assignrole: (role: RoleFormValues) => requests.put<RoleFormValues>("/account/assignrole", role),
 }
 
+const Profiles = {
+  get: (username: string) => requests.get<Profile>(`/profile/${username}`),
+  updateProfile: (profile: Partial<Profile>) => requests.put(`/profile`, profile),
+  listUserListings: (username: string, predicate: string) =>
+    requests.get<WatcherListingDto[]>(`/profile/listings/${username}?predicate=${predicate}`),
+  listUserJobs: (username: string, predicate: string) =>
+    requests.get<UserJobDto[]>(`/profile/jobs/${username}?predicate=${predicate}`),
+  listUserCompanies: (username: string, predicate: string) =>
+    requests.get<UserCompanyDto[]>(`/profile/companies/${username}?predicate=${predicate}`)
+}
+
 const Listings = {
   listAll: () => requests.get<Listing[]>("/listing/all"),
-  list: (params: URLSearchParams) => axios.get<PaginatedResult<Listing[]>>("/listing", {params}).then(responseBody),
+  list: (params: URLSearchParams) => axios.get<PaginatedResult<Listing[]>>("/listing", { params }).then(responseBody),
   details: (id: string) => requests.get<Listing>(`/listing/${id}`),
   getMax: () => requests.get<MaxValue[]>("/listing/max"),
   create: (listing: ListingFormValues) => requests.post<Listing>("/listing", listing),
   update: (listing: ListingFormValues) => requests.put<Listing>(`/listing/${listing.id}`, listing),
   delete: (id: string) => requests.del<void>(`/listing/${id}`),
+  watchListing: (listingId: string) => requests.post(`/listing/watch/${listingId}`, {})
 };
 
 const Companies = {
-  list: (params: URLSearchParams) => axios.get<PaginatedResult<Company[]>>("/company", {params}).then(responseBody),
+  list: (params: URLSearchParams) => axios.get<PaginatedResult<Company[]>>("/company", { params }).then(responseBody),
   details: (id: string) => requests.get<Company>(`/company/${id}`),
   detailsmycompany: () => requests.get<Company>(`/company/owner`),
   create: (company: CompanyFormValues) => requests.post<Company>('/company', company),
   update: (company: CompanyFormValues) => requests.put<Company>(`/company/${company.id}`, company),
   delete: (id: string) => requests.del<void>(`/company/${id}`),
+  listListings: (id: string, predicate: string) =>
+    requests.get<Stock[]>(`/company/listings/${id}?predicate=${predicate}`)
 };
 
 const Jobs = {
@@ -109,13 +125,16 @@ const Jobs = {
   create: (job: JobFormValues) => requests.post<void>('/job', job),
   update: (job: JobFormValues) => requests.put<void>(`/job/${job.id}`, job),
   delete: (id: string) => requests.del<void>(`/job/${id}`),
+  applyJob: (jobId: string) => requests.post(`/job/apply/${jobId}`, {}),
+  shortlistJobApplicant: (jobId: string, username: string) => requests.post(`/job/shortlist/${jobId}/${username}`, {})
 }
 
 const agent = {
   Account,
   Listings,
   Companies,
-  Jobs
+  Jobs,
+  Profiles
 };
 
 export default agent;

@@ -10,6 +10,7 @@ export interface Location {
     longitude: number;
 }
 
+
 export enum Country {
     afghanistan,
     albania,
@@ -203,5 +204,6 @@ export enum Country {
     vietnam,
     yemen,
     zambia,
-    zimbabwe
+    zimbabwe,
+    map
 }

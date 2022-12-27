@@ -10,6 +10,7 @@ import { propertyType, UnitOfLength } from "../../../app/model/ListingAggregate/
 import ListingBookmark from "./ListingBookmark";
 import priceFormatter from "../../../app/common/PriceFormatter";
 import { Content, DetailedDescription } from "../../../app/model/ListingAggregate/ListingObjects";
+import DateTag from "../../../app/common/tags/DateTag";
 
 interface Props {
     listing: Listing | undefined;
@@ -71,6 +72,7 @@ export default observer(function ListingDetails({ listing }: Props) {
             {multiListings.length > 1 && <ListingBookmark multiListings={multiListings} />}
             <div className="details-contents" style={(multiListings.length > 1) ? { marginTop: "60px" } : {}}>
                 <AgencyTags listing={listing} />
+                <DateTag listing={listing} />
                 <button style={{position:"absolute"}}>Save</button>
                 <section className="details-gallery">
                     <div style={{ position: "relative" }}>

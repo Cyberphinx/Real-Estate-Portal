@@ -49,6 +49,7 @@ export default observer(function CreateCompany() {
         companyRegistrationNumber: "",
         displayName: "",
         insurances: [],
+        isMain: false,
         lastModified: new Date(),
         legalName: "",
         membership: {

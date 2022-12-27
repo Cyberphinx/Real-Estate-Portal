@@ -30,11 +30,13 @@ namespace Application.Core
         {
             // AppUser Dtos
             CreateMap<AppUser, Application.ProfileApplication.ProfileDtos.Profile>()
+                .ForMember(x => x.AddedOn, o => o.MapFrom(s => s.AddedOn))
+                .ForMember(x => x.Language, o => o.MapFrom(s => s.Language))
+                .ForMember(x => x.Country, o => o.MapFrom(s => s.Country))
                 .ForMember(x => x.Description, o => o.MapFrom(s => s.Description))
                 .ForMember(x => x.DisplayName, o => o.MapFrom(s => s.DisplayName))
                 .ForMember(x => x.Photos, o => o.MapFrom(s => s.Photos))
                 .ForMember(x => x.Reviews, o => o.MapFrom(s => s.Reviews))
-                .ForMember(x => x.SavedListings, o => o.MapFrom(s => s.SavedListings))
                 .ForMember(x => x.Username, o => o.MapFrom(s => s.UserName));
 
             CreateMap<Photo, Application.ProfileApplication.ProfileDtos.PhotoDto>();
@@ -50,7 +52,11 @@ namespace Application.Core
 
             // Listing Dtos
             CreateMap<Listing, Listing>();
-            CreateMap<Listing, Stock>();
+            CreateMap<Listing, Stock>()
+                .ForMember(x => x.Image, o => o.MapFrom(s => s.Contents.FirstOrDefault(x => x.IsMain).Url))
+                .ForMember(x => x.ListingLocation, o => o.MapFrom(s => s.ListingLocation))
+                .ForMember(x => x.Pricing, o => o.MapFrom(s => s.Pricing));
+
             CreateMap<Content, ContentDto>();
             CreateMap<DetailedDescription, DetailedDescriptionDto>();
             CreateMap<EpcRatings, EpcRatingsDto>();
@@ -64,11 +70,17 @@ namespace Application.Core
                 .ForMember(x => x.Description, o => o.MapFrom(s => s.AppUser.Description));
             
             CreateMap<ListingWatcher, Application.ProfileApplication.ProfileDtos.WatcherListingDto>()
-                .ForMember(x => x.ListingReference, o => o.MapFrom(s => s.Listing.ListingReference))
-                .ForMember(x => x.ListingPrice, o => o.MapFrom(s => s.Listing.Pricing.Price))
-                .ForMember(x => x.ListingImage, o => o.MapFrom(s => s.Listing.Contents.FirstOrDefault(x => x.IsMain).Url))
-                .ForMember(x => x.ListingCity, o => o.MapFrom(s => s.Listing.ListingLocation.TownOrCity))
-                .ForMember(x => x.ListingPostcode, o => o.MapFrom(s => s.Listing.ListingLocation.PostalCode));
+                .ForMember(x => x.Id, o => o.MapFrom(s => s.Listing.Id))
+                .ForMember(x => x.AddedOn, o => o.MapFrom(s => s.Listing.AddedOn))
+                .ForMember(x => x.Reference, o => o.MapFrom(s => s.Listing.ListingReference))
+                .ForMember(x => x.TransactionType, o => o.MapFrom(s => s.Listing.Pricing.TransactionType))
+                .ForMember(x => x.Price, o => o.MapFrom(s => s.Listing.Pricing.Price))
+                .ForMember(x => x.PriceQualifier, o => o.MapFrom(s => s.Listing.Pricing.PriceQualifier))
+                .ForMember(x => x.Currency, o => o.MapFrom(s => s.Listing.Pricing.Currency))
+                .ForMember(x => x.RentFrequency, o => o.MapFrom(s => s.Listing.Pricing.RentFrequency))
+                .ForMember(x => x.Image, o => o.MapFrom(s => s.Listing.Contents.FirstOrDefault(x => x.IsMain).Url))
+                .ForMember(x => x.City, o => o.MapFrom(s => s.Listing.ListingLocation.TownOrCity))
+                .ForMember(x => x.Postcode, o => o.MapFrom(s => s.Listing.ListingLocation.PostalCode));
 
             CreateMap<Listing, ListingDto>()
                 .ForMember(x => x.Company, o => o.MapFrom(s => s.Company))
@@ -96,6 +108,11 @@ namespace Application.Core
                 .ForMember(x => x.Membership, o => o.MapFrom(s => s.Membership))
                 .ForMember(x => x.Reviews, o => o.MapFrom(s => s.Reviews))
                 .ForMember(x => x.Listings, o => o.MapFrom(s => s.Listings));
+            
+            CreateMap<Company, UserCompanyDto>()
+                .ForMember(x => x.ListingsCount, o => o.MapFrom(s => s.Listings.Count));
+
+
             
             // Job Dtos
             CreateMap<JobContent, JobContentDto>();

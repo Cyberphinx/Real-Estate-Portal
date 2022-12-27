@@ -21,6 +21,7 @@ export interface Company {
     displayName: string;
     invoices: Invoice[];
     insurances: Insurance[];
+    isMain: boolean;
     lastMofidied: Date;
     legalName: string;
     listings: Stock[];
@@ -52,6 +53,7 @@ export class CompanyFormValues {
     displayName: string = "";
     invoices?: Invoice[];
     insurances?: Insurance[];
+    isMain: boolean =  false;
     lastModified: Date = new Date();
     legalName: string = "";
     listings?: Stock[];
@@ -77,6 +79,7 @@ export class CompanyFormValues {
             this.displayName = company.displayName;
             this.invoices = company.invoices;
             this.insurances = company.insurances;
+            this.isMain = company.isMain;
             this.lastModified = company.lastModified;
             this.legalName = company.legalName;
             this.listings = company.listings;
@@ -155,6 +158,7 @@ export interface Stock {
     availableBedrooms: number;
     availableFromDate: Date;
     bathrooms: number;
+    image: string;
     lifeCycleStatus: LifeCycleStatus;
     listingReference: string;
     listingLocation: ListingLocation;

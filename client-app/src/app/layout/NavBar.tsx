@@ -4,29 +4,31 @@ import { Link } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../stores/store";
 import priceFormatter from "../../app/common/PriceFormatter";
-import { priceQualifier, propertyType } from "../model/ListingAggregate/ListingEnums";
+import { Frequency, priceQualifier, propertyType } from "../model/ListingAggregate/ListingEnums";
 
 export default observer(function NavBar() {
     const { listingStore, featureStore } = useStore();
-    const { loadedListing } = listingStore;
+    const { selectedListing: listing } = listingStore;
     const { setDescription, setContacts } = featureStore;
 
     const address = `
-        ${loadedListing?.listingLocation.townOrCity && (loadedListing?.listingLocation.townOrCity + ", ")}
-        ${loadedListing?.listingLocation.county && (loadedListing?.listingLocation.county + ", ")}
-        ${loadedListing?.listingLocation.postalCode && (loadedListing?.listingLocation.postalCode)}
+        ${listing?.listingLocation.townOrCity && (listing?.listingLocation.townOrCity + ", ")}
+        ${listing?.listingLocation.county && (listing?.listingLocation.county + ", ")}
+        ${listing?.listingLocation.postalCode && (listing?.listingLocation.postalCode)}
         `;
 
     return (
         <div>
             <ul className="nav-bar2">
-                {/* <li className="nav-bar-item"><img className="logo" src="/assets/logo3.svg" alt="logo" /></li> */}
+                <li className="nav-bar-item"><img className="logo-large" src="/assets/sanctum.svg" alt="S" /></li>
                 <li className="nav-bar2-item"><Link to="/">SANCTUM</Link></li>
                 <li className="nav-bar2-item"><p className="gist-style">
-                    {priceQualifier(loadedListing!)} <b>{priceFormatter(loadedListing!.pricing.price, loadedListing!.pricing.currency)}</b>
+                    <span>{listing?.pricing.transactionType === 1 && priceQualifier(listing!.pricing.priceQualifier)} </span> 
+                    <b>{priceFormatter(listing!.pricing.price, listing!.pricing.currency)} </b>
+                    <span>{listing?.pricing.transactionType === 0 && Frequency[listing.pricing.rentFrequency].replace(/[A-Z]/g, ' $&').trim()}</span>
                 </p></li>
                 <li className="nav-bar2-item"><p className="gist-style">
-                    {loadedListing!.totalBedrooms} Beds {propertyType(loadedListing!)}
+                    {listing!.totalBedrooms} Beds {propertyType(listing!)}
                 </p></li>
                 <li className="nav-bar2-item"><p className="address-style">{address}</p></li>
 

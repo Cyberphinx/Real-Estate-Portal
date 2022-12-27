@@ -8,6 +8,7 @@ using Domain;
 using Domain.ListingAggregate;
 using FluentValidation;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Persistence;
 
 namespace Application.ListingApplication
@@ -16,6 +17,7 @@ namespace Application.ListingApplication
     {
         public class Command : IRequest<Result<Unit>>
         {
+            public Guid CompanyId { get; set; }
             public Listing Listing { get; set; }
         }
 
@@ -37,11 +39,16 @@ namespace Application.ListingApplication
 
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
-                await _context.Listings.AddAsync(request.Listing);
+                var listing = request.Listing;
+
+                listing.CompanyId = request.CompanyId;
+
+                await _context.Listings.AddAsync(listing);
 
                 // SaveChangesAsync actually returns an integer of state entries written to the database
-                var result = await _context.SaveChangesAsync() > 0; 
-                if (!result) return Result<Unit>.Failure("Failed to create sales advert");
+                var result = await _context.SaveChangesAsync() > 0;
+
+                if (!result) return Result<Unit>.Failure("Failed to create listing");
 
                 return Result<Unit>.Success(Unit.Value);
             }

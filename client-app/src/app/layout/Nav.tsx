@@ -18,11 +18,12 @@ export default observer(function Nav() {
     const [sortingActive, setSortingActive] = useDetectOutsideClick(sortingRef, false);
     const toggleSorting = () => setSortingActive(!sortingActive);
 
-    const { listingStore, featureStore, userStore, companyStore } = useStore();
+    const { listingStore, featureStore, userStore, companyStore, jobStore } = useStore();
     const { cancelSelectListing } = listingStore;
     const { cancelSelectCompany } = companyStore;
     const { activeFeature, setActiveFeature, isLocked, setLocked } = featureStore;
     const { isLoggedIn } = userStore;
+    const { loadJobs } = jobStore;
 
     return (
         <div>
@@ -38,22 +39,26 @@ export default observer(function Nav() {
                 </li>
                 <li className="nav-bar-item">
                     <button className={activeFeature === 1 ? "nav-button-selected" : "nav-button"}
-                        onClick={() => { cancelSelectListing(); cancelSelectCompany(); setActiveFeature(1) }}>
+                        onClick={() => { 
+                            cancelSelectListing(); 
+                            cancelSelectCompany();
+                            setActiveFeature(1); 
+                            }}>
                         Services
                     </button>
                 </li>
-                <li className="nav-bar-item">
+                {/* <li className="nav-bar-item">
                     <button className="nav-button"
                         onClick={() => { cancelSelectListing(); cancelSelectCompany(); }}>
                         Get Agent
                     </button>
-                </li>
-                <li className="nav-bar-item">
+                </li> */}
+                {/* <li className="nav-bar-item">
                     <button className="nav-button"
                         onClick={() => { cancelSelectListing(); cancelSelectCompany(); }}>
                         Get Moving
                     </button>
-                </li>
+                </li> */}
 
                 {isLoggedIn
                     ? (
@@ -62,7 +67,7 @@ export default observer(function Nav() {
                                 <div className="dropdown-container" ref={dropdownRef}>
                                     <button className="user-button profile" onClick={toggle}>
                                         <img className="user-icon" src="/assets/user.svg" alt="user" />
-                                        {/* <span className="user-tooltip">User menu</span> */}
+                                        <img className="hamburger-icon" src="/assets/hamburger.svg" alt="dropdown" />
                                     </button>
                                     {isActive && <UserDropdown />}
                                 </div>
@@ -76,7 +81,6 @@ export default observer(function Nav() {
                                     <button className="user-button profile" onClick={toggle}>
                                         <img className="user-icon" src="/assets/user.svg" alt="user" />
                                         <img className="hamburger-icon" src="/assets/hamburger.svg" alt="dropdown" />
-                                        {/* <span className="user-tooltip">User menu</span> */}
                                     </button>
                                     {isActive && <Dropdown />}
                                 </div>

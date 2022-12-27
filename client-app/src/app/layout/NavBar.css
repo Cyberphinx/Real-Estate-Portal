@@ -7,9 +7,9 @@
   height: 55px;
   margin: auto;
   padding: 0;
-  background-color: #fff;
+  background-color: #f5f5f5;
   z-index: 2;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #aaaeb3;
 }
 
 .nav-bar2-item {
@@ -34,10 +34,6 @@
   text-decoration: none;
   /* border: 1px solid black; */
   border-right: 1px solid #ccc;
-}
-.nav-bar2-item a:hover {
-  color: #fff;
-  background-color: #000;
 }
 
 .gist-style {
@@ -67,20 +63,19 @@
   text-decoration: none;
 }
 .nav-bar-button:hover {
-  color: #fff;
-  background-color: #000;
+  color: #000;
+  background-color: #dcdcdc;
   cursor: pointer;
 }
 
 .nav-bar-user {
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 400;
   letter-spacing: 1px;
   display: block;
   background: none;
   color: #000;
   padding: 18px 16px;
-  border-left: 1px solid black;
   border-top: none;
   border-right: none;
   border-bottom: none;
@@ -88,4 +83,9 @@
 }
 .nav-bar-user:hover {
   cursor: auto;
+}
+
+.logo-large {
+  width: 35px;
+  margin: 10px 0px 0px 20px;
 }

@@ -19,6 +19,9 @@ export default observer(function ListingItem({ listing, predicate }: Props) {
     const { setActiveListing } = mapStore;
     const { selectedListing } = listingStore;
 
+    // const addedDate = new Date(listing!.addedOn);
+    // const title = `Added on ${addedDate.toLocaleDateString()}`
+
     const priceFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: Currency[listing!.pricing.currency].toUpperCase(), minimumFractionDigits: 0 });
 
     const [image, setImage] = useState<Content>(listing!.contents[0]);
@@ -86,7 +89,7 @@ export default observer(function ListingItem({ listing, predicate }: Props) {
                     <button className="right-arr-thumbnails" onClick={(e) => scroll(e, 120)}><img className="right-ico" src="/assets/next.svg" alt="next" /></button>
                 </section>
                 <section className="card-overlay">
-                    <div className="card-price" title={`${priceQualifier(listing!)} in ${Currency[listing!.pricing.currency].toUpperCase()}`}>
+                    <div className="card-price" title={`${priceQualifier(listing!.pricing.priceQualifier)} in ${Currency[listing!.pricing.currency].toUpperCase()}`}>
                         <b style={{ fontSize: "18px" }}>{priceFormat.format(listing!.pricing.price)}</b>
                         {predicate.get("channel") === "sale" ? null : <sup> {rentFrequency(listing!)}</sup>}
                     </div>

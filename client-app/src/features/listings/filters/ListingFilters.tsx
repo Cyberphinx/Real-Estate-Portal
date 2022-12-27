@@ -7,11 +7,14 @@ import Price from "./parameters/Price";
 import PropertyTypes from "./parameters/PropertyTypes";
 import Bedrooms from "./parameters/Bedrooms";
 import OrderBy from "./parameters/OrderBy";
+import { Link } from "react-router-dom";
+import { Job } from "../../../app/model/Job";
 
 export default observer(function ListingFilters() {
-    const { listingStore, featureStore } = useStore();
+    const { listingStore, featureStore, jobStore } = useStore();
     const { predicate, setPredicate } = listingStore;
     const { isLocked, setLocked } = featureStore;
+    const { jobs } = jobStore;
 
     const items = ["Detached", "SemiDetached", "Terraced", "Flat", "Land"];
 
@@ -52,7 +55,7 @@ export default observer(function ListingFilters() {
                         Rent
                     </button>
                 </li>
-                <li className="filters-item" >
+                <li className="filters-item" style={{borderRight:"1px solid #aaaeb3",paddingBottom:"5px",paddingRight:"10px",marginRight:"10px"}}>
                     <button className={predicate.get("channel") === "sale" ? "filters-button-selected" : "filters-button"}
                         onClick={() => setPredicate("channel", "sale")}>
                         Sale
@@ -107,6 +110,13 @@ export default observer(function ListingFilters() {
                 <li className="filters-item" >
                     <button className="filters-button">Filters</button>
                 </li>
+
+                {/* {jobs.map((job: Job, index: number) => (
+                    <li key={job.id}>
+                        <button><Link to={`/job/${job?.id}`} target="_blank">Job{index}</Link></button>
+                    </li>
+                ))} */}
+
                 <li className="filters-item-right">
                     <button className="lock-button" onClick={() => setLocked()}>
                         {isLocked === true ?
