@@ -14,8 +14,6 @@ namespace Application.ListingApplication.ListingDtos
         public double Length { get; set; }
         public double Width { get; set; }
         public UnitOfLength Unit { get; set; }
-        public double GetArea() {
-            return Length * Width;
-        }
+        public double Area { get; set; }
     }
 }

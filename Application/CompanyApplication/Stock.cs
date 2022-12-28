@@ -27,5 +27,6 @@ namespace Application.CompanyApplication
         public PricingDto Pricing { get; set; }
         public PropertyType PropertyType { get; set; }
         public int TotalBedrooms { get; set; }
+        public string Agency { get; set; }
     }
 }

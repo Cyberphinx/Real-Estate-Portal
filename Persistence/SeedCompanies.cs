@@ -68,6 +68,14 @@ namespace Persistence
                             Caption = "Agency Image",
                             IsMain = false,
                             IsLogo = false
+                        },
+                        new CompanyContent
+                        {
+                            Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1672172027/Placeholder/CompanyContents/logo-placeholder_lajpbm.jpg",
+                            Type = CompanyMediaType.Image,
+                            Caption = "Agency Image",
+                            IsMain = false,
+                            IsLogo = true
                         }
                     },
                     ServiceCategories = new List<ServiceCategory>

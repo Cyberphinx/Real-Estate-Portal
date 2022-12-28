@@ -246,12 +246,15 @@ namespace Persistence
                             TransactionType = TransactionType.Rent,
                             Currency = Currency.GBP,
                             Price = rnd.Next(800, 8000),
-                            RentFrequency = Frequency.NotApplicable,
+                            RentFrequency = Frequency.PerMonth,
                             PriceQualifier = PriceQualifier.FixedPrice,
                             Auction = false
                         };
                 newListing.PropertyType = PropertyType.Detached;
                 newListing.TotalBedrooms = rnd.Next(0, 12);
+                newListing.MinimumContractLength = 6;
+                newListing.MinimumContractLengthUnits = UnitOfTime.Months;
+                newListing.RentalTerm = RentalTerm.LongTerm;
 
                 listings.Add(newListing);
                 // company.Listings.Add(newListing);
@@ -518,6 +521,10 @@ namespace Persistence
                         };
                 newListing.PropertyType = PropertyType.Detached;
                 newListing.TotalBedrooms = rnd.Next(0, 12);
+                newListing.MinimumContractLength = 6;
+                newListing.MinimumContractLengthUnits = UnitOfTime.Months;
+                newListing.RentalTerm = RentalTerm.LongTerm;
+
 
                 listings.Add(newListing);
                 // company.Listings.Add(newListing);
@@ -535,7 +542,6 @@ namespace Persistence
                         // ListedBuildingGrade = 0,
                         // LivingRooms = 2,
                         // Loft = false,
-                        // MinimumContractLength = null,
                         // NewBuild = false,
                         // OpenDay = new DateTime(2022, month, day),
                         // Outbuildings = false,

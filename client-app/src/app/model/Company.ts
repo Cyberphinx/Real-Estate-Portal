@@ -166,6 +166,7 @@ export interface Stock {
     pricing: Pricing;
     propertyType:PropertyType;
     totalBedrooms: number;
+    agency: string;
 }
 
 export enum RedressScheme {

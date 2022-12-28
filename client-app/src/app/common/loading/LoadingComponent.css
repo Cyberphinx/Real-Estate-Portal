@@ -1,7 +1,7 @@
 .loader {
-  border: 5px solid #fff;
+  border: 5px solid #000;
   border-radius: 50%;
-  border-top: 5px solid #000;
+  border-top: 5px solid #fff;
   width: 35px;
   height: 35px;
   -webkit-animation: spin 2s linear infinite; /* Safari */

@@ -5,3 +5,7 @@ export function capitalizeFirstLetter(string: string) {
 export function dateFormatter(date: Date) {
     return new Date(date).toLocaleString();
 }
+
+export function dateFormatterShort(date: Date) {
+    return new Date(date).toLocaleDateString();
+}

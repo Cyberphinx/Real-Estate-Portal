@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useMap } from "react-leaflet";
 import { Listing } from "../../../app/model/ListingAggregate/Listing";
 import { useStore } from "../../../app/stores/store";
@@ -13,11 +13,16 @@ export default observer(function Locate({selectedItem}: Props) {
     const {mapStore:{lat, long, setLat, setLong}} = useStore();
     const map = useMap();
 
-    const flyBack = useCallback(() => {
-        map.flyTo([selectedItem!.listingLocation.latitude, selectedItem!.listingLocation.longitude], 14, {
+    // const flyBack = useCallback(() => {
+    //     map.flyTo([selectedItem!.listingLocation.latitude, selectedItem!.listingLocation.longitude], 14, {
+    //         duration: 3
+    //     });
+    // }, [map, lat, long])
+
+    const flyBack = () => {
+        map.flyTo([selectedItem!.listingLocation.latitude, selectedItem!.listingLocation.longitude], 13, {
             duration: 3
-        });
-    }, [map, lat, long])
+        })}
 
     return (
         <div className="locate-container">

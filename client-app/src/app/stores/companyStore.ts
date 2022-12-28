@@ -12,9 +12,7 @@ export default class CompanyStore {
   selectedCompany: Company | undefined = undefined;
   loadingCompanies = false;
   loadingCompany = false;
-  loadingCompanyListings = false;
   editMode = false;
-  companyListings: Stock[] = [];
 
   // Pagination
   pagination: Pagination | null = null;
@@ -194,20 +192,6 @@ export default class CompanyStore {
       console.log(error);
     };
   }
-
-  loadCompanyListings = async (id: string, predicate?: string) => {
-    this.loadingCompanyListings = true;
-    try {
-        const listings = await agent.Companies.listListings(id, predicate!);
-        runInAction(() => {
-            this.companyListings = listings;
-            this.loadingCompanyListings = false;
-        })
-    } catch (error) {
-        console.log(error);
-        runInAction(() => this.loadingCompanyListings = false);
-    }
-}
 
 }
 

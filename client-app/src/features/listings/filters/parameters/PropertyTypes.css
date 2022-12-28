@@ -54,5 +54,6 @@
 }
 .types-reset-button:hover {
   cursor: pointer;
-  background: #f8f8f9;
+  background: #000;
+  color: #fff;
 }

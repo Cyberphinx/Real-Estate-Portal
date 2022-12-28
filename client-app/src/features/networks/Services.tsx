@@ -22,17 +22,17 @@ export default observer(function Services() {
         <div className="services-hub">
             <div className="forum-toolbar">
                 <div style={{ padding: "8px" }}>
-                    <button>Heating</button>
-                    <button>Handyman</button>
-                    <button>Plumbing</button>
-                    <button>Electrician</button>
-                    <button>Gardening</button>
-                    <button>Cleaning</button>
-                    <button>Removals</button>
+                    <button className="service-hub-button">Heating</button>
+                    <button className="service-hub-button">Handyman</button>
+                    <button className="service-hub-button">Plumbing</button>
+                    <button className="service-hub-button">Electrician</button>
+                    <button className="service-hub-button">Gardening</button>
+                    <button className="service-hub-button">Cleaning</button>
+                    <button className="service-hub-button">Removals</button>
                 </div>
                 <div style={{ padding: "8px" }}>
-                    <button style={{ float: "right" }}>Post a job</button>
-                    <button style={{ float: "right" }}>Join as a tradesperson</button>
+                    <button className="service-hub-button-master" style={{ float: "right" }}>Join as a tradesperson</button>
+                    <button className="service-hub-button-master" style={{ float: "right" }}>Post a job</button>
                 </div>
             </div>
             <div className="forum-container">
@@ -48,7 +48,7 @@ export default observer(function Services() {
                             <LoadingPlaceholder />
                         </div>
                         : jobs.map((job: Job) => (
-                            <Link to={`/job/${job?.id}`} target="_blank" key={job.id} style={{textDecoration:"none"}}>
+                            <Link to={`/job/${job?.id}`} target="_blank" key={job.id} style={{ textDecoration: "none" }}>
                                 <JobItem job={job} />
                             </Link>
                         ))}

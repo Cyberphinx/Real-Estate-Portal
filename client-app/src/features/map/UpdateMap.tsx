@@ -16,9 +16,9 @@ export default function UpdateMap({listing}: Props) {
 
     useEffect(() => {
         if (listing && isLocked) {
-            map.flyTo([listing!.listingLocation.latitude, listing!.listingLocation.longitude], 14, {
-                duration: 3
-            });
+            // map.flyTo([listing!.listingLocation.latitude, listing!.listingLocation.longitude], 14, {
+            //     duration: 3
+            // });
             setLat(0);
             setLong(0);
         }

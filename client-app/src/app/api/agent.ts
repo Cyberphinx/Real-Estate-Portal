@@ -115,8 +115,8 @@ const Companies = {
   create: (company: CompanyFormValues) => requests.post<Company>('/company', company),
   update: (company: CompanyFormValues) => requests.put<Company>(`/company/${company.id}`, company),
   delete: (id: string) => requests.del<void>(`/company/${id}`),
-  listListings: (id: string, predicate: string) =>
-    requests.get<Stock[]>(`/company/listings/${id}?predicate=${predicate}`)
+  listListings: (params: URLSearchParams) =>
+    axios.get<PaginatedResult<Stock[]>>("/company/listings/", {params}).then(responseBody)
 };
 
 const Jobs = {

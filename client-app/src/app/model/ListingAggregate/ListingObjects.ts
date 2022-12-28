@@ -42,6 +42,7 @@ export interface Owner {
     displayName: string;
     redressSchemes: RedressScheme[];
     summaryDescription: string;
+    logo: string;
 }
 
 export interface Pricing {

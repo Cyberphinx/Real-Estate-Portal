@@ -1,0 +1,22 @@
+.header-container {
+    padding: 40px 20px 0px 20px;
+}
+
+.header-one {
+  padding: 20px 0px 10px 0px;
+}
+
+.details-divider {
+  border-width: 0.5px;
+  border-style: inset;
+  color: #f5f5f5;
+  margin: 0px 20px;
+}
+
+.listing-summary-container {
+    padding: 0px 20px 20px 20px;
+}
+
+.summary-text {
+  font-size: 14px;
+}

@@ -84,6 +84,25 @@ export const rentFrequency = (listing: Listing) => {
     }
 }
 
+export const rentFrequencyShort = (listing: Listing) => {
+    switch (listing.pricing.rentFrequency) {
+        case 0:
+            return "/p/w"
+        case 1:
+            return "/w"
+        case 2:
+            return "/m"
+        case 3:
+            return "/q"
+        case 4:
+            return "/y"
+        case 5:
+            return ""
+        default:
+            return ""
+    }
+}
+
 export enum FurnishedState {
     furnished,
     furnishedOrUnfurnished,
@@ -245,6 +264,27 @@ export const propertyType = (listing: Listing) => {
             return "Land"
         default:
             return "Property"
+    }
+}
+
+export const propertyTypeLong = (listing: Listing) => {
+    switch (listing.propertyType) {
+        case 0:
+            return "barn conversion"
+        case 8:
+            return "detached house"
+        case 15:
+            return "flat/apartment"
+        case 28:
+            return "park home"
+        case 37:
+            return "terraced house"
+        case 34:
+            return "semi-detached house"
+        case 19:
+            return "land / farm"
+        default:
+            return "property"
     }
 }
 

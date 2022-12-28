@@ -55,10 +55,12 @@ namespace Application.Core
             CreateMap<Listing, Stock>()
                 .ForMember(x => x.Image, o => o.MapFrom(s => s.Contents.FirstOrDefault(x => x.IsMain).Url))
                 .ForMember(x => x.ListingLocation, o => o.MapFrom(s => s.ListingLocation))
-                .ForMember(x => x.Pricing, o => o.MapFrom(s => s.Pricing));
+                .ForMember(x => x.Pricing, o => o.MapFrom(s => s.Pricing))
+                .ForMember(x => x.Agency, o => o.MapFrom(s => s.Company.DisplayName));
 
             CreateMap<Content, ContentDto>();
-            CreateMap<DetailedDescription, DetailedDescriptionDto>();
+            CreateMap<DetailedDescription, DetailedDescriptionDto>()
+            .ForMember(x => x.Area, o => o.MapFrom(s => s.Length * s.Width));
             CreateMap<EpcRatings, EpcRatingsDto>();
             CreateMap<ListingLocation, ListingLocationDto>();
             CreateMap<Pricing, PricingDto>();
@@ -90,7 +92,9 @@ namespace Application.Core
 
             // Company Dtos
             CreateMap<Company, Company>();
-            CreateMap<Company, Owner>();
+            CreateMap<Company, Owner>()
+                .ForMember(x => x.Logo, o => o.MapFrom(s => s.CompanyContents.FirstOrDefault(x => x.IsLogo).Url));
+            
             CreateMap<CompanyAddress, CompanyAddressDto>();
             CreateMap<CompanyContacts, CompanyContactsDto>();
             CreateMap<CompanyContent, CompanyContentDto>();

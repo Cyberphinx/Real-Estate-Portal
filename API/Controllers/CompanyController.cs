@@ -77,11 +77,11 @@ namespace API.Controllers
             await SeedCompanies.SeedData(_db);
         }
         
-        [Authorize(Policy = "IsCompanyOwner")]
-        [HttpGet("listings/{id}")]
-        public async Task<IActionResult> GetCompanyListings(Guid id, string predicate)
+        // [Authorize(Policy = "IsCompanyOwner")]
+        [HttpGet("listings")]
+        public async Task<IActionResult> GetCompanyListings([FromQuery]AgentListingParams param)
         {
-            return HandleResult(await Mediator.Send(new ListListings.Query{CompanyId = id, Predicate = predicate}));
+            return HandlePagedResult(await Mediator.Send(new ListListings.Query{Params = param}));
         }
 
     }

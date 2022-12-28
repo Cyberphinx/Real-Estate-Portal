@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import './ListingDetailsPage.css';
 import { useParams } from "react-router-dom";
 import { useStore } from "../../../app/stores/store";
@@ -19,6 +19,7 @@ export default observer(function ListingDetailsPage() {
         if (id) loadListing(id);
         return () => cancelSelectListing();
     }, [id, loadListing, cancelSelectListing])
+
 
     if (loadingListing || !listing) return <LoadingComponent content={"Loading..."} />;
 
@@ -44,7 +45,7 @@ export default observer(function ListingDetailsPage() {
                                 <article key={description.id} >
                                     <h1>{description.heading}</h1>
                                     <span>
-                                        {description.area !== null
+                                        {description.area !== 0
                                             && ` (${description.length} x ${description.width} = ${description.area} sq ${UnitOfLength[description.unit]})`}
                                     </span>
                                     <p>{description.text}</p>

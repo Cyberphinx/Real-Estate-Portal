@@ -4,7 +4,7 @@ import { Listing } from "../../app/model/ListingAggregate/Listing";
 import AgencyTag from "../../app/common/tags/AgencyTag";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../app/stores/store";
-import { Currency, priceQualifier, propertyType, rentFrequency } from "../../app/model/ListingAggregate/ListingEnums";
+import { Currency, Frequency, priceQualifier, propertyType, rentFrequency, rentFrequencyShort } from "../../app/model/ListingAggregate/ListingEnums";
 import RefTag from "../../app/common/tags/RefTag";
 import { Content } from "../../app/model/ListingAggregate/ListingObjects";
 import WatchButton from "../../app/common/WatchButton";
@@ -91,7 +91,7 @@ export default observer(function ListingItem({ listing, predicate }: Props) {
                 <section className="card-overlay">
                     <div className="card-price" title={`${priceQualifier(listing!.pricing.priceQualifier)} in ${Currency[listing!.pricing.currency].toUpperCase()}`}>
                         <b style={{ fontSize: "18px" }}>{priceFormat.format(listing!.pricing.price)}</b>
-                        {predicate.get("channel") === "sale" ? null : <sup> {rentFrequency(listing!)}</sup>}
+                        {predicate.get("channel") === "sale" ? null : <span style={{fontSize:"10px"}}>{rentFrequencyShort(listing!)}</span>}
                     </div>
                     <div className="card-attribute">
                         <p style={{ fontSize: "16px", padding: "0px", margin: "0px" }}>{listing!.totalBedrooms} Beds {propertyType(listing!)}</p>

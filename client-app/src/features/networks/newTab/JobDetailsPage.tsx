@@ -59,15 +59,14 @@ export default observer(function JobDetailsPage() {
 
                         <p className="thread-content">{job.description}</p>
 
-                        <section className="thread-gallery">
-                            <div className="thread-carousel" style={{ gridTemplateColumns: `repeat(${job!.jobContents.length},calc(100vw / 10))` }}>
-                                {job?.jobContents.map((content: JobContent, index: number) => (
-                                    <div style={{ position: "relative" }} key={content.id}>
-                                        <img className="job-thumbnail" src={content.url} alt={content.caption} />
-                                        <span className="job-numbering">{index + 1}</span>
-                                    </div>
-                                ))}
-                            </div>
+
+                        <section className="thread-carousel" style={{ gridTemplateColumns: `repeat(${job!.jobContents.length},calc(100vw / 10))` }}>
+                            {job?.jobContents.map((content: JobContent, index: number) => (
+                                <div style={{ position: "relative" }} key={content.id}>
+                                    <img className="job-thumbnail" src={content.url} alt={content.caption} />
+                                    <span className="job-numbering">{index + 1}</span>
+                                </div>
+                            ))}
                         </section>
 
                         <section className="job-applicants">
@@ -108,7 +107,7 @@ export default observer(function JobDetailsPage() {
                 </section>
 
                 {applicant
-                    ? <section className="job-network-container">
+                    ? <section className="job-author-container">
                         {applicant.role === JobNetworkRole.ShortlistedCompany ? <p>Shortlisted applicant:</p> : <p>Interested applicant:</p>}
                         {applicant.image !== null
                             ? <img className="large-user-icon" src={applicant.image} alt="profile-pic" />
@@ -130,9 +129,10 @@ export default observer(function JobDetailsPage() {
                             <p>Chats</p>
                             <p>Chats</p>
                             <p>Chats</p>
+                            <p>Chats</p>
                         </div>
                     </section>
-                    : <section className="job-network-container"></section>}
+                    : <section></section>}
             </div>
         </div>
     )

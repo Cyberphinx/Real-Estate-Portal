@@ -39,6 +39,7 @@ export interface Listing {
     deposit: number;
     detailedDescriptions: DetailedDescription[];
     doubleGlazing: boolean;
+    dishwasher: boolean;
     epcRatings: EpcRatings;
     featureProperty: boolean;
     featureList: string[];
@@ -77,6 +78,7 @@ export interface Listing {
     serviceCharge: ServiceCharge;
     serviced: boolean;
     sharedAccommodation: boolean;
+    smokersConsidered: boolean;
     summaryDescription: string;
     swimmingPool: boolean;
     tenanted: boolean;
@@ -87,6 +89,7 @@ export interface Listing {
     totalBedrooms: number;
     utilityRoom: boolean;
     waterFront: boolean;
+    washingMachine: boolean;
     woodFloors: boolean;
     watchers: WatcherDto[];
 }

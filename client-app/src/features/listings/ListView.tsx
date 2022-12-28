@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './ListView.css';
 import { observer } from "mobx-react-lite";
 import { useStore } from '../../app/stores/store';
@@ -42,7 +42,6 @@ export default observer(function ListView({ clusters, supercluster }: Props) {
         setCombinedListing(clusterArray);
         return () => { setCombinedListing([]) };
     }, [clusters, setCombinedListing]);
-
 
     return (
         <div className="listings-container" >

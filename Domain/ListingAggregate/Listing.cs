@@ -41,6 +41,7 @@ namespace Domain.ListingAggregate
         public double Deposit { get; set; }
         public ICollection<DetailedDescription> DetailedDescriptions { get; set; }
         public bool DoubleGlazing { get; set; }
+        public bool Dishwasher { get; set; }
         public EpcRatings EpcRatings { get; set; }
         public bool FeatureProperty { get; set; }
         public List<string> FeatureList { get; set; }
@@ -79,6 +80,7 @@ namespace Domain.ListingAggregate
         public ServiceCharge ServiceCharge { get; set; }
         public bool Serviced { get; set; }
         public bool SharedAccommodation { get; set; }
+        public bool SmokersConsidered { get; set; }
         public string SummaryDescription { get; set; }
         public bool SwimmingPool { get; set; }
         public bool Tenanted { get; set; }
@@ -89,6 +91,7 @@ namespace Domain.ListingAggregate
         public int TotalBedrooms { get; set; }
         public bool UtilityRoom { get; set; }
         public bool WaterFront { get; set; }
+        public bool WashingMachine { get; set; }
         public bool WoodFloors { get; set; }
         public Guid CompanyId { get; set; }
         public Company Company { get; set; }

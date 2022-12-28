@@ -37,35 +37,35 @@ export default observer(function Customer({ user }: Props) {
     ]
 
     return (
-        <div className="customer-container">
+        <div className="agent-container">
             {loadingProfile ? <LoadingComponent content='Loading profile...' /> :
                 <>
-                    <section className="customer-section-one">
-                        <h1 className="customer-title">{user?.displayName ? capitalizeFirstLetter(user?.displayName) : capitalizeFirstLetter(user!.username)}'s control panel</h1>
-                        <ul className="customer-menu">
+                    <section className="agent-section-one">
+                        <h1 className="agent-title">{user?.displayName ? capitalizeFirstLetter(user?.displayName) : capitalizeFirstLetter(user!.username)}'s control panel</h1>
+                        <ul className="agent-menu">
                             <li>
                                 <button
-                                    className={activeTab === 0 ? "customer-menu-button-active" : "customer-menu-button"}
+                                    className={activeTab === 0 ? "agent-menu-button-active" : "agent-menu-button"}
                                     onClick={() => setActiveTab(0)}>User settings</button>
                             </li>
                             <li>
                                 <button
-                                    className={activeTab === 1 ? "customer-menu-button-active" : "customer-menu-button"}
+                                    className={activeTab === 1 ? "agent-menu-button-active" : "agent-menu-button"}
                                     onClick={() => setActiveTab(1)}>Branches</button>
                             </li>
                             <li>
                                 <button
-                                    className={activeTab === 2 ? "customer-menu-button-active" : "customer-menu-button"}
+                                    className={activeTab === 2 ? "agent-menu-button-active" : "agent-menu-button"}
                                     onClick={() => setActiveTab(2)}>Property listings</button>
                             </li>
                             <li>
                                 <button
-                                    className={activeTab === 4 ? "customer-menu-button-active" : "customer-menu-button"}
+                                    className={activeTab === 4 ? "agent-menu-button-active" : "agent-menu-button"}
                                     onClick={() => setActiveTab(4)}>Messages</button>
                             </li>
                         </ul>
                     </section>
-                    <section className="customer-section-two">
+                    <section className="agent-section-two">
                         {panes[activeTab]}
                     </section>
                 </>

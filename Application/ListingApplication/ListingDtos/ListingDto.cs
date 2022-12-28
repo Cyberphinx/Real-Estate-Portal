@@ -42,6 +42,7 @@ namespace Application.ListingApplication.ListingDtos
         public double Deposit { get; set; }
         public ICollection<DetailedDescriptionDto> DetailedDescriptions { get; set; }
         public bool DoubleGlazing { get; set; }
+        public bool Dishwasher { get; set; }
         public EpcRatingsDto EpcRatings { get; set; }
         public List<string> FeatureList { get; set; }
         public bool Fireplace { get; set; }
@@ -79,6 +80,7 @@ namespace Application.ListingApplication.ListingDtos
         public ServiceChargeDto ServiceCharge { get; set; }
         public bool Serviced { get; set; }
         public bool SharedAccommodation { get; set; }
+        public bool SmokersConsidered { get; set; }
         public string SummaryDescription { get; set; }
         public bool SwimmingPool { get; set; }
         public bool Tenanted { get; set; }
@@ -89,6 +91,7 @@ namespace Application.ListingApplication.ListingDtos
         public int TotalBedrooms { get; set; }
         public bool UtilityRoom { get; set; }
         public bool WaterFront { get; set; }
+        public bool WashingMachine { get; set; }
         public bool WoodFloors { get; set; }
         public Owner Company { get; set; }
         public ICollection<WatcherDto> Wacthers { get; set; }

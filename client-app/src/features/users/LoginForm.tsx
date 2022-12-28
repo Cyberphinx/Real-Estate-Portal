@@ -1,4 +1,4 @@
-import './RegisterLoginForm.css';
+import './LoginForm.css';
 import { Formik, Form } from "formik";
 import MyTextInput from "../../app/common/form/MyTextInput";
 import { useStore } from "../../app/stores/store";
@@ -28,8 +28,9 @@ export default observer(function LoginForm() {
                         <Form onSubmit={handleSubmit} autoComplete="off">
                             <MyTextInput inputclassname='login-input-style' errorclassname='error-style' name="email" placeholder="Email" />
                             <br />
-                            <MyTextInput inputclassname='input-style' errorclassname='error-style' name="password" placeholder="Password" type="password" />
-                            <button type="submit">Login</button>
+                            <MyTextInput inputclassname='login-input-style' errorclassname='error-style' name="password" placeholder="Password" type="password" />
+                            <br />
+                            <button className='login-button' type="submit">Login</button>
                             {/* <button disabled={!isValid || !dirty || isSubmitting} className="button" type="submit">
                                 <span className={"button-" + (isSubmitting ? "loading" : "text")}>Login</span>
                             </button> */}

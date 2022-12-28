@@ -9,6 +9,7 @@ import FeatureStore from "./featureStore";
 import MapStore from "./mapStore";
 import JobStore from "./jobStore";
 import ProfileStore from "./profileStore";
+import AgentListingStore from "./agentListingStore";
 
 interface Store {
     // class can also be used as types
@@ -22,6 +23,7 @@ interface Store {
     calendarStore: CalendarStore;
     mapStore: MapStore;
     profileStore: ProfileStore;
+    agentListingStore: AgentListingStore;
 }
 
 export const store: Store = {
@@ -34,7 +36,8 @@ export const store: Store = {
     modalStore: new ModalStore(),
     calendarStore: new CalendarStore(),
     mapStore: new MapStore(),
-    profileStore: new ProfileStore()
+    profileStore: new ProfileStore(),
+    agentListingStore: new AgentListingStore()
 }
 
 export const StoreContext = createContext(store);

@@ -23,7 +23,7 @@ export default observer(function NavBar() {
                 <li className="nav-bar-item"><img className="logo-large" src="/assets/sanctum.svg" alt="S" /></li>
                 <li className="nav-bar2-item"><Link to="/">SANCTUM</Link></li>
                 <li className="nav-bar2-item"><p className="gist-style">
-                    <span>{listing?.pricing.transactionType === 1 && priceQualifier(listing!.pricing.priceQualifier)} </span> 
+                    <span>{listing?.pricing.transactionType === 1 && priceQualifier(listing!.pricing.priceQualifier)} </span>
                     <b>{priceFormatter(listing!.pricing.price, listing!.pricing.currency)} </b>
                     <span>{listing?.pricing.transactionType === 0 && Frequency[listing.pricing.rentFrequency].replace(/[A-Z]/g, ' $&').trim()}</span>
                 </p></li>
@@ -33,8 +33,18 @@ export default observer(function NavBar() {
                 <li className="nav-bar2-item"><p className="address-style">{address}</p></li>
 
                 {/* {isLoggedIn ? <li className="nav-bar2-item-right" ><button className="nav-bar-user">Logged in as: {user?.username}</button></li> : null} */}
-                <li className="nav-bar2-item-right"><button className="nav-bar-button" onClick={() => setContacts()}>Contact agent</button></li>
-                <li className="nav-bar2-item-right"><button className="nav-bar-button" onClick={() => setDescription()}>Description</button></li>
+                <li className="nav-bar2-item-right"><button className="nav-bar-button"
+                    onClick={() => {
+                        setContacts();
+                    }}>
+                    Contact agent
+                </button></li>
+                <li className="nav-bar2-item-right"><button className="nav-bar-button"
+                    onClick={() => {
+                        setDescription()
+                    }}>
+                    Description
+                </button></li>
             </ul>
         </div>
     );
