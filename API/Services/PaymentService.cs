@@ -15,7 +15,7 @@ namespace API.Services
             _config = config;
         }
 
-        public async Task<PaymentIntent> CreateOrUpdatePaymentIntent(Domain.InvoiceAggregate.Invoice currentInvoice)
+        public async Task<PaymentIntent> CreateOrUpdatePaymentIntent(Domain.AppUserAggregate.Objects.Invoice currentInvoice)
         {
             StripeConfiguration.ApiKey = _config["StripeSettings:SecretKey"];
 

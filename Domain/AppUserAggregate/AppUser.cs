@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Domain;
 using Domain.AppUserAggregate.Enums;
 using Domain.AppUserAggregate.Objects;
 using Domain.LocationAggregate;
@@ -18,6 +17,8 @@ namespace Domain.AppUserAggregate
         public string DisplayName { get; set; }
         public Country Country { get; set; }
         public Language Language { get; set; }
+        public Membership Membership { get; set; }
+        public ICollection<Invoice> Invoices { get; set; } = new List<Invoice>();
         public ICollection<JobNetwork> Jobs { get; set; }
         public ICollection<Photo> Photos { get; set; }
         public ICollection<AppUserReview> Reviews { get; set; }

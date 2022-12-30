@@ -4,9 +4,10 @@ import MyTextInput from "../../app/common/form/MyTextInput";
 import { useStore } from "../../app/stores/store";
 import { observer } from "mobx-react-lite";
 import * as Yup from 'yup';
+import RegisterForm from './register/RegisterForm';
 
 export default observer(function LoginForm() {
-    const { userStore: { login }, modalStore: { closeModal } } = useStore();
+    const { userStore: { login }, modalStore: { openModal, closeModal } } = useStore();
 
     return (
         <div className="login-form">
@@ -20,21 +21,32 @@ export default observer(function LoginForm() {
                         login(values).catch(errors => setErrors({ error: "Invalid email or password" }));
                     }}
                     validationSchema={Yup.object({
-                        email: Yup.string().required().email(),
-                        password: Yup.string().required()
+                        email: Yup.string().required("The email is required").email("The email must be a valid email"),
+                        password: Yup.string().required("The password is required")
                     })}
                 >
                     {({ handleSubmit, isSubmitting, errors, isValid, dirty }) => (
                         <Form onSubmit={handleSubmit} autoComplete="off">
-                            <MyTextInput inputclassname='login-input-style' errorclassname='error-style' name="email" placeholder="Email" />
+                            <p style={{textAlign:"left",fontSize:"18px",fontWeight:"600",padding:"0px 20px 0px 20px"}}>Log In</p>
+                            <p style={{textAlign:"left",fontSize:"12px",fontWeight:"400",padding:"0px 20px 20px 20px"}}>
+                                By continuing, you agree are setting up a Sanctum account and agree to our <span className='login-legal-text'>User Agreement</span> and <span className='login-legal-text'>Privacy Policy</span>.
+                                </p>
+                            <MyTextInput inputclassname='login-input-style' errorclassname='login-form-error' name="email" placeholder="Email" />
                             <br />
-                            <MyTextInput inputclassname='login-input-style' errorclassname='error-style' name="password" placeholder="Password" type="password" />
+                            <MyTextInput inputclassname='login-input-style' errorclassname='login-form-error' name="password" placeholder="Password" type="password" />
                             <br />
-                            <button className='login-button' type="submit">Login</button>
+                            <p className='login-suggestion'>Forget your <button className='login-suggestion-button'>password</button> ?</p>
+                            <button className='login-button' type="submit">Log In</button>
                             {/* <button disabled={!isValid || !dirty || isSubmitting} className="button" type="submit">
                                 <span className={"button-" + (isSubmitting ? "loading" : "text")}>Login</span>
                             </button> */}
-                            {errors.error && <p className="login-error">{errors.error}</p>}
+                            {errors.error && <p className="login-form-submission-error">{errors.error}</p>}
+                            <p className='login-suggestion'>New to Sanctum? <button className='login-suggestion-button' 
+                            onClick={() => {
+                                closeModal();
+                                openModal(<RegisterForm />);
+                            }}
+                            >Sign Up</button></p>
                         </Form>
                     )}
                 </Formik>

@@ -5,18 +5,29 @@ import LoadingPlaceholder from "../../app/common/loading/LoadingPlaceholder";
 import { Job, JobContent } from "../../app/model/Job";
 import { ServiceCategory } from "../../app/model/ServiceCategory";
 import { useStore } from "../../app/stores/store";
+import LoginForm from "../users/LoginForm";
 import JobItem from "./JobItem";
 import './Services.css';
 
 export default observer(function Services() {
-    const { jobStore, userStore, profileStore } = useStore();
+    const { jobStore, userStore, profileStore, modalStore } = useStore();
     const { jobs, loadingJobs, loadJobs, selectJob, selectedJob } = jobStore;
+    const { isLoggedIn } = userStore;
+    const { openModal } = modalStore;
 
     useEffect(() => {
         if (userStore.isLoggedIn) {
             profileStore.loadUserJobs(userStore.user!.username);
         };
     }, [userStore.isLoggedIn, userStore.user])
+
+    function postAJob(event: SyntheticEvent) {
+        
+    }
+    function loginPrompt(event: SyntheticEvent) {
+        event.stopPropagation();
+        openModal(<LoginForm />);
+    }
 
     return (
         <div className="services-hub">
@@ -31,8 +42,8 @@ export default observer(function Services() {
                     <button className="service-hub-button">Removals</button>
                 </div>
                 <div style={{ padding: "8px" }}>
-                    <button className="service-hub-button-master" style={{ float: "right" }}>Join as a tradesperson</button>
-                    <button className="service-hub-button-master" style={{ float: "right" }}>Post a job</button>
+                    <button className="service-hub-button-master" style={{ float: "right" }}>Tradesperson sign up</button>
+                    <button className="service-hub-button-master" onClick={(e) => {isLoggedIn ? postAJob(e) : loginPrompt(e)}} style={{ float: "right" }}>Post a job</button>
                 </div>
             </div>
             <div className="forum-container">

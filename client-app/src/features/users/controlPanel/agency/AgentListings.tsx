@@ -89,7 +89,7 @@ export default observer(function AgentListings() {
                     ))
                 }
             </div>
-            <div className="agent-listing-pagination-container">
+            {agentListings.length > 0 ? <div className="agent-listing-pagination-container">
                 <p style={{ fontSize: "14px" }}>Showing {agentListings.length} of {pagination?.totalItems} items</p>
                 <button className={loadingNext ? "agent-listing-loading-button" : "agent-listing-load-button"}
                  onClick={() => handleGetNext()}>
@@ -97,6 +97,7 @@ export default observer(function AgentListings() {
                     Load 12 more
                     </button>
             </div>
+            : (loadingAgentListings ? null : <p>Select a branch to view its listings.</p>)}
         </div>
     )
 })

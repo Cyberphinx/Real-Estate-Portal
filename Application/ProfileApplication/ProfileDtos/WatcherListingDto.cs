@@ -13,6 +13,7 @@ namespace Application.ProfileApplication.ProfileDtos
         public string Reference { get; set; }
         public TransactionType TransactionType { get; set; }
         public string Image { get; set; }
+        public LifeCycleStatus LifeCycleStatus { get; set; }
         public double Price { get; set; }
         public PriceQualifier PriceQualifier { get; set; }
         public Currency Currency { get; set; }

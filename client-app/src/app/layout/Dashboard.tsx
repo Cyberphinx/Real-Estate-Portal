@@ -6,22 +6,22 @@ import Nav from "./Nav";
 import Listings from "../../features/listings/Listings";
 import ControlPanel from "../../features/users/controlPanel/ControlPanel";
 import AdminPanel from "../../features/users/controlPanel/AdminPanel";
-import ListingDetails from "../../features/listings/details/ListingDetails";
 import useSupercluster from "use-supercluster";
 import { Listing } from "../model/ListingAggregate/Listing";
 import { Company } from "../model/Company";
-import CompanyDetails from "../../features/companies/details/CompanyDetails";
 import Services from "../../features/networks/Services";
+import ListingTab from "../../features/listings/details/ListingTab";
+import CompanyTab from "../../features/companies/details/CompanyTab";
 
 export default observer(function Dashboard() {
     const { featureStore, listingStore, mapStore, jobStore, companyStore, userStore, profileStore } = useStore();
     const { activeFeature } = featureStore;
-    const { loadJobs, jobRegistry, loadingJobs } = jobStore;
-    const { listings, selectedListing, listingRegistry, loadListings, loadingInitial } = listingStore;
-    const { companies, selectedCompany, loadCompanies, companyRegistry, loadingCompanies } = companyStore;
+    const { loadJobs } = jobStore;
+    const { listings, selectedListing,  loadListings } = listingStore;
+    const { companies, selectedCompany, loadCompanies } = companyStore;
     const { zoom, bounds } = mapStore;
     const { user, isLoggedIn } = userStore;
-    const { loadProfile, profile, loadUserListings, setActiveTab, userListings, loadingUserListings } = profileStore;
+    const { loadUserListings } = profileStore;
 
     useEffect(() => {
         loadListings();
@@ -92,8 +92,8 @@ export default observer(function Dashboard() {
         <div style={{ position: "relative" }}>
             <Nav />
             {features[activeFeature]}
-            {selectedListing && <ListingDetails listing={selectedListing} />}
-            {selectedCompany && <CompanyDetails company={selectedCompany} />}
+            {selectedListing && <ListingTab listing={selectedListing} />}
+            {selectedCompany && <CompanyTab company={selectedCompany} />}
         </div>
     )
 });

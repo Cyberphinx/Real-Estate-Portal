@@ -1,0 +1,90 @@
+.register-form {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 50; 
+  width: 100%;
+  height: 100%;
+  overflow: auto; 
+  background-color: rgba(0, 0, 0, 0.4); 
+}
+
+.modal-content {
+  text-align: center;
+  padding: 20px 50px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 20%; /* Could be more or less, depending on screen size */
+}
+
+.register-button {
+  border: 1px solid #1F51FF;
+  border-radius: 3px;
+  background: #1F51FF;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  width: 80%;
+  margin: 0px 0px 20px 0px;
+  color: #fff;
+}
+.register-button:hover {
+  cursor: pointer;
+  background: rgba(31,81,255,0.9);
+}
+.register-button:disabled {
+  cursor: default;
+  border: 1px solid rgba(31,81,255,0);
+  background: rgba(31,81,255,0.2);
+}
+
+.register-input-style {
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  width: 80%;
+  padding: 10px;
+}
+
+.register-form-error {
+  padding: 10px 0px 0px 0px;
+  margin: 0px;
+  font-size: 14px;
+  color: #ff0033;
+}
+
+.register-form-submission-error {
+  padding: 10px 0px 0px 0px;
+  margin: 0px 0px 20px 0px;
+  font-size: 14px;
+  color: #ff0033;
+}
+
+.register-legal-text {
+  color: #4169E1;
+}
+.register-legal-text:hover {
+  cursor: pointer;
+}
+
+.register-suggestion {
+  font-size: 14px;
+  padding: 0px;
+  margin: 0px 0px 20px 0px;
+}
+
+.register-suggestion-button {
+  text-decoration: underline;
+  color: #1F51FF;
+  background: none;
+  border: none;
+  padding: 0px;
+  margin: 0px;
+
+}
+.register-suggestion-button:hover {
+  cursor: pointer;
+}

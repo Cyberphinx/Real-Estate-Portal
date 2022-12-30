@@ -13,5 +13,6 @@ namespace Domain
         public AppUser AppUser { get; set; }
         public Guid ListingId { get; set; }
         public Listing Listing { get; set; }
+        public DateTime AddedOn { get; set; }
     }
 }

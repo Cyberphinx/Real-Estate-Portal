@@ -31,7 +31,7 @@ export default function MySelectInput(props: Props) {
                 })}
             </select>
             {meta.touched && meta.error ? (
-                <p className="login-error">{meta.error}</p>
+                <p className="select-input-error">{meta.error}</p>
             ) : null}
         </div>
     );

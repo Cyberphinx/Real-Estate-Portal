@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Domain;
 using Domain.Enums;
-using Domain.InvoiceAggregate;
 
 namespace Application.JobApplication.JobDtos
 {

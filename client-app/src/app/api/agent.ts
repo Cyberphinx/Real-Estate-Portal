@@ -94,7 +94,8 @@ const Profiles = {
   listUserJobs: (username: string, predicate: string) =>
     requests.get<UserJobDto[]>(`/profile/jobs/${username}?predicate=${predicate}`),
   listUserCompanies: (username: string, predicate: string) =>
-    requests.get<UserCompanyDto[]>(`/profile/companies/${username}?predicate=${predicate}`)
+    requests.get<UserCompanyDto[]>(`/profile/companies/${username}?predicate=${predicate}`),
+  getHeadquarter: (username: string) => requests.get<UserCompanyDto>(`profile/headquarter/${username}`),
 }
 
 const Listings = {

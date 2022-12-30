@@ -10,11 +10,10 @@
   top: 140px;
   left: calc((100vw / 3) + 20px);
   color: #000;
-  background: #f5f5f5;
+  background: #dcdcdc;
   margin: auto;
   padding: 0;
   display: inline-grid;
-  grid-template-columns: auto 50px 50px 50px;
   box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.5);
   z-index: 1000;
 }
@@ -29,17 +28,7 @@
   font-size: 14px;
 }
 
-.toolbar-locate {
-  /* border: 1px solid black; */
-  text-align: right;
-}
-
-.toolbar-newtab {
-  /* border: 1px solid black; */
-  text-align: right;
-}
-
-.toolbar-x {
+.toolbar-button {
   /* border: 1px solid black; */
   text-align: right;
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Domain;
+using Domain.CompanyAggregate.Enums;
 using Domain.Enums;
 
 namespace Application.CompanyApplication.CompanyDtos
@@ -16,14 +17,14 @@ namespace Application.CompanyApplication.CompanyDtos
         public ICollection<CompanyDescriptionDto> CompanyDescriptions { get; set; }
         public string CompanyReference { get; set; }
         public string CompanyRegistrationNumber { get; set; }
+        public CompanyType CompanyType { get; set; }
         public string DisplayName { get; set; }
-        public ICollection<InvoiceDto> Invoices { get; set; }
+        public string IcoRegistrationNumber { get; set; }
         public ICollection<InsuranceDto> Insurances { get; set; }
         public bool IsMain { get; set; }
         public DateTime LastModified { get; set; }
         public string LegalName { get; set; }
         public ICollection<Stock> Listings { get; set; }
-        public MembershipDto Membership { get; set; }
         public List<RedressScheme> RedressSchemes { get; set; } 
         public ICollection<CompanyReviewDto> Reviews { get; set; }
         public string ServiceLocations { get; set; }

@@ -1,7 +1,7 @@
 .close-button {
   position: relative;
-  top: 3px;
-  right: 3px;
+  top: 4px;
+  right: 6px;
   background: none;
   color: #000;
   border: none;
@@ -15,7 +15,7 @@
 }
 
 .x {
-  width: 20px;
+  width: 16px;
   object-fit: contain;
 }
 

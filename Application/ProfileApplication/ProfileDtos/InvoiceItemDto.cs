@@ -1,6 +1,6 @@
 using System;
 
-namespace Application.CompanyApplication.CompanyDtos
+namespace Application.ProfileApplication.ProfileDtos
 {
     public class InvoiceItemDto
     {

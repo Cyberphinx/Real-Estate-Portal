@@ -3,5 +3,6 @@ export enum PaymentStatus {
     Pending,
     Paid,
     Failed,
-    Waived
+    Waived,
+    InProgress
 }

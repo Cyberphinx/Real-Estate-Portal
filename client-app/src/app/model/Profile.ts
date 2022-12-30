@@ -1,9 +1,12 @@
+import { CompanyAddress } from './Company';
+import { Membership } from './Membership';
 import { AccessStatus } from './AccessStatus';
 import { ServiceCategory } from './ServiceCategory';
 import { Review } from "./Review";
 import { JobLifeCycle, JobNetworkRole } from './Job';
-import { Currency, Frequency, PriceQualifier, TransactionType } from './ListingAggregate/ListingEnums';
+import { Currency, Frequency, LifeCycleStatus, PriceQualifier, TransactionType } from './ListingAggregate/ListingEnums';
 import { Country } from './Location';
+import { PaymentStatus } from './PaymentStatus';
 
 export interface Profile {
     username: string;
@@ -12,7 +15,9 @@ export interface Profile {
     country: Country;
     image: string;
     photos: Photo[];
+    membership: Membership;
     reviews: AppUserReview[];
+    invoices: Invoice[];
 }
 
 export interface Photo {
@@ -38,8 +43,9 @@ export interface WatcherListingDto {
     id: string;
     addedOn: Date;
     reference: string;
-    image: string;
     transactionType: TransactionType;
+    image: string;
+    lifeCycleStatus: LifeCycleStatus;
     price: number;
     priceQualifier: PriceQualifier;
     currency: Currency;
@@ -58,4 +64,25 @@ export interface UserCompanyDto {
     listingsCount: number;
     summaryDescription: string;
     username: string;
+    companyAddress: CompanyAddress;
+}
+
+export interface Invoice {
+    id?: string;
+    amount: number;
+    description: string;
+    invoiceDate: Date;
+    invoiceNumber: number;
+    items: InvoiceItem[];
+    paymentStatus: PaymentStatus;
+    title: string;
+    vatPercentage: number;
+}
+
+export interface InvoiceItem {
+    id?: string;
+    amount: number;
+    description: string;
+    title: string;
+    vatPercentage: number;
 }

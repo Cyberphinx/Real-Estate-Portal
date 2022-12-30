@@ -3,17 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.CompanyApplication;
-using Application.ListingApplication;
-using Application.InvoiceApplication;
 using AutoMapper;
 using Domain;
 using Domain.AppUserAggregate;
-using Domain.InvoiceAggregate;
 using Domain.CompanyAggregate;
 using Domain.ListingAggregate;
 using Domain.ListingAggregate.Objects;
-using Domain.LocationAggregate;
-using Application.JobApplication;
 using Domain.JobAggregate;
 using Domain.CompanyAggregate.Objects;
 using Domain.JobAggregate.Objects;
@@ -28,7 +23,7 @@ namespace Application.Core
     {
         public MappingProfiles()
         {
-            // AppUser Dtos
+            // Profile Dtos
             CreateMap<AppUser, Application.ProfileApplication.ProfileDtos.Profile>()
                 .ForMember(x => x.AddedOn, o => o.MapFrom(s => s.AddedOn))
                 .ForMember(x => x.Language, o => o.MapFrom(s => s.Language))
@@ -37,7 +32,9 @@ namespace Application.Core
                 .ForMember(x => x.DisplayName, o => o.MapFrom(s => s.DisplayName))
                 .ForMember(x => x.Photos, o => o.MapFrom(s => s.Photos))
                 .ForMember(x => x.Reviews, o => o.MapFrom(s => s.Reviews))
-                .ForMember(x => x.Username, o => o.MapFrom(s => s.UserName));
+                .ForMember(x => x.Username, o => o.MapFrom(s => s.UserName))
+                .ForMember(x => x.Membership, o => o.MapFrom(s => s.Membership))
+                .ForMember(x => x.Invoices, o => o.MapFrom(s => s.Invoices));
 
             CreateMap<Photo, Application.ProfileApplication.ProfileDtos.PhotoDto>();
             CreateMap<AppUserReview, Application.ProfileApplication.ProfileDtos.AppUserReviewDto>();
@@ -69,7 +66,8 @@ namespace Application.Core
             CreateMap<ListingWatcher, WatcherDto>()
                 .ForMember(x => x.Username, o => o.MapFrom(s => s.AppUser.UserName))
                 .ForMember(x => x.DisplayName, o => o.MapFrom(s => s.AppUser.DisplayName))
-                .ForMember(x => x.Description, o => o.MapFrom(s => s.AppUser.Description));
+                .ForMember(x => x.Description, o => o.MapFrom(s => s.AppUser.Description))
+                .ForMember(x => x.AddedOn, o => o.MapFrom(s => s.AddedOn));
             
             CreateMap<ListingWatcher, Application.ProfileApplication.ProfileDtos.WatcherListingDto>()
                 .ForMember(x => x.Id, o => o.MapFrom(s => s.Listing.Id))
@@ -81,13 +79,14 @@ namespace Application.Core
                 .ForMember(x => x.Currency, o => o.MapFrom(s => s.Listing.Pricing.Currency))
                 .ForMember(x => x.RentFrequency, o => o.MapFrom(s => s.Listing.Pricing.RentFrequency))
                 .ForMember(x => x.Image, o => o.MapFrom(s => s.Listing.Contents.FirstOrDefault(x => x.IsMain).Url))
+                .ForMember(x => x.LifeCycleStatus, o => o.MapFrom(s => s.Listing.LifeCycleStatus))
                 .ForMember(x => x.City, o => o.MapFrom(s => s.Listing.ListingLocation.TownOrCity))
                 .ForMember(x => x.Postcode, o => o.MapFrom(s => s.Listing.ListingLocation.PostalCode));
 
             CreateMap<Listing, ListingDto>()
                 .ForMember(x => x.Company, o => o.MapFrom(s => s.Company))
-                .ForMember(x => x.Contents, o => o.MapFrom(s => s.Contents))
-                .ForMember(x => x.DetailedDescriptions, o => o.MapFrom(s => s.DetailedDescriptions))
+                .ForMember(x => x.Contents, o => o.MapFrom(s => s.Contents.OrderBy(x => x.Id)))
+                .ForMember(x => x.DetailedDescriptions, o => o.MapFrom(s => s.DetailedDescriptions.OrderBy(x => x.Id)))
                 .ForMember(x => x.Wacthers, o => o.MapFrom(s => s.Watchers));
 
             // Company Dtos
@@ -100,22 +99,20 @@ namespace Application.Core
             CreateMap<CompanyContent, CompanyContentDto>();
             CreateMap<CompanyDescription, CompanyDescriptionDto>();
             CreateMap<Insurance, InsuranceDto>();
-            CreateMap<Membership, MembershipDto>();
+            CreateMap<Membership, ProfileApplication.ProfileDtos.MembershipDto>();
             CreateMap<CompanyReview, CompanyReviewDto>();
 
             CreateMap<Company, CompanyDto>()
                 .ForMember(x => x.CompanyAddress, o => o.MapFrom(s => s.CompanyAddress))
                 .ForMember(x => x.CompanyContacts, o => o.MapFrom(s => s.CompanyContacts))
-                .ForMember(x => x.CompanyContents, o => o.MapFrom(s => s.CompanyContents))
-                .ForMember(x => x.CompanyDescriptions, o => o.MapFrom(s => s.CompanyDescriptions))
+                .ForMember(x => x.CompanyContents, o => o.MapFrom(s => s.CompanyContents.OrderBy(x => x.Id)))
+                .ForMember(x => x.CompanyDescriptions, o => o.MapFrom(s => s.CompanyDescriptions.OrderBy(x => x.Id)))
                 .ForMember(x => x.Insurances, o => o.MapFrom(s => s.Insurances))
-                .ForMember(x => x.Membership, o => o.MapFrom(s => s.Membership))
                 .ForMember(x => x.Reviews, o => o.MapFrom(s => s.Reviews))
                 .ForMember(x => x.Listings, o => o.MapFrom(s => s.Listings));
             
             CreateMap<Company, UserCompanyDto>()
                 .ForMember(x => x.ListingsCount, o => o.MapFrom(s => s.Listings.Count));
-
 
             
             // Job Dtos
@@ -138,12 +135,12 @@ namespace Application.Core
 
 
             // Invoice Dtos
-            CreateMap<Invoice, InvoiceDto>()
+            CreateMap<Invoice, ProfileApplication.ProfileDtos.InvoiceDto>()
                 .ForMember(x => x.Amount, o => o.MapFrom(s => s.Amount))
                 .ForMember(x => x.Items, o => o.MapFrom(s => s.Items))
                 .ForMember(x => x.PaymentStatus, o => o.MapFrom(s => s.PaymentStatus));
 
-            CreateMap<InvoiceItem, InvoiceItemDto>()
+            CreateMap<InvoiceItem, ProfileApplication.ProfileDtos.InvoiceItemDto>()
                 .ForMember(x => x.Amount, o => o.MapFrom(s => s.Amount))
                 .ForMember(x => x.Description, o => o.MapFrom(s => s.Description));
         }

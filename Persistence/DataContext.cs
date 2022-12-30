@@ -1,6 +1,5 @@
 using Domain;
 using Domain.CompanyAggregate;
-using Domain.InvoiceAggregate;
 using Domain.JobAggregate;
 using Domain.ListingAggregate;
 using Domain.ListingAggregate.Enums;
@@ -8,9 +7,8 @@ using Domain.AppUserAggregate;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Npgsql;
 using Domain.TrackingAggregate;
+using Domain.AppUserAggregate.Objects;
 
 namespace Persistence
 {

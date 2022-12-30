@@ -1,7 +1,7 @@
 .new-tab-button {
   position: relative;
-  top: 3px;
-  right: 3px;
+  top: 4px;
+  right: 5px;
   background: none;
   border: none;
   cursor: pointer;
@@ -14,7 +14,7 @@
 }
 
 .new-tab-icon {
-  width: 20px;
+  width: 16px;
   object-fit: contain;
 }
 

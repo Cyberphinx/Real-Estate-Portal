@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using API.Services;
 using Domain;
 using Domain.AppUserAggregate;
-using Domain.InvoiceAggregate;
+using Domain.AppUserAggregate.Objects;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

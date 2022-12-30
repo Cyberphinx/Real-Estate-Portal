@@ -7,10 +7,14 @@ using API.DTOs;
 using API.Services;
 using Domain.AppUserAggregate;
 using Domain.AppUserAggregate.Enums;
+using Domain.AppUserAggregate.Objects;
+using Domain.CompanyAggregate;
+using Domain.CompanyAggregate.Objects;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Persistence;
 
 namespace API.Controllers
 {
@@ -24,10 +28,12 @@ namespace API.Controllers
         private readonly SignInManager<AppUser> _signInManager;
         private readonly TokenService _tokenService;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly DataContext _context;
 
         public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, TokenService tokenService,
-        RoleManager<IdentityRole> roleManager)
+        RoleManager<IdentityRole> roleManager, DataContext context)
         {
+            _context = context;
             _tokenService = tokenService;
             _signInManager = signInManager;
             _userManager = userManager;
@@ -74,14 +80,76 @@ namespace API.Controllers
                 Email = registerDto.Email,
                 UserName = registerDto.Username,
                 PhoneNumber = registerDto.PhoneNumber,
-                AddedOn = DateTime.Now
+                AddedOn = DateTime.UtcNow,
+                AccountType = registerDto.AccountType
+            };
+
+            if (registerDto.AccountType == AccountType.Agent) 
+            {
+                var companyContacts = new CompanyContacts
+                {
+                    Email = registerDto.Email,
+                    Phone = registerDto.PhoneNumber
+                };
+                
+                var company = new Company
+                {
+                    Username = registerDto.Username,
+                    AccessStatus = registerDto.CompanyAccessStatus,
+                    AddedOn = registerDto.AddedOn,
+                    CompanyContacts = companyContacts,
+                    LegalName = registerDto.CompanyLegalName,
+                    DisplayName = registerDto.CompanyDisplayName,
+                    IsMain = registerDto.IsMainCompany,
+                    IcoRegistrationNumber = registerDto.ComapnyIcoNumber,
+                    Insurances = registerDto.CompanyInsurances,
+                    RedressSchemes = registerDto.CompanyRedressSchemes,
+                    CompanyAddress = registerDto.LegalCompanyAddress
+                };
+
+                var items = new List<InvoiceItem>();
+                var invoiceItem = new InvoiceItem
+                {
+                    Amount = registerDto.InvoiceAmount,
+                    Description = "",
+                    Title = "Property Agent Sign Up fee",
+                    VatPercentage = 20,
+                };
+                items.Add(invoiceItem);
+
+                var invoice = new Invoice
+                {
+                    Amount = registerDto.InvoiceAmount,
+                    Description = registerDto.InvoiceDescription,
+                    InvoiceDate = DateTime.UtcNow,
+                    InvoiceNumber = 1,
+                    Items = items,
+                    PaymentStatus = Domain.Enums.PaymentStatus.Pending,
+                    Title = "Property Agent Sign Up fee",
+                    Username = registerDto.Username,
+                    VatPercentage = 20,
+                };
+                
+                var membership = new Membership
+                {
+                    Description = "Property Agent Membership",
+                    Expiry = DateTime.MaxValue,
+                    IsActive = false,
+                    MemberSince = DateTime.UtcNow
+                };
+
+                user.Invoices.Add(invoice);
+                user.Membership = membership;
+
+                await _context.Companies.AddAsync(company);
             };
 
             var result = await _userManager.CreateAsync(user, registerDto.Password);
 
+            if (registerDto.AccountType == AccountType.Customer) await _userManager.AddToRoleAsync(user, "Customer");
             if (registerDto.AccountType == AccountType.Agent) await _userManager.AddToRoleAsync(user, "Agency");
             if (registerDto.AccountType == AccountType.Company) await _userManager.AddToRoleAsync(user, "Company");
-            else await _userManager.AddToRoleAsync(user, "Customer");
+
 
             if (result.Succeeded)
             {
@@ -149,6 +217,7 @@ namespace API.Controllers
         {
             return new UserDto
             {
+                AccountType = user.AccountType,
                 Token = await _tokenService.CreateToken(user),
                 Username = user.UserName,
                 Email = user.Email,

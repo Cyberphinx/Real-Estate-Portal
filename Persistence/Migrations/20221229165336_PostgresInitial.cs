@@ -68,7 +68,9 @@ namespace Persistence.Migrations
                     AddedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CompanyReference = table.Column<string>(type: "text", nullable: true),
                     CompanyRegistrationNumber = table.Column<string>(type: "text", nullable: true),
+                    CompanyType = table.Column<int>(type: "integer", nullable: false),
                     DisplayName = table.Column<string>(type: "text", nullable: true),
+                    IcoRegistrationNumber = table.Column<string>(type: "text", nullable: true),
                     IsMain = table.Column<bool>(type: "boolean", nullable: false),
                     LastModified = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     LegalName = table.Column<string>(type: "text", nullable: true),
@@ -252,6 +254,54 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Invoices",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Amount = table.Column<long>(type: "bigint", nullable: false),
+                    ClientSecret = table.Column<string>(type: "text", nullable: true),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    InvoiceDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    InvoiceNumber = table.Column<int>(type: "integer", nullable: false),
+                    PaymentIntentId = table.Column<string>(type: "text", nullable: true),
+                    PaymentStatus = table.Column<int>(type: "integer", nullable: false),
+                    Title = table.Column<string>(type: "text", nullable: true),
+                    Username = table.Column<string>(type: "text", nullable: true),
+                    VatPercentage = table.Column<long>(type: "bigint", nullable: false),
+                    AppUserId = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Invoices", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Invoices_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Membership",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    Expiry = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false),
+                    MemberSince = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    AppUserId = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Membership", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Membership_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Photo",
                 columns: table => new
                 {
@@ -399,6 +449,7 @@ namespace Persistence.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Type = table.Column<int>(type: "integer", nullable: false),
+                    ClientMoneyProtection = table.Column<int>(type: "integer", nullable: false),
                     Provider = table.Column<string>(type: "text", nullable: true),
                     PolicyNumber = table.Column<string>(type: "text", nullable: true),
                     IndemnityLimit = table.Column<string>(type: "text", nullable: true),
@@ -414,33 +465,6 @@ namespace Persistence.Migrations
                         principalTable: "Companies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Invoices",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Amount = table.Column<long>(type: "bigint", nullable: false),
-                    ClientSecret = table.Column<string>(type: "text", nullable: true),
-                    Description = table.Column<string>(type: "text", nullable: true),
-                    InvoiceDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    InvoiceNumber = table.Column<int>(type: "integer", nullable: false),
-                    PaymentIntentId = table.Column<string>(type: "text", nullable: true),
-                    PaymentStatus = table.Column<int>(type: "integer", nullable: false),
-                    Title = table.Column<string>(type: "text", nullable: true),
-                    Username = table.Column<string>(type: "text", nullable: true),
-                    VatPercentage = table.Column<long>(type: "bigint", nullable: false),
-                    CompanyId = table.Column<Guid>(type: "uuid", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Invoices", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Invoices_Companies_CompanyId",
-                        column: x => x.CompanyId,
-                        principalTable: "Companies",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -475,6 +499,7 @@ namespace Persistence.Migrations
                     DecorativeCondition = table.Column<int>(type: "integer", nullable: false),
                     Deposit = table.Column<double>(type: "double precision", nullable: false),
                     DoubleGlazing = table.Column<bool>(type: "boolean", nullable: false),
+                    Dishwasher = table.Column<bool>(type: "boolean", nullable: false),
                     FeatureProperty = table.Column<bool>(type: "boolean", nullable: false),
                     FeatureList = table.Column<List<string>>(type: "text[]", nullable: true),
                     Fireplace = table.Column<bool>(type: "boolean", nullable: false),
@@ -509,6 +534,7 @@ namespace Persistence.Migrations
                     SapRating = table.Column<int>(type: "integer", nullable: false),
                     Serviced = table.Column<bool>(type: "boolean", nullable: false),
                     SharedAccommodation = table.Column<bool>(type: "boolean", nullable: false),
+                    SmokersConsidered = table.Column<bool>(type: "boolean", nullable: false),
                     SummaryDescription = table.Column<string>(type: "text", nullable: true),
                     SwimmingPool = table.Column<bool>(type: "boolean", nullable: false),
                     Tenanted = table.Column<bool>(type: "boolean", nullable: false),
@@ -519,6 +545,7 @@ namespace Persistence.Migrations
                     TotalBedrooms = table.Column<int>(type: "integer", nullable: false),
                     UtilityRoom = table.Column<bool>(type: "boolean", nullable: false),
                     WaterFront = table.Column<bool>(type: "boolean", nullable: false),
+                    WashingMachine = table.Column<bool>(type: "boolean", nullable: false),
                     WoodFloors = table.Column<bool>(type: "boolean", nullable: false),
                     CompanyId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
@@ -527,32 +554,6 @@ namespace Persistence.Migrations
                     table.PrimaryKey("PK_Listings", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Listings_Companies_CompanyId",
-                        column: x => x.CompanyId,
-                        principalTable: "Companies",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Membership",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    ContractLength = table.Column<int>(type: "integer", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: true),
-                    Expiry = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    IsActive = table.Column<bool>(type: "boolean", nullable: false),
-                    MemberSince = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Price = table.Column<long>(type: "bigint", nullable: false),
-                    Unit = table.Column<int>(type: "integer", nullable: false),
-                    VatPercentage = table.Column<long>(type: "bigint", nullable: false),
-                    CompanyId = table.Column<Guid>(type: "uuid", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Membership", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Membership_Companies_CompanyId",
                         column: x => x.CompanyId,
                         principalTable: "Companies",
                         principalColumn: "Id",
@@ -786,7 +787,8 @@ namespace Persistence.Migrations
                 columns: table => new
                 {
                     AppUserId = table.Column<string>(type: "text", nullable: false),
-                    ListingId = table.Column<Guid>(type: "uuid", nullable: false)
+                    ListingId = table.Column<Guid>(type: "uuid", nullable: false),
+                    AddedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -859,10 +861,10 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "1", "117610db-02b1-4b50-a075-f708886232e7", "Company", "COMPANY" },
-                    { "2", "9c93bfbb-8681-401d-9a71-ccc820d6b4cb", "Customer", "CUSTOMER" },
-                    { "3", "a8c14c77-f66d-4ddb-823a-da73fb1b2eb7", "Agency", "AGENCY" },
-                    { "4", "f2009c60-df10-4dc5-a58c-87c7c5b57bb4", "Admin", "ADMIN" }
+                    { "1", "17f177f0-81d4-4f4d-9fe2-51fe06cf8ece", "Company", "COMPANY" },
+                    { "2", "4e93930d-d234-4579-9d6d-0790c723ddd3", "Customer", "CUSTOMER" },
+                    { "3", "5e0cf9c9-3572-413f-b1ec-b43942d877cc", "Agency", "AGENCY" },
+                    { "4", "40394ee9-27fa-4283-9033-a978fd08e4e3", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -961,9 +963,9 @@ namespace Persistence.Migrations
                 column: "InvoiceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Invoices_CompanyId",
+                name: "IX_Invoices_AppUserId",
                 table: "Invoices",
-                column: "CompanyId");
+                column: "AppUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_JobContent_JobId",
@@ -1008,9 +1010,9 @@ namespace Persistence.Migrations
                 column: "ListingId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Membership_CompanyId",
+                name: "IX_Membership_AppUserId",
                 table: "Membership",
-                column: "CompanyId",
+                column: "AppUserId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -1124,10 +1126,10 @@ namespace Persistence.Migrations
                 name: "Jobs");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Listings");
 
             migrationBuilder.DropTable(
-                name: "Listings");
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Companies");

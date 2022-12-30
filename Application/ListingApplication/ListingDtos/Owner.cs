@@ -20,7 +20,6 @@ namespace Application.ListingApplication.ListingDtos
         public string LegalName { get; set; }
         public string CompanyReference { get; set; }
         public string DisplayName { get; set; }
-        public List<RedressScheme> RedressSchemes { get; set; } 
         public string SummaryDescription { get; set; }
         public string Logo { get; set; }
 

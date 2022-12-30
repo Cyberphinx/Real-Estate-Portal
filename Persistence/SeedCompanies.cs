@@ -700,7 +700,7 @@ namespace Persistence
                 {
                     Username = "ewe",
                     CompanyReference = "ewe8594",
-                    DisplayName = "Ewe move Hebden Bridge and Sowerby",
+                    DisplayName = "EweMove Hebden Bridge Sow",
                     LegalName = "Caine-Knight Property Limited",
                     IsMain = true,
                     CompanyRegistrationNumber = "11470075",

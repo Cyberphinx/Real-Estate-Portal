@@ -40,7 +40,6 @@ export interface Owner {
     LegalName: string;
     companyReference: string;
     displayName: string;
-    redressSchemes: RedressScheme[];
     summaryDescription: string;
     logo: string;
 }
@@ -68,4 +67,5 @@ export interface WatcherDto {
     displayName: string;
     description: string;
     username: string;
+    addedOn: Date;
 }

@@ -6,7 +6,7 @@ import { User } from "../../../../app/model/User";
 import { useStore } from "../../../../app/stores/store";
 import './Customer.css';
 import { capitalizeFirstLetter } from "../../../../app/common/HelperFunctions";
-import UserSettings from "../common/UserSettings";
+import UserSettings from "./UserSettings";
 import PropertyWatchlist from "../common/PropertyWatchlist";
 import MyJobPosts from "../common/MyJobPosts";
 import Messages from "../common/Messages";

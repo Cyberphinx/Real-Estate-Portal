@@ -10,5 +10,6 @@ namespace Application.ListingApplication.ListingDtos
         public string DisplayName { get; set; }
         public string Description { get; set; }
         public string Username { get; set; }
+        public DateTime AddedOn { get; set; }
     }
 }

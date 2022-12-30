@@ -7,7 +7,7 @@ using Application.Core;
 using Application.Interfaces;
 using AutoMapper;
 using Domain;
-using Domain.InvoiceAggregate;
+using Domain.AppUserAggregate.Objects;
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

@@ -24,7 +24,7 @@ export default function MyTextInput(props: Props) {
             <label>{props.label}</label>
             <input className={props.inputclassname} {...field} {...props}/>
             {meta.touched && meta.error? (
-                <span className={props.errorclassname}>{meta.error}</span>
+                <p className={props.errorclassname}>{meta.error}</p>
             ): null}
         </div>
     )

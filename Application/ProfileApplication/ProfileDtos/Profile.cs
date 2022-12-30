@@ -16,7 +16,9 @@ namespace Application.ProfileApplication.ProfileDtos
         public Country Country { get; set; }
         public Language Language { get; set; }
         public string Image { get; set; }
+        public MembershipDto Membership { get; set; }
         public ICollection<PhotoDto> Photos { get; set; }
         public ICollection<AppUserReviewDto> Reviews { get; set; }
+        public ICollection<InvoiceDto> Invoices { get; set; }
     }
 }

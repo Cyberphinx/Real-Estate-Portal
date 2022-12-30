@@ -1,6 +1,6 @@
 import React from "react";
-import { Invoice } from "../../model/Company";
 import { PaymentStatus } from "../../model/PaymentStatus";
+import { Invoice } from "../../model/Profile";
 import './InvoiceStatusTag.css';
 
 interface Props {
@@ -11,11 +11,17 @@ export default function InvoiceStatusTag({ invoice }: Props) {
     const tagStyle = (invoice: Invoice) => {
         switch (invoice?.paymentStatus) {
             case 0:
-                return "payment-tag pending"
+                return "payment-tag red"
             case 1:
-                return "payment-tag received"
+                return "payment-tag red"
             case 2:
-                return "payment-tag failed"
+                return "payment-tag green"
+            case 3:
+                return "payment-tag grey"
+            case 4:
+                return "payment-tag grey"
+            case 5:
+                return "payment-tag amber"
         }
     }
 

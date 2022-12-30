@@ -12,10 +12,20 @@
   color: #fff;
 }
 
-.eye-icon {
+.watch-icon {
   width: 20px;
+  object-fit: contain;
 }
-.eye-icon:hover {
+.watch-icon:hover {
   cursor: pointer;
-  width: 25px;
+  filter: invert(17%) sepia(67%) saturate(7492%) hue-rotate(357deg) brightness(90%) contrast(128%);
+}
+
+.unwatch-icon {
+  width: 20px;
+  object-fit: contain;
+}
+.unwatch-icon:hover {
+  cursor: pointer;
+  filter: brightness(0) invert(1);
 }

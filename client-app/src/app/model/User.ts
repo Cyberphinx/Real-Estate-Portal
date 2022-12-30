@@ -1,4 +1,7 @@
+import { Country } from "./Location";
+
 export interface User {
+    accountType: AccountType;
     displayName: string;
     token: string;
     username: string;
@@ -6,6 +9,9 @@ export interface User {
     phoneNumber: string;
     role: string[];
     image?: string;
+    country: Country;
+    language: Language;
+    addedOn: Date;
 }
 
 export interface UserFormValues {
@@ -29,5 +35,14 @@ export interface RoleFormValues {
     role: string;
 }
 
-
+export enum Language {
+    German,
+    English,
+    Spanish,
+    Italian,
+    French,
+    Portuguese,
+    Chinese,
+    Japanese
+}
 

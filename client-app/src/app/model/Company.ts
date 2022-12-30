@@ -18,14 +18,14 @@ export interface Company {
     companyDescriptions: CompanyDescription[];
     companyReference: string;
     companyRegistrationNumber: string;
+    companyType: CompanyType;
     displayName: string;
-    invoices: Invoice[];
+    icoRegistrationNumber: string;
     insurances: Insurance[];
     isMain: boolean;
     lastMofidied: Date;
     legalName: string;
     listings: Stock[];
-    membership: Membership;
     redressSchemes: RedressScheme[];
     reviews: CompanyReview[];
     serviceLocations: string;
@@ -50,14 +50,14 @@ export class CompanyFormValues {
     companyDescriptions?: CompanyDescription[];
     companyReference: string = "";
     companyRegistrationNumber: string = "";
+    companyType?: CompanyType;
     displayName: string = "";
-    invoices?: Invoice[];
+    icoRegistrationNumber?: string;
     insurances?: Insurance[];
     isMain: boolean =  false;
     lastModified: Date = new Date();
     legalName: string = "";
     listings?: Stock[];
-    membership?: Membership;
     redressSchemes?: RedressScheme[] = [];
     reviews?: CompanyReview[];
     serviceLocations?: string;
@@ -76,14 +76,14 @@ export class CompanyFormValues {
             this.companyDescriptions = company.companyDescriptions;
             this.companyReference = company.companyReference;
             this.companyRegistrationNumber = company.companyRegistrationNumber;
+            this.companyType = company.companyType;
             this.displayName = company.displayName;
-            this.invoices = company.invoices;
+            this.icoRegistrationNumber = company.icoRegistrationNumber;
             this.insurances = company.insurances;
             this.isMain = company.isMain;
             this.lastModified = company.lastModified;
             this.legalName = company.legalName;
             this.listings = company.listings;
-            this.membership = company.membership;
             this.redressSchemes = company.redressSchemes;
             this.reviews = company.reviews;
             this.serviceLocations = company.serviceLocations;
@@ -117,29 +117,12 @@ export interface CompanyDescription {
     text: string;
 }
 
-export interface Invoice {
-    id?: string;
-    amount: number;
-    description: string;
-    invoiceDate: Date;
-    InvoiceNumber: number;
-    items: InvoiceItem[];
-    paymentStatus: PaymentStatus;
-    title: string;
-    vatPercentage: number;
-}
 
-export interface InvoiceItem {
-    id?: string;
-    amount: number;
-    description: string;
-    title: string;
-    vatPercentage: number;
-}
 
 export interface Insurance {
     id: string;
     type: InsuranceType;
+    clientMoneyProtection: CmpScheme;
     provider: string;
     policyNumber: string;
     indemnityLimit: string;
@@ -148,7 +131,21 @@ export interface Insurance {
 
 export enum InsuranceType {
     ProfessionalIndemnity,
-    PublicLiability
+    PublicLiability,
+    ClientMoneyProtection
+}
+
+export enum CmpScheme {
+    ClientMoneyProtect,
+    MoneyShield,
+    Propertymark,
+    RICS,
+    Safeagent,
+    UKALA,
+    LawSocietyOfScotland,
+    CouncilOfLettingAgents,
+    PICMPMint,
+    Other
 }
 
 export interface Stock {
@@ -172,8 +169,6 @@ export interface Stock {
 export enum RedressScheme {
     ThePropertyOmbudsman,
     ThePropertyRedressScheme,
-    ScottishLettingAgentRegister,
-    PropertyServicesRegulatoryAuthorityIreland, 
     None
 }
 
@@ -189,3 +184,9 @@ export enum CompanyMediaType {
     Video
 }
 
+export enum CompanyType {
+    SoleTrader,
+    LimitedCompany,
+    Partnership,
+    LimitedLiabilityPartnership
+}

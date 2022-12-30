@@ -17,7 +17,7 @@ export default function MyTextArea(props: Props) {
             <label>{props.label}</label>
             <textarea className="text-area-input" {...field} {...props}/>
             {meta.touched && meta.error? (
-                <p className="login-error">{meta.error}</p>
+                <p className="textarea-error">{meta.error}</p>
             ): null}
         </div>
     )

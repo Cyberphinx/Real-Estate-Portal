@@ -12,7 +12,6 @@ using Microsoft.EntityFrameworkCore;
 using Persistence;
 using Domain;
 using Domain.Enums;
-using Domain.InvoiceAggregate;
 
 namespace Application.JobApplication
 {
@@ -45,7 +44,7 @@ namespace Application.JobApplication
             {
                 var user = await _context.Users.FirstOrDefaultAsync(x => x.UserName == _userAccessor.GetUsername());
 
-                request.Job.AddedOn = DateTime.Now;
+                request.Job.AddedOn = DateTime.UtcNow;
 
                 var customer = new JobNetwork()
                 {

@@ -7,6 +7,7 @@ namespace Application.CompanyApplication.CompanyDtos
     {
         public Guid Id { get; set; }
         public InsuranceType Type { get; set; }
+        public CmpScheme ClientMoneyProtection { get; set; }
         public string Provider { get; set; }
         public string PolicyNumber { get; set; }
         public string IndemnityLimit { get; set; }

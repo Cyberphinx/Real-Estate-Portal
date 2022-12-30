@@ -38,5 +38,11 @@ namespace API.Controllers
         {
             return HandleResult(await Mediator.Send(new ListCompanies.Query{Username = username, Predicate = predicate}));
         }
+
+        [HttpGet("headquarter/{username}")]
+        public async Task<IActionResult> GetMainCompany(string username)
+        {
+            return HandleResult(await Mediator.Send(new DetailsMainCompany.Query{Username = username}));
+        }
     }
 }

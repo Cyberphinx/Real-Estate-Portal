@@ -7,6 +7,7 @@ import { store } from './store';
 
 export default class ProfileStore {
     profile: Profile | null = null;
+    headquarter: UserCompanyDto | null = null;
     loadingProfile = false;
     uploading = false;
     loading = false;
@@ -172,6 +173,20 @@ export default class ProfileStore {
         } catch (error) {
             console.log(error);
             runInAction(() => this.loadingUserCompanies = false);
+        }
+    }
+
+    loadHeadquarter = async (username: string) => {
+        this.loadingProfile = true;
+        try{
+            const headquarter = await agent.Profiles.getHeadquarter(username);
+            runInAction(() => {
+                this.headquarter = headquarter;
+                this.loadingProfile = false;
+            })
+        } catch (error) {
+            console.log(error);
+            runInAction(() => this.loadingProfile = false);
         }
     }
 

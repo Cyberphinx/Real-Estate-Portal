@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Domain.Enums;
-using Domain.InvoiceAggregate;
 using Domain.ListingAggregate;
 using Domain.CompanyAggregate.Objects;
+using Domain.CompanyAggregate.Enums;
 
 namespace Domain.CompanyAggregate
 {
@@ -20,14 +20,14 @@ namespace Domain.CompanyAggregate
         public ICollection<CompanyDescription> CompanyDescriptions { get; set; }
         public string CompanyReference { get; set; }
         public string CompanyRegistrationNumber { get; set; }
+        public CompanyType CompanyType { get; set; }
         public string DisplayName { get; set; }
-        public ICollection<Invoice> Invoices { get; set; }
+        public string IcoRegistrationNumber { get; set; }
         public ICollection<Insurance> Insurances { get; set; }
         public bool IsMain { get; set; }
         public DateTime LastModified { get; set; }
         public string LegalName { get; set; }
         public ICollection<Listing> Listings { get; set; }
-        public Membership Membership { get; set; }
         public List<RedressScheme> RedressSchemes { get; set; } 
         public ICollection<CompanyReview> Reviews { get; set; }
         public string ServiceLocations { get; set; }

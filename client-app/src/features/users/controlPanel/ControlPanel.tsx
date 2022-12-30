@@ -13,7 +13,7 @@ export default observer(function ControlPanel() {
         <div>
             {user?.role.includes("Agency") && <Agency user={user} />}
             {user?.role.includes("Company") && <Company user={user} />}
-            {user?.role.includes("Customer") && <Customer user={user} />}
+            {user?.role.includes("Customer") && !user?.role.includes("Agency") && !user?.role.includes("Company") && <Customer user={user} />}
         </div>
     );
 }

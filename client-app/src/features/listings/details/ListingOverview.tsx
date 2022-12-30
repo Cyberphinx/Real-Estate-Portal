@@ -2,16 +2,16 @@ import React, { SyntheticEvent, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Listing } from "../../../app/model/ListingAggregate/Listing";
 import { Content } from "../../../app/model/ListingAggregate/ListingObjects";
-import './ListingGallery.css';
-import AgencyTags from "../../../app/common/tags/AgencyTag";
-import WatchButton from "../../../app/common/WatchButton";
+import './ListingOverview.css';
+import priceFormatter from "../../../app/common/PriceFormatter";
+import { propertyTypeLong, rentFrequency } from "../../../app/model/ListingAggregate/ListingEnums";
 
 
 interface Props {
     listing: Listing;
 }
 
-export default function ListingGallery({ listing }: Props) {
+export default function ListingOverview({ listing }: Props) {
     const [image, setImage] = useState<Content>(listing!.contents[0]);
     function handleImage(event: SyntheticEvent, state: Content) {
         event.stopPropagation();
@@ -46,6 +46,14 @@ export default function ListingGallery({ listing }: Props) {
         }
     }
 
+    const address = `${listing?.listingLocation.propertyNumberOrName && (listing?.listingLocation.propertyNumberOrName + ", ")}
+        ${listing?.listingLocation.streetName && (listing?.listingLocation.streetName + ", ")}
+        ${listing?.listingLocation.locality && (listing?.listingLocation.locality + ", ")}
+        ${listing?.listingLocation.townOrCity && (listing?.listingLocation.townOrCity + ", ")}
+        ${listing?.listingLocation.county && (listing?.listingLocation.county + ", ")}
+        ${listing?.listingLocation.postalCode && (listing?.listingLocation.postalCode)}
+        `;
+
 
     return (
         <div className="details-gallery-container">
@@ -73,6 +81,20 @@ export default function ListingGallery({ listing }: Props) {
                     <button className="right-arrow-thumbnails" onClick={(e) => scroll(e, 240)}><img className="right-icon" src="/assets/next.svg" alt="next" /></button>
                 </div>
             </section>
+            <article className="header-container">
+                <div className="header-one">
+                    <span style={{ fontSize: "20px", fontWeight: "600" }}>{priceFormatter(listing!.pricing.price, listing!.pricing.currency)}</span>
+                    {listing?.pricing.transactionType === 0 && <span style={{ fontSize: "16px" }}> {rentFrequency(listing!)} </span>}
+                    <p style={{ fontSize: "16px"}}>{listing!.totalBedrooms} beds {listing.bathrooms} baths {propertyTypeLong(listing!)}</p>
+                    <p style={{ fontSize: "14px" }}>Address: {address}</p>
+                </div>
+                {/* {!contacts && <div className="header-three">
+                    <button className="contact-button" onClick={() => setContacts(true)}>Contact agent</button>
+                </div>}
+                {contacts && <div className="header-four">
+                    {contacts && <ContactForm listing={listing} />}
+                </div>} */}
+            </article>
         </div>
 
     )

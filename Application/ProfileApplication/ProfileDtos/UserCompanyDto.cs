@@ -16,5 +16,6 @@ namespace Application.CompanyApplication.CompanyDtos
         public int ListingsCount { get; set; }
         public string SummaryDescription { get; set; }
         public string Username { get; set; }
+        public CompanyAddressDto CompanyAddress { get; set; }
     }
 }

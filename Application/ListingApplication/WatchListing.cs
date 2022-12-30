@@ -52,7 +52,8 @@ namespace Application.ListingApplication
                     watcher = new ListingWatcher
                     {
                         AppUser = user,
-                        Listing = listing
+                        Listing = listing,
+                        AddedOn = DateTime.UtcNow
                     };
 
                     listing.Watchers.Add(watcher);

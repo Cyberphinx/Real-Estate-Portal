@@ -71,7 +71,7 @@ export default observer(function UserSettings() {
 
             <p className="account-tab-label">About (optional)</p>
             <p className="account-tab-value">A brief description of yourself shown on your profile</p>
-            <textarea className="account-tab-textarea" placeholder="About (optional)"/>
+            <textarea className="account-tab-textarea" placeholder="About (optional)" />
             <p className="account-tab-value">200 Characters remaining</p>
 
             <p className="account-tab-subtitle">Images</p>

@@ -12,6 +12,7 @@ namespace Domain.Enums
         Paid,
         Cancelled,
         Refunded,
-        Waived
+        Waived,
+        InProgress
     }
 }

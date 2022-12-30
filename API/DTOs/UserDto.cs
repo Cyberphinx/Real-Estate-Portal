@@ -11,6 +11,7 @@ namespace API.DTOs
     public class UserDto
     {
         // information that are returned to the user once they have logged in
+        public AccountType AccountType { get; set; }
         public string DisplayName { get; set; }
         public string Token { get; set; } // used to authenticate the user
         public string Username { get; set; }

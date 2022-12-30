@@ -123,14 +123,15 @@ export default observer(function JobDetailsPage() {
                                 : <button className="thread-button" onClick={() => { }}>Shortlist Applicant</button>)
                             : null
                         }
-                        <div className="job-chats">
-                            <p>Message from {applicant.displayName ? applicant.displayName : applicant.username}: </p>
-                            <p>Chats</p>
-                            <p>Chats</p>
-                            <p>Chats</p>
-                            <p>Chats</p>
-                            <p>Chats</p>
-                        </div>
+                        {userStore.isLoggedIn && userStore.user?.username === job.networks.find(x => x.role === JobNetworkRole.Customer)?.username &&
+                            <div className="job-chats">
+                                <p>Message from {applicant.displayName ? applicant.displayName : applicant.username}: </p>
+                                <p>Chats</p>
+                                <p>Chats</p>
+                                <p>Chats</p>
+                                <p>Chats</p>
+                                <p>Chats</p>
+                            </div>}
                     </section>
                     : <section></section>}
             </div>

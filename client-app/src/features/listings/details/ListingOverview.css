@@ -1,11 +1,13 @@
-.details-gallery-container {
-  /* height: calc(100vh - 240px); */
-  overflow-y: scroll;
+.header-container {
+  padding: 20px 20px 0px 20px;
 }
+
+.header-one {
+padding: 0px 0px 10px 0px;
+}
+
 .details-gallery {
   position: relative;
-  margin-top: 40px;
-  margin-bottom: 10px;
 }
 
 .details-image {

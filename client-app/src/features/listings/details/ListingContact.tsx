@@ -1,14 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Listing } from "../../../app/model/ListingAggregate/Listing";
-import './ContactForm.css';
+import './ListingContact.css';
 
 
 interface Props {
     listing: Listing | undefined;
 }
 
-export default function ContactForm({ listing }: Props) {
+export default function ListingContact({ listing }: Props) {
     const address = `${listing?.company.companyAddress.propertyNumberOrName && (listing?.company.companyAddress.propertyNumberOrName + ", ")}
     ${listing?.company.companyAddress.streetName && (listing?.company.companyAddress.streetName + ", ")}
     ${listing?.company.companyAddress.locality && (listing?.company.companyAddress.locality + ", ")}

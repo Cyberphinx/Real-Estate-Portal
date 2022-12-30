@@ -10,17 +10,14 @@ export default function ToolbarForCompany() {
     const {companyStore} = useStore()
     const {selectedCompany, cancelSelectCompany} = companyStore;
 
-    // const addedDate = new Date(selectedCompany!.addedOn);
-    // const title = `Added on ${addedDate.toLocaleDateString()}`
-
     return (
-        <div className="toolbar-container">
-            <section className="toolbar-title">Agent Ref: #{selectedCompany?.companyReference}</section>
-            <section className="toolbar-locate"><LocateForCompany selectedItem={selectedCompany} /></section>
-            <section className="toolbar-newtab">
+        <div className="toolbar-container" style={{gridTemplateColumns:"auto 50px 50px 50px"}}>
+            <section className="toolbar-title">{selectedCompany?.displayName}</section>
+            <section className="toolbar-button"><LocateForCompany selectedItem={selectedCompany} /></section>
+            <section className="toolbar-button">
                 <Link to={`/company/${selectedCompany?.id}`} target="_blank" > <NewTab /> </Link>
             </section>
-            <section className="toolbar-x"><Close close={cancelSelectCompany} /></section>
+            <section className="toolbar-button"><Close close={cancelSelectCompany} /></section>
         </div>
     )
 }

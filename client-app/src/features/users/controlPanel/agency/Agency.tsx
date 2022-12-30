@@ -1,17 +1,15 @@
 import { observer } from "mobx-react-lite";
 import React, { useEffect } from "react";
 import LoadingComponent from "../../../../app/common/loading/LoadingComponent";
-import { AccessStatus } from "../../../../app/model/AccessStatus";
 import { User } from "../../../../app/model/User";
 import { useStore } from "../../../../app/stores/store";
 import './Agency.css';
 import { capitalizeFirstLetter } from "../../../../app/common/HelperFunctions";
-import UserSettings from "../common/UserSettings";
-import PropertyWatchlist from "../common/PropertyWatchlist";
 import MyJobPosts from "../common/MyJobPosts";
 import Messages from "../common/Messages";
 import AgentListings from "./AgentListings";
 import UserCompanies from "../common/UserCompanies";
+import AgentUserSettings from "./AgentUserSettings";
 
 interface Props {
     user: User | null;
@@ -19,17 +17,18 @@ interface Props {
 
 export default observer(function Customer({ user }: Props) {
     const { profileStore } = useStore();
-    const { loadProfile, loadingProfile, activeTab, setActiveTab } = profileStore;
+    const { loadProfile, loadingProfile, activeTab, setActiveTab, loadHeadquarter } = profileStore;
 
     useEffect(() => {
         loadProfile(user!.username);
+        loadHeadquarter(user!.username);
         return () => {
             setActiveTab(0);
         }
-    }, [loadProfile, user!.username, setActiveTab])
+    }, [loadProfile, loadHeadquarter, user!.username, setActiveTab])
 
     const panes = [
-        <UserSettings />,
+        <AgentUserSettings />,
         <UserCompanies />,
         <AgentListings />,
         <MyJobPosts />,
