@@ -17,10 +17,12 @@ export default function InvoiceStatusTag({ invoice }: Props) {
             case 2:
                 return "payment-tag green"
             case 3:
-                return "payment-tag grey"
+                return "payment-tag amber"
             case 4:
                 return "payment-tag grey"
             case 5:
+                return "payment-tag grey"
+            case 6:
                 return "payment-tag amber"
         }
     }
@@ -28,7 +30,7 @@ export default function InvoiceStatusTag({ invoice }: Props) {
     return (
         <div style={{ position: "relative" }}>
             <span className={tagStyle(invoice!)} >
-            Payment {PaymentStatus[invoice!.paymentStatus]}
+            Payment {PaymentStatus[invoice!.paymentStatus].replace(/[A-Z]/g, ' $&').trim()}
             </span>
         </div>
 

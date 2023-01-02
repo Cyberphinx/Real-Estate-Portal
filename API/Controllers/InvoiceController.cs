@@ -2,21 +2,38 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.Extensions;
 using Application.InvoiceApplication;
+using Application.ProfileApplication.ProfileDtos;
 using Domain.AppUserAggregate.Objects;
 using Domain.CompanyAggregate;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Persistence;
 
 namespace API.Controllers
 {
     public class InvoiceController : BaseApiController
     
     {
-        [HttpGet]
-        public async Task<IActionResult> GetInvoices()
+        private readonly DataContext _context;
+
+        public InvoiceController(DataContext context)
         {
-            return HandleResult(await Mediator.Send(new List.Query()));
+            _context = context;
+        }
+
+        [HttpGet(Name = "GetInvoice")]
+        public async Task<ActionResult<InvoiceDto>> GetInvoice()
+        {
+            var invoice = await _context.Invoices
+                .Include(i => i.Items)
+                .FirstOrDefaultAsync(x => x.Username == User.Identity.Name);
+
+            if (invoice == null) return NotFound();
+
+            return invoice.MapInvoiceToDto();
         }
 
         [HttpGet("{id}")]
@@ -44,5 +61,22 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new Delete.Command{Id = id}));
         }
 
+        // private async Task<Invoice> RetrieveInvoice(string appUserId)
+        // {
+        //     if (string.IsNullOrEmpty(appUserId))
+        //     {
+        //         Response.Cookies.Delete("appUserId");
+        //         return null;
+        //     }
+
+        //     return await _context.Invoices
+        //         .Include(i => i.Items)
+        //         .FirstOrDefaultAsync(x => x.AppUserId == appUserId);
+        // }
+
+        // private string GetBuyerId()
+        // {
+        //     return User.Identity?.Name ?? Request.Cookies["appUserId"];
+        // }
     }
 }

@@ -28,21 +28,21 @@ namespace API.DTOs
         public DateTime AddedOn { get; set; }
         public Country Country { get; set; }
         public Language Language { get; set; }
+        
+        [MaxLength(20, ErrorMessage = "Max length is 20")]
+        public string DisplayName { get; set; }
 
         // for company sign up
         public AccessStatus CompanyAccessStatus { get; set; }
         public string CompanyLegalName { get; set; }
 
-        [MaxLength(25, ErrorMessage = "Max length is 25")]
-        public string CompanyDisplayName { get; set; }
         public bool IsMainCompany { get; set; }
-        public string ComapnyIcoNumber { get; set; }
-        public List<RedressScheme> CompanyRedressSchemes { get; set; }
-        public ICollection<Insurance> CompanyInsurances { get; set; }
         public CompanyAddress LegalCompanyAddress { get; set; }
 
         // for property agent signup fee
         public string InvoiceDescription { get; set; }
+
+        // the amount needs to be in the smallest currency unit, ie. Cents
         public long InvoiceAmount { get; set; }
     }
 }

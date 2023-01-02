@@ -9,7 +9,7 @@ namespace Domain.JobAggregate.Objects
 {
     public class JobLocation : Location
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public Guid JobId { get; set; }
         public Job Job { get; set; }
     }

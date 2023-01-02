@@ -13,6 +13,7 @@ export default function LeafletGeosearch({apikey}: Props) {
     const provider = new LocationIQProvider({
         params: {
             key: apikey!,
+            countrycodes: "gb"
         },
     });
 

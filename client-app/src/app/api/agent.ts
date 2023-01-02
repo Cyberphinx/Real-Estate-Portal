@@ -1,6 +1,6 @@
 import { Profile, WatcherListingDto, UserJobDto, UserCompanyDto } from './../model/Profile';
 import { MaxValue } from './../model/MaxValue';
-import { User, UserFormValues, RoleFormValues } from './../model/User';
+import { User, RoleFormValues, LoginFormValues, RegisterFormValues } from './../model/User';
 import axios, { AxiosResponse } from "axios";
 import { Company, CompanyFormValues, Stock } from '../model/Company';
 import { store } from '../stores/store';
@@ -8,7 +8,6 @@ import { history } from '../..';
 import { PaginatedResult } from '../model/Pagination';
 import { Listing, ListingFormValues } from '../model/ListingAggregate/Listing';
 import { Job, JobFormValues } from '../model/Job';
-import { profile } from 'console';
 
 // adding fake delay
 const sleep = (delay: number) => {
@@ -80,8 +79,8 @@ const requests = {
 
 const Account = {
   current: () => requests.get<User>("/account"),
-  login: (user: UserFormValues) => requests.post<User>("/account/login", user),
-  register: (user: UserFormValues) => requests.post<User>("/account/register", user),
+  login: (user: LoginFormValues) => requests.post<User>("/account/login", user),
+  register: (user: RegisterFormValues) => requests.post<User>("/account/register", user),
   list: () => requests.get<User[]>("/account/all"),
   assignrole: (role: RoleFormValues) => requests.put<RoleFormValues>("/account/assignrole", role),
 }
@@ -130,12 +129,17 @@ const Jobs = {
   shortlistJobApplicant: (jobId: string, username: string) => requests.post(`/job/shortlist/${jobId}/${username}`, {})
 }
 
+const Payments = {
+  createPaymentIntent: () => requests.post('payments', {})
+}
+
 const agent = {
   Account,
   Listings,
   Companies,
   Jobs,
-  Profiles
+  Profiles,
+  Payments
 };
 
 export default agent;

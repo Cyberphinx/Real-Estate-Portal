@@ -8,7 +8,7 @@ namespace Application.ProfileApplication.ProfileDtos
 {
     public class WatcherListingDto
     {
-        public string Id { get; set; }
+        public Guid Id { get; set; }
         public DateTime AddedOn { get; set; }
         public string Reference { get; set; }
         public TransactionType TransactionType { get; set; }

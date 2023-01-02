@@ -9,7 +9,7 @@ namespace Domain.ListingAggregate.Objects
 {
     public class DetailedDescription
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Heading { get; set; }
         public string Text { get; set; }
         public double Length { get; set; }

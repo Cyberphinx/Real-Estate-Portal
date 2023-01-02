@@ -7,3 +7,4 @@ export const categoryOptions = [
     {text: 'Electrician', value: ServiceCategory.Electrical},
     {text: 'Handyman', value: ServiceCategory.Handyman},
 ]
+

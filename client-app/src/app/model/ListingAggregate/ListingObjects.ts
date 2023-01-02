@@ -3,7 +3,7 @@ import { CompanyAddress, CompanyContacts, RedressScheme } from "../Company";
 import { Currency, Frequency, MediaType, PriceQualifier, TransactionType, UnitOfArea, UnitOfLength } from "./ListingEnums";
 
 export interface Content {
-    id: number;
+    id: string;
     url: string;
     type: MediaType;
     caption: string;
@@ -11,7 +11,7 @@ export interface Content {
 }
 
 export interface DetailedDescription {
-    id: number;
+    id: string;
     heading: string;
     text: string;
     length: number;
@@ -21,7 +21,7 @@ export interface DetailedDescription {
 }
 
 export interface EpcRatings {
-    id: number;
+    id: string;
     eerCurrentRating: number;
     eerPotentialRating: number;
     eirCurrentRating: number;
@@ -29,7 +29,7 @@ export interface EpcRatings {
 }
 
 export interface ListingLocation extends Location {
-    id: number;
+    id: string;
 }
 
 export interface Owner {
@@ -45,7 +45,7 @@ export interface Owner {
 }
 
 export interface Pricing {
-    id: number;
+    id: string;
     transactionType: TransactionType;
     currency: Currency;
     price: number;
@@ -57,7 +57,7 @@ export interface Pricing {
 }
 
 export interface ServiceCharge {
-    id: number;
+    id: string;
     charge: number;
     perUnitAreaUnits: UnitOfArea;
     frequency: Frequency;

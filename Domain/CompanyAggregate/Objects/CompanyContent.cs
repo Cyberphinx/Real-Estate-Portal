@@ -9,7 +9,7 @@ namespace Domain.CompanyAggregate.Objects
 {
     public class CompanyContent
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Url { get; set; }
         public CompanyMediaType Type { get; set; }
         public string Caption { get; set; }

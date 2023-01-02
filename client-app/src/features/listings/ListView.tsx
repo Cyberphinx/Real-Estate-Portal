@@ -66,9 +66,9 @@ export default observer(function ListView({ clusters, supercluster }: Props) {
                             <button
                                 className="button"
                                 onClick={handleGetNext}
-                                disabled={pagination?.totalPages === pagination?.currentPage}
+                                disabled={(pagination?.totalPages === pagination?.currentPage) || pagination!.totalItems < 1}
                             >
-                                <span className={"button-" + (loadingNext ? "loading" : "text")} style={{ paddingBottom: "20px" }}>Load 100 More</span>
+                                <span className={"button-" + (loadingNext ? "loading" : "text")} style={{ paddingBottom: "20px" }}>Load {pagination?.itemsPerPage} More</span>
                             </button>
                         </section>
                     </div>

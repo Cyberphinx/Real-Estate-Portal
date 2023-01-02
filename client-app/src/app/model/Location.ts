@@ -1,4 +1,5 @@
 export interface Location {
+    displayAddress: string;
     propertyNumberOrName: string;
     streetName: string;
     locality: string;

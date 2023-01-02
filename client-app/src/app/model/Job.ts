@@ -1,43 +1,6 @@
 import { Location } from './Location';
 import { ServiceCategory } from './ServiceCategory';
-export enum JobLifeCycle {
-    Open,
-    Cancelled,
-    Completed
-}
 
-export interface JobContent {
-    id: number;
-    url: string;
-    type: JobMediaType;
-    caption: string;
-}
-
-export enum JobMediaType {
-    Audio,
-    Image,
-    Video
-}
-
-export interface JobLocation extends Location {
-    id: number;
-}
-
-export interface NetworkDto {
-    displayName: string;
-    description: string;
-    image: string;
-    jobsCount: number;
-    reviewsCount: number;
-    username: string;
-    role: JobNetworkRole;
-}
-
-export enum JobNetworkRole {
-    Customer,
-    InterestedCompany,
-    ShortlistedCompany
-}
 
 export interface Job {
     id: string;
@@ -51,6 +14,7 @@ export interface Job {
     jobLocation: JobLocation;
     networks: NetworkDto[];
 }
+
 
 export class Job implements Job {
     constructor(initialValues?: JobFormValues) {
@@ -85,4 +49,46 @@ export class JobFormValues {
         }
     }
 }
+
+
+export enum JobLifeCycle {
+    Open,
+    Cancelled,
+    Completed
+}
+
+export interface JobContent {
+    id: string;
+    url: string;
+    type: JobMediaType;
+    caption: string;
+}
+
+export enum JobMediaType {
+    Audio,
+    Image,
+    Video
+}
+
+export interface JobLocation extends Location {
+    id: string;
+}
+
+export interface NetworkDto {
+    displayName: string;
+    description: string;
+    image: string;
+    jobsCount: number;
+    reviewsCount: number;
+    username: string;
+    role: JobNetworkRole;
+}
+
+export enum JobNetworkRole {
+    Customer,
+    InterestedCompany,
+    ShortlistedCompany
+}
+
+
 

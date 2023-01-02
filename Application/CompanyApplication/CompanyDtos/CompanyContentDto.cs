@@ -1,10 +1,11 @@
 using Domain.CompanyAggregate.Enums;
+using System;
 
 namespace Application.CompanyApplication.CompanyDtos
 {
     public class CompanyContentDto
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Url { get; set; }
         public CompanyMediaType Type { get; set; }
         public string Caption { get; set; }

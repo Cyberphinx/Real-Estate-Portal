@@ -15,36 +15,46 @@ namespace API.Services
             _config = config;
         }
 
-        public async Task<PaymentIntent> CreateOrUpdatePaymentIntent(Domain.AppUserAggregate.Objects.Invoice currentInvoice)
+        // get a payment intent from stripe
+        public async Task<PaymentIntent> CreateOrUpdatePaymentIntent(Domain.AppUserAggregate.Objects.Invoice invoice)
         {
             StripeConfiguration.ApiKey = _config["StripeSettings:SecretKey"];
 
             var service = new PaymentIntentService();
 
             var intent = new PaymentIntent();
-            var subtotal = currentInvoice.Amount;
-
-            if (string.IsNullOrEmpty(currentInvoice.PaymentIntentId))
+            var total = invoice.Amount;
+            
+            if (string.IsNullOrEmpty(invoice.PaymentIntentId))
             {
+                // if we do not have a payment intent id in the Invoice
                 var options = new PaymentIntentCreateOptions
                 {
-                    Amount = subtotal,
-                    Currency = "usd",
+                    Amount = total,
+                    Currency = "gbp",
                     PaymentMethodTypes = new List<string> {"card"}
                 };
 
+                // create a new payment intent
                 intent = await service.CreateAsync(options);
+
+                // below logic have been moved to API/PaymentsController
+                // invoice.PaymentIntentId = intent.Id;
+                // invoice.ClientSecret = intent.ClientSecret;
             }
             else
             {
+                // to update an already existing payment intent
                 var options = new PaymentIntentUpdateOptions
                 {
-                    Amount = subtotal,
+                    // only update the amount of the invoice
+                    Amount = total,
                 };
-                await service.UpdateAsync(currentInvoice.PaymentIntentId, options);
+                await service.UpdateAsync(invoice.PaymentIntentId, options);
             }
 
             return intent;
         }
     }
 }
+

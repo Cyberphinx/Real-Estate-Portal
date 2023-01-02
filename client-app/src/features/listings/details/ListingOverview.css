@@ -30,7 +30,6 @@ padding: 0px 0px 10px 0px;
   overflow: hidden;
   white-space: nowrap;
   display: grid;
-  //grid-template-columns: repeat(8, calc(100vh / 6));
   grid-gap: 5px;
   position: relative;
 }

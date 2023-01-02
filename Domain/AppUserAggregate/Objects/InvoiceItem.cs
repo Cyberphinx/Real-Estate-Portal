@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Domain.ListingAggregate.Enums;
 
 namespace Domain.AppUserAggregate.Objects
 {
@@ -9,6 +10,7 @@ namespace Domain.AppUserAggregate.Objects
     {
         public Guid Id { get; set; }
         public long Amount { get; set; }
+        public Currency Currency { get; set; }
         public string Description { get; set; }
         public string Title { get; set; }
         public long VatPercentage { get; set; }

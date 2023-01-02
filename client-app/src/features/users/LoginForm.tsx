@@ -27,26 +27,31 @@ export default observer(function LoginForm() {
                 >
                     {({ handleSubmit, isSubmitting, errors, isValid, dirty }) => (
                         <Form onSubmit={handleSubmit} autoComplete="off">
-                            <p style={{textAlign:"left",fontSize:"18px",fontWeight:"600",padding:"0px 20px 0px 20px"}}>Log In</p>
-                            <p style={{textAlign:"left",fontSize:"12px",fontWeight:"400",padding:"0px 20px 20px 20px"}}>
+                            <p style={{ textAlign: "left", fontSize: "18px", fontWeight: "600", padding: "0px 20px 0px 20px" }}>Log In</p>
+                            <p style={{ textAlign: "left", fontSize: "12px", fontWeight: "400", padding: "0px 20px 20px 20px" }}>
                                 By continuing, you agree are setting up a Sanctum account and agree to our <span className='login-legal-text'>User Agreement</span> and <span className='login-legal-text'>Privacy Policy</span>.
-                                </p>
+                            </p>
                             <MyTextInput inputclassname='login-input-style' errorclassname='login-form-error' name="email" placeholder="Email" />
                             <br />
                             <MyTextInput inputclassname='login-input-style' errorclassname='login-form-error' name="password" placeholder="Password" type="password" />
                             <br />
-                            <p className='login-suggestion'>Forget your <button className='login-suggestion-button'>password</button> ?</p>
-                            <button className='login-button' type="submit">Log In</button>
+                            <div className='login-suggestion'>Forget your <button className='login-suggestion-button'>password</button> ?</div>
+                            <button className={isSubmitting ? 'login-submitting-button' : 'login-button'} type="submit">
+                                {isSubmitting && <span className="login-submitting"></span>}
+                                Log In
+                            </button>
                             {/* <button disabled={!isValid || !dirty || isSubmitting} className="button" type="submit">
                                 <span className={"button-" + (isSubmitting ? "loading" : "text")}>Login</span>
                             </button> */}
                             {errors.error && <p className="login-form-submission-error">{errors.error}</p>}
-                            <p className='login-suggestion'>New to Sanctum? <button className='login-suggestion-button' 
-                            onClick={() => {
-                                closeModal();
-                                openModal(<RegisterForm />);
-                            }}
-                            >Sign Up</button></p>
+                            <div className='login-suggestion'>New to Sanctum? <button className='login-suggestion-button'
+                                onClick={() => {
+                                    closeModal();
+                                    openModal(<RegisterForm />);
+                                }}
+                            >
+                                Sign Up
+                            </button></div>
                         </Form>
                     )}
                 </Formik>

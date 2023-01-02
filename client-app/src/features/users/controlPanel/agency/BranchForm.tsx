@@ -27,7 +27,8 @@ export default observer(function BranchForm({ setBranchForm }: Props) {
         accessStatus: AccessStatus.Public,
         addedOn: new Date(),
         companyAddress: {
-            id: 0,
+            id: uuid(),
+            displayAddress: "",
             propertyNumberOrName: "",
             streetName: "",
             locality: "",
@@ -39,7 +40,7 @@ export default observer(function BranchForm({ setBranchForm }: Props) {
             longitude: 0
         },
         companyContacts: {
-            id: 0,
+            id: uuid(),
             phone: "",
             email: user!.email,
             website: ""
@@ -124,7 +125,7 @@ export default observer(function BranchForm({ setBranchForm }: Props) {
                                     <MyTextInput inputclassname="branch-form-input-small" errorclassname="branch-form-error" name="companyAddress.county" placeholder="County" />
                                     <MyTextInput inputclassname="branch-form-input-small" errorclassname="branch-form-error" name="companyAddress.postalCode" placeholder="Postcode" />
                                     {/* <MyTextInput inputclassname="branch-form-input-small" errorclassname="branch-form-error" name="companyAddress.country" placeholder="Country" /> */}
-                                    <MySelectInput selectclassname="branch-form-select" placeholder="Country" name="companyAddress.country" options={countryOptions} />
+                                    <MySelectInput selectclassname="branch-form-select" errorclassname="branch-form-error" placeholder="Country" name="companyAddress.country" options={countryOptions} />
                                     <MyTextInput inputclassname="branch-form-input-small" errorclassname="branch-form-error" name="companyAddress.coordinates.latitude" placeholder="Latitude" />
                                     <MyTextInput inputclassname="branch-form-input-small" errorclassname="branch-form-error" name="companyAddress.coordinates.longitude" placeholder="Longitude" />
                                 </div>

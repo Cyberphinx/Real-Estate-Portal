@@ -1,3 +1,5 @@
+import { CompanyAddress } from './Company';
+import { AccessStatus } from './AccessStatus';
 import { Country } from "./Location";
 
 export interface User {
@@ -14,13 +16,27 @@ export interface User {
     addedOn: Date;
 }
 
-export interface UserFormValues {
-    displayName?: string;
+export interface LoginFormValues {
     email: string;
     password: string;
-    username?: string;
+}
+
+export interface RegisterFormValues {
+    email: string;
+    password: string;
+    username: string;
     phoneNumber?: string;
-    accountType?: AccountType;
+    accountType: AccountType;
+    addedOn: Date;
+    country: Country;
+    language: Language;
+    displayName?: string; // max length is 20 characters
+    companyAccessStatus?: AccessStatus;
+    companyLegalName?: string;
+    isMainCompany?: boolean;
+    legalCompanyAddress?: CompanyAddress;
+    invoiceDescription?: string;
+    invoiceAmount?: number; // in the smallest currency unit, ie. Cents
 }
 
 export enum AccountType {

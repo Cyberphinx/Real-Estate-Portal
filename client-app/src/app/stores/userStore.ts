@@ -1,6 +1,6 @@
 import { history } from './../../index';
 import { runInAction } from 'mobx';
-import { UserFormValues, RoleFormValues } from './../model/User';
+import { RoleFormValues, RegisterFormValues, LoginFormValues } from './../model/User';
 import { makeAutoObservable } from 'mobx';
 import { User } from "../model/User";
 import agent from '../api/agent';
@@ -19,7 +19,7 @@ export default class UserStore {
         return !!this.user;
     }
 
-    login = async (creds: UserFormValues) => {
+    login = async (creds: LoginFormValues) => {
         try {
             const user = await agent.Account.login(creds);
             store.commonStore.setToken(user.token);
@@ -74,7 +74,7 @@ export default class UserStore {
     //     }
     // }
 
-    register = async ( creds: UserFormValues) => {
+    register = async ( creds: RegisterFormValues) => {
         try {
             const user = await agent.Account.register(creds);
             store.commonStore.setToken(user.token);

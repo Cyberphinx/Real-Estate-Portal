@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using API.Extensions;
 using API.Services;
+using Application.ProfileApplication.ProfileDtos;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Domain;
 using Domain.AppUserAggregate;
 using Domain.AppUserAggregate.Objects;
@@ -20,8 +24,10 @@ namespace API.Controllers
         private readonly DataContext _context;
         private readonly PaymentService _paymentService;
         private readonly UserManager<AppUser> _userManager;
-        public PaymentsController(PaymentService paymentService, DataContext context, UserManager<AppUser> userManager)
+        private readonly IMapper _mapper;
+        public PaymentsController(PaymentService paymentService, DataContext context, UserManager<AppUser> userManager, IMapper mapper)
         {
+            _mapper = mapper;
             _userManager = userManager;
             _paymentService = paymentService;
             _context = context;
@@ -29,31 +35,30 @@ namespace API.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<ActionResult<Invoice>> CreateOrUpdatePaymentIntent()
+        public async Task<ActionResult<InvoiceDto>> CreateOrUpdatePaymentIntent()
         {
-            // var user = await _userManager.FindByEmailAsync(User.FindFirstValue(ClaimTypes.Email));
-            var user = await _userManager.FindByNameAsync(User.FindFirstValue(ClaimTypes.Name));
-
-            var currentInvoice = await _context.Invoices
-                .Where(b => b.Username == user.UserName)
+            // find the invoice by username
+            var invoice = await _context.Invoices
+                .Where(i => i.Username == User.Identity.Name)
                 .FirstOrDefaultAsync();
 
-            if (currentInvoice == null) return NotFound();
+            if (invoice == null) return NotFound();
 
-            var intent = await _paymentService.CreateOrUpdatePaymentIntent(currentInvoice);
+            // create payment intent
+            var intent = await _paymentService.CreateOrUpdatePaymentIntent(invoice);
 
             if (intent == null) return BadRequest(new ProblemDetails { Title = "Problem creating payment intent" });
 
-            currentInvoice.PaymentIntentId = currentInvoice.PaymentIntentId ?? intent.Id;
-            currentInvoice.ClientSecret = currentInvoice.ClientSecret ?? intent.ClientSecret;
+            invoice.PaymentIntentId = invoice.PaymentIntentId ?? intent.Id;
+            invoice.ClientSecret = invoice.ClientSecret ?? intent.ClientSecret;
 
-            _context.Update(currentInvoice);
+            _context.Update(invoice);
 
             var result = await _context.SaveChangesAsync() > 0;
 
             if (!result) return BadRequest(new ProblemDetails { Title = "Problem updating the current invoice with intent" });
 
-            return currentInvoice;
+            return invoice.MapInvoiceToDto();
         }
     }
 }

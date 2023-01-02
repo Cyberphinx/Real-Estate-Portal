@@ -8,7 +8,7 @@ namespace Application.ListingApplication.ListingDtos
 {
     public class ServiceChargeDto
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public double Charge { get; set; }
         public UnitOfArea PerUnitAreaUnits { get; set; }
         public Frequency Frequency { get; set; }

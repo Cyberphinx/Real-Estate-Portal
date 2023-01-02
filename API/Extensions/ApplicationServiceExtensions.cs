@@ -1,4 +1,5 @@
 using System;
+using System.Text.Json.Serialization;
 using API.Services;
 using Application.Core;
 using Application.Interfaces;
@@ -76,7 +77,8 @@ namespace API.Extensions
             {
                 opt.AddPolicy("CorsPolicy", policy =>
                 {
-                    policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:3000");
+                    policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:3000"); 
+                    policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("https://locationiq.org"); 
                 });
             });
 
@@ -84,6 +86,10 @@ namespace API.Extensions
             services.AddAutoMapper(typeof(MappingProfiles).Assembly);
             services.AddScoped<IUserAccessor, UserAccessor>();
             services.AddScoped<PaymentService>();
+            services.AddControllers().AddJsonOptions(opt => 
+            {
+                opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            });
 
             return services;
         }

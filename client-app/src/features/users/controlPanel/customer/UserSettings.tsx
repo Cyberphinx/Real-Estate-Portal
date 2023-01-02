@@ -67,7 +67,7 @@ export default observer(function UserSettings() {
             <p className="account-tab-label">Display name (optional)</p>
             <p className="account-tab-value">Set a display name. This does not change your username</p>
             <input className="account-tab-input" placeholder="Display name (optional)" />
-            <p className="account-tab-value">30 Characters remaining</p>
+            <p className="account-tab-value">20 Characters remaining</p>
 
             <p className="account-tab-label">About (optional)</p>
             <p className="account-tab-value">A brief description of yourself shown on your profile</p>

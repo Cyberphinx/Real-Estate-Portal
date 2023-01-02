@@ -9,7 +9,7 @@ namespace Domain.ListingAggregate.Objects
 {
     public class ListingLocation : Location
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public Guid ListingId { get; set; }
         public Listing Listing { get; set; }
     }

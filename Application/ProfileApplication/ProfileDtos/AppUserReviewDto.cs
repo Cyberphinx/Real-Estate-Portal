@@ -8,7 +8,7 @@ namespace Application.ProfileApplication.ProfileDtos
 {
     public class AppUserReviewDto : Review
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         
     }
 }

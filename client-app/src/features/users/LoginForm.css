@@ -22,6 +22,7 @@
 }
 
 .login-button {
+  position: relative;
   border: 1px solid #1F51FF;
   border-radius: 3px;
   background: #1F51FF;
@@ -36,6 +37,48 @@
   cursor: pointer;
   background: rgba(31,81,255,0.9);
 }
+
+.login-submitting-button {
+  position: relative;
+  border: 1px solid #1F51FF;
+  border-radius: 3px;
+  background: rgba(31,81,255,0);
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  width: 80%;
+  margin: 0px 0px 20px 0px;
+  color: transparent;
+}
+
+/* LOADING BUTTON START */
+.login-submitting::after {
+  font-size: 12px;
+  position: absolute;
+  content: "";
+  width: 14px;
+  height: 14px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  border: 2px solid #1f51ff;
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: button-submitting-spinner 1s ease infinite;
+}
+
+@keyframes button-submitting-spinner {
+  from {
+    transform: rotate(0turn);
+  }
+
+  to {
+    transform: rotate(1turn);
+  }
+}
+/* LOADING BUTTON END */
 
 .login-input-style {
   border: 1px solid #ccc;

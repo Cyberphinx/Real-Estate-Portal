@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { countryOptions } from "../../../../app/common/form/countryOptions";
 import MySelectInput from "../../../../app/common/form/MySelectInput";
 import { dateFormatter, dateFormatterShort } from "../../../../app/common/HelperFunctions";
+import priceFormatter from "../../../../app/common/PriceFormatter";
 import InvoiceStatusTag from "../../../../app/common/tags/InvoiceStatusTag";
 import { Country } from "../../../../app/model/Location";
 import { PaymentStatus } from "../../../../app/model/PaymentStatus";
@@ -79,7 +80,7 @@ export default observer(function AgentUserSettings() {
             <p className="account-tab-label">Display name (optional)</p>
             <p className="account-tab-value">Set a display name. This does not change your username</p>
             <input className="account-tab-input" placeholder="Display name (optional)" />
-            <p className="account-tab-value">30 Characters remaining</p>
+            <p className="account-tab-value">20 Characters remaining</p>
 
             <p className="account-tab-label">About (optional)</p>
             <p className="account-tab-value">A brief description of yourself shown on your profile</p>
@@ -143,16 +144,20 @@ export default observer(function AgentUserSettings() {
                                             <td>{index + 1}</td>
                                             <td>{item.title}</td>
                                             <td>{item.description}</td>
-                                            <td>{item.amount}</td>
+                                            <td>{priceFormatter(((item.amount / 100) / ((item.vatPercentage + 100) / 100)), item.currency)}</td>
                                             <td>1</td>
-                                            <td>{item.amount}</td>
+                                            <td>{priceFormatter(((item.amount / 100) / ((item.vatPercentage + 100) / 100)), item.currency)}</td>
                                         </tr>
                                     ))}
                                 </table>
                                 <article style={{ textAlign: "right", width: "50%", float: "right" }}>
-                                    <p className="invoice-text">Sub Total: {invoice.amount}</p>
-                                    <p className="invoice-text">VAT: {invoice.vatPercentage}%</p>
-                                    <p className="invoice-subtitle" style={{ borderTop: "1px solid grey", padding: "20px 0px" }}>Total: {invoice.amount + (invoice.amount * (invoice.vatPercentage / 100))}</p>
+                                    <p className="invoice-text">Sub Total: {priceFormatter(((invoice.amount / 100) / ((invoice.vatPercentage + 100) / 100)), invoice.currency)}</p>
+                                    <p className="invoice-text">
+                                    {invoice.vatPercentage}% VAT: {priceFormatter((invoice.amount / 100) - (invoice.amount / 100) / ((invoice.vatPercentage + 100) / 100), invoice.currency)}
+                                    </p>
+                                    <p className="invoice-subtitle" style={{ borderTop: "1px solid grey", padding: "20px 0px" }}>
+                                        Total: {priceFormatter((invoice.amount / 100), invoice.currency)}
+                                        </p>
                                 </article>
                             </div>
                             <article>

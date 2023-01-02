@@ -1,5 +1,4 @@
 import { createContext, useContext } from "react";
-import CalendarStore from "./calendarStore";
 import CommonStore from "./commonStore";
 import CompanyStore from "./companyStore";
 import ModalStore from "./modalStore";
@@ -20,7 +19,6 @@ interface Store {
     jobStore: JobStore;
     userStore: UserStore;
     modalStore: ModalStore;
-    calendarStore: CalendarStore;
     mapStore: MapStore;
     profileStore: ProfileStore;
     agentListingStore: AgentListingStore;
@@ -34,7 +32,6 @@ export const store: Store = {
     jobStore: new JobStore(),
     userStore: new UserStore(),
     modalStore: new ModalStore(),
-    calendarStore: new CalendarStore(),
     mapStore: new MapStore(),
     profileStore: new ProfileStore(),
     agentListingStore: new AgentListingStore()

@@ -108,11 +108,9 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.AppUserAggregate.Objects.AppUserReview", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("AddedOn")
                         .HasColumnType("timestamp with time zone");
@@ -166,6 +164,9 @@ namespace Persistence.Migrations
                     b.Property<string>("ClientSecret")
                         .HasColumnType("text");
 
+                    b.Property<int>("Currency")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
@@ -205,6 +206,9 @@ namespace Persistence.Migrations
 
                     b.Property<long>("Amount")
                         .HasColumnType("bigint");
+
+                    b.Property<int>("Currency")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
@@ -333,11 +337,9 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.CompanyAggregate.Objects.CompanyAddress", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("CompanyId")
                         .HasColumnType("uuid");
@@ -346,6 +348,9 @@ namespace Persistence.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("County")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DisplayAddress")
                         .HasColumnType("text");
 
                     b.Property<double>("Latitude")
@@ -380,11 +385,9 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.CompanyAggregate.Objects.CompanyContacts", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("CompanyId")
                         .HasColumnType("uuid");
@@ -409,11 +412,9 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.CompanyAggregate.Objects.CompanyContent", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Caption")
                         .HasColumnType("text");
@@ -442,11 +443,9 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.CompanyAggregate.Objects.CompanyDescription", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("CompanyId")
                         .HasColumnType("uuid");
@@ -466,11 +465,9 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.CompanyAggregate.Objects.CompanyReview", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("AddedOn")
                         .HasColumnType("timestamp with time zone");
@@ -574,11 +571,9 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.JobAggregate.Objects.JobContent", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Caption")
                         .HasColumnType("text");
@@ -601,16 +596,17 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.JobAggregate.Objects.JobLocation", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<int>("Country")
                         .HasColumnType("integer");
 
                     b.Property<string>("County")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DisplayAddress")
                         .HasColumnType("text");
 
                     b.Property<Guid>("JobId")
@@ -648,11 +644,9 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.JobAggregate.Objects.JobMessage", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<string>("AuthorId")
                         .HasColumnType("text");
@@ -936,11 +930,9 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.ListingAggregate.Objects.Content", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Caption")
                         .HasColumnType("text");
@@ -966,11 +958,9 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.ListingAggregate.Objects.DetailedDescription", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Heading")
                         .HasColumnType("text");
@@ -999,11 +989,9 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.ListingAggregate.Objects.EpcRatings", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<int>("EerCurrentRating")
                         .HasColumnType("integer");
@@ -1030,16 +1018,17 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.ListingAggregate.Objects.ListingLocation", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<int>("Country")
                         .HasColumnType("integer");
 
                     b.Property<string>("County")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DisplayAddress")
                         .HasColumnType("text");
 
                     b.Property<double>("Latitude")
@@ -1077,11 +1066,9 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.ListingAggregate.Objects.Pricing", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<int>("AreaUnits")
                         .HasColumnType("integer");
@@ -1120,11 +1107,9 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.ListingAggregate.Objects.ServiceCharge", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<double>("Charge")
                         .HasColumnType("double precision");
@@ -1225,28 +1210,28 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "17f177f0-81d4-4f4d-9fe2-51fe06cf8ece",
+                            ConcurrencyStamp = "8aee7701-a052-490e-b18a-4a99862391c4",
                             Name = "Company",
                             NormalizedName = "COMPANY"
                         },
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "4e93930d-d234-4579-9d6d-0790c723ddd3",
+                            ConcurrencyStamp = "f9812053-334b-4e6f-98cc-4196dfb43bb6",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
                             Id = "3",
-                            ConcurrencyStamp = "5e0cf9c9-3572-413f-b1ec-b43942d877cc",
+                            ConcurrencyStamp = "c4649951-6357-40ce-8fbf-55d0cf849495",
                             Name = "Agency",
                             NormalizedName = "AGENCY"
                         },
                         new
                         {
                             Id = "4",
-                            ConcurrencyStamp = "40394ee9-27fa-4283-9033-a978fd08e4e3",
+                            ConcurrencyStamp = "49d7fbc2-3840-4deb-a46c-9cdf777c2b5b",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

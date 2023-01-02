@@ -1,13 +1,13 @@
 .img-placeholder {
   margin: 20px;
-  max-width: auto;
-  min-height: auto;
+  width: auto;
+  height: auto;
   background-color: #eee;
 }
 
 .thumb-placeholder {
-  max-width: auto;
-  min-height: auto;
+  width: auto;
+  height: auto;
   background-color: #eee;
   border-radius: 5px;
 }

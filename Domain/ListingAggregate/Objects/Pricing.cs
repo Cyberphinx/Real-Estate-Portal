@@ -9,7 +9,7 @@ namespace Domain.ListingAggregate.Objects
 {
     public class Pricing
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public TransactionType TransactionType { get; set; }
         public Currency Currency { get; set; }
         public double Price { get; set; }

@@ -1,5 +1,10 @@
+import { Country } from './../../model/Location';
 import { AccessStatus } from '../../model/AccessStatus';
 import { Category, CookerType, FurnishedState, MediaType, PriceQualifier, PropertyType, TransactionType } from '../../model/ListingAggregate/ListingEnums';
+
+export const countryOptions = [
+    {text: 'United Kingdom', value: Country.unitedkingdom},
+]
 
 export const accessOptions = [
     {text: 'Private', value: AccessStatus.Private},

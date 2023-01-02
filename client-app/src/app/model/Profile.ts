@@ -27,7 +27,7 @@ export interface Photo {
 }
 
 export interface AppUserReview extends Review {
-    id: number;
+    id: string;
 }
 
 export interface UserJobDto {
@@ -70,6 +70,7 @@ export interface UserCompanyDto {
 export interface Invoice {
     id?: string;
     amount: number;
+    currency: Currency;
     description: string;
     invoiceDate: Date;
     invoiceNumber: number;
@@ -77,11 +78,14 @@ export interface Invoice {
     paymentStatus: PaymentStatus;
     title: string;
     vatPercentage: number;
+    paymentIntentId?: string;
+    clientSecret?: string;
 }
 
 export interface InvoiceItem {
     id?: string;
     amount: number;
+    currency: Currency;
     description: string;
     title: string;
     vatPercentage: number;

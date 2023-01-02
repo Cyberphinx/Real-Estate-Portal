@@ -13,19 +13,20 @@ interface Props {
     inputclassname: string;
     errorclassname: string;
     onChange?: (e: any) => void;
-    onKeyDown?: (e:any) => void;
+    onKeyDown?: (e: any) => void;
+    validate?: (value: any) => undefined | string | Promise<any>;
 }
 
 export default function MyTextInput(props: Props) {
     const [field, meta] = useField(props.name);
-    
+
     return (
         <div className="text-input-container">
             <label>{props.label}</label>
-            <input className={props.inputclassname} {...field} {...props}/>
-            {meta.touched && meta.error? (
+            <input className={props.inputclassname} {...field} {...props} />
+            {meta.touched && meta.error ? (
                 <p className={props.errorclassname}>{meta.error}</p>
-            ): null}
+            ) : null}
         </div>
     )
 }

@@ -8,7 +8,7 @@ namespace Domain.ListingAggregate.Objects
 {
     public class Content
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Url { get; set; }
         public MediaType Type { get; set; }
         public string Caption { get; set; }

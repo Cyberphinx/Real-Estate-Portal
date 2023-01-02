@@ -8,7 +8,7 @@ namespace Domain.ListingAggregate.Objects
 {
     public class EpcRatings
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public int EerCurrentRating { get; set; }
         public int EerPotentialRating { get; set; }
         public int EirCurrentRating { get; set; }

@@ -9,7 +9,7 @@ namespace Domain.CompanyAggregate.Objects
 {
     public class CompanyContacts
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         [Required]
         public string Email { get; set; }
         public string Phone { get; set; }

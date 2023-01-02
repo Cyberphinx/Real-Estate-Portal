@@ -145,8 +145,7 @@ namespace Persistence.Migrations
                 name: "AppUserReview",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     AppUserId = table.Column<string>(type: "text", nullable: true),
                     ReviewerDisplayName = table.Column<string>(type: "text", nullable: true),
                     ReviewerUsername = table.Column<string>(type: "text", nullable: true),
@@ -259,16 +258,17 @@ namespace Persistence.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Amount = table.Column<long>(type: "bigint", nullable: false),
-                    ClientSecret = table.Column<string>(type: "text", nullable: true),
+                    Currency = table.Column<int>(type: "integer", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: true),
                     InvoiceDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     InvoiceNumber = table.Column<int>(type: "integer", nullable: false),
-                    PaymentIntentId = table.Column<string>(type: "text", nullable: true),
                     PaymentStatus = table.Column<int>(type: "integer", nullable: false),
                     Title = table.Column<string>(type: "text", nullable: true),
                     Username = table.Column<string>(type: "text", nullable: true),
                     VatPercentage = table.Column<long>(type: "bigint", nullable: false),
-                    AppUserId = table.Column<string>(type: "text", nullable: true)
+                    AppUserId = table.Column<string>(type: "text", nullable: true),
+                    PaymentIntentId = table.Column<string>(type: "text", nullable: true),
+                    ClientSecret = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -324,9 +324,9 @@ namespace Persistence.Migrations
                 name: "CompanyAddress",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     CompanyId = table.Column<Guid>(type: "uuid", nullable: false),
+                    DisplayAddress = table.Column<string>(type: "text", nullable: true),
                     PropertyNumberOrName = table.Column<string>(type: "text", nullable: true),
                     StreetName = table.Column<string>(type: "text", nullable: true),
                     Locality = table.Column<string>(type: "text", nullable: true),
@@ -352,8 +352,7 @@ namespace Persistence.Migrations
                 name: "CompanyContacts",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Email = table.Column<string>(type: "text", nullable: false),
                     Phone = table.Column<string>(type: "text", nullable: true),
                     Website = table.Column<string>(type: "text", nullable: true),
@@ -374,8 +373,7 @@ namespace Persistence.Migrations
                 name: "CompanyContent",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Url = table.Column<string>(type: "text", nullable: true),
                     Type = table.Column<int>(type: "integer", nullable: false),
                     Caption = table.Column<string>(type: "text", nullable: true),
@@ -398,8 +396,7 @@ namespace Persistence.Migrations
                 name: "CompanyDescription",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Heading = table.Column<string>(type: "text", nullable: true),
                     Text = table.Column<string>(type: "text", nullable: true),
                     CompanyId = table.Column<Guid>(type: "uuid", nullable: false)
@@ -419,8 +416,7 @@ namespace Persistence.Migrations
                 name: "CompanyReview",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     CompanyId = table.Column<Guid>(type: "uuid", nullable: false),
                     ReviewerDisplayName = table.Column<string>(type: "text", nullable: true),
                     ReviewerUsername = table.Column<string>(type: "text", nullable: true),
@@ -564,8 +560,7 @@ namespace Persistence.Migrations
                 name: "JobContent",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Url = table.Column<string>(type: "text", nullable: true),
                     Type = table.Column<int>(type: "integer", nullable: false),
                     Caption = table.Column<string>(type: "text", nullable: true),
@@ -586,9 +581,9 @@ namespace Persistence.Migrations
                 name: "JobLocation",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     JobId = table.Column<Guid>(type: "uuid", nullable: false),
+                    DisplayAddress = table.Column<string>(type: "text", nullable: true),
                     PropertyNumberOrName = table.Column<string>(type: "text", nullable: true),
                     StreetName = table.Column<string>(type: "text", nullable: true),
                     Locality = table.Column<string>(type: "text", nullable: true),
@@ -614,8 +609,7 @@ namespace Persistence.Migrations
                 name: "JobMessage",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Body = table.Column<string>(type: "text", nullable: true),
                     AuthorId = table.Column<string>(type: "text", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -668,6 +662,7 @@ namespace Persistence.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Amount = table.Column<long>(type: "bigint", nullable: false),
+                    Currency = table.Column<int>(type: "integer", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: true),
                     Title = table.Column<string>(type: "text", nullable: true),
                     VatPercentage = table.Column<long>(type: "bigint", nullable: false),
@@ -688,8 +683,7 @@ namespace Persistence.Migrations
                 name: "Content",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Url = table.Column<string>(type: "text", nullable: true),
                     Type = table.Column<int>(type: "integer", nullable: false),
                     Caption = table.Column<string>(type: "text", nullable: true),
@@ -711,8 +705,7 @@ namespace Persistence.Migrations
                 name: "DetailedDescription",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Heading = table.Column<string>(type: "text", nullable: true),
                     Text = table.Column<string>(type: "text", nullable: true),
                     Length = table.Column<double>(type: "double precision", nullable: false),
@@ -735,8 +728,7 @@ namespace Persistence.Migrations
                 name: "EpcRatings",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     EerCurrentRating = table.Column<int>(type: "integer", nullable: false),
                     EerPotentialRating = table.Column<int>(type: "integer", nullable: false),
                     EirCurrentRating = table.Column<int>(type: "integer", nullable: false),
@@ -758,9 +750,9 @@ namespace Persistence.Migrations
                 name: "ListingLocation",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     ListingId = table.Column<Guid>(type: "uuid", nullable: false),
+                    DisplayAddress = table.Column<string>(type: "text", nullable: true),
                     PropertyNumberOrName = table.Column<string>(type: "text", nullable: true),
                     StreetName = table.Column<string>(type: "text", nullable: true),
                     Locality = table.Column<string>(type: "text", nullable: true),
@@ -811,8 +803,7 @@ namespace Persistence.Migrations
                 name: "Pricing",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     TransactionType = table.Column<int>(type: "integer", nullable: false),
                     Currency = table.Column<int>(type: "integer", nullable: false),
                     Price = table.Column<double>(type: "double precision", nullable: false),
@@ -838,8 +829,7 @@ namespace Persistence.Migrations
                 name: "ServiceCharge",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Charge = table.Column<double>(type: "double precision", nullable: false),
                     PerUnitAreaUnits = table.Column<int>(type: "integer", nullable: false),
                     Frequency = table.Column<int>(type: "integer", nullable: false),
@@ -861,10 +851,10 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "1", "17f177f0-81d4-4f4d-9fe2-51fe06cf8ece", "Company", "COMPANY" },
-                    { "2", "4e93930d-d234-4579-9d6d-0790c723ddd3", "Customer", "CUSTOMER" },
-                    { "3", "5e0cf9c9-3572-413f-b1ec-b43942d877cc", "Agency", "AGENCY" },
-                    { "4", "40394ee9-27fa-4283-9033-a978fd08e4e3", "Admin", "ADMIN" }
+                    { "1", "8aee7701-a052-490e-b18a-4a99862391c4", "Company", "COMPANY" },
+                    { "2", "f9812053-334b-4e6f-98cc-4196dfb43bb6", "Customer", "CUSTOMER" },
+                    { "3", "c4649951-6357-40ce-8fbf-55d0cf849495", "Agency", "AGENCY" },
+                    { "4", "49d7fbc2-3840-4deb-a46c-9cdf777c2b5b", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.CreateIndex(

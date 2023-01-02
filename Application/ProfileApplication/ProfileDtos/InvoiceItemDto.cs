@@ -1,4 +1,5 @@
 using System;
+using Domain.ListingAggregate.Enums;
 
 namespace Application.ProfileApplication.ProfileDtos
 {
@@ -6,6 +7,7 @@ namespace Application.ProfileApplication.ProfileDtos
     {
         public Guid Id { get; set; }
         public long Amount { get; set; }
+        public Currency Currency { get; set; }
         public string Description { get; set; }
         public string Title { get; set; }
         public long VatPercentage { get; set; }

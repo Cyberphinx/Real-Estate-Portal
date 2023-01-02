@@ -5,16 +5,20 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using API.DTOs;
 using API.Services;
+using Domain.Enums;
 using Domain.AppUserAggregate;
 using Domain.AppUserAggregate.Enums;
 using Domain.AppUserAggregate.Objects;
 using Domain.CompanyAggregate;
 using Domain.CompanyAggregate.Objects;
+using Domain.ListingAggregate.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
+using Application.ProfileApplication.ProfileDtos;
+using API.Extensions;
 
 namespace API.Controllers
 {
@@ -29,10 +33,12 @@ namespace API.Controllers
         private readonly TokenService _tokenService;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly DataContext _context;
+        private readonly PaymentService _paymentService;
 
         public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, TokenService tokenService,
-        RoleManager<IdentityRole> roleManager, DataContext context)
+        RoleManager<IdentityRole> roleManager, DataContext context, PaymentService paymentService)
         {
+            _paymentService = paymentService;
             _context = context;
             _tokenService = tokenService;
             _signInManager = signInManager;
@@ -99,11 +105,8 @@ namespace API.Controllers
                     AddedOn = registerDto.AddedOn,
                     CompanyContacts = companyContacts,
                     LegalName = registerDto.CompanyLegalName,
-                    DisplayName = registerDto.CompanyDisplayName,
+                    DisplayName = registerDto.DisplayName,
                     IsMain = registerDto.IsMainCompany,
-                    IcoRegistrationNumber = registerDto.ComapnyIcoNumber,
-                    Insurances = registerDto.CompanyInsurances,
-                    RedressSchemes = registerDto.CompanyRedressSchemes,
                     CompanyAddress = registerDto.LegalCompanyAddress
                 };
 
@@ -111,23 +114,25 @@ namespace API.Controllers
                 var invoiceItem = new InvoiceItem
                 {
                     Amount = registerDto.InvoiceAmount,
+                    Currency = Currency.GBP,
                     Description = "",
                     Title = "Property Agent Sign Up fee",
-                    VatPercentage = 20,
+                    VatPercentage = 20
                 };
                 items.Add(invoiceItem);
 
                 var invoice = new Invoice
                 {
                     Amount = registerDto.InvoiceAmount,
+                    Currency = Currency.GBP,
                     Description = registerDto.InvoiceDescription,
                     InvoiceDate = DateTime.UtcNow,
                     InvoiceNumber = 1,
                     Items = items,
-                    PaymentStatus = Domain.Enums.PaymentStatus.Pending,
+                    PaymentStatus = PaymentStatus.InProgress,
                     Title = "Property Agent Sign Up fee",
                     Username = registerDto.Username,
-                    VatPercentage = 20,
+                    VatPercentage = 20
                 };
                 
                 var membership = new Membership
@@ -142,6 +147,7 @@ namespace API.Controllers
                 user.Membership = membership;
 
                 await _context.Companies.AddAsync(company);
+                await CreateOrUpdatePaymentIntent(invoice);
             };
 
             var result = await _userManager.CreateAsync(user, registerDto.Password);
@@ -159,11 +165,33 @@ namespace API.Controllers
             return BadRequest("Problem registering user");
         }
 
+        private async Task<ActionResult<InvoiceDto>> CreateOrUpdatePaymentIntent(Invoice invoice)
+        {
+            if (invoice == null) return NotFound();
+
+            // create payment intent
+            var intent = await _paymentService.CreateOrUpdatePaymentIntent(invoice);
+
+            if (intent == null) return BadRequest(new ProblemDetails { Title = "Problem creating payment intent" });
+
+            invoice.PaymentIntentId = invoice.PaymentIntentId ?? intent.Id;
+            invoice.ClientSecret = invoice.ClientSecret ?? intent.ClientSecret;
+
+            _context.Update(invoice);
+
+            var result = await _context.SaveChangesAsync() > 0;
+
+            if (!result) return BadRequest(new ProblemDetails { Title = "Problem updating the current invoice with intent" });
+
+            return invoice.MapInvoiceToDto();
+        }
+
         [Authorize]
         [HttpGet]
         public async Task<ActionResult<UserDto>> GetCurrentUser()
         {
-            var user = await _userManager.FindByEmailAsync(User.FindFirstValue(ClaimTypes.Email));
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            // var user = await _userManager.FindByEmailAsync(User.FindFirstValue(ClaimTypes.Email));
 
             return await CreateUserObject(user);
         }
@@ -227,6 +255,7 @@ namespace API.Controllers
                 Country = user.Country,
                 AddedOn = user.AddedOn,
                 Language = user.Language
+                
             };
         }
     }

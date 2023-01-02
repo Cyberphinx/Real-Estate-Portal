@@ -8,6 +8,6 @@ namespace Application.ListingApplication.ListingDtos
 {
     public class ListingLocationDto : Location
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
     }
 }

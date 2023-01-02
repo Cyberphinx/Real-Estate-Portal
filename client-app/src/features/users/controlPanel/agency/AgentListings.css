@@ -75,7 +75,7 @@
   border-radius: 5px;
 }
 
-/* LOGIN BUTTON START */
+/* LOADING BUTTON START */
 .loading-next::after {
   font-size: 12px;
   position: absolute;
@@ -102,4 +102,4 @@
     transform: rotate(1turn);
   }
 }
-/* LOGIN BUTTON END */
+/* LOADING BUTTON END */

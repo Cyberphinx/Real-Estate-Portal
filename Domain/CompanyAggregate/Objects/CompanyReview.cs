@@ -7,7 +7,7 @@ namespace Domain.CompanyAggregate.Objects
 {
     public class CompanyReview : Review
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public Guid CompanyId { get; set; }
         public Company Company { get; set; }
     }

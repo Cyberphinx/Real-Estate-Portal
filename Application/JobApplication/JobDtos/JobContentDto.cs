@@ -8,7 +8,7 @@ namespace Application.JobApplication.JobDtos
 {
     public class JobContentDto
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Url { get; set; }
         public JobMediaType Type { get; set; }
         public string Caption { get; set; }

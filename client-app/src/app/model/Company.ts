@@ -95,15 +95,15 @@ export class CompanyFormValues {
 }
 
 export interface CompanyAddress extends Location {
-    id: number;
+    id: string;
 }
 
 export interface CompanyContacts extends Contacts {
-    id: number;
+    id: string;
 }
 
 export interface CompanyContent {
-    id: number;
+    id: string;
     url: string;
     type: CompanyMediaType;
     caption: string;
@@ -173,7 +173,7 @@ export enum RedressScheme {
 }
 
 export interface CompanyReview extends Review {
-    id: number;
+    id: string;
 }
 
 export enum CompanyMediaType {
