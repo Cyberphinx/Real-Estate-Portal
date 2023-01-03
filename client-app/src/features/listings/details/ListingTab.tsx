@@ -32,7 +32,7 @@ export default observer(function ListingTab({ listing }: Props) {
     return (
         <div className="details-container"  >
             {multiListings.length > 1 && <ListingBookmark multiListings={multiListings} />}
-            <nav className='sticky-nav-container' >
+            <nav className='sticky-nav-container' style={multiListings.length > 1 ? {top:"51px"} : {}} >
                 <div style={{ margin: "0px 5px" }}>
                     <button className={tab === 0 ? "sticky-nav-button-active" : "sticky-nav-button"} onClick={() => setTab(0)}>Overview</button>
                     <button className={tab === 1 ? "sticky-nav-button-active" : "sticky-nav-button"} onClick={() => setTab(1)}>Features</button>
@@ -40,7 +40,7 @@ export default observer(function ListingTab({ listing }: Props) {
                     <button className={tab === 3 ? "sticky-nav-button-active" : "sticky-nav-button"} onClick={() => setTab(3)}>Contact Agent</button>
                 </div>
             </nav>
-            <div className="details-contents" style={(multiListings.length > 1) ? { marginTop: "60px" } : {}}>
+            <div className="details-contents" style={(multiListings.length > 1) ? { marginTop: "90px" } : {}}>
                 {features[tab]}
             </div>
         </div>

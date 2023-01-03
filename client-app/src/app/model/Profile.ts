@@ -5,14 +5,13 @@ import { ServiceCategory } from './ServiceCategory';
 import { Review } from "./Review";
 import { JobLifeCycle, JobNetworkRole } from './Job';
 import { Currency, Frequency, LifeCycleStatus, PriceQualifier, TransactionType } from './ListingAggregate/ListingEnums';
-import { Country } from './Location';
 import { PaymentStatus } from './PaymentStatus';
 
 export interface Profile {
     username: string;
     displayName: string;
     description: string;
-    country: Country;
+    country: string;
     image: string;
     photos: Photo[];
     membership: Membership;

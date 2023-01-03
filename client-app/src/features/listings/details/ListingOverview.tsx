@@ -84,7 +84,7 @@ export default function ListingOverview({ listing }: Props) {
             <article className="header-container">
                 <div className="header-one">
                     <span style={{ fontSize: "20px", fontWeight: "600" }}>{priceFormatter(listing!.pricing.price, listing!.pricing.currency)}</span>
-                    {listing?.pricing.transactionType === 0 && <span style={{ fontSize: "16px" }}> {rentFrequency(listing!)} </span>}
+                    {(listing?.pricing.transactionType.toString() === "Rent") && <span style={{ fontSize: "16px" }}> {rentFrequency(listing!)} </span>}
                     <p style={{ fontSize: "16px"}}>{listing!.totalBedrooms} beds {listing.bathrooms} baths {propertyTypeLong(listing!)}</p>
                     <p style={{ fontSize: "14px" }}>Address: {address}</p>
                 </div>

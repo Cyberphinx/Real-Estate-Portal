@@ -42,8 +42,8 @@ namespace Persistence.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("text");
 
-                    b.Property<int>("Country")
-                        .HasColumnType("integer");
+                    b.Property<string>("Country")
+                        .HasColumnType("text");
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
@@ -344,8 +344,8 @@ namespace Persistence.Migrations
                     b.Property<Guid>("CompanyId")
                         .HasColumnType("uuid");
 
-                    b.Property<int>("Country")
-                        .HasColumnType("integer");
+                    b.Property<string>("Country")
+                        .HasColumnType("text");
 
                     b.Property<string>("County")
                         .HasColumnType("text");
@@ -363,7 +363,6 @@ namespace Persistence.Migrations
                         .HasColumnType("double precision");
 
                     b.Property<string>("PostalCode")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("PropertyNumberOrName")
@@ -600,8 +599,8 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<int>("Country")
-                        .HasColumnType("integer");
+                    b.Property<string>("Country")
+                        .HasColumnType("text");
 
                     b.Property<string>("County")
                         .HasColumnType("text");
@@ -622,7 +621,6 @@ namespace Persistence.Migrations
                         .HasColumnType("double precision");
 
                     b.Property<string>("PostalCode")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("PropertyNumberOrName")
@@ -1022,8 +1020,8 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<int>("Country")
-                        .HasColumnType("integer");
+                    b.Property<string>("Country")
+                        .HasColumnType("text");
 
                     b.Property<string>("County")
                         .HasColumnType("text");
@@ -1044,7 +1042,6 @@ namespace Persistence.Migrations
                         .HasColumnType("double precision");
 
                     b.Property<string>("PostalCode")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("PropertyNumberOrName")
@@ -1210,28 +1207,28 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "8aee7701-a052-490e-b18a-4a99862391c4",
+                            ConcurrencyStamp = "40f7ef3d-61a1-4a7e-ae39-1031a4835bdc",
                             Name = "Company",
                             NormalizedName = "COMPANY"
                         },
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "f9812053-334b-4e6f-98cc-4196dfb43bb6",
+                            ConcurrencyStamp = "6268e09c-06ca-40ed-aef0-59bf572c91a3",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
                             Id = "3",
-                            ConcurrencyStamp = "c4649951-6357-40ce-8fbf-55d0cf849495",
+                            ConcurrencyStamp = "ed07e236-617e-4845-a257-5e3033c930ba",
                             Name = "Agency",
                             NormalizedName = "AGENCY"
                         },
                         new
                         {
                             Id = "4",
-                            ConcurrencyStamp = "49d7fbc2-3840-4deb-a46c-9cdf777c2b5b",
+                            ConcurrencyStamp = "63f92612-a988-4723-99c1-98647d6d27e9",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

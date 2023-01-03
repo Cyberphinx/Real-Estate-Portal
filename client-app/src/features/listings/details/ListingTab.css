@@ -18,7 +18,7 @@
 }
 
 .details-contents {
-  height: calc(100vh - 240px);
+  height: calc(100vh - 280px);
   overflow-y: auto;
   margin-top: 40px;
 }

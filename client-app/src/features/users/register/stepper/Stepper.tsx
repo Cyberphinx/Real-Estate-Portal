@@ -4,33 +4,42 @@ import React, { useState } from 'react';
 
 interface Props {
     step: number;
+    setStep: (value: number) => void;
 }
 
-export default observer(function Stepper({ step }: Props) {
+export default observer(function Stepper({ step, setStep }: Props) {
 
     return (
-        <div className="wrapper">
-            <ol className="c-timeline">
-                <li className="c-timeline__item">
-                    <div className="c-timeline__content">
-                        <h3 className="c-timeline__title">Design</h3>
-                        <p className="c-timeline__desc">In Progress</p>
-                    </div>
-                    <time>10:03</time>
+        <div className="stepper-wrapper">
+            <ol className="stepper-timeline">
+                <li className="stepper-timeline__item">
+                    <button
+                        type='button'
+                        className='stepper-dot'
+                        style={step === 0 ? { backgroundColor: "#1F51FF" } : {}}
+                        onClick={() => setStep(0)}
+                        disabled={step === 2 ? true : false}
+                    >1</button>
+                    <h3 className="stepper-timeline__title">Account</h3>
                 </li>
-                <li className="c-timeline__item">
-                    <div className="c-timeline__content">
-                        <h3 className="c-timeline__title">Development</h3>
-                        <p className="c-timeline__desc">Todo</p>
-                    </div>
-                    <time>10:03</time>
+                <li className="stepper-timeline__item">
+                    <button
+                        type='button'
+                        className='stepper-dot'
+                        style={step === 1 ? { backgroundColor: "#1F51FF" } : {}}
+                        disabled={step === 2 ? true : false}
+                        onClick={() => setStep(1)}
+                    >2</button>
+                    <h3 className="stepper-timeline__title">Membership</h3>
                 </li>
-                <li className="c-timeline__item">
-                    <div className="c-timeline__content">
-                        <h3 className="c-timeline__title">QA Testing</h3>
-                        <p className="c-timeline__desc">Todo</p>
-                    </div>
-                    <time>10:03</time>
+                <li className="stepper-timeline__item">
+                    <button
+                        type='button'
+                        className='stepper-dot'
+                        style={step === 2 ? { backgroundColor: "#1F51FF" } : {}}
+                        disabled={true}
+                    >3</button>
+                    <h3 className="stepper-timeline__title">Payment</h3>
                 </li>
             </ol>
         </div>

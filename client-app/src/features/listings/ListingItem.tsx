@@ -4,8 +4,7 @@ import { Listing } from "../../app/model/ListingAggregate/Listing";
 import AgencyTag from "../../app/common/tags/AgencyTag";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../app/stores/store";
-import { Currency, Frequency, priceQualifier, propertyType, rentFrequency, rentFrequencyShort } from "../../app/model/ListingAggregate/ListingEnums";
-import RefTag from "../../app/common/tags/RefTag";
+import { priceQualifier, propertyType, rentFrequencyShort } from "../../app/model/ListingAggregate/ListingEnums";
 import { Content } from "../../app/model/ListingAggregate/ListingObjects";
 import WatchButton from "../../app/common/WatchButton";
 
@@ -22,7 +21,7 @@ export default observer(function ListingItem({ listing, predicate }: Props) {
     // const addedDate = new Date(listing!.addedOn);
     // const title = `Added on ${addedDate.toLocaleDateString()}`
 
-    const priceFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: Currency[listing!.pricing.currency].toUpperCase(), minimumFractionDigits: 0 });
+    const priceFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: listing!.pricing.currency.toString().toUpperCase(), minimumFractionDigits: 0 });
 
     const [image, setImage] = useState<Content>(listing!.contents[0]);
     function handleImage(event: SyntheticEvent, state: Content) {
@@ -89,7 +88,7 @@ export default observer(function ListingItem({ listing, predicate }: Props) {
                     <button className="right-arr-thumbnails" onClick={(e) => scroll(e, 120)}><img className="right-ico" src="/assets/next.svg" alt="next" /></button>
                 </section>
                 <section className="card-overlay">
-                    <div className="card-price" title={`${priceQualifier(listing!.pricing.priceQualifier)} in ${Currency[listing!.pricing.currency].toUpperCase()}`}>
+                    <div className="card-price" title={`${priceQualifier(listing!.pricing.priceQualifier)} in ${listing!.pricing.currency.toString().toUpperCase()}`}>
                         <b style={{ fontSize: "18px" }}>{priceFormat.format(listing!.pricing.price)}</b>
                         {predicate.get("channel") === "sale" ? null : <span style={{fontSize:"10px"}}>{rentFrequencyShort(listing!)}</span>}
                     </div>

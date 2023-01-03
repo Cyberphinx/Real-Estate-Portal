@@ -8,7 +8,6 @@ import { FieldArray, Form, Formik } from "formik";
 import { ListingFormValues } from "../../../../app/model/ListingAggregate/Listing";
 import { v4 as uuid } from 'uuid';
 import MySelectInput from "../../../../app/common/form/MySelectInput";
-import { countryOptions } from "../../../../app/common/form/countryOptions";
 import { cookerOptions, furnishedOptions, mediaOptions, priceOptions, propertyOptions } from "../../../../app/common/form/options";
 import { Category, MediaType, TransactionType } from "../../../../app/model/ListingAggregate/ListingEnums";
 
@@ -142,7 +141,6 @@ export default function ListingForm() {
                                     <MyTextInput inputclassname="branch-form-input-small" errorclassname="branch-form-error" name="listingLocation.townOrCity" placeholder="Town or city" />
                                     <MyTextInput inputclassname="branch-form-input-small" errorclassname="branch-form-error" name="listingLocation.county" placeholder="County" />
                                     <MyTextInput inputclassname="branch-form-input-small" errorclassname="branch-form-error" name="listingLocation.postalCode" placeholder="Postcode" />
-                                    <MySelectInput selectclassname="branch-form-select" placeholder="Country" name="listingLocation.country" options={countryOptions} />
                                     <MyTextInput inputclassname="branch-form-input-small" errorclassname="branch-form-error" name="listingLocation.coordinates.latitude" placeholder="Latitude" />
                                     <MyTextInput inputclassname="branch-form-input-small" errorclassname="branch-form-error" name="listingLocation.coordinates.longitude" placeholder="Longitude" />
                                 </div>

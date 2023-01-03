@@ -10,6 +10,8 @@ export default class UserStore {
     user: User | null = null;
     users: User[] | null = null;
     loadingUsers = false;
+    // loadingAvailable = false;
+    // usernameAvailable: any;
 
     constructor() {
         makeAutoObservable(this)
@@ -63,25 +65,33 @@ export default class UserStore {
         this.loadingUsers = state;
       }
 
-    // getAllUsers = async () => {
-    //     try {
-    //         const results = await agent.Account.list();
-    //         results.forEach(item => {
-    //             this.users?.push(item);
-    //         })
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
-
-    register = async ( creds: RegisterFormValues) => {
+    register = async ( creds: RegisterFormValues, setSubmitting: any, formType: number, setStep?: any) => {
+        setSubmitting(true);
         try {
             const user = await agent.Account.register(creds);
             store.commonStore.setToken(user.token);
             runInAction(() => this.user = user);
-            history.push("/");
-            store.modalStore.closeModal();
+            switch (formType) {
+                case 0:
+                    history.push("/");
+                    store.modalStore.closeModal();
+                    break;
+                case 1:
+                    // history.push("/");
+                    setStep(2);
+                    break;
+                case 2:
+                    history.push("/");
+                    store.modalStore.closeModal();
+                    break;
+                default:
+                    history.push("/");
+                    store.modalStore.closeModal();
+                    break;
+            }
+            setSubmitting(false);
         } catch (error) {
+            setSubmitting(false);
             throw error;
         }
     }
@@ -103,4 +113,16 @@ export default class UserStore {
     setDisplayName = (name: string) => {
         if (this.user) this.user.displayName = name;
     }
+
+    // checkUsernameAvailable = async (username: string) => {
+    //     this.loadingAvailable = true;
+    //     try {
+    //         const result = await agent.Account.checkusername(username);
+    //         runInAction(() => this.usernameAvailable = result);
+    //         this.setLoadingUsers(false);
+    //     } catch (error) {
+    //         console.log(error);
+    //         this.setLoadingUsers(false);
+    //     }
+    // }
 }

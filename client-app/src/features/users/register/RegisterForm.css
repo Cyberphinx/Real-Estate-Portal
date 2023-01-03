@@ -19,25 +19,11 @@
   background-color: #fefefe;
   margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
   border: 1px solid #888;
-  width: 450px; /* Could be more or less, depending on screen size */
+  width: 30rem; /* Could be more or less, depending on screen size */
   max-height: calc(100vh - (100vh * 0.2));
   overflow-x: hidden; 
   overflow-y: auto; 
 }
-
-.agent-map-container {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    height: 10%;
-    width: 10%;
-    overflow: hidden;
-    background-color: #fff;
-    z-index: 1;
-}
-/* .leaflet-container {
-  height: 100%;
-} */
 
 .register-button {
   border: 1px solid #1F51FF;
@@ -59,6 +45,48 @@
   border: 1px solid rgba(31,81,255,0);
   background: rgba(31,81,255,0.2);
 }
+
+.register-submitting-button {
+  position: relative;
+  border: 1px solid #1F51FF;
+  border-radius: 3px;
+  background: rgba(31,81,255,0);
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  width: 80%;
+  margin: 0px 0px 20px 0px;
+  color: transparent;
+}
+
+/* LOADING SPINNER START */
+.register-submitting::after {
+  font-size: 12px;
+  position: absolute;
+  content: "";
+  width: 14px;
+  height: 14px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  border: 2px solid #1f51ff;
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: button-submitting-spinner 1s ease infinite;
+}
+
+@keyframes button-submitting-spinner {
+  from {
+    transform: rotate(0turn);
+  }
+
+  to {
+    transform: rotate(1turn);
+  }
+}
+/* LOADING SPINNER END */
 
 .register-input-style {
   border: 1px solid #ccc;
@@ -101,6 +129,7 @@
   border-right: none;
   /* border-radius: 3px; */
   padding: 5px 0px 5px 0px;
+  cursor: pointer;
 }
 .account-select-style:hover {
   cursor: pointer;
@@ -184,7 +213,7 @@
 .form-section-value {
   text-align: left;
   font-size: 12px;
-  padding: 0px 0px 0px 20px;
+  padding: 0px 0px 10px 40px;
   margin: 0px;
   color: grey;
   width: 600px;

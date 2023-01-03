@@ -237,7 +237,7 @@ namespace Persistence
                             TownOrCity = "London",
                             County = "England",
                             PostalCode = "SW27 9HL",
-                            Country = Country.UnitedKingdom,
+                            Country = "United Kingdom",
                             Latitude = rnd.NextDouble() * (59 - 49) + 49,
                             Longitude = rnd.NextDouble() * (2 - -10) + -10
                         };
@@ -506,7 +506,7 @@ namespace Persistence
                             TownOrCity = "London",
                             County = "England",
                             PostalCode = "SW27 9HL",
-                            Country = Country.UnitedKingdom,
+                            Country = "United Kingdom",
                             Latitude = rnd.NextDouble() * (59 - 49) + 49,
                             Longitude = rnd.NextDouble() * (2 - -10) + -10
                         };

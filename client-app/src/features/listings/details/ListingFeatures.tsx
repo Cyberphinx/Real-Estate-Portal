@@ -14,8 +14,7 @@ export default observer(function ListingFeatures({ listing }: Props) {
     return (
         <div>
             <article className="listing-features-container">
-                <div>
-                    <p>Basic information</p>
+                    <p style={{fontWeight:"bold"}}>Basic information</p>
                     <p className="feature-text">Status: {LifeCycleStatus[listing!.lifeCycleStatus]}</p>
                     <p className="feature-text">New home: {listing?.newBuild}</p>
                     <p className="feature-text">House/Flat share: {listing?.sharedAccommodation}</p>
@@ -29,13 +28,6 @@ export default observer(function ListingFeatures({ listing }: Props) {
                     <p className="feature-text">Council tax band: {CouncilTaxBand[listing.councilTaxBand]}</p>
                     <p className="feature-text">Business for sale: {listing.businessForSale}</p>
                     <p className="feature-text">Commercial use class: {listing.commercialUseClass}</p>
-                </div>
-            </article>
-
-            <hr className="details-divider" />
-            
-            <article className="listing-features-container">
-                <div>
                     <p className="feature-text">Total floors: {listing.floors}</p>
                     <p className="feature-text">Floor levels: {listing?.floorLevels}</p>
                     <p className="feature-text">Condition: {listing?.decorativeCondition}</p>
@@ -43,14 +35,13 @@ export default observer(function ListingFeatures({ listing }: Props) {
                     <p className="feature-text">Pets allowed: {listing?.petsAllowed}</p>
                     <p className="feature-text">Smokers considered: {listing.smokersConsidered}</p>
                     <p className="feature-text">EPC rating: {listing.epcRatings.eerCurrentRating}</p>
-                </div>
             </article>
 
             <hr className="details-divider" />
             
             <article className="listing-features-container">
                 <div>
-                    <p>Facilities:</p>
+                    <p style={{fontWeight:"bold"}}>Facilities:</p>
                     <p className="feature-text">Furnished state: {FurnishedState[listing.furnishedState]}</p>
                     <p className="feature-text">Burglar alarm: {listing.burglarAlarm}</p>
                     <p className="feature-text">Central heating: {listing.centralHeating}</p>

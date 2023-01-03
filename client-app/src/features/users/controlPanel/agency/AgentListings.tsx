@@ -1,16 +1,12 @@
 import { observer } from "mobx-react-lite";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import LoadingComponent from "../../../../app/common/loading/LoadingComponent";
 import priceFormatter from "../../../../app/common/PriceFormatter";
-import AgencyTag from "../../../../app/common/tags/AgencyTag";
-import AgencyTagForCompany from "../../../../app/common/tags/AgencyTagForCompany";
 import DateTag from "../../../../app/common/tags/DateTag";
-import WatchButton from "../../../../app/common/WatchButton";
 import { Stock } from "../../../../app/model/Company";
-import { Currency, Frequency, priceQualifier, PriceQualifier, rentFrequency, TransactionType } from "../../../../app/model/ListingAggregate/ListingEnums";
+import { Frequency, priceQualifier, TransactionType } from "../../../../app/model/ListingAggregate/ListingEnums";
 import { PagingParams } from "../../../../app/model/Pagination";
-import { UserCompanyDto, WatcherListingDto } from "../../../../app/model/Profile";
+import { UserCompanyDto } from "../../../../app/model/Profile";
 import { useStore } from "../../../../app/stores/store";
 import './AgentListings.css';
 
@@ -79,9 +75,9 @@ export default observer(function AgentListings() {
                                 <img className="agent-listing-image" src={listing.image} alt="property" />
                                 <article className="watchlist-item-title">
                                     <b>{priceFormatter(listing.pricing.price, listing.pricing.currency)} </b>
-                                    {listing.pricing.transactionType === 0 && <span>({Frequency[listing.pricing.rentFrequency].replace(/[A-Z]/g, ' $&').trim()})</span>}
+                                    {listing.pricing.transactionType === 0 && <span>({listing.pricing.rentFrequency.toString().replace(/[A-Z]/g, ' $&').trim()})</span>}
                                     <span> for </span>
-                                    <b>{TransactionType[listing.pricing.transactionType]}</b>
+                                    <b>{listing.pricing.transactionType}</b>
                                     <span> - {listing.listingLocation.townOrCity}, {listing.listingLocation.postalCode}</span>
                                 </article>
                             </Link>

@@ -8,9 +8,6 @@ import { useStore } from "../../../../app/stores/store";
 import './BranchForm.css';
 import * as Yup from 'yup';
 import { v4 as uuid } from 'uuid';
-import { Country } from "../../../../app/model/Location";
-import MySelectInput from "../../../../app/common/form/MySelectInput";
-import { countryOptions } from "../../../../app/common/form/countryOptions";
 import { UnitOfTime } from "../../../../app/model/Membership";
 
 interface Props {
@@ -35,7 +32,7 @@ export default observer(function BranchForm({ setBranchForm }: Props) {
             townOrCity: "",
             county: "",
             postalCode: "",
-            country: Country.unitedkingdom,
+            country: "United Kingdom",
             latitude: 0,
             longitude: 0
         },
@@ -124,8 +121,7 @@ export default observer(function BranchForm({ setBranchForm }: Props) {
                                     <MyTextInput inputclassname="branch-form-input-small" errorclassname="branch-form-error" name="companyAddress.townOrCity" placeholder="Town or city" />
                                     <MyTextInput inputclassname="branch-form-input-small" errorclassname="branch-form-error" name="companyAddress.county" placeholder="County" />
                                     <MyTextInput inputclassname="branch-form-input-small" errorclassname="branch-form-error" name="companyAddress.postalCode" placeholder="Postcode" />
-                                    {/* <MyTextInput inputclassname="branch-form-input-small" errorclassname="branch-form-error" name="companyAddress.country" placeholder="Country" /> */}
-                                    <MySelectInput selectclassname="branch-form-select" errorclassname="branch-form-error" placeholder="Country" name="companyAddress.country" options={countryOptions} />
+                                    <MyTextInput inputclassname="branch-form-input-small" errorclassname="branch-form-error" name="companyAddress.country" placeholder="Country" />
                                     <MyTextInput inputclassname="branch-form-input-small" errorclassname="branch-form-error" name="companyAddress.coordinates.latitude" placeholder="Latitude" />
                                     <MyTextInput inputclassname="branch-form-input-small" errorclassname="branch-form-error" name="companyAddress.coordinates.longitude" placeholder="Longitude" />
                                 </div>

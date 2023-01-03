@@ -37,7 +37,7 @@ namespace Persistence.Migrations
                     AddedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: true),
                     DisplayName = table.Column<string>(type: "text", nullable: true),
-                    Country = table.Column<int>(type: "integer", nullable: false),
+                    Country = table.Column<string>(type: "text", nullable: true),
                     Language = table.Column<int>(type: "integer", nullable: false),
                     UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
@@ -332,8 +332,8 @@ namespace Persistence.Migrations
                     Locality = table.Column<string>(type: "text", nullable: true),
                     TownOrCity = table.Column<string>(type: "text", nullable: true),
                     County = table.Column<string>(type: "text", nullable: true),
-                    PostalCode = table.Column<string>(type: "text", nullable: false),
-                    Country = table.Column<int>(type: "integer", nullable: false),
+                    PostalCode = table.Column<string>(type: "text", nullable: true),
+                    Country = table.Column<string>(type: "text", nullable: true),
                     Latitude = table.Column<double>(type: "double precision", nullable: false),
                     Longitude = table.Column<double>(type: "double precision", nullable: false)
                 },
@@ -589,8 +589,8 @@ namespace Persistence.Migrations
                     Locality = table.Column<string>(type: "text", nullable: true),
                     TownOrCity = table.Column<string>(type: "text", nullable: true),
                     County = table.Column<string>(type: "text", nullable: true),
-                    PostalCode = table.Column<string>(type: "text", nullable: false),
-                    Country = table.Column<int>(type: "integer", nullable: false),
+                    PostalCode = table.Column<string>(type: "text", nullable: true),
+                    Country = table.Column<string>(type: "text", nullable: true),
                     Latitude = table.Column<double>(type: "double precision", nullable: false),
                     Longitude = table.Column<double>(type: "double precision", nullable: false)
                 },
@@ -758,8 +758,8 @@ namespace Persistence.Migrations
                     Locality = table.Column<string>(type: "text", nullable: true),
                     TownOrCity = table.Column<string>(type: "text", nullable: true),
                     County = table.Column<string>(type: "text", nullable: true),
-                    PostalCode = table.Column<string>(type: "text", nullable: false),
-                    Country = table.Column<int>(type: "integer", nullable: false),
+                    PostalCode = table.Column<string>(type: "text", nullable: true),
+                    Country = table.Column<string>(type: "text", nullable: true),
                     Latitude = table.Column<double>(type: "double precision", nullable: false),
                     Longitude = table.Column<double>(type: "double precision", nullable: false)
                 },
@@ -851,10 +851,10 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "1", "8aee7701-a052-490e-b18a-4a99862391c4", "Company", "COMPANY" },
-                    { "2", "f9812053-334b-4e6f-98cc-4196dfb43bb6", "Customer", "CUSTOMER" },
-                    { "3", "c4649951-6357-40ce-8fbf-55d0cf849495", "Agency", "AGENCY" },
-                    { "4", "49d7fbc2-3840-4deb-a46c-9cdf777c2b5b", "Admin", "ADMIN" }
+                    { "1", "40f7ef3d-61a1-4a7e-ae39-1031a4835bdc", "Company", "COMPANY" },
+                    { "2", "6268e09c-06ca-40ed-aef0-59bf572c91a3", "Customer", "CUSTOMER" },
+                    { "3", "ed07e236-617e-4845-a257-5e3033c930ba", "Agency", "AGENCY" },
+                    { "4", "63f92612-a988-4723-99c1-98647d6d27e9", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.CreateIndex(

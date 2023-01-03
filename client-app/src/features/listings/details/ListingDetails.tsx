@@ -21,7 +21,7 @@ export default observer(function ListingDetails({ listing }: Props) {
                             <b className="listing-details-title">{description.heading}</b>
                             <span className="listing-details-dimensions">
                                 {description.area !== 0
-                                    && ` (${description.length} x ${description.width} = ${description.area} sq ${UnitOfLength[description.unit]})`}
+                                    && ` (${description.length} x ${description.width} = ${description.area} sq ${description.unit.toString()})`}
                             </span>
                         </article>
                         <p className="listing-details-text">{description.text}</p>

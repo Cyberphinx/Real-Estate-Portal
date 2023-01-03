@@ -19,7 +19,7 @@ namespace API.DTOs
         public string PhoneNumber { get; set; }
         public List<string> Role { get; set; }
         public string Image { get; set; }
-        public Country Country { get; set; }
+        public string Country { get; set; }
         public Language Language { get; set; }
         public DateTime AddedOn { get; set; }
         

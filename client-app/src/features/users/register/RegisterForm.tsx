@@ -5,9 +5,9 @@ import * as Yup from 'yup';
 import { v4 as uuid } from 'uuid';
 import { useStore } from '../../../app/stores/store';
 import LoginForm from '../LoginForm';
-import { AccountType } from '../../../app/model/User';
+import { AccountType, Language } from '../../../app/model/User';
 import Switcher from './Switcher';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 
 export default observer(function RegisterForm() {
@@ -16,9 +16,9 @@ export default observer(function RegisterForm() {
     const apikey = process.env.REACT_APP_LOCATION_IQ;
     const locationIQLink = `https://{s}-tiles.locationiq.com/v3/streets/r/{z}/{x}/{y}.png?key=${apikey}`;
 
-    const [formType, setFormType] = useState<number>(2);
+    const [formType, setFormType] = useState<number>(0);
+    const [step, setStep] = useState<number>(0);
 
-    
     const initialValues = {
         email: "",
         password: "",
@@ -26,8 +26,8 @@ export default observer(function RegisterForm() {
         phoneNumber: "",
         accountType: 0,
         addedOn: new Date(),
-        country: 182,
-        language: 1,
+        country: "United Kingdom",
+        language: Language.English,
         displayName: "",
         companyAccessStatus: 0,
         companyLegalName: "",
@@ -41,7 +41,7 @@ export default observer(function RegisterForm() {
             townOrCity: "",
             county: "",
             postalCode: "",
-            country: 182,
+            country: "United Kingdom",
             latitude: 0,
             longitude: 0,
         },
@@ -53,7 +53,12 @@ export default observer(function RegisterForm() {
     const registerValidation = [
         Yup.object({
             username: Yup.string().required("Username is required"),
-            email: Yup.string().required("Email is required").email(),
+            email: Yup.string().required("Email is required").email("Email must be a valid email"),
+            password: Yup.string().required("Password is required"),
+        }),
+        Yup.object({
+            username: Yup.string().required("Username is required"),
+            email: Yup.string().required("Email is required").email("Email must be a valid email"),
             password: Yup.string().required("Password is required"),
             companyLegalName: Yup.string().required("Legal business name is required"),
             displayName: Yup.string().required("Displayname is required").max(20, "Display name must be under 20 characters"),
@@ -65,15 +70,12 @@ export default observer(function RegisterForm() {
             username: Yup.string().required("Username is required"),
             email: Yup.string().required("Email is required").email("Email must be a valid email"),
             password: Yup.string().required("Password is required"),
-        }),
-        Yup.object({
-            username: Yup.string().required("Username is required"),
-            email: Yup.string().required("Email is required").email("Email must be a valid email"),
-            password: Yup.string().required("Password is required"),
         })
-    ] 
+    ]
 
     const currentValidationSchema = registerValidation[formType];
+
+    console.log(currentValidationSchema);
 
     return (
         <div className="register-form">
@@ -83,13 +85,16 @@ export default observer(function RegisterForm() {
                 </div>
                 <Formik
                     initialValues={initialValues}
-                    onSubmit={(values, { setErrors }) => {
-                        register(values).catch(error => setErrors({ error }));
+                    onSubmit={(values, { setErrors, setSubmitting }) => {
+                        register(values, setSubmitting, formType, setStep).catch(error => setErrors({ error }));
                         setActiveFeature(0);
                     }}
                     validationSchema={currentValidationSchema}
                 >
-                    {({ handleSubmit, isSubmitting, errors, isValid, dirty, setFieldValue, touched, handleChange, setTouched }) => {
+                    {({
+                        handleSubmit, isSubmitting, errors, isValid, dirty, setFieldValue,
+                        handleChange, setFieldTouched, validateField, getFieldMeta
+                    }) => {
                         return (
                             <Form onSubmit={handleSubmit} autoComplete="off">
                                 <div style={{ position: "relative" }}>
@@ -97,34 +102,54 @@ export default observer(function RegisterForm() {
                                         Sign Up
                                     </p>
                                     <select name="accountType" className='account-select-style'>
-                                        <option value={AccountType.Customer}
-                                            onClick={() => {
-                                                setFormType(2);
-                                                setFieldValue("accountType", AccountType.Customer);
-                                            }}>( Individual )</option>
-                                        <option value={AccountType.Agent}
+                                        <option
+                                            value={AccountType.Customer}
                                             onClick={() => {
                                                 setFormType(0);
+                                                setFieldValue("accountType", AccountType.Customer);
+                                            }}>( Individual )</option>
+                                        <option
+                                            value={AccountType.Agent}
+                                            onClick={() => {
+                                                setFormType(1);
                                                 setFieldValue("accountType", AccountType.Agent);
                                                 setFieldValue("invoiceAmount", 600000);
                                                 setFieldValue("invoiceDescription", "Payment in 1 installment");
                                             }}>( Estate Agent )</option>
-                                        <option value={AccountType.Company}
+                                        <option
+                                            value={AccountType.Company}
                                             onClick={() => {
-                                                setFormType(1);
+                                                setFormType(2);
                                                 setFieldValue("accountType", AccountType.Company);
                                             }}>( Tradesperson )</option>
                                     </select>
                                 </div>
 
-                                <p style={{ textAlign: "left", fontSize: "12px", fontWeight: "400", padding: "0px 20px 20px 20px" }}>
+                                <p style={{ textAlign: "left", fontSize: "12px", fontWeight: "400", padding: "0px 20px 0px 20px" }}>
                                     By continuing, you agree are setting up a Sanctum account and agree to our <span className='register-legal-text'>User Agreement</span> and <span className='register-legal-text'>Privacy Policy</span>.
                                 </p>
-                                <Switcher isValid={isValid} dirty={dirty} isSubmitting={isSubmitting} setFieldValue={setFieldValue}
-                                handleChange={handleChange} accountType={formType} />
+                                
+                                {/* <p style={{fontSize:"0.75rem"}}>Username errors: {getFieldMeta("username").error?.toString()}</p>
+                                <p style={{fontSize:"0.75rem"}}>Email errors: {getFieldMeta("email").error?.toString()}</p>
+                                <p style={{fontSize:"0.75rem"}}>Password errors: {getFieldMeta("password").error?.toString()}</p> */}
+
+                                <Switcher
+                                    isValid={isValid}
+                                    dirty={dirty}
+                                    isSubmitting={isSubmitting}
+                                    setFieldValue={setFieldValue}
+                                    handleChange={handleChange}
+                                    accountType={formType}
+                                    setFieldTouched={setFieldTouched}
+                                    validateField={validateField}
+                                    getFieldMeta={getFieldMeta}
+                                    step={step}
+                                    setStep={setStep}
+                                />
 
                                 {errors.error && <p className="register-form-submission-error">{errors.error}</p>}
                                 <div className='register-suggestion'>Already on Sanctum? <button className='register-suggestion-button'
+                                    type='button'
                                     onClick={() => {
                                         {
                                             closeModal();

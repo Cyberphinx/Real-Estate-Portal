@@ -1,16 +1,12 @@
 import { observer } from "mobx-react-lite";
 import React, { useState } from "react";
-import { countryOptions } from "../../../../app/common/form/countryOptions";
-import MySelectInput from "../../../../app/common/form/MySelectInput";
-import { Country } from "../../../../app/model/Location";
 import { useStore } from "../../../../app/stores/store";
 import './UserSettings.css';
 
 
 export default observer(function UserSettings() {
-    const { profileStore, userStore } = useStore();
-    const { profile, loading } = profileStore;
-    const { isLoggedIn, user } = userStore;
+    const { userStore } = useStore();
+    const { user } = userStore;
 
     const accountTab =
         <section>

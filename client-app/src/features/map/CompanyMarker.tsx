@@ -6,7 +6,6 @@ import useSupercluster from "use-supercluster";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../app/stores/store";
 import { Company } from "../../app/model/Company";
-import { ServiceCategory } from "../../app/model/ServiceCategory";
 import ReactDOMServer from "react-dom/server";
 
 interface Props {
@@ -35,10 +34,8 @@ export default observer(function CompanyMarker({ points }: Props) {
 
     const maxZoom = 20;
     const map = useMap();
-    // const [bounds, setBounds] = useState<any>();
 
     const companyIcon = (company: Company) => {
-        // const size = ServiceCategory[company.serviceCategory].length;
         const icon = L.divIcon({
             html: ReactDOMServer.renderToString(
                 <div className="point-marker-company">
@@ -74,14 +71,6 @@ export default observer(function CompanyMarker({ points }: Props) {
         updateMap();
     }, []);
 
-    // get clusters
-    // const { clusters } = useSupercluster({
-    //     points,
-    //     bounds,
-    //     zoom,
-    //     options: { radius: 75, maxZoom: 20 }
-    // });
-
     const { clusters, supercluster } = useSupercluster({
         points: points,
         bounds: bounds,
@@ -101,9 +90,6 @@ export default observer(function CompanyMarker({ points }: Props) {
             return false;
         }
     }
-
-    // debounce: to avoid making too much changes to bounds
-    // const [debouncedDataBounds] = useDebounce(bounds, 200);
 
     return (
         <div>
@@ -145,7 +131,6 @@ export default observer(function CompanyMarker({ points }: Props) {
                                         } else {
                                             selectCompany(leaves[0].properties.company.id);
                                         }
-                                        // if (contacts === true) setContacts(false);
                                     }
                                 },
                             }}
@@ -188,10 +173,7 @@ export default observer(function CompanyMarker({ points }: Props) {
                         <Tooltip direction="top" offset={[3, -3]}>
                             <b>{cluster.properties.company.displayName}</b>
                             <p style={{ margin: "0px", padding: "0px", fontSize: "10px", color: "grey" }}>#{cluster.properties.company.companyReference}</p>
-                            {/* <p style={{ margin: "0px", padding: "0px", fontSize: "10px", color: "grey" }}>#{ServiceCategory[cluster.properties.company.serviceCategories[0]]}</p> */}
                             <p style={{ margin: "0px", padding: "0px", fontSize: "10px" }}>Listings: {cluster.properties.company.listings.length}</p>
-                            {/* <p style={{margin:"0px",padding:"0px",fontSize:"12px"}}>{cluster.properties.companyContacts.email}</p> */}
-                            {/* <img src={cluster.properties.logo} style={{ width: "100px" }} /> */}
                         </Tooltip>
                     </Marker>
                 );

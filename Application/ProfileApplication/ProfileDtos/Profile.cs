@@ -13,7 +13,7 @@ namespace Application.ProfileApplication.ProfileDtos
         public string Username { get; set; }
         public string DisplayName { get; set; }
         public string Description { get; set; }
-        public Country Country { get; set; }
+        public string Country { get; set; }
         public Language Language { get; set; }
         public string Image { get; set; }
         public MembershipDto Membership { get; set; }

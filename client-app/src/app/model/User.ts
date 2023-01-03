@@ -1,6 +1,5 @@
 import { CompanyAddress } from './Company';
 import { AccessStatus } from './AccessStatus';
-import { Country } from "./Location";
 
 export interface User {
     accountType: AccountType;
@@ -11,7 +10,7 @@ export interface User {
     phoneNumber: string;
     role: string[];
     image?: string;
-    country: Country;
+    country: string;
     language: Language;
     addedOn: Date;
 }
@@ -28,7 +27,7 @@ export interface RegisterFormValues {
     phoneNumber?: string;
     accountType: AccountType;
     addedOn: Date;
-    country: Country;
+    country: string;
     language: Language;
     displayName?: string; // max length is 20 characters
     companyAccessStatus?: AccessStatus;

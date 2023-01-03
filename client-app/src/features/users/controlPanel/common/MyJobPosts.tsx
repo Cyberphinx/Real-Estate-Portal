@@ -66,7 +66,7 @@ export default observer(function MyJobPosts() {
                                     <section>
                                         <span>Posted on {displayDate(job)}</span>
                                         <div>{job.serviceCategories.map((cat: ServiceCategory, index: number) => (
-                                            <span key={index}>#{ServiceCategory[cat]} </span>
+                                            <span key={index}>#{cat} </span>
                                         ))}</div>
                                     </section>
                                 </div>

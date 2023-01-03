@@ -18,7 +18,7 @@ namespace API.DTOs
         public string Email { get; set; }
 
         [Required]
-        [RegularExpression("(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$", ErrorMessage = "Password must be complex")]
+        [RegularExpression("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$", ErrorMessage = "Password must be minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character")]
         public string Password { get; set; }
 
         [Required]
@@ -26,7 +26,7 @@ namespace API.DTOs
         public string PhoneNumber { get; set; }
         public AccountType AccountType { get; set; }
         public DateTime AddedOn { get; set; }
-        public Country Country { get; set; }
+        public string Country { get; set; }
         public Language Language { get; set; }
         
         [MaxLength(20, ErrorMessage = "Max length is 20")]

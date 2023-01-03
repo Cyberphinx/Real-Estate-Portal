@@ -15,9 +15,9 @@ export default function Toolbar() {
     // const title = `Added on ${addedDate.toLocaleDateString()}`
 
     return (
-        <div className="toolbar-container" style={{gridTemplateColumns:"auto 30px 50px 50px 50px"}}>
+        <div className="toolbar-container" style={{gridTemplateColumns:"auto 50px 50px 50px"}}>
             <section className="toolbar-title">{selectedListing?.company.displayName}</section>
-            <section className="toolbar-button" style={{width:"10px"}}><Watch listing={selectedListing} /></section>
+            {/* <section className="toolbar-button" style={{width:"10px"}}><Watch listing={selectedListing} /></section> */}
             <section className="toolbar-button"><Locate selectedItem={selectedListing} /></section>
             <section className="toolbar-button">
                 <Link to={`/listing/${selectedListing?.id}`} target="_blank" > <NewTab /> </Link>

@@ -15,7 +15,7 @@ namespace Domain.AppUserAggregate
         public DateTime AddedOn { get; set; }
         public string Description { get; set; }
         public string DisplayName { get; set; }
-        public Country Country { get; set; }
+        public string Country { get; set; }
         public Language Language { get; set; }
         public Membership Membership { get; set; }
         public ICollection<Invoice> Invoices { get; set; } = new List<Invoice>();

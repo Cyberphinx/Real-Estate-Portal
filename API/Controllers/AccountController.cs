@@ -19,6 +19,7 @@ using Microsoft.EntityFrameworkCore;
 using Persistence;
 using Application.ProfileApplication.ProfileDtos;
 using API.Extensions;
+using AutoMapper.QueryableExtensions;
 
 namespace API.Controllers
 {
@@ -68,14 +69,14 @@ namespace API.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
-            if (await _userManager.Users.AnyAsync(x => x.Email == registerDto.Email))
+            if (await _userManager.Users.AnyAsync(x => x.Email == registerDto.Email.ToLower()))
             {
                 // manually add validation errors
                 ModelState.AddModelError("email", "Email taken");
                 return ValidationProblem();
             }
 
-            if (await _userManager.Users.AnyAsync(x => x.UserName == registerDto.Username))
+            if (await _userManager.Users.AnyAsync(x => x.UserName.ToLower() == registerDto.Username.ToLower()))
             {
                 ModelState.AddModelError("username", "Username taken");
                 return ValidationProblem();
@@ -83,21 +84,21 @@ namespace API.Controllers
 
             var user = new AppUser
             {
-                Email = registerDto.Email,
-                UserName = registerDto.Username,
+                Email = registerDto.Email.ToLower(),
+                UserName = registerDto.Username.ToLower(),
                 PhoneNumber = registerDto.PhoneNumber,
                 AddedOn = DateTime.UtcNow,
                 AccountType = registerDto.AccountType
             };
 
-            if (registerDto.AccountType == AccountType.Agent) 
+            if (registerDto.AccountType == AccountType.Agent)
             {
                 var companyContacts = new CompanyContacts
                 {
                     Email = registerDto.Email,
                     Phone = registerDto.PhoneNumber
                 };
-                
+
                 var company = new Company
                 {
                     Username = registerDto.Username,
@@ -134,7 +135,7 @@ namespace API.Controllers
                     Username = registerDto.Username,
                     VatPercentage = 20
                 };
-                
+
                 var membership = new Membership
                 {
                     Description = "Property Agent Membership",
@@ -211,6 +212,34 @@ namespace API.Controllers
             return userDtos;
         }
 
+        // check whether or not username is taken
+        [AllowAnonymous]
+        [HttpGet("username/{username}")]
+        public async Task<ActionResult<PublicUserDto>> GetUserByUsername(string username)
+        {
+            if (await _userManager.Users.AnyAsync(x => x.UserName == username.ToLower()))
+            {
+                ModelState.AddModelError("username", "Username taken");
+                return ValidationProblem();
+            }
+
+            return Ok("Username available");
+        }
+
+         // check whether or not email is taken
+        [AllowAnonymous]
+        [HttpGet("email/{email}")]
+        public async Task<ActionResult<PublicUserDto>> GetUserByEmail(string email)
+        {
+            if (await _userManager.Users.AnyAsync(x => x.Email == email.ToLower()))
+            {
+                ModelState.AddModelError("email", "Email taken");
+                return ValidationProblem();
+            }
+            
+            return Ok("Email available");
+        }
+
         [Authorize(Roles = "Admin")]
         [HttpPut("assignrole")]
         public async Task<ActionResult<UserDto>> AddToRole(AssignRoleDto assignRoleDto)
@@ -227,12 +256,12 @@ namespace API.Controllers
         {
             var user = await _userManager.FindByNameAsync(assignRoleDto.Username);
 
-            if (user != null) 
+            if (user != null)
             {
                 IdentityResult result = await _userManager.DeleteAsync(user);
                 if (result.Succeeded)
                     return Ok();
-                else 
+                else
                     return BadRequest(new ProblemDetails { Title = "Problem deleting the user" });
             }
             else
@@ -255,7 +284,7 @@ namespace API.Controllers
                 Country = user.Country,
                 AddedOn = user.AddedOn,
                 Language = user.Language
-                
+
             };
         }
     }

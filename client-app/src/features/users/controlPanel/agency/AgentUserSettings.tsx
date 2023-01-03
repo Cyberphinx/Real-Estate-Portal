@@ -1,12 +1,8 @@
 import { observer } from "mobx-react-lite";
-import React, { useEffect, useState } from "react";
-import { countryOptions } from "../../../../app/common/form/countryOptions";
-import MySelectInput from "../../../../app/common/form/MySelectInput";
+import React, { useState } from "react";
 import { dateFormatter, dateFormatterShort } from "../../../../app/common/HelperFunctions";
 import priceFormatter from "../../../../app/common/PriceFormatter";
 import InvoiceStatusTag from "../../../../app/common/tags/InvoiceStatusTag";
-import { Country } from "../../../../app/model/Location";
-import { PaymentStatus } from "../../../../app/model/PaymentStatus";
 import { Invoice, InvoiceItem } from "../../../../app/model/Profile";
 import { useStore } from "../../../../app/stores/store";
 import './AgentUserSettings.css';
@@ -14,8 +10,8 @@ import './AgentUserSettings.css';
 
 export default observer(function AgentUserSettings() {
     const { profileStore, userStore } = useStore();
-    const { profile, loading, userCompanies, headquarter, loadHeadquarter } = profileStore;
-    const { isLoggedIn, user } = userStore;
+    const { profile, headquarter } = profileStore;
+    const { user } = userStore;
 
     const address = `${headquarter?.companyAddress.propertyNumberOrName && (headquarter?.companyAddress.propertyNumberOrName + ", ")}
         ${headquarter?.companyAddress.streetName && (headquarter?.companyAddress.streetName + ", ")}

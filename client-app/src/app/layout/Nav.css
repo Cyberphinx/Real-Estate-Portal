@@ -3,7 +3,8 @@
   list-style-type: none;
   /* width: calc(100vw / 3); */
   width: 100vw;
-  height: 39px;
+  /* height: 39px; */
+  height: 2.5rem;
   margin: auto;
   padding: 0;
   color: #000;
@@ -13,7 +14,7 @@
 }
 
 .logo {
-  width: 25px;
+  width: 1.5rem;
   margin: 6px -3px 0px 20px;
 }
 

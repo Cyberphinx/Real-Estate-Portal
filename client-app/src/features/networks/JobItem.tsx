@@ -54,11 +54,11 @@ export default observer(function JobItem({ job }: Props) {
                 <div className="thread-subtitle">
                     <span className="thread-location">
                         {job.jobLocation.townOrCity}
-                    </span> - Posted by {job.networks.find(x => x.role === JobNetworkRole.Customer)?.username} - {dateFormatter(job.addedOn)}
+                    </span> - Posted by {job.networks.find(x => x.role.toString() === "Customer")?.username} - {dateFormatter(job.addedOn)}
                 </div>
                 <p className="thread-title">{job.title} </p>
                 <p className="thread-subtitle">{job.serviceCategories.map((category: ServiceCategory, index: number) => (
-                    <span className="job-tag" key={index}># {ServiceCategory[category].replace(/[A-Z]/g, ' $&').trim()} </span>
+                    <span className="job-tag" key={index}># {category.toString().replace(/[A-Z]/g, ' $&').trim()} </span>
                 ))}</p>
 
                 <p className="thread-content">{job.description}</p>

@@ -30,15 +30,15 @@ export default observer(function JobDetailsPage() {
             <div className="job-page-container">
                 <section>
                     <div className="job-author-container">
-                        {job.networks.find(x => x.role === JobNetworkRole.Customer)?.image === null
+                        {job.networks.find(x => x.role.toString() === "Customer")?.image === null
                             ? <img className="large-user-icon" src="/assets/default-user-icon.jpg" alt="user" />
-                            : <img className="large-user-icon" src={job.networks.find(x => x.role === JobNetworkRole.Customer)?.image} alt="profile-pic" />}
-                        {job.networks.find(x => x.role === JobNetworkRole.Customer)?.displayName === null
-                            ? <p>{job.networks.find(x => x.role === JobNetworkRole.Customer)?.username}</p>
-                            : <p>{job.networks.find(x => x.role === JobNetworkRole.Customer)?.displayName}</p>}
-                        <p>Description: {job.networks.find(x => x.role === JobNetworkRole.Customer)?.description}</p>
-                        <p>Total jobs: {job.networks.find(x => x.role === JobNetworkRole.Customer)?.jobsCount}</p>
-                        <p>Total reviews: {job.networks.find(x => x.role === JobNetworkRole.Customer)?.reviewsCount}</p>
+                            : <img className="large-user-icon" src={job.networks.find(x => x.role.toString() === "Customer")?.image} alt="profile-pic" />}
+                        {job.networks.find(x => x.role.toString() === "Customer")?.displayName === null
+                            ? <p>{job.networks.find(x => x.role.toString() === "Customer")?.username}</p>
+                            : <p>{job.networks.find(x => x.role.toString() === "Customer")?.displayName}</p>}
+                        <p>Description: {job.networks.find(x => x.role.toString() === "Customer")?.description}</p>
+                        <p>Total jobs: {job.networks.find(x => x.role.toString() === "Customer")?.jobsCount}</p>
+                        <p>Total reviews: {job.networks.find(x => x.role.toString() === "Customer")?.reviewsCount}</p>
                     </div>
                 </section>
 
@@ -50,11 +50,11 @@ export default observer(function JobDetailsPage() {
                         <div className="thread-subtitle">
                             <span className="thread-location">
                                 {job.jobLocation.townOrCity}
-                            </span> - Posted by {job.networks.find(x => x.role === JobNetworkRole.Customer)?.username} - {dateFormatter(job.addedOn)}
+                            </span> - Posted by {job.networks.find(x => x.role.toString() === "Customer")?.username} - {dateFormatter(job.addedOn)}
                         </div>
                         <p className="thread-title">{job.title} </p>
                         <p className="thread-subtitle">{job.serviceCategories.map((category: ServiceCategory, index: number) => (
-                            <span className="job-tag" key={index}># {ServiceCategory[category].replace(/[A-Z]/g, ' $&').trim()} </span>
+                            <span className="job-tag" key={index}># {category.toString().replace(/[A-Z]/g, ' $&').trim()} </span>
                         ))}</p>
 
                         <p className="thread-content">{job.description}</p>
@@ -72,7 +72,7 @@ export default observer(function JobDetailsPage() {
                         <section className="job-applicants">
                             <div>
                                 <p>Shortlisted: </p>
-                                {job.networks.filter(x => x.role === JobNetworkRole.ShortlistedCompany).map((network: NetworkDto) => (
+                                {job.networks.filter(x => x.role.toString() === "ShortlistedCompany").map((network: NetworkDto) => (
                                     <div key={network.username}>
                                         <button className="networker-button" onClick={() => setApplicant(network)}>
                                             {network.displayName ? network.displayName : network.username}
@@ -82,7 +82,7 @@ export default observer(function JobDetailsPage() {
                             </div>
                             <div>
                                 <p>Interested: </p>
-                                {job.networks.filter(x => x.role === JobNetworkRole.InterestedCompany).map((network: NetworkDto) => (
+                                {job.networks.filter(x => x.role.toString() === "InterestedCompany").map((network: NetworkDto) => (
                                     <div key={network.username}>
                                         <button className="networker-button" onClick={() => setApplicant(network)}>
                                             {network.displayName ? network.displayName : network.username}
@@ -93,7 +93,7 @@ export default observer(function JobDetailsPage() {
                         </section>
 
                         <div style={{ display: "inline-grid", gridTemplateColumns: "auto auto auto auto", gridGap: "20px", marginTop: "20px" }}>
-                            {userStore.isLoggedIn && userStore.user?.username === job.networks.find(x => x.role === JobNetworkRole.Customer)?.username
+                            {userStore.isLoggedIn && userStore.user?.username === job.networks.find(x => x.role.toString() === "Customer")?.username
                                 ?
                                 <button className="thread-button" style={{ fontWeight: "600", border: "1px solid #000" }}>Edit</button>
                                 :
@@ -117,13 +117,13 @@ export default observer(function JobDetailsPage() {
                         <p>Description: {applicant.description}</p>
                         <p>Total jobs: {applicant.jobsCount}</p>
                         <p>Total reviews: {applicant.reviewsCount}</p>
-                        {userStore.isLoggedIn && userStore.user?.username === job.networks.find(x => x.role === JobNetworkRole.Customer)?.username
+                        {userStore.isLoggedIn && userStore.user?.username === job.networks.find(x => x.role.toString() === "Customer")?.username
                             ? (applicant.role === JobNetworkRole.ShortlistedCompany
                                 ? <p>Paid/Not Paid</p>
                                 : <button className="thread-button" onClick={() => { }}>Shortlist Applicant</button>)
                             : null
                         }
-                        {userStore.isLoggedIn && userStore.user?.username === job.networks.find(x => x.role === JobNetworkRole.Customer)?.username &&
+                        {userStore.isLoggedIn && userStore.user?.username === job.networks.find(x => x.role.toString() === "Customer")?.username &&
                             <div className="job-chats">
                                 <p>Message from {applicant.displayName ? applicant.displayName : applicant.username}: </p>
                                 <p>Chats</p>

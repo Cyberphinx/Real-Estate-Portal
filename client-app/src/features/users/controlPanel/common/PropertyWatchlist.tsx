@@ -2,10 +2,8 @@ import { observer } from "mobx-react-lite";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import priceFormatter from "../../../../app/common/PriceFormatter";
-import AgencyTag from "../../../../app/common/tags/AgencyTag";
-import DateTag from "../../../../app/common/tags/DateTag";
 import WatchButton from "../../../../app/common/WatchButton";
-import { Currency, Frequency, priceQualifier, PriceQualifier, rentFrequency, TransactionType } from "../../../../app/model/ListingAggregate/ListingEnums";
+import { Frequency, priceQualifier, TransactionType } from "../../../../app/model/ListingAggregate/ListingEnums";
 import { WatcherListingDto } from "../../../../app/model/Profile";
 import { useStore } from "../../../../app/stores/store";
 import './PropertyWatchlist.css';
@@ -40,9 +38,9 @@ export default observer(function PropertyWatchlist() {
                                 <img className="saved-listing-image" src={listing.image} alt="property" />
                                 <article className="watchlist-item-title">
                                     <b>{priceFormatter(listing.price, listing.currency)} </b>
-                                    {listing.transactionType === 0 && <span>({Frequency[listing.rentFrequency].replace(/[A-Z]/g, ' $&').trim()})</span>}
+                                    {listing.transactionType === 0 && <span>({listing.rentFrequency.toString().replace(/[A-Z]/g, ' $&').trim()})</span>}
                                     <span> for </span>
-                                    <b>{TransactionType[listing.transactionType]}</b>
+                                    <b>{listing.transactionType}</b>
                                     <span> - {listing.city}, {listing.postcode}</span>
                                 </article>
                             </Link>

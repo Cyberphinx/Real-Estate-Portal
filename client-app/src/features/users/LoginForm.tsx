@@ -35,7 +35,7 @@ export default observer(function LoginForm() {
                             <br />
                             <MyTextInput inputclassname='login-input-style' errorclassname='login-form-error' name="password" placeholder="Password" type="password" />
                             <br />
-                            <div className='login-suggestion'>Forget your <button className='login-suggestion-button'>password</button> ?</div>
+                            <div className='login-suggestion'>Forget your <button type="button" className='login-suggestion-button'>password</button> ?</div>
                             <button className={isSubmitting ? 'login-submitting-button' : 'login-button'} type="submit">
                                 {isSubmitting && <span className="login-submitting"></span>}
                                 Log In
@@ -45,6 +45,7 @@ export default observer(function LoginForm() {
                             </button> */}
                             {errors.error && <p className="login-form-submission-error">{errors.error}</p>}
                             <div className='login-suggestion'>New to Sanctum? <button className='login-suggestion-button'
+                                type="button"
                                 onClick={() => {
                                     closeModal();
                                     openModal(<RegisterForm />);

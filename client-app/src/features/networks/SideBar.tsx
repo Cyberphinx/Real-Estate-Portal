@@ -86,11 +86,6 @@ export default function SideBar() {
                     </div>
                 </article>
                 <article className="subservice-list-container">
-                    {/* {currentTrades.map((trade: ServiceCategory, index: number) => (
-                        <article key={index}>
-                            <p className="subservice-tags"># {ServiceCategory[trade].replace(/[A-Z]/g, ' $&'). trim()}</p>
-                        </article> 
-                    ))} */}
                     {trades.map((trade: string, index: number) => (
                         <div key={index}>
                             <p className="subservice-tags"># {trade}</p>

@@ -66,18 +66,18 @@ export enum Frequency {
 }
 
 export const rentFrequency = (listing: Listing) => {
-    switch (listing.pricing.rentFrequency) {
-        case 0:
+    switch (listing.pricing.rentFrequency.toString()) {
+        case "PerPersonPerWeek":
             return "/person/week"
-        case 1:
+        case "PerWeek":
             return "/week"
-        case 2:
+        case "PerMonth":
             return "/month"
-        case 3:
+        case "PerQuarter":
             return "/quarter"
-        case 4:
+        case "PerYear":
             return "/year"
-        case 5:
+        case "NotApplicable":
             return ""
         default:
             return ""
@@ -85,18 +85,18 @@ export const rentFrequency = (listing: Listing) => {
 }
 
 export const rentFrequencyShort = (listing: Listing) => {
-    switch (listing.pricing.rentFrequency) {
-        case 0:
+    switch (listing.pricing.rentFrequency.toString()) {
+        case "PerPersonPerWeek":
             return "/p/w"
-        case 1:
+        case "PerWeek":
             return "/w"
-        case 2:
+        case "PerMonth":
             return "/m"
-        case 3:
+        case "PerQuarter":
             return "/q"
-        case 4:
+        case "PerYear":
             return "/y"
-        case 5:
+        case "NotApplicable":
             return ""
         default:
             return ""
@@ -183,22 +183,22 @@ export enum PriceQualifier {
 }
 
 export const priceQualifier = (priceQualifier: PriceQualifier) => {
-    switch (priceQualifier) {
-        case 0:
+    switch (priceQualifier.toString()) {
+        case "FixedPrice":
             return "Fixed price"
-        case 1:
+        case "From":
             return "From"
-        case 2:
+        case "GuidePrice":
             return "Guide price"
-        case 3:
+        case "NonQuoting":
             return "Non quoting"
-        case 4:
+        case "OffersInTheRegionOf":
             return "Offers in the region of"
-        case 5:
+        case "OffersOver":
             return "Offers over"
-        case 6:
+        case "PriceOnApplication":
             return "Price on application"
-        case 7:
+        case "SaleByTender":
             return "Sale by tender"
         default:
             return ""
@@ -251,16 +251,20 @@ export enum PropertyType {
 }
 
 export const propertyType = (listing: Listing) => {
-    switch (listing.propertyType) {
-        case 8:
+    switch (listing.propertyType.toString()) {
+        case "BarnConversion":
+            return "Barn conversion"
+        case "Detached":
             return "Detached"
-        case 15:
+        case "Flat":
             return "Flat"
-        case 37:
+        case "ParkHome":
+            return "Park home"
+        case "Terraced":
             return "Terraced"
-        case 34:
+        case "SemiDetached":
             return "Semi-detached"
-        case 19:
+        case "Land":
             return "Land"
         default:
             return "Property"
@@ -268,20 +272,20 @@ export const propertyType = (listing: Listing) => {
 }
 
 export const propertyTypeLong = (listing: Listing) => {
-    switch (listing.propertyType) {
-        case 0:
+    switch (listing.propertyType.toString()) {
+        case "BarnConversion":
             return "barn conversion"
-        case 8:
+        case "Detached":
             return "detached house"
-        case 15:
+        case "Flat":
             return "flat/apartment"
-        case 28:
+        case "ParkHome":
             return "park home"
-        case 37:
+        case "Terraced":
             return "terraced house"
-        case 34:
+        case "SemiDetached":
             return "semi-detached house"
-        case 19:
+        case "Land":
             return "land / farm"
         default:
             return "property"

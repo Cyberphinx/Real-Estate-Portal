@@ -9,20 +9,20 @@ interface Props {
 
 export default function InvoiceStatusTag({ invoice }: Props) {
     const tagStyle = (invoice: Invoice) => {
-        switch (invoice?.paymentStatus) {
-            case 0:
+        switch (invoice?.paymentStatus.toString()) {
+            case "Unpaid":
                 return "payment-tag red"
-            case 1:
+            case "Pending":
                 return "payment-tag red"
-            case 2:
+            case "Paid":
                 return "payment-tag green"
-            case 3:
+            case "Cancelled":
                 return "payment-tag amber"
-            case 4:
+            case "Refunded":
                 return "payment-tag grey"
-            case 5:
+            case "Waived":
                 return "payment-tag grey"
-            case 6:
+            case "InProgress":
                 return "payment-tag amber"
         }
     }
@@ -30,7 +30,7 @@ export default function InvoiceStatusTag({ invoice }: Props) {
     return (
         <div style={{ position: "relative" }}>
             <span className={tagStyle(invoice!)} >
-            Payment {PaymentStatus[invoice!.paymentStatus].replace(/[A-Z]/g, ' $&').trim()}
+            Payment {invoice!.paymentStatus.toString().replace(/[A-Z]/g, ' $&').trim()}
             </span>
         </div>
 

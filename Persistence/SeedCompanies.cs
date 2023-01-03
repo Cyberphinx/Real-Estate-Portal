@@ -39,7 +39,7 @@ namespace Persistence
                         TownOrCity = "London",
                         County = "City of London",
                         PostalCode = "W1G 0JD",
-                        Country = Country.UnitedKingdom,
+                        Country = "United Kingdom",
                         Latitude = 51.51654265291029,
                         Longitude = -0.14291257284437422
                     },
@@ -142,7 +142,7 @@ namespace Persistence
                         TownOrCity = "London",
                         County = "City of London",
                         PostalCode = "W1G 0JD",
-                        Country = Country.UnitedKingdom,
+                        Country = "United Kingdom",
                         Latitude = 55.95435353799718,
                         Longitude = -3.2067211982100288
                     },
@@ -238,7 +238,7 @@ namespace Persistence
                         TownOrCity = "Solihull",
                         County = "West Midlands",
                         PostalCode = "B90 4RZ",
-                        Country = Country.UnitedKingdom,
+                        Country = "United Kingdom",
                         Latitude = 52.40066044491819,
                         Longitude = -1.8066908304837104
                     },
@@ -334,7 +334,7 @@ namespace Persistence
                         TownOrCity = "Solihull",
                         County = "West Midlands",
                         PostalCode = "B90 4RZ",
-                        Country = Country.UnitedKingdom,
+                        Country = "United Kingdom",
                         Latitude = 52.40066044491819,
                         Longitude = -1.8066908304837104
                     },
@@ -430,7 +430,7 @@ namespace Persistence
                         TownOrCity = "Solihull",
                         County = "West Midlands",
                         PostalCode = "B90 4RZ",
-                        Country = Country.UnitedKingdom,
+                        Country = "United Kingdom",
                         Latitude = 52.40066044491819,
                         Longitude = -1.8066908304837104
                     },
@@ -526,7 +526,7 @@ namespace Persistence
                         TownOrCity = "Solihull",
                         County = "West Midlands",
                         PostalCode = "B90 4RZ",
-                        Country = Country.UnitedKingdom,
+                        Country = "United Kingdom",
                         Latitude = 54.39231504142715,
                         Longitude = -2.371760263326141
                     },
@@ -613,7 +613,7 @@ namespace Persistence
                         TownOrCity = "Shrewsbury",
                         County = "Shropshire",
                         PostalCode = "SY5 0HZ",
-                        Country = Country.UnitedKingdom,
+                        Country = "United Kingdom",
                         Latitude = 52.60740391205163,
                         Longitude = -2.9450937943182147
                     },
@@ -718,7 +718,7 @@ namespace Persistence
                         TownOrCity = " Bournemouth",
                         County = "England",
                         PostalCode = "BH2 6LA",
-                        Country = Country.UnitedKingdom,
+                        Country = "United Kingdom",
                         Latitude = 50.722980159789316,
                         Longitude = -1.8829559728734109
                     },
@@ -813,7 +813,7 @@ namespace Persistence
                         TownOrCity = "Bournemouth",
                         County = "England",
                         PostalCode = "BH2 6LA",
-                        Country = Country.UnitedKingdom,
+                        Country = "United Kingdom",
                         Latitude = 50.72308467556089,
                         Longitude =  -1.8824440593814602
                     },
@@ -909,7 +909,7 @@ namespace Persistence
                         TownOrCity = "Bournemouth",
                         County = "England",
                         PostalCode = "BH2 6LA",
-                        Country = Country.UnitedKingdom,
+                        Country = "United Kingdom",
                         Latitude = 53.297230105069126,
                         Longitude =  -1.3833799280677688
                     },
@@ -1005,7 +1005,7 @@ namespace Persistence
                         TownOrCity = "New Malden",
                         County = "England",
                         PostalCode = "KT3 4HX",
-                        Country = Country.UnitedKingdom,
+                        Country = "United Kingdom",
                         Latitude = 51.40264956734864,
                         Longitude = -0.24979083392406543
                     },
@@ -1086,7 +1086,7 @@ namespace Persistence
                         TownOrCity = "Essex",
                         County = "England",
                         PostalCode = "SS5 4QS",
-                        Country = Country.UnitedKingdom,
+                        Country = "United Kingdom",
                         Latitude = 51.60137056764931,
                         Longitude = 0.6534702269086803
                     },
@@ -1150,7 +1150,7 @@ namespace Persistence
                         TownOrCity = "Norwich",
                         County = "England",
                         PostalCode = "NR3 2DB",
-                        Country = Country.UnitedKingdom,
+                        Country = "United Kingdom",
                         Latitude = 52.643914264497965,
                         Longitude = 1.2797135271974041
                     },
@@ -1214,7 +1214,7 @@ namespace Persistence
                         TownOrCity = "Milton Keynes",
                         County = "England",
                         PostalCode = "MK11 1FB",
-                        Country = Country.UnitedKingdom,
+                        Country = "United Kingdom",
                         Latitude = 52.05661506461248,
                         Longitude = -0.8533489730745938
                     },
@@ -1278,7 +1278,7 @@ namespace Persistence
                         TownOrCity = "Enfield",
                         County = "England",
                         PostalCode = "EN3 7PY",
-                        Country = Country.UnitedKingdom,
+                        Country = "United Kingdom",
                         Latitude = 51.659803529028075,
                         Longitude = -0.027048244003053896
                     },

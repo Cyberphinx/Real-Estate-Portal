@@ -83,6 +83,8 @@ const Account = {
   register: (user: RegisterFormValues) => requests.post<User>("/account/register", user),
   list: () => requests.get<User[]>("/account/all"),
   assignrole: (role: RoleFormValues) => requests.put<RoleFormValues>("/account/assignrole", role),
+  checkusername: (username: string) => requests.get<string>(`/account/username/${username}`),
+  checkemail: (email: string) => requests.get<string>(`/account/email/${email}`)
 }
 
 const Profiles = {
@@ -116,7 +118,7 @@ const Companies = {
   update: (company: CompanyFormValues) => requests.put<Company>(`/company/${company.id}`, company),
   delete: (id: string) => requests.del<void>(`/company/${id}`),
   listListings: (params: URLSearchParams) =>
-    axios.get<PaginatedResult<Stock[]>>("/company/listings/", {params}).then(responseBody)
+    axios.get<PaginatedResult<Stock[]>>("/company/listings/", { params }).then(responseBody)
 };
 
 const Jobs = {
