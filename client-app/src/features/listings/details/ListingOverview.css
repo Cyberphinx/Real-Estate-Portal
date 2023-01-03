@@ -1,9 +1,8 @@
 .header-container {
-  padding: 20px 20px 0px 20px;
-}
-
-.header-one {
-padding: 0px 0px 10px 0px;
+  margin: 1.25rem;
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+  background-color: #fff;
 }
 
 .details-gallery {
@@ -21,7 +20,7 @@ padding: 0px 0px 10px 0px;
   left: calc((100vw / 6) - 105px);
   font-size: 16px;
   color: #000;
-  background: #fff;
+  background-color: #fff;
   border: none;
   border-radius: 3px;
   padding: 2px 5px 3px 5px;

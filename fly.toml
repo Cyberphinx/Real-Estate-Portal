@@ -1,4 +1,4 @@
-# fly.toml file generated for houseapp on 2022-12-21T22:42:56Z
+# fly.toml file generated for houseapp on 2023-01-03T21:39:57Z
 
 app = "houseapp"
 kill_signal = "SIGINT"

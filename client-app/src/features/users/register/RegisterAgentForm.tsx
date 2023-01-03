@@ -58,7 +58,6 @@ export default observer(function RegisterAgentForm({ isValid, dirty, isSubmittin
                 <p className='form-section-title'>Estate agent address</p>
                 <br />
                 <p className='form-section-value'>The legal address of the estate agent business</p>
-                <br />
                 <AddressSearch
                     setFieldValue={setFieldValue}
                     handleChange={handleChange}

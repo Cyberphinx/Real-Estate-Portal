@@ -4,8 +4,8 @@ import { observer } from "mobx-react-lite";
 import { useStore } from "../../../app/stores/store";
 import { Company } from "../../../app/model/Company";
 import CompanyBookmark from "./CompanyBookmark";
-import CompanySummary from "./CompanySummary";
 import CompanyDetails from "./CompanyDetails";
+import CompanyOverview from "./CompanyOverview";
 
 interface Props {
     company: Company | undefined;
@@ -20,7 +20,7 @@ export default observer(function CompanyTab({ company }: Props) {
     const [tab, setTab] = useState<number>(0);
 
     const features = [
-        <CompanySummary company={company}  />,
+        <CompanyOverview company={company}  />,
         <CompanyDetails company={company} />
     ]
 

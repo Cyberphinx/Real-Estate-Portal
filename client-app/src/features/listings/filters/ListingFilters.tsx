@@ -49,19 +49,18 @@ export default observer(function ListingFilters() {
         //     </section>
         <div className="filters-container">
             <ul className="filters-buttons-container">
-                <li className="filters-item" >
-                    <button className={predicate.get("channel") === "rent" ? "filters-button-selected" : "filters-button"}
+                <li className="filters-item__channel" >
+                    <button className={predicate.get("channel") === "rent" ? "filters-button__channel-selected" : "filters-button__channel"}
                         onClick={() => setPredicate("channel", "rent")}>
                         Rent
                     </button>
-                </li>
-                <li className="filters-item" style={{borderRight:"1px solid #aaaeb3",paddingBottom:"5px",paddingRight:"10px",marginRight:"10px"}}>
-                    <button className={predicate.get("channel") === "sale" ? "filters-button-selected" : "filters-button"}
+                    <button className={predicate.get("channel") === "sale" ? "filters-button__channel-selected" : "filters-button__channel"}
                         onClick={() => setPredicate("channel", "sale")}>
                         Sale
                     </button>
                 </li>
-                <li className="filters-item" >
+
+                <li className="filters-item">
                     <div ref={priceRef}>
                         <button
                             className={pricePanel ? "filters-button-selected"

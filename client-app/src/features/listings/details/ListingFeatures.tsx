@@ -1,8 +1,9 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
 import { dateFormatterShort } from "../../../app/common/HelperFunctions";
+import priceFormatter from "../../../app/common/PriceFormatter";
 import { Listing } from "../../../app/model/ListingAggregate/Listing";
-import { LifeCycleStatus, RentalTerm, FurnishedState, CookerType, CouncilTaxBand, Utility } from "../../../app/model/ListingAggregate/ListingEnums";
+import { LifeCycleStatus, RentalTerm, FurnishedState, CookerType, CouncilTaxBand, Utility, rentFrequency, propertyTypeLong } from "../../../app/model/ListingAggregate/ListingEnums";
 import { UnitOfTime } from "../../../app/model/Membership";
 import './ListingFeatures.css';
 
@@ -11,10 +12,24 @@ interface Props {
 }
 
 export default observer(function ListingFeatures({ listing }: Props) {
+    const address = `${listing?.listingLocation.propertyNumberOrName && (listing?.listingLocation.propertyNumberOrName + ", ")}
+        ${listing?.listingLocation.streetName && (listing?.listingLocation.streetName + ", ")}
+        ${listing?.listingLocation.locality && (listing?.listingLocation.locality + ", ")}
+        ${listing?.listingLocation.townOrCity && (listing?.listingLocation.townOrCity + ", ")}
+        ${listing?.listingLocation.county && (listing?.listingLocation.county + ", ")}
+        ${listing?.listingLocation.postalCode && (listing?.listingLocation.postalCode)}
+        `;
+
     return (
-        <div>
+        <div style={{paddingTop:"10px"}}>
             <article className="listing-features-container">
-                    <p style={{fontWeight:"bold"}}>Basic information</p>
+                    <span style={{ fontSize: "1.5rem", fontWeight: "bold" }}>{priceFormatter(listing!.pricing.price, listing!.pricing.currency)}</span>
+                    {(listing?.pricing.transactionType.toString() === "Rent") && <span style={{ fontSize: "16px" }}> {rentFrequency(listing!)} </span>}
+                    <p style={{ fontSize: "16px"}}>{listing!.totalBedrooms} beds {listing.bathrooms} baths {propertyTypeLong(listing!)}</p>
+                    <p style={{ fontSize: "14px" }}>Address: {address}</p>
+            </article>
+            <article className="listing-features-container">
+                    <h3 className="feature-title">Basic information</h3>
                     <p className="feature-text">Status: {LifeCycleStatus[listing!.lifeCycleStatus]}</p>
                     <p className="feature-text">New home: {listing?.newBuild}</p>
                     <p className="feature-text">House/Flat share: {listing?.sharedAccommodation}</p>
@@ -36,12 +51,10 @@ export default observer(function ListingFeatures({ listing }: Props) {
                     <p className="feature-text">Smokers considered: {listing.smokersConsidered}</p>
                     <p className="feature-text">EPC rating: {listing.epcRatings.eerCurrentRating}</p>
             </article>
-
-            <hr className="details-divider" />
             
             <article className="listing-features-container">
                 <div>
-                    <p style={{fontWeight:"bold"}}>Facilities:</p>
+                    <h3 className="feature-title">Facilities:</h3>
                     <p className="feature-text">Furnished state: {FurnishedState[listing.furnishedState]}</p>
                     <p className="feature-text">Burglar alarm: {listing.burglarAlarm}</p>
                     <p className="feature-text">Central heating: {listing.centralHeating}</p>

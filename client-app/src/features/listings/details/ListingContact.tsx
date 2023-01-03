@@ -20,7 +20,7 @@ export default function ListingContact({ listing }: Props) {
     return (
         <div className="agent-contacts-container">
             <Link to={`/company/${listing?.company.id}`} target="_blank" style={{ textDecoration: "none" }} >
-                <h4 style={{ fontWeight: "600", color: "#000", fontSize:"18px" }}>{listing?.company.displayName}</h4>
+                <h1 style={{ fontWeight: "bold", color: "#000", fontSize:"1.25rem" }}>{listing?.company.displayName}</h1>
             </Link>
             {/* <img src={listing?.company.logo} style={{float:"right"}} alt="logo"/> */}
             <p style={{fontSize:"14px"}}>Phone: {listing?.company.companyContacts.phone}</p>

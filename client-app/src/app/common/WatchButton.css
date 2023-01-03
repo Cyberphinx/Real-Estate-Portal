@@ -1,19 +1,19 @@
 .watch-button {
   position: absolute;
-  left: 0px;
-  font-size: 12px;
+  left: 0;
+  font-size: 0.75rem;
   z-index: 10;
-  padding: 6px 6px 0px 6px;
-  margin: 0px;
+  padding: 0.375rem;
+  margin: 0;
   border: none;
-  border-radius: 5px;
-  font-weight: 400;
+  border-radius: 0.3rem;
+  font-weight: bold;
   background: none;
   color: #fff;
 }
 
 .watch-icon {
-  width: 20px;
+  width: 1.25rem;
   object-fit: contain;
 }
 .watch-icon:hover {
@@ -22,7 +22,7 @@
 }
 
 .unwatch-icon {
-  width: 20px;
+  width: 1.25rem;
   object-fit: contain;
 }
 .unwatch-icon:hover {

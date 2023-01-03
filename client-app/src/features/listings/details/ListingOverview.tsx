@@ -5,6 +5,7 @@ import { Content } from "../../../app/model/ListingAggregate/ListingObjects";
 import './ListingOverview.css';
 import priceFormatter from "../../../app/common/PriceFormatter";
 import { propertyTypeLong, rentFrequency } from "../../../app/model/ListingAggregate/ListingEnums";
+import WatchButton from "../../../app/common/WatchButton";
 
 
 interface Props {
@@ -82,18 +83,10 @@ export default function ListingOverview({ listing }: Props) {
                 </div>
             </section>
             <article className="header-container">
-                <div className="header-one">
-                    <span style={{ fontSize: "20px", fontWeight: "600" }}>{priceFormatter(listing!.pricing.price, listing!.pricing.currency)}</span>
-                    {(listing?.pricing.transactionType.toString() === "Rent") && <span style={{ fontSize: "16px" }}> {rentFrequency(listing!)} </span>}
-                    <p style={{ fontSize: "16px"}}>{listing!.totalBedrooms} beds {listing.bathrooms} baths {propertyTypeLong(listing!)}</p>
-                    <p style={{ fontSize: "14px" }}>Address: {address}</p>
-                </div>
-                {/* {!contacts && <div className="header-three">
-                    <button className="contact-button" onClick={() => setContacts(true)}>Contact agent</button>
-                </div>}
-                {contacts && <div className="header-four">
-                    {contacts && <ContactForm listing={listing} />}
-                </div>} */}
+                <span style={{ fontSize: "20px", fontWeight: "600" }}>{priceFormatter(listing!.pricing.price, listing!.pricing.currency)}</span>
+                {(listing?.pricing.transactionType.toString() === "Rent") && <span style={{ fontSize: "16px" }}> {rentFrequency(listing!)} </span>}
+                <p style={{ fontSize: "16px" }}>{listing!.totalBedrooms} beds {listing.bathrooms} baths {propertyTypeLong(listing!)}</p>
+                <p style={{ fontSize: "14px" }}>Address: {address}</p>
             </article>
         </div>
 

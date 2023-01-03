@@ -1,20 +1,22 @@
-.detailed-info-container {
-    padding: 20px 20px 20px 20px;
+.listing-detailed-info-container {
+  margin: 1.25rem;
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+  background-color: #fff;
 }
 
 .listing-details-title {
-    font-size: 16px;
-    font-weight: 600;
+  font-size: 1rem;
+  font-weight: bold;
 }
 
 .listing-details-dimensions {
-    font-size: 14px;
-    font-weight: 400;
-    color: grey;
+  font-size: 0.875rem;
+  font-weight: normal;
+  color: grey;
 }
 
 .listing-details-text {
-    font-size: 14px;
-    font-weight: 400;
-
+  font-size: 0.875rem;
+  font-weight: normal;
 }

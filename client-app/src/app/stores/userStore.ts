@@ -21,14 +21,17 @@ export default class UserStore {
         return !!this.user;
     }
 
-    login = async (creds: LoginFormValues) => {
+    login = async (creds: LoginFormValues, setSubmitting: any) => {
+        setSubmitting(true);
         try {
             const user = await agent.Account.login(creds);
             store.commonStore.setToken(user.token);
             runInAction(() => this.user = user);
             history.push("/");
             store.modalStore.closeModal();
+            setSubmitting(false);
         } catch (error) {
+            setSubmitting(false);
             throw error;
         }
     }
@@ -77,7 +80,6 @@ export default class UserStore {
                     store.modalStore.closeModal();
                     break;
                 case 1:
-                    // history.push("/");
                     setStep(2);
                     break;
                 case 2:

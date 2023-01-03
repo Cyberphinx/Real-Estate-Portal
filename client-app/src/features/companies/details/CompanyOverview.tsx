@@ -1,5 +1,5 @@
 import React, { SyntheticEvent, useEffect, useRef, useState } from "react";
-import '../../listings/details/ListingTab.css';
+import '../../listings/details/ListingOverview.css';
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
 import { useStore } from "../../../app/stores/store";
@@ -9,7 +9,7 @@ interface Props {
     company: Company | undefined;
 }
 
-export default observer(function CompanyTab({ company }: Props) {
+export default observer(function CompanyOverview({ company }: Props) {
     const { companyStore } = useStore();
     const { companies } = companyStore;
 
@@ -56,7 +56,6 @@ export default observer(function CompanyTab({ company }: Props) {
 
     
     return (<div>
-                {/* <AgencyTagForCompany company={company} /> */}
                 <section className="details-gallery">
                     <div style={{ position: "relative" }}>
                         <Link to={`/company/${company?.id}`} target="_blank" >
@@ -83,14 +82,10 @@ export default observer(function CompanyTab({ company }: Props) {
                 </section>
 
                 <article className="header-container">
-                    <div className="header-one">
-                        <span style={{ fontSize: "24px" }}>{company?.displayName}</span>
-                    </div>
-                    <div className="header-two" style={{paddingTop:"0px"}}>
+                        <span style={{ fontSize: "1.25rem", fontWeight:"bold" }}>{company?.displayName}</span>
                         <p>Phone: {company?.companyContacts.phone}</p>
                         <p>Email: {company?.companyContacts.email}</p>
                         <p>Address: {address}</p>
-                    </div>
                 </article>
             </div>
     );

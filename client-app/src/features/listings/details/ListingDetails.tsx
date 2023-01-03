@@ -16,7 +16,7 @@ export default observer(function ListingDetails({ listing }: Props) {
         <div>
             <article className="detailed-info-container">
                 <div>{listing?.detailedDescriptions.map((description: DetailedDescription) => (
-                    <div key={description.id}>
+                    <div key={description.id} className='listing-detailed-info-container'>
                         <article>
                             <b className="listing-details-title">{description.heading}</b>
                             <span className="listing-details-dimensions">

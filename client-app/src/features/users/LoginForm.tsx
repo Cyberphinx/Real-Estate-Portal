@@ -17,8 +17,8 @@ export default observer(function LoginForm() {
                 </div>
                 <Formik
                     initialValues={{ email: "", password: "", error: null }}
-                    onSubmit={(values, { setErrors }) => {
-                        login(values).catch(errors => setErrors({ error: "Invalid email or password" }));
+                    onSubmit={(values, { setErrors, setSubmitting }) => {
+                        login(values, setSubmitting).catch(errors => setErrors({ error: "Invalid email or password" }));
                     }}
                     validationSchema={Yup.object({
                         email: Yup.string().required("The email is required").email("The email must be a valid email"),

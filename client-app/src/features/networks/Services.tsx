@@ -39,7 +39,8 @@ export default observer(function Services() {
                     <button className="service-hub-button">Electrician</button>
                     <button className="service-hub-button">Gardening</button>
                     <button className="service-hub-button">Cleaning</button>
-                    <button className="service-hub-button">Removals</button>
+                    <button className="service-hub-button">Moving</button>
+                    <button className="service-hub-button">Inventory Clerk</button>
                 </div>
                 <div style={{ padding: "8px" }}>
                     <button className="service-hub-button-master" style={{ float: "right" }}>Tradesperson sign up</button>

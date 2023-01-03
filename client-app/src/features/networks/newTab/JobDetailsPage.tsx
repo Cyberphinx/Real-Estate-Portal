@@ -106,34 +106,37 @@ export default observer(function JobDetailsPage() {
                     </div>
                 </section>
 
-                {applicant
-                    ? <section className="job-author-container">
-                        {applicant.role === JobNetworkRole.ShortlistedCompany ? <p>Shortlisted applicant:</p> : <p>Interested applicant:</p>}
-                        {applicant.image !== null
-                            ? <img className="large-user-icon" src={applicant.image} alt="profile-pic" />
-                            : <img className="large-user-icon" src="/assets/default-user-icon.jpg" alt="user" />
-                        }
-                        <p>{applicant.displayName ? applicant.displayName : applicant.username}</p>
-                        <p>Description: {applicant.description}</p>
-                        <p>Total jobs: {applicant.jobsCount}</p>
-                        <p>Total reviews: {applicant.reviewsCount}</p>
-                        {userStore.isLoggedIn && userStore.user?.username === job.networks.find(x => x.role.toString() === "Customer")?.username
-                            ? (applicant.role === JobNetworkRole.ShortlistedCompany
-                                ? <p>Paid/Not Paid</p>
-                                : <button className="thread-button" onClick={() => { }}>Shortlist Applicant</button>)
-                            : null
-                        }
-                        {userStore.isLoggedIn && userStore.user?.username === job.networks.find(x => x.role.toString() === "Customer")?.username &&
-                            <div className="job-chats">
-                                <p>Message from {applicant.displayName ? applicant.displayName : applicant.username}: </p>
-                                <p>Chats</p>
-                                <p>Chats</p>
-                                <p>Chats</p>
-                                <p>Chats</p>
-                                <p>Chats</p>
-                            </div>}
-                    </section>
-                    : <section></section>}
+                <section>
+                    {applicant
+                        ? <div className="job-author-container">
+                            {applicant.role === JobNetworkRole.ShortlistedCompany ? <p>Shortlisted applicant:</p> : <p>Interested applicant:</p>}
+                            {applicant.image !== null
+                                ? <img className="large-user-icon" src={applicant.image} alt="profile-pic" />
+                                : <img className="large-user-icon" src="/assets/default-user-icon.jpg" alt="user" />
+                            }
+                            <p>{applicant.displayName ? applicant.displayName : applicant.username}</p>
+                            <p>Description: {applicant.description}</p>
+                            <p>Total jobs: {applicant.jobsCount}</p>
+                            <p>Total reviews: {applicant.reviewsCount}</p>
+                            {userStore.isLoggedIn && userStore.user?.username === job.networks.find(x => x.role.toString() === "Customer")?.username
+                                ? (applicant.role === JobNetworkRole.ShortlistedCompany
+                                    ? <p>Paid/Not Paid</p>
+                                    : <button className="thread-button" onClick={() => { }}>Shortlist Applicant</button>)
+                                : null
+                            }
+                            {userStore.isLoggedIn && userStore.user?.username === job.networks.find(x => x.role.toString() === "Customer")?.username &&
+                                <div className="job-chats">
+                                    <p>Message from {applicant.displayName ? applicant.displayName : applicant.username}: </p>
+                                    <p>Chats</p>
+                                    <p>Chats</p>
+                                    <p>Chats</p>
+                                    <p>Chats</p>
+                                    <p>Chats</p>
+                                </div>}
+                        </div>
+                        : null}
+                </section>
+
             </div>
         </div>
     )

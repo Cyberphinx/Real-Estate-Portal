@@ -9,6 +9,7 @@ import ListingGallery from "./ListingOverview";
 import ListingSummary from "./ListingFeatures";
 import ListingDetails from "./ListingDetails";
 import ListingContact from "./ListingContact";
+import WatchButton from "../../../app/common/WatchButton";
 
 interface Props {
     listing: Listing | undefined;
@@ -43,6 +44,9 @@ export default observer(function ListingTab({ listing }: Props) {
             <div className="details-contents" style={(multiListings.length > 1) ? { marginTop: "90px" } : {}}>
                 {features[tab]}
             </div>
+            <section style={{position:"absolute",bottom:"3rem",right:"3rem"}}>
+                <WatchButton listing={listing} />
+            </section>
         </div>
     );
 });

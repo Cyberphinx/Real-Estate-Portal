@@ -42,7 +42,12 @@ export default observer(function PropertyTypes({ items, checked, onChange }: Pro
                     <label style={{ cursor: "pointer", paddingLeft:"3px" }}>{propertyType}</label>
                 </div>
             ))}
-            <button className="types-reset-button" onClick={() => predicate.delete("propertyTypes")}>Reset</button>
+            <button className="types-reset-button" 
+            onClick={() => {
+                setCheckedItems([]);
+                predicate.delete("propertyTypes");
+            }}
+                >Reset</button>
         </div>
     )
 });
