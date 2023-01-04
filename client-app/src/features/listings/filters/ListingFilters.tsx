@@ -56,7 +56,7 @@ export default observer(function ListingFilters() {
                     </button>
                     <button className={predicate.get("channel") === "sale" ? "filters-button__channel-selected" : "filters-button__channel"}
                         onClick={() => setPredicate("channel", "sale")}>
-                        Sale
+                        Buy
                     </button>
                 </li>
 

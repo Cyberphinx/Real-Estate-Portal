@@ -44,3 +44,17 @@
   margin-left: auto;
   margin-right: auto;
 }
+
+.list-view-button {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 0.3rem;
+  padding: 0.375rem 0.75rem;
+}
+.list-view-button:hover:enabled {
+  cursor: pointer;
+}
+.list-view-button:disabled {
+  background-color: grey;
+}

@@ -64,7 +64,7 @@ export default observer(function ListView({ clusters, supercluster }: Props) {
                         <section style={{ textAlign: "center", color: "#000" }}>
                             <p>Showing {isLocked ? listings.length : combinedListing.length} of {pagination?.totalItems} listings {isLocked ? null : "in map area"} for {predicate.get("channel")}</p>
                             <button
-                                className="button"
+                                className="list-view-button"
                                 onClick={handleGetNext}
                                 disabled={(pagination?.totalPages === pagination?.currentPage) || pagination!.totalItems < 1}
                             >

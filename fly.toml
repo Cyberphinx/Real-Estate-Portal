@@ -1,6 +1,6 @@
-# fly.toml file generated for houseapp on 2023-01-03T21:39:57Z
+# fly.toml file generated for sanctum on 2023-01-03T22:08:29Z
 
-app = "houseapp"
+app = "sanctum"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []

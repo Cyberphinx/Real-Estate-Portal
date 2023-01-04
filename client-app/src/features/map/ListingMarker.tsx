@@ -74,7 +74,7 @@ export default observer(function ListingMarker({ points, clusters, supercluster 
     const priceIcon = (id: string, price: string, size: number) => {
         const icon = L.divIcon({
             html: ReactDOMServer.renderToString(
-                <div className="point-marker-price" style={{ width: `calc(7px * ${size})`, height: '16px' }}>
+                <div className="point-marker-price" style={{ width: `calc(0.5rem * ${size})`, height: '1rem' }}>
                     {price}
                 </div>
             )
@@ -218,7 +218,7 @@ export default observer(function ListingMarker({ points, clusters, supercluster 
                     <Marker
                         key={`estate-${cluster.properties.listing.id}`}
                         position={[latitude, longitude]}
-                        icon={priceIcon(cluster.properties.listing.id, nFormatter(cluster.properties.listing.pricing.price, 1), cluster.properties.listing.pricing.price.toString().length)}
+                        icon={priceIcon(cluster.properties.listing.id, nFormatter(cluster.properties.listing.pricing.price, 1), nFormatter(cluster.properties.listing.pricing.price, 1).length)}
                         eventHandlers={{
                             click: () => {
                                 if (selectedCompany) cancelSelectCompany();
