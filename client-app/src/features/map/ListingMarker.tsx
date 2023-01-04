@@ -81,7 +81,7 @@ export default observer(function ListingMarker({ points, clusters, supercluster 
         });
         const iconActive = L.divIcon({
             html: ReactDOMServer.renderToString(
-                <div className="point-marker-price-active" style={{width: `calc(7px * ${size})`, height: '16px'}}>
+                <div className="point-marker-price-active" style={{width: `calc(0.5rem * ${size})`, height: '1rem'}}>
                     {price}
                 </div>
             )
@@ -89,7 +89,7 @@ export default observer(function ListingMarker({ points, clusters, supercluster 
         });
         const iconSelected = L.divIcon({
             html: ReactDOMServer.renderToString(
-                <div className="point-marker-price-selected" style={{width: `calc(7px * ${size})`, height: '16px'}}>
+                <div className="point-marker-price-selected" style={{width: `calc(0.5rem * ${size})`, height: '1rem'}}>
                     {price}
                 </div>
             )
@@ -231,7 +231,7 @@ export default observer(function ListingMarker({ points, clusters, supercluster 
                             }
                         }}
                     >
-                        <Tooltip direction="bottom" offset={[10, 8]}>
+                        <Tooltip direction="bottom" offset={[15, 10]}>
                             <AgencyTag listing={cluster.properties.listing} fontSize={"10px"} />
                             <img className="marker-snippet"
                                 src={cluster.properties.listing.contents[0].url}
