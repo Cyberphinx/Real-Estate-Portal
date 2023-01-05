@@ -1,17 +1,24 @@
 import { observer } from "mobx-react-lite";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { dateFormatter, dateFormatterShort } from "../../../../app/common/HelperFunctions";
 import priceFormatter from "../../../../app/common/PriceFormatter";
 import InvoiceStatusTag from "../../../../app/common/tags/InvoiceStatusTag";
 import { Invoice, InvoiceItem } from "../../../../app/model/Profile";
 import { useStore } from "../../../../app/stores/store";
-import './AgentUserSettings.css';
+import './AccountSettings.css';
+import PaymentModal from "./PaymentModal";
 
 
-export default observer(function AgentUserSettings() {
-    const { profileStore, userStore } = useStore();
+export default observer(function AccountSettings() {
+    const { profileStore, userStore, modalStore } = useStore();
     const { profile, headquarter } = profileStore;
     const { user } = userStore;
+    const { openModal, step, setStep } = modalStore;
+
+    useEffect(() => {
+        const unpaidInvoice = profile?.invoices.some(x => x.paymentStatus.toString() !== "Paid" );
+        if (unpaidInvoice) setStep(2);
+    }, [])
 
     const address = `${headquarter?.companyAddress.propertyNumberOrName && (headquarter?.companyAddress.propertyNumberOrName + ", ")}
         ${headquarter?.companyAddress.streetName && (headquarter?.companyAddress.streetName + ", ")}
@@ -127,33 +134,38 @@ export default observer(function AgentUserSettings() {
                             </div>
                             <div style={{ padding: "40px 40px 40px 20px" }}>
                                 <table className="invoice-table">
-                                    <tr>
-                                        <th>No.</th>
-                                        <th>Item Title</th>
-                                        <th>Item Description</th>
-                                        <th>Price</th>
-                                        <th>Qty.</th>
-                                        <th>Total</th>
-                                    </tr>
-                                    {invoice.items.map((item: InvoiceItem, index: number) => (
-                                        <tr key={item.id}>
-                                            <td>{index + 1}</td>
-                                            <td>{item.title}</td>
-                                            <td>{item.description}</td>
-                                            <td>{priceFormatter(((item.amount / 100) / ((item.vatPercentage + 100) / 100)), item.currency)}</td>
-                                            <td>1</td>
-                                            <td>{priceFormatter(((item.amount / 100) / ((item.vatPercentage + 100) / 100)), item.currency)}</td>
+                                    <caption className="invoice-subtitle" style={{paddingBottom:"0.5rem"}}>Invoice Items:</caption>
+                                    <thead className="invoice-table__thead">
+                                        <tr>
+                                            <th>No.</th>
+                                            <th>Item Title</th>
+                                            <th>Item Description</th>
+                                            <th>Price</th>
+                                            <th>Qty.</th>
+                                            <th>Total</th>
                                         </tr>
-                                    ))}
+                                    </thead>
+                                    <tbody className="invoice-table__tbody">
+                                        {invoice.items.map((item: InvoiceItem, index: number) => (
+                                            <tr key={item.id}>
+                                                <td>{index + 1}</td>
+                                                <td>{item.title}</td>
+                                                <td>{item.description}</td>
+                                                <td>{priceFormatter(((item.amount / 100) / ((item.vatPercentage + 100) / 100)), item.currency)}</td>
+                                                <td>1</td>
+                                                <td>{priceFormatter(((item.amount / 100) / ((item.vatPercentage + 100) / 100)), item.currency)}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
                                 </table>
                                 <article style={{ textAlign: "right", width: "50%", float: "right" }}>
                                     <p className="invoice-text">Sub Total: {priceFormatter(((invoice.amount / 100) / ((invoice.vatPercentage + 100) / 100)), invoice.currency)}</p>
                                     <p className="invoice-text">
-                                    {invoice.vatPercentage}% VAT: {priceFormatter((invoice.amount / 100) - (invoice.amount / 100) / ((invoice.vatPercentage + 100) / 100), invoice.currency)}
+                                        {invoice.vatPercentage}% VAT: {priceFormatter((invoice.amount / 100) - (invoice.amount / 100) / ((invoice.vatPercentage + 100) / 100), invoice.currency)}
                                     </p>
-                                    <p className="invoice-subtitle" style={{ borderTop: "1px solid grey", padding: "20px 0px" }}>
+                                    <p className="invoice-total" style={{ borderTop: "1px solid grey", padding: "20px 0px" }}>
                                         Total: {priceFormatter((invoice.amount / 100), invoice.currency)}
-                                        </p>
+                                    </p>
                                 </article>
                             </div>
                             <article>
@@ -171,7 +183,10 @@ export default observer(function AgentUserSettings() {
                             </article>
                         </div>
                         <button className="invoice-button print">Print</button>
-                        <button className="invoice-button payment">Make Payment</button>
+                        <button className="invoice-button payment" 
+                        onClick={() => {
+                            openModal(<PaymentModal invoice={invoice} />);
+                        }}>Make Payment</button>
                     </div>
                 ))}
             </div>
@@ -189,7 +204,7 @@ export default observer(function AgentUserSettings() {
     return (
         <div className="account-settings-container">
             <div className="account-settings-toolbar">
-                <p className="account-settings-title">User settings</p>
+                <p className="account-settings-title">Account settings</p>
                 <section>
                     <button className={tabNumber === 0 ? "account-button-active" : "account-button"} onClick={() => setTabNumber(0)}>Membership</button>
                     <button className={tabNumber === 1 ? "account-button-active" : "account-button"} onClick={() => setTabNumber(1)}>Account</button>

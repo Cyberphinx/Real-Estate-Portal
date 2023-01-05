@@ -71,7 +71,7 @@
   padding: 0px 3px 2px 3px;
   background: #fff;
   color: #000;
-  font-size: 12px;
+  font-size: 0.75rem;
   z-index: 2;
   transform: translate(-50%, 0);
 }
@@ -164,7 +164,7 @@
 .thumbnail {
   width: 100%;
   height: calc(100vh / 20);
-  border-radius: 3px;
+  border-radius: 0.2rem;
   object-fit: cover;
   z-index: 1;
 }
@@ -186,9 +186,10 @@
 
 .card-overlay{
   /* border: 1px solid black; */
-  height: 40px;
+  height: 2.5rem;
   display: grid;
-  grid-template-columns: 1fr 1.8fr;
+  gap: 1.25rem;
+  grid-template-columns: 1fr 1fr;
   padding: 10px 5px 0px 5px;
 }
 
@@ -204,9 +205,9 @@
 
 .card-description{
   /* border: 1px solid black; */
-  height: 30px;
+  height: 1.875rem;
   text-align: left;
-  padding: 5px 5px 10px 5px;
+  padding: 0.3rem 0.3rem 1.25rem 0.3rem;
 }
 
 .card-function{

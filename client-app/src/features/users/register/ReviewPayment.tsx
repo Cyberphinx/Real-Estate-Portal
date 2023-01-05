@@ -18,6 +18,7 @@ export default observer(function ReviewPayment({ isValid, dirty, isSubmitting, s
     useEffect(() => {
         setFieldValue("invoiceAmount", 600000);
         setFieldValue("invoiceDescription", `One-off payment of £6000.`);
+        setFieldValue("invoiceDescription", `One-off payment of £6000.`);
     }, [])
 
     const amount = [

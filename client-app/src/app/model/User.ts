@@ -1,5 +1,6 @@
 import { CompanyAddress } from './Company';
 import { AccessStatus } from './AccessStatus';
+import { Currency } from './ListingAggregate/ListingEnums';
 
 export interface User {
     accountType: AccountType;
@@ -36,6 +37,7 @@ export interface RegisterFormValues {
     legalCompanyAddress?: CompanyAddress;
     invoiceDescription?: string;
     invoiceAmount?: number; // in the smallest currency unit, ie. Cents
+    invoiceCurrency?: Currency; 
 }
 
 export enum AccountType {

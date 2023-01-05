@@ -3,7 +3,7 @@ import 'leaflet-geosearch/dist/geosearch.css';
 import { LocationIQProvider } from 'leaflet-geosearch';
 import { LocationRaw } from "../../../app/model/LocationRaw";
 import { useDebounce } from "../../../app/hooks/useDebounce";
-import './RegisterForm.css';
+import './SignUp.css';
 import MyTextInput from "../../../app/common/form/MyTextInput";
 import { observer } from "mobx-react-lite";
 import { Field } from "formik";

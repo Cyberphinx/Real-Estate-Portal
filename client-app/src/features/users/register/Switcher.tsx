@@ -1,4 +1,4 @@
-import './RegisterForm.css';
+import './SignUp.css';
 import { observer } from "mobx-react-lite";
 import React from 'react';
 import RegisterCustomerForm from './RegisterCustomerForm';

@@ -74,9 +74,9 @@ export default observer(function ListView({ clusters, supercluster }: Props) {
                     </div>
                 )}
             </div>
-            <div style={{paddingTop:"10px"}}>
-                <p style={{textAlign:"center", fontSize:"12px"}}>© {new Date().getFullYear() } Sanctum Sanctorium Ltd, All Rights Reserved.</p>
-                <p style={{textAlign:"center", fontSize:"12px"}}>Contact: info@sanctum.co.uk</p>
+            <div style={{padding:"1rem"}}>
+                <p style={{ textAlign: "center", fontSize: "12px" }}>Contact us: info@sanctum.co.uk</p>
+                <p style={{textAlign:"center", fontSize:"12px"}}>© {new Date().getFullYear() } Cerberus Cybernetics Ltd, All Rights Reserved.</p>
             </div>
         </div>
     );

@@ -25,11 +25,12 @@ namespace API.Controllers
         }
 
         [HttpGet(Name = "GetInvoice")]
-        public async Task<ActionResult<InvoiceDto>> GetInvoice()
+        public async Task<ActionResult<InvoiceDto>> GetFirstInvoice()
         {
             var invoice = await _context.Invoices
                 .Include(i => i.Items)
-                .FirstOrDefaultAsync(x => x.Username == User.Identity.Name);
+                .Where(x => x.Username == User.Identity.Name)
+                .SingleOrDefaultAsync(x => x.InvoiceNumber == 1);
 
             if (invoice == null) return NotFound();
 

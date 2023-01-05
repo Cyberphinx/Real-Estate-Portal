@@ -4,7 +4,7 @@ import MyTextInput from "../../app/common/form/MyTextInput";
 import { useStore } from "../../app/stores/store";
 import { observer } from "mobx-react-lite";
 import * as Yup from 'yup';
-import RegisterForm from './register/RegisterForm';
+import SignUp from './register/SignUp';
 
 export default observer(function LoginForm() {
     const { userStore: { login }, modalStore: { openModal, closeModal } } = useStore();
@@ -48,7 +48,7 @@ export default observer(function LoginForm() {
                                 type="button"
                                 onClick={() => {
                                     closeModal();
-                                    openModal(<RegisterForm />);
+                                    openModal(<SignUp />);
                                 }}
                             >
                                 Sign Up

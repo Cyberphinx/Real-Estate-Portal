@@ -8,6 +8,7 @@ using Domain.AppUserAggregate.Enums;
 using Domain.CompanyAggregate.Enums;
 using Domain.LocationAggregate;
 using Domain.CompanyAggregate.Objects;
+using Domain.ListingAggregate.Enums;
 
 namespace API.DTOs
 {
@@ -44,5 +45,6 @@ namespace API.DTOs
 
         // the amount needs to be in the smallest currency unit, ie. Cents
         public long InvoiceAmount { get; set; }
+        public Currency InvoiceCurrency { get; set; }
     }
 }

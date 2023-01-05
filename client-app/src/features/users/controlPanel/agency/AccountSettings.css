@@ -173,7 +173,8 @@
   grid-template-columns: auto auto;
 }
 .invoice-subtitle {
-  font-size: 14px;
+  text-align: left;
+  font-size: 0.875rem;
   font-weight: 600;
   text-transform: uppercase; 
 }
@@ -184,18 +185,25 @@
 
 .invoice-table {
   position: relative;
-  font-size: 12px;
+  font-size: 0.75rem;
   border: 1px solid grey;
   border-collapse: collapse;
   width: 100%;
 }
-.invoice-table > tr > th {
+.invoice-table__thead > tr > th {
   border: 1px solid grey;
   text-align: left;
-  padding: 10px;
+  padding: 0.625rem;
 }
-.invoice-table > tr > td {
+.invoice-table__tbody > tr > td {
   border: 1px solid grey;
   text-align: left;
-  padding: 10px;
+  padding: 0.625rem;
+}
+
+.invoice-total {
+  text-align: right;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase; 
 }

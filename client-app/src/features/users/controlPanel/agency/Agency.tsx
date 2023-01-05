@@ -9,7 +9,7 @@ import MyJobPosts from "../common/MyJobPosts";
 import Messages from "../common/Messages";
 import AgentListings from "./AgentListings";
 import UserCompanies from "../common/UserCompanies";
-import AgentUserSettings from "./AgentUserSettings";
+import AccountSettings from "./AccountSettings";
 
 interface Props {
     user: User | null;
@@ -28,7 +28,7 @@ export default observer(function Customer({ user }: Props) {
     }, [loadProfile, loadHeadquarter, user!.username, setActiveTab])
 
     const panes = [
-        <AgentUserSettings />,
+        <AccountSettings />,
         <UserCompanies />,
         <AgentListings />,
         <MyJobPosts />,
@@ -45,12 +45,12 @@ export default observer(function Customer({ user }: Props) {
                             <li>
                                 <button
                                     className={activeTab === 0 ? "agent-menu-button-active" : "agent-menu-button"}
-                                    onClick={() => setActiveTab(0)}>User settings</button>
+                                    onClick={() => setActiveTab(0)}>Account settings</button>
                             </li>
                             <li>
                                 <button
                                     className={activeTab === 1 ? "agent-menu-button-active" : "agent-menu-button"}
-                                    onClick={() => setActiveTab(1)}>Branches</button>
+                                    onClick={() => setActiveTab(1)}>Agency branches</button>
                             </li>
                             <li>
                                 <button
@@ -63,6 +63,10 @@ export default observer(function Customer({ user }: Props) {
                                     onClick={() => setActiveTab(4)}>Messages</button>
                             </li>
                         </ul>
+                        <div style={{ position: "absolute", bottom: "1rem" }}>
+                            <p style={{ textAlign: "center", fontSize: "12px" }}>Contact us: info@sanctum.co.uk</p>
+                            <p style={{ textAlign: "center", fontSize: "12px" }}>© {new Date().getFullYear()} Cerberus Cybernetics Ltd., All Rights Reserved.</p>
+                        </div>
                     </section>
                     <section className="agent-section-two">
                         {panes[activeTab]}

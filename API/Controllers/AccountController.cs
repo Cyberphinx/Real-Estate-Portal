@@ -87,8 +87,11 @@ namespace API.Controllers
                 Email = registerDto.Email.ToLower(),
                 UserName = registerDto.Username.ToLower(),
                 PhoneNumber = registerDto.PhoneNumber,
+                AccountType = registerDto.AccountType,
                 AddedOn = DateTime.UtcNow,
-                AccountType = registerDto.AccountType
+                Country = registerDto.Country,
+                Language = registerDto.Language,
+                DisplayName = registerDto.DisplayName,
             };
 
             if (registerDto.AccountType == AccountType.Agent)
@@ -115,7 +118,7 @@ namespace API.Controllers
                 var invoiceItem = new InvoiceItem
                 {
                     Amount = registerDto.InvoiceAmount,
-                    Currency = Currency.GBP,
+                    Currency = registerDto.InvoiceCurrency,
                     Description = "",
                     Title = "Property Agent Sign Up fee",
                     VatPercentage = 20
@@ -125,7 +128,7 @@ namespace API.Controllers
                 var invoice = new Invoice
                 {
                     Amount = registerDto.InvoiceAmount,
-                    Currency = Currency.GBP,
+                    Currency = registerDto.InvoiceCurrency,
                     Description = registerDto.InvoiceDescription,
                     InvoiceDate = DateTime.UtcNow,
                     InvoiceNumber = 1,

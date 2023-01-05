@@ -1,4 +1,4 @@
-import { Profile, WatcherListingDto, UserJobDto, UserCompanyDto } from './../model/Profile';
+import { Profile, WatcherListingDto, UserJobDto, UserCompanyDto, Invoice } from './../model/Profile';
 import { MaxValue } from './../model/MaxValue';
 import { User, RoleFormValues, LoginFormValues, RegisterFormValues } from './../model/User';
 import axios, { AxiosResponse } from "axios";
@@ -131,8 +131,12 @@ const Jobs = {
   shortlistJobApplicant: (jobId: string, username: string) => requests.post(`/job/shortlist/${jobId}/${username}`, {})
 }
 
-const Payments = {
-  createPaymentIntent: () => requests.post('payments', {})
+// const Payments = {
+//   createPaymentIntent: () => requests.post('payments', {})
+// }
+
+const Invoices = {
+  getFirstInvoice: () => requests.get<Invoice>("/invoice")
 }
 
 const agent = {
@@ -141,7 +145,7 @@ const agent = {
   Companies,
   Jobs,
   Profiles,
-  Payments
+  Invoices
 };
 
 export default agent;

@@ -1,4 +1,4 @@
-import './RegisterForm.css';
+import './SignUp.css';
 import { observer } from "mobx-react-lite";
 import MyTextInput from '../../../app/common/form/MyTextInput';
 import { useEffect, useState } from 'react';
@@ -6,7 +6,8 @@ import AddressSearch from './AddressSearch';
 import ReviewPayment from './ReviewPayment';
 import Stepper from './stepper/Stepper';
 import { Language } from '../../../app/model/User';
-import Payment from './Payment';
+import CheckoutWrapper from './PaymentWrapper';
+import { useStore } from '../../../app/stores/store';
 
 interface Props {
     isValid: boolean;
@@ -23,6 +24,8 @@ interface Props {
 
 export default observer(function RegisterAgentForm({ isValid, dirty, isSubmitting, setFieldValue, handleChange, 
     setFieldTouched, validateField, getFieldMeta, step, setStep }: Props) {
+
+        const { modalStore } = useStore();
 
     useEffect(() => {
         setFieldValue("country", "United Kingdom");
@@ -80,9 +83,9 @@ export default observer(function RegisterAgentForm({ isValid, dirty, isSubmittin
                 <ReviewPayment isValid={isValid} dirty={dirty} isSubmitting={isSubmitting} setFieldValue={setFieldValue} handleChange={handleChange} setStep={setStep} />
             }
 
-            {step === 2 &&
-                <Payment />
-            }
+            {/* {step === 2 &&
+               <CheckoutWrapper />
+            } */}
         </div>
     )
 });

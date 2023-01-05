@@ -10,6 +10,7 @@ export default class ModalStore {
         open: false,
         body: null
     }
+    step: number = 0;
 
     constructor() {
         makeAutoObservable(this)
@@ -24,4 +25,6 @@ export default class ModalStore {
         this.modal.open = false;
         this.modal.body = null;
     }
+
+    setStep = (value: number) => this.step = value;
 }

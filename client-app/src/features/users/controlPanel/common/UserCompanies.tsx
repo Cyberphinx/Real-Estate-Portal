@@ -31,7 +31,7 @@ export default observer(function UserCompanies() {
     return (
         <div className="my-jobs-container">
             <div className="my-jobs-toolbar">
-                <p className="my-jobs-title">Branches</p>
+                <p className="my-jobs-title">Agency branches</p>
                 {/* <section>
                     <button
                         className={searchTerm === "_" ? "my-job-button-active" : "my-job-button"}
