@@ -39,7 +39,7 @@ axios.interceptors.response.use(
     switch (status) {
       case 400:
         if (typeof data === "string") {
-          store.featureStore.setToast("show", data);
+          store.featureStore.setToast("show warn", data);
         }
         if (config.method === "get" && data.errors.hasOwnProperty("id")) {
           history.push("/not-found");
@@ -55,7 +55,7 @@ axios.interceptors.response.use(
         }
         break;
       case 401:
-        store.featureStore.setToast("show", "unauthorized");
+        store.featureStore.setToast("show danger", "unauthorized");
         break;
       case 404:
         history.push("/not-found");

@@ -118,7 +118,16 @@
 }
 
 .status-active {
-
+  position: absolute;
+  top: 25px;
+  left: 0px;
+  border: 1px solid #50C878;
+  border-radius: 3px;
+  padding: 3px 8px;
+  margin: 20px 0px;
+  color: #50C878;
+  font-size: 12px;
+  /* background: rgba(204, 0, 0, 0.05); */
 }
 
 .status-inactive {
@@ -150,9 +159,15 @@
   padding: 6px 12px;
   font-weight: 600;
 }
-.invoice-button:hover {
+.invoice-button:hover:enabled {
   cursor: pointer;
   background: rgba(31, 81, 255, 0.05);
+}
+.invoice-button:disabled {
+  cursor: default;
+  background: none;
+  border: 1px solid #ccc;
+  color: #ccc;
 }
 
 .payment {

@@ -851,10 +851,10 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "1", "40f7ef3d-61a1-4a7e-ae39-1031a4835bdc", "Company", "COMPANY" },
-                    { "2", "6268e09c-06ca-40ed-aef0-59bf572c91a3", "Customer", "CUSTOMER" },
-                    { "3", "ed07e236-617e-4845-a257-5e3033c930ba", "Agency", "AGENCY" },
-                    { "4", "63f92612-a988-4723-99c1-98647d6d27e9", "Admin", "ADMIN" }
+                    { "1", "3fb92e13-507e-4e13-bf86-c9f665f847c0", "Company", "COMPANY" },
+                    { "2", "0f37cf62-a211-4f14-b5ab-5926ef67ec64", "Customer", "CUSTOMER" },
+                    { "3", "3610c2ff-0d11-4ab0-839b-c5ba587438cf", "Agency", "AGENCY" },
+                    { "4", "894e3134-1135-45db-bb8b-19eaaabe59dd", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.CreateIndex(

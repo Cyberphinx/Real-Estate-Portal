@@ -8,8 +8,8 @@ import { capitalizeFirstLetter } from "../../../../app/common/HelperFunctions";
 import MyJobPosts from "../common/MyJobPosts";
 import Messages from "../common/Messages";
 import AgentListings from "./AgentListings";
-import UserCompanies from "../common/UserCompanies";
-import AccountSettings from "./AccountSettings";
+import UserCompanies from "./AgencyBranches";
+import AccountSettings from "./account/AccountSettings";
 
 interface Props {
     user: User | null;
@@ -57,11 +57,11 @@ export default observer(function Customer({ user }: Props) {
                                     className={activeTab === 2 ? "agent-menu-button-active" : "agent-menu-button"}
                                     onClick={() => setActiveTab(2)}>Property listings</button>
                             </li>
-                            <li>
+                            {/* <li>
                                 <button
                                     className={activeTab === 4 ? "agent-menu-button-active" : "agent-menu-button"}
                                     onClick={() => setActiveTab(4)}>Messages</button>
-                            </li>
+                            </li> */}
                         </ul>
                         <div style={{ position: "absolute", bottom: "1rem" }}>
                             <p style={{ textAlign: "center", fontSize: "12px" }}>Contact us: info@sanctum.co.uk</p>

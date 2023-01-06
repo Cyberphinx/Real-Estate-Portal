@@ -1,15 +1,11 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using API.Extensions;
 using API.Services;
 using Application.ProfileApplication.ProfileDtos;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using Domain;
 using Domain.AppUserAggregate;
 using Domain.AppUserAggregate.Objects;
 using Domain.Enums;
@@ -68,37 +64,39 @@ namespace API.Controllers
             return invoice.MapInvoiceToDto();
         }
 
+        [AllowAnonymous]
         [HttpPost("webhook")]
         public async Task<ActionResult> StripeWebhook()
         {
-            // read the request body
             var json = await new StreamReader(HttpContext.Request.Body).ReadToEndAsync();
 
-            // get the thing that we are interested in
             var stripeEvent = EventUtility.ConstructEvent(json, Request.Headers["Stripe-Signature"],
                 _config["StripeSettings:WhSecret"]);
 
-            // cast it into a stripe charge object
             var charge = (Charge)stripeEvent.Data.Object;
 
-            var invoice = await _context.Invoices.FirstOrDefaultAsync(x => x.PaymentIntentId == charge.PaymentIntentId);
-            var user = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == invoice.Username);
-            var companies = await _context.Companies.Where(x => x.Username == invoice.Username).ToListAsync();
+            var invoice = await _context.Invoices.FirstOrDefaultAsync(x =>
+                x.PaymentIntentId == charge.PaymentIntentId);
 
-            if (charge.Status == "succeeded") 
+            // var user = await _userManager.Users.Include(m => m.Membership).FirstOrDefaultAsync(x => x.UserName == invoice.Username);
+
+            // var companies = await _context.Companies.Where(x => x.Username == invoice.Username).ToListAsync();
+
+            if (charge.Status == "succeeded")
             {
                 invoice.PaymentStatus = PaymentStatus.Paid;
-                user.Membership.IsActive = true;
-                foreach (var company in companies)
-                {
-                    company.AccessStatus = AccessStatus.Public;
-                }
+                // user.Membership.IsActive = true;
+                // foreach (var company in companies)
+                // {
+                //     company.AccessStatus = AccessStatus.Public;
+                // }
             };
 
             await _context.SaveChangesAsync();
+            // await _userManager.UpdateAsync(user);
 
-            // let stripe know that we have received its request, otherwise they will keep trying to send the request
             return new EmptyResult();
         }
+        
     }
 }

@@ -46,9 +46,9 @@ export default observer(function SignUp({invoice}:Props) {
                     </p>
                 </div>
                 <br />
-                    <Elements options={options} stripe={stripePromise}>
+                    {clientSecret && <Elements options={options} stripe={stripePromise}>
                         <StripeForm />
-                    </Elements>
+                    </Elements>}
                 <br />
             </div>
         </div>

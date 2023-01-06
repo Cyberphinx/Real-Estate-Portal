@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Extensions;
@@ -7,10 +8,13 @@ using Application.InvoiceApplication;
 using Application.ProfileApplication.ProfileDtos;
 using Domain.AppUserAggregate.Objects;
 using Domain.CompanyAggregate;
+using Domain.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Persistence;
+using Stripe;
 
 namespace API.Controllers
 {
@@ -18,9 +22,11 @@ namespace API.Controllers
     
     {
         private readonly DataContext _context;
+        private readonly IConfiguration _config;
 
-        public InvoiceController(DataContext context)
+        public InvoiceController(DataContext context, IConfiguration config)
         {
+            _config = config;
             _context = context;
         }
 
@@ -44,13 +50,13 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddInvoice(Invoice invoice)
+        public async Task<IActionResult> AddInvoice(Domain.AppUserAggregate.Objects.Invoice invoice)
         {
             return HandleResult(await Mediator.Send(new Create.Command{Invoice = invoice}));
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> EditInvoice(Guid id, Invoice invoice)
+        public async Task<IActionResult> EditInvoice(Guid id, Domain.AppUserAggregate.Objects.Invoice invoice)
         {
             invoice.Id = id;
             return HandleResult(await Mediator.Send(new Edit.Command{Invoice = invoice}));
@@ -79,5 +85,6 @@ namespace API.Controllers
         // {
         //     return User.Identity?.Name ?? Request.Cookies["appUserId"];
         // }
+
     }
 }

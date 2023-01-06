@@ -1,5 +1,5 @@
 import React from "react";
-import { PaymentStatus } from "../../model/PaymentStatus";
+import { PaymentStatus, paymentStatusFormatter } from "../../model/PaymentStatus";
 import { Invoice } from "../../model/Profile";
 import './InvoiceStatusTag.css';
 
@@ -30,7 +30,7 @@ export default function InvoiceStatusTag({ invoice }: Props) {
     return (
         <div style={{ position: "relative" }}>
             <span className={tagStyle(invoice!)} >
-            Payment {invoice!.paymentStatus.toString().replace(/[A-Z]/g, ' $&').trim()}
+                {paymentStatusFormatter(invoice!.paymentStatus)}
             </span>
         </div>
 

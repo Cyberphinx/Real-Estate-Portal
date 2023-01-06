@@ -22,15 +22,15 @@ export default observer(function ReviewPayment({ isValid, dirty, isSubmitting, s
     }, [])
 
     const amount = [
-        6000,
-        1000,
-        500
+        6600,
+        1100,
+        550
     ]
 
     const duration = [
-        "one-off payment",
-        "for 6 months",
-        "for 1 year"
+        "one-off payment, then it's free forever",
+        "pay within 6 months, then it's free forever",
+        "pay within 1 year, then it's free forever"
     ]
 
     const today = new Date();
@@ -47,7 +47,7 @@ export default observer(function ReviewPayment({ isValid, dirty, isSubmitting, s
                         className='payment-details__tab'
                         onClick={() => {
                             setPaymentType(0);
-                            setFieldValue("invoiceAmount", 600000);
+                            setFieldValue("invoiceAmount", 660000);
                             setFieldValue("invoiceDescription", `One-off payment of £6000.`);
                         }}
                         style={paymentType === 0 ? { backgroundColor: "#fff" } : {}}
@@ -59,7 +59,7 @@ export default observer(function ReviewPayment({ isValid, dirty, isSubmitting, s
                         className='payment-details__tab'
                         onClick={() => {
                             setPaymentType(1);
-                            setFieldValue("invoiceAmount", 100000);
+                            setFieldValue("invoiceAmount", 110000);
                             setFieldValue("invoiceDescription", `Payment of £1000 per month for 6 months.`);
                         }}
                         style={paymentType === 1 ? { backgroundColor: "#fff" } : {}}
@@ -71,7 +71,7 @@ export default observer(function ReviewPayment({ isValid, dirty, isSubmitting, s
                         className='payment-details__tab'
                         onClick={() => {
                             setPaymentType(2);
-                            setFieldValue("invoiceAmount", 50000);
+                            setFieldValue("invoiceAmount", 55000);
                             setFieldValue("invoiceDescription", `Payment of £500 per month for 12 months.`);
                         }}
                         style={paymentType === 2 ? { backgroundColor: "#fff" } : {}}

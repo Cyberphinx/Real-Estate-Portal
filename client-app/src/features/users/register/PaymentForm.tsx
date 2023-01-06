@@ -6,16 +6,18 @@ import {
     useElements,
     CardNumberElement
 } from "@stripe/react-stripe-js";
-import { StripePaymentElementOptions } from "@stripe/stripe-js";
+import { StripeError, StripePaymentElementOptions } from "@stripe/stripe-js";
 import { useStore } from "../../../app/stores/store";
 import './SignUp.css';
 import { observer } from "mobx-react-lite";
 
 
-export default observer(function StripeForm() {
+export default observer(function PaymentForm() {
     const baseUrl = process.env.REACT_APP_BASE_URL;
-    const {featureStore} = useStore();
-    const {setToast} = featureStore;
+    const { featureStore, modalStore, userStore } = useStore();
+    const { setToast } = featureStore;
+    const { closeModal, step, setStep } = modalStore;
+    const { user } = userStore;
 
     const stripe = useStripe();
     const elements = useElements();
@@ -74,18 +76,7 @@ export default observer(function StripeForm() {
             },
         });
 
-        // This point will only be reached if there is an immediate error when
-        // confirming the payment. Otherwise, your customer will be redirected to
-        // your `return_url`. For some payment methods like iDEAL, your customer will
-        // be redirected to an intermediate site first to authorize the payment, then
-        // redirected to the `return_url`.
-        if (error.type === "card_error" || error.type === "validation_error") {
-            setMessage(error.message);
-        } else {
-            setMessage("An unexpected error occurred.");
-        }
-
-        setIsLoading(false);
+        
     };
 
     const paymentElementOptions: StripePaymentElementOptions = {

@@ -7,7 +7,7 @@ import { JobLifeCycle, JobNetworkRole } from "../../../../app/model/Job";
 import { UserCompanyDto, UserJobDto } from "../../../../app/model/Profile";
 import { ServiceCategory } from "../../../../app/model/ServiceCategory";
 import { useStore } from "../../../../app/stores/store";
-import './MyJobPosts.css';
+import './AgencyBranches.css';
 
 
 export default observer(function UserCompanies() {
@@ -58,15 +58,15 @@ export default observer(function UserCompanies() {
                                 <div className="my-jobs-item">
                                     <section>
                                         {/* <p>{job.id}</p> */}
-                                        <p>Status: {AccessStatus[company.accessStatus]}</p>
+                                        <p>Status: {company.accessStatus.toString() === "Private" ? "Offline" : "Online"}</p>
                                     </section>
                                     <section>
-                                        <p>{company.displayName}</p>
-                                        <p>{company.legalName}</p>
+                                        <p>Company display name: {company.displayName}</p>
+                                        <p>Company legal name: {company.legalName}</p>
                                     </section>
                                     <section>
-                                        {company.isMain === true ? <b>Main</b> : null}
-                                        <div>{company.companyReference}</div>
+                                        {company.isMain === true ? <b>Headquarter</b> : null}
+                                        <div>Company Ref:{company.companyReference}</div>
                                     </section>
                                 </div>
 

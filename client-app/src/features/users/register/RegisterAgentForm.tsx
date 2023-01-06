@@ -8,6 +8,7 @@ import Stepper from './stepper/Stepper';
 import { Language } from '../../../app/model/User';
 import CheckoutWrapper from './PaymentWrapper';
 import { useStore } from '../../../app/stores/store';
+import Toast from '../../../app/common/Toast';
 
 interface Props {
     isValid: boolean;
@@ -22,10 +23,11 @@ interface Props {
     setStep: (value: number) => void;
 }
 
-export default observer(function RegisterAgentForm({ isValid, dirty, isSubmitting, setFieldValue, handleChange, 
+export default observer(function RegisterAgentForm({ isValid, dirty, isSubmitting, setFieldValue, handleChange,
     setFieldTouched, validateField, getFieldMeta, step, setStep }: Props) {
 
-        const { modalStore } = useStore();
+    const { featureStore } = useStore();
+    const { setToast } = featureStore;
 
     useEffect(() => {
         setFieldValue("country", "United Kingdom");
@@ -35,7 +37,6 @@ export default observer(function RegisterAgentForm({ isValid, dirty, isSubmittin
     return (
         <div>
             <Stepper step={step} setStep={setStep} />
-
             {step === 0 && <>
                 <p className='form-section-title'>Account information</p>
                 <br />
@@ -82,10 +83,6 @@ export default observer(function RegisterAgentForm({ isValid, dirty, isSubmittin
             {step === 1 &&
                 <ReviewPayment isValid={isValid} dirty={dirty} isSubmitting={isSubmitting} setFieldValue={setFieldValue} handleChange={handleChange} setStep={setStep} />
             }
-
-            {/* {step === 2 &&
-               <CheckoutWrapper />
-            } */}
         </div>
     )
 });

@@ -1,41 +1,86 @@
 #toast {
-    visibility: hidden;
-    min-width: 250px;
-    margin-left: -125px;
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    border-radius: 2px;
-    padding: 16px;
-    position: fixed;
-    z-index: 10;
-    left: 50%;
-    bottom: 30px;
-    font-size: 17px;
-  }
-  
+  visibility: hidden;
+  min-width: 15rem;
+  margin-left: -7.5rem;
+  background-color: #0096FF;
+  color: #fff;
+  text-align: center;
+  border-radius: 0.3rem;
+  padding: 1rem;
+  position: fixed;
+  z-index: 100;
+  left: 50%;
+  bottom: 2rem;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
 #toast.show {
-    visibility: visible;
-    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
   }
-  
-  @-webkit-keyframes fadein {
-    from {bottom: 0; opacity: 0;} 
-    to {bottom: 30px; opacity: 1;}
+  to {
+    bottom: 30px;
+    opacity: 1;
   }
-  
-  @keyframes fadein {
-    from {bottom: 0; opacity: 0;}
-    to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
   }
-  
-  @-webkit-keyframes fadeout {
-    from {bottom: 30px; opacity: 1;} 
-    to {bottom: 0; opacity: 0;}
+  to {
+    bottom: 30px;
+    opacity: 1;
   }
-  
-  @keyframes fadeout {
-    from {bottom: 30px; opacity: 1;}
-    to {bottom: 0; opacity: 0;}
+}
+
+@-webkit-keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
   }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
+#toast.success {
+  background-color: #00A36C;
+  color: #fff;
+}
+
+#toast.danger {
+  background-color: #cc0000;
+  color: #fff;
+}
+
+#toast.info {
+  background-color: #0F52BA;
+  color: #fff;
+}
+
+#toast.warn {
+  background-color: #FFBF00;
+  color: #000;
+}
