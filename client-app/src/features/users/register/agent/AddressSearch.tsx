@@ -1,25 +1,21 @@
 import { useEffect, useState } from "react";
 import 'leaflet-geosearch/dist/geosearch.css';
 import { LocationIQProvider } from 'leaflet-geosearch';
-import { LocationRaw } from "../../../app/model/LocationRaw";
-import { useDebounce } from "../../../app/hooks/useDebounce";
-import './SignUp.css';
-import MyTextInput from "../../../app/common/form/MyTextInput";
+import { LocationRaw } from "../../../../app/model/LocationRaw";
+import { useDebounce } from "../../../../app/hooks/useDebounce";
+import '.././SignUp.css';
+import MyTextInput from "../../../../app/common/form/MyTextInput";
 import { observer } from "mobx-react-lite";
-import { Field } from "formik";
 
 interface Props {
     setFieldValue: any;
-    handleChange: (e: any) => void;
     setFieldTouched: (field: string, isTouched?: boolean | undefined, shouldValidate?: boolean | undefined) => void;
-    validateField: (field: string) => void;
     getFieldMeta: any;
 }
 
-export default observer(function AddressSearch({ setFieldValue, handleChange, setFieldTouched, validateField, getFieldMeta }: Props) {
+export default observer(function AddressSearch({ setFieldValue, setFieldTouched, getFieldMeta }: Props) {
 
     const apikey = process.env.REACT_APP_LOCATION_IQ;
-    // const locationIQLink = `https://{s}-tiles.locationiq.com/v3/streets/r/{z}/{x}/{y}.png?key=${apikey}`;
 
     const [value, setValue] = useState<string>("");
     const [rawResults, setRawResults] = useState<any>();
@@ -63,10 +59,6 @@ export default observer(function AddressSearch({ setFieldValue, handleChange, se
         }
         if (value.length > 0) fetchData();
     }, [value]);
-
-    // useEffect(() => {
-    //     if (rawResults) console.log(rawResults);
-    // }, [rawResults])
 
     const propertyNumberOrName = name ? (house_number ? `${name}, ${house_number}` : name) : house_number;
     const streetName = road ? (neighbourhood ? `${road}, ${neighbourhood}` : road) : neighbourhood;
@@ -147,7 +139,6 @@ export default observer(function AddressSearch({ setFieldValue, handleChange, se
                                     setFieldValue("legalCompanyAddress.county", countyValue);
                                     setFieldValue("legalCompanyAddress.postalCode", postcode);
                                     setFieldTouched("legalCompanyAddress.postalCode", true);
-                                    // validateField("legalCompanyAddress.postalCode");
                                     setFieldValue("legalCompanyAddress.country", country);
                                     setFieldValue("legalCompanyAddress.latitude", item.y);
                                     setFieldValue("legalCompanyAddress.longitude", item.x);

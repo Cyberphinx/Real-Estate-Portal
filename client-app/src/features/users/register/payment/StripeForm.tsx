@@ -3,21 +3,18 @@ import {
     PaymentElement,
     LinkAuthenticationElement,
     useStripe,
-    useElements,
-    CardNumberElement
+    useElements
 } from "@stripe/react-stripe-js";
-import { StripeError, StripePaymentElementOptions } from "@stripe/stripe-js";
-import { useStore } from "../../../app/stores/store";
-import './SignUp.css';
+import { StripePaymentElementOptions } from "@stripe/stripe-js";
+import '.././SignUp.css';
 import { observer } from "mobx-react-lite";
+import { useStore } from "../../../../app/stores/store";
 
 
-export default observer(function PaymentForm() {
+export default observer(function StripeForm() {
     const baseUrl = process.env.REACT_APP_BASE_URL;
-    const { featureStore, modalStore, userStore } = useStore();
-    const { setToast } = featureStore;
-    const { closeModal, step, setStep } = modalStore;
-    const { user } = userStore;
+    const {featureStore} = useStore();
+    const {setToast} = featureStore;
 
     const stripe = useStripe();
     const elements = useElements();
@@ -72,11 +69,22 @@ export default observer(function PaymentForm() {
             elements,
             confirmParams: {
                 // Make sure to change this to your payment completion page
-                return_url: "http://localhost:3000",
+                return_url: "https://localhost:3000",
             },
         });
 
-        
+        // This point will only be reached if there is an immediate error when
+        // confirming the payment. Otherwise, your customer will be redirected to
+        // your `return_url`. For some payment methods like iDEAL, your customer will
+        // be redirected to an intermediate site first to authorize the payment, then
+        // redirected to the `return_url`.
+        if (error.type === "card_error" || error.type === "validation_error") {
+            setMessage(error.message);
+        } else {
+            setMessage("An unexpected error occurred.");
+        }
+
+        setIsLoading(false);
     };
 
     const paymentElementOptions: StripePaymentElementOptions = {

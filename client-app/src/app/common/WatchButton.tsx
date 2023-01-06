@@ -19,7 +19,7 @@ export default observer(function WatchButton({ listing }: Props) {
 
 
     const watchIcon = <img className="watch-icon" src="/assets/heart_white.svg" alt="Watch" />;
-    const unwatchIcon = <img className="unwatch-icon" src="/assets/heart_grey.svg" alt="Watch" />;
+    const unwatchIcon = <img className="unwatch-icon" src="/assets/heart_white.svg" alt="Watch" />;
 
     const [img, setImg] = useState<boolean>(true)
 

@@ -1,18 +1,16 @@
-import './ReviewPayment.css';
+import './RegisterAgentStepTwo.css';
 import { observer } from "mobx-react-lite";
 import React, { useEffect, useState } from 'react';
-import { dateFormatter, dateFormatterShort } from '../../../app/common/HelperFunctions';
 
 interface Props {
-    setStep: (value: number) => void;
+    setFormType: (value: number) => void;
     isValid: boolean;
     dirty: boolean;
     isSubmitting: boolean;
     setFieldValue: any;
-    handleChange: (e: any) => void;
 }
 
-export default observer(function ReviewPayment({ isValid, dirty, isSubmitting, setFieldValue, handleChange, setStep }: Props) {
+export default observer(function RegisterAgentStepTwo({ isValid, dirty, isSubmitting, setFieldValue, setFormType }: Props) {
     const [paymentType, setPaymentType] = useState<number>(0);
 
     useEffect(() => {
@@ -32,10 +30,6 @@ export default observer(function ReviewPayment({ isValid, dirty, isSubmitting, s
         "pay within 6 months, then it's free forever",
         "pay within 1 year, then it's free forever"
     ]
-
-    const today = new Date();
-    const day = new Date();
-    const endDate = new Date(day.setMonth(day.getMonth() + 12));
 
     return (
         <div>
@@ -108,7 +102,7 @@ export default observer(function ReviewPayment({ isValid, dirty, isSubmitting, s
                 <button
                     className='payment-register-button'
                     type="button"
-                    onClick={() => setStep(0)}
+                    onClick={() => setFormType(1)}
                 >
                     Back to account
                 </button>

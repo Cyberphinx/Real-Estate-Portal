@@ -11,10 +11,12 @@ export default observer(function AccountSettings() {
     const { profileStore, userStore, modalStore } = useStore();
     const { profile, headquarter } = profileStore;
     const { user } = userStore;
-    const { openModal, step, setStep } = modalStore;
+    const { closeModal, formType, setFormType, paymentForm, setPaymentForm } = modalStore;
+
+    const [tabNumber, setTabNumber] = useState<number>(0);
 
     useEffect(() => {
-        if (step !== 2) setStep(2);
+        if (paymentForm === false) setPaymentForm(true);
     }, [])
 
     const tabs = [
@@ -22,8 +24,6 @@ export default observer(function AccountSettings() {
         <AccountTab />,
         <ProfileTab />
     ]
-
-    const [tabNumber, setTabNumber] = useState<number>(0);
 
     return (
         <div className="account-settings-container">

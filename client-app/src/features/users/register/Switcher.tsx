@@ -1,9 +1,13 @@
 import './SignUp.css';
 import { observer } from "mobx-react-lite";
 import React from 'react';
-import RegisterCustomerForm from './RegisterCustomerForm';
-import RegisterAgentForm from './RegisterAgentForm';
-import RegisterCompanyForm from './RegisterCompanyForm';
+import RegisterCustomerForm from './customer/RegisterCustomerForm';
+import RegisterCompanyForm from './company/RegisterCompanyForm';
+import RegisterAgentStepOne from './agent/RegisterAgentStepOne';
+import RegisterAgentStepTwo from './agent/RegisterAgentStepTwo';
+import Stepper from './agent/agentStepper/Stepper';
+import PaymentWrapper from './payment/PaymentWrapper';
+import { useStore } from '../../../app/stores/store';
 
 interface Props {
     isValid: boolean;
@@ -11,16 +15,18 @@ interface Props {
     isSubmitting: boolean;
     setFieldValue: (field: string, value: any, shouldValidate?: boolean | undefined) => void;
     handleChange: (e: any) => void;
-    accountType: number;
+    formType: number;
+    setFormType: (value: number) => void;
     setFieldTouched: (field: string, isTouched?: boolean | undefined, shouldValidate?: boolean | undefined) => void;
     validateField: (field: string) => void;
     getFieldMeta: any;
-    step: number;
-    setStep: (value: number) => void;
 }
 
-export default observer(function Switcher({ isValid, dirty, isSubmitting, setFieldValue, 
-    handleChange, accountType, setFieldTouched, validateField, getFieldMeta, step, setStep }: Props) {
+export default observer(function Switcher({ isValid, dirty, isSubmitting, setFieldValue,
+    handleChange, formType, setFieldTouched, validateField, getFieldMeta, setFormType }: Props) {
+
+    const { modalStore } = useStore();
+    const { closeModal } = modalStore;
 
     function getFormType(type: number) {
         switch (type) {
@@ -32,21 +38,36 @@ export default observer(function Switcher({ isValid, dirty, isSubmitting, setFie
                     setFieldValue={setFieldValue}
                 />;
             case 1:
-                return <RegisterAgentForm
-                    isValid={isValid}
-                    dirty={dirty}
-                    isSubmitting={isSubmitting}
-                    setFieldValue={setFieldValue}
-                    handleChange={handleChange}
-                    setFieldTouched={setFieldTouched}
-                    validateField={validateField}
-                    getFieldMeta={getFieldMeta}
-                    step={step}
-                    setStep={setStep}
-                />;
+                return (
+                    <>
+                        <Stepper />
+                        <RegisterAgentStepOne
+                            isValid={isValid}
+                            dirty={dirty}
+                            isSubmitting={isSubmitting}
+                            setFieldValue={setFieldValue}
+                            handleChange={handleChange}
+                            setFieldTouched={setFieldTouched}
+                            validateField={validateField}
+                            getFieldMeta={getFieldMeta}
+                            formType={formType}
+                            setFormType={setFormType}
+                        />
+                    </>
+                );
+
             case 2:
-                return <RegisterCompanyForm 
-                isValid={isValid}
+                return (
+                    <>
+                        <Stepper />
+                        <RegisterAgentStepTwo setFormType={setFormType} isValid={isValid} dirty={dirty}
+                            isSubmitting={isSubmitting} setFieldValue={setFieldValue} />
+                    </>
+                )
+
+            case 3:
+                return <RegisterCompanyForm
+                    isValid={isValid}
                     dirty={dirty}
                     isSubmitting={isSubmitting}
                     setFieldValue={setFieldValue}
@@ -63,7 +84,7 @@ export default observer(function Switcher({ isValid, dirty, isSubmitting, setFie
 
     return (
         <div>
-            {getFormType(accountType)}
+            {getFormType(formType)}
         </div>
 
     )

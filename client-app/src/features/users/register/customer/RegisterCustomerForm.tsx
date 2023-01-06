@@ -1,9 +1,8 @@
-import './SignUp.css';
+import React, { useEffect } from 'react';
+import '.././SignUp.css';
 import { observer } from "mobx-react-lite";
-import { useStore } from '../../../app/stores/store';
-import MyTextInput from '../../../app/common/form/MyTextInput';
-import { useEffect } from 'react';
-import { AccountType, Language } from '../../../app/model/User';
+import MyTextInput from '../../../../app/common/form/MyTextInput';
+import { AccountType, Language } from '../../../../app/model/User';
 
 interface Props {
     isValid: boolean;
@@ -13,7 +12,6 @@ interface Props {
 }
 
 export default observer(function RegisterCustomerForm({isValid, dirty, isSubmitting, setFieldValue}: Props) {
-    const { userStore: { register }, featureStore: { setActiveFeature }, modalStore: { openModal, closeModal } } = useStore();
 
     useEffect(() => {
         setFieldValue("accountType", AccountType.Customer);

@@ -1,6 +1,7 @@
-import { history } from './../../index';
+import { AccountType } from './../model/User';
+import { history } from '../../index';
 import { runInAction } from 'mobx';
-import { RoleFormValues, RegisterFormValues, LoginFormValues } from './../model/User';
+import { RoleFormValues, RegisterFormValues, LoginFormValues } from '../model/User';
 import { makeAutoObservable } from 'mobx';
 import { User } from "../model/User";
 import agent from '../api/agent';
@@ -10,6 +11,7 @@ export default class UserStore {
     user: User | null = null;
     users: User[] | null = null;
     loadingUsers = false;
+    refreshTokenTimeout: any;
     // loadingAvailable = false;
     // usernameAvailable: any;
 
@@ -26,9 +28,11 @@ export default class UserStore {
         try {
             const user = await agent.Account.login(creds);
             store.commonStore.setToken(user.token);
+            this.startRefreshTokenTimer(user);
             runInAction(() => this.user = user);
             history.push("/");
             store.modalStore.closeModal();
+            store.featureStore.setToast("show success", "Login successful!");
             setSubmitting(false);
         } catch (error) {
             setSubmitting(false);
@@ -41,12 +45,15 @@ export default class UserStore {
         window.localStorage.removeItem("jwt");
         this.user = null;
         history.push("/");
+        store.featureStore.setToast("show info", "Successfully logged out!");
     }
 
     getUser = async () => {
         try {
             const user = await agent.Account.current();
+            store.commonStore.setToken(user.token);
             runInAction(() => this.user = user);
+            this.startRefreshTokenTimer(user);
         } catch (error) {
             console.log(error);
         }
@@ -68,21 +75,25 @@ export default class UserStore {
         this.loadingUsers = state;
       }
 
-    register = async ( creds: RegisterFormValues, setSubmitting: any, formType: number, setStep?: any) => {
+    register = async ( creds: RegisterFormValues, setSubmitting: any, paymentModal: JSX.Element) => {
         setSubmitting(true);
         try {
             const user = await agent.Account.register(creds);
             store.commonStore.setToken(user.token);
+            this.startRefreshTokenTimer(user);
             runInAction(() => this.user = user);
-            switch (formType) {
-                case 0:
+
+            switch (creds.accountType) {
+                case AccountType.Customer:
                     history.push("/");
                     store.modalStore.closeModal();
+                    store.featureStore.setToast("show success", "Account successfully created!");
                     break;
-                case 1:
-                    setStep(2);
+                case AccountType.Agent:
+                    store.modalStore.closeModal();
+                    store.modalStore.openModal(paymentModal);
                     break;
-                case 2:
+                case AccountType.Company:
                     history.push("/");
                     store.modalStore.closeModal();
                     break;
@@ -127,4 +138,27 @@ export default class UserStore {
     //         this.setLoadingUsers(false);
     //     }
     // }
+
+    refreshToken = async () => {
+        this.stopRefreshTokenTimer();
+        try {
+            const user = await agent.Account.refreshToken();
+            runInAction(() => this.user = user);
+            store.commonStore.setToken(user.token);
+            this.startRefreshTokenTimer(user);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    private startRefreshTokenTimer(user: User) {
+        const jwtToken = JSON.parse(atob(user.token.split('.')[1]));
+        const expires = new Date(jwtToken.exp * 1000);
+        const timeout = expires.getTime() - Date.now() - (30 * 1000);
+        this.refreshTokenTimeout = setTimeout(this.refreshToken, timeout);
+    }
+
+    private stopRefreshTokenTimer() {
+        clearTimeout(this.refreshTokenTimeout);
+    }
 }

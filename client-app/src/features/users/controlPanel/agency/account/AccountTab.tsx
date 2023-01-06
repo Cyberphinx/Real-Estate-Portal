@@ -1,14 +1,12 @@
 import { observer } from "mobx-react-lite";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useStore } from "../../../../../app/stores/store";
 import './AccountSettings.css';;
 
 
 export default observer(function AccountTab() {
-    const { profileStore, userStore, modalStore } = useStore();
-    const { profile, headquarter } = profileStore;
+    const { userStore } = useStore();
     const { user } = userStore;
-    const { openModal, step, setStep } = modalStore;
 
     return (
         <section>

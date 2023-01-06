@@ -1,11 +1,16 @@
-import './ReviewPayment.css';
+import '.././SignUp.css';
 import { observer } from "mobx-react-lite";
-import React from 'react';
-import { useStore } from '../../../app/stores/store';
+import React, { useState } from 'react';
+import { useStore } from '../../../../app/stores/store';
+import Stepper from './agentStepper/Stepper';
+import PaymentWrapper from '../payment/PaymentWrapper';
 
-export default observer(function LegalChecks() {
-    const { modalStore } = useStore();
-    const { closeModal } = modalStore;
+
+export default observer(function RegisterAgentStepThree() {
+    const { modalStore, invoiceStore } = useStore();
+    const { closeModal, formType, setFormType, paymentForm, setPaymentForm } = modalStore;
+    const { clientSecret } = invoiceStore;
+
 
     return (
         <div className="register-form">
@@ -21,7 +26,8 @@ export default observer(function LegalChecks() {
                         By continuing, you agree are setting up a Sanctum account and agree to our <span className='register-legal-text'>User Agreement</span> and <span className='register-legal-text'>Privacy Policy</span>.
                     </p>
                 </div>
-                <p>Do you have property redress scheme?</p>
+                <Stepper />
+                <PaymentWrapper />
             </div>
         </div>
     )

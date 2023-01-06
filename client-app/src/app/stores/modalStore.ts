@@ -10,7 +10,8 @@ export default class ModalStore {
         open: false,
         body: null
     }
-    step: number = 0;
+    formType: number = 0;
+    paymentForm = false;
 
     constructor() {
         makeAutoObservable(this)
@@ -26,5 +27,8 @@ export default class ModalStore {
         this.modal.body = null;
     }
 
-    setStep = (value: number) => this.step = value;
+    setFormType = (value: number) => this.formType = value;
+
+    setPaymentForm = (value: boolean) => this.paymentForm = value;
+
 }

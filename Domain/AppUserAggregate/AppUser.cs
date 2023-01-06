@@ -23,6 +23,7 @@ namespace Domain.AppUserAggregate
         public ICollection<Photo> Photos { get; set; }
         public ICollection<AppUserReview> Reviews { get; set; }
         public ICollection<ListingWatcher> SavedListings { get; set; }
+        public ICollection<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();
 
     }
 }

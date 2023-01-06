@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import './SignUp.css';
 import { Formik, Form } from "formik";
 import { observer } from "mobx-react-lite";
@@ -7,18 +8,16 @@ import { useStore } from '../../../app/stores/store';
 import LoginForm from '../LoginForm';
 import { AccountType, Language } from '../../../app/model/User';
 import Switcher from './Switcher';
-import React from 'react';
 import { Currency } from '../../../app/model/ListingAggregate/ListingEnums';
+import RegisterAgentStepThree from './agent/RegisterAgentStepThree';
 
 interface Props {
     formType: number;
     setFormType: (value: number) => void;
-    step: number;
-    setStep: (value: number) => void;
 }
 
-export default observer(function SignUpForm({ formType, setFormType, step, setStep }: Props) {
-    const { userStore: { register }, featureStore: { setActiveFeature }, modalStore: { openModal, closeModal } } = useStore();
+export default observer(function SignUpForm({ formType, setFormType }: Props) {
+    const { userStore: { register }, featureStore: { setActiveFeature }, modalStore: { openModal, closeModal, setPaymentForm } } = useStore();
 
     const initialValues = {
         email: "",
@@ -77,11 +76,13 @@ export default observer(function SignUpForm({ formType, setFormType, step, setSt
 
     const currentValidationSchema = registerValidation[formType];
 
+    const paymentModal = <RegisterAgentStepThree />;
+
     return (
         <Formik
             initialValues={initialValues}
             onSubmit={(values, { setErrors, setSubmitting }) => {
-                register(values, setSubmitting, formType, setStep).catch(error => setErrors({ error }));
+                register(values, setSubmitting, paymentModal).catch(error => setErrors({ error }));
                 setActiveFeature(0);
             }}
             validationSchema={currentValidationSchema}
@@ -96,27 +97,36 @@ export default observer(function SignUpForm({ formType, setFormType, step, setSt
                             <p style={{ textAlign: "left", fontSize: "18px", fontWeight: "600", padding: "0px 20px 0px 20px" }}>
                                 Sign Up
                             </p>
-                            <select name="accountType" className='account-select-style'>
+                            <select
+                                name="accountType"
+                                className='account-select-style'
+                                defaultValue={
+                                    formType === 0 ? AccountType.Customer : (formType === 3 ? AccountType.Company : AccountType.Agent)
+                                }
+                            >
                                 <option
                                     value={AccountType.Customer}
                                     onClick={() => {
                                         setFormType(0);
                                         setFieldValue("accountType", AccountType.Customer);
-                                    }}>( Individual )</option>
+                                    }}
+                                >( Individual )</option>
                                 <option
                                     value={AccountType.Agent}
                                     onClick={() => {
                                         setFormType(1);
                                         setFieldValue("accountType", AccountType.Agent);
-                                        setFieldValue("invoiceAmount", 600000);
+                                        setFieldValue("invoiceAmount", 660000);
                                         setFieldValue("invoiceDescription", "Payment in 1 installment");
-                                    }}>( Estate Agent )</option>
+                                    }}
+                                >( Estate Agent )</option>
                                 <option
                                     value={AccountType.Company}
                                     onClick={() => {
-                                        setFormType(2);
+                                        setFormType(3);
                                         setFieldValue("accountType", AccountType.Company);
-                                    }}>( Tradesperson )</option>
+                                    }}
+                                >( Tradesperson )</option>
                             </select>
                         </div>
 
@@ -130,16 +140,15 @@ export default observer(function SignUpForm({ formType, setFormType, step, setSt
                             isSubmitting={isSubmitting}
                             setFieldValue={setFieldValue}
                             handleChange={handleChange}
-                            accountType={formType}
+                            formType={formType}
+                            setFormType={setFormType}
                             setFieldTouched={setFieldTouched}
                             validateField={validateField}
                             getFieldMeta={getFieldMeta}
-                            step={step}
-                            setStep={setStep}
                         />
 
                         {errors.error && <p className="register-form-submission-error">{errors.error}</p>}
-                        
+
                         <div className='register-suggestion'>Already on Sanctum? <button className='register-suggestion-button'
                             type='button'
                             onClick={() => {

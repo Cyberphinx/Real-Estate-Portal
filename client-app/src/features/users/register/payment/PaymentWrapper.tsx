@@ -1,15 +1,15 @@
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { observer } from "mobx-react-lite";
-import React, { useEffect, useState } from "react";
-import { useStore } from "../../../app/stores/store";
+import React, { useEffect } from "react";
+import { useStore } from "../../../../app/stores/store";
 import StripeForm from "./StripeForm";
-import './SignUp.css';
+import '.././SignUp.css';
 
 const stripePromise = loadStripe('pk_test_51L6i4NELV0KnfWeJgoqaVUo7jOES7YMDlWgtdHdwAXRsd2ExfVwP7sU9DhIyjES0JN7yly88c9HKpp0lBvtjIakX00pl6UGKM9');
 
 export default observer(function PaymentWrapper() {
-    const { userStore, invoiceStore, modalStore } = useStore();
+    const { userStore, invoiceStore } = useStore();
     const { isLoggedIn, user } = userStore;
     const { loadFirstInvoice, loadingInvoice, clientSecret } = invoiceStore;
 
@@ -29,7 +29,7 @@ export default observer(function PaymentWrapper() {
     };
 
     return (<>
-        {loadingInvoice ?
+        {loadingInvoice || !clientSecret ?
             <p>Loading secure payment function...</p>
             :
             <Elements options={options} stripe={stripePromise}>

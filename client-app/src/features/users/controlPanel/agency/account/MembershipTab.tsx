@@ -10,10 +10,9 @@ import './AccountSettings.css';
 
 
 export default observer(function MembershipTab() {
-    const { profileStore, userStore, modalStore } = useStore();
+    const { profileStore, modalStore } = useStore();
     const { profile, headquarter } = profileStore;
-    const { user } = userStore;
-    const { openModal, step, setStep } = modalStore;
+    const { openModal } = modalStore;
 
     const address = `${headquarter?.companyAddress.propertyNumberOrName && (headquarter?.companyAddress.propertyNumberOrName + ", ")}
         ${headquarter?.companyAddress.streetName && (headquarter?.companyAddress.streetName + ", ")}
@@ -34,7 +33,7 @@ export default observer(function MembershipTab() {
                 : 
                 <div>
                     <p className="status-inactive">Inactive</p>
-                    <p className="account-tab-value">Please complete the Compliance section below to activate the account.  This is ensure that estate agents on Sanctum comply with the UK regulations</p>
+                    <p className="account-tab-value">Please fill in the Compliance section below to activate the account.</p>
                 </div>
                 }
             </div>

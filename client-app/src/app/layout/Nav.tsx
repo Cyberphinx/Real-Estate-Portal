@@ -30,7 +30,7 @@ export default observer(function Nav() {
             <ModalContainer />
             <ul className="nav-bar">
                 <li className="nav-bar-item"><img className="logo" src="/assets/sanctum.svg" alt="S" /></li>
-                <li className="nav-bar-item"><Link to="/">SANCTUM</Link></li>
+                <li className="nav-bar-item"><button className="home-button" onClick={() => { setActiveFeature(0) }}>SANCTUM</button></li>
                 <li className="nav-bar-item">
                     <button className={activeFeature === 0 ? "nav-button-selected" : "nav-button"}
                         onClick={() => { setActiveFeature(0) }}>

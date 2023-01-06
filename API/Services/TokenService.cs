@@ -10,6 +10,8 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Identity;
 using Domain.AppUserAggregate;
+using System.Security.Cryptography;
+using Domain.AppUserAggregate.Objects;
 
 namespace API.Services
 {
@@ -50,7 +52,7 @@ namespace API.Services
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddDays(7), // later we will look into RefreshToken
+                Expires = DateTime.UtcNow.AddMinutes(1), // later we will look into RefreshToken
                 SigningCredentials = creds
             };
 
@@ -59,6 +61,15 @@ namespace API.Services
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
             return tokenHandler.WriteToken(token); // this will return to us an actual JWT token, which the user can use to authengticate to the api
+        }
+
+        public RefreshToken GenerateRefreshToken() 
+        {
+            var randomNumber = new byte[32];
+            using var rng = RandomNumberGenerator.Create();
+            rng.GetBytes(randomNumber);
+
+            return new RefreshToken{Token = Convert.ToBase64String(randomNumber)};
         }
     }
 }

@@ -55,11 +55,11 @@ export default observer(function Customer({ user }: Props) {
                                     className={activeTab === 2 ? "customer-menu-button-active" : "customer-menu-button"}
                                     onClick={() => setActiveTab(2)}>My job posts</button>
                             </li>
-                            <li>
+                            {/* <li>
                                 <button
                                     className={activeTab === 3 ? "customer-menu-button-active" : "customer-menu-button"}
                                     onClick={() => setActiveTab(3)}>Messages</button>
-                            </li>
+                            </li> */}
                         </ul>
                     </section>
                     <section className="customer-section-two">

@@ -69,15 +69,11 @@ namespace Persistence
 
                 var customerUsers = new List<AppUser>
                 {
-                    new AppUser{UserName = "lily", Email = "lily@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English},
-                    new AppUser{UserName = "Jack", Email = "jack@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English},
-                    new AppUser{UserName = "ruby", Email = "ruby@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English},
-                    new AppUser{UserName = "lucy", Email = "lucy@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English},
-                    new AppUser{UserName = "tom", Email = "tom@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English},
-                    new AppUser{UserName = "peter", Email = "peter@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English},
-                    new AppUser{UserName = "mike", Email = "mike@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English},
-                    new AppUser{UserName = "lara", Email = "lara@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English},
-                    new AppUser{UserName = "sophie", Email = "sophie@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English}
+                    new AppUser{UserName = "lily", Email = "lily@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Customer},
+                    new AppUser{UserName = "Jack", Email = "jack@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Customer},
+                    new AppUser{UserName = "ruby", Email = "ruby@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Customer},
+                    new AppUser{UserName = "lucy", Email = "lucy@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Customer},
+                    new AppUser{UserName = "tom", Email = "tom@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Customer}
                 };
 
                 foreach (var customer in customerUsers)
@@ -98,11 +94,11 @@ namespace Persistence
 
                 var agencyUsers = new List<AppUser>
                 {
-                    new AppUser{UserName = "savills", Email = "savills@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English},
-                    new AppUser{UserName = "hunters", Email = "hunters@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English},
-                    new AppUser{UserName = "RogerParry", Email = "rogerparry@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English},
-                    new AppUser{UserName = "Purple", Email = "purple@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English},
-                    new AppUser{UserName = "Ewe", Email = "ewe@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English},
+                    new AppUser{UserName = "savills", Email = "savills@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Agent},
+                    new AppUser{UserName = "hunters", Email = "hunters@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Agent},
+                    new AppUser{UserName = "RogerParry", Email = "rogerparry@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Agent},
+                    new AppUser{UserName = "Purple", Email = "purple@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Agent},
+                    new AppUser{UserName = "Ewe", Email = "ewe@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Agent},
                 };
 
                 foreach (var agent in agencyUsers)

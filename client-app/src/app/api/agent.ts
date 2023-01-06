@@ -35,7 +35,7 @@ axios.interceptors.response.use(
     }
     return response;
   }, (error: any) => {
-    const { data, status, config } = error.response!;
+    const { data, status, config, headers } = error.response!;
     switch (status) {
       case 400:
         if (typeof data === "string") {
@@ -55,7 +55,11 @@ axios.interceptors.response.use(
         }
         break;
       case 401:
-        store.featureStore.setToast("show danger", "unauthorized");
+        if (status === 401 && headers['www-authenticate'].startsWith('Bearer error="invalid_token"')) {
+          store.userStore.logout();
+          store.featureStore.setToast("show warn", "Session expired - please login again");
+        }
+        store.featureStore.setToast("show danger", "Invalid login credentials");
         break;
       case 404:
         history.push("/not-found");
@@ -84,7 +88,8 @@ const Account = {
   list: () => requests.get<User[]>("/account/all"),
   assignrole: (role: RoleFormValues) => requests.put<RoleFormValues>("/account/assignrole", role),
   checkusername: (username: string) => requests.get<string>(`/account/username/${username}`),
-  checkemail: (email: string) => requests.get<string>(`/account/email/${email}`)
+  checkemail: (email: string) => requests.get<string>(`/account/email/${email}`),
+  refreshToken: () => requests.post<User>('/account/refreshToken', {})
 }
 
 const Profiles = {

@@ -2,12 +2,12 @@ import './PaymentModal.css';
 import { observer } from "mobx-react-lite";
 import React, { useState } from 'react';
 import { useStore } from '../../../../app/stores/store';
-import PaymentWrapper from '../../register/PaymentWrapper';
+import PaymentWrapper from '../../register/payment/PaymentWrapper';
 import { Invoice } from '../../../../app/model/Profile';
 import { Elements } from '@stripe/react-stripe-js';
-import StripeForm from '../../register/StripeForm';
 import { loadStripe } from '@stripe/stripe-js';
 import priceFormatter from '../../../../app/common/PriceFormatter';
+import StripeForm from '../../register/payment/StripeForm';
 
 const stripePromise = loadStripe('pk_test_51L6i4NELV0KnfWeJgoqaVUo7jOES7YMDlWgtdHdwAXRsd2ExfVwP7sU9DhIyjES0JN7yly88c9HKpp0lBvtjIakX00pl6UGKM9');
 
@@ -17,7 +17,7 @@ interface Props {
 
 export default observer(function SignUp({invoice}:Props) {
     const { userStore, modalStore } = useStore();
-    const { closeModal, step, setStep } = modalStore;
+    const { closeModal } = modalStore;
     const { isLoggedIn, user } = userStore;
 
     const clientSecret = invoice.clientSecret;

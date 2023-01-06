@@ -26,23 +26,23 @@
   float: right;
 }
 
-.nav-bar-item a {
+.home-button {
   color: #000;
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  display: block;
-  text-align: center;
-  padding: 10px 16px;
-  text-decoration: none;
+  background: none;
+  padding: 0.2rem 0.5rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+  border: none;
+  cursor: pointer;
+  margin: 5px 10px;
 }
 
 .nav-button {
   color: #000;
   background: none;
-  padding: 6px 10px;
+  padding: 0.375rem 0.625rem;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 0.875rem;
   border: 0px solid #000;
   border-radius: 3px;
   cursor: pointer;
@@ -59,9 +59,9 @@
   background-clip: padding-box;
   border: 1px solid #000;
   border-radius: 3px;
-  padding: 6px 10px;
+  padding: 0.375rem 0.625rem;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 0.875rem;
   margin: 4px 9px;
   cursor: default;
 }
@@ -81,54 +81,14 @@
   border: 1px solid #000;
 }
 .user-icon {
-  width: 20px;
+  width: 1.25rem;
   margin: 2px 5px 0px 5px;
   padding: 0px;
   float: right;
-  /* border: 1px solid black; */
   border-radius: 50%
-  /* filter:  brightness(0) invert(1); */
 }
-/* .user-icon:hover {
-  filter: invert(17%) sepia(67%) saturate(7492%) hue-rotate(357deg) brightness(90%) contrast(128%);
-} */
-.user-tooltip {
-  visibility: hidden;
-  position: absolute;
-  width: 80px;
-  top: 50px;
-  left: -20px;
-  padding: 3px 6px;
-  border-radius: 3px;
-  background-color: #ffc300;
-  color: #000;
-  font-size: 14px;
-  font-weight: 600;
-  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
-}
-
-
-
-
-.about-button {
-  padding: 0px 6px;
-  border: 0px solid #fff;
-  border-radius: 5px;
-  background: none;
-  cursor: pointer;
-  color: #fff;
-  margin: 5px 4px;
-  font-size: 33px;
-  font-weight: 600;
-}
-.about-button:hover {
-  border: 2px solid #fff;
-  margin: 3px 2px;
-}
-
-
 
 .hamburger-icon {
-  width: 15px;
+  width: 1rem;
   margin: 5px 10px 0px 5px;
 }
