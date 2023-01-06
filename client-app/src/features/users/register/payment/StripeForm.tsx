@@ -69,7 +69,7 @@ export default observer(function StripeForm() {
             elements,
             confirmParams: {
                 // Make sure to change this to your payment completion page
-                return_url: "https://localhost:3000",
+                return_url: "https://sanctum.co.uk",
             },
         });
 
