@@ -104,7 +104,11 @@ namespace API
                     ))
                 .ScriptSources(s => s.Self().CustomSources(
                     "https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.79.0/dist/L.Control.Locate.min.js",
-                    "https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.umd.js"
+                    "https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.umd.js",
+                    "https://js.stripe.com/v3",
+                    "https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.79.0/dist/L.Control.Locate.min.js",
+                    "https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.umd.js",
+                    "Stripe.js"
                     ))
             );
 
