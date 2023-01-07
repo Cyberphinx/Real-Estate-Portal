@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import React, { useEffect } from "react";
 import { useStore } from "../../../../app/stores/store";
 import StripeForm from "./StripeForm";
-import '.././SignUp.css';
+import './PaymentWrapper.css';
 
 const stripePromise = loadStripe('pk_test_51L6i4NELV0KnfWeJgoqaVUo7jOES7YMDlWgtdHdwAXRsd2ExfVwP7sU9DhIyjES0JN7yly88c9HKpp0lBvtjIakX00pl6UGKM9');
 
@@ -30,7 +30,10 @@ export default observer(function PaymentWrapper() {
 
     return (<>
         {loadingInvoice || !clientSecret ?
-            <p>Loading secure payment function...</p>
+            <div style={{ position: "relative" }}>
+                <span className="payment-form-loader" />
+                <p className="payment-form-loading__text">Loading secure payment function...</p>
+            </div>
             :
             <Elements options={options} stripe={stripePromise}>
                 <StripeForm />

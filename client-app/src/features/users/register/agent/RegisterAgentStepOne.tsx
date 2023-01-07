@@ -3,7 +3,7 @@ import '.././SignUp.css';
 import { observer } from "mobx-react-lite";
 import MyTextInput from '../../../../app/common/form/MyTextInput';
 import AddressSearch from './AddressSearch';
-import { Language } from '../../../../app/model/User';
+import { AccountType, Language } from '../../../../app/model/User';
 
 interface Props {
     isValid: boolean;
@@ -24,7 +24,11 @@ export default observer(function RegisterAgentStepOne({ isValid, dirty, isSubmit
     useEffect(() => {
         setFieldValue("country", "United Kingdom");
         setFieldValue("language", Language.English);
-    }, [])
+        setFieldValue("accountType", AccountType.Agent);
+        setFieldValue("invoiceAmount", 660000);
+        setFieldValue("invoiceDescription", "Payment in 1 installment");
+        if (formType !== 1) setFormType(1);
+    }, [formType])
 
     return (
         <div>

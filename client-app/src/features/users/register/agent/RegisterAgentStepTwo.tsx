@@ -26,9 +26,9 @@ export default observer(function RegisterAgentStepTwo({ isValid, dirty, isSubmit
     ]
 
     const duration = [
-        "one-off payment, then it's free forever",
-        "pay within 6 months, then it's free forever",
-        "pay within 1 year, then it's free forever"
+        "one-off payment",
+        "for 6 months",
+        "for 1 year"
     ]
 
     return (
@@ -42,7 +42,7 @@ export default observer(function RegisterAgentStepTwo({ isValid, dirty, isSubmit
                         onClick={() => {
                             setPaymentType(0);
                             setFieldValue("invoiceAmount", 660000);
-                            setFieldValue("invoiceDescription", `One-off payment of £6000.`);
+                            setFieldValue("invoiceDescription", `One-off payment of £${amount[paymentType]}.`);
                         }}
                         style={paymentType === 0 ? { backgroundColor: "#fff" } : {}}
                     >
@@ -54,7 +54,7 @@ export default observer(function RegisterAgentStepTwo({ isValid, dirty, isSubmit
                         onClick={() => {
                             setPaymentType(1);
                             setFieldValue("invoiceAmount", 110000);
-                            setFieldValue("invoiceDescription", `Payment of £1000 per month for 6 months.`);
+                            setFieldValue("invoiceDescription", `Payment of £${amount[paymentType]} per month for 6 months.`);
                         }}
                         style={paymentType === 1 ? { backgroundColor: "#fff" } : {}}
                     >
@@ -66,7 +66,7 @@ export default observer(function RegisterAgentStepTwo({ isValid, dirty, isSubmit
                         onClick={() => {
                             setPaymentType(2);
                             setFieldValue("invoiceAmount", 55000);
-                            setFieldValue("invoiceDescription", `Payment of £500 per month for 12 months.`);
+                            setFieldValue("invoiceDescription", `Payment of £${amount[paymentType]} per month for 12 months.`);
                         }}
                         style={paymentType === 2 ? { backgroundColor: "#fff" } : {}}
                     >
@@ -74,7 +74,6 @@ export default observer(function RegisterAgentStepTwo({ isValid, dirty, isSubmit
                     </button>
                 </div>
                 <br />
-                {/* <hr className='payment-details__hr' /> */}
 
                 <div>
                     <p className='payment-details__amount' >
@@ -87,7 +86,7 @@ export default observer(function RegisterAgentStepTwo({ isValid, dirty, isSubmit
                 </div>
                 <hr className='payment-details__hr' />
                 <div>
-                    <p className='payment-details__title'>Sanctum membership benefits:</p>
+                    <p className='payment-details__title'>Sanctum lifetime membership:</p>
                     <p className='payment-details__desc'>- unlimited listings</p>
                     <p className='payment-details__desc'>- permanently free access</p>
                     <p className='payment-details__desc'>- free and fair featuring system</p>

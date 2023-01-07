@@ -1,9 +1,16 @@
+import { AccountType } from './../../model/User';
 import { AccessStatus } from '../../model/AccessStatus';
 import { Category, CookerType, FurnishedState, MediaType, PriceQualifier, PropertyType, TransactionType } from '../../model/ListingAggregate/ListingEnums';
 
 export const accessOptions = [
     {text: 'Private', value: AccessStatus.Private},
     {text: 'Public', value: AccessStatus.Public}
+]
+
+export const accountTypeOptions = [
+    {text: '( Customer )', value: AccountType.Customer},
+    {text: '( Estate Agent )', value: AccountType.Agent},
+    {text: '( Company )', value: AccountType.Company}
 ]
 
 export const transactionOptions = [

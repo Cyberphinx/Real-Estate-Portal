@@ -1,6 +1,6 @@
 import '.././SignUp.css';
 import { observer } from "mobx-react-lite";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useStore } from '../../../../app/stores/store';
 import Stepper from './agentStepper/Stepper';
 import PaymentWrapper from '../payment/PaymentWrapper';
@@ -11,6 +11,9 @@ export default observer(function RegisterAgentStepThree() {
     const { closeModal, formType, setFormType, paymentForm, setPaymentForm } = modalStore;
     const { clientSecret } = invoiceStore;
 
+    useEffect(() => {
+        if (formType !== 3) setFormType(3);
+    }, [formType])
 
     return (
         <div className="register-form">

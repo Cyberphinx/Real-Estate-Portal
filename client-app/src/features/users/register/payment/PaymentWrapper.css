@@ -1,0 +1,32 @@
+/* LOADING SPINNER START */
+.payment-form-loader::after {
+    font-size: 1rem;
+    position: absolute;
+    content: "";
+    width: 3rem;
+    height: 3rem;
+    top: -3rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    border: 0.3rem solid #1f51ff;
+    border-top-color: #f5f5f5;
+    border-radius: 50%;
+    animation: payment-form-loader-spinner 1s ease infinite;
+  }
+  
+  @keyframes payment-form-loader-spinner {
+    from {
+      transform: rotate(0turn);
+    }
+  
+    to {
+      transform: rotate(1turn);
+    }
+  }
+  /* LOADING SPINNER END */
+
+.payment-form-loading__text {
+    padding: 10rem 0 1rem 0;
+}

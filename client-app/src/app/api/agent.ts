@@ -59,7 +59,6 @@ axios.interceptors.response.use(
           store.userStore.logout();
           store.featureStore.setToast("show warn", "Session expired - please login again");
         }
-        store.featureStore.setToast("show danger", "Invalid login credentials");
         break;
       case 404:
         history.push("/not-found");

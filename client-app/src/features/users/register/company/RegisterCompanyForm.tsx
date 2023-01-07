@@ -13,9 +13,9 @@ interface Props {
 export default observer(function RegisterCompanyForm({setFieldValue}: Props) {
 
     useEffect(() => {
-        setFieldValue("accountType", AccountType.Company);
         setFieldValue("country", "United Kingdom");
         setFieldValue("language", Language.English);
+        setFieldValue("accountType", AccountType.Company);
     }, [])
 
     return (

@@ -40,11 +40,8 @@ export default observer(function Stepper() {
                     <button
                         type='button'
                         className='stepper-dot'
-                        style={(paymentForm === true) ? { backgroundColor: "#1F51FF" } : {}}
-                        disabled={false}
-                        onClick={() => {
-                            setPaymentForm(true);
-                        }}
+                        style={(formType === 3) ? { backgroundColor: "#1F51FF" } : {}}
+                        disabled={true}
                     >3</button>
                     <h3 className="stepper-timeline__title">Payment</h3>
                 </li>

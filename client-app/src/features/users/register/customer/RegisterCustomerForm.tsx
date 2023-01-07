@@ -14,9 +14,9 @@ interface Props {
 export default observer(function RegisterCustomerForm({isValid, dirty, isSubmitting, setFieldValue}: Props) {
 
     useEffect(() => {
-        setFieldValue("accountType", AccountType.Customer);
         setFieldValue("country", "United Kingdom");
         setFieldValue("language", Language.English);
+        setFieldValue("accountType", AccountType.Customer);
     }, [])
 
     return (

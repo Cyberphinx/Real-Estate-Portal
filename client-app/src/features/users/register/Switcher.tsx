@@ -8,6 +8,7 @@ import RegisterAgentStepTwo from './agent/RegisterAgentStepTwo';
 import Stepper from './agent/agentStepper/Stepper';
 import PaymentWrapper from './payment/PaymentWrapper';
 import { useStore } from '../../../app/stores/store';
+import { AccountType } from '../../../app/model/User';
 
 interface Props {
     isValid: boolean;
@@ -28,45 +29,69 @@ export default observer(function Switcher({ isValid, dirty, isSubmitting, setFie
     const { modalStore } = useStore();
     const { closeModal } = modalStore;
 
-    function getFormType(type: number) {
-        switch (type) {
-            case 0:
-                return <RegisterCustomerForm
+    const accountIndex = getFieldMeta("accountType").value.toString();
+
+    function selectForm() {
+        switch (accountIndex) {
+            case '1':
+                switch (formType) {
+                    case 1:
+                        return (
+                            <>
+                                <Stepper />
+                                <RegisterAgentStepOne
+                                    isValid={isValid}
+                                    dirty={dirty}
+                                    isSubmitting={isSubmitting}
+                                    setFieldValue={setFieldValue}
+                                    handleChange={handleChange}
+                                    setFieldTouched={setFieldTouched}
+                                    validateField={validateField}
+                                    getFieldMeta={getFieldMeta}
+                                    formType={formType}
+                                    setFormType={setFormType}
+                                />
+                            </>
+                        );
+                    case 2:
+                        return (
+                            <>
+                                <Stepper />
+                                <RegisterAgentStepTwo setFormType={setFormType} isValid={isValid} dirty={dirty}
+                                    isSubmitting={isSubmitting} setFieldValue={setFieldValue} />
+                            </>
+                        )
+                    default:
+                        return (
+                            <>
+                                <Stepper />
+                                <RegisterAgentStepOne
+                                    isValid={isValid}
+                                    dirty={dirty}
+                                    isSubmitting={isSubmitting}
+                                    setFieldValue={setFieldValue}
+                                    handleChange={handleChange}
+                                    setFieldTouched={setFieldTouched}
+                                    validateField={validateField}
+                                    getFieldMeta={getFieldMeta}
+                                    formType={formType}
+                                    setFormType={setFormType}
+                                />
+                            </>
+                        );
+                };
+
+            case '2':
+                return <RegisterCompanyForm
                     isValid={isValid}
                     dirty={dirty}
                     isSubmitting={isSubmitting}
                     setFieldValue={setFieldValue}
                 />;
-            case 1:
-                return (
-                    <>
-                        <Stepper />
-                        <RegisterAgentStepOne
-                            isValid={isValid}
-                            dirty={dirty}
-                            isSubmitting={isSubmitting}
-                            setFieldValue={setFieldValue}
-                            handleChange={handleChange}
-                            setFieldTouched={setFieldTouched}
-                            validateField={validateField}
-                            getFieldMeta={getFieldMeta}
-                            formType={formType}
-                            setFormType={setFormType}
-                        />
-                    </>
-                );
 
-            case 2:
-                return (
-                    <>
-                        <Stepper />
-                        <RegisterAgentStepTwo setFormType={setFormType} isValid={isValid} dirty={dirty}
-                            isSubmitting={isSubmitting} setFieldValue={setFieldValue} />
-                    </>
-                )
 
-            case 3:
-                return <RegisterCompanyForm
+            case '3':
+                return <RegisterCustomerForm
                     isValid={isValid}
                     dirty={dirty}
                     isSubmitting={isSubmitting}
@@ -82,9 +107,10 @@ export default observer(function Switcher({ isValid, dirty, isSubmitting, setFie
         }
     }
 
+
     return (
         <div>
-            {getFormType(formType)}
+            {selectForm()}
         </div>
 
     )

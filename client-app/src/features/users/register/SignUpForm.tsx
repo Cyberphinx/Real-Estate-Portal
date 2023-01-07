@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './SignUp.css';
-import { Formik, Form } from "formik";
+import { Formik, Form, Field } from "formik";
 import { observer } from "mobx-react-lite";
 import * as Yup from 'yup';
 import { v4 as uuid } from 'uuid';
@@ -10,6 +10,8 @@ import { AccountType, Language } from '../../../app/model/User';
 import Switcher from './Switcher';
 import { Currency } from '../../../app/model/ListingAggregate/ListingEnums';
 import RegisterAgentStepThree from './agent/RegisterAgentStepThree';
+import MySelectInput from '../../../app/common/form/MySelectInput';
+import { accountTypeOptions } from '../../../app/common/form/options';
 
 interface Props {
     formType: number;
@@ -78,6 +80,7 @@ export default observer(function SignUpForm({ formType, setFormType }: Props) {
 
     const paymentModal = <RegisterAgentStepThree />;
 
+
     return (
         <Formik
             initialValues={initialValues}
@@ -89,7 +92,7 @@ export default observer(function SignUpForm({ formType, setFormType }: Props) {
         >
             {({
                 handleSubmit, isSubmitting, errors, isValid, dirty, setFieldValue,
-                handleChange, setFieldTouched, validateField, getFieldMeta
+                handleChange, setFieldTouched, validateField, getFieldMeta, values
             }) => {
                 return (
                     <Form onSubmit={handleSubmit} autoComplete="off">
@@ -97,37 +100,12 @@ export default observer(function SignUpForm({ formType, setFormType }: Props) {
                             <p style={{ textAlign: "left", fontSize: "18px", fontWeight: "600", padding: "0px 20px 0px 20px" }}>
                                 Sign Up
                             </p>
-                            <select
-                                name="accountType"
-                                className='account-select-style'
-                                defaultValue={
-                                    formType === 0 ? AccountType.Customer : (formType === 3 ? AccountType.Company : AccountType.Agent)
-                                }
-                            >
-                                <option
-                                    value={AccountType.Customer}
-                                    onClick={() => {
-                                        setFormType(0);
-                                        setFieldValue("accountType", AccountType.Customer);
-                                    }}
-                                >( Individual )</option>
-                                <option
-                                    value={AccountType.Agent}
-                                    onClick={() => {
-                                        setFormType(1);
-                                        setFieldValue("accountType", AccountType.Agent);
-                                        setFieldValue("invoiceAmount", 660000);
-                                        setFieldValue("invoiceDescription", "Payment in 1 installment");
-                                    }}
-                                >( Estate Agent )</option>
-                                <option
-                                    value={AccountType.Company}
-                                    onClick={() => {
-                                        setFormType(3);
-                                        setFieldValue("accountType", AccountType.Company);
-                                    }}
-                                >( Tradesperson )</option>
-                            </select>
+                            {/* <h3>{getFieldMeta("accountType").value!.toString()}</h3> */}
+                            <Field as="select" name="accountType" className='account-select-style'>
+                                <option value={AccountType.Customer} >( Individual )</option>
+                                <option value={AccountType.Agent} >( Estate Agent )</option>
+                                <option value={AccountType.Company} >( Tradesperson )</option>
+                            </Field>
                         </div>
 
                         <p style={{ textAlign: "left", fontSize: "12px", fontWeight: "400", padding: "0px 20px 0px 20px" }}>

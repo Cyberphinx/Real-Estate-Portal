@@ -12,7 +12,6 @@ export default observer(function SignUp() {
     const { closeModal, formType, setFormType, paymentForm, setPaymentForm } = modalStore;
     const { clientSecret } = invoiceStore;
 
-
     return (
         <div className="register-form">
             <div className="modal-content">

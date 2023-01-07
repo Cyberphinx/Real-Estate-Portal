@@ -120,15 +120,15 @@
 .account-select-style {
   position: absolute;
   top: 0px;
-  left: 120px;
-  font-size: 12px;
+  left: 7rem;
+  font-size: 0.875rem;
   background: none;
   border-top: none;
   border-bottom: none;
   border-left: none;
   border-right: none;
   /* border-radius: 3px; */
-  padding: 5px 0px 5px 0px;
+  padding: 0.3rem;
   cursor: pointer;
 }
 .account-select-style:hover {
@@ -139,14 +139,14 @@
 .register-form-error {
   padding: 10px 0px 0px 0px;
   margin: 0px;
-  font-size: 14px;
+  font-size: 0.875rem;
   color: #ff0033;
 }
 
 .register-form-submission-error {
   padding: 10px 0px 0px 0px;
   margin: 0px 0px 20px 0px;
-  font-size: 14px;
+  font-size: 0.875rem;
   color: #ff0033;
 }
 

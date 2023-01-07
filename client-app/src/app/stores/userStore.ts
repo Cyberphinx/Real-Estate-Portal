@@ -92,6 +92,7 @@ export default class UserStore {
                 case AccountType.Agent:
                     store.modalStore.closeModal();
                     store.modalStore.openModal(paymentModal);
+                    if (store.modalStore.formType !== 3) store.modalStore.setFormType(3);
                     break;
                 case AccountType.Company:
                     history.push("/");
