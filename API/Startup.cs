@@ -88,7 +88,7 @@ namespace API
                     "https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.css"
                     )
                     .UnsafeInline())
-                .FontSources(s => s.Self())
+                .FontSources(s => s.Self().CustomSources("https://fonts.googleapis.com/"))
                 .FormActions(s => s.Self())
                 .FrameAncestors(s => s.Self())
                 .ImageSources(s => s.Self().CustomSources(

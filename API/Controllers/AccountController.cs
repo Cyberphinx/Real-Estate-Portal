@@ -21,6 +21,13 @@ using Application.ProfileApplication.ProfileDtos;
 using API.Extensions;
 using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Http;
+using Infrastructure.Email;
+using Microsoft.AspNetCore.WebUtilities;
+using System.Text;
+using SendGrid;
+using Microsoft.Extensions.Configuration;
+using SendGrid.Helpers.Mail;
+using Domain;
 
 namespace API.Controllers
 {
@@ -36,10 +43,12 @@ namespace API.Controllers
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly DataContext _context;
         private readonly PaymentService _paymentService;
+        private readonly EmailService _emailService;
 
         public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, TokenService tokenService,
-        RoleManager<IdentityRole> roleManager, DataContext context, PaymentService paymentService)
+        RoleManager<IdentityRole> roleManager, DataContext context, PaymentService paymentService, EmailService emailService)
         {
+            _emailService = emailService;
             _paymentService = paymentService;
             _context = context;
             _tokenService = tokenService;
@@ -54,7 +63,9 @@ namespace API.Controllers
         {
             var user = await _userManager.FindByEmailAsync(loginDto.Email); // if in doubt, check the database to see what a Normalized Email Address is
 
-            if (user == null) return Unauthorized();
+            if (user == null) return Unauthorized("Invalid email");
+
+            if (!user.EmailConfirmed) return Unauthorized("Email not confirmed");
 
             var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
 
@@ -64,7 +75,7 @@ namespace API.Controllers
                 return await CreateUserObject(user);
             }
 
-            return Unauthorized();
+            return Unauthorized("Invalid password");
         }
 
         [AllowAnonymous] // the enpoint here can be accessed anonymously when a new user is trying to register
@@ -163,20 +174,105 @@ namespace API.Controllers
             if (registerDto.AccountType == AccountType.Company) await _userManager.AddToRoleAsync(user, "Company");
 
 
-            if (result.Succeeded)
-            {
-                await SetRefreshToken(user);
-                return await CreateUserObject(user);
-            }
+            // Below is for non-email-verification
+            // if (result.Succeeded)
+            // {
+            //     await SetRefreshToken(user);
+            //     return await CreateUserObject(user);
+            // }
 
-            return BadRequest("Problem registering user");
+            // return BadRequest("Problem registering user");
+
+
+            // Below is for email verification
+            if (!result.Succeeded) return BadRequest("Problem registering user");
+
+            var origin = Request.Headers["origin"];
+            // var origin = "https://localhost:5000/api";
+            var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            token = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(token));
+
+            var verifyUrl = $"{origin}/account/verifyEmail?token={token}&email={user.Email}";
+            var message = $"<p>Please click the below link to verify your email address:</p><p><a href='{verifyUrl}'>Click to verify email</a></p>";
+
+            // SendinBlue
+            var verificationEmail = new EmailDto
+            {
+                RecipientName = user.UserName,
+                RecipientEmail = user.Email,
+                Subject = "Please verify email",
+                Body = message
+            };
+            _emailService.SendEmailAsync(verificationEmail);
+
+            return Ok("Registration success - please verify email");
+        }
+
+        // method just to test if SendinBlue works
+        [AllowAnonymous]
+        [HttpPost("testSendinBlue")]
+        public IActionResult TestSendinBlue()
+        {
+            var newEmail = new EmailDto
+            {
+                RecipientName = "Test Recipient",
+                RecipientEmail = "[INPUT TEST EMAIL]",
+                Subject = "The Vampire Lestat",
+                Body = "The story is told from the point of view of the vampire Lestat de Lioncourt as narrator, while Interview is narrated by Louis de Pointe du Lac"
+            };
+
+            _emailService.SendEmailAsync(newEmail);
+            return Ok();
+        }
+
+
+        [AllowAnonymous]
+        [HttpPost("verifyEmail")]
+        public async Task<IActionResult> VerifyEmail(string token, string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null) return Unauthorized();
+            var decodedTokenBytes = WebEncoders.Base64UrlDecode(token);
+            var decodedToken = Encoding.UTF8.GetString(decodedTokenBytes);
+            var result = await _userManager.ConfirmEmailAsync(user, decodedToken);
+
+            if (!result.Succeeded) return BadRequest("Could not verify email address");
+
+            return Ok("Email confirmed - you can now login");
+        }
+
+        [AllowAnonymous]
+        [HttpGet("resendVerifyLink")]
+        public async Task<IActionResult> ResendVerifyLink(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null) return Unauthorized();
+
+            var origin = Request.Headers["origin"];
+            // var origin = "https://localhost:5000/api";
+            var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            token = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(token));
+
+            var verifyUrl = $"{origin}/account/verifyEmail?token={token}&email={user.Email}";
+            var message = $"<p>Please click the below link to verify your email address:</p><p><a href='{verifyUrl}'>Click to verify email</a></p>";
+
+            // SendinBlue
+            var verificationEmail = new EmailDto
+            {
+                RecipientName = user.UserName,
+                RecipientEmail = user.Email,
+                Subject = "Please verify email",
+                Body = message
+            };
+            _emailService.SendEmailAsync(verificationEmail);
+
+            return Ok("Email verification link resent");
         }
 
         [Authorize]
         [HttpGet]
         public async Task<ActionResult<UserDto>> GetCurrentUser()
         {
-            // var user = await _userManager.FindByNameAsync(User.Identity.Name);
             var user = await _userManager.FindByEmailAsync(User.FindFirstValue(ClaimTypes.Email));
 
             await SetRefreshToken(user);

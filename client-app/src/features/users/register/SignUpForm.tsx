@@ -10,8 +10,7 @@ import { AccountType, Language } from '../../../app/model/User';
 import Switcher from './Switcher';
 import { Currency } from '../../../app/model/ListingAggregate/ListingEnums';
 import RegisterAgentStepThree from './agent/RegisterAgentStepThree';
-import MySelectInput from '../../../app/common/form/MySelectInput';
-import { accountTypeOptions } from '../../../app/common/form/options';
+import RegisterSuccess from './RegisterSuccess';
 
 interface Props {
     formType: number;
@@ -79,13 +78,14 @@ export default observer(function SignUpForm({ formType, setFormType }: Props) {
     const currentValidationSchema = registerValidation[formType];
 
     const paymentModal = <RegisterAgentStepThree />;
+    const successModal = <RegisterSuccess />;
 
 
     return (
         <Formik
             initialValues={initialValues}
             onSubmit={(values, { setErrors, setSubmitting }) => {
-                register(values, setSubmitting, paymentModal).catch(error => setErrors({ error }));
+                register(values, setSubmitting, paymentModal, successModal).catch(error => setErrors({ error }));
                 setActiveFeature(0);
             }}
             validationSchema={currentValidationSchema}
@@ -109,7 +109,7 @@ export default observer(function SignUpForm({ formType, setFormType }: Props) {
                         </div>
 
                         <p style={{ textAlign: "left", fontSize: "12px", fontWeight: "400", padding: "0px 20px 0px 20px" }}>
-                            By continuing, you agree are setting up a Sanctum account and agree to our <span className='register-legal-text'>User Agreement</span> and <span className='register-legal-text'>Privacy Policy</span>.
+                            By continuing, you are setting up a Sanctum account and agree to our <span className='register-legal-text'>User Agreement</span> and <span className='register-legal-text'>Privacy Policy</span>.
                         </p>
 
                         <Switcher

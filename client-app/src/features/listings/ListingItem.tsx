@@ -43,6 +43,14 @@ export default observer(function ListingItem({ listing, predicate }: Props) {
         ${listing?.listingLocation.postalCode && (listing?.listingLocation.postalCode)}
         `;
 
+    const addressShort = `
+        ${listing?.listingLocation.streetName && (listing?.listingLocation.streetName + ", ")}
+        ${listing?.listingLocation.locality && (listing?.listingLocation.locality + ", ")}
+        ${listing?.listingLocation.townOrCity && (listing?.listingLocation.townOrCity + ", ")}
+        ${listing?.listingLocation.county && (listing?.listingLocation.county + ", ")}
+        ${listing?.listingLocation.postalCode && (listing?.listingLocation.postalCode)}
+        `;
+
     function handlePrev(event: SyntheticEvent) {
         event.stopPropagation();
         if (listing!.contents.indexOf(image) === 0) return null;
@@ -77,27 +85,27 @@ export default observer(function ListingItem({ listing, predicate }: Props) {
                         <button className="right-arr" onClick={(e) => handleNext(e)}><img className="right-ico" src="/assets/next.svg" alt="next" /></button>
                     </div>
                     <div className="carousel" style={{ gridTemplateColumns: `repeat(${listing!.contents.length}, calc(100vh / 13))` }} ref={scrollRef}>
-                            {listing?.contents.map((content: Content, index: number) => (
-                                <div style={{ position: "relative" }} key={content.id}>
-                                    <img className="thumbnail" src={content.url} alt={content.caption} onClick={(e) => handleImage(e, content)} />
-                                    <span className="numbering">{index + 1}</span>
-                                </div>
-                            ))}
+                        {listing?.contents.map((content: Content, index: number) => (
+                            <div style={{ position: "relative" }} key={content.id}>
+                                <img className="thumbnail" src={content.url} alt={content.caption} onClick={(e) => handleImage(e, content)} />
+                                <span className="numbering">{index + 1}</span>
+                            </div>
+                        ))}
                     </div>
                     <button className="left-arr-thumbnails" onClick={(e) => scroll(e, -120)}><img className="left-ico" src="/assets/previous.svg" alt="previous" /></button>
                     <button className="right-arr-thumbnails" onClick={(e) => scroll(e, 120)}><img className="right-ico" src="/assets/next.svg" alt="next" /></button>
                 </section>
                 <section className="card-overlay">
                     <div className="card-price" title={`${priceQualifier(listing!.pricing.priceQualifier)} in ${listing!.pricing.currency.toString().toUpperCase()}`}>
-                        <b style={{ fontSize: "18px" }}>{priceFormat.format(listing!.pricing.price)}</b>
-                        {predicate.get("channel") === "sale" ? null : <span style={{fontSize:"10px"}}>{rentFrequencyShort(listing!)}</span>}
+                        <b style={{ fontSize: "1.125rem"}}>{priceFormat.format(listing!.pricing.price)}</b>
+                        {predicate.get("channel") === "sale" ? null : <span style={{ fontSize: "10px" }}>{rentFrequencyShort(listing!)}</span>}
                     </div>
                     <div className="card-attribute">
-                        <p style={{ fontSize: "16px", padding: "0px", margin: "0px" }}>{listing!.totalBedrooms} Beds {propertyType(listing!)}</p>
+                        <p style={{ fontSize: "1rem", padding: "0px", margin: "0px" }}><span>{listing!.totalBedrooms}</span> Beds {propertyType(listing!)}</p>
                     </div>
                 </section>
                 <section className="card-description">
-                    <span style={{ fontSize: "12px" }}>{address}</span>
+                    <span style={{ fontSize: "0.75rem" }}>{addressShort}</span>
                 </section>
             </div>
         </div>

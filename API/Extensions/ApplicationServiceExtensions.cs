@@ -5,6 +5,7 @@ using Application.Core;
 using Application.Interfaces;
 using Application.ListingApplication;
 using Domain;
+using Infrastructure.Email;
 using Infrastructure.Security;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -91,6 +92,7 @@ namespace API.Extensions
             services.AddAutoMapper(typeof(MappingProfiles).Assembly);
             services.AddScoped<IUserAccessor, UserAccessor>();
             services.AddScoped<PaymentService>();
+            services.AddScoped<EmailService>();
             services.AddControllers().AddJsonOptions(opt => 
             {
                 opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());

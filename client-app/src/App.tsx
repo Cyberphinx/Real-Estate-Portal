@@ -12,6 +12,8 @@ import LoginForm from './features/users/LoginForm';
 import ListingDetailsPage from './features/listings/newTab/ListingDetailsPage';
 import CompanyDetailsPage from './features/companies/newTab/CompanyDetailsPage';
 import JobDetailsPage from './features/networks/newTab/JobDetailsPage';
+import RegisterSuccess from './features/users/register/RegisterSuccess';
+import ConfirmEmail from './features/users/register/ConfirmEmail';
 
 function App() {
   const {commonStore, userStore} = useStore();
@@ -37,6 +39,8 @@ function App() {
         <Route path='/login' element={<LoginForm />} />
         <Route path='/errors' element={<TestErrors />}/>
         <Route path='/server-error' element={<ServerError />} />
+        <Route path='/account/registerSuccess' element={<Dashboard />} />
+        <Route path='/account/verifyEmail' element={<Dashboard />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </div>

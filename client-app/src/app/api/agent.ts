@@ -88,7 +88,9 @@ const Account = {
   assignrole: (role: RoleFormValues) => requests.put<RoleFormValues>("/account/assignrole", role),
   checkusername: (username: string) => requests.get<string>(`/account/username/${username}`),
   checkemail: (email: string) => requests.get<string>(`/account/email/${email}`),
-  refreshToken: () => requests.post<User>('/account/refreshToken', {})
+  refreshToken: () => requests.post<User>('/account/refreshToken', {}),
+  verifyEmail: (token:string, email: string) => requests.post<void>(`/account/verifyEmail?token=${token}&email=${email}`, {}),
+  resendVerifyLink: (email: string) => requests.get(`/account/resendVerifyLink?email=${email}`)
 }
 
 const Profiles = {

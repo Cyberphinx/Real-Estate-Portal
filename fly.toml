@@ -1,4 +1,4 @@
-# fly.toml file generated for sanctum on 2023-01-03T22:08:29Z
+# fly.toml file generated for sanctum on 2023-01-07T18:42:04Z
 
 app = "sanctum"
 kill_signal = "SIGINT"
@@ -7,7 +7,7 @@ processes = []
 
 [env]
   ASPNETCORE_URLS = "http://+:8080"
-  StripeSettings__PublishableKey="pk_test_51L6i4NELV0KnfWeJgoqaVUo7jOES7YMDlWgtdHdwAXRsd2ExfVwP7sU9DhIyjES0JN7yly88c9HKpp0lBvtjIakX00pl6UGKM9"
+  StripeSettings__PublishableKey = "pk_test_51L6i4NELV0KnfWeJgoqaVUo7jOES7YMDlWgtdHdwAXRsd2ExfVwP7sU9DhIyjES0JN7yly88c9HKpp0lBvtjIakX00pl6UGKM9"
 
 [experimental]
   allowed_public_ports = []

@@ -26,7 +26,7 @@ export default observer(function RegisterAgentStepThree() {
                         Sign Up
                     </p>
                     <p style={{ textAlign: "left", fontSize: "12px", fontWeight: "400", padding: "0px 20px 0px 20px" }}>
-                        By continuing, you agree are setting up a Sanctum account and agree to our <span className='register-legal-text'>User Agreement</span> and <span className='register-legal-text'>Privacy Policy</span>.
+                        By continuing, you are setting up a Sanctum account and agree to our <span className='register-legal-text'>User Agreement</span> and <span className='register-legal-text'>Privacy Policy</span>.
                     </p>
                 </div>
                 <Stepper />

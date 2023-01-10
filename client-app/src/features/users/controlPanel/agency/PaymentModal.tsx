@@ -42,7 +42,7 @@ export default observer(function SignUp({invoice}:Props) {
                         Make Payment: {priceFormatter((invoice.amount / 100), invoice.currency)}
                     </p>
                     <p style={{ textAlign: "left", fontSize: "0.75rem", fontWeight: "normal", padding: "0px 10px 0px 10px" }}>
-                        By continuing, you agree are setting up a Sanctum account and agree to our <span className='register-legal-text'>User Agreement</span> and <span className='register-legal-text'>Privacy Policy</span>.
+                        By continuing, you are setting up a Sanctum account and agree to our <span className='register-legal-text'>User Agreement</span> and <span className='register-legal-text'>Privacy Policy</span>.
                     </p>
                 </div>
                 <br />

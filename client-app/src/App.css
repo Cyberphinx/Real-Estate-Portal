@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand');
+
 /* SCROLLBAR */
 /* Works on Firefox */
 * {
@@ -7,7 +9,7 @@
 
 /* Works on Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
-  width: 12px;
+  width: 0.75rem;
 }
 
 *::-webkit-scrollbar-track {
@@ -16,10 +18,10 @@
 
 *::-webkit-scrollbar-thumb {
   background-color: gray;
-  border-radius: 20px;
+  border-radius: 1.25rem;
   border: 3px solid #eee;
 }
 
 * {
-  font-family: Raleway;
+  font-family: "Quicksand", sans-serif;
 }

@@ -18,7 +18,7 @@ export default observer(function LoginForm() {
                 <Formik
                     initialValues={{ email: "", password: "", error: null }}
                     onSubmit={(values, { setErrors, setSubmitting }) => {
-                        login(values, setSubmitting).catch(errors => setErrors({ error: "Invalid email or password" }));
+                        login(values, setSubmitting).catch(error => setErrors({error: error.response.data}));
                     }}
                     validationSchema={Yup.object({
                         email: Yup.string().required("The email is required").email("The email must be a valid email"),
@@ -29,7 +29,7 @@ export default observer(function LoginForm() {
                         <Form onSubmit={handleSubmit} autoComplete="off">
                             <p style={{ textAlign: "left", fontSize: "18px", fontWeight: "600", padding: "0px 20px 0px 20px" }}>Log In</p>
                             <p style={{ textAlign: "left", fontSize: "12px", fontWeight: "400", padding: "0px 20px 20px 20px" }}>
-                                By continuing, you agree are setting up a Sanctum account and agree to our <span className='login-legal-text'>User Agreement</span> and <span className='login-legal-text'>Privacy Policy</span>.
+                                By continuing, you are setting up a Sanctum account and agree to our <span className='login-legal-text'>User Agreement</span> and <span className='login-legal-text'>Privacy Policy</span>.
                             </p>
                             <MyTextInput inputclassname='login-input-style' errorclassname='login-form-error' name="email" placeholder="Email" />
                             <br />

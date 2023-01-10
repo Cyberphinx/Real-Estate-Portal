@@ -6,6 +6,7 @@ import { makeAutoObservable } from 'mobx';
 import { User } from "../model/User";
 import agent from '../api/agent';
 import { store } from './store';
+import { Router, Navigate } from 'react-router-dom';
 
 export default class UserStore {
     user: User | null = null;
@@ -75,18 +76,16 @@ export default class UserStore {
         this.loadingUsers = state;
       }
 
-    register = async ( creds: RegisterFormValues, setSubmitting: any, paymentModal: JSX.Element) => {
+    register = async ( creds: RegisterFormValues, setSubmitting: any, paymentModal: JSX.Element, successModal: JSX.Element) => {
         setSubmitting(true);
         try {
-            const user = await agent.Account.register(creds);
-            store.commonStore.setToken(user.token);
-            this.startRefreshTokenTimer(user);
-            runInAction(() => this.user = user);
+            await agent.Account.register(creds);
 
             switch (creds.accountType) {
                 case AccountType.Customer:
-                    history.push("/");
                     store.modalStore.closeModal();
+                    history.push(`/account/registerSuccess?email=${creds.email}`);
+                    store.modalStore.openModal(successModal);
                     store.featureStore.setToast("show success", "Account successfully created!");
                     break;
                 case AccountType.Agent:

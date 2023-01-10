@@ -1,16 +1,13 @@
+import React, { useState } from 'react';
 import './SignUp.css';
 import { observer } from "mobx-react-lite";
 import { useStore } from '../../../app/stores/store';
-import React, { useState } from 'react';
 import SignUpForm from './SignUpForm';
-import PaymentWrapper from './payment/PaymentWrapper';
-import Stepper from './agent/agentStepper/Stepper';
 
 
 export default observer(function SignUp() {
-    const { modalStore, invoiceStore } = useStore();
-    const { closeModal, formType, setFormType, paymentForm, setPaymentForm } = modalStore;
-    const { clientSecret } = invoiceStore;
+    const { modalStore } = useStore();
+    const { closeModal, formType, setFormType } = modalStore;
 
     return (
         <div className="register-form">
