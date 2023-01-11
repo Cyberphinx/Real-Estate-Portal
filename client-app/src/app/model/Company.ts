@@ -153,13 +153,11 @@ export interface Stock {
     addedOn: Date;
     accessStatus: AccessStatus;
     availableBedrooms: number;
-    availableFromDate: Date;
     bathrooms: number;
     image: string;
     lifeCycleStatus: LifeCycleStatus;
     listingReference: string;
     listingLocation: ListingLocation;
-    newBuild: boolean;
     pricing: Pricing;
     propertyType:PropertyType;
     totalBedrooms: number;

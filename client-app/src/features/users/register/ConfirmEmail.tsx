@@ -56,9 +56,9 @@ export default observer(function ConfirmEmail() {
                     <div style={{ padding: "2rem 1.25rem" }}>
                         <img src="https://res.cloudinary.com/dwcsdudyn/image/upload/v1673305279/Icons/greentick_ubm9ce.svg" alt="succeeded" style={{ width: "5rem" }} />
                         <p style={{ textAlign: "center", fontSize: "1.25rem", fontWeight: "bold", padding: "0rem 1.25rem" }}>
-                            Email has been verified
+                            Email verification
                         </p>
-                        <p style={{ padding: "0rem 1.25rem", lineHeight: "1.5rem" }}>You can now login</p>
+                        <p style={{ padding: "0rem 1.25rem", lineHeight: "1.5rem" }}>Email has been verified - You can now login</p>
                         <button className="resend-button"
                             onClick={() => {
                                 closeModal();

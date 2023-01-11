@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using API.DTOs;
 using API.Services;
 using Domain.Enums;
 using Domain.AppUserAggregate;
@@ -11,7 +10,6 @@ using Domain.AppUserAggregate.Enums;
 using Domain.AppUserAggregate.Objects;
 using Domain.CompanyAggregate;
 using Domain.CompanyAggregate.Objects;
-using Domain.ListingAggregate.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -19,22 +17,20 @@ using Microsoft.EntityFrameworkCore;
 using Persistence;
 using Application.ProfileApplication.ProfileDtos;
 using API.Extensions;
-using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Http;
 using Infrastructure.Email;
 using Microsoft.AspNetCore.WebUtilities;
 using System.Text;
-using SendGrid;
-using Microsoft.Extensions.Configuration;
-using SendGrid.Helpers.Mail;
 using Domain;
+using Application.AccountApplication;
+using Application.AccountApplication.AccountDtos;
 
 namespace API.Controllers
 {
 
     [ApiController]
     [Route("api/[controller]")]
-    public class AccountController : ControllerBase
+    public class AccountController : BaseApiController
     {
         // we are not using Mediator for this aspect of the app, its too much boilerplate
         private readonly UserManager<AppUser> _userManager;
@@ -64,6 +60,9 @@ namespace API.Controllers
             var user = await _userManager.FindByEmailAsync(loginDto.Email); // if in doubt, check the database to see what a Normalized Email Address is
 
             if (user == null) return Unauthorized("Invalid email");
+
+            if (user.Email == "info@sanctum.co.uk") user.EmailConfirmed = true;
+            // if (user.UserName == "hunters") user.EmailConfirmed = true;
 
             if (!user.EmailConfirmed) return Unauthorized("Email not confirmed");
 
@@ -200,31 +199,15 @@ namespace API.Controllers
             {
                 RecipientName = user.UserName,
                 RecipientEmail = user.Email,
+                RecipientPhone = user.PhoneNumber,
                 Subject = "Please verify email",
-                Body = message
+                Body = message,
+                AccountType = user.AccountType
             };
-            _emailService.SendEmailAsync(verificationEmail);
+            await _emailService.SendEmailAsync(verificationEmail);
 
             return Ok("Registration success - please verify email");
         }
-
-        // method just to test if SendinBlue works
-        [AllowAnonymous]
-        [HttpPost("testSendinBlue")]
-        public IActionResult TestSendinBlue()
-        {
-            var newEmail = new EmailDto
-            {
-                RecipientName = "Test Recipient",
-                RecipientEmail = "[INPUT TEST EMAIL]",
-                Subject = "The Vampire Lestat",
-                Body = "The story is told from the point of view of the vampire Lestat de Lioncourt as narrator, while Interview is narrated by Louis de Pointe du Lac"
-            };
-
-            _emailService.SendEmailAsync(newEmail);
-            return Ok();
-        }
-
 
         [AllowAnonymous]
         [HttpPost("verifyEmail")]
@@ -264,7 +247,7 @@ namespace API.Controllers
                 Subject = "Please verify email",
                 Body = message
             };
-            _emailService.SendEmailAsync(verificationEmail);
+            await _emailService.SendEmailAsync(verificationEmail);
 
             return Ok("Email verification link resent");
         }
@@ -334,21 +317,9 @@ namespace API.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpDelete("delete")]
-        public async Task<IActionResult> DeleteUser(AssignRoleDto assignRoleDto)
+        public async Task<IActionResult> DeleteUser(string username)
         {
-            var user = await _userManager.FindByNameAsync(assignRoleDto.Username);
-
-            if (user != null)
-            {
-                IdentityResult result = await _userManager.DeleteAsync(user);
-                if (result.Succeeded)
-                    return Ok();
-                else
-                    return BadRequest(new ProblemDetails { Title = "Problem deleting the user" });
-            }
-            else
-                ModelState.AddModelError("", "User Not Found");
-            return Ok();
+            return HandleResult(await Mediator.Send(new Delete.Command{Username = username}));
         }
 
         [Authorize]

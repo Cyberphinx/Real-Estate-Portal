@@ -97,7 +97,7 @@ export default observer(function SignUpForm({ formType, setFormType }: Props) {
                 return (
                     <Form onSubmit={handleSubmit} autoComplete="off">
                         <div style={{ position: "relative" }}>
-                            <p style={{ textAlign: "left", fontSize: "18px", fontWeight: "600", padding: "0px 20px 0px 20px" }}>
+                            <p style={{ textAlign: "left", fontSize: "1.125rem", fontWeight: "bold", padding: "0rem 1.25rem" }}>
                                 Sign Up
                             </p>
                             {/* <h3>{getFieldMeta("accountType").value!.toString()}</h3> */}
@@ -108,7 +108,7 @@ export default observer(function SignUpForm({ formType, setFormType }: Props) {
                             </Field>
                         </div>
 
-                        <p style={{ textAlign: "left", fontSize: "12px", fontWeight: "400", padding: "0px 20px 0px 20px" }}>
+                        <p style={{ textAlign: "left", fontSize: "0.75rem", fontWeight: "normal", padding: "0rem 1.25rem" }}>
                             By continuing, you are setting up a Sanctum account and agree to our <span className='register-legal-text'>User Agreement</span> and <span className='register-legal-text'>Privacy Policy</span>.
                         </p>
 

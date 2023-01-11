@@ -8,6 +8,7 @@ processes = []
 [env]
   ASPNETCORE_URLS = "http://+:8080"
   StripeSettings__PublishableKey = "pk_test_51L6i4NELV0KnfWeJgoqaVUo7jOES7YMDlWgtdHdwAXRsd2ExfVwP7sU9DhIyjES0JN7yly88c9HKpp0lBvtjIakX00pl6UGKM9"
+  SendinBlue_User="Sanctum"
 
 [experimental]
   allowed_public_ports = []

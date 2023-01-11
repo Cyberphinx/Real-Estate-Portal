@@ -5,6 +5,7 @@ using Application.Core;
 using Application.Interfaces;
 using Application.ListingApplication;
 using Domain;
+using Infrastructure.Crm;
 using Infrastructure.Email;
 using Infrastructure.Security;
 using MediatR;
@@ -93,6 +94,8 @@ namespace API.Extensions
             services.AddScoped<IUserAccessor, UserAccessor>();
             services.AddScoped<PaymentService>();
             services.AddScoped<EmailService>();
+            services.AddScoped<ContactsService>();
+            services.AddScoped<AttributesService>();
             services.AddControllers().AddJsonOptions(opt => 
             {
                 opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());

@@ -164,7 +164,8 @@ namespace Persistence.Migrations
                         name: "FK_AppUserReview_AspNetUsers_AppUserId",
                         column: x => x.AppUserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -277,7 +278,8 @@ namespace Persistence.Migrations
                         name: "FK_Invoices_AspNetUsers_AppUserId",
                         column: x => x.AppUserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -298,7 +300,8 @@ namespace Persistence.Migrations
                         name: "FK_Membership_AspNetUsers_AppUserId",
                         column: x => x.AppUserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -317,7 +320,30 @@ namespace Persistence.Migrations
                         name: "FK_Photo_AspNetUsers_AppUserId",
                         column: x => x.AppUserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RefreshToken",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    AppUserId = table.Column<string>(type: "text", nullable: true),
+                    Token = table.Column<string>(type: "text", nullable: true),
+                    Expires = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Revoked = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RefreshToken", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RefreshToken_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -851,10 +877,10 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "1", "3fb92e13-507e-4e13-bf86-c9f665f847c0", "Company", "COMPANY" },
-                    { "2", "0f37cf62-a211-4f14-b5ab-5926ef67ec64", "Customer", "CUSTOMER" },
-                    { "3", "3610c2ff-0d11-4ab0-839b-c5ba587438cf", "Agency", "AGENCY" },
-                    { "4", "894e3134-1135-45db-bb8b-19eaaabe59dd", "Admin", "ADMIN" }
+                    { "1", "e804ed1c-a01f-4233-937a-3ddccedcd2b7", "Company", "COMPANY" },
+                    { "2", "3e47a972-2fb7-4fcb-87fa-2a9537e93dcd", "Customer", "CUSTOMER" },
+                    { "3", "0715d80a-96cb-4ff3-976a-8c13bfa5cbcd", "Agency", "AGENCY" },
+                    { "4", "2db85076-9944-41c2-9836-4327c9ad4259", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -1017,6 +1043,11 @@ namespace Persistence.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_RefreshToken_AppUserId",
+                table: "RefreshToken",
+                column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ServiceCharge_ListingId",
                 table: "ServiceCharge",
                 column: "ListingId",
@@ -1099,6 +1130,9 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "Pricing");
+
+            migrationBuilder.DropTable(
+                name: "RefreshToken");
 
             migrationBuilder.DropTable(
                 name: "ServiceCharge");

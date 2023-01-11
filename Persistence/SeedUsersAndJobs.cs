@@ -85,8 +85,8 @@ namespace Persistence
 
                 var adminUser = new AppUser
                 {
-                    UserName = "admin",
-                    Email = "admin@test.com"
+                    UserName = "sanctum",
+                    Email = "info@sanctum.co.uk"
                 };
 
                 await userManager.CreateAsync(adminUser, "Pa$$w0rd");
@@ -94,7 +94,7 @@ namespace Persistence
 
                 var agencyUsers = new List<AppUser>
                 {
-                    new AppUser{UserName = "savills", Email = "savills@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Agent},
+                    new AppUser{UserName = "agentne", Email = "savills@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Agent},
                     new AppUser{UserName = "hunters", Email = "hunters@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Agent},
                     new AppUser{UserName = "RogerParry", Email = "rogerparry@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Agent},
                     new AppUser{UserName = "Purple", Email = "purple@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Agent},

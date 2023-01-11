@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using API.DTOs;
+using Application.AccountApplication.AccountDtos;
 using Application.ProfileApplication.ProfileDtos;
 using Domain.AppUserAggregate;
 using Domain.AppUserAggregate.Objects;

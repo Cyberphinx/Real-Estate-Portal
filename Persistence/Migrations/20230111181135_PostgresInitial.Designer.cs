@@ -13,8 +13,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230106165711_RefreshTokens")]
-    partial class RefreshTokens
+    [Migration("20230111181135_PostgresInitial")]
+    partial class PostgresInitial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -1236,28 +1236,28 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "8def38f4-1200-4f4d-bf38-6534a89dc10b",
+                            ConcurrencyStamp = "e804ed1c-a01f-4233-937a-3ddccedcd2b7",
                             Name = "Company",
                             NormalizedName = "COMPANY"
                         },
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "46a3f3af-b765-4743-9220-0484a607efa8",
+                            ConcurrencyStamp = "3e47a972-2fb7-4fcb-87fa-2a9537e93dcd",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
                             Id = "3",
-                            ConcurrencyStamp = "68d35aaf-fc76-448c-be23-bf6ed8129b13",
+                            ConcurrencyStamp = "0715d80a-96cb-4ff3-976a-8c13bfa5cbcd",
                             Name = "Agency",
                             NormalizedName = "AGENCY"
                         },
                         new
                         {
                             Id = "4",
-                            ConcurrencyStamp = "bb5f19c0-9403-43f0-a1e9-a130785fc2b5",
+                            ConcurrencyStamp = "2db85076-9944-41c2-9836-4327c9ad4259",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -1373,7 +1373,8 @@ namespace Persistence.Migrations
                 {
                     b.HasOne("Domain.AppUserAggregate.AppUser", "AppUser")
                         .WithMany("Reviews")
-                        .HasForeignKey("AppUserId");
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("AppUser");
                 });
@@ -1382,7 +1383,8 @@ namespace Persistence.Migrations
                 {
                     b.HasOne("Domain.AppUserAggregate.AppUser", "AppUser")
                         .WithMany("Invoices")
-                        .HasForeignKey("AppUserId");
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("AppUser");
                 });
@@ -1402,7 +1404,8 @@ namespace Persistence.Migrations
                 {
                     b.HasOne("Domain.AppUserAggregate.AppUser", "AppUser")
                         .WithOne("Membership")
-                        .HasForeignKey("Domain.AppUserAggregate.Objects.Membership", "AppUserId");
+                        .HasForeignKey("Domain.AppUserAggregate.Objects.Membership", "AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("AppUser");
                 });
@@ -1411,7 +1414,8 @@ namespace Persistence.Migrations
                 {
                     b.HasOne("Domain.AppUserAggregate.AppUser", "AppUser")
                         .WithMany("Photos")
-                        .HasForeignKey("AppUserId");
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("AppUser");
                 });
@@ -1420,7 +1424,8 @@ namespace Persistence.Migrations
                 {
                     b.HasOne("Domain.AppUserAggregate.AppUser", "AppUser")
                         .WithMany("RefreshTokens")
-                        .HasForeignKey("AppUserId");
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("AppUser");
                 });

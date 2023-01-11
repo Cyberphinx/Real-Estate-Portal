@@ -48,7 +48,6 @@ namespace API
             // services.AddIdentityCore<AppUser>()
             //     .AddRoles<IdentityRole>()
             //     .AddEntityFrameworkStores<DataContext>();
-            services.AddScoped<PaymentService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -83,6 +82,7 @@ namespace API
             app.UseCsp(opt => opt
                 .BlockAllMixedContent() // no mixes of http and https
                 .StyleSources(s => s.Self().CustomSources(
+                    "https://fonts.googleapis.com/",
                     "https://unpkg.com/leaflet@1.8.0/dist/leaflet.css",
                     "https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.79.0/dist/L.Control.Locate.min.css",
                     "https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.css"

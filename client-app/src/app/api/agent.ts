@@ -55,7 +55,7 @@ axios.interceptors.response.use(
         }
         break;
       case 401:
-        if (status === 401 && headers['www-authenticate'].startsWith('Bearer error="invalid_token"')) {
+        if (status === 401 && headers['www-authenticate']?.startsWith('Bearer error="invalid_token"')) {
           store.userStore.logout();
           store.featureStore.setToast("show warn", "Session expired - please login again");
         }

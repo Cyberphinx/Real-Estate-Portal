@@ -103,9 +103,11 @@ export default class UserStore {
                     break;
             }
             setSubmitting(false);
-        } catch (error) {
+        } catch (error: any) {
             setSubmitting(false);
-            throw error;
+            if (error?.response?.status === 400) throw error;
+            store.modalStore.closeModal();
+            console.log(500);
         }
     }
 
@@ -154,7 +156,7 @@ export default class UserStore {
     private startRefreshTokenTimer(user: User) {
         const jwtToken = JSON.parse(atob(user.token.split('.')[1]));
         const expires = new Date(jwtToken.exp * 1000);
-        const timeout = expires.getTime() - Date.now() - (30 * 1000);
+        const timeout = expires.getTime() - Date.now() - (300 * 1000); // refreshes every 5 minutes
         this.refreshTokenTimeout = setTimeout(this.refreshToken, timeout);
     }
 

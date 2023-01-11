@@ -16,7 +16,7 @@ export default function Toolbar() {
 
     return (
         <div className="toolbar-container" style={{gridTemplateColumns:"auto 50px 50px 50px"}}>
-            <section className="toolbar-title">{selectedListing?.company.displayName}</section>
+            <section className="toolbar-title">{selectedListing?.listingReference}</section>
             {/* <section className="toolbar-button" style={{width:"10px"}}><Watch listing={selectedListing} /></section> */}
             <section className="toolbar-button"><Locate selectedItem={selectedListing} /></section>
             <section className="toolbar-button">

@@ -6,7 +6,7 @@ using Domain;
 using Domain.AppUserAggregate.Enums;
 using Domain.LocationAggregate;
 
-namespace API.DTOs
+namespace Application.AccountApplication.AccountDtos
 {
     public class PublicUserDto
     {

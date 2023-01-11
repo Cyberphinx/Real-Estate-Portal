@@ -68,6 +68,33 @@ namespace Persistence
                 .HasOne(x => x.Listing)
                 .WithMany(x => x.Watchers)
                 .HasForeignKey(x => x.ListingId);
+
+
+            // Cascade delete for all AppUser's children
+            builder.Entity<Membership>()
+                .HasOne(x => x.AppUser)
+                .WithOne(x => x.Membership)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<Invoice>()
+                .HasOne(x => x.AppUser)
+                .WithMany(x => x.Invoices)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<Photo>()
+                .HasOne(x => x.AppUser)
+                .WithMany(x => x.Photos)
+                .OnDelete(DeleteBehavior.Cascade);
+            
+            builder.Entity<AppUserReview>()
+                .HasOne(x => x.AppUser)
+                .WithMany(x => x.Reviews)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<RefreshToken>()
+                .HasOne(x => x.AppUser)
+                .WithMany(x => x.RefreshTokens)
+                .OnDelete(DeleteBehavior.Cascade);
         }
 
     }

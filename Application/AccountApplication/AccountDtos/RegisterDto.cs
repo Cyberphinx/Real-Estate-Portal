@@ -10,7 +10,7 @@ using Domain.LocationAggregate;
 using Domain.CompanyAggregate.Objects;
 using Domain.ListingAggregate.Enums;
 
-namespace API.DTOs
+namespace Application.AccountApplication.AccountDtos
 {
     public class RegisterDto
     {

@@ -52,7 +52,7 @@ namespace API.Services
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddMinutes(1), // later we will look into RefreshToken
+                Expires = DateTime.UtcNow.AddMinutes(10), // token expires after 10 minutes
                 SigningCredentials = creds
             };
 
