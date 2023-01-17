@@ -28,7 +28,7 @@ namespace Domain.CompanyAggregate
         public DateTime LastModified { get; set; }
         public string LegalName { get; set; }
         public ICollection<Listing> Listings { get; set; }
-        public List<RedressScheme> RedressSchemes { get; set; } 
+        public RedressScheme RedressScheme { get; set; } 
         public ICollection<CompanyReview> Reviews { get; set; }
         public string ServiceLocations { get; set; }
         public string SummaryDescription { get; set; }

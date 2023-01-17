@@ -4,7 +4,6 @@ import './Dropdown.css';
 import LoginForm from "../../features/users/LoginForm";
 import { useStore } from "../../app/stores/store";
 import SignUp from "./register/SignUp";
-import RegisterAgentStepThree from "./register/agent/RegisterAgentStepThree";
 
 export default observer(function Dropdown() {
     const { modalStore } = useStore();

@@ -342,8 +342,8 @@ namespace Persistence.Migrations
                     b.Property<string>("LegalName")
                         .HasColumnType("text");
 
-                    b.Property<int[]>("RedressSchemes")
-                        .HasColumnType("integer[]");
+                    b.Property<int>("RedressScheme")
+                        .HasColumnType("integer");
 
                     b.Property<int[]>("ServiceCategories")
                         .HasColumnType("integer[]");
@@ -1234,28 +1234,28 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "e804ed1c-a01f-4233-937a-3ddccedcd2b7",
+                            ConcurrencyStamp = "a2111ddd-61c2-4f57-a412-219fb02676d7",
                             Name = "Company",
                             NormalizedName = "COMPANY"
                         },
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "3e47a972-2fb7-4fcb-87fa-2a9537e93dcd",
+                            ConcurrencyStamp = "26e366c0-c198-4dea-90a4-ede72aeff603",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
                             Id = "3",
-                            ConcurrencyStamp = "0715d80a-96cb-4ff3-976a-8c13bfa5cbcd",
+                            ConcurrencyStamp = "8b0b411c-6bc0-4187-9cd9-dda31780a434",
                             Name = "Agency",
                             NormalizedName = "AGENCY"
                         },
                         new
                         {
                             Id = "4",
-                            ConcurrencyStamp = "2db85076-9944-41c2-9836-4327c9ad4259",
+                            ConcurrencyStamp = "1793131c-400f-45a9-803b-c4a4e7ecd3dc",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

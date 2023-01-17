@@ -25,7 +25,7 @@ namespace Application.CompanyApplication.CompanyDtos
         public DateTime LastModified { get; set; }
         public string LegalName { get; set; }
         public ICollection<Stock> Listings { get; set; }
-        public List<RedressScheme> RedressSchemes { get; set; } 
+        public RedressScheme RedressScheme { get; set; } 
         public ICollection<CompanyReviewDto> Reviews { get; set; }
         public string ServiceLocations { get; set; }
         public string SummaryDescription { get; set; }

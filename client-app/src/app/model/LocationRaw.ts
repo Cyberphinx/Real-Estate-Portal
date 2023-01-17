@@ -29,8 +29,8 @@ export interface LocationIQAddress {
     city: string;
     county: string;
     state: string;
-    state_code: string;
+    state_code: string; // USA mostly
     postcode: string;
     country: string;
-    country_code: string;
+    country_code: string; 
 }

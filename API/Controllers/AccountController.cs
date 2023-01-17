@@ -62,7 +62,8 @@ namespace API.Controllers
             if (user == null) return Unauthorized("Invalid email");
 
             if (user.Email == "info@sanctum.co.uk") user.EmailConfirmed = true;
-            // if (user.UserName == "hunters") user.EmailConfirmed = true;
+            if (user.UserName == "hunters") user.EmailConfirmed = true;
+            if (user.UserName == "tom") user.EmailConfirmed = true;
 
             if (!user.EmailConfirmed) return Unauthorized("Email not confirmed");
 
@@ -123,7 +124,10 @@ namespace API.Controllers
                     LegalName = registerDto.CompanyLegalName,
                     DisplayName = registerDto.DisplayName,
                     IsMain = registerDto.IsMainCompany,
-                    CompanyAddress = registerDto.LegalCompanyAddress
+                    CompanyAddress = registerDto.LegalCompanyAddress,
+                    CompanyRegistrationNumber = registerDto.CompanyNumber,
+                    IcoRegistrationNumber = registerDto.IcoNumber,
+                    RedressScheme = registerDto.RedressScheme
                 };
 
                 var items = new List<InvoiceItem>();
@@ -277,6 +281,26 @@ namespace API.Controllers
             return userDtos;
         }
 
+        [Authorize(Roles = "Admin")]
+        [HttpGet("activate")]
+        public async Task<IActionResult> ActivateAccount(string username)
+        {
+            var user = await _userManager.FindByNameAsync(username);
+            if (user == null) return BadRequest("User does not exist");
+
+            var companies = await _context.Companies.Where(x => x.Username == username).ToListAsync();
+            if (companies == null) return BadRequest("User does not have any companies");
+
+            user.Membership.IsActive = true;
+
+            foreach (var company in companies)
+            {
+                company.AccessStatus = AccessStatus.Public;
+            }
+
+            return Ok("User and their companies have been activated");
+        }
+
         // check whether or not username is taken
         [AllowAnonymous]
         [HttpGet("username/{username}")]
@@ -319,7 +343,7 @@ namespace API.Controllers
         [HttpDelete("delete")]
         public async Task<IActionResult> DeleteUser(string username)
         {
-            return HandleResult(await Mediator.Send(new Delete.Command{Username = username}));
+            return HandleResult(await Mediator.Send(new Delete.Command { Username = username }));
         }
 
         [Authorize]

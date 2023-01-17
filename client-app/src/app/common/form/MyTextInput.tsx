@@ -3,7 +3,7 @@ import React from "react";
 import './MyTextInput.css';
 
 interface Props {
-    placeholder: string;
+    placeholder?: string;
     name: string;
     type?: string;
     label?: string;
@@ -12,6 +12,7 @@ interface Props {
     list?: string;
     inputclassname: string;
     errorclassname: string;
+    labelclassname?: string;
     onChange?: (e: any) => void;
     onKeyDown?: (e: any) => void;
     validate?: (value: any) => undefined | string | Promise<any>;
@@ -22,7 +23,7 @@ export default function MyTextInput(props: Props) {
 
     return (
         <div className="text-input-container">
-            <label>{props.label}</label>
+            <label className={props.labelclassname}>{props.label}</label>
             <input className={props.inputclassname} {...field} {...props} />
             {meta.touched && meta.error ? (
                 <p className={props.errorclassname}>{meta.error}</p>

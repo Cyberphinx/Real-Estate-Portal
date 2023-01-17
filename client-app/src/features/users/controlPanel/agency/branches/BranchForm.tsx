@@ -1,14 +1,15 @@
 import { Form, Formik } from "formik";
 import { observer } from "mobx-react-lite";
 import React from "react";
-import MyTextInput from "../../../../app/common/form/MyTextInput";
-import { AccessStatus } from "../../../../app/model/AccessStatus";
-import { ServiceCategory } from "../../../../app/model/ServiceCategory";
-import { useStore } from "../../../../app/stores/store";
 import './BranchForm.css';
 import * as Yup from 'yup';
 import { v4 as uuid } from 'uuid';
-import { UnitOfTime } from "../../../../app/model/Membership";
+import { useStore } from "../../../../../app/stores/store";
+import { AccessStatus } from "../../../../../app/model/AccessStatus";
+import { RedressScheme } from "../../../../../app/model/Company";
+import { UnitOfTime } from "../../../../../app/model/Membership";
+import { ServiceCategory } from "../../../../../app/model/ServiceCategory";
+import MyTextInput from "../../../../../app/common/form/MyTextInput";
 
 interface Props {
     setBranchForm: any;
@@ -66,7 +67,7 @@ export default observer(function BranchForm({ setBranchForm }: Props) {
             vatPercentage: 20
         },
         jobs: [],
-        redressSchemes: [],
+        redressSchems: RedressScheme.None,
         reviews: [],
         serviceLocations: "",
         summaryDescription: "",

@@ -7,9 +7,9 @@ import './Agency.css';
 import { capitalizeFirstLetter } from "../../../../app/common/HelperFunctions";
 import MyJobPosts from "../common/MyJobPosts";
 import Messages from "../common/Messages";
-import AgentListings from "./AgentListings";
-import UserCompanies from "./AgencyBranches";
+import AgentBranches from "./branches/AgencyBranches";
 import AccountSettings from "./account/AccountSettings";
+import AgentListings from "./listings/AgentListings";
 
 interface Props {
     user: User | null;
@@ -23,13 +23,13 @@ export default observer(function Customer({ user }: Props) {
         loadProfile(user!.username);
         loadHeadquarter(user!.username);
         return () => {
-            setActiveTab(0);
+            setActiveTab(2);
         }
     }, [loadProfile, loadHeadquarter, user!.username, setActiveTab])
 
     const panes = [
         <AccountSettings />,
-        <UserCompanies />,
+        <AgentBranches />,
         <AgentListings />,
         <MyJobPosts />,
         <Messages />
@@ -44,8 +44,8 @@ export default observer(function Customer({ user }: Props) {
                         <ul className="agent-menu">
                             <li>
                                 <button
-                                    className={activeTab === 0 ? "agent-menu-button-active" : "agent-menu-button"}
-                                    onClick={() => setActiveTab(0)}>Account settings</button>
+                                    className={activeTab === 2 ? "agent-menu-button-active" : "agent-menu-button"}
+                                    onClick={() => setActiveTab(2)}>Property listings</button>
                             </li>
                             <li>
                                 <button
@@ -54,8 +54,8 @@ export default observer(function Customer({ user }: Props) {
                             </li>
                             <li>
                                 <button
-                                    className={activeTab === 2 ? "agent-menu-button-active" : "agent-menu-button"}
-                                    onClick={() => setActiveTab(2)}>Property listings</button>
+                                    className={activeTab === 0 ? "agent-menu-button-active" : "agent-menu-button"}
+                                    onClick={() => setActiveTab(0)}>Account settings</button>
                             </li>
                             {/* <li>
                                 <button

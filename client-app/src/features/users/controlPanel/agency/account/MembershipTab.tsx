@@ -28,7 +28,7 @@ export default observer(function MembershipTab() {
             <p className="account-tab-subtitle">Status</p>
             <div style={{ position: "relative" }}>
                 <p className="account-tab-label" style={{ paddingBottom: "40px" }}>Membership status</p>
-                {profile?.membership.isActive ? 
+                {profile?.membership?.isActive ? 
                 <p className="status-active">Active</p> 
                 : 
                 <div>

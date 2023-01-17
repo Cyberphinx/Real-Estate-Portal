@@ -1,0 +1,44 @@
+.listing-form {
+  padding: 20px;
+  width: 50rem;
+}
+
+.listing-form-contents {
+  position: relative;
+  border: 1px solid #ccc;
+  padding: 5px 20px 20px 20px;
+  border-radius: 5px;
+  background: #fff;
+  margin-bottom: 20px;
+}
+
+.listing-form-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.listing-form-subtitle {
+  font-size: 16px;
+}
+
+.listing-form-label {
+  padding: 10px 0px;
+  margin: 0px;
+}
+
+.breadcrumb:hover {
+  cursor: pointer;
+}
+
+.listing-form-master-button {
+  margin: -10px 0px 10px 10px;
+  padding: 6px 12px;
+  color: #1f51ff;
+  background: #fff;
+  border: 1px solid #1f51ff;
+  border-radius: 5px;
+}
+.listing-form-master-button:hover {
+  cursor: pointer;
+  background: rgba(31, 81, 255, 0.05);
+}

@@ -1,0 +1,25 @@
+#minimap {
+  height: 300px;
+  width: 47rem;
+  border: 1px solid black;
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+
+.listing-location__input-style {
+  border: 1px solid #ccc;
+  border-radius: 0.2rem;
+  width: 96%;
+  padding: 2rem 0.625rem 0.625rem 0.625rem;
+  font-size: 1.125rem;
+}
+
+.listing-location__input-label {
+  position: absolute;
+  top: 0.2rem;
+  left: 0.625rem;
+  z-index: 1;
+  color: grey;
+  font-size: 0.875rem;
+}

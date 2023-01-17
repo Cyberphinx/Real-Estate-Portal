@@ -36,9 +36,11 @@ namespace Application.AccountApplication.AccountDtos
         // for company sign up
         public AccessStatus CompanyAccessStatus { get; set; }
         public string CompanyLegalName { get; set; }
-
         public bool IsMainCompany { get; set; }
         public CompanyAddress LegalCompanyAddress { get; set; }
+        public string CompanyNumber { get; set; }
+        public string IcoNumber { get; set; }
+        public RedressScheme RedressScheme { get; set; }
 
         // for property agent signup fee
         public string InvoiceDescription { get; set; }

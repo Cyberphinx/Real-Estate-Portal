@@ -1,9 +1,8 @@
 import { observer } from "mobx-react-lite";
-import React, { SyntheticEvent, useEffect, useRef, useState } from "react";
+import React, { SyntheticEvent, useEffect } from "react";
 import { Link } from "react-router-dom";
 import LoadingPlaceholder from "../../app/common/loading/LoadingPlaceholder";
-import { Job, JobContent } from "../../app/model/Job";
-import { ServiceCategory } from "../../app/model/ServiceCategory";
+import { Job } from "../../app/model/Job";
 import { useStore } from "../../app/stores/store";
 import LoginForm from "../users/LoginForm";
 import JobItem from "./JobItem";
@@ -11,7 +10,7 @@ import './Services.css';
 
 export default observer(function Services() {
     const { jobStore, userStore, profileStore, modalStore } = useStore();
-    const { jobs, loadingJobs, loadJobs, selectJob, selectedJob } = jobStore;
+    const { jobs, loadingJobs } = jobStore;
     const { isLoggedIn } = userStore;
     const { openModal } = modalStore;
 

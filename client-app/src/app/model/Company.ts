@@ -26,7 +26,7 @@ export interface Company {
     lastMofidied: Date;
     legalName: string;
     listings: Stock[];
-    redressSchemes: RedressScheme[];
+    redressScheme: RedressScheme;
     reviews: CompanyReview[];
     serviceLocations: string;
     summaryDescription: string;
@@ -58,7 +58,7 @@ export class CompanyFormValues {
     lastModified: Date = new Date();
     legalName: string = "";
     listings?: Stock[];
-    redressSchemes?: RedressScheme[] = [];
+    redressScheme?: RedressScheme;
     reviews?: CompanyReview[];
     serviceLocations?: string;
     summaryDescription: string = "";
@@ -84,7 +84,7 @@ export class CompanyFormValues {
             this.lastModified = company.lastModified;
             this.legalName = company.legalName;
             this.listings = company.listings;
-            this.redressSchemes = company.redressSchemes;
+            this.redressScheme = company.redressScheme;
             this.reviews = company.reviews;
             this.serviceLocations = company.serviceLocations;
             this.summaryDescription = company.summaryDescription;

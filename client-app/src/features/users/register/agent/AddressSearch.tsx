@@ -33,6 +33,8 @@ export default observer(function AddressSearch({ setFieldValue, setFieldTouched,
     const [state, setState] = useState<string | undefined>("");
     const [postcode, setPostcode] = useState<string | undefined>("");
     const [country, setCountry] = useState<string | undefined>("");
+    const [latitude, setLatitude] = useState<number | undefined>(0);
+    const [longitude, setLongitude] = useState<number | undefined>(0);
 
     const handleSearchChange = (e: any) => {
         setValue(e.target.value);
@@ -100,6 +102,14 @@ export default observer(function AddressSearch({ setFieldValue, setFieldTouched,
         if (postalCodeValue) setFieldTouched("legalCompanyAddress.postalCode", true);
     }, [postalCodeValue])
 
+    useEffect(() => {
+        setFieldValue("legalCompanyAddress.latitude", latitude);
+    }, [latitude])
+
+    useEffect(() => {
+        setFieldValue("legalCompanyAddress.longitude", longitude);
+    }, [longitude])
+
     return (
         <div>
             <MyTextInput
@@ -130,6 +140,8 @@ export default observer(function AddressSearch({ setFieldValue, setFieldTouched,
                                     setState(item.raw.address.state ? item.raw.address.state : "");
                                     setPostcode(item.raw.address.postcode ? item.raw.address.postcode : "");
                                     setCountry(item.raw.address.country ? item.raw.address.country : "");
+                                    setLatitude(item.y ? item.y : 0);
+                                    setLongitude(item.x ? item.x : 0);
                                     // set field values from state variables
                                     setFieldValue("legalCompanyAddress.displayAddress", displayAddress);
                                     setFieldValue("legalCompanyAddress.propertyNumberOrName", propertyNumberOrName);
@@ -140,8 +152,8 @@ export default observer(function AddressSearch({ setFieldValue, setFieldTouched,
                                     setFieldValue("legalCompanyAddress.postalCode", postcode);
                                     setFieldTouched("legalCompanyAddress.postalCode", true);
                                     setFieldValue("legalCompanyAddress.country", country);
-                                    setFieldValue("legalCompanyAddress.latitude", item.y);
-                                    setFieldValue("legalCompanyAddress.longitude", item.x);
+                                    setFieldValue("legalCompanyAddress.latitude", latitude);
+                                    setFieldValue("legalCompanyAddress.longitude", longitude);
                                     setRawResults(null);
                                     setShowAddressInputs(true);
                                 }}

@@ -1,12 +1,8 @@
 import { observer } from "mobx-react-lite";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import DateTag from "../../../../app/common/tags/DateTag";
-import { AccessStatus } from "../../../../app/model/AccessStatus";
-import { JobLifeCycle, JobNetworkRole } from "../../../../app/model/Job";
-import { UserCompanyDto, UserJobDto } from "../../../../app/model/Profile";
-import { ServiceCategory } from "../../../../app/model/ServiceCategory";
-import { useStore } from "../../../../app/stores/store";
+import { UserCompanyDto } from "../../../../../app/model/Profile";
+import { useStore } from "../../../../../app/stores/store";
 import './AgencyBranches.css';
 
 
@@ -32,23 +28,24 @@ export default observer(function UserCompanies() {
         <div className="my-jobs-container">
             <div className="my-jobs-toolbar">
                 <p className="my-jobs-title">Agency branches</p>
-                {/* <section>
+                <section>
                     <button
                         className={searchTerm === "_" ? "my-job-button-active" : "my-job-button"}
-                        onClick={() => setSearchTerm("_")}>
+                        onClick={() => {}}>
                         All
                     </button>
                     <button
                         className={searchTerm === "open" ? "my-job-button-active" : "my-job-button"}
-                        onClick={() => setSearchTerm("open")}>
-                        Open
+                        onClick={() => {}}>
+                        Public
                     </button>
                     <button
-                        className={searchTerm === "completed" ? "my-job-button-active" : "my-job-button"}
-                        onClick={() => setSearchTerm("completed")}>
-                        Completed
+                        className={searchTerm === "open" ? "my-job-button-active" : "my-job-button"}
+                        onClick={() => {}}>
+                        Private
                     </button>
-                </section> */}
+                    <button className="agent-listing-master-button" onClick={() => {}}>Create branch</button>
+                </section>
             </div>
             <div className="my-jobs-contents">
                 {loadingUserCompanies ? <p>Loading branches...</p> :

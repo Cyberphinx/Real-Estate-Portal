@@ -1,8 +1,7 @@
 import './PaymentModal.css';
 import { observer } from "mobx-react-lite";
-import React, { useState } from 'react';
+import React from 'react';
 import { useStore } from '../../../../app/stores/store';
-import PaymentWrapper from '../../register/payment/PaymentWrapper';
 import { Invoice } from '../../../../app/model/Profile';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
@@ -16,9 +15,8 @@ interface Props {
 }
 
 export default observer(function SignUp({invoice}:Props) {
-    const { userStore, modalStore } = useStore();
+    const { modalStore } = useStore();
     const { closeModal } = modalStore;
-    const { isLoggedIn, user } = userStore;
 
     const clientSecret = invoice.clientSecret;
 

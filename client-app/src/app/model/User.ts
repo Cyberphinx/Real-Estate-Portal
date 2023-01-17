@@ -1,4 +1,4 @@
-import { CompanyAddress } from './Company';
+import { CompanyAddress, RedressScheme } from './Company';
 import { AccessStatus } from './AccessStatus';
 import { Currency } from './ListingAggregate/ListingEnums';
 
@@ -35,6 +35,9 @@ export interface RegisterFormValues {
     companyLegalName?: string;
     isMainCompany?: boolean;
     legalCompanyAddress?: CompanyAddress;
+    companyNumber?: string;
+    icoNumber: string;
+    redressScheme: RedressScheme;
     invoiceDescription?: string;
     invoiceAmount?: number; // in the smallest currency unit, ie. Cents
     invoiceCurrency?: Currency; 

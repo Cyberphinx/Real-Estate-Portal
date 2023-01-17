@@ -11,6 +11,7 @@ import Switcher from './Switcher';
 import { Currency } from '../../../app/model/ListingAggregate/ListingEnums';
 import RegisterAgentStepThree from './agent/RegisterAgentStepThree';
 import RegisterSuccess from './RegisterSuccess';
+import { RedressScheme } from '../../../app/model/Company';
 
 interface Props {
     formType: number;
@@ -46,6 +47,9 @@ export default observer(function SignUpForm({ formType, setFormType }: Props) {
             latitude: 0,
             longitude: 0,
         },
+        companyNumber: "",
+        icoNumber: "",
+        redressScheme: RedressScheme.None,
         invoiceDescription: "",
         invoiceAmount: 0,
         invoiceCurrency: Currency.gbp,

@@ -6,9 +6,7 @@ import RegisterCompanyForm from './company/RegisterCompanyForm';
 import RegisterAgentStepOne from './agent/RegisterAgentStepOne';
 import RegisterAgentStepTwo from './agent/RegisterAgentStepTwo';
 import Stepper from './agent/agentStepper/Stepper';
-import PaymentWrapper from './payment/PaymentWrapper';
 import { useStore } from '../../../app/stores/store';
-import { AccountType } from '../../../app/model/User';
 
 interface Props {
     isValid: boolean;
@@ -26,8 +24,6 @@ interface Props {
 export default observer(function Switcher({ isValid, dirty, isSubmitting, setFieldValue,
     handleChange, formType, setFieldTouched, validateField, getFieldMeta, setFormType }: Props) {
 
-    const { modalStore } = useStore();
-    const { closeModal } = modalStore;
 
     const accountIndex = getFieldMeta("accountType").value.toString();
 

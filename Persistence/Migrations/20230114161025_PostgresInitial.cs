@@ -74,7 +74,7 @@ namespace Persistence.Migrations
                     IsMain = table.Column<bool>(type: "boolean", nullable: false),
                     LastModified = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     LegalName = table.Column<string>(type: "text", nullable: true),
-                    RedressSchemes = table.Column<int[]>(type: "integer[]", nullable: true),
+                    RedressScheme = table.Column<int>(type: "integer", nullable: false),
                     ServiceLocations = table.Column<string>(type: "text", nullable: true),
                     SummaryDescription = table.Column<string>(type: "text", nullable: true),
                     ServiceCategories = table.Column<int[]>(type: "integer[]", nullable: true),
@@ -877,10 +877,10 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "1", "e804ed1c-a01f-4233-937a-3ddccedcd2b7", "Company", "COMPANY" },
-                    { "2", "3e47a972-2fb7-4fcb-87fa-2a9537e93dcd", "Customer", "CUSTOMER" },
-                    { "3", "0715d80a-96cb-4ff3-976a-8c13bfa5cbcd", "Agency", "AGENCY" },
-                    { "4", "2db85076-9944-41c2-9836-4327c9ad4259", "Admin", "ADMIN" }
+                    { "1", "a2111ddd-61c2-4f57-a412-219fb02676d7", "Company", "COMPANY" },
+                    { "2", "26e366c0-c198-4dea-90a4-ede72aeff603", "Customer", "CUSTOMER" },
+                    { "3", "8b0b411c-6bc0-4187-9cd9-dda31780a434", "Agency", "AGENCY" },
+                    { "4", "1793131c-400f-45a9-803b-c4a4e7ecd3dc", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.CreateIndex(

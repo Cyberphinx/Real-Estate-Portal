@@ -1,18 +1,17 @@
-import axios from "axios";
 import './JobDetailsPage.css';
 import { observer } from "mobx-react-lite";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import LoadingComponent from "../../../app/common/loading/LoadingComponent";
 import NavBarForJob from "../../../app/layout/NavBarForJob";
-import { Job, JobContent, JobLifeCycle, JobNetworkRole, NetworkDto } from "../../../app/model/Job";
+import { JobContent, JobNetworkRole, NetworkDto } from "../../../app/model/Job";
 import { useStore } from "../../../app/stores/store";
 import { ServiceCategory } from "../../../app/model/ServiceCategory";
 import { dateFormatter } from "../../../app/common/HelperFunctions";
 
 export default observer(function JobDetailsPage() {
     const { id } = useParams();
-    const { jobStore, userStore, profileStore } = useStore();
+    const { jobStore, userStore } = useStore();
     const { loadJob, loadingJob, selectedJob: job, cancelSelectJob } = jobStore;
 
     const [applicant, setApplicant] = useState<NetworkDto>();

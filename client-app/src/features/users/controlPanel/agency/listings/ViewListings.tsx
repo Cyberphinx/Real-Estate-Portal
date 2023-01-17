@@ -1,30 +1,26 @@
 import { observer } from "mobx-react-lite";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import priceFormatter from "../../../../app/common/PriceFormatter";
-import DateTag from "../../../../app/common/tags/DateTag";
-import { Stock } from "../../../../app/model/Company";
-import { Frequency, priceQualifier, TransactionType } from "../../../../app/model/ListingAggregate/ListingEnums";
-import { PagingParams } from "../../../../app/model/Pagination";
-import { UserCompanyDto } from "../../../../app/model/Profile";
-import { useStore } from "../../../../app/stores/store";
+import priceFormatter from "../../../../../app/common/PriceFormatter";
+import DateTag from "../../../../../app/common/tags/DateTag";
+import { Stock } from "../../../../../app/model/Company";
+import { PagingParams } from "../../../../../app/model/Pagination";
+import { UserCompanyDto } from "../../../../../app/model/Profile";
+import { useStore } from "../../../../../app/stores/store";
 import './AgentListings.css';
 
+interface Props {
+    setActivePane: (value: number) => void;
+}
 
-export default observer(function AgentListings() {
+export default observer(function AgentListings({setActivePane}: Props) {
     const { profileStore, companyStore, agentListingStore } = useStore();
-    const { profile, userCompanies, loadUserCompanies, loadingUserCompanies } = profileStore;
+    const { userCompanies, loadingUserCompanies } = profileStore;
     const { } = companyStore;
     const { loadAgentListings, loadingAgentListings, agentListings, predicate, setPredicate,
         setPagingParams, loadingNext, setLoadingNext, pagination } = agentListingStore;
 
-    const [searchTerm, setSearchTerm] = useState<string>("rent");
     const [branch, setBranch] = useState<UserCompanyDto>(userCompanies[0]);
-
-    useEffect(() => {
-        loadUserCompanies(profile!.username);
-        if (userCompanies) loadAgentListings();
-    }, [loadUserCompanies, loadAgentListings, profile, searchTerm, branch]);
 
     function handleGetNext() {
         setLoadingNext(true);
@@ -33,7 +29,8 @@ export default observer(function AgentListings() {
     }
 
     return (
-        <div className="property-watchlist-container">
+        <div className="agent-listings">
+
             <div className="watchlist-toolbar">
                 <p className="watchlist-title">Property listings</p>
                 <section className="watchlist-button-container">
@@ -41,7 +38,8 @@ export default observer(function AgentListings() {
                         onClick={() => setPredicate("channel", "rent")}>Rent</button>
                     <button className={predicate.get("channel") === "sale" ? "watchlist-button-active" : "watchlist-button"}
                         onClick={() => setPredicate("channel", "sale")}>Sale</button>
-                    <select className="agent-listing-master-button">
+                    <button className="agent-listing-master-button" onClick={() => setActivePane(1)}>Create listing</button>
+                    <select className="agent-listing-master-button" defaultValue="placeholder">
                         {loadingUserCompanies ?
                             <option>Loading branches...</option>
                             : userCompanies.map((company: UserCompanyDto) => (
@@ -51,15 +49,17 @@ export default observer(function AgentListings() {
                                         setBranch(company);
                                         setPredicate("agentId", company.id.toString());
                                     }}
-                                    selected={predicate.get("agentId") === company.id ? true : false}
+                                    // value={predicate.get("agentId") === company.id ? true : false}
+                                    value={company.displayName}
                                 >
                                     {company.displayName}
                                 </option>
                             ))}
-                        <option disabled selected={true} > -- select a branch -- </option>
+                        <option disabled value="placeholder" > -- select a branch -- </option>
                     </select>
                 </section>
             </div>
+
             <div className="agent-listing-container">
                 {/* {loadingUserCompanies && <p>Loading branches...</p>} */}
                 {loadingAgentListings && !loadingNext ? <p>Loading listings...</p> :
@@ -85,15 +85,17 @@ export default observer(function AgentListings() {
                     ))
                 }
             </div>
+
             {agentListings.length > 0 ? <div className="agent-listing-pagination-container">
                 <p style={{ fontSize: "14px" }}>Showing {agentListings.length} of {pagination?.totalItems} items</p>
                 <button className={loadingNext ? "agent-listing-loading-button" : "agent-listing-load-button"}
-                 onClick={() => handleGetNext()}>
+                    onClick={() => handleGetNext()}>
                     {loadingNext && <span className="loading-next"></span>}
                     Load 12 more
-                    </button>
+                </button>
             </div>
-            : (loadingAgentListings ? null : <p>Select a branch to view its listings.</p>)}
+                : (loadingAgentListings ? null : <p>Select a branch to view its listings.</p>)}
+
         </div>
     )
 })

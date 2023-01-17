@@ -1,8 +1,8 @@
 import { AccessStatus } from "../AccessStatus";
 import { UnitOfTime } from "../Membership";
 import {
-    Category, CentralHeating, CookerType, CouncilTaxBand, DecorativeCondition,  Eligibility, FurnishedState, Incentive,
-    LifeCycleStatus, ListedBuildingGrade, OutsideSpace, Parking, PropertyType, RentalTerm, Tenure, Utility, UnitOfArea 
+    Category, CentralHeating, CookerType, CouncilTaxBand, DecorativeCondition, Eligibility, FurnishedState, Incentive,
+    LifeCycleStatus, ListedBuildingGrade, OutsideSpace, Parking, PropertyType, RentalTerm, Tenure, Utility, UnitOfArea
 } from "./ListingEnums";
 import { Content, DetailedDescription, EpcRatings, ListingLocation, Owner, Pricing, ServiceCharge, WatcherDto, } from "./ListingObjects";
 
@@ -101,86 +101,125 @@ export class Listing implements Listing {
 }
 
 export class ListingFormValues {
-    id?: string;
-    accessibility?: boolean;
+    id?: string = '';
+    accessibility?: boolean = undefined;
     addedOn: Date = new Date();
-    administrationFees?: string;
-    annualBusinessRates?: number;
-    areasTotal?: number;
-    areasUnits?: UnitOfArea;
+    administrationFees?: string = '';
+    annualBusinessRates?: number = undefined;
+    areasTotal?: number = undefined;
+    areasUnits?: UnitOfArea = UnitOfArea.SqMetres;
     accessStatus: AccessStatus = AccessStatus.Private;
-    availableBedrooms?: number;
-    availableFromDate?: Date;
-    basement?: boolean;
-    bathrooms?: number;
-    billsIncluded?: Utility[];
-    company?: Owner;
-    companyReference: string = "";
-    burglarAlarm?: boolean;
-    businessForSale?: boolean;
-    buyerIncentives?: Incentive[];
-    category?: Category;
-    centralHeating?: CentralHeating;
-    chainFree?: boolean;
-    commercialUseClass?: string[];
-    connectedUtilities?: Utility[];
-    conservatory?: boolean;
-    constructionYear?: number;
-    contents?: Content[];
-    cookerType?: CookerType;
-    councilTaxBand?: CouncilTaxBand;
-    decorativeCondition?: DecorativeCondition;
-    deposit?: number;
-    detailedDescriptions?: DetailedDescription[];
-    doubleGlazing?: boolean;
-    epcRatings?: EpcRatings;
-    featureList?: string[];
-    fireplace?: boolean;
-    fishingRights?: boolean;
-    floorLevels?: number[];
-    floors?: number;
-    furnishedState?: FurnishedState;
-    freezer?: boolean;
-    fridge?: boolean;
-    groundRent?: number;
-    gym?: boolean;
-    leaseExpiry?: string;
-    lifeCycleStatus?: LifeCycleStatus;
-    listedBuildingGrade?: ListedBuildingGrade;
-    listingReference?: string;
-    listingLocation?: ListingLocation;
-    livingRooms?: number;
-    loft?: boolean;
-    minimumContractLength?: number;
+    availableBedrooms?: number = undefined;
+    availableFromDate?: Date = undefined;
+    basement?: boolean = undefined;
+    bathrooms?: number = undefined;
+    billsIncluded?: Utility[] = [];
+    company?: Owner = {
+        id: '',
+        addedOn: new Date(),
+        companyAddress: {
+            id: '',
+            displayAddress: '',
+            propertyNumberOrName: '',
+            streetName: '',
+            locality: '',
+            townOrCity: '',
+            county: '',
+            postalCode: '',
+            country: '',
+            latitude: 51.505,
+            longitude: -0.09,
+        },
+        companyContacts: {
+            id: '',
+            phone: '',
+            email: '',
+            website: ''
+        },
+        LegalName: '',
+        companyReference: '',
+        displayName: '',
+        summaryDescription: '',
+        logo: '',
+    };
+    companyReference: string = '';
+    burglarAlarm?: boolean = undefined;
+    businessForSale?: boolean = undefined;
+    buyerIncentives?: Incentive[] = [];
+    category?: Category = Category.residential;
+    centralHeating?: CentralHeating = undefined;
+    chainFree?: boolean = undefined;
+    commercialUseClass?: string[] = [];
+    connectedUtilities?: Utility[] = [];
+    conservatory?: boolean = undefined;
+    constructionYear?: number = undefined;
+    contents?: Content[] = [];
+    cookerType?: CookerType = undefined;
+    councilTaxBand?: CouncilTaxBand = undefined;
+    decorativeCondition?: DecorativeCondition = undefined;
+    deposit?: number = undefined;
+    detailedDescriptions?: DetailedDescription[] = [];
+    doubleGlazing?: boolean = undefined;
+    epcRatings?: EpcRatings = undefined;
+    featureList?: string[] = [];
+    fireplace?: boolean = undefined;
+    fishingRights?: boolean = undefined;
+    floorLevels?: number[] = [];
+    floors?: number = undefined;
+    furnishedState?: FurnishedState = undefined;
+    freezer?: boolean = undefined;
+    fridge?: boolean = undefined;
+    groundRent?: number = undefined;
+    gym?: boolean = undefined;
+    leaseExpiry?: string = '';
+    lifeCycleStatus?: LifeCycleStatus = undefined;
+    listedBuildingGrade?: ListedBuildingGrade = undefined;
+    listingReference?: string = '';
+    listingLocation?: ListingLocation = {
+        id: '',
+        displayAddress: '',
+        propertyNumberOrName: '',
+        streetName: '',
+        locality: '',
+        townOrCity: '',
+        county: '',
+        postalCode: '',
+        country: '',
+        latitude: 51.505,
+        longitude: -0.09,
+    };
+    livingRooms?: number = undefined;
+    loft?: boolean = undefined;
+    minimumContractLength?: number = undefined;
     minimumContractLengthUnits?: UnitOfTime;
-    newBuild?: boolean;
-    openDay?: Date;
-    outbiuldings?: boolean;
-    outsideSpaces?: OutsideSpace[];
-    parking?: Parking[];
-    petsAllowed?: boolean;
-    porterSecurity?: boolean;
-    pricing?: Pricing;
-    propertyType?: PropertyType;
-    rateableValue?: number;
-    rentalTerm?: RentalTerm;
-    repossession?: boolean;
-    retirement?: boolean;
-    sapRating?: number;
-    serviceCharge?: ServiceCharge;
-    serviced?: boolean;
-    sharedAccommodation?: boolean;
-    summaryDescription?: string;
-    swimmingPool?: boolean;
-    tenanted?: boolean;
-    tenantEligibilityDss?: Eligibility;
-    tenantEligibilityStudents?: Eligibility;
-    tennisCourt?: boolean;
-    tenure?: Tenure;
-    totalBedrooms?: number;
-    utilityRoom?: boolean;
-    waterFront?: boolean;
-    woodFloors?: boolean;
+    newBuild?: boolean = undefined;
+    openDay?: Date = undefined;
+    outbiuldings?: boolean = undefined;
+    outsideSpaces?: OutsideSpace[] = [];
+    parking?: Parking[] = [];
+    petsAllowed?: boolean = undefined;
+    porterSecurity?: boolean = undefined;
+    pricing?: Pricing = undefined;
+    propertyType?: PropertyType = undefined;
+    rateableValue?: number = undefined;
+    rentalTerm?: RentalTerm = undefined;
+    repossession?: boolean = undefined;
+    retirement?: boolean = undefined;
+    sapRating?: number = undefined;
+    serviceCharge?: ServiceCharge = undefined;
+    serviced?: boolean = undefined;
+    sharedAccommodation?: boolean = undefined;
+    summaryDescription?: string = '';
+    swimmingPool?: boolean = undefined;
+    tenanted?: boolean = undefined;
+    tenantEligibilityDss?: Eligibility = undefined;
+    tenantEligibilityStudents?: Eligibility = undefined;
+    tennisCourt?: boolean = undefined;
+    tenure?: Tenure = undefined;
+    totalBedrooms?: number = undefined;
+    utilityRoom?: boolean = undefined;
+    waterFront?: boolean = undefined;
+    woodFloors?: boolean = undefined;
 
     constructor(listing?: ListingFormValues) {
         if (listing) {

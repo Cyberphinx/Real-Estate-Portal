@@ -73,21 +73,24 @@ namespace Infrastructure.Email
                     listIds.Add(3);
                     break;
             }
-            
 
-            var createContact = new CreateContact
+            var existingContact = contactsApiInstance.GetContactInfo(email.RecipientEmail);
+            if (existingContact == null)
             {
-                Email = email.RecipientEmail,
-                Attributes = attributes,
-                EmailBlacklisted = false,
-                SmsBlacklisted = false,
-                ListIds = listIds,
-                UpdateEnabled = false
-            };
+                var createContact = new CreateContact
+                {
+                    Email = email.RecipientEmail,
+                    Attributes = attributes,
+                    EmailBlacklisted = false,
+                    SmsBlacklisted = false,
+                    ListIds = listIds,
+                    UpdateEnabled = false
+                };
+                await contactsApiInstance.CreateContactAsync(createContact);
+            }
 
             // api calls
             await emailsApiInstance.SendTransacEmailAsync(sendSmtpEmail);
-            await contactsApiInstance.CreateContactAsync(createContact);
         }
     }
 }
