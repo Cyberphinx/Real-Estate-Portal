@@ -1,6 +1,7 @@
 using API.Extensions;
 using API.Middleware;
 using API.Services;
+using API.SignalR;
 using Application.ListingApplication;
 using Domain;
 using FluentValidation.AspNetCore;
@@ -132,6 +133,7 @@ namespace API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<ChatHub>("/chat");
                 endpoints.MapFallbackToController("Index", "Fallback");
             });
 

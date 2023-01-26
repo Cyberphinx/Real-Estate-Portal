@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import LoadingComponent from "../../../app/common/loading/LoadingComponent";
 import NavBarForJob from "../../../app/layout/NavBarForJob";
-import { JobContent, JobNetworkRole, NetworkDto } from "../../../app/model/Job";
+import { JobMediaDto, JobNetworkRole, NetworkDto } from "../../../app/model/Job";
 import { useStore } from "../../../app/stores/store";
 import { ServiceCategory } from "../../../app/model/ServiceCategory";
 import { dateFormatter } from "../../../app/common/HelperFunctions";
@@ -59,8 +59,8 @@ export default observer(function JobDetailsPage() {
                         <p className="thread-content">{job.description}</p>
 
 
-                        <section className="thread-carousel" style={{ gridTemplateColumns: `repeat(${job!.jobContents.length},calc(100vw / 10))` }}>
-                            {job?.jobContents.map((content: JobContent, index: number) => (
+                        <section className="thread-carousel" style={{ gridTemplateColumns: `repeat(${job!.jobMedia.length},calc(100vw / 10))` }}>
+                            {job?.jobMedia.map((content: JobMediaDto, index: number) => (
                                 <div style={{ position: "relative" }} key={content.id}>
                                     <img className="job-thumbnail" src={content.url} alt={content.caption} />
                                     <span className="job-numbering">{index + 1}</span>

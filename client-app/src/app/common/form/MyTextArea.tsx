@@ -7,17 +7,19 @@ interface Props {
     rows: number;
     cols: number;
     label?: string;
+    inputclassname: string;
+    errorclassname: string;
+    labelclassname?: string;
 }
 
 export default function MyTextArea(props: Props) {
     const [field, meta] = useField(props.name);
     return (
-        // the double exclamation marks !! makes the object into a Boolean
         <div className="text-area-input-container">
-            <label>{props.label}</label>
-            <textarea className="text-area-input" {...field} {...props}/>
+            <label className={props.labelclassname}>{props.label}</label>
+            <textarea className={props.inputclassname} {...field} {...props}/>
             {meta.touched && meta.error? (
-                <p className="textarea-error">{meta.error}</p>
+                <p className={props.errorclassname}>{meta.error}</p>
             ): null}
         </div>
     )

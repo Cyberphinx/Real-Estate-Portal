@@ -2,11 +2,13 @@ using System;
 using System.Text.Json.Serialization;
 using API.Services;
 using Application.Core;
+using Application.MediaApplication;
 using Application.Interfaces;
 using Application.ListingApplication;
 using Domain;
 using Infrastructure.Crm;
 using Infrastructure.Email;
+using Infrastructure.Media;
 using Infrastructure.Security;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -92,14 +94,17 @@ namespace API.Extensions
             services.AddMediatR(typeof(List.Handler).Assembly);
             services.AddAutoMapper(typeof(MappingProfiles).Assembly);
             services.AddScoped<IUserAccessor, UserAccessor>();
+            services.AddScoped<IMediaAccessor, MediaAccessor>();
             services.AddScoped<PaymentService>();
             services.AddScoped<EmailService>();
             services.AddScoped<ContactsService>();
             services.AddScoped<AttributesService>();
+            services.AddSignalR();
             services.AddControllers().AddJsonOptions(opt => 
             {
                 opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
             });
+            services.Configure<CloudinarySettings>(config.GetSection("Cloudinary"));
 
             return services;
         }

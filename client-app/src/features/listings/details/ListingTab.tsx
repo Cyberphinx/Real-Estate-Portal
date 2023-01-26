@@ -5,8 +5,7 @@ import { Listing } from "../../../app/model/ListingAggregate/Listing";
 import { useStore } from "../../../app/stores/store";
 import ContactForm from "./ListingContact";
 import ListingBookmark from "./ListingBookmark";
-import ListingGallery from "./ListingOverview";
-import ListingSummary from "./ListingFeatures";
+import ListingOverview from "./ListingOverview";
 import ListingDetails from "./ListingDetails";
 import ListingContact from "./ListingContact";
 import WatchButton from "../../../app/common/WatchButton";
@@ -24,8 +23,7 @@ export default observer(function ListingTab({ listing }: Props) {
     const [tab, setTab] = useState<number>(0);
 
     const features = [
-        <ListingGallery listing={listing!} />,
-        <ListingSummary listing={listing!} />,
+        <ListingOverview listing={listing!} />,
         <ListingDetails listing={listing!} />,
         <ListingContact listing={listing} />
     ]
@@ -36,9 +34,8 @@ export default observer(function ListingTab({ listing }: Props) {
             <nav className='sticky-nav-container' style={multiListings.length > 1 ? {top:"51px"} : {}} >
                 <div style={{ margin: "0px 5px" }}>
                     <button className={tab === 0 ? "sticky-nav-button-active" : "sticky-nav-button"} onClick={() => setTab(0)}>Overview</button>
-                    <button className={tab === 1 ? "sticky-nav-button-active" : "sticky-nav-button"} onClick={() => setTab(1)}>Features</button>
-                    <button className={tab === 2 ? "sticky-nav-button-active" : "sticky-nav-button"} onClick={() => setTab(2)}>Details</button>
-                    <button className={tab === 3 ? "sticky-nav-button-active" : "sticky-nav-button"} onClick={() => setTab(3)}>Contact agent</button>
+                    <button className={tab === 1 ? "sticky-nav-button-active" : "sticky-nav-button"} onClick={() => setTab(1)}>Details</button>
+                    <button className={tab === 2 ? "sticky-nav-button-active" : "sticky-nav-button"} onClick={() => setTab(2)}>Contact agent</button>
                 </div>
             </nav>
             <div className="details-contents" style={(multiListings.length > 1) ? { marginTop: "90px" } : {}}>

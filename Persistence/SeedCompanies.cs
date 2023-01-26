@@ -7,6 +7,7 @@ using Domain.CompanyAggregate;
 using Domain.CompanyAggregate.Enums;
 using Domain.LocationAggregate;
 using Domain.CompanyAggregate.Objects;
+using Domain.MediaAggregate;
 
 namespace Persistence
 {
@@ -21,15 +22,15 @@ namespace Persistence
                 new Company
                 {
                     AccessStatus = AccessStatus.Public,
-                    CompanyReference = "savills5186",
-                    Username = "savills",
-                    DisplayName = "Savills - London",
-                    LegalName = "Savills (UK) Limited",
+                    CompanyReference = "agent5186",
+                    Username = "agent5186",
+                    DisplayName = "Agent - London",
+                    LegalName = "Agent (UK) Limited",
                     IsMain = true,
                     CompanyContacts = new CompanyContacts
                     {
                         Phone = "+44 (0) 20 8877 1222",
-                        Email = "info@savills.com"
+                        Email = "info@agent.com"
                     },
                     CompanyAddress = new CompanyAddress
                     {
@@ -38,41 +39,45 @@ namespace Persistence
                         Locality = "",
                         TownOrCity = "London",
                         County = "City of London",
-                        PostalCode = "W1G 0JD",
+                        PostalCode = "A2C 3DE",
                         Country = "United Kingdom",
                         Latitude = 51.51654265291029,
                         Longitude = -0.14291257284437422
                     },
-                    CompanyContents = new List<CompanyContent>()
+                    CompanyMedia = new List<Media>()
                     {
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder1",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671215966/Placeholder/CompanyContents/real-estate-agency_wrm90i.jpg",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Agency Image",
                             IsMain = true,
                             IsLogo = false
                         },
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder2",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/Screenshot_2022-12-16_184526_gilzvg.jpg",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Agency Image",
                             IsMain = false,
                             IsLogo = false
                         },
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder3",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/realtor-showing-young-family-around-property-for-PUTL8G4-e1516618996652_zfgphc.jpg",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Agency Image",
                             IsMain = false,
                             IsLogo = false
                         },
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder4",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1672172027/Placeholder/CompanyContents/logo-placeholder_lajpbm.jpg",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Agency Image",
                             IsMain = false,
                             IsLogo = true
@@ -124,15 +129,15 @@ namespace Persistence
                 new Company
                 {
                     AccessStatus = AccessStatus.Public,
-                    CompanyReference = "savills6648",
-                    Username = "savills",
-                    DisplayName = "Savills - Edinburgh",
-                    LegalName = "Savills (UK) Limited",
+                    CompanyReference = "agent6648",
+                    Username = "agent",
+                    DisplayName = "Agent - Edinburgh",
+                    LegalName = "Agent (UK) Limited",
                     IsMain = false,
                     CompanyContacts = new CompanyContacts
                     {
                         Phone = "+44 (0) 20 8877 1222",
-                        Email = "info@savills.com"
+                        Email = "info@agent.com"
                     },
                     CompanyAddress = new CompanyAddress
                     {
@@ -141,33 +146,36 @@ namespace Persistence
                         Locality = "",
                         TownOrCity = "London",
                         County = "City of London",
-                        PostalCode = "W1G 0JD",
+                        PostalCode = "A2C 3DE",
                         Country = "United Kingdom",
                         Latitude = 55.95435353799718,
                         Longitude = -3.2067211982100288
                     },
-                    CompanyContents = new List<CompanyContent>()
+                    CompanyMedia = new List<Media>()
                     {
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder5",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671215966/Placeholder/CompanyContents/real-estate-agency_wrm90i.jpg",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Agency Image",
                             IsMain = true,
                             IsLogo = false
                         },
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder6",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/Screenshot_2022-12-16_184526_gilzvg.jpg",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Agency Image",
                             IsMain = false,
                             IsLogo = false
                         },
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder7",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/realtor-showing-young-family-around-property-for-PUTL8G4-e1516618996652_zfgphc.jpg",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Agency Image",
                             IsMain = false,
                             IsLogo = false
@@ -218,16 +226,16 @@ namespace Persistence
 
                 new Company
                 {
-                    Username = "purple",
-                    CompanyReference = "purple2453",
-                    DisplayName = "Purple Bricks 1",
-                    LegalName = "Purplebricks Group PLC",
+                    Username = "agent",
+                    CompanyReference = "agent2453",
+                    DisplayName = "Agent - Midlands",
+                    LegalName = "Agents Group PLC",
                     IsMain = true,
                     CompanyRegistrationNumber = "8047368",
                     CompanyContacts = new CompanyContacts
                     {
                         Phone = "+44 (0) 117 910 2200",
-                        Email = "info@purple.com"
+                        Email = "info@agent.com"
                     },
                     AccessStatus = AccessStatus.Public,
                     CompanyAddress = new CompanyAddress
@@ -237,33 +245,36 @@ namespace Persistence
                         Locality = "",
                         TownOrCity = "Solihull",
                         County = "West Midlands",
-                        PostalCode = "B90 4RZ",
+                        PostalCode = "A2C 3DE",
                         Country = "United Kingdom",
                         Latitude = 52.40066044491819,
                         Longitude = -1.8066908304837104
                     },
-                    CompanyContents = new List<CompanyContent>()
+                    CompanyMedia = new List<Media>()
                     {
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder8",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671215966/Placeholder/CompanyContents/real-estate-agency_wrm90i.jpg",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Agency Image",
                             IsMain = true,
                             IsLogo = false
                         },
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder9",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/Screenshot_2022-12-16_184526_gilzvg.jpg",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Agency Image",
                             IsMain = false,
                             IsLogo = false
                         },
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder10",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/realtor-showing-young-family-around-property-for-PUTL8G4-e1516618996652_zfgphc.jpg",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Agency Image",
                             IsMain = false,
                             IsLogo = false
@@ -314,16 +325,16 @@ namespace Persistence
 
                 new Company
                 {
-                    Username = "purple",
-                    CompanyReference = "purple1253",
-                    DisplayName = "Purple Bricks 2",
-                    LegalName = "Purplebricks Group PLC",
+                    Username = "agent",
+                    CompanyReference = "agent1253",
+                    DisplayName = "Agent ABC",
+                    LegalName = "Agents Group PLC",
                     CompanyRegistrationNumber = "8047368",
                     IsMain = false,
                     CompanyContacts = new CompanyContacts
                     {
                         Phone = "+44 (0) 117 910 2200",
-                        Email = "info@purple.com"
+                        Email = "info@agent.com"
                     },
                     AccessStatus = AccessStatus.Public,
                     CompanyAddress = new CompanyAddress
@@ -333,33 +344,36 @@ namespace Persistence
                         Locality = "",
                         TownOrCity = "Solihull",
                         County = "West Midlands",
-                        PostalCode = "B90 4RZ",
+                        PostalCode = "A1B 2CD",
                         Country = "United Kingdom",
                         Latitude = 52.40066044491819,
                         Longitude = -1.8066908304837104
                     },
-                    CompanyContents = new List<CompanyContent>()
+                    CompanyMedia = new List<Media>()
                     {
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder11",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671215966/Placeholder/CompanyContents/real-estate-agency_wrm90i.jpg",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Agency Image",
                             IsMain = true,
                             IsLogo = false
                         },
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder12",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/Screenshot_2022-12-16_184526_gilzvg.jpg",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Agency Image",
                             IsMain = false,
                             IsLogo = false
                         },
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder13",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/realtor-showing-young-family-around-property-for-PUTL8G4-e1516618996652_zfgphc.jpg",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Agency Image",
                             IsMain = false,
                             IsLogo = false
@@ -410,16 +424,16 @@ namespace Persistence
 
                 new Company
                 {
-                    Username = "purple",
-                    CompanyReference = "purple6321",
-                    DisplayName = "Purple Bricks 3",
-                    LegalName = "Purplebricks Group PLC",
+                    Username = "agent",
+                    CompanyReference = "agent6321",
+                    DisplayName = "Agent DEF",
+                    LegalName = "Agents Group PLC",
                     IsMain = false,
                     CompanyRegistrationNumber = "8047368",
                     CompanyContacts = new CompanyContacts
                     {
                         Phone = "+44 (0) 117 910 2200",
-                        Email = "info@purple.com"
+                        Email = "info@agent.com"
                     },
                     AccessStatus = AccessStatus.Public,
                     CompanyAddress = new CompanyAddress
@@ -429,33 +443,36 @@ namespace Persistence
                         Locality = "",
                         TownOrCity = "Solihull",
                         County = "West Midlands",
-                        PostalCode = "B90 4RZ",
+                        PostalCode = "A1B 2CD",
                         Country = "United Kingdom",
                         Latitude = 52.40066044491819,
                         Longitude = -1.8066908304837104
                     },
-                    CompanyContents = new List<CompanyContent>()
+                    CompanyMedia = new List<Media>()
                     {
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder14",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671215966/Placeholder/CompanyContents/real-estate-agency_wrm90i.jpg",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Agency Image",
                             IsMain = true,
                             IsLogo = false
                         },
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder15",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/Screenshot_2022-12-16_184526_gilzvg.jpg",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Agency Image",
                             IsMain = false,
                             IsLogo = false
                         },
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder16",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/realtor-showing-young-family-around-property-for-PUTL8G4-e1516618996652_zfgphc.jpg",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Agency Image",
                             IsMain = false,
                             IsLogo = false
@@ -506,16 +523,16 @@ namespace Persistence
 
                 new Company
                 {
-                    Username = "purple",
-                    CompanyReference = "purple1345",
-                    DisplayName = "Purple Bricks 4",
+                    Username = "agent",
+                    CompanyReference = "agent1345",
+                    DisplayName = "Agent XYZ",
                     IsMain = false,
-                    LegalName = "Purplebricks Group PLC",
+                    LegalName = "Agents Group PLC",
                     CompanyRegistrationNumber = "8047368",
                     CompanyContacts = new CompanyContacts
                     {
                         Phone = "+44 (0) 117 910 2200",
-                        Email = "info@purple.com"
+                        Email = "info@agent.com"
                     },
                     AccessStatus = AccessStatus.Public,
                     CompanyAddress = new CompanyAddress
@@ -525,33 +542,36 @@ namespace Persistence
                         Locality = "",
                         TownOrCity = "Solihull",
                         County = "West Midlands",
-                        PostalCode = "B90 4RZ",
+                        PostalCode = "A1B 2CD",
                         Country = "United Kingdom",
                         Latitude = 54.39231504142715,
                         Longitude = -2.371760263326141
                     },
-                    CompanyContents = new List<CompanyContent>()
+                    CompanyMedia = new List<Media>()
                     {
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder17",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671215966/Placeholder/CompanyContents/real-estate-agency_wrm90i.jpg",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Agency Image",
                             IsMain = true,
                             IsLogo = false
                         },
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder18",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/Screenshot_2022-12-16_184526_gilzvg.jpg",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Agency Image",
                             IsMain = false,
                             IsLogo = false
                         },
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder19",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/realtor-showing-young-family-around-property-for-PUTL8G4-e1516618996652_zfgphc.jpg",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Agency Image",
                             IsMain = false,
                             IsLogo = false
@@ -612,33 +632,36 @@ namespace Persistence
                         Locality = "",
                         TownOrCity = "Shrewsbury",
                         County = "Shropshire",
-                        PostalCode = "SY5 0HZ",
+                        PostalCode = "A1B 2CD",
                         Country = "United Kingdom",
                         Latitude = 52.60740391205163,
                         Longitude = -2.9450937943182147
                     },
-                    CompanyContents = new List<CompanyContent>()
+                    CompanyMedia = new List<Media>()
                     {
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder20",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671215966/Placeholder/CompanyContents/real-estate-agency_wrm90i.jpg",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Agency Image",
                             IsMain = true,
                             IsLogo = false
                         },
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder21",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/Screenshot_2022-12-16_184526_gilzvg.jpg",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Agency Image",
                             IsMain = false,
                             IsLogo = false
                         },
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder22",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/realtor-showing-young-family-around-property-for-PUTL8G4-e1516618996652_zfgphc.jpg",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Agency Image",
                             IsMain = false,
                             IsLogo = false
@@ -717,33 +740,36 @@ namespace Persistence
                         Locality = "",
                         TownOrCity = " Bournemouth",
                         County = "England",
-                        PostalCode = "BH2 6LA",
+                        PostalCode = "A1B 2CD",
                         Country = "United Kingdom",
                         Latitude = 50.722980159789316,
                         Longitude = -1.8829559728734109
                     },
-                    CompanyContents = new List<CompanyContent>()
+                    CompanyMedia = new List<Media>()
                     {
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder23",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671215966/Placeholder/CompanyContents/real-estate-agency_wrm90i.jpg",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Agency Image",
                             IsMain = true,
                             IsLogo = false
                         },
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder24",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/Screenshot_2022-12-16_184526_gilzvg.jpg",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Agency Image",
                             IsMain = false,
                             IsLogo = false
                         },
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder25",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/realtor-showing-young-family-around-property-for-PUTL8G4-e1516618996652_zfgphc.jpg",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Agency Image",
                             IsMain = false,
                             IsLogo = false
@@ -812,33 +838,36 @@ namespace Persistence
                         Locality = "",
                         TownOrCity = "Bournemouth",
                         County = "England",
-                        PostalCode = "BH2 6LA",
+                        PostalCode = "A1B 2CD",
                         Country = "United Kingdom",
                         Latitude = 50.72308467556089,
                         Longitude =  -1.8824440593814602
                     },
-                    CompanyContents = new List<CompanyContent>()
+                    CompanyMedia = new List<Media>()
                     {
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder26",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671215966/Placeholder/CompanyContents/real-estate-agency_wrm90i.jpg",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Agency Image",
                             IsMain = true,
                             IsLogo = false
                         },
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder27",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/Screenshot_2022-12-16_184526_gilzvg.jpg",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Agency Image",
                             IsMain = false,
                             IsLogo = false
                         },
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder28",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/realtor-showing-young-family-around-property-for-PUTL8G4-e1516618996652_zfgphc.jpg",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Agency Image",
                             IsMain = false,
                             IsLogo = false
@@ -908,33 +937,36 @@ namespace Persistence
                         Locality = "",
                         TownOrCity = "Bournemouth",
                         County = "England",
-                        PostalCode = "BH2 6LA",
+                        PostalCode = "A1B 2CD",
                         Country = "United Kingdom",
                         Latitude = 53.297230105069126,
                         Longitude =  -1.3833799280677688
                     },
-                    CompanyContents = new List<CompanyContent>()
+                    CompanyMedia = new List<Media>()
                     {
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder29",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671215966/Placeholder/CompanyContents/real-estate-agency_wrm90i.jpg",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Agency Image",
                             IsMain = true,
                             IsLogo = false
                         },
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder30",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/Screenshot_2022-12-16_184526_gilzvg.jpg",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Agency Image",
                             IsMain = false,
                             IsLogo = false
                         },
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder31",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/realtor-showing-young-family-around-property-for-PUTL8G4-e1516618996652_zfgphc.jpg",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Agency Image",
                             IsMain = false,
                             IsLogo = false
@@ -1004,29 +1036,32 @@ namespace Persistence
                         Locality = "",
                         TownOrCity = "New Malden",
                         County = "England",
-                        PostalCode = "KT3 4HX",
+                        PostalCode = "ABC 123",
                         Country = "United Kingdom",
                         Latitude = 51.40264956734864,
                         Longitude = -0.24979083392406543
                     },
-                    CompanyContents = new List<CompanyContent>
+                    CompanyMedia = new List<Media>
                     {
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder32",
                             Url = "/assets/company-images/001.JPG",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Image One"
                         },
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder33",
                             Url = "/assets/company-images/002.JPG",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Image Two"
                         },
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder34",
                             Url = "/assets/company-images/003.JPG",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Image Three"
                         }
                     },
@@ -1085,7 +1120,7 @@ namespace Persistence
                         Locality = "Hockley",
                         TownOrCity = "Essex",
                         County = "England",
-                        PostalCode = "SS5 4QS",
+                        PostalCode = "ABC 123",
                         Country = "United Kingdom",
                         Latitude = 51.60137056764931,
                         Longitude = 0.6534702269086803
@@ -1105,24 +1140,27 @@ namespace Persistence
                         }
                     },
                     ServiceLocations = "UK and international",
-                    CompanyContents = new List<CompanyContent>
+                    CompanyMedia = new List<Media>
                     {
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder35",
                             Url = "/assets/company-images/001.JPG",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Image One"
                         },
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder36",
                             Url = "/assets/company-images/002.JPG",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Image Two"
                         },
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder37",
                             Url = "/assets/company-images/003.JPG",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Image Three"
                         }
                     }
@@ -1149,7 +1187,7 @@ namespace Persistence
                         Locality = "",
                         TownOrCity = "Norwich",
                         County = "England",
-                        PostalCode = "NR3 2DB",
+                        PostalCode = "ABC 123",
                         Country = "United Kingdom",
                         Latitude = 52.643914264497965,
                         Longitude = 1.2797135271974041
@@ -1169,24 +1207,27 @@ namespace Persistence
                         }
                     },
                     ServiceLocations = "UK",
-                    CompanyContents = new List<CompanyContent>
+                    CompanyMedia = new List<Media>
                     {
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder38",
                             Url = "https://s3-media0.fl.yelpcdn.com/bphoto/YmImfv7rT1wx6OhHL9THUQ/o.jpg",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Image One"
                         },
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder39",
                             Url = "https://s3-media0.fl.yelpcdn.com/bphoto/CxFpFiFXinp31JaBGvVRdg/o.jpg",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Image Two"
                         },
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder40",
                             Url = "https://s3-media0.fl.yelpcdn.com/bphoto/BeDc9QGW3uhD2BzjhmznoA/o.jpg",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Image Three"
                         }
                     }
@@ -1213,7 +1254,7 @@ namespace Persistence
                         Locality = "Stony Stratford",
                         TownOrCity = "Milton Keynes",
                         County = "England",
-                        PostalCode = "MK11 1FB",
+                        PostalCode = "ABC 123",
                         Country = "United Kingdom",
                         Latitude = 52.05661506461248,
                         Longitude = -0.8533489730745938
@@ -1233,24 +1274,27 @@ namespace Persistence
                         }
                     },
                     ServiceLocations = "UK",
-                    CompanyContents = new List<CompanyContent>
+                    CompanyMedia = new List<Media>
                     {
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder41",
                             Url = "https://www.birchlandscapes.co.uk/wp-content/uploads/2021/08/PHOTO-2021-06-11-09-40-05-2.jpg",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Image One"
                         },
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder42",
                             Url = "https://www.birchlandscapes.co.uk/wp-content/uploads/2021/08/PHOTO-2021-06-11-09-40-05.jpg",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Image Two"
                         },
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder43",
                             Url = "https://www.birchlandscapes.co.uk/wp-content/uploads/2021/08/PHOTO-2021-06-11-09-40-06.jpg",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Image Three"
                         }
                     }
@@ -1277,7 +1321,7 @@ namespace Persistence
                         Locality = "",
                         TownOrCity = "Enfield",
                         County = "England",
-                        PostalCode = "EN3 7PY",
+                        PostalCode = "ABC 123",
                         Country = "United Kingdom",
                         Latitude = 51.659803529028075,
                         Longitude = -0.027048244003053896
@@ -1297,24 +1341,27 @@ namespace Persistence
                         }
                     },
                     ServiceLocations = "UK",
-                    CompanyContents = new List<CompanyContent>
+                    CompanyMedia = new List<Media>
                     {
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder44",
                             Url = "https://www.jasteelandson.co.uk/assets/images/content-img_move1.jpg",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Image One"
                         },
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder45",
                             Url = "https://www.jasteelandson.co.uk/assets/images/content-img_move2.jpg",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Image Two"
                         },
-                        new CompanyContent
+                        new Media
                         {
+                            Id = "placeholder46",
                             Url = "https://www.jasteelandson.co.uk/assets/images/content-img_move3.jpg",
-                            Type = CompanyMediaType.Image,
+                            Type = MediaType.Image,
                             Caption = "Image Three"
                         }
                     }

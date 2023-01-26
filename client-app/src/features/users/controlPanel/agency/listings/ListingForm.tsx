@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useStore } from "../../../../../app/stores/store";
 import './ListingForm.css';
 import * as Yup from 'yup';
 import { Form, Formik } from "formik";
 import { ListingFormValues } from "../../../../../app/model/ListingAggregate/Listing";
 import { v4 as uuid } from 'uuid';
-import SwitchBoard from "./SwitchBoard";
-import { GeoSearchControl, LocationIQProvider } from "leaflet-geosearch";
-import L from "leaflet";
+import SwitchBoard from "./listingForms/SwitchBoard";
+import ListingFormStepper from "./listingForms/ListingFormStepper";
 
 interface Props {
     setActivePane: (value: number) => void;
@@ -37,54 +36,51 @@ export default function ListingForm({ setActivePane }: Props) {
     }
 
     const validationSchema = Yup.object({
-        companyName: Yup.string().required('The company name is required!'),
-        serviceCategory: Yup.number().required(),
-        companyAddress: Yup.object().shape({
-            postalCode: Yup.string().required("The postcode is required"),
+        areasTotal: Yup.number().typeError('Approximate floor area must be a number'),
+        companyReference: Yup.string().required("Company reference is required"),
+        listingLocation: Yup.object({
+            postalCode: Yup.string().required("Postcode is required"),
+            latitude: Yup.string().required("Latitude is required"),
+            longitude: Yup.string().required("Longitude is required"),
+            country: Yup.string().required("Country is required"),
         }),
-        companyContacts: Yup.object().shape({
-            email: Yup.string().required("The email is required").email(),
-            phone: Yup.string().required("The phone is required"),
-        })
+        pricing: Yup.object({
+            price: Yup.string().required("Price is required")
+        }),
+        totalBedrooms: Yup.number().required('Bedrooms is required').typeError('Bedrooms must be a number')
     })
 
-
-
     return (
-        <div className="agent-listings">
+        <Formik
+            initialValues={listing}
+            onSubmit={(values) => handleFormSubmit(values)}
+            validationSchema={validationSchema}
+        >
+            {({ handleSubmit, isSubmitting, isValid, dirty, errors, values, setFieldValue, setFieldTouched, getFieldMeta }) => (
+                <Form className="listing-form__container" onSubmit={handleSubmit} autoComplete="off">
+                    <div className="listing-form__toolbar">
+                        <p className="listing-form__title"><span className="listing-form__portfolio"
+                            onClick={() => setActivePane(0)}>Portfolio</span> &#x203A; Create listing</p>
+                    </div>
 
-            <div className="watchlist-toolbar">
-                <p className="watchlist-title"><span className="breadcrumb"
-                    onClick={() => setActivePane(0)}>Property listings</span> / <span>Create listing</span></p>
-                <section className="watchlist-button-container">
-                    <button className="watchlist-button-active"
-                        onClick={() => setStep(0)}>Location</button>
-                    <button className="watchlist-button"
-                        onClick={() => setStep(1)}>Basic information</button>
-                    <button className="watchlist-button"
-                        onClick={() => setStep(2)}>Details</button>
-                    <button className="watchlist-button"
-                        onClick={() => setStep(3)}>Media</button>
-                    <button className="agent-listing-master-button" onClick={() => setActivePane(0)}>Back</button>
-                </section>
-            </div>
-
-            <Formik
-                initialValues={listing}
-                onSubmit={(values) => handleFormSubmit(values)}
-                validationSchema={validationSchema}
-            >
-                {({ handleSubmit, isSubmitting, isValid, dirty, errors, values, setFieldValue, setFieldTouched, getFieldMeta }) => (
-                    <Form className="listing-form" onSubmit={handleSubmit} autoComplete="off">
-                        <SwitchBoard step={step} setFieldValue={setFieldValue} setFieldTouched={setFieldTouched}
-                            getFieldMeta={getFieldMeta} values={values} />
-                        <button disabled={!isValid || !dirty || isSubmitting} className="button" type="submit">
-                            <span className={"button-" + (isSubmitting ? "loading" : "text")}>Submit</span>
-                        </button>
-                        {/* {errors.error && <p className="submission-error">{errors.error}</p>} */}
-                    </Form>
-                )}
-            </Formik>
-        </div>
+                    <div className="listing-form__contents">
+                        <ListingFormStepper step={step} setStep={setStep} />
+                        <SwitchBoard
+                            step={step}
+                            setStep={setStep}
+                            setFieldValue={setFieldValue}
+                            setFieldTouched={setFieldTouched}
+                            getFieldMeta={getFieldMeta}
+                            values={values}
+                            isValid={isValid}
+                            dirty={dirty}
+                            isSubmitting={isSubmitting}
+                            setActivePane={setActivePane}
+                        />
+                    </div>
+                    {/* {errors.error && <p className="submission-error">{errors.error}</p>} */}
+                </Form>
+            )}
+        </Formik>
     )
 }

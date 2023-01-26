@@ -2,7 +2,7 @@ import React, { SyntheticEvent, useEffect, useRef, useState } from "react";
 import './CompanyDetails.css';
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../../app/stores/store";
-import { Company, CompanyContent, CompanyDescription } from "../../../app/model/Company";
+import { Company, CompanyDescription } from "../../../app/model/Company";
 
 interface Props {
     company: Company | undefined;

@@ -7,13 +7,13 @@ import { Stock } from "../../../../../app/model/Company";
 import { PagingParams } from "../../../../../app/model/Pagination";
 import { UserCompanyDto } from "../../../../../app/model/Profile";
 import { useStore } from "../../../../../app/stores/store";
-import './AgentListings.css';
+import './ViewListings.css';
 
 interface Props {
     setActivePane: (value: number) => void;
 }
 
-export default observer(function AgentListings({setActivePane}: Props) {
+export default observer(function AgentListings({ setActivePane }: Props) {
     const { profileStore, companyStore, agentListingStore } = useStore();
     const { userCompanies, loadingUserCompanies } = profileStore;
     const { } = companyStore;
@@ -29,34 +29,47 @@ export default observer(function AgentListings({setActivePane}: Props) {
     }
 
     return (
-        <div className="agent-listings">
+        <div className="view-listings__container">
+            <div className="view-listings__toolbar">
+                <p className="view-listings__title">Portfolio</p>
+                <section className="view-listings__button-container">
+                    <div style={{display:"flex",gap:"1rem"}}>
+                        <select className="view-listings__select-button" defaultValue="placeholder">
+                            {loadingUserCompanies ?
+                                <option>Loading branches...</option>
+                                : userCompanies.map((company: UserCompanyDto) => (
+                                    <option
+                                        key={company.id}
+                                        onClick={() => {
+                                            setBranch(company);
+                                            setPredicate("agentId", company.id.toString());
+                                        }}
+                                        // value={predicate.get("agentId") === company.id ? true : false}
+                                        value={company.displayName}
+                                    >
+                                        {company.displayName}
+                                    </option>
+                                ))}
+                            <option disabled value="placeholder" > -- select a branch -- </option>
+                        </select>
 
-            <div className="watchlist-toolbar">
-                <p className="watchlist-title">Property listings</p>
-                <section className="watchlist-button-container">
-                    <button className={predicate.get("channel") === "rent" ? "watchlist-button-active" : "watchlist-button"}
-                        onClick={() => setPredicate("channel", "rent")}>Rent</button>
-                    <button className={predicate.get("channel") === "sale" ? "watchlist-button-active" : "watchlist-button"}
-                        onClick={() => setPredicate("channel", "sale")}>Sale</button>
-                    <button className="agent-listing-master-button" onClick={() => setActivePane(1)}>Create listing</button>
-                    <select className="agent-listing-master-button" defaultValue="placeholder">
-                        {loadingUserCompanies ?
-                            <option>Loading branches...</option>
-                            : userCompanies.map((company: UserCompanyDto) => (
-                                <option
-                                    key={company.id}
-                                    onClick={() => {
-                                        setBranch(company);
-                                        setPredicate("agentId", company.id.toString());
-                                    }}
-                                    // value={predicate.get("agentId") === company.id ? true : false}
-                                    value={company.displayName}
-                                >
-                                    {company.displayName}
-                                </option>
-                            ))}
-                        <option disabled value="placeholder" > -- select a branch -- </option>
-                    </select>
+                        <div className="view-listings__button-group">
+                            <button
+                                className="view-listings__button"
+                                style={predicate.get("channel") === "rent" ? { background: "#fff", cursor: "default", color: "#000", fontWeight: "bold" } : {}}
+                                onClick={() => setPredicate("channel", "rent")}
+                                disabled={predicate.get("channel") === "rent" ? true : false}
+                            >For rent</button>
+                            <button
+                                className="view-listings__button"
+                                style={predicate.get("channel") === "sale" ? { background: "#fff", cursor: "default", color: "#000", fontWeight: "bold" } : {}}
+                                onClick={() => setPredicate("channel", "sale")}
+                            >For sale</button>
+                        </div>
+                    </div>
+
+
+                    <button className="view-listings__button-accent" style={{ float: "right" }} onClick={() => setActivePane(1)}>Create listing</button>
                 </section>
             </div>
 
@@ -74,7 +87,7 @@ export default observer(function AgentListings({setActivePane}: Props) {
                                 <DateTag listing={listing} />
                                 <img className="agent-listing-image" src={listing.image} alt="property" />
                                 <article className="watchlist-item-title">
-                                    <b>{priceFormatter(listing.pricing.price, listing.pricing.currency)} </b>
+                                    <b>{priceFormatter(listing.pricing.price!, listing.pricing.currency)} </b>
                                     {listing.pricing.transactionType === 0 && <span>({listing.pricing.rentFrequency.toString().replace(/[A-Z]/g, ' $&').trim()})</span>}
                                     <span> for </span>
                                     <b>{listing.pricing.transactionType}</b>

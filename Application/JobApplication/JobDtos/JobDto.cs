@@ -18,7 +18,7 @@ namespace Application.JobApplication.JobDtos
         public string Title { get; set; }
         public string Description { get; set; }
         public JobLifeCycle JobLifeCycle { get; set; }
-        public ICollection<JobContentDto> JobContents { get; set; }
+        public ICollection<JobMediaDto> JobMedia { get; set; }
         public JobLocationDto JobLocation { get; set; }
         public ICollection<NetworkDto> Networks { get; set; }
     }

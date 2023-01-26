@@ -26,9 +26,9 @@
 }
 
 .register-button {
-  border: 1px solid #1F51FF;
+  border: 1px solid #DC143C;
   border-radius: 3px;
-  background: #1F51FF;
+  background: linear-gradient(45deg, #FF1493 0%, #DC143C 100%);
   padding: 10px;
   font-size: 16px;
   font-weight: 600;
@@ -38,19 +38,19 @@
 }
 .register-button:hover {
   cursor: pointer;
-  background: rgba(31,81,255,0.9);
+  background: linear-gradient(45deg, rgba(255,20,147, 0.8) 0%, rgba(220, 20, 60, 0.8) 100%);
 }
 .register-button:disabled {
   cursor: default;
   border: 1px solid rgba(31,81,255,0);
-  background: rgba(31,81,255,0.2);
+  background: linear-gradient(45deg, rgba(255,20,147, 0.2) 0%, rgba(220, 20, 60, 0.2) 100%);
 }
 
 .register-submitting-button {
   position: relative;
-  border: 1px solid #1F51FF;
+  border: 1px solid #DC143C;
   border-radius: 3px;
-  background: rgba(31,81,255,0);
+  background: linear-gradient(45deg, rgba(255,20,147, 0.8) 0%, rgba(220, 20, 60, 0.8) 100%);
   padding: 10px;
   font-size: 16px;
   font-weight: 600;
@@ -60,7 +60,7 @@
 }
 
 .resend-button {
-  border: 1px solid #1F51FF;
+  border: 1px solid #DC143C;
   border-radius: 3px;
   background: #fff;
   padding: 10px;
@@ -68,27 +68,11 @@
   font-weight: 600;
   width: 40%;
   margin: 0px 0px 20px 0px;
-  color: #1F51FF;
+  color: #DC143C;
 }
 .resend-button:hover {
   cursor: pointer;
-  background: rgba(31,81,255,0.05);
-}
-
-.log-in-button {
-  border: 1px solid #1F51FF;
-  border-radius: 3px;
-  background: #1F51FF;
-  padding: 10px;
-  font-size: 16px;
-  font-weight: 600;
-  width: 40%;
-  margin: 0px 0px 20px 0px;
-  color: #fff;
-}
-.log-in-button:hover {
-  cursor: pointer;
-  background: rgba(31,81,255,0.05);
+  background: rgba(220, 20, 60, 0.05);
 }
 
 /* LOADING SPINNER START */
@@ -103,7 +87,7 @@
   right: 0;
   bottom: 0;
   margin: auto;
-  border: 2px solid #1f51ff;
+  border: 2px solid #DC143C;
   border-top-color: #fff;
   border-radius: 50%;
   animation: button-submitting-spinner 1s ease infinite;
@@ -302,7 +286,7 @@
   right: 0;
   bottom: 0;
   margin: auto;
-  border: 0.3rem solid #1f51ff;
+  border: 0.3rem solid #DC143C;
   border-top-color: #f5f5f5;
   border-radius: 50%;
   animation: verification-loader-spinner 1s ease infinite;

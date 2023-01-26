@@ -1,0 +1,106 @@
+#minimap {
+  height: 300px;
+  width: 60rem;
+  border: 1px solid #ccc;
+  border-radius: 0.4rem;
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.minimap__title {
+  padding: 1rem 0 0 0;
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.listing-location__input-style {
+  border: 1px solid #ccc;
+  border-radius: 0.4rem;
+  width: 58.75rem;
+  padding: 2rem 0.625rem 0.625rem 0.625rem;
+  font-size: 1.125rem;
+}
+
+.listing-location__fields-container {
+  padding-top: 1rem;
+  display: flex;
+  gap: 0.375rem;
+}
+
+.listing-location__input-short {
+  border: 1px solid #ccc;
+  border-radius: 0.4rem;
+  width: 28.5rem;
+  padding: 2rem 0.625rem 0.625rem 0.625rem;
+  font-size: 1.125rem;
+}
+
+.listing-location__input-label {
+  position: absolute;
+  top: 0.2rem;
+  left: 0.625rem;
+  z-index: 1;
+  color: #000;
+  font-weight: bold;
+  font-size: 0.875rem;
+}
+
+.listing-location__input-error {
+  position: absolute;
+  z-index: 1;
+  top: 0.2rem;
+  left: 0.425rem;
+  padding: 0 0.2rem;
+  background: #cc0000;
+  margin: 0px;
+  font-size: 0.875rem;
+  font-weight: bold;
+  color: #fff;
+  border: 1px solid #cc0000;
+  z-index: 1;
+}
+
+.listing-location__buttons-container {
+  position: relative;
+  padding: 1rem 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.listing-location__button {
+  padding: 0.5rem 1rem;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1rem;
+  background: #000;
+  border: 1px solid transparent;
+  border-radius: 0.3rem;
+}
+.listing-location__button:hover {
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.listing-location__button-cancel {
+  padding: 0.5rem 1rem;
+  color: #000;
+  font-weight: bold;
+  font-size: 1rem;
+  background: #ccc;
+  border: 1px solid transparent;
+  border-radius: 0.3rem;
+}
+.listing-location__button-cancel:hover {
+  cursor: pointer;
+  background: #dcdcdc;
+}
+
+
+.listing-location__tooltip {
+  font-size: 0.875rem;
+  color: #505050;
+  position: absolute;
+  zIndex: 1;
+  top: 0.2rem;
+}

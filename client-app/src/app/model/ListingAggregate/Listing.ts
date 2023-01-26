@@ -1,10 +1,15 @@
 import { AccessStatus } from "../AccessStatus";
 import { UnitOfTime } from "../Membership";
 import {
-    Category, CentralHeating, CookerType, CouncilTaxBand, DecorativeCondition, Eligibility, FurnishedState, Incentive,
-    LifeCycleStatus, ListedBuildingGrade, OutsideSpace, Parking, PropertyType, RentalTerm, Tenure, Utility, UnitOfArea
+    Category, CentralHeating, CookerType, CouncilTaxBand, DecorativeCondition, 
+    Eligibility, FurnishedState, Incentive,
+    LifeCycleStatus, ListedBuildingGrade, FeatureSpace, Parking, PropertyType, 
+    RentalTerm, Tenure, Utility, UnitOfArea, TransactionType, Currency, Frequency, 
+    PriceQualifier, WhiteGoods, UniqueFeature
 } from "./ListingEnums";
-import { Content, DetailedDescription, EpcRatings, ListingLocation, Owner, Pricing, ServiceCharge, WatcherDto, } from "./ListingObjects";
+import { DetailedDescription, EpcRatings, ListingLocation, 
+    ListingMediaDto, 
+    Owner, Pricing, ServiceCharge, WatcherDto, } from "./ListingObjects";
 
 export interface Listing {
     id: string;
@@ -17,10 +22,8 @@ export interface Listing {
     accessStatus: AccessStatus;
     availableBedrooms: number;
     availableFromDate: Date;
-    basement: boolean;
     bathrooms: number;
     billsIncluded: Utility[];
-    burglarAlarm: boolean;
     businessForSale: boolean;
     buyerIncentives: Incentive[];
     company: Owner;
@@ -29,48 +32,45 @@ export interface Listing {
     centralHeating: CentralHeating;
     chainFree: boolean;
     commercialUseClass: string[];
+    commonholdDetails: string;
     connectedUtilities: Utility[];
-    conservatory: boolean;
     constructionYear: number;
-    contents: Content[];
     cookerType: CookerType;
     councilTaxBand: CouncilTaxBand;
     decorativeCondition: DecorativeCondition;
     deposit: number;
     detailedDescriptions: DetailedDescription[];
-    doubleGlazing: boolean;
-    dishwasher: boolean;
     epcRatings: EpcRatings;
+    eerCurrentRating: string;
+    eerPotentialRating: string;
+    eirCurrentRating: string;
+    eirPotentialRating: string;
     featureProperty: boolean;
     featureList: string[];
-    fireplace: boolean;
-    fishingRights: boolean;
-    floorLevels: number[];
+    floorLevels: string[];
     floors: number;
     furnishedState: FurnishedState;
-    freezer: boolean;
-    fridge: boolean;
     groundRent: number;
-    gym: boolean;
+    groundRentReviewPeriod: string;
     leaseExpiry: string;
     lifeCycleStatus: LifeCycleStatus;
+    listedBuilding: boolean;
     listedBuildingGrade: ListedBuildingGrade;
+    listingMedia?: ListingMediaDto[];
     listingReference: string;
     listingLocation: ListingLocation;
     livingRooms: number;
-    loft: boolean;
     minimumContractLength: number;
     minimumContractLengthUnits: UnitOfTime;
     newBuild: boolean;
     openDay: Date;
-    outbiuldings: boolean;
-    outsideSpaces: OutsideSpace[];
+    featureSpaces: FeatureSpace[];
     parking: Parking[];
     petsAllowed: boolean;
-    porterSecurity: boolean;
     pricing: Pricing;
     propertyType: PropertyType;
     rateableValue: number;
+    ratesPayable: number;
     rentalTerm: RentalTerm;
     repossession: boolean;
     retirement: boolean;
@@ -78,19 +78,16 @@ export interface Listing {
     serviceCharge: ServiceCharge;
     serviced: boolean;
     sharedAccommodation: boolean;
+    sharedOwnershipDetails: string;
     smokersConsidered: boolean;
     summaryDescription: string;
-    swimmingPool: boolean;
     tenanted: boolean;
     tenantEligibilityDss: Eligibility;
     tenantEligibilityStudents: Eligibility;
-    tennisCourt: boolean;
     tenure: Tenure;
     totalBedrooms: number;
-    utilityRoom: boolean;
-    waterFront: boolean;
-    washingMachine: boolean;
-    woodFloors: boolean;
+    uniqueFeatures: UniqueFeature[];
+    whiteGoods: WhiteGoods[];
     watchers: WatcherDto[];
 }
 
@@ -111,7 +108,6 @@ export class ListingFormValues {
     accessStatus: AccessStatus = AccessStatus.Private;
     availableBedrooms?: number = undefined;
     availableFromDate?: Date = undefined;
-    basement?: boolean = undefined;
     bathrooms?: number = undefined;
     billsIncluded?: Utility[] = [];
     company?: Owner = {
@@ -126,7 +122,7 @@ export class ListingFormValues {
             townOrCity: '',
             county: '',
             postalCode: '',
-            country: '',
+            country: 'United Kingdom',
             latitude: 51.505,
             longitude: -0.09,
         },
@@ -143,37 +139,36 @@ export class ListingFormValues {
         logo: '',
     };
     companyReference: string = '';
-    burglarAlarm?: boolean = undefined;
     businessForSale?: boolean = undefined;
     buyerIncentives?: Incentive[] = [];
     category?: Category = Category.residential;
     centralHeating?: CentralHeating = undefined;
-    chainFree?: boolean = undefined;
+    chainFree: boolean = false;
     commercialUseClass?: string[] = [];
+    commonholdDetails: string = ''
     connectedUtilities?: Utility[] = [];
-    conservatory?: boolean = undefined;
     constructionYear?: number = undefined;
-    contents?: Content[] = [];
     cookerType?: CookerType = undefined;
     councilTaxBand?: CouncilTaxBand = undefined;
     decorativeCondition?: DecorativeCondition = undefined;
     deposit?: number = undefined;
     detailedDescriptions?: DetailedDescription[] = [];
-    doubleGlazing?: boolean = undefined;
-    epcRatings?: EpcRatings = undefined;
+    eerCurrentRating?: string = '';
+    eerPotentialRating?: string = '';
+    eirCurrentRating?: string = '';
+    eirPotentialRating?: string = '';
+    featureProperty?: boolean = false;
     featureList?: string[] = [];
-    fireplace?: boolean = undefined;
-    fishingRights?: boolean = undefined;
-    floorLevels?: number[] = [];
+    floorLevels?: string[] = [];
     floors?: number = undefined;
     furnishedState?: FurnishedState = undefined;
-    freezer?: boolean = undefined;
-    fridge?: boolean = undefined;
     groundRent?: number = undefined;
-    gym?: boolean = undefined;
+    groundRentReviewPeriod?: string = '';
     leaseExpiry?: string = '';
     lifeCycleStatus?: LifeCycleStatus = undefined;
+    listedBuilding?: boolean = false;
     listedBuildingGrade?: ListedBuildingGrade = undefined;
+    listingMedia?: ListingMediaDto[] = [];
     listingReference?: string = '';
     listingLocation?: ListingLocation = {
         id: '',
@@ -184,24 +179,32 @@ export class ListingFormValues {
         townOrCity: '',
         county: '',
         postalCode: '',
-        country: '',
+        country: 'United Kingdom',
         latitude: 51.505,
         longitude: -0.09,
     };
     livingRooms?: number = undefined;
-    loft?: boolean = undefined;
     minimumContractLength?: number = undefined;
-    minimumContractLengthUnits?: UnitOfTime;
+    minimumContractLengthUnits?: UnitOfTime = UnitOfTime.Months;
     newBuild?: boolean = undefined;
     openDay?: Date = undefined;
-    outbiuldings?: boolean = undefined;
-    outsideSpaces?: OutsideSpace[] = [];
+    featureSpaces?: FeatureSpace[] = [];
     parking?: Parking[] = [];
     petsAllowed?: boolean = undefined;
-    porterSecurity?: boolean = undefined;
-    pricing?: Pricing = undefined;
+    pricing?: Pricing = {
+        id: '',
+        transactionType: TransactionType.rent,
+        currency: Currency.gbp,
+        price: undefined,
+        pricePerUnitArea: undefined,
+        rentFrequency: Frequency.perMonth,
+        priceQualifier: PriceQualifier.from,
+        auction: false,
+        areaUnits: UnitOfArea.SqMetres
+    };
     propertyType?: PropertyType = undefined;
     rateableValue?: number = undefined;
+    ratesPayable?: number = undefined;
     rentalTerm?: RentalTerm = undefined;
     repossession?: boolean = undefined;
     retirement?: boolean = undefined;
@@ -209,17 +212,16 @@ export class ListingFormValues {
     serviceCharge?: ServiceCharge = undefined;
     serviced?: boolean = undefined;
     sharedAccommodation?: boolean = undefined;
+    sharedOwnershipDetails?: string = '';
+    smokersConsidered?: boolean = undefined;
     summaryDescription?: string = '';
-    swimmingPool?: boolean = undefined;
     tenanted?: boolean = undefined;
     tenantEligibilityDss?: Eligibility = undefined;
     tenantEligibilityStudents?: Eligibility = undefined;
-    tennisCourt?: boolean = undefined;
-    tenure?: Tenure = undefined;
+    tenure?: Tenure = 1;
     totalBedrooms?: number = undefined;
-    utilityRoom?: boolean = undefined;
-    waterFront?: boolean = undefined;
-    woodFloors?: boolean = undefined;
+    uniqueFeatures?: UniqueFeature[] = [];
+    whiteGoods?: WhiteGoods[] = [];
 
     constructor(listing?: ListingFormValues) {
         if (listing) {
@@ -232,57 +234,52 @@ export class ListingFormValues {
             this.accessStatus = listing.accessStatus;
             this.availableBedrooms = listing.availableBedrooms;
             this.availableFromDate = listing.availableFromDate;
-            this.basement = listing.basement;
             this.bathrooms = listing.bathrooms;
             this.billsIncluded = listing.billsIncluded;
             this.company = listing.company;
             this.companyReference = listing.companyReference;
-            this.burglarAlarm = listing.burglarAlarm;
             this.businessForSale = listing.businessForSale;
             this.buyerIncentives = listing.buyerIncentives;
             this.category = listing.category;
             this.centralHeating = listing.centralHeating;
             this.chainFree = listing.chainFree;
             this.commercialUseClass = listing.commercialUseClass;
+            this.commonholdDetails = listing.commonholdDetails;
             this.connectedUtilities = listing.connectedUtilities;
-            this.conservatory = listing.conservatory;
             this.constructionYear = listing.constructionYear;
-            this.contents = listing.contents;
             this.cookerType = listing.cookerType;
             this.councilTaxBand = listing.councilTaxBand;
             this.decorativeCondition = listing.decorativeCondition;
             this.deposit = listing.deposit;
             this.detailedDescriptions = listing.detailedDescriptions;
-            this.doubleGlazing = listing.doubleGlazing;
-            this.epcRatings = listing.epcRatings;
+            this.eerCurrentRating = listing.eerCurrentRating;
+            this.eerPotentialRating = listing.eerPotentialRating;
+            this.eirCurrentRating = listing.eirCurrentRating;
+            this.eirPotentialRating = listing.eirPotentialRating;
             this.featureList = listing.featureList;
-            this.fireplace = listing.fireplace;
-            this.fishingRights = listing.fishingRights;
             this.floorLevels = listing.floorLevels;
             this.floors = listing.floors;
             this.furnishedState = listing.furnishedState;
-            this.freezer = listing.freezer;
-            this.fridge = listing.fridge;
             this.groundRent = listing.groundRent;
-            this.gym = listing.gym;
+            this.groundRentReviewPeriod = listing.groundRentReviewPeriod;
             this.leaseExpiry = listing.leaseExpiry;
             this.lifeCycleStatus = listing.lifeCycleStatus;
+            this.listedBuilding = listing.listedBuilding;
             this.listedBuildingGrade = listing.listedBuildingGrade;
+            this.listingMedia = listing.listingMedia;
             this.listingReference = listing.listingReference;
             this.listingLocation = listing.listingLocation;
             this.livingRooms = listing.livingRooms;
-            this.loft = listing.loft;
             this.minimumContractLength = listing.minimumContractLength;
             this.newBuild = listing.newBuild;
             this.openDay = listing.openDay;
-            this.outbiuldings = listing.outbiuldings;
-            this.outsideSpaces = listing.outsideSpaces;
+            this.featureSpaces = listing.featureSpaces;
             this.parking = listing.parking;
             this.petsAllowed = listing.petsAllowed;
-            this.porterSecurity = listing.porterSecurity;
             this.pricing = listing.pricing;
             this.propertyType = listing.propertyType;
             this.rateableValue = listing.rateableValue;
+            this.ratesPayable = listing.ratesPayable;
             this.rentalTerm = listing.rentalTerm;
             this.repossession = listing.repossession;
             this.retirement = listing.retirement;
@@ -290,17 +287,16 @@ export class ListingFormValues {
             this.serviceCharge = listing.serviceCharge;
             this.serviced = listing.serviced;
             this.sharedAccommodation = listing.sharedAccommodation;
+            this.sharedOwnershipDetails = listing.sharedOwnershipDetails;
+            this.smokersConsidered = listing.smokersConsidered;
             this.summaryDescription = listing.summaryDescription;
-            this.swimmingPool = listing.swimmingPool;
             this.tenanted = listing.tenanted;
             this.tenantEligibilityDss = listing.tenantEligibilityDss;
             this.tenantEligibilityStudents = listing.tenantEligibilityStudents;
-            this.tennisCourt = listing.tennisCourt;
             this.tenure = listing.tenure;
             this.totalBedrooms = listing.totalBedrooms;
-            this.utilityRoom = listing.utilityRoom;
-            this.waterFront = listing.waterFront;
-            this.woodFloors = listing.woodFloors;
+            this.uniqueFeatures = listing.uniqueFeatures;
+            this.whiteGoods = listing.whiteGoods;
         }
     }
 }

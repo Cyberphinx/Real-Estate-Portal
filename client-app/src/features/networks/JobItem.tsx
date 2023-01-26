@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import React, { SyntheticEvent, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { dateFormatter } from "../../app/common/HelperFunctions";
-import { Job, JobContent, JobNetworkRole } from "../../app/model/Job";
+import { Job, JobMediaDto, JobNetworkRole } from "../../app/model/Job";
 import { ServiceCategory } from "../../app/model/ServiceCategory";
 import { useStore } from "../../app/stores/store";
 import './JobItem.css';
@@ -16,8 +16,8 @@ interface Props {
 export default observer(function JobItem({ job }: Props) {
     const { userStore, profileStore } = useStore();
 
-    const [image, setImage] = useState<JobContent>(job!.jobContents[0]);
-    function handleImage(event: SyntheticEvent, state: JobContent) {
+    const [image, setImage] = useState<JobMediaDto>(job!.jobMedia[0]);
+    function handleImage(event: SyntheticEvent, state: JobMediaDto) {
         event.stopPropagation();
         setImage(state);
     }
@@ -29,16 +29,16 @@ export default observer(function JobItem({ job }: Props) {
     };
 
     function handlePrev(event: SyntheticEvent) {
-        if (job!.jobContents.indexOf(image) === 0) return null;
+        if (job!.jobMedia.indexOf(image) === 0) return null;
         else {
-            setImage(job!.jobContents[job!.jobContents.indexOf(image) - 1]);
+            setImage(job!.jobMedia[job!.jobMedia.indexOf(image) - 1]);
         }
     }
 
     function handleNext(event: SyntheticEvent) {
         event.stopPropagation();
-        if (job!.jobContents.indexOf(image) < job!.jobContents.length - 1) {
-            setImage(job!.jobContents[job!.jobContents.indexOf(image) + 1]);
+        if (job!.jobMedia.indexOf(image) < job!.jobMedia.length - 1) {
+            setImage(job!.jobMedia[job!.jobMedia.indexOf(image) + 1]);
         }
         else {
             return null;
@@ -64,8 +64,8 @@ export default observer(function JobItem({ job }: Props) {
                 <p className="thread-content">{job.description}</p>
 
                 <section className="thread-gallery">
-                    <div className="thread-carousel" style={{ gridTemplateColumns: `repeat(${job!.jobContents.length},calc(100vw / 10))` }} ref={scrollRef}>
-                        {job?.jobContents.map((content: JobContent, index: number) => (
+                    <div className="thread-carousel" style={{ gridTemplateColumns: `repeat(${job!.jobMedia.length},calc(100vw / 10))` }} ref={scrollRef}>
+                        {job?.jobMedia.map((content: JobMediaDto, index: number) => (
                             <div style={{ position: "relative" }} key={content.id}>
                                 <img className="job-thumbnail" src={content.url} alt={content.caption} onClick={(e) => handleImage(e, content)} />
                                 <span className="job-numbering">{index + 1}</span>

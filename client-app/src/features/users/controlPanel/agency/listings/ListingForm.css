@@ -1,44 +1,32 @@
-.listing-form {
-  padding: 20px;
-  width: 50rem;
-}
-
-.listing-form-contents {
-  position: relative;
-  border: 1px solid #ccc;
-  padding: 5px 20px 20px 20px;
-  border-radius: 5px;
+.listing-form__container {
+  height: calc(100vh - 80px);
+  overflow-y: scroll;
+  padding: 20px 40px;
   background: #fff;
-  margin-bottom: 20px;
 }
 
-.listing-form-title {
-  font-size: 18px;
-  font-weight: 600;
+.listing-form__title {
+  font-size: 1.75rem;
+  font-weight: normal;
+  margin: 1rem 0px 1.25rem 0px;
+  color: #000;
 }
 
-.listing-form-subtitle {
-  font-size: 16px;
-}
-
-.listing-form-label {
-  padding: 10px 0px;
-  margin: 0px;
-}
-
-.breadcrumb:hover {
+.listing-form__portfolio {
+  font-weight: normal;
   cursor: pointer;
+  color: grey;
+}
+.listing-form__portfolio:hover {
+  cursor: pointer;
+  color: #ccc;
 }
 
-.listing-form-master-button {
-  margin: -10px 0px 10px 10px;
-  padding: 6px 12px;
-  color: #1f51ff;
-  background: #fff;
-  border: 1px solid #1f51ff;
-  border-radius: 5px;
+.listing-form__toolbar {
+  width: 60rem;
 }
-.listing-form-master-button:hover {
-  cursor: pointer;
-  background: rgba(31, 81, 255, 0.05);
+
+.listing-form__contents {
+  padding-top: 2rem;
+  width: 60rem;
 }

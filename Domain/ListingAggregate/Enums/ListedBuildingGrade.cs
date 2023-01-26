@@ -2,6 +2,7 @@ namespace Domain.ListingAggregate.Enums
 {
     public enum ListedBuildingGrade
     {
+        NotApplicable,
         CategoryA,
         CategoryB,
         CategoryC,

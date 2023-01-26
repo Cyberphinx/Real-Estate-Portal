@@ -40,9 +40,9 @@
 }
 
 .payment-register-button {
-  border: 1px solid #1F51FF;
+  border: 1px solid #DC143C;
   border-radius: 3px;
-  background: #1F51FF;
+  background: linear-gradient(45deg, #FF1493 0%, #DC143C 100%);
   padding: 10px;
   font-size: 16px;
   font-weight: 600;
@@ -52,19 +52,19 @@
 }
 .payment-register-button:hover {
   cursor: pointer;
-  background: rgba(31,81,255,0.9);
+  background: linear-gradient(45deg, rgba(255,20,147, 0.8) 0%, rgba(220, 20, 60, 0.8) 100%);
 }
 .payment-register-button:disabled {
   cursor: default;
-  border: 1px solid rgba(31,81,255,0);
-  background: rgba(31,81,255,0.2);
+  border: 1px solid transparent;
+  background: linear-gradient(45deg, rgba(255,20,147, 0.2) 0%, rgba(220, 20, 60, 0.2) 100%);
 }
 
 .payment-register-submitting-button {
   position: relative;
-  border: 1px solid #1F51FF;
+  border: 1px solid #DC143C;
   border-radius: 3px;
-  background: rgba(31,81,255,0);
+  background: none;
   padding: 10px;
   font-size: 16px;
   font-weight: 600;

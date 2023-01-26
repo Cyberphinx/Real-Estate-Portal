@@ -196,7 +196,7 @@ namespace API.Controllers
             token = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(token));
 
             var verifyUrl = $"{origin}/account/verifyEmail?token={token}&email={user.Email}";
-            var message = $"<p>Please click the below link to verify your email address:</p><p><a href='{verifyUrl}'>Click to verify email</a></p>";
+            var message = $"<p>Please click the below link to verify your email address for Sanctum:</p><p><a href='{verifyUrl}'>Click to verify email</a></p>";
 
             // SendinBlue
             var verificationEmail = new EmailDto
@@ -204,7 +204,7 @@ namespace API.Controllers
                 RecipientName = user.UserName,
                 RecipientEmail = user.Email,
                 RecipientPhone = user.PhoneNumber,
-                Subject = "Please verify email",
+                Subject = "Please verify email for Sanctum",
                 Body = message,
                 AccountType = user.AccountType
             };

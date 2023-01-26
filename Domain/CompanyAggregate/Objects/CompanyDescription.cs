@@ -8,6 +8,7 @@ namespace Domain.CompanyAggregate.Objects
     public class CompanyDescription
     {
         public Guid Id { get; set; }
+        public int Index { get; set; }
         public string Heading { get; set; }
         public string Text { get; set; }
         public Guid CompanyId { get; set; }

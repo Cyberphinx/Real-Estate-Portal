@@ -1,0 +1,36 @@
+.media__buttons-container {
+    position: relative;
+    padding: 1rem 0;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  
+  .media__button {
+    padding: 0.5rem 1rem;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1rem;
+    background: #1f51ff;
+    border: 1px solid transparent;
+    border-radius: 0.3rem;
+  }
+  .media__button:hover {
+    cursor: pointer;
+    background: rgba(31, 81, 255, 0.9);
+  }
+  
+  .media__button-accent {
+    padding: 0.5rem 1rem;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1rem;
+    background: #00a36c;
+    border: 1px solid transparent;
+    border-radius: 0.3rem;
+  }
+  .media__button-accent:hover {
+    cursor: pointer;
+    background: rgba(0, 163, 108, 0.9);
+  }
+  

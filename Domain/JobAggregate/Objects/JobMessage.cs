@@ -11,8 +11,7 @@ namespace Domain.JobAggregate.Objects
         public Guid Id { get; set; }
         public string Body { get; set; }
         public AppUser Author { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        public Guid JobId { get; set; }
         public Job Job { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }
 }

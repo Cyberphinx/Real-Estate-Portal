@@ -10,6 +10,7 @@ import JobStore from "./jobStore";
 import ProfileStore from "./profileStore";
 import AgentListingStore from "./agentListingStore";
 import InvoiceStore from "./invoiceStore";
+import MessageStore from "./messageStore";
 
 interface Store {
     // class can also be used as types
@@ -24,6 +25,7 @@ interface Store {
     profileStore: ProfileStore;
     agentListingStore: AgentListingStore;
     invoiceStore: InvoiceStore;
+    messageStore: MessageStore;
 }
 
 export const store: Store = {
@@ -37,7 +39,8 @@ export const store: Store = {
     mapStore: new MapStore(),
     profileStore: new ProfileStore(),
     agentListingStore: new AgentListingStore(),
-    invoiceStore: new InvoiceStore()
+    invoiceStore: new InvoiceStore(),
+    messageStore: new MessageStore()
 }
 
 export const StoreContext = createContext(store);

@@ -6,7 +6,7 @@ import { useStore } from "../../../app/stores/store";
 import NavBar from "../../../app/layout/NavBar";
 import LoadingComponent from "../../../app/common/loading/LoadingComponent";
 import Close from "../../map/toolbar/Close";
-import { Content, DetailedDescription } from "../../../app/model/ListingAggregate/ListingObjects";
+import { ListingMediaDto, DetailedDescription } from "../../../app/model/ListingAggregate/ListingObjects";
 import { UnitOfLength } from "../../../app/model/ListingAggregate/ListingEnums";
 
 export default observer(function ListingDetailsPage() {
@@ -27,12 +27,27 @@ export default observer(function ListingDetailsPage() {
         <div>
             <NavBar />
             <div style={{ position: "relative" }}>
-                <section className="listing-contents-container" >
-                    {listing.contents.map((content: Content) => (
-                        <div className="single-content-container" key={content.id}>
+                <section className="listing-contents__container" >
+                    {/* {listing.contents.map((content: Content) => (
+                        <div className="listing-content__wrapper" key={content.id}>
                             <img src={content.url} alt={content.caption} className="content-images" />
                         </div>
-                    ))}
+                    ))} */}
+                    <div>
+                        {listing.listingMedia!.slice(0, (listing.listingMedia!.length / 2)).map((content: ListingMediaDto) => (
+                            <div className="listing-content__wrapper" key={content.id}>
+                                <img src={content.url} alt={content.caption} className="content-image" />
+                            </div>
+                        ))}
+                    </div>
+                    <div>
+                        {listing.listingMedia!.slice((listing.listingMedia!.length / 2), listing.listingMedia!.length).map((content: ListingMediaDto) => (
+                            <div className="listing-content__wrapper" key={content.id}>
+                                <img src={content.url} alt={content.caption} className="content-image" />
+                            </div>
+                        ))}
+                    </div>
+
                 </section>
 
                 {description &&

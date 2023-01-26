@@ -1,0 +1,57 @@
+.details__multi-select {
+  border: 1px solid #ccc;
+  border-radius: 0.4rem;
+  width: 58.65rem;
+  padding: 2rem 0.625rem 0.625rem 0.625rem;
+  font-size: 1.125rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.details__multi-select__selected {
+  font-size: 1.125rem;
+  background: #f0f0f0;
+  border: 1px solid transparent;
+  padding: 0.3rem 1rem;
+  font-weight: normal;
+}
+.details__multi-select__selected:hover {
+  cursor: pointer;
+  text-decoration: line-through;
+}
+
+.details__multi-select-dropdown {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 1.125rem;
+  width: 58.65rem;
+  padding: 0.625rem;
+  border: 1px solid transparent;
+  border-radius: 0.4rem;
+  margin-top: -1rem;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.details__multi-select-options {
+  font-size: 1.125rem;
+  background: #f0f0f0;
+  border: 2px solid transparent;
+  border-radius: 0;
+  padding: 0.3rem 1rem;
+}
+.details__multi-select-options:hover {
+  cursor: pointer;
+}
+
+.multiselect__input-label {
+  position: absolute;
+  top: 0.2rem;
+  left: 0.625rem;
+  z-index: 1;
+  color: #000;
+  font-size: 0.875rem;
+  font-weight: bold;
+}

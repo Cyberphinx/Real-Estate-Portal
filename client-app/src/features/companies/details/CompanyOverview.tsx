@@ -3,7 +3,8 @@ import '../../listings/details/ListingOverview.css';
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
 import { useStore } from "../../../app/stores/store";
-import { Company, CompanyContent } from "../../../app/model/Company";
+import { Company } from "../../../app/model/Company";
+import { Media } from "../../../app/model/Media";
 
 interface Props {
     company: Company | undefined;
@@ -13,8 +14,8 @@ export default observer(function CompanyOverview({ company }: Props) {
     const { companyStore } = useStore();
     const { companies } = companyStore;
 
-    const [companyImage, setCompanyImage] = useState<CompanyContent>(company!.companyContents[0]);
-    function handleImage(event: SyntheticEvent, state: CompanyContent) {
+    const [companyImage, setCompanyImage] = useState<Media>(company!.companyMedia[0]);
+    function handleImage(event: SyntheticEvent, state: Media) {
         event.stopPropagation();
         setCompanyImage(state);
     }
@@ -25,7 +26,7 @@ export default observer(function CompanyOverview({ company }: Props) {
     };
     
     useEffect(() => {
-        setCompanyImage(company!.companyContents[0]);
+        setCompanyImage(company!.companyMedia[0]);
     }, [company])
 
     const address = `${company?.companyAddress.propertyNumberOrName && (company?.companyAddress.propertyNumberOrName + ", ")}
@@ -38,16 +39,16 @@ export default observer(function CompanyOverview({ company }: Props) {
 
     function handlePrev(event: SyntheticEvent) {
         event.stopPropagation();
-        if (company!.companyContents.indexOf(companyImage) === 0) return null;
+        if (company!.companyMedia.indexOf(companyImage) === 0) return null;
         else {
-            setCompanyImage(company!.companyContents[company!.companyContents.indexOf(companyImage) - 1]);
+            setCompanyImage(company!.companyMedia[company!.companyMedia.indexOf(companyImage) - 1]);
         }
     }
 
     function handleNext(event: SyntheticEvent) {
         event.stopPropagation();
-        if (company!.companyContents.indexOf(companyImage) < company!.companyContents.length - 1) {
-            setCompanyImage(company!.companyContents[company!.companyContents.indexOf(companyImage) + 1]);
+        if (company!.companyMedia.indexOf(companyImage) < company!.companyMedia.length - 1) {
+            setCompanyImage(company!.companyMedia[company!.companyMedia.indexOf(companyImage) + 1]);
         }
         else {
             return null;
@@ -62,14 +63,14 @@ export default observer(function CompanyOverview({ company }: Props) {
                             <img className="details-image" src={companyImage?.url} alt="cover" />
                         </Link>
                         <span className="image-numbering">
-                            Image {company!.companyContents.indexOf(companyImage) + 1} of {company?.companyContents.length}
+                            Image {company!.companyMedia.indexOf(companyImage) + 1} of {company?.companyMedia.length}
                         </span>
                         <button className="left-arrow" onClick={(e) => handlePrev(e)}><img className="left-icon" src="/assets/previous.svg" alt="previous" /></button>
                         <button className="right-arrow" onClick={(e) => handleNext(e)}><img className="right-icon" src="/assets/next.svg" alt="next" /></button>
                     </div>
                     <div style={{ position: "relative" }}>
-                        <section className="details-carousel" style={{ gridTemplateColumns: `repeat(${company?.companyContents.length}, calc(100vh / 6))` }} ref={scrollRef}>
-                            {company?.companyContents.map((content: CompanyContent, index: number) => (
+                        <section className="details-carousel" style={{ gridTemplateColumns: `repeat(${company?.companyMedia.length}, calc(100vh / 6))` }} ref={scrollRef}>
+                            {company?.companyMedia.map((content: Media, index: number) => (
                                 <div style={{ position: "relative" }} key={content.id}>
                                     <img className="details-thumbnail" src={content.url} alt={content.caption} onClick={(e) => handleImage(e, content)} />
                                     <span className="thumbnail-numbering">{index + 1}</span>

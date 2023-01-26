@@ -1,9 +1,11 @@
 import { Location } from './../Location';
 import { CompanyAddress, CompanyContacts, RedressScheme } from "../Company";
-import { Currency, Frequency, MediaType, PriceQualifier, TransactionType, UnitOfArea, UnitOfLength } from "./ListingEnums";
+import { Currency, Frequency, PriceQualifier, TransactionType, UnitOfArea, UnitOfLength } from "./ListingEnums";
+import { MediaType } from '../Media';
 
-export interface Content {
+export interface ListingMediaDto {
     id: string;
+    index: number;
     url: string;
     type: MediaType;
     caption: string;
@@ -48,8 +50,8 @@ export interface Pricing {
     id: string;
     transactionType: TransactionType;
     currency: Currency;
-    price: number;
-    pricePerUnitArea: number;
+    price: number | undefined;
+    pricePerUnitArea: number | undefined;
     rentFrequency: Frequency;
     priceQualifier: PriceQualifier;
     auction: boolean;
@@ -58,8 +60,10 @@ export interface Pricing {
 
 export interface ServiceCharge {
     id: string;
+    applicable: boolean;
     charge: number;
     perUnitAreaUnits: UnitOfArea;
+    reviewPeriod: string;
     frequency: Frequency;
 }
 

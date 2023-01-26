@@ -5,7 +5,7 @@ import AgencyTag from "../../app/common/tags/AgencyTag";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../app/stores/store";
 import { priceQualifier, propertyType, rentFrequencyShort } from "../../app/model/ListingAggregate/ListingEnums";
-import { Content } from "../../app/model/ListingAggregate/ListingObjects";
+import { ListingMediaDto } from "../../app/model/ListingAggregate/ListingObjects";
 import WatchButton from "../../app/common/WatchButton";
 
 interface Props {
@@ -23,8 +23,8 @@ export default observer(function ListingItem({ listing, predicate }: Props) {
 
     const priceFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: listing!.pricing.currency.toString().toUpperCase(), minimumFractionDigits: 0 });
 
-    const [image, setImage] = useState<Content>(listing!.contents[0]);
-    function handleImage(event: SyntheticEvent, state: Content) {
+    const [image, setImage] = useState<ListingMediaDto>(listing!.listingMedia![0]);
+    function handleImage(event: SyntheticEvent, state: ListingMediaDto) {
         event.stopPropagation();
         setImage(state);
     }
@@ -53,16 +53,16 @@ export default observer(function ListingItem({ listing, predicate }: Props) {
 
     function handlePrev(event: SyntheticEvent) {
         event.stopPropagation();
-        if (listing!.contents.indexOf(image) === 0) return null;
+        if (listing!.listingMedia!.indexOf(image) === 0) return null;
         else {
-            setImage(listing!.contents[listing!.contents.indexOf(image) - 1]);
+            setImage(listing!.listingMedia![listing!.listingMedia!.indexOf(image) - 1]);
         }
     }
 
     function handleNext(event: SyntheticEvent) {
         event.stopPropagation();
-        if (listing!.contents.indexOf(image) < listing!.contents.length - 1) {
-            setImage(listing!.contents[listing!.contents.indexOf(image) + 1]);
+        if (listing!.listingMedia!.indexOf(image) < listing!.listingMedia!.length - 1) {
+            setImage(listing!.listingMedia![listing!.listingMedia!.indexOf(image) + 1]);
         }
         else {
             return null;
@@ -80,12 +80,12 @@ export default observer(function ListingItem({ listing, predicate }: Props) {
                 <section className="gallery">
                     <div style={{ position: "relative" }}>
                         <img src={image?.url} className="card-image" alt="property" />
-                        <span className="img-numbering">Image {listing!.contents.indexOf(image) + 1} of {listing?.contents.length}</span>
+                        <span className="img-numbering">Image {listing!.listingMedia!.indexOf(image) + 1} of {listing?.listingMedia!.length}</span>
                         <button className="left-arr" onClick={(e) => handlePrev(e)}><img className="left-ico" src="/assets/previous.svg" alt="previous" /></button>
                         <button className="right-arr" onClick={(e) => handleNext(e)}><img className="right-ico" src="/assets/next.svg" alt="next" /></button>
                     </div>
-                    <div className="carousel" style={{ gridTemplateColumns: `repeat(${listing!.contents.length}, calc(100vh / 13))` }} ref={scrollRef}>
-                        {listing?.contents.map((content: Content, index: number) => (
+                    <div className="carousel" style={{ gridTemplateColumns: `repeat(${listing!.listingMedia!.length}, calc(100vh / 13))` }} ref={scrollRef}>
+                        {listing?.listingMedia!.map((content: ListingMediaDto, index: number) => (
                             <div style={{ position: "relative" }} key={content.id}>
                                 <img className="thumbnail" src={content.url} alt={content.caption} onClick={(e) => handleImage(e, content)} />
                                 <span className="numbering">{index + 1}</span>
@@ -97,7 +97,7 @@ export default observer(function ListingItem({ listing, predicate }: Props) {
                 </section>
                 <section className="card-overlay">
                     <div className="card-price" title={`${priceQualifier(listing!.pricing.priceQualifier)} in ${listing!.pricing.currency.toString().toUpperCase()}`}>
-                        <b style={{ fontSize: "1.125rem"}}>{priceFormat.format(listing!.pricing.price)}</b>
+                        <b style={{ fontSize: "1.125rem"}}>{priceFormat.format(listing!.pricing.price!)}</b>
                         {predicate.get("channel") === "sale" ? null : <span style={{ fontSize: "10px" }}>{rentFrequencyShort(listing!)}</span>}
                     </div>
                     <div className="card-attribute">

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Domain.Enums;
 using Domain.ListingAggregate;
+using Domain.MediaAggregate;
 using Domain.CompanyAggregate.Objects;
 using Domain.CompanyAggregate.Enums;
 
@@ -16,7 +17,7 @@ namespace Domain.CompanyAggregate
         public DateTime AddedOn { get; set; }
         public CompanyAddress CompanyAddress { get; set; }
         public CompanyContacts CompanyContacts { get; set; }
-        public ICollection<CompanyContent> CompanyContents { get; set; }
+        public ICollection<Media> CompanyMedia { get; set; }
         public ICollection<CompanyDescription> CompanyDescriptions { get; set; }
         public string CompanyReference { get; set; }
         public string CompanyRegistrationNumber { get; set; }

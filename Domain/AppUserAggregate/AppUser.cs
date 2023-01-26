@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Domain.MediaAggregate;
 using Domain.AppUserAggregate.Enums;
 using Domain.AppUserAggregate.Objects;
 using Domain.LocationAggregate;
@@ -20,7 +21,7 @@ namespace Domain.AppUserAggregate
         public Membership Membership { get; set; }
         public ICollection<Invoice> Invoices { get; set; } = new List<Invoice>();
         public ICollection<JobNetwork> Jobs { get; set; }
-        public ICollection<Photo> Photos { get; set; }
+        public ICollection<Media> Photos { get; set; }
         public ICollection<AppUserReview> Reviews { get; set; }
         public ICollection<ListingWatcher> SavedListings { get; set; }
         public ICollection<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();

@@ -24,7 +24,7 @@ export default observer(function NavBar() {
                 <li className="nav-bar2-item"><Link to="/">SANCTUM</Link></li>
                 <li className="nav-bar2-item"><p className="gist-style">
                     <span>{listing?.pricing.transactionType.toString() === "Sale" && priceQualifier(listing!.pricing.priceQualifier)} </span>
-                    <b>{listing && priceFormatter(listing.pricing.price, listing.pricing.currency)} </b>
+                    <b>{listing && priceFormatter(listing.pricing.price!, listing.pricing.currency)} </b>
                     <span>{listing?.pricing.transactionType.toString() === "Rent" && rentFrequency(listing!)}</span>
                 </p></li>
                 <li className="nav-bar2-item">

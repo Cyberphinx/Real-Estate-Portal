@@ -1,12 +1,26 @@
-.listing-contents-container {
+
+.listing-contents__container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(600px, 1fr));
+  grid-template-columns: repeat(auto-fill);
   gap: 5px;
   grid-auto-flow: dense;
 }
-.content-images {
+.content-image {
   width: 100%;
 }
+
+@media all and (min-width: 1025px) {
+  .listing-contents__container {
+    grid-template-columns: repeat(auto-fill, minmax(512px, 1fr));
+  }
+}
+
+@media all and (min-width: 1921px) {
+  .listing-contents__container {
+    grid-template-columns: repeat(auto-fill, minmax(960px, 1fr));
+  }
+}
+
 .listing-descriptions-container {
   position: fixed;
   left: 50vw;

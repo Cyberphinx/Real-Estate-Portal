@@ -1,3 +1,4 @@
+import { Media } from './Media';
 import { ListingLocation, Pricing } from './ListingAggregate/ListingObjects';
 import { LifeCycleStatus, PropertyType } from './ListingAggregate/ListingEnums';
 import { Review } from './Review';
@@ -14,7 +15,7 @@ export interface Company {
     addedOn: Date;
     companyAddress: CompanyAddress;
     companyContacts: CompanyContacts;
-    companyContents: CompanyContent[];
+    companyMedia: Media[];
     companyDescriptions: CompanyDescription[];
     companyReference: string;
     companyRegistrationNumber: string;
@@ -46,7 +47,7 @@ export class CompanyFormValues {
     addedOn: Date = new Date();
     companyAddress?: CompanyAddress;
     companyContacts?: CompanyContacts;
-    companyContents?: CompanyContent[];
+    companyMedia?: Media[];
     companyDescriptions?: CompanyDescription[];
     companyReference: string = "";
     companyRegistrationNumber: string = "";
@@ -72,7 +73,7 @@ export class CompanyFormValues {
             this.addedOn = company.addedOn;
             this.companyAddress = company.companyAddress;
             this.companyContacts = company.companyContacts;
-            this.companyContents = company.companyContents;
+            this.companyMedia = company.companyMedia;
             this.companyDescriptions = company.companyDescriptions;
             this.companyReference = company.companyReference;
             this.companyRegistrationNumber = company.companyRegistrationNumber;
@@ -102,22 +103,11 @@ export interface CompanyContacts extends Contacts {
     id: string;
 }
 
-export interface CompanyContent {
-    id: string;
-    url: string;
-    type: CompanyMediaType;
-    caption: string;
-    isMain: boolean;
-    isLogo: boolean;
-}
-
 export interface CompanyDescription {
     id: string;
     heading: string;
     text: string;
 }
-
-
 
 export interface Insurance {
     id: string;
@@ -172,14 +162,6 @@ export enum RedressScheme {
 
 export interface CompanyReview extends Review {
     id: string;
-}
-
-export enum CompanyMediaType {
-    Audio,
-    Brochure,
-    Document,
-    Image,
-    Video
 }
 
 export enum CompanyType {

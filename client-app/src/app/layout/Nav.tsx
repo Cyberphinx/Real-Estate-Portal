@@ -47,18 +47,27 @@ export default observer(function Nav() {
                         Services
                     </button>
                 </li>
-                {/* <li className="nav-bar-item">
+                <li className="nav-bar-item">
                     <button className="nav-button"
                         onClick={() => { cancelSelectListing(); cancelSelectCompany(); }}>
-                        Get Agent
+                        Get an agent
                     </button>
-                </li> */}
-                {/* <li className="nav-bar-item">
+                </li>
+                
+                <li className="nav-bar-item">
                     <button className="nav-button"
                         onClick={() => { cancelSelectListing(); cancelSelectCompany(); }}>
-                        Get Moving
+                        Get moving company
                     </button>
-                </li> */}
+                </li>
+
+                <li className="nav-bar-item">
+                    <button className="nav-button"
+                        onClick={() => { cancelSelectListing(); cancelSelectCompany(); }}>
+                        Find a builder
+                    </button>
+                </li>
+                
 
                 {isLoggedIn
                     ? (

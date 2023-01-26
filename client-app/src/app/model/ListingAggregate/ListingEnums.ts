@@ -18,6 +18,7 @@ export enum CookerType {
 }
 
 export enum CouncilTaxBand {
+    none,
     a,
     b,
     c,
@@ -51,7 +52,7 @@ export enum DecorativeCondition {
 }
 
 export enum Eligibility {
-    aAccepted,
+    accepted,
     excluded,
     only
 }
@@ -130,6 +131,7 @@ export enum LifeCycleStatus {
 }
 
 export enum ListedBuildingGrade {
+    notApplicable,
     categoryA,
     categoryB,
     categoryC,
@@ -142,25 +144,22 @@ export enum ListedBuildingGrade {
     locallyListed
 }
 
-export enum MediaType {
-    audioTour,
-    brochure,
-    document,
-    epcGraph,
-    epcReport,
-    floorPlan,
-    homePack,
-    image,
-    sitePlan,
-    virtualTour
-}
 
-export enum OutsideSpace {
+
+export enum FeatureSpace {
     balcony,
+    basement,
     communalGarden,
+    conservatory,
+    gym,
+    loft,
+    outbuildings,
     privateGarden,
     roofTerrace,
-    terrace
+    swimmingPool,
+    tennisCourt,
+    terrace,
+    utilityRoom
 }
 
 export enum Parking {
@@ -302,7 +301,9 @@ export enum Tenure {
     feudal,
     freehold,
     leasehold,
-    shareOfFreehold
+    shareOfFreehold,
+    commonhold,
+    sharedOwnership
 }
 
 export enum TransactionType {
@@ -323,6 +324,17 @@ export enum UnitOfLength {
     metres
 }
 
+export enum UniqueFeature {
+    burglarAlarm,
+    doubleGlazing,
+    fireplace,
+    fishingRights,
+    porterSecurity,
+    ruralSecluded,
+    waterFront,
+    woodenFloors
+}
+
 export enum Utility {
     electricity,
     gas,
@@ -333,5 +345,15 @@ export enum Utility {
     water
 }
 
+export enum WhiteGoods {
+    airConditioner,
+    cookerStove,
+    dishwasher,
+    fridge,
+    freezer,
+    oven,
+    tumbleDryer,
+    washingMachine,
+}
 
 

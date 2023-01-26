@@ -25,9 +25,9 @@ export default observer(function UserCompanies() {
 
 
     return (
-        <div className="my-jobs-container">
-            <div className="my-jobs-toolbar">
-                <p className="my-jobs-title">Agency branches</p>
+        <div className="branches__container">
+            <div className="branches__toolbar">
+                <p className="branches__title">Branches</p>
                 <section>
                     <button
                         className={searchTerm === "_" ? "my-job-button-active" : "my-job-button"}
@@ -44,7 +44,7 @@ export default observer(function UserCompanies() {
                         onClick={() => {}}>
                         Private
                     </button>
-                    <button className="agent-listing-master-button" onClick={() => {}}>Create branch</button>
+                    <button className="branches__button-accent" onClick={() => {}}>Create branch</button>
                 </section>
             </div>
             <div className="my-jobs-contents">

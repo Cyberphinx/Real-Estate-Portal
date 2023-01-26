@@ -1,6 +1,6 @@
-import React, { RefObject, useRef } from "react";
+import React, { RefObject, useRef, useState } from "react";
 import './MainMap.css';
-import { MapContainer, TileLayer, useMap, ZoomControl } from 'react-leaflet'
+import { MapContainer, TileLayer, ZoomControl, LayersControl } from 'react-leaflet'
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../app/stores/store";
 import CompanyMarker from "./CompanyMarker";
@@ -10,7 +10,7 @@ import UpdateMap from "./UpdateMap";
 import LocateControl from "./LocateControl";
 import LeafletGeosearch from "./LeafletGeosearch";
 import Toolbar from "./toolbar/Toolbar";
-import LayersControl from "./LayersControl";
+import AgentsLayerControl from "./AgentsLayerControl";
 import ToolbarForCompany from "./toolbar/ToolbarForCompany";
 
 interface Props {
@@ -22,13 +22,17 @@ interface Props {
 
 export default observer(function MainMap({ points, clusters, supercluster, companyPoints }: Props) {
     const { featureStore, listingStore, companyStore, mapStore } = useStore();
-    const { activeFeature } = featureStore;
     const { selectedListing } = listingStore;
     const { selectedCompany } = companyStore;
     const { displayAgents } = mapStore;
 
     const apikey = process.env.REACT_APP_LOCATION_IQ;
     const locationIQLink = `https://{s}-tiles.locationiq.com/v3/streets/r/{z}/{x}/{y}.png?key=${apikey}`;
+
+    const apikeyTomtom = process.env.REACT_APP_TOMTOM;
+    const tomtomLink = `https://api.tomtom.com/map/1/tile/sat/main/{z}/{x}/{y}.jpg?key=${apikeyTomtom}`;
+
+    const { BaseLayer } = LayersControl;
 
     const mapRef = useRef<any>();
     const resizeMap = (mapRef: RefObject<any>) => {
@@ -49,20 +53,30 @@ export default observer(function MainMap({ points, clusters, supercluster, compa
                 whenReady={() => resizeMap(mapRef)}
                 id="map-container"
             >
-                <TileLayer
-                    url={locationIQLink}
-                    attribution='&copy <a href="https://locationiq.com/?ref=maps">LocationIQ</a>'
-                    opacity={1} zIndex={10}
-                />
 
                 <ListingMarker points={points} clusters={clusters} supercluster={supercluster} />
                 {displayAgents && <CompanyMarker points={companyPoints} />}
                 {selectedListing && <Toolbar />}
                 {selectedCompany && <ToolbarForCompany />}
-
                 <ZoomControl position="bottomright" />
                 <SearchMap />
-                <LayersControl />
+                <AgentsLayerControl />
+                <LayersControl position="bottomleft">
+                    <BaseLayer checked name="Map view">
+                        <TileLayer
+                            url={locationIQLink}
+                            attribution='&copy <a href="https://locationiq.com/?ref=maps">LocationIQ</a>'
+                            opacity={1} zIndex={10}
+                        />
+                    </BaseLayer>
+                    <BaseLayer name="Satellite view">
+                        <TileLayer
+                            url={tomtomLink}
+                            attribution='&copy <a href="https://www.tomtom.com/products/satellite-imagery/">TomTom</a>'
+                            opacity={1} zIndex={10}
+                        />
+                    </BaseLayer>
+                </LayersControl>
                 <UpdateMap listing={selectedListing} />
                 <LeafletGeosearch apikey={apikey} />
                 <LocateControl />

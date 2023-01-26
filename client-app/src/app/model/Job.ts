@@ -1,4 +1,6 @@
 import { Location } from './Location';
+import { MediaType } from './Media';
+import { Message } from './Message';
 import { ServiceCategory } from './ServiceCategory';
 
 
@@ -10,9 +12,10 @@ export interface Job {
     title: string;
     description: string;
     jobLifeCycle: JobLifeCycle;
-    jobContents: JobContent[];
+    jobMedia: JobMediaDto[];
     jobLocation: JobLocation;
     networks: NetworkDto[];
+    messages: Message[];
 }
 
 
@@ -30,9 +33,10 @@ export class JobFormValues {
     title: string = "";
     description: string = "";
     jobLifeCycle: JobLifeCycle = JobLifeCycle.Open;
-    jobContents?: JobContent[];
+    jobMedia?: JobMediaDto[];
     jobLocation?: JobLocation;
     networks?: NetworkDto[];
+    messages?: Message[];
 
     constructor(job?: Job) {
         if (job) {
@@ -43,9 +47,10 @@ export class JobFormValues {
             this.title = job.title;
             this.description = job.description;
             this.jobLifeCycle = job.jobLifeCycle;
-            this.jobContents = job.jobContents;
+            this.jobMedia = job.jobMedia;
             this.jobLocation = job.jobLocation;
             this.networks = job.networks;
+            this.messages = job.messages
         }
     }
 }
@@ -57,17 +62,13 @@ export enum JobLifeCycle {
     Completed
 }
 
-export interface JobContent {
+export interface JobMediaDto {
     id: string;
+    index: number;
     url: string;
-    type: JobMediaType;
+    type: MediaType;
     caption: string;
-}
-
-export enum JobMediaType {
-    Audio,
-    Image,
-    Video
+    isMain: boolean;
 }
 
 export interface JobLocation extends Location {
@@ -89,6 +90,7 @@ export enum JobNetworkRole {
     InterestedCompany,
     ShortlistedCompany
 }
+
 
 
 

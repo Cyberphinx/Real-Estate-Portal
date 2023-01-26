@@ -11,6 +11,7 @@ using Domain.LocationAggregate;
 using Domain.AppUserAggregate.Enums;
 using Microsoft.AspNetCore.Identity;
 using Domain;
+using Domain.MediaAggregate;
 
 namespace Persistence
 {
@@ -125,30 +126,30 @@ namespace Persistence
                         Title = "Window draught repair and locks replaced",
                         Description = "A couple of windows require locks to be replaced (no key / other window keys don’t work) and one window has a draught and requires repair",
                         JobLifeCycle = JobLifeCycle.Open,
-                        JobContents = new List<JobContent>
+                        JobMedia = new List<Media>
                         {
-                            new JobContent
+                            new Media
                             {
                                 Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1670965880/Placeholder/Jobs/wood-splice-repair-sash-windows_pe7edt.jpg",
-                                Type = JobMediaType.Image,
+                                Type = MediaType.Image,
                                 Caption = "Image One"
                             },
-                            new JobContent
+                            new Media
                             {
                                 Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1670965880/Placeholder/Jobs/wood-splice-repairs-resin-sash-windows_pprskr.jpg",
-                                Type = JobMediaType.Image,
+                                Type = MediaType.Image,
                                 Caption = "Image Two"
                             },
-                            new JobContent
+                            new Media
                             {
                                 Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1670965880/Placeholder/Jobs/Frame-entirely-removed-and-rot-exposed-to-the-internal-lining_uptikm.jpg",
-                                Type = JobMediaType.Image,
+                                Type = MediaType.Image,
                                 Caption = "Image Three"
                             },
-                            new JobContent
+                            new Media
                             {
                                 Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1670965880/Placeholder/Jobs/wood-splice-repairs-primed-undercoated_avdl8c.jpg",
-                                Type = JobMediaType.Image,
+                                Type = MediaType.Image,
                                 Caption = "Image Four"
                             }
                         },
@@ -200,24 +201,24 @@ namespace Persistence
                         Title = "Boiler replacement and relocation",
                         Description = "Removal of boiler from upstairs bathroom and the replacement to be relocated (preferably to under the stairs). Looking for new boiler to have minimum 7 year guarantee and have hive thermostat installed at the same time (not a necessity).",
                         JobLifeCycle = JobLifeCycle.Open,
-                        JobContents = new List<JobContent>
+                        JobMedia = new List<Media>
                         {
-                            new JobContent
+                            new Media
                             {
                                 Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1670965634/Placeholder/Jobs/boiler-replacement-scaled_wjt1ac.jpg",
-                                Type = JobMediaType.Image,
+                                Type = MediaType.Image,
                                 Caption = "Image One"
                             },
-                            new JobContent
+                            new Media
                             {
                                 Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1670965634/Placeholder/Jobs/1666987215shutterstock_1211727466_gcj2ar.jpg",
-                                Type = JobMediaType.Image,
+                                Type = MediaType.Image,
                                 Caption = "Image Two"
                             },
-                            new JobContent
+                            new Media
                             {
                                 Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1670965634/Placeholder/Jobs/Boiler-cylinder_wn81jt.jpg",
-                                Type = JobMediaType.Image,
+                                Type = MediaType.Image,
                                 Caption = "Image Three"
                             }
                         },
@@ -284,30 +285,30 @@ namespace Persistence
                         Title = "New bathroom extractor fan",
                         Description = "New Extractor Fan to be fitted to Bathroom & Connected to existing Vent Tile in Roof. Already have the fan, and there is already an existing fan, and electrics for it installed in loft.",
                         JobLifeCycle = JobLifeCycle.Open,
-                        JobContents = new List<JobContent>
+                        JobMedia = new List<Media>
                         {
-                            new JobContent
+                            new Media
                             {
                                 Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1670968362/Placeholder/Jobs/ceiling_hole_ytzjfn.jpg",
-                                Type = JobMediaType.Image,
+                                Type = MediaType.Image,
                                 Caption = "Image One"
                             },
-                            new JobContent
+                            new Media
                             {
                                 Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1670968362/Placeholder/Jobs/extractor_fan_connections_nbio3b.jpg",
-                                Type = JobMediaType.Image,
+                                Type = MediaType.Image,
                                 Caption = "Image Two"
                             },
-                            new JobContent
+                            new Media
                             {
                                 Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1670968362/Placeholder/Jobs/shower_extractor_fan_1_omhys6.jpg",
-                                Type = JobMediaType.Image,
+                                Type = MediaType.Image,
                                 Caption = "Image Three"
                             },
-                            new JobContent
+                            new Media
                             {
                                 Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1670968363/Placeholder/Jobs/triple-pole-fan-isolator_qctpu2.jpg",
-                                Type = JobMediaType.Image,
+                                Type = MediaType.Image,
                                 Caption = "Image Four"
                             }
                         },

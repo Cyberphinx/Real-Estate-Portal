@@ -74,20 +74,17 @@ namespace Infrastructure.Email
                     break;
             }
 
-            var existingContact = contactsApiInstance.GetContactInfo(email.RecipientEmail);
-            if (existingContact == null)
+            var createContact = new CreateContact
             {
-                var createContact = new CreateContact
-                {
-                    Email = email.RecipientEmail,
-                    Attributes = attributes,
-                    EmailBlacklisted = false,
-                    SmsBlacklisted = false,
-                    ListIds = listIds,
-                    UpdateEnabled = false
-                };
-                await contactsApiInstance.CreateContactAsync(createContact);
-            }
+                Email = email.RecipientEmail,
+                Attributes = attributes,
+                EmailBlacklisted = false,
+                SmsBlacklisted = false,
+                ListIds = listIds,
+                UpdateEnabled = true
+            };
+            await contactsApiInstance.CreateContactAsync(createContact);
+
 
             // api calls
             await emailsApiInstance.SendTransacEmailAsync(sendSmtpEmail);

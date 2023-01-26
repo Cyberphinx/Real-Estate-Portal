@@ -111,7 +111,7 @@ export default observer(function RegisterAgentStepTwo({ isValid, dirty, isSubmit
                     disabled={!isValid || !dirty || isSubmitting}
                 >
                     {isSubmitting && <span className="payment-register-submitting"></span>}
-                    Proceed to payment
+                    Register
                 </button>
             </div>
 

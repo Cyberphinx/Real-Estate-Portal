@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Domain;
 using Domain.CompanyAggregate.Enums;
+using Domain.MediaAggregate;
 using Domain.Enums;
 
 namespace Application.CompanyApplication.CompanyDtos
@@ -13,7 +14,7 @@ namespace Application.CompanyApplication.CompanyDtos
         public DateTime AddedOn { get; set; }
         public CompanyAddressDto CompanyAddress { get; set; }
         public CompanyContactsDto CompanyContacts { get; set; }
-        public ICollection<CompanyContentDto> CompanyContents { get; set; }
+        public ICollection<Media> CompanyMedia { get; set; }
         public ICollection<CompanyDescriptionDto> CompanyDescriptions { get; set; }
         public string CompanyReference { get; set; }
         public string CompanyRegistrationNumber { get; set; }

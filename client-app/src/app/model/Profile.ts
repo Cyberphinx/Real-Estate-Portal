@@ -6,6 +6,7 @@ import { Review } from "./Review";
 import { JobLifeCycle, JobNetworkRole } from './Job';
 import { Currency, Frequency, LifeCycleStatus, PriceQualifier, TransactionType } from './ListingAggregate/ListingEnums';
 import { PaymentStatus } from './PaymentStatus';
+import { MediaType } from './Media';
 
 export interface Profile {
     username: string;
@@ -13,15 +14,18 @@ export interface Profile {
     description: string;
     country: string;
     image: string;
-    photos: Photo[];
+    photos: PhotoDto[];
     membership: Membership;
     reviews: AppUserReview[];
     invoices: Invoice[];
 }
 
-export interface Photo {
+export interface PhotoDto {
     id: string;
+    index: number;
     url: string;
+    type: MediaType;
+    caption: string;
     isMain: boolean;
 }
 

@@ -12,7 +12,7 @@ export default function CompanyImages({ company }: Props) {
             {/* {company?.images.map((image: Image) => (
                 <img key={image.id} src={image.url} className="company-images" />
             ))} */}
-            <img src={company?.companyContents[0].url} className="company-images" alt="Profile Picture"/>
+            <img src={company?.companyMedia[0].url} className="company-images" alt="Profile Picture"/>
         </div>
     );
 }

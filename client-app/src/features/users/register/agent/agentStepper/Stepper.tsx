@@ -14,7 +14,8 @@ export default observer(function Stepper() {
                     <button
                         type='button'
                         className='stepper-dot'
-                        style={formType === 1 && paymentForm === false ? { backgroundColor: "#1F51FF" } : {}}
+                        style={formType === 1 && paymentForm === false ? { 
+  background: 'linear-gradient(45deg, rgba(255,20,147, 0.8) 0%, rgba(220, 20, 60, 0.8) 100%)' } : {}}
                         onClick={() => {
                             setPaymentForm(false);
                             setFormType(1);
@@ -27,7 +28,8 @@ export default observer(function Stepper() {
                     <button
                         type='button'
                         className='stepper-dot'
-                        style={formType === 2 && paymentForm === false ? { backgroundColor: "#1F51FF" } : {}}
+                        style={formType === 2 && paymentForm === false ? { 
+  background: 'linear-gradient(45deg, rgba(255,20,147, 0.8) 0%, rgba(220, 20, 60, 0.8) 100%)' } : {}}
                         onClick={() => {
                             setPaymentForm(false);
                             setFormType(2);
@@ -40,7 +42,8 @@ export default observer(function Stepper() {
                     <button
                         type='button'
                         className='stepper-dot'
-                        style={(formType === 3) ? { backgroundColor: "#1F51FF" } : {}}
+                        style={(formType === 3) ? { 
+  background: 'linear-gradient(45deg, rgba(255,20,147, 0.8) 0%, rgba(220, 20, 60, 0.8) 100%)' } : {}}
                         disabled={true}
                     >3</button>
                     <h3 className="stepper-timeline__title">Payment</h3>

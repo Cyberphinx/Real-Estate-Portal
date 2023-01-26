@@ -1,11 +1,13 @@
 import React, { SyntheticEvent, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Listing } from "../../../app/model/ListingAggregate/Listing";
-import { Content } from "../../../app/model/ListingAggregate/ListingObjects";
+import { ListingMediaDto } from "../../../app/model/ListingAggregate/ListingObjects";
 import './ListingOverview.css';
 import priceFormatter from "../../../app/common/PriceFormatter";
-import { propertyTypeLong, rentFrequency } from "../../../app/model/ListingAggregate/ListingEnums";
+import { CouncilTaxBand, LifeCycleStatus, propertyTypeLong, RentalTerm, rentFrequency, Utility } from "../../../app/model/ListingAggregate/ListingEnums";
 import WatchButton from "../../../app/common/WatchButton";
+import { dateFormatterShort } from "../../../app/common/HelperFunctions";
+import { UnitOfTime } from "../../../app/model/Membership";
 
 
 interface Props {
@@ -13,14 +15,14 @@ interface Props {
 }
 
 export default function ListingOverview({ listing }: Props) {
-    const [image, setImage] = useState<Content>(listing!.contents[0]);
-    function handleImage(event: SyntheticEvent, state: Content) {
+    const [image, setImage] = useState<ListingMediaDto>(listing.listingMedia![0]);
+    function handleImage(event: SyntheticEvent, state: ListingMediaDto) {
         event.stopPropagation();
         setImage(state);
     }
 
     useEffect(() => {
-        setImage(listing!.contents[0]);
+        setImage(listing.listingMedia![0]);
     }, [listing])
 
     const scrollRef = useRef<any>(null);
@@ -31,16 +33,16 @@ export default function ListingOverview({ listing }: Props) {
 
     function handlePrev(event: SyntheticEvent) {
         event.stopPropagation();
-        if (listing!.contents.indexOf(image) === 0) return null;
+        if (listing.listingMedia!.indexOf(image) === 0) return null;
         else {
-            setImage(listing!.contents[listing!.contents.indexOf(image) - 1]);
+            setImage(listing.listingMedia![listing.listingMedia!.indexOf(image) - 1]);
         }
     }
 
     function handleNext(event: SyntheticEvent) {
         event.stopPropagation();
-        if (listing!.contents.indexOf(image) < listing!.contents.length - 1) {
-            setImage(listing!.contents[listing!.contents.indexOf(image) + 1]);
+        if (listing.listingMedia!.indexOf(image) < listing.listingMedia!.length - 1) {
+            setImage(listing.listingMedia![listing.listingMedia!.indexOf(image) + 1]);
         }
         else {
             return null;
@@ -64,14 +66,14 @@ export default function ListingOverview({ listing }: Props) {
                         <img className="details-image" src={image.url} alt="cover" />
                     </Link>
                     <span className="image-numbering">
-                        Image {listing!.contents.indexOf(image) + 1} of {listing?.contents.length}
+                        Image {listing.listingMedia!.indexOf(image) + 1} of {listing.listingMedia?.length}
                     </span>
                     <button className="left-arrow" onClick={(e) => handlePrev(e)}><img className="left-icon" src="/assets/previous.svg" alt="previous" /></button>
                     <button className="right-arrow" onClick={(e) => handleNext(e)}><img className="right-icon" src="/assets/next.svg" alt="next" /></button>
                 </div>
                 <div style={{ position: "relative" }}>
-                    <section className="details-carousel" style={{ gridTemplateColumns: `repeat(${listing?.contents.length}, calc(100vh / 6))` }} ref={scrollRef}>
-                        {listing?.contents.map((content: Content, index: number) => (
+                    <section className="details-carousel" style={{ gridTemplateColumns: `repeat(${listing.listingMedia?.length}, calc(100vh / 6))` }} ref={scrollRef}>
+                        {listing.listingMedia?.map((content: ListingMediaDto, index: number) => (
                             <div style={{ position: "relative" }} key={content.id}>
                                 <img className="details-thumbnail" src={content.url} alt={content.caption} onClick={(e) => handleImage(e, content)} />
                                 <span className="thumbnail-numbering">{index + 1}</span>
@@ -83,10 +85,13 @@ export default function ListingOverview({ listing }: Props) {
                 </div>
             </section>
             <article className="header-container">
-                <span style={{ fontSize: "20px", fontWeight: "600" }}>{priceFormatter(listing!.pricing.price, listing!.pricing.currency)}</span>
+                <span style={{ fontSize: "20px", fontWeight: "600" }}>{priceFormatter(listing!.pricing.price!, listing!.pricing.currency)}</span>
                 {(listing?.pricing.transactionType.toString() === "Rent") && <span style={{ fontSize: "16px" }}> {rentFrequency(listing!)} </span>}
                 <p style={{ fontSize: "16px" }}>{listing!.totalBedrooms} beds {listing.bathrooms} baths {propertyTypeLong(listing!)}</p>
                 <p style={{ fontSize: "14px" }}>Address: {address}</p>
+            </article>
+            <article className="header-container">
+                <p style={{ fontSize: "14px" }}>{listing.summaryDescription}</p>
             </article>
         </div>
 

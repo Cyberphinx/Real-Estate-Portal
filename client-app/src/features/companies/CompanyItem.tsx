@@ -15,7 +15,7 @@ export default function CompanyItem({ company }: Props) {
             <CompanyTags company={company} />
             <div className="company-card">
                 <div className="company-profile-pic-container">
-                    <img src={company.companyContents[0]?.url} className="company-profile-pic" alt="profile" />
+                    <img src={company.companyMedia[0]?.url} className="company-profile-pic" alt="profile" />
                 </div>
                 <div style={{ paddingLeft: "10px" }}>
                     <h2>{company.displayName}</h2>

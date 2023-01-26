@@ -5,6 +5,8 @@ namespace Domain.ListingAggregate.Enums
         Feudal,
         Freehold,
         Leasehold,
-        ShareOfFreehold
+        ShareOfFreehold,
+        Commonhold,
+        SharedOwnership
     }
 }

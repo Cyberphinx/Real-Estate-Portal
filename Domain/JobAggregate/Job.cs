@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Domain.CompanyAggregate;
+using Domain.MediaAggregate;
 using Domain.Enums;
 using Domain.JobAggregate.Enums;
 using Domain.JobAggregate.Objects;
@@ -18,7 +18,7 @@ namespace Domain.JobAggregate
         public string Title { get; set; }
         public string Description { get; set; }
         public JobLifeCycle JobLifeCycle { get; set; }
-        public ICollection<JobContent> JobContents { get; set; }
+        public ICollection<Media> JobMedia { get; set; }
         public JobLocation JobLocation { get; set; }
         public ICollection<JobNetwork> Networks { get; set; } = new List<JobNetwork>();
         public ICollection<JobMessage> Messages { get; set; } = new List<JobMessage>();

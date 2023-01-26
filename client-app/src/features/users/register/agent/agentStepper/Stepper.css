@@ -30,12 +30,11 @@
 }
 .stepper-dot:hover {
   cursor: pointer;
-  background-color: rgba(31,81,255,0.2);
+  background: rgba(220, 20, 60, 0.2);
 }
 .stepper-dot:disabled {
   cursor: default;
   background-color: lightgrey;
-
 }
 
 .stepper-timeline__item:not(:last-child) {

@@ -1,0 +1,84 @@
+.view-listings__container {
+  height: calc(100vh - 80px);
+  overflow-y: scroll;
+  padding: 20px 40px;
+  background: #fff;
+}
+
+.view-listings__title {
+  font-size: 1.75rem;
+  font-weight: normal;
+  margin: 1rem 0px 1.25rem 0px;
+  color: #000;
+}
+
+.view-listings__toolbar {
+  border-bottom: 1px solid #aaaeb3;
+  width: 60rem;
+  padding-bottom: 1.25rem;
+}
+
+.view-listings__button-container {
+  padding-top: 1rem;
+  display: flex;
+  gap: 2rem;
+  align-items: stretch;
+  justify-content: space-between;
+}
+
+.view-listings__button-group {
+  background: #c0c0c0;
+  padding: 0.3rem;
+  border: none;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+.view-listings__button-group:hover {
+  cursor: pointer;
+  background: #ccc;
+}
+
+.view-listings__button {
+  border: none;
+  border-radius: 0.3rem;
+  background: none;
+  padding: 0.2rem 0.6rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+}
+.view-listings__button:hover {
+  cursor: pointer;
+}
+
+.view-listings__select-button {
+  padding: 0.375rem 1.5rem;
+  color: #000;
+  font-weight: bold;
+  font-size: 1rem;
+  background: none;
+  border: 1px solid #000;
+  border-radius: 0.3rem;
+}
+.view-listings__select-button:hover {
+  cursor: pointer;
+  background: #f8f8f9;
+}
+
+.view-listings__button-accent {
+  padding: 0.375rem 1.5rem;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1rem;
+  background: linear-gradient(45deg, #FF1493 0%, #DC143C 100%);
+  border-top: 1px solid transparent;
+  border-left: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  border-right: 1px solid transparent;
+  border-radius: 0.3rem;
+}
+.view-listings__button-accent:hover {
+  cursor: pointer;
+  background: linear-gradient(45deg, rgba(255,20,147, 0.8) 0%, rgba(220, 20, 60, 0.8) 100%);
+}

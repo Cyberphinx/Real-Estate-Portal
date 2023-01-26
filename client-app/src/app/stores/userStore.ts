@@ -90,8 +90,11 @@ export default class UserStore {
                     break;
                 case AccountType.Agent:
                     store.modalStore.closeModal();
-                    store.modalStore.openModal(paymentModal);
-                    if (store.modalStore.formType !== 3) store.modalStore.setFormType(3);
+                    history.push(`/account/registerSuccess?email=${creds.email}`);
+                    store.modalStore.openModal(successModal);
+                    store.featureStore.setToast("show success", "Account successfully created!");
+                    // store.modalStore.openModal(paymentModal);
+                    // if (store.modalStore.formType !== 3) store.modalStore.setFormType(3);
                     break;
                 case AccountType.Company:
                     history.push("/");
