@@ -11,11 +11,11 @@ namespace Application.Extensions
 {
     public static class AgentListingExtensions
     {
-        public static IQueryable<Listing> WhereAgentListing(this IQueryable<Listing> query, Guid agentId)
+        public static IQueryable<Listing> WhereAgentListing(this IQueryable<Listing> query, Guid companyId)
         {
-            if (string.IsNullOrWhiteSpace(agentId.ToString())) return query;
+            if (string.IsNullOrWhiteSpace(companyId.ToString())) return query;
 
-            query = query.Where(x => x.CompanyId == agentId);
+            query = query.Where(x => x.CompanyId == companyId);
 
             return query;
         }

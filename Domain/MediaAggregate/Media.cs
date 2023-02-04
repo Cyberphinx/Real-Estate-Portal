@@ -16,6 +16,5 @@ namespace Domain.MediaAggregate
         public string Caption { get; set; }
         public bool IsMain { get; set; }
         public bool IsLogo { get; set; }
-
     }
 }

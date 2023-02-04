@@ -10,7 +10,7 @@ export default function RefTag({ listing }: Props) {
 
     return (
         <div style={{ position: "relative" }}>
-            <span className="date-tag" >
+            <span className="ref-tag" >
                 {listing?.listingReference}
             </span>
         </div>

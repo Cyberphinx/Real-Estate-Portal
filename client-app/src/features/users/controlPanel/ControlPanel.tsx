@@ -1,4 +1,5 @@
 import { observer } from "mobx-react-lite";
+import Nav from "../../../app/layout/Nav";
 import { useStore } from "../../../app/stores/store";
 import Agency from "./agency/Agency";
 import Company from "./company/Company";
@@ -11,6 +12,7 @@ export default observer(function ControlPanel() {
 
     return (
         <div>
+            <Nav />
             {user?.role.includes("Agency") && <Agency user={user} />}
             {user?.role.includes("Company") && <Company user={user} />}
             {user?.role.includes("Customer") && !user?.role.includes("Agency") && !user?.role.includes("Company") && <Customer user={user} />}

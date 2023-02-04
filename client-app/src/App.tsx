@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Toast from './app/common/Toast';
-import Dashboard from './app/layout/Dashboard';
+import HomePage from './app/layout/HomePage';
 import { useStore } from './app/stores/store';
 import NotFound from './features/errors/NotFound';
 import ServerError from './features/errors/ServerError';
@@ -12,8 +12,11 @@ import LoginForm from './features/users/LoginForm';
 import ListingDetailsPage from './features/listings/newTab/ListingDetailsPage';
 import CompanyDetailsPage from './features/companies/newTab/CompanyDetailsPage';
 import JobDetailsPage from './features/networks/newTab/JobDetailsPage';
-import RegisterSuccess from './features/users/register/RegisterSuccess';
-import ConfirmEmail from './features/users/register/ConfirmEmail';
+import ListingForm from './features/users/controlPanel/agency/listings/ListingForm';
+import ListingMediaForm from './features/users/controlPanel/agency/listings/ListingMediaForm';
+import Agency from './features/users/controlPanel/agency/Agency';
+import ControlPanel from './features/users/controlPanel/ControlPanel';
+import ListingFormPreview from './features/users/controlPanel/agency/listings/ListingFormPreview';
 
 function App() {
   const {commonStore, userStore} = useStore();
@@ -31,16 +34,21 @@ function App() {
     <div style={{overflow: "hidden"}}>
       <Toast />
       <Routes>
-        <Route path="/" element={<Navigate replace to="/dashboard" />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/" element={<Navigate replace to="/homepage" />} />
+        <Route path="/homepage" element={<HomePage />} />
         <Route path='/listing/:id' element={<ListingDetailsPage />} />
         <Route path='/company/:id' element={<CompanyDetailsPage />} />
         <Route path='/job/:id' element={<JobDetailsPage />} />
         <Route path='/login' element={<LoginForm />} />
         <Route path='/errors' element={<TestErrors />}/>
         <Route path='/server-error' element={<ServerError />} />
-        <Route path='/account/registerSuccess' element={<Dashboard />} />
-        <Route path='/account/verifyEmail' element={<Dashboard />} />
+        <Route path='/account/registerSuccess' element={<HomePage />} />
+        <Route path='/account/verifyEmail' element={<HomePage />} />
+        <Route path='/control-panel' element={<ControlPanel />} />
+        <Route path='/create-listing' element={<ListingForm />} />
+        <Route path='/manage/:id' element={<ListingForm />} />
+        <Route path='/add-listing-media/:id' element={<ListingMediaForm />} />
+        <Route path='/preview/:id' element={<ListingFormPreview />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </div>

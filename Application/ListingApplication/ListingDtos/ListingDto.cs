@@ -84,6 +84,7 @@ namespace Application.ListingApplication.ListingDtos
         public int TotalBedrooms { get; set; }
         public List<UniqueFeature> UniqueFeatures { get; set; }
         public List<WhiteGoods> WhiteGoods { get; set; }
+        public Guid CompanyId { get; set; }
         public Owner Company { get; set; }
         public ICollection<WatcherDto> Wacthers { get; set; }
     }

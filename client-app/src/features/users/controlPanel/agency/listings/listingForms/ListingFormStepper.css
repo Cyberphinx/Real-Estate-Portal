@@ -1,17 +1,12 @@
 .listingform-stepper__timeline {
   list-style-type: none;
   display: flex;
-  flex-wrap: wrap;
-  font-weight: bold;
-  line-height: 1.3rem;
-  color: #fff;
-  margin: 0px 20px 20px 20px;
-  padding: 0px;
+  flex-wrap: nowrap;
 }
 
 .listingform-stepper__item {
   display: flex;
-  gap: clamp(0.25rem, 2vw, 0.5rem);
+  gap: 1rem;
   align-items: center;
 }
 .listingform-stepper__item:not(:last-child) {
@@ -21,51 +16,85 @@
   content: "";
   z-index: 1;
   height: 1px;
-  background-color: #ccc;
+  background-color: #000;
   flex: 1;
-  margin-right: 0.5rem;
+  margin-right: 1rem;
 }
 
 .listingform-stepper__button {
   display: flex;
-  color: #fff;
   border: none;
   background: none;
 }
 
 .listingform-stepper__dot {
-  display: block;
-  width: clamp(1.5rem, 5vw, 1.8rem);
-  height: clamp(1.5rem, 5vw, 1.8rem);
+  width: 30px;
+  height: 30px;
   color: #fff;
   border: none;
   border-radius: 50%;
-  background-color: lightgrey;
+  background-color: grey;
   font-size: 1.3rem;
   font-weight: bold;
   line-height: 1.8rem;
-}
-.listingform-stepper__button:hover > .listingform-stepper__dot {
-  cursor: pointer;
-  background: grey;
+  text-align: center;
 }
 .listingform-stepper__dot:disabled {
   cursor: default;
   background-color: lightgrey;
 }
 
+.listingform-stepper__dot-selected {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 50%;
+  background-image: linear-gradient(45deg, #A31ACB, #39B5E0);
+  color: #fff;
+  font-size: 1.3rem;
+  font-weight: bold;
+  line-height: 1.8rem;
+  text-align: center;
+}
+
+.listingform-stepper__dot-completed {
+  width: 30px;
+  height: 30px;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  background-image: linear-gradient(45deg, #3E978B, #28DF99);
+  font-size: 1.3rem;
+  font-weight: bold;
+  line-height: 1.8rem;
+  text-align: center;
+}
+
+.listingform-stepper__dot-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 38px;
+  height: 38px;
+  margin: -20px 0 0 -20px;
+  border: 1px solid #851DE0;
+  border-radius: 50%;
+}
+
 .listingform-stepper__title {
   font-weight: normal;
   font-size: 1.15rem;
   line-height: 1.8rem;
-  color: lightgrey;
-  padding-left: 0.5rem;
-}
-.listingform-stepper__button:hover > .listingform-stepper__title {
-  cursor: pointer;
-  color: grey;
+  color: #000;
+  padding-left: 0.75rem;
 }
 
 .listingform-stepper__desc {
   font-size: 0.75rem;
 }
+
+.listingform-stepper__link {
+  text-decoration: none;
+}
+

@@ -31,19 +31,19 @@ export default observer(function ListingTab({ listing }: Props) {
     return (
         <div className="details-container"  >
             {multiListings.length > 1 && <ListingBookmark multiListings={multiListings} />}
-            <nav className='sticky-nav-container' style={multiListings.length > 1 ? {top:"51px"} : {}} >
+            <nav className='sticky-nav-container' style={multiListings.length > 1 ? { top: "51px" } : {}} >
                 <div style={{ margin: "0px 5px" }}>
                     <button className={tab === 0 ? "sticky-nav-button-active" : "sticky-nav-button"} onClick={() => setTab(0)}>Overview</button>
                     <button className={tab === 1 ? "sticky-nav-button-active" : "sticky-nav-button"} onClick={() => setTab(1)}>Details</button>
                     <button className={tab === 2 ? "sticky-nav-button-active" : "sticky-nav-button"} onClick={() => setTab(2)}>Contact agent</button>
                 </div>
+                <div style={{ position: "absolute", top: "0.3rem", right: "3rem" }}>
+                    <WatchButton listing={listing} />
+                </div>
             </nav>
             <div className="details-contents" style={(multiListings.length > 1) ? { marginTop: "90px" } : {}}>
                 {features[tab]}
             </div>
-            <section style={{position:"absolute",bottom:"3rem",right:"3rem"}}>
-                <WatchButton listing={listing} />
-            </section>
         </div>
     );
 });

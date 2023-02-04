@@ -43,10 +43,10 @@ namespace Application.CompanyApplication
             {
                 request.Company.Username = _userAccessor.GetUsername();
 
-                Random rnd = new Random();
-                int random = rnd.Next(1, 9999);  // creates a number between 1000 and 9999
-                string discriminator = random.ToString("D4");
-                request.Company.CompanyReference = $"{request.Company.Username}{discriminator}"; 
+                // Random rnd = new Random();
+                // int random = rnd.Next(1, 9999);  // creates a number between 1 and 9999
+                // string discriminator = random.ToString("D4");
+                // request.Company.CompanyReference = $"{request.Company.Username}{discriminator}"; 
 
                 await _context.Companies.AddAsync(request.Company);
 

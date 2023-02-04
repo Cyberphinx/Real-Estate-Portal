@@ -1,14 +1,18 @@
+import { ListingMediaDto } from './../model/ListingAggregate/ListingObjects';
 import { PagingParams } from '../model/Pagination';
 import { makeAutoObservable, reaction, runInAction } from "mobx";
 import agent from "../api/agent";
 import { Pagination } from '../model/Pagination';
 import { Listing, ListingFormValues } from '../model/ListingAggregate/Listing';
 import { MaxValue } from '../model/MaxValue';
+import { store } from './store';
 
 export default class ListingStore {
   listingRegistry = new Map<string, Listing>();
   selectedListing: Listing | undefined = undefined;
+  listingId: string | undefined = undefined;
   loading = false;
+  uploading = false;
   loadingInitial = false;
   loadingListing = false;
   contacts = false;
@@ -121,7 +125,7 @@ export default class ListingStore {
   loadListing = async (id: string) => {
     let listing = this.getListing(id);
     if (listing) {
-      this.selectedListing = listing;
+      // this.selectedListing = listing;
       return listing;
     }
     else {
@@ -129,7 +133,7 @@ export default class ListingStore {
       try {
         listing = await agent.Listings.details(id);
         this.setListing(listing);
-        runInAction(() => this.selectedListing = listing);
+        // runInAction(() => this.selectedListing = listing);
         this.setLoadingListing(false);
         return listing;
       } catch (error) {
@@ -209,24 +213,27 @@ export default class ListingStore {
   watchListing = async (listingId: string) => {
     this.loadingWatching = true;
     try {
-        await agent.Listings.watchListing(listingId);
-        runInAction(() => {
-            this.loadingWatching = false;
-        })
+      await agent.Listings.watchListing(listingId);
+      runInAction(() => {
+        this.loadingWatching = false;
+      })
     } catch (error) {
-        console.log(error);
-        runInAction(() => this.loadingWatching = false);
+      console.log(error);
+      runInAction(() => this.loadingWatching = false);
     }
-}
+  }
 
-  createListing = async (listing: ListingFormValues) => {
+  setListingId = (value: string) => this.listingId = value;
+
+  createListing = async (companyId: string, listing: ListingFormValues) => {
     // const user = store.userStore.user;
     try {
-      await agent.Listings.create(listing);
+      await agent.Listings.create(companyId, listing);
       const newListing = new Listing(listing);
       this.setListing(newListing);
       runInAction(() => {
         this.selectedListing = newListing;
+        this.listingId = newListing.id;
         this.loading = false;
       });
     } catch (error) {
@@ -244,7 +251,8 @@ export default class ListingStore {
         if (listing.id) {
           let updatedListing = { ...this.getListing(listing.id), ...listing }
           this.listingRegistry.set(listing.id, updatedListing as Listing);
-          this.selectedListing = updatedListing as Listing;
+          // this.selectedListing = updatedListing as Listing;
+          this.listingId = listing.id;
         }
       });
     } catch (error) {
@@ -265,6 +273,50 @@ export default class ListingStore {
       runInAction(() => {
         this.loading = false;
       });
+    }
+  };
+
+  uploadListingMedia = async (listingId: string, file: Blob) => {
+    this.uploading = true;
+    try {
+      const response = await agent.Listings.uploadMedia(listingId, file);
+      const media = response.data;
+      runInAction(() => {
+        console.log(media.url);
+        this.uploading = false;
+      })
+    } catch (error) {
+      console.log(error);
+      runInAction(() => this.uploading = false);
+    }
+  };
+
+  setMainImage = async (listingId: string, image: ListingMediaDto) => {
+    this.loading = true;
+    try {
+      await agent.Listings.setMainImage(listingId, image.id);
+      store.agentListingStore.setImage(image.url);
+      runInAction(() => {
+        console.log(image.isMain ? "isMain: true" : "isMain: false");
+        this.loading = false;
+      })
+    } catch (error) {
+      runInAction(() => this.loading = false);
+      console.log(error);
+    }
+  };
+
+  deleteMedia = async (listingId: string, media: ListingMediaDto) => {
+    this.loading = true;
+    try {
+      await agent.Listings.deleteMedia(listingId, media.id);
+      runInAction(() => {
+        console.log("media deleted");
+        this.loading = false;
+      })
+    } catch (error) {
+      runInAction(() => this.loading = false);
+      console.log(error);
     }
   };
 

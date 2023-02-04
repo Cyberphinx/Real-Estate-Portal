@@ -14,5 +14,6 @@ namespace Application.ListingApplication.ListingDtos
         public MediaType Type { get; set; }
         public string Caption { get; set; }
         public bool IsMain { get; set; }
+        public Guid ListingId { get; set; }
     }
 }

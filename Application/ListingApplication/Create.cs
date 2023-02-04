@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.CompanyApplication.CompanyDtos;
 using Application.Core;
+using Application.Interfaces;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Domain;
+using Domain.CompanyAggregate;
 using Domain.ListingAggregate;
 using FluentValidation;
 using MediatR;
@@ -17,8 +22,8 @@ namespace Application.ListingApplication
     {
         public class Command : IRequest<Result<Unit>>
         {
-            public Guid CompanyId { get; set; }
             public Listing Listing { get; set; }
+            public string CompanyId { get; set; }
         }
 
         public class CommandValidator : AbstractValidator<Command>
@@ -32,8 +37,17 @@ namespace Application.ListingApplication
         public class Handler : IRequestHandler<Command, Result<Unit>>
         {
             private readonly DataContext _context;
-            public Handler(DataContext context)
+            private readonly IMediaAccessor _mediaAccessor;
+            private readonly IUserAccessor _userAccessor;
+            private readonly IMapper _mapper;
+            private readonly ICompanyAccessor _companyAccessor;
+
+            public Handler(DataContext context, IMediaAccessor mediaAccessor, IUserAccessor userAccessor, IMapper mapper, ICompanyAccessor companyAccessor)
             {
+                _companyAccessor = companyAccessor;
+                _userAccessor = userAccessor;
+                _mapper = mapper;
+                _mediaAccessor = mediaAccessor;
                 _context = context;
             }
 
@@ -41,11 +55,9 @@ namespace Application.ListingApplication
             {
                 var listing = request.Listing;
 
-                listing.CompanyId = request.CompanyId;
-
                 await _context.Listings.AddAsync(listing);
 
-                // SaveChangesAsync actually returns an integer of state entries written to the database
+                // SaveChangesAsync actually returns the task results as an integer of the number of state entries written to the database
                 var result = await _context.SaveChangesAsync() > 0;
 
                 if (!result) return Result<Unit>.Failure("Failed to create listing");

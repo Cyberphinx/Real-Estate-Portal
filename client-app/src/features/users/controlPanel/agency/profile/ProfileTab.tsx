@@ -1,8 +1,12 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
+import { useStore } from "../../../../../app/stores/store";
 
 
 export default observer(function ProfileTab() {
+    const { profileStore } = useStore();
+    const { profile } = profileStore;
+    const profilePic = profile?.image ? profile.image : '/assets/default-user-icon.jpg';
 
     return (
         <div className="account-settings-container">
@@ -23,7 +27,7 @@ export default observer(function ProfileTab() {
                 <p className="account-tab-subtitle">Images</p>
                 <p className="account-tab-label">Avatar and banner image</p>
                 <p className="account-tab-value">Images must be .png or .jpg format</p>
-                <img className="large-user-icon" src="/assets/default-user-icon.jpg" alt="user" />
+                <img className="large-user-icon" src={profilePic} alt="user" />
                 <div>
                     <p className="account-tab-value">Drag and Drop or Upload <b>Banner</b> Image</p>
                 </div>

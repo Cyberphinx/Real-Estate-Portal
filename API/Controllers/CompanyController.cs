@@ -49,18 +49,18 @@ namespace API.Controllers
         }
 
         [Authorize(Policy = "IsCompanyOwner")]
-        [HttpPut("{id}")]
-        public async Task<IActionResult> EditCompany(Guid id, Company company)
+        [HttpPut("{companyId}")]
+        public async Task<IActionResult> EditCompany(Guid companyId, Company company)
         {
-            company.Id = id;
+            company.Id = companyId;
             return HandleResult(await Mediator.Send(new Edit.Command{Company = company}));
         }
 
-        [Authorize(Roles = "Admin")]
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCompany(Guid id)
+        [Authorize(Policy = "IsCompanyOwner")]
+        [HttpDelete("{companyId}")]
+        public async Task<IActionResult> DeleteCompany(Guid companyId)
         {
-            return HandleResult(await Mediator.Send(new Delete.Command{Id = id}));
+            return HandleResult(await Mediator.Send(new Delete.Command{Id = companyId}));
         }
         
         [Authorize(Roles = "Admin")]
@@ -76,8 +76,7 @@ namespace API.Controllers
         {
             await SeedCompanies.SeedData(_db);
         }
-        
-        // [Authorize(Policy = "IsCompanyOwner")]
+
         [HttpGet("listings")]
         public async Task<IActionResult> GetCompanyListings([FromQuery]AgentListingParams param)
         {

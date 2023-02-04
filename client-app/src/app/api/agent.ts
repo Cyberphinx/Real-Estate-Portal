@@ -1,3 +1,4 @@
+import { ListingMediaDto } from './../model/ListingAggregate/ListingObjects';
 import { Profile, WatcherListingDto, UserJobDto, UserCompanyDto, Invoice } from './../model/Profile';
 import { MaxValue } from './../model/MaxValue';
 import { User, RoleFormValues, LoginFormValues, RegisterFormValues } from './../model/User';
@@ -89,7 +90,7 @@ const Account = {
   checkusername: (username: string) => requests.get<string>(`/account/username/${username}`),
   checkemail: (email: string) => requests.get<string>(`/account/email/${email}`),
   refreshToken: () => requests.post<User>('/account/refreshToken', {}),
-  verifyEmail: (token:string, email: string) => requests.post<void>(`/account/verifyEmail?token=${token}&email=${email}`, {}),
+  verifyEmail: (token: string, email: string) => requests.post<void>(`/account/verifyEmail?token=${token}&email=${email}`, {}),
   resendVerifyLink: (email: string) => requests.get(`/account/resendVerifyLink?email=${email}`)
 }
 
@@ -110,10 +111,19 @@ const Listings = {
   list: (params: URLSearchParams) => axios.get<PaginatedResult<Listing[]>>("/listing", { params }).then(responseBody),
   details: (id: string) => requests.get<Listing>(`/listing/${id}`),
   getMax: () => requests.get<MaxValue[]>("/listing/max"),
-  create: (listing: ListingFormValues) => requests.post<Listing>("/listing", listing),
+  create: (companyId: string, listing: ListingFormValues) => requests.post<Listing>(`/listing/${companyId}`, listing),
   update: (listing: ListingFormValues) => requests.put<Listing>(`/listing/${listing.id}`, listing),
   delete: (id: string) => requests.del<void>(`/listing/${id}`),
-  watchListing: (listingId: string) => requests.post(`/listing/watch/${listingId}`, {})
+  watchListing: (listingId: string) => requests.post(`/listing/watch/${listingId}`, {}),
+  uploadMedia: (listingId: string, file: Blob) => {
+    let formData = new FormData();
+    formData.append('File', file);
+    return axios.post<ListingMediaDto>(`/listing/media/${listingId}`, formData, {
+      headers: { 'Content-type': 'multipart/form-data' }
+    })
+  },
+  setMainImage: (listingId: string, listingMediaId: string) => requests.post(`/listing/${listingId}/setMainImage/${listingMediaId}`, {}),
+  deleteMedia: (listingId: string, listingMediaId: string) => requests.del(`/listing/${listingId}/${listingMediaId}`),
 };
 
 const Companies = {

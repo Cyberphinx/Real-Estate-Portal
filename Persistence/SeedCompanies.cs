@@ -44,9 +44,9 @@ namespace Persistence
                         Latitude = 51.51654265291029,
                         Longitude = -0.14291257284437422
                     },
-                    CompanyMedia = new List<Media>()
+                    CompanyMedia = new List<CompanyMedia>()
                     {
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder1",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671215966/Placeholder/CompanyContents/real-estate-agency_wrm90i.jpg",
@@ -55,7 +55,7 @@ namespace Persistence
                             IsMain = true,
                             IsLogo = false
                         },
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder2",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/Screenshot_2022-12-16_184526_gilzvg.jpg",
@@ -64,7 +64,7 @@ namespace Persistence
                             IsMain = false,
                             IsLogo = false
                         },
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder3",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/realtor-showing-young-family-around-property-for-PUTL8G4-e1516618996652_zfgphc.jpg",
@@ -73,7 +73,7 @@ namespace Persistence
                             IsMain = false,
                             IsLogo = false
                         },
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder4",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1672172027/Placeholder/CompanyContents/logo-placeholder_lajpbm.jpg",
@@ -151,9 +151,9 @@ namespace Persistence
                         Latitude = 55.95435353799718,
                         Longitude = -3.2067211982100288
                     },
-                    CompanyMedia = new List<Media>()
+                    CompanyMedia = new List<CompanyMedia>()
                     {
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder5",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671215966/Placeholder/CompanyContents/real-estate-agency_wrm90i.jpg",
@@ -162,7 +162,7 @@ namespace Persistence
                             IsMain = true,
                             IsLogo = false
                         },
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder6",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/Screenshot_2022-12-16_184526_gilzvg.jpg",
@@ -171,7 +171,7 @@ namespace Persistence
                             IsMain = false,
                             IsLogo = false
                         },
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder7",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/realtor-showing-young-family-around-property-for-PUTL8G4-e1516618996652_zfgphc.jpg",
@@ -250,9 +250,9 @@ namespace Persistence
                         Latitude = 52.40066044491819,
                         Longitude = -1.8066908304837104
                     },
-                    CompanyMedia = new List<Media>()
+                    CompanyMedia = new List<CompanyMedia>()
                     {
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder8",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671215966/Placeholder/CompanyContents/real-estate-agency_wrm90i.jpg",
@@ -261,7 +261,7 @@ namespace Persistence
                             IsMain = true,
                             IsLogo = false
                         },
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder9",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/Screenshot_2022-12-16_184526_gilzvg.jpg",
@@ -270,7 +270,7 @@ namespace Persistence
                             IsMain = false,
                             IsLogo = false
                         },
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder10",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/realtor-showing-young-family-around-property-for-PUTL8G4-e1516618996652_zfgphc.jpg",
@@ -349,9 +349,9 @@ namespace Persistence
                         Latitude = 52.40066044491819,
                         Longitude = -1.8066908304837104
                     },
-                    CompanyMedia = new List<Media>()
+                    CompanyMedia = new List<CompanyMedia>()
                     {
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder11",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671215966/Placeholder/CompanyContents/real-estate-agency_wrm90i.jpg",
@@ -360,7 +360,7 @@ namespace Persistence
                             IsMain = true,
                             IsLogo = false
                         },
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder12",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/Screenshot_2022-12-16_184526_gilzvg.jpg",
@@ -369,7 +369,7 @@ namespace Persistence
                             IsMain = false,
                             IsLogo = false
                         },
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder13",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/realtor-showing-young-family-around-property-for-PUTL8G4-e1516618996652_zfgphc.jpg",
@@ -448,9 +448,9 @@ namespace Persistence
                         Latitude = 52.40066044491819,
                         Longitude = -1.8066908304837104
                     },
-                    CompanyMedia = new List<Media>()
+                    CompanyMedia = new List<CompanyMedia>()
                     {
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder14",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671215966/Placeholder/CompanyContents/real-estate-agency_wrm90i.jpg",
@@ -459,7 +459,7 @@ namespace Persistence
                             IsMain = true,
                             IsLogo = false
                         },
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder15",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/Screenshot_2022-12-16_184526_gilzvg.jpg",
@@ -468,7 +468,7 @@ namespace Persistence
                             IsMain = false,
                             IsLogo = false
                         },
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder16",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/realtor-showing-young-family-around-property-for-PUTL8G4-e1516618996652_zfgphc.jpg",
@@ -547,9 +547,9 @@ namespace Persistence
                         Latitude = 54.39231504142715,
                         Longitude = -2.371760263326141
                     },
-                    CompanyMedia = new List<Media>()
+                    CompanyMedia = new List<CompanyMedia>()
                     {
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder17",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671215966/Placeholder/CompanyContents/real-estate-agency_wrm90i.jpg",
@@ -558,7 +558,7 @@ namespace Persistence
                             IsMain = true,
                             IsLogo = false
                         },
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder18",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/Screenshot_2022-12-16_184526_gilzvg.jpg",
@@ -567,7 +567,7 @@ namespace Persistence
                             IsMain = false,
                             IsLogo = false
                         },
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder19",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/realtor-showing-young-family-around-property-for-PUTL8G4-e1516618996652_zfgphc.jpg",
@@ -637,9 +637,9 @@ namespace Persistence
                         Latitude = 52.60740391205163,
                         Longitude = -2.9450937943182147
                     },
-                    CompanyMedia = new List<Media>()
+                    CompanyMedia = new List<CompanyMedia>()
                     {
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder20",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671215966/Placeholder/CompanyContents/real-estate-agency_wrm90i.jpg",
@@ -648,7 +648,7 @@ namespace Persistence
                             IsMain = true,
                             IsLogo = false
                         },
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder21",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/Screenshot_2022-12-16_184526_gilzvg.jpg",
@@ -657,7 +657,7 @@ namespace Persistence
                             IsMain = false,
                             IsLogo = false
                         },
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder22",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/realtor-showing-young-family-around-property-for-PUTL8G4-e1516618996652_zfgphc.jpg",
@@ -745,9 +745,9 @@ namespace Persistence
                         Latitude = 50.722980159789316,
                         Longitude = -1.8829559728734109
                     },
-                    CompanyMedia = new List<Media>()
+                    CompanyMedia = new List<CompanyMedia>()
                     {
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder23",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671215966/Placeholder/CompanyContents/real-estate-agency_wrm90i.jpg",
@@ -756,7 +756,7 @@ namespace Persistence
                             IsMain = true,
                             IsLogo = false
                         },
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder24",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/Screenshot_2022-12-16_184526_gilzvg.jpg",
@@ -765,7 +765,7 @@ namespace Persistence
                             IsMain = false,
                             IsLogo = false
                         },
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder25",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/realtor-showing-young-family-around-property-for-PUTL8G4-e1516618996652_zfgphc.jpg",
@@ -843,9 +843,9 @@ namespace Persistence
                         Latitude = 50.72308467556089,
                         Longitude =  -1.8824440593814602
                     },
-                    CompanyMedia = new List<Media>()
+                    CompanyMedia = new List<CompanyMedia>()
                     {
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder26",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671215966/Placeholder/CompanyContents/real-estate-agency_wrm90i.jpg",
@@ -854,7 +854,7 @@ namespace Persistence
                             IsMain = true,
                             IsLogo = false
                         },
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder27",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/Screenshot_2022-12-16_184526_gilzvg.jpg",
@@ -863,7 +863,7 @@ namespace Persistence
                             IsMain = false,
                             IsLogo = false
                         },
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder28",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/realtor-showing-young-family-around-property-for-PUTL8G4-e1516618996652_zfgphc.jpg",
@@ -942,9 +942,9 @@ namespace Persistence
                         Latitude = 53.297230105069126,
                         Longitude =  -1.3833799280677688
                     },
-                    CompanyMedia = new List<Media>()
+                    CompanyMedia = new List<CompanyMedia>()
                     {
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder29",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671215966/Placeholder/CompanyContents/real-estate-agency_wrm90i.jpg",
@@ -953,7 +953,7 @@ namespace Persistence
                             IsMain = true,
                             IsLogo = false
                         },
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder30",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/Screenshot_2022-12-16_184526_gilzvg.jpg",
@@ -962,7 +962,7 @@ namespace Persistence
                             IsMain = false,
                             IsLogo = false
                         },
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder31",
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671216388/Placeholder/CompanyContents/realtor-showing-young-family-around-property-for-PUTL8G4-e1516618996652_zfgphc.jpg",
@@ -1041,23 +1041,23 @@ namespace Persistence
                         Latitude = 51.40264956734864,
                         Longitude = -0.24979083392406543
                     },
-                    CompanyMedia = new List<Media>
+                    CompanyMedia = new List<CompanyMedia>
                     {
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder32",
                             Url = "/assets/company-images/001.JPG",
                             Type = MediaType.Image,
                             Caption = "Image One"
                         },
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder33",
                             Url = "/assets/company-images/002.JPG",
                             Type = MediaType.Image,
                             Caption = "Image Two"
                         },
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder34",
                             Url = "/assets/company-images/003.JPG",
@@ -1140,23 +1140,23 @@ namespace Persistence
                         }
                     },
                     ServiceLocations = "UK and international",
-                    CompanyMedia = new List<Media>
+                    CompanyMedia = new List<CompanyMedia>
                     {
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder35",
                             Url = "/assets/company-images/001.JPG",
                             Type = MediaType.Image,
                             Caption = "Image One"
                         },
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder36",
                             Url = "/assets/company-images/002.JPG",
                             Type = MediaType.Image,
                             Caption = "Image Two"
                         },
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder37",
                             Url = "/assets/company-images/003.JPG",
@@ -1207,23 +1207,23 @@ namespace Persistence
                         }
                     },
                     ServiceLocations = "UK",
-                    CompanyMedia = new List<Media>
+                    CompanyMedia = new List<CompanyMedia>
                     {
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder38",
                             Url = "https://s3-media0.fl.yelpcdn.com/bphoto/YmImfv7rT1wx6OhHL9THUQ/o.jpg",
                             Type = MediaType.Image,
                             Caption = "Image One"
                         },
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder39",
                             Url = "https://s3-media0.fl.yelpcdn.com/bphoto/CxFpFiFXinp31JaBGvVRdg/o.jpg",
                             Type = MediaType.Image,
                             Caption = "Image Two"
                         },
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder40",
                             Url = "https://s3-media0.fl.yelpcdn.com/bphoto/BeDc9QGW3uhD2BzjhmznoA/o.jpg",
@@ -1274,23 +1274,23 @@ namespace Persistence
                         }
                     },
                     ServiceLocations = "UK",
-                    CompanyMedia = new List<Media>
+                    CompanyMedia = new List<CompanyMedia>
                     {
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder41",
                             Url = "https://www.birchlandscapes.co.uk/wp-content/uploads/2021/08/PHOTO-2021-06-11-09-40-05-2.jpg",
                             Type = MediaType.Image,
                             Caption = "Image One"
                         },
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder42",
                             Url = "https://www.birchlandscapes.co.uk/wp-content/uploads/2021/08/PHOTO-2021-06-11-09-40-05.jpg",
                             Type = MediaType.Image,
                             Caption = "Image Two"
                         },
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder43",
                             Url = "https://www.birchlandscapes.co.uk/wp-content/uploads/2021/08/PHOTO-2021-06-11-09-40-06.jpg",
@@ -1341,23 +1341,23 @@ namespace Persistence
                         }
                     },
                     ServiceLocations = "UK",
-                    CompanyMedia = new List<Media>
+                    CompanyMedia = new List<CompanyMedia>
                     {
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder44",
                             Url = "https://www.jasteelandson.co.uk/assets/images/content-img_move1.jpg",
                             Type = MediaType.Image,
                             Caption = "Image One"
                         },
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder45",
                             Url = "https://www.jasteelandson.co.uk/assets/images/content-img_move2.jpg",
                             Type = MediaType.Image,
                             Caption = "Image Two"
                         },
-                        new Media
+                        new CompanyMedia
                         {
                             Id = "placeholder46",
                             Url = "https://www.jasteelandson.co.uk/assets/images/content-img_move3.jpg",

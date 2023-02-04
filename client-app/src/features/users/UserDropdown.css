@@ -23,8 +23,22 @@
   display: block;
   margin: 12px auto;
 }
-
 .user-drop-button:hover {
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+}
+.user-drop-button:hover .user-drop-link {
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+}
+
+.user-drop-link {
+  color: #000;
+  text-decoration: none;
+}
+.user-drop-link:hover {
   background: #000;
   color: #fff;
   cursor: pointer;

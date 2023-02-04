@@ -30,7 +30,7 @@ export default observer(function Nav() {
             <ModalContainer />
             <ul className="nav-bar">
                 <li className="nav-bar-item"><img className="logo" src="/assets/sanctum.svg" alt="S" /></li>
-                <li className="nav-bar-item"><button className="home-button" onClick={() => { setActiveFeature(0) }}>SANCTUM</button></li>
+                <li className="nav-bar-item" style={{paddingTop:'0.25rem'}}><Link className="home-button" to={'/homepage'} onClick={() => setActiveFeature(0)}>SANCTUM</Link></li>
                 <li className="nav-bar-item">
                     <button className={activeFeature === 0 ? "nav-button-selected" : "nav-button"}
                         onClick={() => { setActiveFeature(0) }}>
@@ -39,11 +39,11 @@ export default observer(function Nav() {
                 </li>
                 <li className="nav-bar-item">
                     <button className={activeFeature === 1 ? "nav-button-selected" : "nav-button"}
-                        onClick={() => { 
-                            cancelSelectListing(); 
+                        onClick={() => {
+                            cancelSelectListing();
                             cancelSelectCompany();
-                            setActiveFeature(1); 
-                            }}>
+                            setActiveFeature(1);
+                        }}>
                         Services
                     </button>
                 </li>
@@ -53,7 +53,7 @@ export default observer(function Nav() {
                         Get an agent
                     </button>
                 </li>
-                
+
                 <li className="nav-bar-item">
                     <button className="nav-button"
                         onClick={() => { cancelSelectListing(); cancelSelectCompany(); }}>
@@ -67,27 +67,31 @@ export default observer(function Nav() {
                         Find a builder
                     </button>
                 </li>
-                
 
                 {isLoggedIn
                     ? (
                         <>
                             <li className="nav-bar-item-right">
                                 <div className="dropdown-container" ref={dropdownRef}>
-                                    <button className="user-button profile" onClick={toggle}>
+                                    <button className="user-button" onClick={toggle}>
                                         <img className="user-icon" src="/assets/user.svg" alt="user" />
                                         <img className="hamburger-icon" src="/assets/hamburger.svg" alt="dropdown" />
                                     </button>
                                     {isActive && <UserDropdown />}
                                 </div>
                             </li>
+                            {userStore.user?.username ? <li className="nav-bar-item-right">
+                                <button className="username-button" >
+                                    Logged in as {userStore.user?.username}
+                                </button>
+                            </li> : null}
                         </>
                     )
                     : (
                         <>
                             <li className="nav-bar-item-right">
                                 <div className="dropdown-container" ref={dropdownRef}>
-                                    <button className="user-button profile" onClick={toggle}>
+                                    <button className="user-button" onClick={toggle}>
                                         <img className="user-icon" src="/assets/user.svg" alt="user" />
                                         <img className="hamburger-icon" src="/assets/hamburger.svg" alt="dropdown" />
                                     </button>

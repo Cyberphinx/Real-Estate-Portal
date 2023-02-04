@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import './Dashboard.css';
+import './HomePage.css';
 import { useStore } from "../stores/store";
 import { observer } from "mobx-react-lite";
 import Nav from "./Nav";
@@ -15,7 +15,7 @@ import CompanyTab from "../../features/companies/details/CompanyTab";
 import { useLocation } from "react-router-dom";
 import ConfirmEmail from "../../features/users/register/ConfirmEmail";
 
-export default observer(function Dashboard() {
+export default observer(function HomePage() {
     const { featureStore, listingStore, mapStore, jobStore, companyStore, userStore, profileStore, modalStore } = useStore();
     const { activeFeature } = featureStore;
     const { loadJobs } = jobStore;

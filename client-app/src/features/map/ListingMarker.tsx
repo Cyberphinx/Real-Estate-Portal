@@ -199,7 +199,7 @@ export default observer(function ListingMarker({ points, clusters, supercluster 
                                     <div className="snippets-container" style={{ gridTemplateColumns: `repeat(${supercluster.getLeaves(cluster.id, Infinity, 0).length}, 1fr)` }}>
                                         {supercluster.getLeaves(cluster.id, Infinity, 0).map((item: any) => (
                                             <div key={item.properties.listing.id} className="snippet-container">
-                                                <img className="tiny-snippet" src={item.properties.listing.contents[0].url} alt="listing" />
+                                                <img className="tiny-snippet" src={item.properties.listing.listingMedia[0]?.url} alt="listing" />
                                                 <article className="marker-text">
                                                     <b>{priceFormatter(item.properties.listing.pricing.price, item.properties.listing.pricing.currency)}</b>
                                                     {predicate.get("channel") === "sale" ? null : <span>{rentFrequency(item.properties.listing)}</span>}
@@ -234,7 +234,7 @@ export default observer(function ListingMarker({ points, clusters, supercluster 
                         <Tooltip direction="bottom" offset={[15, 10]}>
                             <AgencyTag listing={cluster.properties.listing} fontSize={"10px"} />
                             <img className="marker-snippet"
-                                src={cluster.properties.listing.contents[0].url}
+                                src={cluster.properties.listing.listingMedia[0]?.url}
                                 alt="listing"
                                 onLoad={() => setImgLoaded(true)}
                                 style={imgLoaded ? {} : { display: "none" }}

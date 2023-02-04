@@ -12,7 +12,7 @@ namespace Application.CompanyApplication
     public class AgentListingParams : PagingParams
     {
         public DateTime AddedOn { get; set; } = DateTime.UtcNow;
-        public Guid AgentId { get; set; }
+        public Guid CompanyId { get; set; } // this is the Id of the company entity (Role = Agent)
         public string Channel { get; set; }
         public string OrderBy { get; set; }
         public string SearchTerm { get; set; }

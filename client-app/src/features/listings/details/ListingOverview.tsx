@@ -4,10 +4,9 @@ import { Listing } from "../../../app/model/ListingAggregate/Listing";
 import { ListingMediaDto } from "../../../app/model/ListingAggregate/ListingObjects";
 import './ListingOverview.css';
 import priceFormatter from "../../../app/common/PriceFormatter";
-import { CouncilTaxBand, LifeCycleStatus, propertyTypeLong, RentalTerm, rentFrequency, Utility } from "../../../app/model/ListingAggregate/ListingEnums";
-import WatchButton from "../../../app/common/WatchButton";
-import { dateFormatterShort } from "../../../app/common/HelperFunctions";
-import { UnitOfTime } from "../../../app/model/Membership";
+import { propertyTypeLong, rentFrequency } from "../../../app/model/ListingAggregate/ListingEnums";
+import { MediaType } from "../../../app/model/Media";
+import { nanoid } from "nanoid";
 
 
 interface Props {
@@ -22,8 +21,20 @@ export default function ListingOverview({ listing }: Props) {
     }
 
     useEffect(() => {
-        setImage(listing.listingMedia![0]);
-    }, [listing])
+        if (listing.listingMedia) {
+            setImage(listing.listingMedia![0]);
+        } else {
+            let placeholderMedia: ListingMediaDto = {
+                id: nanoid(6),
+                url: 'https://res.cloudinary.com/dwcsdudyn/image/upload/v1674919816/Placeholder/Placeholder_view_vector_uufvu4.svg',
+                isMain: true,
+                index: 0,
+                type: MediaType.image,
+                caption: 'Image coming soon...'
+            }
+            setImage(placeholderMedia);
+        }
+    }, [listing.listingMedia, setImage])
 
     const scrollRef = useRef<any>(null);
     const scroll = (event: SyntheticEvent, scrollOffset: number) => {
@@ -60,10 +71,10 @@ export default function ListingOverview({ listing }: Props) {
 
     return (
         <div className="details-gallery-container">
-            <section className="details-gallery">
+            {listing.listingMedia && <section className="details-gallery">
                 <div style={{ position: "relative" }}>
                     <Link to={`/listing/${listing?.id}`} target="_blank" >
-                        <img className="details-image" src={image.url} alt="cover" />
+                        <img className="details-image" src={'https://res.cloudinary.com/dwcsdudyn/image/upload/v1674919816/Placeholder/Placeholder_view_vector_uufvu4.svg'} alt="cover" />
                     </Link>
                     <span className="image-numbering">
                         Image {listing.listingMedia!.indexOf(image) + 1} of {listing.listingMedia?.length}
@@ -83,11 +94,11 @@ export default function ListingOverview({ listing }: Props) {
                     <button className="left-arrow-thumbnails" onClick={(e) => scroll(e, -240)}><img className="left-icon" src="/assets/previous.svg" alt="previous" /></button>
                     <button className="right-arrow-thumbnails" onClick={(e) => scroll(e, 240)}><img className="right-icon" src="/assets/next.svg" alt="next" /></button>
                 </div>
-            </section>
+            </section>}
             <article className="header-container">
-                <span style={{ fontSize: "20px", fontWeight: "600" }}>{priceFormatter(listing!.pricing.price!, listing!.pricing.currency)}</span>
+                {/* <span style={{ fontSize: "20px", fontWeight: "600" }}>{priceFormatter(listing!.pricing.price!, listing!.pricing.currency)}</span> */}
                 {(listing?.pricing.transactionType.toString() === "Rent") && <span style={{ fontSize: "16px" }}> {rentFrequency(listing!)} </span>}
-                <p style={{ fontSize: "16px" }}>{listing!.totalBedrooms} beds {listing.bathrooms} baths {propertyTypeLong(listing!)}</p>
+                {/* <p style={{ fontSize: "16px" }}>{listing!.totalBedrooms} beds {listing.bathrooms} baths {propertyTypeLong(listing!)}</p> */}
                 <p style={{ fontSize: "14px" }}>Address: {address}</p>
             </article>
             <article className="header-container">

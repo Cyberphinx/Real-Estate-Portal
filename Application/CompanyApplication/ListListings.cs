@@ -4,13 +4,9 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Core;
-using Application.ListingApplication;
-using Domain.ListingAggregate.Enums;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Domain.Enums;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Persistence;
 using Application.Extensions;
 
@@ -36,7 +32,7 @@ namespace Application.CompanyApplication
             public async Task<Result<PagedList<Stock>>> Handle(Query request, CancellationToken cancellationToken)
             {
                 var query = _context.Listings
-                    .WhereAgentListing(request.Params.AgentId)
+                    .WhereAgentListing(request.Params.CompanyId)
                     .SearchAgentListing(request.Params.SearchTerm)
                     .FilterAgentListing(request.Params.Channel, request.Params.PropertyTypes, request.Params.MinMaxPrice, request.Params.MinMaxBeds)
                     .SearchMapAgentListing(request.Params.MapBounds)

@@ -39,7 +39,7 @@ namespace Infrastructure.Security
             if (username == null) return Task.CompletedTask;
 
             // get company id from context
-            var companyId = Guid.Parse(_httpContextAccessor.HttpContext?.Request.RouteValues.SingleOrDefault(x => x.Key == "id").Value.ToString());
+            var companyId = Guid.Parse(_httpContextAccessor.HttpContext?.Request.RouteValues.SingleOrDefault(x => x.Key == "companyId").Value.ToString());
 
             // find the selected company
             var company = _dbContext.Companies

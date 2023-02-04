@@ -4,13 +4,14 @@ import './ServerError.css';
 import { Link } from "react-router-dom";
 import NavBar from "../../app/layout/NavBar";
 import { useStore } from "../../app/stores/store";
+import Nav from "../../app/layout/Nav";
 
 export default observer(function ServerError() {
     const { commonStore } = useStore();
 
     return (
         <div>
-            <NavBar />
+            <Nav />
             <div className="server-error-container">
                 <h1>500 Server Error</h1>
                 <h5 style={{fontSize: "16px"}}>{commonStore.error?.message}</h5>

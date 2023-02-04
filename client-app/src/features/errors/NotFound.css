@@ -1,6 +1,7 @@
 .not-found-container {
   /* border: 5px solid #FFFF00; */
   text-align: center;
+  padding-top: 2.5rem;
 }
 
 .error-code {
@@ -28,9 +29,11 @@
   text-decoration: none;
   width: 150px;
   margin: auto;
+  border: 1px solid black;
+  border-radius: 0.3rem;
 }
 
 .back-home-button:hover {
   color: #000;
-  background-color: #fff;
+  background-color: #f5f5f5;
 }

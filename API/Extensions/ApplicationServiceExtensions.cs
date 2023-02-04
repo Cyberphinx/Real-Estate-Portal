@@ -86,8 +86,8 @@ namespace API.Extensions
                     .AllowAnyHeader()
                     .AllowCredentials()
                     .WithExposedHeaders("WWW-Authenticate", "Pagination")
-                    .WithOrigins("http://localhost:3000", "https://localhost:3000"); 
-                    policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("https://locationiq.org"); 
+                    .WithOrigins("https://localhost:3000", "http://localhost:3000");
+                    policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("https://locationiq.org");
                 });
             });
 
@@ -95,12 +95,14 @@ namespace API.Extensions
             services.AddAutoMapper(typeof(MappingProfiles).Assembly);
             services.AddScoped<IUserAccessor, UserAccessor>();
             services.AddScoped<IMediaAccessor, MediaAccessor>();
+            services.AddScoped<IListingAccessor, ListingAccessor>();
+            services.AddScoped<ICompanyAccessor, CompanyAccessor>();
             services.AddScoped<PaymentService>();
             services.AddScoped<EmailService>();
             services.AddScoped<ContactsService>();
             services.AddScoped<AttributesService>();
             services.AddSignalR();
-            services.AddControllers().AddJsonOptions(opt => 
+            services.AddControllers().AddJsonOptions(opt =>
             {
                 opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
             });

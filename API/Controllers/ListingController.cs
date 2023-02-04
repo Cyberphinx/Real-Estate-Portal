@@ -6,6 +6,7 @@ using Application.ListingApplication;
 using Domain;
 using Domain.ListingAggregate;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Persistence;
 
@@ -48,16 +49,39 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new GetMaxValues.Query()));
         }
         
+        [Authorize(Policy = "IsCompanyOwner")]
         [HttpPost("{companyId}")]
-        public async Task<IActionResult> CreateListing(Guid companyId, Listing listing)
+        public async Task<IActionResult> CreateListing(string companyId, Listing listing)
         {
-            return HandleResult(await Mediator.Send(new Create.Command{CompanyId = companyId,Listing = listing}));
+            return HandleResult(await Mediator.Send(new Create.Command{CompanyId = companyId, Listing = listing}));
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> EditListing(Guid id, Listing listing)
+        [Authorize(Policy = "IsListingOwner")]
+        [HttpPost("media/{listingId}")]
+        public async Task<IActionResult> AddMedia([FromForm] AddMedia.Command command)
         {
-            listing.Id = id;
+            return HandleResult(await Mediator.Send(command));
+        }
+
+        [Authorize(Policy = "IsListingOwner")]
+        [HttpPost("{listingId}/setMainImage/{listingMediaId}")]
+        public async Task<IActionResult> SetMainImage(string listingId, string listingMediaId)
+        {
+            return HandleResult(await Mediator.Send(new SetMainImage.Command{ListingId = listingId, ListingMediaId = listingMediaId}));
+        }
+
+        [Authorize(Policy = "IsListingOwner")]
+        [HttpDelete("{listingId}/{listingMediaId}")]
+        public async Task<IActionResult> DeleteMedia(string listingId, string listingMediaId)
+        {
+            return HandleResult(await Mediator.Send(new DeleteMedia.Command{ListingId = listingId, ListingMediaId = listingMediaId}));
+        }
+
+        [Authorize(Policy = "IsListingOwner")]
+        [HttpPut("{listingId}")]
+        public async Task<IActionResult> EditListing(Guid listingId, Listing listing)
+        {
+            listing.Id = listingId;
             return HandleResult(await Mediator.Send(new Edit.Command{Listing = listing}));
         }
 

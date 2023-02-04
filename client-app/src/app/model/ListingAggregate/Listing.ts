@@ -27,7 +27,7 @@ export interface Listing {
     businessForSale: boolean;
     buyerIncentives: Incentive[];
     company: Owner;
-    companyReference: string;
+    companyId: string;
     category: Category;
     centralHeating: CentralHeating;
     chainFree: boolean;
@@ -103,47 +103,19 @@ export class ListingFormValues {
     addedOn: Date = new Date();
     administrationFees?: string = '';
     annualBusinessRates?: number = undefined;
-    areasTotal?: number = undefined;
-    areasUnits?: UnitOfArea = UnitOfArea.SqMetres;
+    areaTotal?: number = undefined;
+    areaUnits: UnitOfArea = UnitOfArea.SqMetres;
     accessStatus: AccessStatus = AccessStatus.Private;
     availableBedrooms?: number = undefined;
     availableFromDate?: Date = undefined;
     bathrooms?: number = undefined;
     billsIncluded?: Utility[] = [];
-    company?: Owner = {
-        id: '',
-        addedOn: new Date(),
-        companyAddress: {
-            id: '',
-            displayAddress: '',
-            propertyNumberOrName: '',
-            streetName: '',
-            locality: '',
-            townOrCity: '',
-            county: '',
-            postalCode: '',
-            country: 'United Kingdom',
-            latitude: 51.505,
-            longitude: -0.09,
-        },
-        companyContacts: {
-            id: '',
-            phone: '',
-            email: '',
-            website: ''
-        },
-        LegalName: '',
-        companyReference: '',
-        displayName: '',
-        summaryDescription: '',
-        logo: '',
-    };
-    companyReference: string = '';
     businessForSale?: boolean = undefined;
     buyerIncentives?: Incentive[] = [];
     category?: Category = Category.residential;
     centralHeating?: CentralHeating = undefined;
     chainFree: boolean = false;
+    companyId: string = '';
     commercialUseClass?: string[] = [];
     commonholdDetails: string = ''
     connectedUtilities?: Utility[] = [];
@@ -170,7 +142,7 @@ export class ListingFormValues {
     listedBuildingGrade?: ListedBuildingGrade = undefined;
     listingMedia?: ListingMediaDto[] = [];
     listingReference?: string = '';
-    listingLocation?: ListingLocation = {
+    listingLocation: ListingLocation = {
         id: '',
         displayAddress: '',
         propertyNumberOrName: '',
@@ -191,7 +163,7 @@ export class ListingFormValues {
     featureSpaces?: FeatureSpace[] = [];
     parking?: Parking[] = [];
     petsAllowed?: boolean = undefined;
-    pricing?: Pricing = {
+    pricing: Pricing = {
         id: '',
         transactionType: TransactionType.rent,
         currency: Currency.gbp,
@@ -230,19 +202,19 @@ export class ListingFormValues {
             this.addedOn = listing.addedOn;
             this.administrationFees = listing.administrationFees;
             this.annualBusinessRates = listing.annualBusinessRates;
-            this.areasTotal = listing.areasTotal;
+            this.areaTotal = listing.areaTotal;
+            this.areaUnits = listing.areaUnits;
             this.accessStatus = listing.accessStatus;
             this.availableBedrooms = listing.availableBedrooms;
             this.availableFromDate = listing.availableFromDate;
             this.bathrooms = listing.bathrooms;
             this.billsIncluded = listing.billsIncluded;
-            this.company = listing.company;
-            this.companyReference = listing.companyReference;
             this.businessForSale = listing.businessForSale;
             this.buyerIncentives = listing.buyerIncentives;
             this.category = listing.category;
             this.centralHeating = listing.centralHeating;
             this.chainFree = listing.chainFree;
+            this.companyId = listing.companyId;
             this.commercialUseClass = listing.commercialUseClass;
             this.commonholdDetails = listing.commonholdDetails;
             this.connectedUtilities = listing.connectedUtilities;

@@ -3,6 +3,40 @@ import { MediaType } from './Media';
 import { Message } from './Message';
 import { ServiceCategory } from './ServiceCategory';
 
+export enum JobLifeCycle {
+    Open,
+    Cancelled,
+    Completed
+}
+
+export interface JobMediaDto {
+    id: string;
+    index: number;
+    url: string;
+    type: MediaType;
+    caption: string;
+    isMain: boolean;
+}
+
+export interface JobLocation extends Location {
+    id: string;
+}
+
+export interface NetworkDto {
+    displayName: string;
+    description: string;
+    image: string;
+    jobsCount: number;
+    reviewsCount: number;
+    username: string;
+    role: JobNetworkRole;
+}
+
+export enum JobNetworkRole {
+    Customer,
+    InterestedCompany,
+    ShortlistedCompany
+}
 
 export interface Job {
     id: string;
@@ -56,40 +90,7 @@ export class JobFormValues {
 }
 
 
-export enum JobLifeCycle {
-    Open,
-    Cancelled,
-    Completed
-}
 
-export interface JobMediaDto {
-    id: string;
-    index: number;
-    url: string;
-    type: MediaType;
-    caption: string;
-    isMain: boolean;
-}
-
-export interface JobLocation extends Location {
-    id: string;
-}
-
-export interface NetworkDto {
-    displayName: string;
-    description: string;
-    image: string;
-    jobsCount: number;
-    reviewsCount: number;
-    username: string;
-    role: JobNetworkRole;
-}
-
-export enum JobNetworkRole {
-    Customer,
-    InterestedCompany,
-    ShortlistedCompany
-}
 
 
 

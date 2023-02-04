@@ -14,8 +14,8 @@
 }
 
 .logo {
-  width: 1.5rem;
-  margin: 6px -3px 0px 20px;
+  width: 1.75rem;
+  margin: 0.3rem 0 0 1rem;
 }
 
 .nav-bar-item {
@@ -29,12 +29,12 @@
 .home-button {
   color: #000;
   background: none;
-  padding: 0.2rem 0.5rem;
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   border: none;
   cursor: pointer;
-  margin: 5px 10px;
+  margin: 1rem;
+  text-decoration: none;
 }
 
 .nav-button {
@@ -70,14 +70,14 @@
   position: relative;
 }
 .user-button {
-  margin: 4px 50px;
+  margin: 4px 50px 4px 25px;
   padding: 3px 5px;
   border: 1px solid #ccc;
   border-radius: 3px;
   background: none;
   cursor: pointer;
 }
-.user-button:hover{
+.user-button:hover {
   border: 1px solid #000;
 }
 .user-icon {
@@ -85,10 +85,19 @@
   margin: 2px 5px 0px 5px;
   padding: 0px;
   float: right;
-  border-radius: 50%
+  border-radius: 50%;
 }
 
 .hamburger-icon {
   width: 1rem;
   margin: 5px 10px 0px 5px;
+}
+
+.username-button {
+  margin: 4px 0px;
+  padding: 5px 5px 3px 15px;
+  border: none;
+  border-radius: 3px;
+  background: none;
+  font-size: 1rem;
 }

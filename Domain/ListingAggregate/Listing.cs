@@ -33,7 +33,7 @@ namespace Domain.ListingAggregate
         public string CommonholdDetails { get; set; }
         public List<Utility> ConnectedUtilities { get; set; }
         public int ConstructionYear { get; set; }
-        public ICollection<Media> ListingMedia { get; set; }
+        public ICollection<ListingMedia> ListingMedia { get; set; }
         public CookerType CookerType { get; set; }
         public CouncilTaxBand CouncilTaxBand { get; set; }
         public DecorativeCondition DecorativeCondition { get; set; }

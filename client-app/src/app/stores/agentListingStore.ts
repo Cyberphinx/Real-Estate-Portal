@@ -36,10 +36,10 @@ export default class AgentListingStore {
 
   setPredicate = (predicate: string, value: string | string[]) => {
     switch (predicate) {
-      case "agentId":
+      case "companyId":
         this.predicate.delete("minMaxPrice");
-        this.predicate.delete("agentId");
-        this.predicate.set("agentId", value);
+        this.predicate.delete("companyId");
+        this.predicate.set("companyId", value);
         break;
       case "channel":
         this.predicate.delete("channel");
@@ -135,5 +135,10 @@ export default class AgentListingStore {
   get agentListings() {
     return Array.from(this.agentListingRegistry.values());
   }
+
+  // helper method to set main image
+  setImage = (image: string) => {
+    if (this.selectedAgentListing) this.selectedAgentListing.image = image;
+}
 
 }

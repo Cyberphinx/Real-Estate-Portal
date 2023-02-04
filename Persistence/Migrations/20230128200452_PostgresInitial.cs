@@ -142,6 +142,29 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AppUserMedia",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "text", nullable: false),
+                    AppUserId = table.Column<string>(type: "text", nullable: true),
+                    Index = table.Column<int>(type: "integer", nullable: false),
+                    Url = table.Column<string>(type: "text", nullable: true),
+                    Type = table.Column<int>(type: "integer", nullable: false),
+                    Caption = table.Column<string>(type: "text", nullable: true),
+                    IsMain = table.Column<bool>(type: "boolean", nullable: false),
+                    IsLogo = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppUserMedia", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AppUserMedia_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AppUserReview",
                 columns: table => new
                 {
@@ -397,6 +420,30 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CompanyMedia",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "text", nullable: false),
+                    CompanyId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Index = table.Column<int>(type: "integer", nullable: false),
+                    Url = table.Column<string>(type: "text", nullable: true),
+                    Type = table.Column<int>(type: "integer", nullable: false),
+                    Caption = table.Column<string>(type: "text", nullable: true),
+                    IsMain = table.Column<bool>(type: "boolean", nullable: false),
+                    IsLogo = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CompanyMedia", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CompanyMedia_Companies_CompanyId",
+                        column: x => x.CompanyId,
+                        principalTable: "Companies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CompanyReview",
                 columns: table => new
                 {
@@ -482,7 +529,7 @@ namespace Persistence.Migrations
                     EirPotentialRating = table.Column<string>(type: "text", nullable: true),
                     FeatureProperty = table.Column<bool>(type: "boolean", nullable: false),
                     FeatureList = table.Column<List<string>>(type: "text[]", nullable: true),
-                    FloorLevels = table.Column<List<int>>(type: "integer[]", nullable: true),
+                    FloorLevels = table.Column<List<string>>(type: "text[]", nullable: true),
                     Floors = table.Column<int>(type: "integer", nullable: false),
                     FurnishedState = table.Column<int>(type: "integer", nullable: false),
                     GroundRent = table.Column<double>(type: "double precision", nullable: false),
@@ -554,6 +601,30 @@ namespace Persistence.Migrations
                     table.PrimaryKey("PK_JobLocation", x => x.Id);
                     table.ForeignKey(
                         name: "FK_JobLocation_Jobs_JobId",
+                        column: x => x.JobId,
+                        principalTable: "Jobs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "JobMedia",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "text", nullable: false),
+                    JobId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Index = table.Column<int>(type: "integer", nullable: false),
+                    Url = table.Column<string>(type: "text", nullable: true),
+                    Type = table.Column<int>(type: "integer", nullable: false),
+                    Caption = table.Column<string>(type: "text", nullable: true),
+                    IsMain = table.Column<bool>(type: "boolean", nullable: false),
+                    IsLogo = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_JobMedia", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_JobMedia_Jobs_JobId",
                         column: x => x.JobId,
                         principalTable: "Jobs",
                         principalColumn: "Id",
@@ -688,6 +759,30 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ListingMedia",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "text", nullable: false),
+                    ListingId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Index = table.Column<int>(type: "integer", nullable: false),
+                    Url = table.Column<string>(type: "text", nullable: true),
+                    Type = table.Column<int>(type: "integer", nullable: false),
+                    Caption = table.Column<string>(type: "text", nullable: true),
+                    IsMain = table.Column<bool>(type: "boolean", nullable: false),
+                    IsLogo = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ListingMedia", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ListingMedia_Listings_ListingId",
+                        column: x => x.ListingId,
+                        principalTable: "Listings",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ListingWatchers",
                 columns: table => new
                 {
@@ -706,51 +801,6 @@ namespace Persistence.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ListingWatchers_Listings_ListingId",
-                        column: x => x.ListingId,
-                        principalTable: "Listings",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Media",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "text", nullable: false),
-                    Index = table.Column<int>(type: "integer", nullable: false),
-                    Url = table.Column<string>(type: "text", nullable: true),
-                    Type = table.Column<int>(type: "integer", nullable: false),
-                    Caption = table.Column<string>(type: "text", nullable: true),
-                    IsMain = table.Column<bool>(type: "boolean", nullable: false),
-                    IsLogo = table.Column<bool>(type: "boolean", nullable: false),
-                    AppUserId = table.Column<string>(type: "text", nullable: true),
-                    CompanyId = table.Column<Guid>(type: "uuid", nullable: true),
-                    JobId = table.Column<Guid>(type: "uuid", nullable: true),
-                    ListingId = table.Column<Guid>(type: "uuid", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Media", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Media_AspNetUsers_AppUserId",
-                        column: x => x.AppUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Media_Companies_CompanyId",
-                        column: x => x.CompanyId,
-                        principalTable: "Companies",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Media_Jobs_JobId",
-                        column: x => x.JobId,
-                        principalTable: "Jobs",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Media_Listings_ListingId",
                         column: x => x.ListingId,
                         principalTable: "Listings",
                         principalColumn: "Id",
@@ -811,11 +861,16 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "1", "fd81d1fe-5617-4781-b9de-4692c16f0b0a", "Company", "COMPANY" },
-                    { "2", "0f50c715-1e0c-4d67-b363-d6ebc6787478", "Customer", "CUSTOMER" },
-                    { "3", "f857e897-b54f-477b-b881-0cf20c5bf4ac", "Agency", "AGENCY" },
-                    { "4", "76634601-b38e-415a-b825-0537ad795422", "Admin", "ADMIN" }
+                    { "1", "595a5329-3e99-4cb7-a8d2-2922eb9d8ee1", "Company", "COMPANY" },
+                    { "2", "bbbbf5eb-8a5f-4882-85b1-cc3d655acf3b", "Customer", "CUSTOMER" },
+                    { "3", "a46eb88f-cc03-4fc2-aa45-9512b40196e6", "Agency", "AGENCY" },
+                    { "4", "b4a2141d-33cf-494c-a2cf-ccb2bd6460f0", "Admin", "ADMIN" }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AppUserMedia_AppUserId",
+                table: "AppUserMedia",
+                column: "AppUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AppUserReview_AppUserId",
@@ -877,6 +932,11 @@ namespace Persistence.Migrations
                 column: "CompanyId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CompanyMedia_CompanyId",
+                table: "CompanyMedia",
+                column: "CompanyId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_CompanyReview_CompanyId",
                 table: "CompanyReview",
                 column: "CompanyId");
@@ -908,6 +968,11 @@ namespace Persistence.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_JobMedia_JobId",
+                table: "JobMedia",
+                column: "JobId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_JobMessages_AuthorId",
                 table: "JobMessages",
                 column: "AuthorId");
@@ -929,6 +994,11 @@ namespace Persistence.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_ListingMedia_ListingId",
+                table: "ListingMedia",
+                column: "ListingId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Listings_CompanyId",
                 table: "Listings",
                 column: "CompanyId");
@@ -936,26 +1006,6 @@ namespace Persistence.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_ListingWatchers_ListingId",
                 table: "ListingWatchers",
-                column: "ListingId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Media_AppUserId",
-                table: "Media",
-                column: "AppUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Media_CompanyId",
-                table: "Media",
-                column: "CompanyId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Media_JobId",
-                table: "Media",
-                column: "JobId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Media_ListingId",
-                table: "Media",
                 column: "ListingId");
 
             migrationBuilder.CreateIndex(
@@ -985,6 +1035,9 @@ namespace Persistence.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "AppUserMedia");
+
+            migrationBuilder.DropTable(
                 name: "AppUserReview");
 
             migrationBuilder.DropTable(
@@ -1012,6 +1065,9 @@ namespace Persistence.Migrations
                 name: "CompanyDescription");
 
             migrationBuilder.DropTable(
+                name: "CompanyMedia");
+
+            migrationBuilder.DropTable(
                 name: "CompanyReview");
 
             migrationBuilder.DropTable(
@@ -1027,6 +1083,9 @@ namespace Persistence.Migrations
                 name: "JobLocation");
 
             migrationBuilder.DropTable(
+                name: "JobMedia");
+
+            migrationBuilder.DropTable(
                 name: "JobMessages");
 
             migrationBuilder.DropTable(
@@ -1036,10 +1095,10 @@ namespace Persistence.Migrations
                 name: "ListingLocation");
 
             migrationBuilder.DropTable(
-                name: "ListingWatchers");
+                name: "ListingMedia");
 
             migrationBuilder.DropTable(
-                name: "Media");
+                name: "ListingWatchers");
 
             migrationBuilder.DropTable(
                 name: "Membership");

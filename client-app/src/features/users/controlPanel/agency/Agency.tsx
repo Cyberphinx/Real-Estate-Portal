@@ -4,7 +4,6 @@ import LoadingComponent from "../../../../app/common/loading/LoadingComponent";
 import { User } from "../../../../app/model/User";
 import { useStore } from "../../../../app/stores/store";
 import './Agency.css';
-import { capitalizeFirstLetter } from "../../../../app/common/HelperFunctions";
 import MyJobPosts from "../common/MyJobPosts";
 import Messages from "../common/Messages";
 import AgentBranches from "./branches/AgencyBranches";

@@ -106,6 +106,39 @@ namespace Persistence.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("Domain.AppUserAggregate.Objects.AppUserMedia", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Caption")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Index")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("IsLogo")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("AppUserMedia");
+                });
+
             modelBuilder.Entity("Domain.AppUserAggregate.Objects.AppUserReview", b =>
                 {
                     b.Property<Guid>("Id")
@@ -440,6 +473,39 @@ namespace Persistence.Migrations
                     b.ToTable("CompanyDescription");
                 });
 
+            modelBuilder.Entity("Domain.CompanyAggregate.Objects.CompanyMedia", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Caption")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("CompanyId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Index")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("IsLogo")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompanyId");
+
+                    b.ToTable("CompanyMedia");
+                });
+
             modelBuilder.Entity("Domain.CompanyAggregate.Objects.CompanyReview", b =>
                 {
                     b.Property<Guid>("Id")
@@ -593,6 +659,39 @@ namespace Persistence.Migrations
                     b.ToTable("JobLocation");
                 });
 
+            modelBuilder.Entity("Domain.JobAggregate.Objects.JobMedia", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Caption")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Index")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("IsLogo")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("boolean");
+
+                    b.Property<Guid>("JobId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("JobId");
+
+                    b.ToTable("JobMedia");
+                });
+
             modelBuilder.Entity("Domain.JobAggregate.Objects.JobMessage", b =>
                 {
                     b.Property<Guid>("Id")
@@ -740,8 +839,8 @@ namespace Persistence.Migrations
                     b.Property<int[]>("FeatureSpaces")
                         .HasColumnType("integer[]");
 
-                    b.Property<List<int>>("FloorLevels")
-                        .HasColumnType("integer[]");
+                    b.Property<List<string>>("FloorLevels")
+                        .HasColumnType("text[]");
 
                     b.Property<int>("Floors")
                         .HasColumnType("integer");
@@ -936,6 +1035,39 @@ namespace Persistence.Migrations
                     b.ToTable("ListingLocation");
                 });
 
+            modelBuilder.Entity("Domain.ListingAggregate.Objects.ListingMedia", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Caption")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Index")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("IsLogo")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("boolean");
+
+                    b.Property<Guid>("ListingId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ListingId");
+
+                    b.ToTable("ListingMedia");
+                });
+
             modelBuilder.Entity("Domain.ListingAggregate.Objects.Pricing", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1027,54 +1159,6 @@ namespace Persistence.Migrations
                     b.ToTable("ListingWatchers");
                 });
 
-            modelBuilder.Entity("Domain.MediaAggregate.Media", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
-
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Caption")
-                        .HasColumnType("text");
-
-                    b.Property<Guid?>("CompanyId")
-                        .HasColumnType("uuid");
-
-                    b.Property<int>("Index")
-                        .HasColumnType("integer");
-
-                    b.Property<bool>("IsLogo")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("IsMain")
-                        .HasColumnType("boolean");
-
-                    b.Property<Guid?>("JobId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid?>("ListingId")
-                        .HasColumnType("uuid");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Url")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AppUserId");
-
-                    b.HasIndex("CompanyId");
-
-                    b.HasIndex("JobId");
-
-                    b.HasIndex("ListingId");
-
-                    b.ToTable("Media");
-                });
-
             modelBuilder.Entity("Domain.TrackingAggregate.Tracking", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1136,28 +1220,28 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "fd81d1fe-5617-4781-b9de-4692c16f0b0a",
+                            ConcurrencyStamp = "595a5329-3e99-4cb7-a8d2-2922eb9d8ee1",
                             Name = "Company",
                             NormalizedName = "COMPANY"
                         },
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "0f50c715-1e0c-4d67-b363-d6ebc6787478",
+                            ConcurrencyStamp = "bbbbf5eb-8a5f-4882-85b1-cc3d655acf3b",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
                             Id = "3",
-                            ConcurrencyStamp = "f857e897-b54f-477b-b881-0cf20c5bf4ac",
+                            ConcurrencyStamp = "a46eb88f-cc03-4fc2-aa45-9512b40196e6",
                             Name = "Agency",
                             NormalizedName = "AGENCY"
                         },
                         new
                         {
                             Id = "4",
-                            ConcurrencyStamp = "76634601-b38e-415a-b825-0537ad795422",
+                            ConcurrencyStamp = "b4a2141d-33cf-494c-a2cf-ccb2bd6460f0",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -1269,6 +1353,15 @@ namespace Persistence.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Domain.AppUserAggregate.Objects.AppUserMedia", b =>
+                {
+                    b.HasOne("Domain.AppUserAggregate.AppUser", "AppUser")
+                        .WithMany("Photos")
+                        .HasForeignKey("AppUserId");
+
+                    b.Navigation("AppUser");
+                });
+
             modelBuilder.Entity("Domain.AppUserAggregate.Objects.AppUserReview", b =>
                 {
                     b.HasOne("Domain.AppUserAggregate.AppUser", "AppUser")
@@ -1353,6 +1446,17 @@ namespace Persistence.Migrations
                     b.Navigation("Company");
                 });
 
+            modelBuilder.Entity("Domain.CompanyAggregate.Objects.CompanyMedia", b =>
+                {
+                    b.HasOne("Domain.CompanyAggregate.Company", "Company")
+                        .WithMany("CompanyMedia")
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Company");
+                });
+
             modelBuilder.Entity("Domain.CompanyAggregate.Objects.CompanyReview", b =>
                 {
                     b.HasOne("Domain.CompanyAggregate.Company", "Company")
@@ -1380,6 +1484,17 @@ namespace Persistence.Migrations
                     b.HasOne("Domain.JobAggregate.Job", "Job")
                         .WithOne("JobLocation")
                         .HasForeignKey("Domain.JobAggregate.Objects.JobLocation", "JobId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Job");
+                });
+
+            modelBuilder.Entity("Domain.JobAggregate.Objects.JobMedia", b =>
+                {
+                    b.HasOne("Domain.JobAggregate.Job", "Job")
+                        .WithMany("JobMedia")
+                        .HasForeignKey("JobId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1455,6 +1570,17 @@ namespace Persistence.Migrations
                     b.Navigation("Listing");
                 });
 
+            modelBuilder.Entity("Domain.ListingAggregate.Objects.ListingMedia", b =>
+                {
+                    b.HasOne("Domain.ListingAggregate.Listing", "Listing")
+                        .WithMany("ListingMedia")
+                        .HasForeignKey("ListingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Listing");
+                });
+
             modelBuilder.Entity("Domain.ListingAggregate.Objects.Pricing", b =>
                 {
                     b.HasOne("Domain.ListingAggregate.Listing", "Listing")
@@ -1494,29 +1620,6 @@ namespace Persistence.Migrations
                     b.Navigation("AppUser");
 
                     b.Navigation("Listing");
-                });
-
-            modelBuilder.Entity("Domain.MediaAggregate.Media", b =>
-                {
-                    b.HasOne("Domain.AppUserAggregate.AppUser", null)
-                        .WithMany("Photos")
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Domain.CompanyAggregate.Company", null)
-                        .WithMany("CompanyMedia")
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Domain.JobAggregate.Job", null)
-                        .WithMany("JobMedia")
-                        .HasForeignKey("JobId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Domain.ListingAggregate.Listing", null)
-                        .WithMany("ListingMedia")
-                        .HasForeignKey("ListingId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

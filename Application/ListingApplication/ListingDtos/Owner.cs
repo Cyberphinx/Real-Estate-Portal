@@ -22,6 +22,6 @@ namespace Application.ListingApplication.ListingDtos
         public string DisplayName { get; set; }
         public string SummaryDescription { get; set; }
         public string Logo { get; set; }
-
+        public string Username { get; set; }
     }
 }

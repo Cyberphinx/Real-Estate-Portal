@@ -14,7 +14,7 @@ namespace Application.CompanyApplication.CompanyDtos
         public DateTime AddedOn { get; set; }
         public CompanyAddressDto CompanyAddress { get; set; }
         public CompanyContactsDto CompanyContacts { get; set; }
-        public ICollection<Media> CompanyMedia { get; set; }
+        public ICollection<CompanyMediaDto> CompanyMedia { get; set; }
         public ICollection<CompanyDescriptionDto> CompanyDescriptions { get; set; }
         public string CompanyReference { get; set; }
         public string CompanyRegistrationNumber { get; set; }

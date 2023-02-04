@@ -3,8 +3,6 @@ import { ListingFormValues } from "../../../../../../app/model/ListingAggregate/
 import BasicInfo from "./BasicInfo";
 import Details from "./Details";
 import ListingAddress from "./ListingAddress";
-import Media from "./Media";
-import Preview from "./Preview";
 
 interface Props {
     step: number;
@@ -16,9 +14,8 @@ interface Props {
     isValid: boolean;
     dirty: boolean;
     isSubmitting: boolean;
-    setActivePane: (value: number) => void;
 }
-export default function SwitchBoard({ step, setStep, setFieldValue, setFieldTouched, getFieldMeta, values, isValid, dirty, isSubmitting, setActivePane }: Props) {
+export default function SwitchBoard({ step, setStep, setFieldValue, setFieldTouched, getFieldMeta, values, isValid, dirty, isSubmitting }: Props) {
 
     function selectStep() {
         switch (step) {
@@ -30,7 +27,6 @@ export default function SwitchBoard({ step, setStep, setFieldValue, setFieldTouc
                         setFieldValue={setFieldValue}
                         setFieldTouched={setFieldTouched}
                         getFieldMeta={getFieldMeta}
-                        setActivePane={setActivePane}
                     />
                 );
             case 1:
@@ -38,9 +34,7 @@ export default function SwitchBoard({ step, setStep, setFieldValue, setFieldTouc
                     <BasicInfo
                         step={step}
                         setStep={setStep}
-                        setActivePane={setActivePane}
                         setFieldValue={setFieldValue}
-                        getFieldMeta={getFieldMeta}
                         values={values}
                     />
                 );
@@ -50,37 +44,14 @@ export default function SwitchBoard({ step, setStep, setFieldValue, setFieldTouc
                         step={step}
                         setStep={setStep}
                         values={values}
-                        setActivePane={setActivePane}
                         setFieldValue={setFieldValue}
-                    />
-                );
-            case 3:
-                return (
-                    <Media
-                        step={step}
-                        setStep={setStep}
-                        values={values}
                         isValid={isValid}
                         dirty={dirty}
                         isSubmitting={isSubmitting}
-                        setActivePane={setActivePane}
-                    />
-                );
-            case 4:
-                return (
-                    <Preview
-                        step={step}
-                        setStep={setStep}
-                        values={values}
-                        isValid={isValid}
-                        dirty={dirty}
-                        isSubmitting={isSubmitting}
-                        setActivePane={setActivePane}
                     />
                 );
         }
     }
-
 
     return (
         <div>

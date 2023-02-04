@@ -8,6 +8,7 @@ export default class FeatureStore {
     isLocked = true;
     contacts = false;
     description = false;
+    listingFormStep: number = 0;
 
     companyEditMode = false;
 
@@ -24,6 +25,7 @@ export default class FeatureStore {
     setActiveFeature = (index: number) => this.activeFeature = index;
     setActiveRegister = (index: number) => this.activeRegister = index;
     setActiveAgencyPanel = (index: number) => this.activeAgencyPanel = index;
+    setListingFormStep = (index: number) => this.listingFormStep = index;
 
     setActiveId = (value: string | null ) => { this.activeId = value };
 

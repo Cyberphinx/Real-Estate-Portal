@@ -7,6 +7,7 @@ import { useStore } from "../../app/stores/store";
 import { priceQualifier, propertyType, rentFrequencyShort } from "../../app/model/ListingAggregate/ListingEnums";
 import { ListingMediaDto } from "../../app/model/ListingAggregate/ListingObjects";
 import WatchButton from "../../app/common/WatchButton";
+import RefTag from "../../app/common/tags/RefTag";
 
 interface Props {
     listing: Listing | undefined;
@@ -35,13 +36,13 @@ export default observer(function ListingItem({ listing, predicate }: Props) {
         scrollRef.current.scrollLeft += scrollOffset;
     };
 
-    const address = `${listing?.listingLocation.propertyNumberOrName && (listing?.listingLocation.propertyNumberOrName + ", ")}
-        ${listing?.listingLocation.streetName && (listing?.listingLocation.streetName + ", ")}
-        ${listing?.listingLocation.locality && (listing?.listingLocation.locality + ", ")}
-        ${listing?.listingLocation.townOrCity && (listing?.listingLocation.townOrCity + ", ")}
-        ${listing?.listingLocation.county && (listing?.listingLocation.county + ", ")}
-        ${listing?.listingLocation.postalCode && (listing?.listingLocation.postalCode)}
-        `;
+    // const address = `${listing?.listingLocation.propertyNumberOrName && (listing?.listingLocation.propertyNumberOrName + ", ")}
+    //     ${listing?.listingLocation.streetName && (listing?.listingLocation.streetName + ", ")}
+    //     ${listing?.listingLocation.locality && (listing?.listingLocation.locality + ", ")}
+    //     ${listing?.listingLocation.townOrCity && (listing?.listingLocation.townOrCity + ", ")}
+    //     ${listing?.listingLocation.county && (listing?.listingLocation.county + ", ")}
+    //     ${listing?.listingLocation.postalCode && (listing?.listingLocation.postalCode)}
+    //     `;
 
     const addressShort = `
         ${listing?.listingLocation.streetName && (listing?.listingLocation.streetName + ", ")}
@@ -75,7 +76,7 @@ export default observer(function ListingItem({ listing, predicate }: Props) {
             onMouseLeave={() => setActiveListing(null)}
         >
             <div className={selectedListing?.id === listing!.id ? "card-selected" : "card"} >
-                <AgencyTag listing={listing} />
+                <RefTag listing={listing} />
                 <WatchButton listing={listing} />
                 <section className="gallery">
                     <div style={{ position: "relative" }}>

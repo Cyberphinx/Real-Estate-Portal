@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import './ListingDetailsPage.css';
 import { useParams } from "react-router-dom";
 import { useStore } from "../../../app/stores/store";
@@ -8,6 +8,7 @@ import LoadingComponent from "../../../app/common/loading/LoadingComponent";
 import Close from "../../map/toolbar/Close";
 import { ListingMediaDto, DetailedDescription } from "../../../app/model/ListingAggregate/ListingObjects";
 import { UnitOfLength } from "../../../app/model/ListingAggregate/ListingEnums";
+import { Listing } from "../../../app/model/ListingAggregate/Listing";
 
 export default observer(function ListingDetailsPage() {
     const { id } = useParams<string>();
@@ -15,33 +16,30 @@ export default observer(function ListingDetailsPage() {
     const { selectedListing: listing, loadListing, loadingListing, cancelSelectListing } = listingStore;
     const { description, setDescription, contacts, setContacts } = featureStore;
 
+    const [currentListing, setCurrentListing] = useState<Listing | undefined>(undefined)
+
     useEffect(() => {
-        if (id) loadListing(id);
-        return () => cancelSelectListing();
-    }, [id, loadListing, cancelSelectListing])
+        if (id) loadListing(id).then(currentListing => setCurrentListing(new Listing(currentListing)));
+        return () => setCurrentListing(undefined);
+    }, [id, loadListing, setCurrentListing])
 
 
-    if (loadingListing || !listing) return <LoadingComponent content={"Loading..."} />;
+    if (loadingListing || !currentListing) return <LoadingComponent content={"Loading..."} />;
 
     return (
         <div>
             <NavBar />
             <div style={{ position: "relative" }}>
                 <section className="listing-contents__container" >
-                    {/* {listing.contents.map((content: Content) => (
-                        <div className="listing-content__wrapper" key={content.id}>
-                            <img src={content.url} alt={content.caption} className="content-images" />
-                        </div>
-                    ))} */}
                     <div>
-                        {listing.listingMedia!.slice(0, (listing.listingMedia!.length / 2)).map((content: ListingMediaDto) => (
+                        {currentListing.listingMedia && currentListing.listingMedia!.slice(0, (currentListing.listingMedia!.length / 2)).map((content: ListingMediaDto) => (
                             <div className="listing-content__wrapper" key={content.id}>
                                 <img src={content.url} alt={content.caption} className="content-image" />
                             </div>
                         ))}
                     </div>
                     <div>
-                        {listing.listingMedia!.slice((listing.listingMedia!.length / 2), listing.listingMedia!.length).map((content: ListingMediaDto) => (
+                        {currentListing.listingMedia!.slice((currentListing.listingMedia!.length / 2), currentListing.listingMedia!.length).map((content: ListingMediaDto) => (
                             <div className="listing-content__wrapper" key={content.id}>
                                 <img src={content.url} alt={content.caption} className="content-image" />
                             </div>
@@ -56,7 +54,7 @@ export default observer(function ListingDetailsPage() {
                             <Close close={() => setDescription()} />
                         </div>
                         <div className="listing-descriptions-container">
-                            {listing.detailedDescriptions.map((description: DetailedDescription) => (
+                            {currentListing.detailedDescriptions.map((description: DetailedDescription) => (
                                 <article key={description.id} >
                                     <h1>{description.heading}</h1>
                                     <span>
@@ -76,9 +74,9 @@ export default observer(function ListingDetailsPage() {
                         </div>
                         <article className="listing-contacts-container">
                             <h1>Phone</h1>
-                            <p>{listing.company.companyContacts.phone}</p>
+                            <p>{currentListing.company.companyContacts.phone}</p>
                             <h1>Email</h1>
-                            <p>{listing.company.companyContacts.email}</p>
+                            <p>{currentListing.company.companyContacts.email}</p>
                         </article>
                     </section>}
             </div>

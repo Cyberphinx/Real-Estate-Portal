@@ -18,6 +18,7 @@ using Application.JobApplication.JobDtos;
 using Application.ListingApplication.ListingDtos;
 using Domain.AppUserAggregate.Objects;
 using Application.MessageApplication;
+using Application.AccountApplication.AccountDtos;
 
 namespace Application.Core
 {
@@ -30,6 +31,7 @@ namespace Application.Core
                 .ForMember(x => x.AddedOn, o => o.MapFrom(s => s.AddedOn))
                 .ForMember(x => x.Language, o => o.MapFrom(s => s.Language))
                 .ForMember(x => x.Country, o => o.MapFrom(s => s.Country))
+                .ForMember(x => x.Image, o => o.MapFrom(s => s.Photos.FirstOrDefault(x => x.IsMain).Url))
                 .ForMember(x => x.Description, o => o.MapFrom(s => s.Description))
                 .ForMember(x => x.DisplayName, o => o.MapFrom(s => s.DisplayName))
                 .ForMember(x => x.Photos, o => o.MapFrom(s => s.Photos.OrderBy(x => x.Index)))
@@ -38,7 +40,7 @@ namespace Application.Core
                 .ForMember(x => x.Membership, o => o.MapFrom(s => s.Membership))
                 .ForMember(x => x.Invoices, o => o.MapFrom(s => s.Invoices));
 
-            CreateMap<Media, Application.ProfileApplication.ProfileDtos.PhotoDto>();
+            CreateMap<AppUserMedia, Application.ProfileApplication.ProfileDtos.PhotoDto>();
             CreateMap<AppUserReview, Application.ProfileApplication.ProfileDtos.AppUserReviewDto>();
 
             CreateMap<JobNetwork, Application.ProfileApplication.ProfileDtos.UserJobDto>()
@@ -57,7 +59,7 @@ namespace Application.Core
                 .ForMember(x => x.Pricing, o => o.MapFrom(s => s.Pricing))
                 .ForMember(x => x.Agency, o => o.MapFrom(s => s.Company.DisplayName));
 
-            CreateMap<Media, ListingMediaDto>();
+            CreateMap<ListingMedia, ListingMediaDto>();
             CreateMap<DetailedDescription, DetailedDescriptionDto>()
             .ForMember(x => x.Area, o => o.MapFrom(s => s.Length * s.Width));
             CreateMap<ListingLocation, ListingLocationDto>();
@@ -92,6 +94,7 @@ namespace Application.Core
 
             // Company Dtos
             CreateMap<Company, Company>();
+            CreateMap<CompanyMedia, CompanyMediaDto>();
             CreateMap<Company, Owner>()
                 .ForMember(x => x.Logo, o => o.MapFrom(s => s.CompanyMedia.FirstOrDefault(x => x.IsLogo).Url));
             
@@ -116,7 +119,7 @@ namespace Application.Core
 
             
             // Job Dtos
-            CreateMap<Media, JobMediaDto>();
+            CreateMap<JobMedia, JobMediaDto>();
             CreateMap<JobLocation, JobLocationDto>();
             CreateMap<Job, JobDto>()
                 .ForMember(x => x.JobMedia, o => o.MapFrom(s => s.JobMedia.OrderBy(x => x.Index)))

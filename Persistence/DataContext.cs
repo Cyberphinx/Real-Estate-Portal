@@ -11,6 +11,8 @@ using Microsoft.EntityFrameworkCore;
 using Domain.TrackingAggregate;
 using Domain.AppUserAggregate.Objects;
 using Domain.MediaAggregate;
+using Domain.ListingAggregate.Objects;
+using Domain.CompanyAggregate.Objects;
 
 namespace Persistence
 {
@@ -28,7 +30,11 @@ namespace Persistence
         public DbSet<JobMessage> JobMessages { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<Tracking> TrackingData { get; set; }
-        public DbSet<Media> Media { get; set; }
+
+        // public DbSet<ListingMedia> ListingMedia { get; set; }
+        // public DbSet<CompanyMedia> CompanyMedia { get; set; }
+        // public DbSet<JobMedia> JobMedia { get; set; }
+        // public DbSet<AppUserMedia> AppUserMedia { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -107,27 +113,6 @@ namespace Persistence
                 .HasOne(a => a.Author)
                 .WithMany()
                 .OnDelete(DeleteBehavior.Restrict);
-
-            // configure cascade delete Media from all of their parents
-            builder.Entity<AppUser>()
-                .HasMany(x => x.Photos)
-                .WithOne()
-                .OnDelete(DeleteBehavior.Cascade);
-
-            builder.Entity<Job>()
-                .HasMany(x => x.JobMedia)
-                .WithOne()
-                .OnDelete(DeleteBehavior.Cascade);
-            
-            builder.Entity<Company>()
-                .HasMany(x => x.CompanyMedia)
-                .WithOne()
-                .OnDelete(DeleteBehavior.Cascade);
-
-            builder.Entity<Listing>()
-                .HasMany(x => x.ListingMedia)
-                .WithOne()
-                .OnDelete(DeleteBehavior.Cascade);
         }
 
     }

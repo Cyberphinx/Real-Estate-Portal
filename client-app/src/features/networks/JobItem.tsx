@@ -1,9 +1,7 @@
-import { Content } from "leaflet";
 import { observer } from "mobx-react-lite";
 import React, { SyntheticEvent, useRef, useState } from "react";
-import { Link } from "react-router-dom";
 import { dateFormatter } from "../../app/common/HelperFunctions";
-import { Job, JobMediaDto, JobNetworkRole } from "../../app/model/Job";
+import { Job, JobMediaDto } from "../../app/model/Job";
 import { ServiceCategory } from "../../app/model/ServiceCategory";
 import { useStore } from "../../app/stores/store";
 import './JobItem.css';
@@ -23,27 +21,27 @@ export default observer(function JobItem({ job }: Props) {
     }
 
     const scrollRef = useRef<any>(null);
-    const scroll = (event: SyntheticEvent, scrollOffset: number) => {
-        event.stopPropagation();
-        scrollRef.current.scrollLeft += scrollOffset;
-    };
+    // const scroll = (event: SyntheticEvent, scrollOffset: number) => {
+    //     event.stopPropagation();
+    //     scrollRef.current.scrollLeft += scrollOffset;
+    // };
 
-    function handlePrev(event: SyntheticEvent) {
-        if (job!.jobMedia.indexOf(image) === 0) return null;
-        else {
-            setImage(job!.jobMedia[job!.jobMedia.indexOf(image) - 1]);
-        }
-    }
+    // function handlePrev(event: SyntheticEvent) {
+    //     if (job!.jobMedia.indexOf(image) === 0) return null;
+    //     else {
+    //         setImage(job!.jobMedia[job!.jobMedia.indexOf(image) - 1]);
+    //     }
+    // }
 
-    function handleNext(event: SyntheticEvent) {
-        event.stopPropagation();
-        if (job!.jobMedia.indexOf(image) < job!.jobMedia.length - 1) {
-            setImage(job!.jobMedia[job!.jobMedia.indexOf(image) + 1]);
-        }
-        else {
-            return null;
-        }
-    }
+    // function handleNext(event: SyntheticEvent) {
+    //     event.stopPropagation();
+    //     if (job!.jobMedia.indexOf(image) < job!.jobMedia.length - 1) {
+    //         setImage(job!.jobMedia[job!.jobMedia.indexOf(image) + 1]);
+    //     }
+    //     else {
+    //         return null;
+    //     }
+    // }
 
     return (
         <article className="thread-container">

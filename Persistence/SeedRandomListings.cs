@@ -63,94 +63,94 @@ namespace Persistence
                         Utility.Water
                     };
                 newListing.ConstructionYear = 2018;
-                newListing.ListingMedia = new List<Media>
+                newListing.ListingMedia = new List<ListingMedia>
                     {
-                        new Media
+                        new ListingMedia
                         {
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157050/Placeholder/Listings/ronnie-george-9gGvNWBeOq4_zzpq0z.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 1",
                             IsMain = true
                         },
-                        new Media
+                        new ListingMedia
                         {
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/webaliser-_TPTXZd9mOo_yxhvvk.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 2"
                         },
-                        new Media
+                        new ListingMedia
                         {
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/bailey-anselme-Bkp3gLygyeA_jbeyqw.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 3"
                         },
-                        new Media
+                        new ListingMedia
                         {
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/avi-waxman-f9qZuKoZYoY_fpqamd.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 4"
                         },
-                        new Media
+                        new ListingMedia
                         {
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157050/Placeholder/Listings/chuttersnap-awL_YCtPGv4_mevzcz.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 5"
                         },
-                        new Media
+                        new ListingMedia
                         {
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/sean-pollock-PhYq704ffdA_juovuh.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 6"
                         },
-                        new Media
+                        new ListingMedia
                         {
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/jason-briscoe-UV81E0oXXWQ_d1oc5k.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 7"
                         },
-                        new Media
+                        new ListingMedia
                         {
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/etienne-beauregard-riverin-B0aCvAVSX8E_epmt4d.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 8"
                         },
-                        new Media
+                        new ListingMedia
                         {
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/francesca-tosolini-tHkJAMcO3QE_y8pp1o.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 9"
                         },
-                        new Media
+                        new ListingMedia
                         {
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/grant-lemons-jTCLppdwSEc_gvvge5.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 10"
                         },
-                        new Media
+                        new ListingMedia
                         {
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/naomi-hebert-MP0bgaS_d1c_izjtsb.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 11"
                         },
-                        new Media
+                        new ListingMedia
                         {
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157299/Placeholder/Listings/ionut-vlad-idXQEOxhmvU_svt1mo.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 12"
                         },
-                        new Media
+                        new ListingMedia
                         {
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/krystal-black-V5OEpF12pzw_ekn1te.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 13"
                         },
-                        new Media
+                        new ListingMedia
                         {
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/ronnie-george-9gGvNWBeOq4_yuw3yd.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 14"
                         },
-                        new Media
+                        new ListingMedia
                         {
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/roam-in-color-z3QZ6gjGRt4_evs1kc.jpg",
                             Type = MediaType.Image,
@@ -221,7 +221,7 @@ namespace Persistence
                         "Garden"
                     };
                 newListing.FurnishedState = FurnishedState.Unfurnished;
-                newListing.FloorLevels = new List<int> { 1, 2 };
+                newListing.FloorLevels = new List<string> { "Ground floor", "First floor" };
                 newListing.Floors = 2;
                 newListing.GroundRent = 450;
                 newListing.LifeCycleStatus = LifeCycleStatus.Available;
@@ -334,94 +334,94 @@ namespace Persistence
                         Utility.Water
                     };
                 newListing.ConstructionYear = 2018;
-                newListing.ListingMedia = new List<Media>
+                newListing.ListingMedia = new List<ListingMedia>
                     {
-                        new Media
+                        new ListingMedia
                         {
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/naomi-hebert-MP0bgaS_d1c_izjtsb.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 1",
                             IsMain = true
                         },
-                        new Media
+                        new ListingMedia
                         {
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/krystal-black-V5OEpF12pzw_ekn1te.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 2"
                         },
-                        new Media
+                        new ListingMedia
                         {
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/roam-in-color-z3QZ6gjGRt4_evs1kc.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 3"
                         },
-                        new Media
+                        new ListingMedia
                         {
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157299/Placeholder/Listings/ionut-vlad-idXQEOxhmvU_svt1mo.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 4"
                         },
-                        new Media
+                        new ListingMedia
                         {
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/webaliser-_TPTXZd9mOo_yxhvvk.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 5"
                         },
-                        new Media
+                        new ListingMedia
                         {
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/ronnie-george-9gGvNWBeOq4_yuw3yd.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 6"
                         },
-                        new Media
+                        new ListingMedia
                         {
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/bailey-anselme-Bkp3gLygyeA_jbeyqw.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 7"
                         },
-                        new Media
+                        new ListingMedia
                         {
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/jason-briscoe-UV81E0oXXWQ_d1oc5k.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 8"
                         },
-                        new Media
+                        new ListingMedia
                         {
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/etienne-beauregard-riverin-B0aCvAVSX8E_epmt4d.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 9"
                         },
-                        new Media
+                        new ListingMedia
                         {
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/francesca-tosolini-tHkJAMcO3QE_y8pp1o.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 10"
                         },
-                        new Media
+                        new ListingMedia
                         {
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/grant-lemons-jTCLppdwSEc_gvvge5.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 11"
                         },
-                        new Media
+                        new ListingMedia
                         {
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/sean-pollock-PhYq704ffdA_juovuh.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 12"
                         },
-                        new Media
+                        new ListingMedia
                         {
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157050/Placeholder/Listings/chuttersnap-awL_YCtPGv4_mevzcz.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 13"
                         },
-                        new Media
+                        new ListingMedia
                         {
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/avi-waxman-f9qZuKoZYoY_fpqamd.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 14"
                         },
-                        new Media
+                        new ListingMedia
                         {
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/sean-pollock-PhYq704ffdA_w9meyd.jpg",
                             Type = MediaType.Image,
@@ -492,7 +492,7 @@ namespace Persistence
                         "Garden"
                     };
                 newListing.FurnishedState = FurnishedState.Unfurnished;
-                newListing.FloorLevels = new List<int> { 1, 2 };
+                newListing.FloorLevels = new List<string> { "First floor", "Second floor" };
                 newListing.Floors = 2;
                 newListing.GroundRent = 450;
                 newListing.LifeCycleStatus = LifeCycleStatus.Available;

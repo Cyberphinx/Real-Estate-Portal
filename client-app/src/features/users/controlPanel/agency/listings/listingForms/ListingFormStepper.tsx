@@ -1,93 +1,104 @@
+import { observer } from "mobx-react-lite";
 import React from "react";
+import { Link } from "react-router-dom";
+import { ListingFormValues } from "../../../../../../app/model/ListingAggregate/Listing";
+import { useStore } from "../../../../../../app/stores/store";
 import './ListingFormStepper.css';
-
 
 interface Props {
     step: number;
     setStep: (value: number) => void;
+    values?: ListingFormValues;
 }
 
-export default function ListingFormStepper({ step, setStep }: Props) {
+export default observer(function ListingFormStepper({ step, setStep, values }: Props) {
+    const { listingStore } = useStore();
+    const { setListingId } = listingStore;
 
     return (
-        <div>
+        <div style={{ marginRight: '2rem' }}>
             <ol className="listingform-stepper__timeline">
                 <li className="listingform-stepper__item">
-                    <button
-                        type='button'
-                        className='listingform-stepper__button'
-                        onClick={() => setStep(0)}
-                        disabled={step === 0 ? true : false}
-                    >
-                        <span className='listingform-stepper__dot'
-                            style={step === 0 ? { backgroundColor: "#000", cursor:"default" } : {}}
-                        >1</span>
+                    <button className='listingform-stepper__button'>
+                        <div className={
+                            step === 0 ? 'listingform-stepper__dot-selected'
+                                : (step > 0 ? 'listingform-stepper__dot-completed'
+                                    : 'listingform-stepper__dot')
+                        }>
+                            {step > 0 ? <span>&#10003;</span> : <span>1</span>}
+                            {step === 0 && <div className="listingform-stepper__dot-circle" />}
+                        </div>
+
                         <span className="listingform-stepper__title"
-                            style={step === 0 ? { color: "#000", cursor:"default",fontWeight:"bold" } : {}}
+                            style={step >= 0 ? { color: "#000", cursor: "default", fontWeight: "bold" } : {}}
                         >Address</span>
                     </button>
                 </li>
                 <li className="listingform-stepper__item">
-                    <button
-                        type='button'
-                        className='listingform-stepper__button'
-                        onClick={() => setStep(1)}
-                        disabled={step === 1 ? true : false}
-                    >
-                        <span className='listingform-stepper__dot'
-                            style={step === 1 ? { backgroundColor: "#000", cursor:"default" } : {}}
-                        >2</span>
+                    <button className='listingform-stepper__button'>
+                        <div className={
+                            step === 1 ? 'listingform-stepper__dot-selected'
+                                : (step > 1 ? 'listingform-stepper__dot-completed'
+                                    : 'listingform-stepper__dot')
+                        }>
+                            {step > 1 ? <span>&#10003;</span> : <span>2</span>}
+                            {step === 1 && <div className="listingform-stepper__dot-circle" />}
+                        </div>
+
                         <span className="listingform-stepper__title"
-                            style={step === 1 ? { color: "#000", cursor:"default",fontWeight:"bold" } : {}}
+                            style={step >= 1 ? { color: "#000", cursor: "default", fontWeight: "bold" } : {}}
                         >Basic info</span>
                     </button>
                 </li>
                 <li className="listingform-stepper__item">
-                    <button
-                        type='button'
-                        className='listingform-stepper__button'
-                        onClick={() => setStep(2)}
-                        disabled={step === 2 ? true : false}
-                    >
-                        <span className='listingform-stepper__dot'
-                            style={step === 2 ? { backgroundColor: "#000", cursor:"default" } : {}}
-                        >3</span>
+                    <div className='listingform-stepper__button'>
+                        <div className={
+                            step === 2 ? 'listingform-stepper__dot-selected'
+                                : (step > 2 ? 'listingform-stepper__dot-completed'
+                                    : 'listingform-stepper__dot')
+                        }>
+                            {step > 2 ? <span>&#10003;</span> : <span>3</span>}
+                            {step === 2 && <div className="listingform-stepper__dot-circle" />}
+                        </div>
+
                         <span className="listingform-stepper__title"
-                            style={step === 2 ? { color: "#000", cursor:"default",fontWeight:"bold" } : {}}
+                            style={step >= 2 ? { color: "#000", cursor: "default", fontWeight: "bold" } : {}}
                         >Details</span>
-                    </button>
+                    </div>
                 </li>
                 <li className="listingform-stepper__item">
-                    <button
-                        type='button'
-                        className='listingform-stepper__button'
-                        onClick={() => setStep(3)}
-                        disabled={step === 3 ? true : false}
-                    >
-                        <span className='listingform-stepper__dot'
-                            style={step === 3 ? { backgroundColor: "#000", cursor:"default" } : {}}
-                        >4</span>
+                    <div className='listingform-stepper__button'>
+                        <div className={
+                            step === 3 ? 'listingform-stepper__dot-selected'
+                                : (step > 3 ? 'listingform-stepper__dot-completed'
+                                    : 'listingform-stepper__dot')
+                        }>
+                            {step > 3 ? <span>&#10003;</span> : <span>4</span>}
+                            {step === 3 && <div className="listingform-stepper__dot-circle" />}
+                        </div>
+
                         <span className="listingform-stepper__title"
-                            style={step === 3 ? { color: "#000", cursor:"default",fontWeight:"bold" } : {}}
+                            style={step >= 3 ? { color: "#000", cursor: "default", fontWeight: "bold" } : {}}
                         >Media</span>
-                    </button>
+                    </div>
                 </li>
                 <li className="listingform-stepper__item">
-                    <button
-                        type='button'
-                        className='listingform-stepper__button'
-                        onClick={() => setStep(4)}
-                        disabled={step === 4 ? true : false}
-                    >
-                        <span className='listingform-stepper__dot'
-                            style={step === 4 ? { backgroundColor: "#000", cursor:"default" } : {}}
-                        >5</span>
+                    <div className='listingform-stepper__button'>
+                        <div className={
+                            step === 4 ? 'listingform-stepper__dot-selected'
+                                : (step > 4 ? 'listingform-stepper__dot-completed'
+                                    : 'listingform-stepper__dot')
+                        }>
+                            {step > 4 ? <span>&#10003;</span> : <span>5</span>}
+                            {step === 4 && <div className="listingform-stepper__dot-circle" />}
+                        </div>
+
                         <span className="listingform-stepper__title"
-                            style={step === 4 ? { color: "#000", cursor:"default",fontWeight:"bold" } : {}}
+                            style={step === 4 ? { color: "#000", cursor: "default", fontWeight: "bold" } : {}}
                         >Preview</span>
-                    </button>
+                    </div>
                 </li>
             </ol>
         </div>
     )
-}
+})

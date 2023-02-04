@@ -3,8 +3,10 @@ import 'leaflet-geosearch/dist/geosearch.css';
 import { GeoSearchControl, LocationIQProvider } from 'leaflet-geosearch';
 import { observer } from "mobx-react-lite";
 import L from "leaflet";
-import './ListingAddress.css';
+import './ListingForms.css';
 import MyTextInput from "../../../../../../app/common/form/MyTextInput";
+import { Link } from "react-router-dom";
+import { useStore } from "../../../../../../app/stores/store";
 
 
 interface Props {
@@ -13,10 +15,11 @@ interface Props {
     setFieldValue: (field: string, value: any, shouldValidate?: boolean | undefined) => void;
     setFieldTouched: (field: string, isTouched?: boolean | undefined, shouldValidate?: boolean | undefined) => void;
     getFieldMeta: any;
-    setActivePane: (value: number) => void;
 }
 
-export default observer(function ListingAddress({ step, setStep, setFieldValue, setFieldTouched, getFieldMeta, setActivePane }: Props) {
+export default observer(function ListingAddress({ step, setStep, setFieldValue, setFieldTouched, getFieldMeta }: Props) {
+    const {profileStore : {setActiveTab} } = useStore();
+    
     // LEAFLET START
     const apikey = process.env.REACT_APP_LOCATION_IQ;
     const locationIQLink = `https://{s}-tiles.locationiq.com/v3/streets/r/{z}/{x}/{y}.png?key=${apikey}`;
@@ -38,7 +41,7 @@ export default observer(function ListingAddress({ step, setStep, setFieldValue, 
     const currentLng: number = getFieldMeta("listingLocation.longitude").value;
     const [latitude, setLatitude] = useState<number | undefined>(51.505);
     const [longitude, setLongitude] = useState<number | undefined>(-0.09);
-    const [showInputs, setShowInputs] = useState<boolean>(false);
+    // const [showInputs, setShowInputs] = useState<boolean>(false);
 
     const provider = new LocationIQProvider({
         params: {
@@ -168,7 +171,7 @@ export default observer(function ListingAddress({ step, setStep, setFieldValue, 
             setFieldValue("listingLocation.country", country);
             setFieldValue("listingLocation.latitude", latitude);
             setFieldValue("listingLocation.longitude", longitude);
-            setShowInputs(true);
+            // setShowInputs(true);
         }
     }, [rawData, setFieldValue, displayAddress, propertyNumberOrName, streetName, locality, city, countyValue, postcode, country])
 
@@ -181,37 +184,35 @@ export default observer(function ListingAddress({ step, setStep, setFieldValue, 
     //     }
     // }
 
-    const [displayProperty, setDisplayProperty] = useState<string>("none");
-
     return (
-        <div style={{ position: "relative" }}>
+        <div style={{ position: "relative", padding:'0 2.5rem 1.5rem 2.5rem' }}>
             <p className="minimap__title">Start typing the address in the <b>map</b> search box to locate the <b>marker</b>:</p>
             <div id="minimap"></div>
             <br />
             {/* <p style={{ fontSize: "0.75rem" }}>Latitude meta: {getFieldMeta("listingLocation.latitude").value.toString()}</p> */}
             <div>
-                <div className="listing-location__fields-container">
+                <div className="listing-forms__container">
                     <div style={{ position: "relative" }}>
                         <MyTextInput
-                            inputclassname='listing-location__input-short'
-                            errorclassname='listing-location__input-error'
-                            labelclassname="listing-location__input-label"
+                            inputclassname='listing-forms__input-medium'
+                            errorclassname='listing-forms__input-error'
+                            labelclassname="listing-forms__input-label"
                             name="listingLocation.latitude"
                             label="Latitude for map marker"
                         />
-                        <i className="listing-location__tooltip" style={{ left: "11rem" }}>
+                        <i className="listing-forms__tooltip" style={{ left: "11rem" }}>
                             (drag the marker in the map to change)
                         </i>
                     </div>
                     <div style={{ position: "relative" }}>
                         <MyTextInput
-                            inputclassname='listing-location__input-short'
-                            errorclassname='listing-location__input-error'
-                            labelclassname="listing-location__input-label"
+                            inputclassname='listing-forms__input-medium'
+                            errorclassname='listing-forms__input-error'
+                            labelclassname="listing-forms__input-label"
                             name="listingLocation.longitude"
                             label="Longitude for map marker"
                         />
-                        <i className="listing-location__tooltip" style={{ left: "11.75rem" }}>
+                        <i className="listing-forms__tooltip" style={{ left: "11.75rem" }}>
                             (drag the marker in the map to change)
                         </i>
                     </div>
@@ -219,83 +220,83 @@ export default observer(function ListingAddress({ step, setStep, setFieldValue, 
 
                 <div style={{ position: "relative" }}>
                     <MyTextInput
-                        inputclassname='listing-location__input-style'
-                        errorclassname='listing-location__input-error'
-                        labelclassname="listing-location__input-label"
+                        inputclassname='listing-forms__input-long'
+                        errorclassname='listing-forms__input-error'
+                        labelclassname="listing-forms__input-label"
                         name="listingLocation.displayAddress"
                         label="Display address"
                     />
-                    <i className="listing-location__tooltip" style={{ left: "7.5rem" }}>
+                    <i className="listing-forms__tooltip" style={{ left: "7.5rem" }}>
                         (address which should be displayed on the property. The full detailed address will only be visible to the agent)
                     </i>
                 </div>
 
                 <MyTextInput
-                    inputclassname='listing-location__input-style'
-                    errorclassname='listing-location__input-error'
-                    labelclassname="listing-location__input-label"
+                    inputclassname='listing-forms__input-long'
+                    errorclassname='listing-forms__input-error'
+                    labelclassname="listing-forms__input-label"
                     name="listingLocation.propertyNumberOrName"
                     label="Property number or name"
                 />
                 <MyTextInput
-                    inputclassname='listing-location__input-style'
-                    errorclassname='listing-location__input-error'
-                    labelclassname="listing-location__input-label"
+                    inputclassname='listing-forms__input-long'
+                    errorclassname='listing-forms__input-error'
+                    labelclassname="listing-forms__input-label"
                     name="listingLocation.streetName"
                     label="Street name"
                 />
 
                 <MyTextInput
-                    inputclassname='listing-location__input-style'
-                    errorclassname='listing-location__input-error'
-                    labelclassname="listing-location__input-label"
+                    inputclassname='listing-forms__input-long'
+                    errorclassname='listing-forms__input-error'
+                    labelclassname="listing-forms__input-label"
                     name="listingLocation.locality"
                     label="Locality"
                 />
-                <div className="listing-location__fields-container">
+                <div className="listing-forms__container">
                     <MyTextInput
-                        inputclassname='listing-location__input-short'
-                        errorclassname='listing-location__input-error'
-                        labelclassname="listing-location__input-label"
+                        inputclassname='listing-forms__input-medium'
+                        errorclassname='listing-forms__input-error'
+                        labelclassname="listing-forms__input-label"
                         name="listingLocation.townOrCity"
                         label="Town or city"
                         type="text"
                     />
                     <MyTextInput
-                        inputclassname='listing-location__input-short'
-                        errorclassname='listing-location__input-error'
-                        labelclassname="listing-location__input-label"
+                        inputclassname='listing-forms__input-medium'
+                        errorclassname='listing-forms__input-error'
+                        labelclassname="listing-forms__input-label"
                         name="listingLocation.county"
                         label="County / State"
                     />
                 </div>
 
-                <div className="listing-location__fields-container">
+                <div className="listing-forms__container">
                     <MyTextInput
-                        inputclassname='listing-location__input-short'
-                        errorclassname='listing-location__input-error'
-                        labelclassname="listing-location__input-label"
+                        inputclassname='listing-forms__input-medium'
+                        errorclassname='listing-forms__input-error'
+                        labelclassname="listing-forms__input-label"
                         name="listingLocation.postalCode"
                         label="Postcode"
                     />
                     <MyTextInput
-                        inputclassname='listing-location__input-short'
-                        errorclassname='listing-location__input-error'
-                        labelclassname="listing-location__input-label"
+                        inputclassname='listing-forms__input-medium'
+                        errorclassname='listing-forms__input-error'
+                        labelclassname="listing-forms__input-label"
                         name="listingLocation.country"
                         label="Country"
                     />
                 </div>
             </div>
 
-            <div className="listing-location__buttons-container">
+            <div className="listing-forms__buttons-container">
                 <button
                     type="button"
-                    className="listing-location__button"
-                    onClick={() => setActivePane(0)}
-                >Cancel</button>
+                    className="listing-forms__button"
+                    onClick={() => setActiveTab(2)}
+                ><Link to={"/control-panel"} style={{color:'#fff',textDecoration:'none'}}>Cancel</Link></button>
                 <button
-                    className="listing-location__button"
+                    className="listing-forms__button"
                     onClick={() => {
                         if (step >= 0 && step < 4) setStep(step + 1);
                     }}

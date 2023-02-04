@@ -1,4 +1,4 @@
-.details__field-array {
+.array-input {
   position: relative;
   border: 1px solid #ccc;
   border-radius: 0.4rem;
@@ -8,22 +8,33 @@
   margin-bottom: 1rem;
 }
 
-.details__array-wrapper {
+.array-input__label {
+  position: absolute;
+  top: 0.2rem;
+  left: 0.625rem;
+  z-index: 1;
+  color: #000;
+  font-weight: bold;
+  font-size: 0.875rem;
+}
+
+.array-input__wrapper {
   position: relative;
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
 }
 
-.details__array-item {
+.array-input__item {
   font-size: 1.125rem;
   background: #f0f0f0;
   border: 1px solid transparent;
   padding: 0.3rem 0rem 0.3rem 1rem;
   font-weight: normal;
+  min-width: 15rem;
 }
 
-.details__array-button {
+.array-input__button {
   position: absolute;
   top: 0;
   right: 0;
@@ -37,4 +48,19 @@
 .details__array-button:hover {
   cursor: pointer;
   background: #ccc;
+}
+
+
+.array-input__button-neutral {
+  padding: 0.5rem 1rem;
+  color: #000;
+  font-weight: bold;
+  font-size: 1rem;
+  background: #f0f0f0;
+  border: 1px solid #000;
+  border-radius: 0.3rem;
+}
+.array-input__button-neutral:hover {
+  cursor: pointer;
+  background: #f8f8f9;
 }

@@ -22,11 +22,10 @@ export default observer(function AdminPanel() {
 
     return (
         <div className="control-panel-container">
-            {user?.role}
             {user?.role.includes("Admin") &&
                 <div className="admin-grid-container">
-                    <div style={{ border: "1px solid gray", width: "calc(100vw / 2)" }}>
-                        <h1>Total listings: {pagination?.totalItems}</h1>
+                    <div className="admin-grid-panel">
+                        <h1>Total rent/sale listings: {pagination?.totalItems}</h1>
                         <div style={{ position: "relative" }}>
                             <h1>Total user accounts: {users?.length}</h1>
                             {loadingUsers && <LoadingComponent content={null} />}
@@ -52,21 +51,15 @@ export default observer(function AdminPanel() {
                                         <div>{company.companyReference} - {company.displayName} :
                                             <div>Owner: {company.username}</div></div>
                                         <span>: {company.companyContacts.email} </span>
-                                        <button onClick={() => deleteCompany(company.id)}>Delete</button>
+                                        <button className="admin-delete-button" onClick={() => deleteCompany(company.id)}>Delete</button>
                                     </li>
                                 ))}
                             </ol>
                         </div>
 
                     </div>
-                    <div style={{ border: "1px solid gray", width: "calc(100vw / 2)" }}>
+                    <div className="admin-grid-panel">
                         <h1>Total branches: </h1>
-                        <h3>Savills</h3>
-                        <p>---</p>
-                        <h3>Hunters</h3>
-                        <p>---</p>
-                        <h3>Roger Parry</h3>
-                        <p>---</p>
                     </div>
                 </div>
             }

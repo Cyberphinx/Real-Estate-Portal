@@ -20,6 +20,7 @@ export interface DetailedDescription {
     width: number;
     unit: UnitOfLength;
     area: number;
+    listingId: string;
 }
 
 export interface EpcRatings {

@@ -1,5 +1,4 @@
 import { UnitOfTime } from './../../model/Membership';
-import { EpcRatings } from './../../model/ListingAggregate/ListingObjects';
 import { Frequency, UnitOfArea, CouncilTaxBand, DecorativeCondition, LifeCycleStatus, 
     ListedBuildingGrade, RentalTerm, Eligibility, Tenure, Utility, Incentive, FeatureSpace, WhiteGoods, Parking, CentralHeating } from './../../model/ListingAggregate/ListingEnums';
 import { AccountType } from './../../model/User';

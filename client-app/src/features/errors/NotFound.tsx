@@ -2,11 +2,12 @@ import React from "react";
 import './NotFound.css';
 import { Link } from "react-router-dom";
 import NavBar from "../../app/layout/NavBar";
+import Nav from "../../app/layout/Nav";
 
 export default function NotFound() {
     return (
         <div>
-            <NavBar />
+            <Nav />
             <div className="not-found-container">
                 <h1 className="error-code">404 ERROR</h1>
                 <h5 className="error-message">Page Not Found</h5>

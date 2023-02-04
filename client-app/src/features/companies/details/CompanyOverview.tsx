@@ -2,7 +2,6 @@ import React, { SyntheticEvent, useEffect, useRef, useState } from "react";
 import '../../listings/details/ListingOverview.css';
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
-import { useStore } from "../../../app/stores/store";
 import { Company } from "../../../app/model/Company";
 import { Media } from "../../../app/model/Media";
 
@@ -11,8 +10,6 @@ interface Props {
 }
 
 export default observer(function CompanyOverview({ company }: Props) {
-    const { companyStore } = useStore();
-    const { companies } = companyStore;
 
     const [companyImage, setCompanyImage] = useState<Media>(company!.companyMedia[0]);
     function handleImage(event: SyntheticEvent, state: Media) {

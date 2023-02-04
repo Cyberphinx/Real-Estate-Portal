@@ -17,7 +17,7 @@ namespace Domain.CompanyAggregate
         public DateTime AddedOn { get; set; }
         public CompanyAddress CompanyAddress { get; set; }
         public CompanyContacts CompanyContacts { get; set; }
-        public ICollection<Media> CompanyMedia { get; set; }
+        public ICollection<CompanyMedia> CompanyMedia { get; set; }
         public ICollection<CompanyDescription> CompanyDescriptions { get; set; }
         public string CompanyReference { get; set; }
         public string CompanyRegistrationNumber { get; set; }

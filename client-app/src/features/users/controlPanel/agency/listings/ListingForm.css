@@ -1,8 +1,5 @@
 .listing-form__container {
-  height: calc(100vh - 80px);
-  overflow-y: scroll;
-  padding: 20px 40px;
-  background: #fff;
+  padding: 60px 0px;
 }
 
 .listing-form__title {
@@ -16,6 +13,8 @@
   font-weight: normal;
   cursor: pointer;
   color: grey;
+  text-decoration: none;
+  font-size: 1.75rem;
 }
 .listing-form__portfolio:hover {
   cursor: pointer;
@@ -23,10 +22,101 @@
 }
 
 .listing-form__toolbar {
-  width: 60rem;
+  position: relative;
+  padding: 0 2.5rem;
 }
 
 .listing-form__contents {
   padding-top: 2rem;
-  width: 60rem;
+  width: 65rem;
+  background: rgba(255,255,255,0.5);
+  border-radius: 1rem;
+}
+
+
+.listing-form__company-id {
+  border: 1px solid #ccc;
+  border-radius: 0.4rem;
+  font-size: 1.125rem;
+  font-weight: bold;
+  color: #000;
+  padding: 0.5rem 1rem 0.5rem 9.5rem;
+  background: #fff;
+}
+
+.listing-form__company-id__clear {
+  margin-left: 1rem;
+  padding: 0.15rem 0.5rem;
+  background: none;
+  border: 1px solid #ccc;
+  border-radius: 0.3rem;
+  font-size: 0.85rem;
+  font-weight: normal;
+  float: right;
+}
+.listing-form__company-id__clear:hover {
+  cursor: pointer;
+  background: #ccc;
+}
+
+.access-status__container {
+  background: #505050;
+  width: 12rem;
+  padding: 0.3rem;
+  border-radius: 0.8rem;
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+.access-status__button {
+  border: none;
+  border-radius: 0.5rem;
+  background: none;
+  padding: 0.4rem;
+  width: 6rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+}
+.access-status__button:hover {
+  cursor: pointer;
+}
+
+
+
+.media-form__buttons-container {
+  position: relative;
+  padding: 1rem 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.media-form__button {
+  padding: 0.5rem 1rem;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1rem;
+  background: #000;
+  border: 1px solid transparent;
+  border-radius: 0.3rem;
+}
+.media-form__button:hover {
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.media-form__button-cancel {
+  padding: 0.5rem 1rem;
+  color: #000;
+  font-weight: bold;
+  font-size: 1rem;
+  background: #ccc;
+  border: 1px solid transparent;
+  border-radius: 0.3rem;
+}
+.media-form__button-cancel:hover {
+  cursor: pointer;
+  background: #dcdcdc;
 }

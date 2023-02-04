@@ -1,4 +1,4 @@
-.details__multi-select {
+.multi-select {
   border: 1px solid #ccc;
   border-radius: 0.4rem;
   width: 58.65rem;
@@ -10,19 +10,19 @@
   margin-bottom: 1rem;
 }
 
-.details__multi-select__selected {
+.multi-select__selected {
   font-size: 1.125rem;
   background: #f0f0f0;
   border: 1px solid transparent;
   padding: 0.3rem 1rem;
   font-weight: normal;
 }
-.details__multi-select__selected:hover {
+.multi-select__selected:hover {
   cursor: pointer;
   text-decoration: line-through;
 }
 
-.details__multi-select-dropdown {
+.multi-select-dropdown {
   display: flex;
   flex-wrap: wrap;
   font-size: 1.125rem;
@@ -35,18 +35,18 @@
   gap: 1rem;
 }
 
-.details__multi-select-options {
+.multi-select-options {
   font-size: 1.125rem;
   background: #f0f0f0;
   border: 2px solid transparent;
   border-radius: 0;
   padding: 0.3rem 1rem;
 }
-.details__multi-select-options:hover {
+.multi-select-options:hover {
   cursor: pointer;
 }
 
-.multiselect__input-label {
+.multi-select__input-label {
   position: absolute;
   top: 0.2rem;
   left: 0.625rem;
@@ -54,4 +54,18 @@
   color: #000;
   font-size: 0.875rem;
   font-weight: bold;
+}
+
+.multi-select__button-neutral {
+  padding: 0.5rem 1rem;
+  color: #000;
+  font-weight: bold;
+  font-size: 1rem;
+  background: #f0f0f0;
+  border: 1px solid #000;
+  border-radius: 0.3rem;
+}
+.multi-select__button-neutral:hover {
+  cursor: pointer;
+  background: #f8f8f9;
 }

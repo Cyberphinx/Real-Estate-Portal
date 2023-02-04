@@ -4,10 +4,8 @@ import { LifeCycleStatus, PropertyType } from './ListingAggregate/ListingEnums';
 import { Review } from './Review';
 import { AccessStatus } from './AccessStatus';
 import { ServiceCategory } from './ServiceCategory';
-import { Membership } from './Membership';
 import { Location } from './Location';
 import { Contacts } from './Contacts';
-import { PaymentStatus } from './PaymentStatus';
 
 export interface Company {
     id: string;

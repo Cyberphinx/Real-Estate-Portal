@@ -33,7 +33,7 @@ namespace API
                 var userManager = services.GetRequiredService<UserManager<AppUser>>();
                 await context.Database.MigrateAsync();
                 await SeedUsersAndJobs.SeedData(context, userManager);
-                await SeedCompanies.SeedData(context);
+                // await SeedCompanies.SeedData(context);
                 // await SeedRandomListings.SeedRandomData(context, "savills5186", 100);
             } 
             catch (Exception ex)

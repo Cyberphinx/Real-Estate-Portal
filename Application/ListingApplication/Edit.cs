@@ -9,6 +9,7 @@ using Domain;
 using Domain.ListingAggregate;
 using FluentValidation;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Persistence;
 
 namespace Application.ListingApplication
@@ -40,7 +41,8 @@ namespace Application.ListingApplication
 
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
-                var listing = await _context.Listings.FindAsync(request.Listing.Id);
+                var listing = await _context.Listings.Include(x => x.ListingMedia).FirstOrDefaultAsync(x => x.Id == request.Listing.Id);
+                // .FindAsync(request.Listing.Id);
 
                 if (listing == null) return null;
 

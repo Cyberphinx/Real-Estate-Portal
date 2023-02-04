@@ -69,8 +69,13 @@ namespace API.Extensions
                 {
                     policy.Requirements.Add(new IsCompanyOwner());
                 });
+                opt.AddPolicy("IsListingOwner", policy =>
+                {
+                    policy.Requirements.Add(new IsListingOwner());
+                });
             });
             services.AddTransient<IAuthorizationHandler, IsCompanyOwnerHandler>();
+            services.AddTransient<IAuthorizationHandler, IsListingOwnerHandler>();
 
 
             services.AddScoped<TokenService>();

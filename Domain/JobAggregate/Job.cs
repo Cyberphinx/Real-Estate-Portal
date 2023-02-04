@@ -18,7 +18,7 @@ namespace Domain.JobAggregate
         public string Title { get; set; }
         public string Description { get; set; }
         public JobLifeCycle JobLifeCycle { get; set; }
-        public ICollection<Media> JobMedia { get; set; }
+        public ICollection<JobMedia> JobMedia { get; set; }
         public JobLocation JobLocation { get; set; }
         public ICollection<JobNetwork> Networks { get; set; } = new List<JobNetwork>();
         public ICollection<JobMessage> Messages { get; set; } = new List<JobMessage>();

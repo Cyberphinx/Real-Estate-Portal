@@ -29,7 +29,7 @@ export default observer(function ListingDetails({ listing }: Props) {
                     <span key={index}>{Utility[bill]}, </span>
                 ))}</div>
                 <p className="listing-details-text">Council tax band: {listing.councilTaxBand}</p>
-                <p className="listing-details-text">EPC rating: {listing.epcRatings.eerCurrentRating}</p>
+                <p className="listing-details-text">EPC rating: {listing.eerCurrentRating}</p>
             </article>
 
             <article className='listing-detailed-info-container'>
@@ -63,7 +63,7 @@ export default observer(function ListingDetails({ listing }: Props) {
                         <b className="listing-details-title">{description.heading}</b>
                         <span className="listing-details-dimensions">
                             {description.area !== 0
-                                && ` (${description.length} x ${description.width} = ${description.area} sq ${description.unit.toString()})`}
+                                && ` (${description.length} x ${description.width} = ${description.area} sq ${description.unit})`}
                         </span>
                     </article>
                     <p className="listing-details-text">{description.text}</p>
