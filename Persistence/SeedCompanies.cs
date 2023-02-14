@@ -23,7 +23,7 @@ namespace Persistence
                 {
                     AccessStatus = AccessStatus.Public,
                     CompanyReference = "agent5186",
-                    Username = "agent5186",
+                    Username = "agentsav",
                     DisplayName = "Agent - London",
                     LegalName = "Agent (UK) Limited",
                     IsMain = true,
@@ -83,9 +83,9 @@ namespace Persistence
                             IsLogo = true
                         }
                     },
-                    ServiceCategories = new List<ServiceCategory>
+                    ServiceCategories = new List<string>
                     {
-                        ServiceCategory.EstateAgent
+                        "Estate Agent"
                     },
                     SummaryDescription = "Estate agency based in UK. Eco friendly and competitive approach to all customers.",
                     CompanyDescriptions = new List<CompanyDescription>
@@ -130,7 +130,7 @@ namespace Persistence
                 {
                     AccessStatus = AccessStatus.Public,
                     CompanyReference = "agent6648",
-                    Username = "agent",
+                    Username = "agentsav",
                     DisplayName = "Agent - Edinburgh",
                     LegalName = "Agent (UK) Limited",
                     IsMain = false,
@@ -181,9 +181,9 @@ namespace Persistence
                             IsLogo = false
                         }
                     },
-                    ServiceCategories = new List<ServiceCategory>
+                    ServiceCategories = new List<string>
                     {
-                        ServiceCategory.EstateAgent
+                        "Estate Agent"
                     },
                     SummaryDescription = "Estate agency based in UK. Eco friendly and competitive approach to all customers.",
                     CompanyDescriptions = new List<CompanyDescription>
@@ -226,7 +226,7 @@ namespace Persistence
 
                 new Company
                 {
-                    Username = "agent",
+                    Username = "agentewe",
                     CompanyReference = "agent2453",
                     DisplayName = "Agent - Midlands",
                     LegalName = "Agents Group PLC",
@@ -280,9 +280,9 @@ namespace Persistence
                             IsLogo = false
                         }
                     },
-                    ServiceCategories = new List<ServiceCategory>
+                    ServiceCategories = new List<string>
                     {
-                        ServiceCategory.EstateAgent
+                        "Estate Agent"
                     },
                     SummaryDescription = "Estate agency based in UK. Eco friendly and competitive approach to all customers.",
                     CompanyDescriptions = new List<CompanyDescription>
@@ -325,7 +325,7 @@ namespace Persistence
 
                 new Company
                 {
-                    Username = "agent",
+                    Username = "agentpurple",
                     CompanyReference = "agent1253",
                     DisplayName = "Agent ABC",
                     LegalName = "Agents Group PLC",
@@ -379,9 +379,9 @@ namespace Persistence
                             IsLogo = false
                         }
                     },
-                    ServiceCategories = new List<ServiceCategory>
+                    ServiceCategories = new List<string>
                     {
-                        ServiceCategory.EstateAgent
+                        "Estate Agent"
                     },
                     SummaryDescription = "Estate agency based in UK. Eco friendly and competitive approach to all customers.",
                     CompanyDescriptions = new List<CompanyDescription>
@@ -424,7 +424,7 @@ namespace Persistence
 
                 new Company
                 {
-                    Username = "agent",
+                    Username = "agentpurple",
                     CompanyReference = "agent6321",
                     DisplayName = "Agent DEF",
                     LegalName = "Agents Group PLC",
@@ -478,9 +478,9 @@ namespace Persistence
                             IsLogo = false
                         }
                     },
-                    ServiceCategories = new List<ServiceCategory>
+                    ServiceCategories = new List<string>
                     {
-                        ServiceCategory.EstateAgent
+                        "Estate Agent"
                     },
                     SummaryDescription = "Estate agency based in UK. Eco friendly and competitive approach to all customers.",
                     CompanyDescriptions = new List<CompanyDescription>
@@ -523,7 +523,7 @@ namespace Persistence
 
                 new Company
                 {
-                    Username = "agent",
+                    Username = "agentpurple",
                     CompanyReference = "agent1345",
                     DisplayName = "Agent XYZ",
                     IsMain = false,
@@ -577,9 +577,9 @@ namespace Persistence
                             IsLogo = false
                         }
                     },
-                    ServiceCategories = new List<ServiceCategory>
+                    ServiceCategories = new List<string>
                     {
-                        ServiceCategory.EstateAgent
+                        "Estate Agent"
                     },
                     SummaryDescription = "Estate agency based in UK. Eco friendly and competitive approach to all customers.",
                     CompanyDescriptions = new List<CompanyDescription>
@@ -676,10 +676,10 @@ namespace Persistence
                     CompanyRegistrationNumber = "OC312203",
                     DisplayName = "Roger Parry",
                     LegalName = "Roger Parry & Partners LLP",
-                    Username ="RogerParry",
-                    ServiceCategories = new List<ServiceCategory>
+                    Username ="agentroger",
+                    ServiceCategories = new List<string>
                     {
-                        ServiceCategory.EstateAgent
+                        "Estate Agent"
                     },
                     SummaryDescription = "Estate agency based in UK. Eco friendly and competitive approach to all customers.",
                     CompanyDescriptions = new List<CompanyDescription>
@@ -775,9 +775,9 @@ namespace Persistence
                             IsLogo = false
                         }
                     },
-                    ServiceCategories = new List<ServiceCategory>
+                    ServiceCategories = new List<string>
                     {
-                        ServiceCategory.EstateAgent
+                        "Estate Agent"
                     },
                     SummaryDescription = "Estate agency based in UK. Eco friendly and competitive approach to all customers.",
                     CompanyDescriptions = new List<CompanyDescription>
@@ -820,7 +820,7 @@ namespace Persistence
 
                 new Company
                 {
-                    Username = "hunters",
+                    Username = "agenthunt",
                     CompanyReference = "hunters3546",
                     DisplayName = "Hunters 1",
                     LegalName = "Hunters (Midlands) Limited",
@@ -874,9 +874,9 @@ namespace Persistence
                         }
                     },
                     CompanyRegistrationNumber = "",
-                    ServiceCategories = new List<ServiceCategory>
+                    ServiceCategories = new List<string>
                     {
-                        ServiceCategory.EstateAgent
+                        "Estate Agent"
                     },
                     SummaryDescription = "Estate agency based in UK. Eco friendly and competitive approach to all customers.",
                     CompanyDescriptions = new List<CompanyDescription>
@@ -919,7 +919,7 @@ namespace Persistence
 
                 new Company
                 {
-                    Username = "hunters",
+                    Username = "agenthunt",
                     CompanyReference = "hunters7412",
                     DisplayName = "Hunters 2",
                     LegalName = "Hunters (Midlands) Limited",
@@ -973,9 +973,9 @@ namespace Persistence
                         }
                     },
                     CompanyRegistrationNumber = "",
-                    ServiceCategories = new List<ServiceCategory>
+                    ServiceCategories = new List<string>
                     {
-                        ServiceCategory.EstateAgent
+                        "Estate Agent"
                     },
                     SummaryDescription = "Estate agency based in UK. Eco friendly and competitive approach to all customers.",
                     CompanyDescriptions = new List<CompanyDescription>
@@ -1019,15 +1019,15 @@ namespace Persistence
                 new Company
                 {
                     DisplayName = "Moving Mountains",
-                    CompanyReference = "movingmountains2478",
+                    CompanyReference = "NYPwXk5HCb",
                     LegalName = "Moving Mountains Limited",
-                    Username = "movingmountains",
+                    Username = "moving",
                     AddedOn = new DateTime(2022,07,15),
                     IsMain = true,
                     AccessStatus = AccessStatus.Public,
-                    ServiceCategories = new List<ServiceCategory>
+                    ServiceCategories = new List<string>
                     {
-                        ServiceCategory.Removals
+                        "Removals"
                     },
                     CompanyAddress = new CompanyAddress
                     {
@@ -1108,10 +1108,10 @@ namespace Persistence
                     Username = "electrician1",
                     IsMain = true,
                     AddedOn = new DateTime(2022,03,15),
-                    ServiceCategories = new List<ServiceCategory>
+                    ServiceCategories = new List<string>
                     {
-                        ServiceCategory.Electrical,
-                        ServiceCategory.GasWork
+                        "Electrical",
+                        "Gas Work"
                     },
                     CompanyAddress = new CompanyAddress
                     {
@@ -1175,10 +1175,10 @@ namespace Persistence
                     IsMain = true,
                     AccessStatus = AccessStatus.Public,
                     AddedOn = new DateTime(2022,03,15),
-                    ServiceCategories = new List<ServiceCategory>
+                    ServiceCategories = new List<string>
                     {
-                        ServiceCategory.Cleaning,
-                        ServiceCategory.WasteClearance
+                        "Cleaning",
+                        "Waste Clearance"
                     },
                     CompanyAddress = new CompanyAddress
                     {
@@ -1242,10 +1242,10 @@ namespace Persistence
                     IsMain = true,
                     AccessStatus = AccessStatus.Public,
                     AddedOn = new DateTime(2022,03,15),
-                    ServiceCategories = new List<ServiceCategory>
+                    ServiceCategories = new List<string>
                     {
-                        ServiceCategory.CentralHeating,
-                        ServiceCategory.Pluming
+                        "Central Heating",
+                        "Pluming"
                     },
                     CompanyAddress = new CompanyAddress
                     {
@@ -1309,10 +1309,10 @@ namespace Persistence
                     IsMain = true,
                     AccessStatus = AccessStatus.Public,
                     AddedOn = new DateTime(2022,03,15),
-                    ServiceCategories = new List<ServiceCategory>
+                    ServiceCategories = new List<string>
                     {
-                        ServiceCategory.Removals,
-                        ServiceCategory.WasteClearance
+                        "Removals",
+                        "WasteClearance"
                     },
                     CompanyAddress = new CompanyAddress
                     {

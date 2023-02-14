@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Core;
+using Application.Extensions;
 using Application.JobApplication.JobDtos;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
@@ -16,9 +17,12 @@ namespace Application.JobApplication
 {
     public class List
     {
-        public class Query : IRequest<Result<List<JobDto>>> { }
+        public class Query : IRequest<Result<PagedList<JobDto>>> 
+        {
+            public JobParams Params { get; set; }
+        }
 
-        public class Handler : IRequestHandler<Query, Result<List<JobDto>>>
+        public class Handler : IRequestHandler<Query, Result<PagedList<JobDto>>>
         {
             private readonly DataContext _context;
             private readonly IMapper _mapper;
@@ -28,15 +32,22 @@ namespace Application.JobApplication
                 _context = context;
             }
 
-            public async Task<Result<List<JobDto>>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Result<PagedList<JobDto>>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var jobs = await _context.Jobs
-                    .OrderByDescending(x => x.AddedOn)
+                // paging, sorting, searching, filtering function
+                // nothing is taking place in the database in below method, we are just building up an expression tree using IQueryable<T>
+                var query = _context.Jobs
+                    .SearchJobTitles(request.Params.SearchTerm)
+                    .FilterJobs(request.Params.ServiceCategory)
+                    .SearchJobsOnMap(request.Params.MapBounds)
+                    .SortJobs(request.Params.OrderBy)
                     .ProjectTo<JobDto>(_mapper.ConfigurationProvider) //Automapper projection mapping is much better than .include in terms of SQL query efficiency
                     .AsSplitQuery()
-                    .ToListAsync();
+                    .AsQueryable();
 
-                return Result<List<JobDto>>.Success(jobs);
+                return Result<PagedList<JobDto>>.Success(
+                   await PagedList<JobDto>.CreateAsync(query, request.Params.PageNumber, request.Params.PageSize)
+               );
             }
         }
     }

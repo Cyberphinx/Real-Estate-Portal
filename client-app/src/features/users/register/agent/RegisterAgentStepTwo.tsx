@@ -33,7 +33,8 @@ export default observer(function RegisterAgentStepTwo({ isValid, dirty, isSubmit
 
     return (
         <div>
-            <p className='form-section-title'>Sanctum lifetime membership</p>
+            <p>Under construction...</p>
+            {/* <p className='form-section-title'>Sanctum lifetime membership</p>
             <div className='payment-details'>
                 <div className='payment-details__plan'>
                     <button
@@ -113,7 +114,7 @@ export default observer(function RegisterAgentStepTwo({ isValid, dirty, isSubmit
                     {isSubmitting && <span className="payment-register-submitting"></span>}
                     Register
                 </button>
-            </div>
+            </div> */}
 
         </div>
 

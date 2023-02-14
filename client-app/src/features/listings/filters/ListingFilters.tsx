@@ -9,14 +9,12 @@ import Bedrooms from "./parameters/Bedrooms";
 import OrderBy from "./parameters/OrderBy";
 import { Link } from "react-router-dom";
 import { Job } from "../../../app/model/Job";
+import { PropertyTypesArray } from "../../../app/model/ListingAggregate/ListingEnums";
 
 export default observer(function ListingFilters() {
-    const { listingStore, featureStore, jobStore } = useStore();
+    const { listingStore, featureStore } = useStore();
     const { predicate, setPredicate } = listingStore;
     const { isLocked, setLocked } = featureStore;
-    const { jobs } = jobStore;
-
-    const items = ["Detached", "SemiDetached", "Terraced", "Flat", "Land"];
 
     const bedsRef = useRef(null);
     const [bedsPanel, setBedsPanel] = useDetectOutsideClick(bedsRef, false);
@@ -100,9 +98,9 @@ export default observer(function ListingFilters() {
                             Property Type
                         </button>
                         {typesPanel && <PropertyTypes
-                            items={items}
                             checked={predicate.get("propertyTypes")}
                             onChange={(items: string[]) => setPredicate("propertyTypes", items)}
+                            predicate={predicate}
                         />}
                     </div>
                 </li>

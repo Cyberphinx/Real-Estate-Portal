@@ -1,12 +1,15 @@
 import { Location } from './Location';
 import { MediaType } from './Media';
 import { Message } from './Message';
-import { ServiceCategory } from './ServiceCategory';
 
 export enum JobLifeCycle {
     Open,
+    InProgress,
     Cancelled,
-    Completed
+    Completed,
+    Paid,
+    InDispute,
+    Refunded
 }
 
 export interface JobMediaDto {
@@ -20,6 +23,7 @@ export interface JobMediaDto {
 
 export interface JobLocation extends Location {
     id: string;
+    addressType: string;
 }
 
 export interface NetworkDto {
@@ -35,21 +39,33 @@ export interface NetworkDto {
 export enum JobNetworkRole {
     Customer,
     InterestedCompany,
-    ShortlistedCompany
+    ShortlistedCompany,
+    Finalist
 }
 
 export interface Job {
     id: string;
+    username: string;
+    customerName: string,
+    customerEmail: string,
+    customerPhone: string,
     addedOn: Date;
     finishBy: Date;
-    serviceCategories: ServiceCategory[];
+    serviceCategories: string[];
     title: string;
     description: string;
     jobLifeCycle: JobLifeCycle;
     jobMedia: JobMediaDto[];
-    jobLocation: JobLocation;
+    jobLocations: JobLocation[];
     networks: NetworkDto[];
     messages: Message[];
+    bedrooms: number;
+    bathrooms: number;
+    propertyType: string;
+    declaredValue: string;
+    storageRequired: boolean;
+    storageValue: string;
+    packingRequired: boolean;
 }
 
 
@@ -60,21 +76,34 @@ export class Job implements Job {
 }
 
 export class JobFormValues {
-    id?: string;
+    id?: string = '';
+    customerName?: string = '';
+    customerEmail?: string = '';
+    customerPhone?: string = '';
     addedOn: Date = new Date();
-    finishBy?: Date;
-    serviceCategories: ServiceCategory[] = [];
+    finishBy?: Date = undefined;
+    serviceCategories: string[] = [];
     title: string = "";
     description: string = "";
     jobLifeCycle: JobLifeCycle = JobLifeCycle.Open;
-    jobMedia?: JobMediaDto[];
-    jobLocation?: JobLocation;
-    networks?: NetworkDto[];
-    messages?: Message[];
+    jobMedia?: JobMediaDto[] = [];
+    jobLocations?: JobLocation[] = [];
+    networks?: NetworkDto[] = [];
+    messages?: Message[] = [];
+    bedrooms?: number = undefined;
+    bathrooms?: number = undefined;
+    propertyType?: string = '';
+    declaredValue?: string = '';
+    storageRequired?: boolean = undefined;
+    storageValue?: string = '';
+    packingRequired?: boolean = undefined;
 
     constructor(job?: Job) {
         if (job) {
             this.id = job.id;
+            this.customerName = job.customerName;
+            this.customerEmail = job.customerEmail;
+            this.customerPhone = job.customerPhone;
             this.addedOn = job.addedOn;
             this.finishBy = job.finishBy;
             this.serviceCategories = job.serviceCategories;
@@ -82,9 +111,16 @@ export class JobFormValues {
             this.description = job.description;
             this.jobLifeCycle = job.jobLifeCycle;
             this.jobMedia = job.jobMedia;
-            this.jobLocation = job.jobLocation;
+            this.jobLocations = job.jobLocations;
             this.networks = job.networks;
-            this.messages = job.messages
+            this.messages = job.messages;
+            this.bedrooms = job.bedrooms;
+            this.bathrooms = job.bathrooms;
+            this.propertyType = job.propertyType;
+            this.declaredValue = job.declaredValue;
+            this.storageRequired = job.storageRequired;
+            this.storageValue = job.storageValue;
+            this.packingRequired = job.packingRequired;
         }
     }
 }

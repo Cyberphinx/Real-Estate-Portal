@@ -18,8 +18,8 @@ namespace Application.ProfileApplication.ProfileDtos
         public string Title { get; set; }
         public long VatPercentage { get; set; }
 
-        // buyer id navigation property
-        public string AppUserId { get; set; }
+        // buyer username navigation property
+        public string Username { get; set; }
 
         // for stripe integration
         public string PaymentIntentId { get; set; }

@@ -29,10 +29,9 @@
 .listing-form__contents {
   padding-top: 2rem;
   width: 65rem;
-  background: rgba(255,255,255,0.5);
+  background: rgba(255, 255, 255, 0.5);
   border-radius: 1rem;
 }
-
 
 .listing-form__company-id {
   border: 1px solid #ccc;
@@ -83,40 +82,108 @@
   cursor: pointer;
 }
 
+.listing-media__container {
+  margin: 2.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-start;
+  justify-content: flex-start;
+  border: none;
+  border-radius: 3rem;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 2.5rem;
+}
 
+.listing-media__item {
+  position: relative;
+  width: 13rem;
+  height: 13rem;
+}
+.listing-media__item:hover .listing-media__item-button {
+  visibility: visible;
+}
+
+.listing-media__main-label {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: bold;
+  background: #ffed00;
+  padding: 0.1rem 0.5rem 0.2rem 0.5rem;
+  border-radius: 1rem;
+}
+
+.listing-media__item-button {
+  visibility: hidden;
+  position: absolute;
+  bottom: 0.5rem;
+  left: 0.5rem;
+  z-index: 1;
+  font-weight: bold;
+  border: 1px solid transparent;
+  border-radius: 1rem;
+  background: #fff;
+  padding: 0.1rem 0.5rem 0.2rem 0.5rem;
+}
+.listing-media__item-button:hover {
+  cursor: pointer;
+  border: 1px solid #000;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+}
 
 .media-form__buttons-container {
   position: relative;
-  padding: 1rem 0;
+  padding: 1rem 2.5rem 2.5rem 2.5rem;
   display: flex;
   justify-content: space-between;
   gap: 1rem;
 }
-
 .media-form__button {
   padding: 0.5rem 1rem;
   color: #fff;
   font-weight: bold;
   font-size: 1rem;
-  background: #000;
-  border: 1px solid transparent;
+  background-image: linear-gradient(to bottom left, #ed0cef, #6807f9);
+  border: none;
   border-radius: 0.3rem;
 }
 .media-form__button:hover {
   cursor: pointer;
-  background: rgba(0, 0, 0, 0.8);
+  background-image: linear-gradient(
+    to bottom left,
+    rgba(237, 12, 239, 0.8),
+    rgba(104, 7, 249, 0.8)
+  );
 }
 
-.media-form__button-cancel {
-  padding: 0.5rem 1rem;
-  color: #000;
-  font-weight: bold;
+
+/* LOADING SPINNER START */
+.media-form__submitting::after {
   font-size: 1rem;
-  background: #ccc;
-  border: 1px solid transparent;
-  border-radius: 0.3rem;
+  position: absolute;
+  content: "";
+  width: 20px;
+  height: 20px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  border: 3px solid #fff;
+  border-top-color: #ed0cef;
+  border-radius: 50%;
+  animation: media-form__spinner 1s ease infinite;
 }
-.media-form__button-cancel:hover {
-  cursor: pointer;
-  background: #dcdcdc;
+
+@keyframes media-form__spinner {
+  from {
+    transform: rotate(0turn);
+  }
+
+  to {
+    transform: rotate(1turn);
+  }
 }
+/* LOADING SPINNER END */

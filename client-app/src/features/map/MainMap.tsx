@@ -61,7 +61,10 @@ export default observer(function MainMap({ points, clusters, supercluster, compa
                 <ZoomControl position="bottomright" />
                 <SearchMap />
                 <AgentsLayerControl />
-                <LayersControl position="bottomleft">
+                <UpdateMap listing={selectedListing} />
+                <LeafletGeosearch apikey={apikey} />
+                <LocateControl />
+                <LayersControl position="bottomright">
                     <BaseLayer checked name="Map view">
                         <TileLayer
                             url={locationIQLink}
@@ -77,9 +80,6 @@ export default observer(function MainMap({ points, clusters, supercluster, compa
                         />
                     </BaseLayer>
                 </LayersControl>
-                <UpdateMap listing={selectedListing} />
-                <LeafletGeosearch apikey={apikey} />
-                <LocateControl />
             </MapContainer>
         </div>
     );

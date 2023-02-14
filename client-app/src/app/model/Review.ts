@@ -1,12 +1,10 @@
-import { ServiceCategory } from './ServiceCategory';
-
 export interface Review {
     reviewerDisplayName: string;
     reviewerUsername: string;
     reviewerEmail: string;
     reviewerPhone: string;
     addedOn: Date;
-    serviceCategories: ServiceCategory[];
+    serviceCategories: string[];
     title: string;
     description: string;
     reviewStatus: ReviewStatus;

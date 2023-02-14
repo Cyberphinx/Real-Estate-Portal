@@ -3,7 +3,6 @@ import { ListingLocation, Pricing } from './ListingAggregate/ListingObjects';
 import { LifeCycleStatus, PropertyType } from './ListingAggregate/ListingEnums';
 import { Review } from './Review';
 import { AccessStatus } from './AccessStatus';
-import { ServiceCategory } from './ServiceCategory';
 import { Location } from './Location';
 import { Contacts } from './Contacts';
 
@@ -25,11 +24,11 @@ export interface Company {
     lastMofidied: Date;
     legalName: string;
     listings: Stock[];
-    redressScheme: RedressScheme;
+    redressScheme: string;
     reviews: CompanyReview[];
     serviceLocations: string;
     summaryDescription: string;
-    serviceCategories: ServiceCategory[];
+    serviceCategories: string[];
     username: string;
 }
 
@@ -57,11 +56,11 @@ export class CompanyFormValues {
     lastModified: Date = new Date();
     legalName: string = "";
     listings?: Stock[];
-    redressScheme?: RedressScheme;
+    redressScheme?: string = '';
     reviews?: CompanyReview[];
     serviceLocations?: string;
     summaryDescription: string = "";
-    serviceCategories: ServiceCategory[] = [];
+    serviceCategories: string[] = [];
     username: string = "";
 
     constructor(company?: CompanyFormValues) {

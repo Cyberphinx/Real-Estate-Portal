@@ -1,0 +1,51 @@
+.agent-branches {
+  height: calc(100vh - 40px);
+  overflow-y: scroll;
+}
+
+#agent-branches::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+#agent-branches::-webkit-scrollbar-track {
+  background: none;
+  border: none;
+}
+
+#agent-branches::-webkit-scrollbar-thumb {
+  border-radius: 0.5rem;
+  background-image: linear-gradient(to bottom, #F675A8, #554994);
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #554994), color-stop(1, #F675A8));
+  border: none;
+}
+
+.agent-branches__title {
+  position: absolute;
+  top: 6rem;
+  left: 2.5rem;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #000;
+}
+
+.agent-branches__toolbar {
+  position: relative;
+  height: 200px;
+}
+
+.agent-branches__create-button {
+  position: absolute;
+  top: 2rem;
+  left: 2.5rem;
+  padding: 0.75rem 2.5rem;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.125rem;
+  background-image: linear-gradient(to bottom left, rgba(153,0,240,1) 0%, rgba(71,0,216,1) 100%);
+  border: none;
+  border-radius: 0.75rem;
+}
+.agent-branches__create-button:hover {
+  cursor: pointer;
+  background-image: linear-gradient(to bottom left, rgba(153,0,240,0.8) 0%, rgba(71,0,216,0.8) 100%);
+}

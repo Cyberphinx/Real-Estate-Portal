@@ -42,10 +42,21 @@ namespace Application.ListingApplication
                 if (image == null) return null;
 
                 var currentMain = listing.ListingMedia.FirstOrDefault(x => x.IsMain);
-
-                if (currentMain != null) currentMain.IsMain = false;
+                if (currentMain != null)
+                {
+                    currentMain.IsMain = false;
+                    if (currentMain.Index == 0)
+                    {
+                        if (image.Index == 0)
+                        {
+                            currentMain.Index = listing.ListingMedia.Count();
+                        }
+                        currentMain.Index = image.Index;
+                    }
+                }
 
                 image.IsMain = true;
+                image.Index = 0;
 
                 var success = await _context.SaveChangesAsync() > 0;
 

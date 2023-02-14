@@ -36,15 +36,16 @@ export default function MultiSelect({ setFieldValue, fieldName, fieldValues, opt
     return (
         <div style={{ position: 'relative' }} ref={optionsRef}>
             <section className="multi-select">
-                {fieldValues && fieldValues!.map((item: any) => (
+                {fieldValues && fieldValues.map((item: any) => (
                     <button
                         className="multi-select__selected"
                         key={item.toString()}
                         onClick={() => removeOption(item)}
                         type="button"
                     >
-                        <span>{enumType[item.valueOf()].charAt(0).toUpperCase()}</span>
-                        <span>{enumType[item.valueOf()].toString().replace(/[A-Z]/g, ' $&').trim().slice(1)}</span>
+                        {enumType[item.valueOf()] && <span>{enumType[item.valueOf()].charAt(0).toUpperCase()}</span>}
+                        {enumType[item.valueOf()] ? <span>{enumType[item.valueOf()].toString().replace(/[A-Z]/g, ' $&').trim().slice(1)}</span>
+                        : <span>{item.toString().replace(/[A-Z]/g, ' $&').trim()}</span>}
                     </button>
                 ))}
                 <span className="multi-select__input-label">{label}</span>

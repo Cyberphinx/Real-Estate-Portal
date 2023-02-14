@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Application.ProfileApplication.ProfileDtos;
 using Domain.AppUserAggregate.Objects;
+using Domain.InvoiceAggregate;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Extensions
@@ -13,7 +14,7 @@ namespace API.Extensions
             return new InvoiceDto
             {
                 Id = invoice.Id,
-                AppUserId = invoice.AppUserId,
+                Username = invoice.Username,
                 PaymentIntentId = invoice.PaymentIntentId,
                 ClientSecret = invoice.ClientSecret,
                 Amount = invoice.Amount,
@@ -34,9 +35,9 @@ namespace API.Extensions
             };
         }
 
-        public static IQueryable<Invoice> RetrieveInvoiceWithItems(this IQueryable<Invoice> query, string buyerId)
+        public static IQueryable<Invoice> RetrieveInvoiceWithItems(this IQueryable<Invoice> query, string buyerUsername)
         {
-            return query.Include(i => i.Items).Where(b => b.AppUserId == buyerId);
+            return query.Include(i => i.Items).Where(b => b.Username == buyerUsername);
         }
     }
 }

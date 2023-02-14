@@ -44,5 +44,11 @@ namespace API.Controllers
         {
             return HandleResult(await Mediator.Send(new DetailsMainCompany.Query{Username = username}));
         }
+
+        [HttpGet("employees/{username}")]
+        public async Task<IActionResult> GetUserEmployees(string username)
+        {
+            return HandleResult(await Mediator.Send(new ListCompanies.Query{Username = username}));
+        }
     }
 }

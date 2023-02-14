@@ -3,7 +3,11 @@ namespace Domain.JobAggregate.Enums
     public enum JobLifeCycle
     {
         Open,
+        InProgress,
         Cancelled,
-        Completed
+        Completed,
+        Paid,
+        InDispute,
+        Refunded
     }
 }

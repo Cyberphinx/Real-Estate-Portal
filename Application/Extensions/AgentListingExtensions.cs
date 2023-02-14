@@ -11,7 +11,7 @@ namespace Application.Extensions
 {
     public static class AgentListingExtensions
     {
-        public static IQueryable<Listing> WhereAgentListing(this IQueryable<Listing> query, Guid companyId)
+        public static IQueryable<Listing> Branch(this IQueryable<Listing> query, Guid companyId)
         {
             if (string.IsNullOrWhiteSpace(companyId.ToString())) return query;
 
@@ -40,7 +40,7 @@ namespace Application.Extensions
 
             string lowerCaseSearchTerm = searchTerm.Trim().ToLower();
 
-            return query.Where(p => p.ListingLocation.TownOrCity.Trim().ToLower().Contains(lowerCaseSearchTerm));
+            return query.Where(p => p.ListingReference.Trim().ToLower().Contains(lowerCaseSearchTerm));
         }
 
         public static IQueryable<Listing> FilterAgentListing(this IQueryable<Listing> query, string channel,

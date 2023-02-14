@@ -1,0 +1,41 @@
+.listing-media-modal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 50;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.listing-media-modal__content {
+  position: relative;
+  margin: 5% auto 5% auto; /* 5% from the top, 15% from the bottom and centered */
+  width: 50vw; /* Could be more or less, depending on screen size */
+}
+
+.media-image {
+  width: 100%;
+}
+
+.listing-media-modal__close {
+  position: absolute;
+  top: 0;
+  right: 2.5rem;
+  background: none;
+  padding: 0;
+  margin: 0;
+}
+
+.listing-media-modal__close-button {
+  font-size: 5rem;
+  padding: 0;
+  margin: 0;
+  color: #fff;
+}
+.listing-media-modal__close-button:hover {
+  cursor: pointer;
+  color: #FFEA20;
+}

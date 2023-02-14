@@ -17,7 +17,7 @@ namespace Application.CompanyApplication
 {
     public class List
     {
-        public class Query : IRequest<Result<PagedList<CompanyDto>>> 
+        public class Query : IRequest<Result<PagedList<CompanyDto>>>
         {
             public CompanyParams Params { get; set; }
         }
@@ -46,9 +46,9 @@ namespace Application.CompanyApplication
                     .AsSplitQuery()
                     .AsQueryable();
 
-                 return Result<PagedList<CompanyDto>>.Success(
-                    await PagedList<CompanyDto>.CreateAsync(query, request.Params.PageNumber, request.Params.PageSize)
-                );
+                return Result<PagedList<CompanyDto>>.Success(
+                   await PagedList<CompanyDto>.CreateAsync(query, request.Params.PageNumber, request.Params.PageSize)
+               );
             }
         }
     }

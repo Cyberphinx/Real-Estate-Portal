@@ -1,0 +1,61 @@
+.agent-employees {
+  height: calc(100vh - 40px);
+  overflow-y: scroll;
+}
+
+#agent-employees::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+#agent-employees::-webkit-scrollbar-track {
+  background: none;
+  border: none;
+}
+
+#agent-employees::-webkit-scrollbar-thumb {
+  border-radius: 0.5rem;
+  background-image: linear-gradient(to bottom, #f675a8, #554994);
+  background-image: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(0, #554994),
+    color-stop(1, #f675a8)
+  );
+  border: none;
+}
+
+.agent-employees__title {
+  position: absolute;
+  top: 6rem;
+  left: 2.5rem;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #000;
+}
+
+.agent-employees__toolbar {
+  position: relative;
+  height: 200px;
+}
+
+.agent-employees__create-button {
+  position: absolute;
+  top: 2rem;
+  left: 2.5rem;
+  padding: 0.75rem 2.5rem;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.125rem;
+  background-image: linear-gradient(to bottom left, #81B214, #00AD7C);
+  border: none;
+  border-radius: 0.75rem;
+}
+.agent-employees__create-button:hover {
+  cursor: pointer;
+  background-image: linear-gradient(
+    to bottom left,
+    rgba(129,178,20, 0.8) 0%,
+    rgba(0,173,124, 0.8) 100%
+  );
+}

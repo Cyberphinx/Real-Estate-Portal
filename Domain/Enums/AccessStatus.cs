@@ -8,6 +8,7 @@ namespace Domain.Enums
     public enum AccessStatus
     {
         Private,
-        Public
+        Public,
+        Archive
     }
 }

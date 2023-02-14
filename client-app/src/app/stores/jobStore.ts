@@ -1,6 +1,7 @@
-import { makeAutoObservable, runInAction } from "mobx";
+import { makeAutoObservable, reaction, runInAction } from "mobx";
 import agent from "../api/agent";
 import { Job, JobFormValues } from "../model/Job";
+import { Pagination, PagingParams } from "../model/Pagination";
 
 export default class JobStore {
   jobRegistry = new Map<string, Job>();
@@ -10,15 +11,104 @@ export default class JobStore {
   loadingJobs = false;
   loadingJob = false;
 
+  // pagination and query
+  loadingNext = false;
+  pagination: Pagination | null = null;
+  pagingParams = new PagingParams(1, 12);
+  predicate = new Map().set("orderBy", "_");
+
   constructor() {
     makeAutoObservable(this);
+
+    reaction(
+      () => this.predicate.keys(),
+      () => {
+        // restart from page 1
+        this.pagingParams = new PagingParams(1, 12);
+        this.jobRegistry.clear();
+        this.loadJobs();
+      }
+    )
   }
 
+  // PAGINATION START
+  setPagingParams = (pagingParams: PagingParams) => {
+    this.pagingParams = pagingParams;
+  }
+
+  setPredicate = (predicate: string, value: string | string[]) => {
+    switch (predicate) {
+      case "orderBy":
+        this.predicate.delete("orderBy");
+        this.predicate.set("orderBy", value);
+        break;
+      case "searchTerm":
+        this.predicate.delete("mapBounds");
+        this.predicate.delete("searchTerm");
+        this.predicate.set("searchTerm", value);
+        break;
+      case "serviceCategory":
+        this.predicate.delete("serviceCategory");
+        this.predicate.set("serviceCategory", value);
+        break;
+      case "minMaxPrice":
+        this.predicate.delete("minMaxPrice");
+        this.predicate.set("minMaxPrice", value);
+        break;
+      case "minMaxBeds":
+        this.predicate.delete("minMaxBeds");
+        this.predicate.set("minMaxBeds", value);
+        break;
+      case "mapBounds":
+        this.predicate.delete("mapBounds");
+        this.predicate.delete("searchTerm");
+        this.predicate.set("mapBounds", value);
+        break;
+    }
+  }
+
+  get axiosParams() {
+    const params = new URLSearchParams();
+    params.append("pageNumber", this.pagingParams.pageNumber.toString());
+    params.append("pageSize", this.pagingParams.pageSize.toString());
+    this.predicate.forEach((value, key) => {
+      params.append(key, value);
+    })
+    return params;
+  }
+
+  setLoadingNext = (value: boolean) => {
+    this.loadingNext = value;
+  }
+
+  setPagination = (pagination: Pagination) => {
+    this.pagination = pagination;
+  }
+  // PAGINATION END
+
+
+  // LOAD JOBS START
   loadJobs = async () => {
     this.setLoadingJobs(true);
     // Asynchronous code is inside Try Catch block
     try {
-      const result = await agent.Jobs.list();
+      const result = await agent.Jobs.list(this.axiosParams);
+      result.data.forEach(job => {
+        this.setJob(job);
+      });
+      this.setPagination(result.pagination);
+      this.setLoadingJobs(false);
+    } catch (error) {
+      console.log(error);
+      this.setLoadingJobs(false);
+    }
+  };
+
+  loadAllJobs = async () => {
+    this.setLoadingJobs(true);
+    // Asynchronous code is inside Try Catch block
+    try {
+      const result = await agent.Jobs.listAll();
       result.forEach(job => {
         this.setJob(job);
       });
@@ -50,6 +140,7 @@ export default class JobStore {
       }
     }
   }
+  // LOAD JOBS END
 
   createJob = async (newJob: JobFormValues) => {
     try {

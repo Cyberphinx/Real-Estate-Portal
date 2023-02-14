@@ -134,11 +134,13 @@ const Companies = {
   update: (company: CompanyFormValues) => requests.put<Company>(`/company/${company.id}`, company),
   delete: (id: string) => requests.del<void>(`/company/${id}`),
   listListings: (params: URLSearchParams) =>
-    axios.get<PaginatedResult<Stock[]>>("/company/listings/", { params }).then(responseBody)
+    axios.get<PaginatedResult<Stock[]>>("/company/listings/", { params }).then(responseBody),
+  countListings: (companyId: string) => requests.get<number>(`/company/listings-count/${companyId}`)
 };
 
 const Jobs = {
-  list: () => requests.get<Job[]>("/job"),
+  listAll: () => requests.get<Job[]>("/job/all"),
+  list: (params: URLSearchParams) => axios.get<PaginatedResult<Job[]>>("/job", { params }).then(responseBody),
   details: (id: string) => requests.get<Job>(`/job/${id}`),
   create: (job: JobFormValues) => requests.post<void>('/job', job),
   update: (job: JobFormValues) => requests.put<void>(`/job/${job.id}`, job),

@@ -30,11 +30,13 @@ export default observer(function Nav() {
             <ModalContainer />
             <ul className="nav-bar">
                 <li className="nav-bar-item"><img className="logo" src="/assets/sanctum.svg" alt="S" /></li>
-                <li className="nav-bar-item" style={{paddingTop:'0.25rem'}}><Link className="home-button" to={'/homepage'} onClick={() => setActiveFeature(0)}>SANCTUM</Link></li>
+                <li className="nav-bar-item" style={{ paddingTop: '0.25rem' }}>
+                    <Link className="home-button" to={'/homepage'} onClick={() => setActiveFeature(0)}>SANCTUM</Link>
+                </li>
                 <li className="nav-bar-item">
                     <button className={activeFeature === 0 ? "nav-button-selected" : "nav-button"}
                         onClick={() => { setActiveFeature(0) }}>
-                        Map
+                        <Link to={'/map'} style={{ color: '#000', textDecoration: 'none' }}>Map</Link>
                     </button>
                 </li>
                 <li className="nav-bar-item">
@@ -44,27 +46,20 @@ export default observer(function Nav() {
                             cancelSelectCompany();
                             setActiveFeature(1);
                         }}>
-                        Services
+                        <Link to={'/services'} style={{ color: '#000', textDecoration: 'none' }}>Services</Link>
                     </button>
                 </li>
                 <li className="nav-bar-item">
                     <button className="nav-button"
                         onClick={() => { cancelSelectListing(); cancelSelectCompany(); }}>
-                        Get an agent
-                    </button>
-                </li>
-
-                <li className="nav-bar-item">
-                    <button className="nav-button"
-                        onClick={() => { cancelSelectListing(); cancelSelectCompany(); }}>
-                        Get moving company
+                        Get agent
                     </button>
                 </li>
 
                 <li className="nav-bar-item">
                     <button className="nav-button"
                         onClick={() => { cancelSelectListing(); cancelSelectCompany(); }}>
-                        Find a builder
+                        Book moving company
                     </button>
                 </li>
 

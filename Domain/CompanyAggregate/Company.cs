@@ -29,11 +29,12 @@ namespace Domain.CompanyAggregate
         public DateTime LastModified { get; set; }
         public string LegalName { get; set; }
         public ICollection<Listing> Listings { get; set; }
-        public RedressScheme RedressScheme { get; set; } 
+        public string RedressScheme { get; set; } 
         public ICollection<CompanyReview> Reviews { get; set; }
         public string ServiceLocations { get; set; }
         public string SummaryDescription { get; set; }
-        public List<ServiceCategory> ServiceCategories { get; set; }
+        public List<string> ServiceCategories { get; set; }
         public string Username { get; set; }
+
     }
 }

@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,7 +6,6 @@ using Application.Extensions;
 using Application.Interfaces;
 using Application.ListingApplication.ListingDtos;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using Domain.ListingAggregate.Objects;
 using Domain.MediaAggregate;
 using MediatR;
@@ -32,7 +29,7 @@ namespace Application.ListingApplication
             private readonly IMediaAccessor _mediaAccessor;
             private readonly IListingAccessor _listingAccessor;
             private readonly IMapper _mapper;
-            public Handler(DataContext context, IMediaAccessor mediaAccessor, IUserAccessor userAccessor, IListingAccessor listingAccessor, IMapper mapper )
+            public Handler(DataContext context, IMediaAccessor mediaAccessor, IUserAccessor userAccessor, IListingAccessor listingAccessor, IMapper mapper)
             {
                 _mapper = mapper;
                 _listingAccessor = listingAccessor;
@@ -57,10 +54,19 @@ namespace Application.ListingApplication
                 {
                     Id = mediaUploadResult.PublicId,
                     Url = mediaUploadResult.Url,
-                    Type = MediaType.Image
+                    Type = MediaType.Image,
+                    Index = 0,
+                    IsMain = false
                 };
 
-                if (!listing.ListingMedia.Any(x => x.IsMain)) listingPhoto.IsMain = true;
+                if (listing.ListingMedia.Count() > 0)
+                {
+                    var lastMedia = listing.ListingMedia.OrderBy(x => x.Index).LastOrDefault();
+                    listingPhoto.Index = lastMedia.Index + 1;
+                }
+
+                // if (!listing.ListingMedia.Any(x => x.IsMain)) listingPhoto.IsMain = true;
+                // if (!listing.ListingMedia.Any(x => x.Index == 0)) listingPhoto.Index = 0;
 
                 listing.ListingMedia.Add(listingPhoto);
 

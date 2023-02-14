@@ -7,6 +7,7 @@ using Domain.ListingAggregate;
 
 namespace Domain
 {
+    // junction table of many to many relationships
     public class ListingWatcher
     {
         public string AppUserId { get; set; }

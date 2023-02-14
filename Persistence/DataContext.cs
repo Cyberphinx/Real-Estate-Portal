@@ -10,9 +10,8 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Domain.TrackingAggregate;
 using Domain.AppUserAggregate.Objects;
-using Domain.MediaAggregate;
-using Domain.ListingAggregate.Objects;
-using Domain.CompanyAggregate.Objects;
+using Domain.EmployeeAggregate;
+using Domain.InvoiceAggregate;
 
 namespace Persistence
 {
@@ -30,6 +29,8 @@ namespace Persistence
         public DbSet<JobMessage> JobMessages { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<Tracking> TrackingData { get; set; }
+        public DbSet<Employee> Employees { get; set; }
+        public DbSet<KeyPerson> KeyPersons { get; set; }
 
         // public DbSet<ListingMedia> ListingMedia { get; set; }
         // public DbSet<CompanyMedia> CompanyMedia { get; set; }
@@ -49,7 +50,9 @@ namespace Persistence
                     new IdentityRole { Id = "1", Name = "Company", NormalizedName = "COMPANY" },
                     new IdentityRole { Id = "2", Name = "Customer", NormalizedName = "CUSTOMER" },
                     new IdentityRole { Id = "3", Name = "Agency", NormalizedName = "AGENCY" },
-                    new IdentityRole { Id = "4", Name = "Admin", NormalizedName = "ADMIN" }
+                    new IdentityRole { Id = "4", Name = "Admin", NormalizedName = "ADMIN" },
+                    new IdentityRole { Id = "5", Name = "Manager", NormalizedName = "MANAGER" },
+                    new IdentityRole { Id = "6", Name = "Removalist", NormalizedName = "REMOVALIST" }
                 );
 
             // Many to many relationship between Job and AppUser (ie. Network)
@@ -79,16 +82,23 @@ namespace Persistence
                 .WithMany(x => x.Watchers)
                 .HasForeignKey(x => x.ListingId);
 
+            // Many to many relationship between Listing, Company and Employee
+            builder.Entity<KeyPerson>(x => x.HasKey(x => new { x.ListingId, x.EmployeeId }));
+
+            builder.Entity<KeyPerson>()
+                .HasOne(x => x.Employee)
+                .WithMany(x => x.Portfolio)
+                .HasForeignKey(x => x.EmployeeId);
+            
+            builder.Entity<KeyPerson>()
+                .HasOne(x => x.Listing)
+                .WithMany(x => x.KeyContacts)
+                .HasForeignKey(x => x.ListingId);
 
             // Cascade delete for all AppUser's children
             builder.Entity<Membership>()
                 .HasOne(x => x.AppUser)
                 .WithOne(x => x.Membership)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            builder.Entity<Invoice>()
-                .HasOne(x => x.AppUser)
-                .WithMany(x => x.Invoices)
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<AppUserReview>()

@@ -41,7 +41,7 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new Details.Query{Id = id}));
         }
 
-        [Authorize(Roles = "Admin, Agency, Company")]
+        [Authorize(Roles = "Admin, Agency, Company, Removalist")]
         [HttpPost]
         public async Task<IActionResult> CreateCompany(Company company)
         {
@@ -81,6 +81,12 @@ namespace API.Controllers
         public async Task<IActionResult> GetCompanyListings([FromQuery]AgentListingParams param)
         {
             return HandlePagedResult(await Mediator.Send(new ListListings.Query{Params = param}));
+        }
+
+        [HttpGet("listings-count/{companyId}")]
+        public async Task<IActionResult> GountCompanyListings(Guid companyId)
+        {
+            return HandleResult(await Mediator.Send(new ListListingsCounts.Query{companyId = companyId}));
         }
 
     }

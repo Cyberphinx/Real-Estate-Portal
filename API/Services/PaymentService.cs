@@ -16,7 +16,7 @@ namespace API.Services
         }
 
         // get a payment intent from stripe
-        public async Task<PaymentIntent> CreateOrUpdatePaymentIntent(Domain.AppUserAggregate.Objects.Invoice invoice)
+        public async Task<PaymentIntent> CreateOrUpdatePaymentIntent(Domain.InvoiceAggregate.Invoice invoice)
         {
             StripeConfiguration.ApiKey = _config["StripeSettings:SecretKey"];
 

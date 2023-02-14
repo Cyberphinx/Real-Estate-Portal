@@ -40,7 +40,7 @@ namespace Application.AccountApplication.AccountDtos
         public CompanyAddress LegalCompanyAddress { get; set; }
         public string CompanyNumber { get; set; }
         public string IcoNumber { get; set; }
-        public RedressScheme RedressScheme { get; set; }
+        public string RedressScheme { get; set; }
 
         // for property agent signup fee
         public string InvoiceDescription { get; set; }

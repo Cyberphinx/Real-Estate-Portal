@@ -1,21 +1,22 @@
 import { observer } from "mobx-react-lite";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import LoadingComponent from "../../../../../app/common/loading/LoadingComponent";
 import Nav from "../../../../../app/layout/Nav";
 import { Listing } from "../../../../../app/model/ListingAggregate/Listing";
+import { ListingMediaDto } from "../../../../../app/model/ListingAggregate/ListingObjects";
 import { useStore } from "../../../../../app/stores/store";
-import ListingContact from "../../../../listings/details/ListingContact";
 import ListingDetails from "../../../../listings/details/ListingDetails";
 import ListingOverview from "../../../../listings/details/ListingOverview";
-import ListingTab from "../../../../listings/details/ListingTab";
 import ListingFormStepper from "./listingForms/ListingFormStepper";
 
 export default observer(function ListingFormPreview() {
     const { id } = useParams<string>();
     const { listingStore: { loadListing, loadingListing }, featureStore, profileStore } = useStore();
     const { listingFormStep, setListingFormStep } = featureStore;
-    const {setActiveTab} = profileStore;
+    const { setActiveTab } = profileStore;
 
+    const [image, setImage] = useState<ListingMediaDto>();
 
     const [currentListing, setCurrentListing] = useState<Listing>();
     useEffect(() => {
@@ -27,48 +28,46 @@ export default observer(function ListingFormPreview() {
             <Nav />
             <div style={{ display: 'flex', justifyContent: 'center', backgroundImage: "linear-gradient(to top left, #FFCEFE, #AEE2FF)" }}>
                 <div className="listing-form__container" style={{ width: '65rem' }}>
-                    <div className="listing-form__contents">
-                        <div style={{ position: "relative", padding: '0 2.5rem 1.5rem 2.5rem' }}>
+                    {loadingListing && !currentListing ?
+                        <LoadingComponent content={'Loading listing form values...'} />
+                        :
+                        <div className="listing-form__contents">
                             <ListingFormStepper step={listingFormStep} setStep={setListingFormStep} />
-                            <section className="listing-form__toolbar">
-                                <h1>Create listing</h1>
-                            </section>
-                            <section style={{ display: 'flex', justifyContent: 'center' }}>
-                                <div className="listing-form__container">
-                                    {currentListing &&
-                                        <div>
-                                            <ListingOverview listing={currentListing} />
-                                            <ListingDetails listing={currentListing} />
-                                        </div>
-                                    }
-                                </div>
-                            </section>
+                            <div className="listing-form__toolbar">
+                                <h1 style={{ paddingTop: '2rem' }}>Listing preview:
+                                    {id && <span style={{ fontWeight: 'normal', color: '#6807F9', paddingLeft: '1rem' }}>{currentListing?.listingReference}</span>}
+                                </h1>
+                            </div>
 
-                            <section className="media-form__buttons-container">
+                            <div style={{margin:'auto', width:'60rem', paddingTop:'2rem' }}>
+                                {currentListing &&
+                                    <div>
+                                        <ListingOverview listing={currentListing}  image={image} setImage={setImage} />
+                                        <ListingDetails listing={currentListing} />
+                                    </div>
+                                }
+                            </div>
+
+                            <div className="media-form__buttons-container">
                                 <button className="media-form__button"
-                                    onClick={() => {
-                                        if (listingFormStep <= 4 && listingFormStep > 0) setListingFormStep(listingFormStep - 1);
-                                    }}
+                                    onClick={() => setListingFormStep(3)}
                                 >
-                                    <Link to={`/manage/${id}`} style={{ textDecoration: 'none', color: '#fff' }}>
-                                        Back to details
+                                    <Link to={`/add-listing-media/${id}`} style={{ textDecoration: 'none', color: '#fff' }}>
+                                        Back to media
                                     </Link>
                                 </button>
 
                                 <button className="media-form__button"
                                     onClick={() => {
-                                        setActiveTab(2);
+                                        setActiveTab(0);
                                     }}
                                 >
                                     <Link to={`/control-panel`} style={{ textDecoration: 'none', color: '#fff' }}>
                                         <span>Complete</span>
                                     </Link>
                                 </button>
-                            </section>
-                        </div>
-
-
-                    </div>
+                            </div>
+                        </div>}
                 </div>
             </div>
         </div>

@@ -271,7 +271,7 @@ namespace Persistence
                 newListing.RentalTerm = RentalTerm.LongTerm;
                 newListing.Repossession = false;
                 newListing.Retirement = false;
-                newListing.SapRating = 0;
+                newListing.SapRating = "3";
                 newListing.ServiceCharge = new ServiceCharge()
                 {
                     Charge = 4.5,
@@ -537,7 +537,7 @@ namespace Persistence
                 newListing.RentalTerm = RentalTerm.LongTerm;
                 newListing.Repossession = false;
                 newListing.Retirement = false;
-                newListing.SapRating = 0;
+                newListing.SapRating = "3";
                 newListing.ServiceCharge = null;
                 newListing.Serviced = false;
                 newListing.SharedAccommodation = false;

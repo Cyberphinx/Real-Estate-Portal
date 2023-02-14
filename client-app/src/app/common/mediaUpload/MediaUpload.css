@@ -1,0 +1,122 @@
+.media-upload__wrapper {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  width: 55rem;
+}
+
+.media-upload__preview {
+  width: 13rem;
+  height: 13rem;
+  object-fit: cover;
+  border-radius: 1rem;
+}
+
+#media-upload__preview-wrapper:hover .media-upload__remove-button {
+  visibility: visible;
+}
+
+.media-upload__preview-label {
+  position: absolute;
+  bottom: 1rem;
+  left: 0.75rem;
+  background: #293462;
+  color: #fff;
+  border-radius: 0.3rem;
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 0.2rem 0.75rem;
+}
+
+.media-upload__remove-button {
+  visibility: hidden;
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 1;
+  font-weight: bold;
+  border: 1px solid transparent;
+  border-radius: 1rem;
+  background: #fff;
+  padding: 0.1rem 0.5rem 0.2rem 0.5rem;
+}
+.media-upload__remove-button:hover {
+  cursor: pointer;
+  border: 1px solid #000;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+.media-upload__button-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  padding-top: 1rem;
+  margin: 0;
+}
+
+.media-upload__button {
+  position: relative;
+  padding: 0.5rem 1.5rem;
+  color: #000;
+  font-weight: bold;
+  font-size: 1rem;
+  background: #f0f0f0;
+  border: 1px solid #000;
+  border-radius: 0.3rem;
+  width: 10rem;
+}
+.media-upload__button:hover {
+  cursor: pointer;
+  background: #f8f8f9;
+}
+.media-upload__button:disabled {
+  cursor: default;
+  background: #f8f8f9;
+  color: gray;
+  border: 1px solid gray;
+}
+.media-upload__button:hover .media-upload__button-errors {
+    visibility: visible;
+}
+
+/* LOADING SPINNER START */
+.media-upload__submitting::after {
+  font-size: 12px;
+  position: absolute;
+  content: "";
+  width: 14px;
+  height: 14px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  border: 2px solid DimGray;
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: media-upload__spinner 1s ease infinite;
+}
+
+@keyframes media-upload__spinner {
+  from {
+    transform: rotate(0turn);
+  }
+
+  to {
+    transform: rotate(1turn);
+  }
+}
+/* LOADING SPINNER END */
+
+.media-upload__button-errors {
+  visibility: hidden;
+  position: absolute;
+  top: -2.5rem;
+  left: -3rem;
+  z-index: 1;
+  width: 20rem;
+  background: #ff1e1e;
+  color: #fff;
+  padding: 0.3rem 0;
+  border-radius: 0.5rem;
+}

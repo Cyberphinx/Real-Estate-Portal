@@ -19,11 +19,13 @@
 
 .filters-item {
   float: left;
+  position: relative;
   /* border: 1px solid black; */
 }
 .filters-item-right {
   float: right;
   border: none;
+  position: relative;
 }
 
 .filters-button {

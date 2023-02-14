@@ -24,6 +24,7 @@ using System.Text;
 using Domain;
 using Application.AccountApplication;
 using Application.AccountApplication.AccountDtos;
+using Domain.InvoiceAggregate;
 
 namespace API.Controllers
 {
@@ -66,8 +67,10 @@ namespace API.Controllers
             if (user == null) return Unauthorized("Invalid email");
 
             if (user.Email == "info@sanctum.co.uk") user.EmailConfirmed = true;
-            if (user.UserName == "hunters") user.EmailConfirmed = true;
-            if (user.UserName == "tom") user.EmailConfirmed = true;
+            if (user.UserName == "agenthunt") user.EmailConfirmed = true;
+            if (user.UserName == "lily") user.EmailConfirmed = true;
+            if (user.UserName == "moving") user.EmailConfirmed = true;
+            if (user.Email == "archon@tuta.io") user.EmailConfirmed = true;
 
             if (!user.EmailConfirmed) return Unauthorized("Email not confirmed");
 
@@ -86,6 +89,7 @@ namespace API.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
+            // check if email is taken
             if (await _userManager.Users.AnyAsync(x => x.Email == registerDto.Email.ToLower()))
             {
                 // manually add validation errors
@@ -93,12 +97,14 @@ namespace API.Controllers
                 return ValidationProblem();
             }
 
+            // check if username is taken
             if (await _userManager.Users.AnyAsync(x => x.UserName.ToLower() == registerDto.Username.ToLower()))
             {
                 ModelState.AddModelError("username", "Username taken");
                 return ValidationProblem();
             }
 
+            // create a new AppUser object
             var user = new AppUser
             {
                 Email = registerDto.Email.ToLower(),
@@ -111,6 +117,7 @@ namespace API.Controllers
                 DisplayName = registerDto.DisplayName,
             };
 
+            // if the user is an estate agent, create a headquarter company, a membership, and an invoice with a payment intent for stripe
             if (registerDto.AccountType == AccountType.Agent)
             {
                 var companyContacts = new CompanyContacts
@@ -167,19 +174,24 @@ namespace API.Controllers
                     MemberSince = DateTime.UtcNow
                 };
 
-                user.Invoices.Add(invoice);
                 user.Membership = membership;
 
                 await _context.Companies.AddAsync(company);
+
+                await _context.Invoices.AddAsync(invoice);
                 await CreateOrUpdatePaymentIntent(invoice);
             };
 
+            // finally, create the user
             var result = await _userManager.CreateAsync(user, registerDto.Password);
 
+            // assign correct role to the newly created user
             if (registerDto.AccountType == AccountType.Customer) await _userManager.AddToRoleAsync(user, "Customer");
             if (registerDto.AccountType == AccountType.Agent) await _userManager.AddToRoleAsync(user, "Agency");
             if (registerDto.AccountType == AccountType.Company) await _userManager.AddToRoleAsync(user, "Company");
-
+            if (registerDto.AccountType == AccountType.Admin) await _userManager.AddToRoleAsync(user, "Admin");
+            if (registerDto.AccountType == AccountType.Manager) await _userManager.AddToRoleAsync(user, "Manager");
+            if (registerDto.AccountType == AccountType.Removalist) await _userManager.AddToRoleAsync(user, "Removalist");
 
             // Below is for non-email-verification
             // if (result.Succeeded)
@@ -337,11 +349,20 @@ namespace API.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpPut("assignrole")]
-        public async Task<ActionResult<UserDto>> AddToRole(AssignRoleDto assignRoleDto)
+        [HttpPut("toggleRole")]
+        public async Task<ActionResult<UserDto>> ToggleRole(AssignRoleDto assignRoleDto)
         {
             var user = await _userManager.FindByNameAsync(assignRoleDto.Username);
-            await _userManager.AddToRoleAsync(user, assignRoleDto.Role);
+
+            var currentRoles = _userManager.GetRolesAsync(user).Result.ToList();
+            if (currentRoles.Contains(assignRoleDto.Role))
+            {
+                await _userManager.RemoveFromRoleAsync(user, assignRoleDto.Role);
+            }
+            else 
+            {
+                await _userManager.AddToRoleAsync(user, assignRoleDto.Role);
+            }
 
             return await CreateUserObject(user);
         }

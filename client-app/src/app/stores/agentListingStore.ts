@@ -1,19 +1,21 @@
 import { PagingParams } from '../model/Pagination';
-import { makeAutoObservable, reaction, runInAction } from "mobx";
+import { makeAutoObservable, reaction } from "mobx";
 import agent from "../api/agent";
 import { Pagination } from '../model/Pagination';
-import { Listing, ListingFormValues } from '../model/ListingAggregate/Listing';
-import { MaxValue } from '../model/MaxValue';
 import { Stock } from '../model/Company';
 
 export default class AgentListingStore {
   agentListingRegistry = new Map<string, Stock>();
   selectedAgentListing: Stock | undefined = undefined;
   loadingAgentListings = false;
+  totalCount: number = 0;
+
+  // pagination and query
   loadingNext = false;
   pagination: Pagination | null = null;
   pagingParams = new PagingParams();
   predicate = new Map().set("channel", "rent").set("orderBy", "_");
+  
 
   constructor() {
     makeAutoObservable(this);
@@ -110,6 +112,19 @@ export default class AgentListingStore {
     }
   }
 
+  countAgentListings = async (companyId: string) => {
+    this.setLoadingAgentListings(true);
+    try {
+      const count = await agent.Companies.countListings(companyId);
+      this.setTotalCount(count);
+      this.setLoadingAgentListings(false);
+    } catch (error) {
+      console.log(error);
+      this.setLoadingAgentListings(false);
+    }
+  }
+
+  setTotalCount = (value: number) => this.totalCount = value;
 
   setLoadingAgentListings = (state: boolean) => {
     this.loadingAgentListings = state;

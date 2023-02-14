@@ -18,6 +18,8 @@ export default class ListingStore {
   contacts = false;
   combinedListing: Listing[] = [];
   loadingWatching = false;
+  currentListing: Listing | undefined = undefined;
+  files: any = [];
 
 
   // Pagination
@@ -232,7 +234,6 @@ export default class ListingStore {
       const newListing = new Listing(listing);
       this.setListing(newListing);
       runInAction(() => {
-        this.selectedListing = newListing;
         this.listingId = newListing.id;
         this.loading = false;
       });
@@ -282,7 +283,11 @@ export default class ListingStore {
       const response = await agent.Listings.uploadMedia(listingId, file);
       const media = response.data;
       runInAction(() => {
-        console.log(media.url);
+        if (this.currentListing) {
+          this.currentListing.listingMedia.push(media);
+          this.files = [];
+        }
+        console.log(`${media.url} is uploaded`);
         this.uploading = false;
       })
     } catch (error) {
@@ -297,8 +302,13 @@ export default class ListingStore {
       await agent.Listings.setMainImage(listingId, image.id);
       store.agentListingStore.setImage(image.url);
       runInAction(() => {
-        console.log(image.isMain ? "isMain: true" : "isMain: false");
-        this.loading = false;
+        if (this.currentListing && this.currentListing.listingMedia) {
+          if (this.currentListing.listingMedia.some(m => m.isMain === true)) {
+            this.currentListing.listingMedia.find(m => m.isMain === true)!.isMain = false;
+          }
+          this.currentListing.listingMedia.find(m => m.id === image.id)!.isMain = true;
+          this.loading = false;
+        }
       })
     } catch (error) {
       runInAction(() => this.loading = false);
@@ -311,13 +321,19 @@ export default class ListingStore {
     try {
       await agent.Listings.deleteMedia(listingId, media.id);
       runInAction(() => {
-        console.log("media deleted");
-        this.loading = false;
+        if (this.currentListing) {
+          this.currentListing.listingMedia = this.currentListing.listingMedia?.filter(m => m.id !== media.id);
+          this.loading = false;
+        }
       })
     } catch (error) {
       runInAction(() => this.loading = false);
       console.log(error);
     }
   };
+
+  setCurrentListing = (values: Listing) => this.currentListing = values;
+
+  setFiles = (values: any) => this.files = values;
 
 }

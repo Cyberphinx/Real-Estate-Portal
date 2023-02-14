@@ -293,13 +293,11 @@ export default observer(function ListingAddress({ step, setStep, setFieldValue, 
                 <button
                     type="button"
                     className="listing-forms__button"
-                    onClick={() => setActiveTab(2)}
+                    onClick={() => setActiveTab(0)}
                 ><Link to={"/control-panel"} style={{color:'#fff',textDecoration:'none'}}>Cancel</Link></button>
                 <button
                     className="listing-forms__button"
-                    onClick={() => {
-                        if (step >= 0 && step < 4) setStep(step + 1);
-                    }}
+                    onClick={() => setStep(1) }
                     type="button"
                 >Continue to basic info</button>
             </div>

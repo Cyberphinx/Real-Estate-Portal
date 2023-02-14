@@ -10,6 +10,7 @@ export default class CompanyStore {
   companyRegistry = new Map<string, Company>();
   myCompany: Company | undefined = undefined;
   selectedCompany: Company | undefined = undefined;
+  company: Company | undefined = undefined;
   loadingCompanies = false;
   loadingCompany = false;
   editMode = false;
@@ -20,7 +21,7 @@ export default class CompanyStore {
   loadingNext = false;
 
   // Filtering
-  predicate = new Map().set("mapBounds", "").set("serviceCategory", "17").set("orderBy", "_");
+  predicate = new Map().set("mapBounds", "").set("serviceCategory", "Estate Agent").set("orderBy", "_");
   loadingFilters = false;
 
   constructor() {
@@ -102,19 +103,19 @@ export default class CompanyStore {
   };
 
   loadCompany = async (id: string) => {
-    let company = this.getCompany(id);
-    if (company) {
-      this.selectedCompany = company;
-      return company;
+    let existingCompany = this.getCompany(id);
+    if (existingCompany) {
+      this.company = existingCompany;
+      return existingCompany;
     }
     else {
       this.setLoadingCompany(true);
       try {
-        company = await agent.Companies.details(id);
-        this.setCompany(company);
-        runInAction(() => this.selectedCompany = company);
+        existingCompany = await agent.Companies.details(id);
+        this.setCompany(existingCompany);
+        runInAction(() => this.company = existingCompany);
         this.setLoadingCompany(false);
-        return company;
+        return existingCompany;
       } catch (error) {
         console.log(error);
         this.setLoadingCompany(false);

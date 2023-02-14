@@ -5,6 +5,8 @@ namespace Domain.AppUserAggregate.Enums
         Admin,
         Agent,
         Company,
-        Customer
+        Customer,
+        Manager,
+        Removalist
     }
 }

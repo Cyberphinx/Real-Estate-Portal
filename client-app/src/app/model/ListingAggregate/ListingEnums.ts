@@ -249,6 +249,17 @@ export enum PropertyType {
     warehouse
 }
 
+export function PropertyTypesArray() {
+    let items: string[] = [];
+    let length = Object.values(PropertyType).length / 2;
+    for (let index = 0; index < length; index++) {
+        const capitalLetter = PropertyType[index].charAt(0).toUpperCase()
+        const element = PropertyType[index].toString().replace(/[A-Z]/g, ' $&').trim().slice(1);
+        items.push(capitalLetter + element);
+    }
+    return items;
+}
+
 export const propertyType = (listing: Listing) => {
     switch (listing.propertyType.toString()) {
         case "BarnConversion":

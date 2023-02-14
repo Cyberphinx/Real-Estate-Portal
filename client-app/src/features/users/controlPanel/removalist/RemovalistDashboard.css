@@ -1,0 +1,26 @@
+.agency-dashboard {
+  height: calc(100vh - 40px);
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 3rem 0 0 3rem;
+  position: relative;
+  display: grid;
+  grid-template-rows: 35vh auto;
+}
+
+#agencymap {
+  height: 30vh;
+  width: 25vw;
+  border: none;
+  border-radius: 2rem;
+  position: relative;
+  margin: 1rem 2rem;
+  box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
+}
+
+.agency-dashboard__section-two{
+  background: #f5f5f5;
+  border-radius: 2rem;
+  padding: 2rem;
+  margin: 1rem 2rem 1rem 2rem;
+}

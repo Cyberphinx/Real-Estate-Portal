@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react-lite';
 import React, { useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
 
@@ -5,22 +6,21 @@ interface Props {
     setFiles: (files: any) => void;
 }
 
-export default function MediaWidgetDropzone({ setFiles }: Props) {
+export default observer(function MediaWidgetDropzone({ setFiles }: Props) {
     const dzStyles = {
-        border: 'dashed 3px #eee',
-        borderColor: '#eee',
-        borderRadius: '5px',
-        paddingTop: '30px',
+        border: 'dashed 3px grey',
+        borderColor: '#000',
+        borderRadius: '1rem',
         textAlign: 'center' as 'center',
-        height: 200
+        height: '12.5rem'
     }
 
     const dzActive = {
-        borderColor: 'green'
+        borderColor: '#EA047E'
     }
 
-    const onDrop = useCallback((acceptedFiles: any) => {
-        setFiles(acceptedFiles.map((file: any) => Object.assign(file, {
+    const onDrop = useCallback((acceptedFiles: File[]) => {
+        setFiles(acceptedFiles.map((file: File) => Object.assign(file, {
             preview: URL.createObjectURL(file)
         })))
     }, [setFiles])
@@ -30,7 +30,8 @@ export default function MediaWidgetDropzone({ setFiles }: Props) {
     return (
         <div {...getRootProps()} style={isDragActive ? {...dzStyles, ...dzActive} : dzStyles} >
             <input {...getInputProps()} />
-            <p>Drop image here</p> 
+            {isDragActive ? <p style={{padding: '2rem',fontSize:'1.25rem'}}>Drop image here</p>
+            : <p style={{padding: '2rem',fontSize:'1.25rem'}}>Drag and drop up to <b>6 files</b> here</p>} 
         </div>
     )
-}
+})

@@ -34,12 +34,12 @@ namespace Application.JobApplication
 
             public async Task<Result<JobDto>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var order =  await _context.Jobs
+                var job =  await _context.Jobs
                     .ProjectTo<JobDto>(_mapper.ConfigurationProvider)
                     .AsSplitQuery()
                     .FirstOrDefaultAsync(x => x.Id == request.Id);
 
-                return Result<JobDto>.Success(order);
+                return Result<JobDto>.Success(job);
             }
         }
     }

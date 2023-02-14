@@ -16,9 +16,9 @@
 }
 .image-numbering {
   position: absolute;
-  bottom: 16px;
-  left: calc((100vw / 6) - 105px);
-  font-size: 16px;
+  bottom: 1rem;
+  left: 14rem;
+  font-size: 1rem;
   color: #000;
   background-color: #fff;
   border: none;

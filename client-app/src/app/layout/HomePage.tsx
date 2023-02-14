@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import './HomePage.css';
 import { useStore } from "../stores/store";
 import { observer } from "mobx-react-lite";
@@ -9,7 +9,7 @@ import AdminPanel from "../../features/users/controlPanel/AdminPanel";
 import useSupercluster from "use-supercluster";
 import { Listing } from "../model/ListingAggregate/Listing";
 import { Company } from "../model/Company";
-import Services from "../../features/networks/Services";
+import Services from "../../features/services/Services";
 import ListingTab from "../../features/listings/details/ListingTab";
 import CompanyTab from "../../features/companies/details/CompanyTab";
 import { useLocation } from "react-router-dom";

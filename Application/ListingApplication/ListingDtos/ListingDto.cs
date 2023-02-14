@@ -70,7 +70,7 @@ namespace Application.ListingApplication.ListingDtos
         public RentalTerm RentalTerm { get; set; }
         public bool Repossession { get; set; }
         public bool Retirement { get; set; }
-        public int SapRating { get; set; }
+        public string SapRating { get; set; }
         public ServiceChargeDto ServiceCharge { get; set; }
         public bool Serviced { get; set; }
         public bool SharedAccommodation { get; set; }
@@ -87,5 +87,6 @@ namespace Application.ListingApplication.ListingDtos
         public Guid CompanyId { get; set; }
         public Owner Company { get; set; }
         public ICollection<WatcherDto> Wacthers { get; set; }
+        public ICollection<KeyContact> KeyContacts { get; set; }
     }
 }

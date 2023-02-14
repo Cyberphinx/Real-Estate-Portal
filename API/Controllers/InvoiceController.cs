@@ -50,13 +50,13 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddInvoice(Domain.AppUserAggregate.Objects.Invoice invoice)
+        public async Task<IActionResult> AddInvoice(Domain.InvoiceAggregate.Invoice invoice)
         {
             return HandleResult(await Mediator.Send(new Create.Command{Invoice = invoice}));
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> EditInvoice(Guid id, Domain.AppUserAggregate.Objects.Invoice invoice)
+        public async Task<IActionResult> EditInvoice(Guid id, Domain.InvoiceAggregate.Invoice invoice)
         {
             invoice.Id = id;
             return HandleResult(await Mediator.Send(new Edit.Command{Invoice = invoice}));

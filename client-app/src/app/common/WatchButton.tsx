@@ -14,7 +14,7 @@ export default observer(function WatchButton({ listing }: Props) {
     const { listingStore, profileStore, userStore, modalStore } = useStore();
     const { watchListing  } = listingStore;
     const { userListings } = profileStore;
-    const { isLoggedIn } = userStore;
+    const { isLoggedIn, user } = userStore;
     const { openModal } = modalStore;
 
 
@@ -34,7 +34,7 @@ export default observer(function WatchButton({ listing }: Props) {
     }
 
     return (
-        <div style={{ position: "relative" }}>
+        <div style={isLoggedIn && user?.accountType.toString() === 'Customer' ? { position: "relative" } : {display: 'none'}}>
             <button className="watch-button" onClick={(e) => {isLoggedIn ? toggleWatchButton(e) : loginPrompt(e)}}>
                 {isLoggedIn
                     ? userListings.find(x => x.id === listing!.id) ? (img ? unwatchIcon : watchIcon) : (img ? watchIcon : unwatchIcon)

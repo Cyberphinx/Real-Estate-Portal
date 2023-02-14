@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
 import { store, StoreContext } from './app/stores/store';
 import {createBrowserHistory} from 'history';
+import 'react-calendar/dist/Calendar.css';
 
 export const history = createBrowserHistory();
 

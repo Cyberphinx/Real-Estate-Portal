@@ -2,9 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Domain.CompanyAggregate;
-using Domain.AppUserAggregate.Objects;
 using FluentValidation;
+using Domain.InvoiceAggregate;
 
 namespace Application.InvoiceApplication
 {

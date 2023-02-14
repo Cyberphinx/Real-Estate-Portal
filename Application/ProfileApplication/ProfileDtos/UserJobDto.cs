@@ -12,8 +12,9 @@ namespace Application.ProfileApplication.ProfileDtos
         public Guid Id { get; set; }
         public DateTime AddedOn { get; set; }
         public string Title { get; set; }
+        public string JobReference { get; set; }
         public JobLifeCycle JobLifeCycle { get; set; }
-        public List<ServiceCategory> ServiceCategories { get; set; }
+        public List<string> ServiceCategories { get; set; }
         public JobNetworkRole Role { get; set; }
     }
 }

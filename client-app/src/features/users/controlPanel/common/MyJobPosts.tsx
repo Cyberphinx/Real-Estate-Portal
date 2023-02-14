@@ -1,10 +1,8 @@
 import { observer } from "mobx-react-lite";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import DateTag from "../../../../app/common/tags/DateTag";
-import { JobLifeCycle, JobNetworkRole } from "../../../../app/model/Job";
+import { JobLifeCycle } from "../../../../app/model/Job";
 import { UserJobDto } from "../../../../app/model/Profile";
-import { ServiceCategory } from "../../../../app/model/ServiceCategory";
 import { useStore } from "../../../../app/stores/store";
 import './MyJobPosts.css';
 
@@ -65,8 +63,8 @@ export default observer(function MyJobPosts() {
                                     </section>
                                     <section>
                                         <span>Posted on {displayDate(job)}</span>
-                                        <div>{job.serviceCategories.map((cat: ServiceCategory, index: number) => (
-                                            <span key={index}>#{cat} </span>
+                                        <div>{job.serviceCategories.map((category: string, index: number) => (
+                                            <span key={index}>#{category} </span>
                                         ))}</div>
                                     </section>
                                 </div>

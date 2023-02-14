@@ -34,15 +34,13 @@ namespace Application.Extensions
             return query.Where(p => p.DisplayName.Trim().ToLower().Contains(lowerCaseSearchTerm));
         }
 
-        public static IQueryable<Company> FilterCompanies(this IQueryable<Company> query, int serviceCategory)
+        public static IQueryable<Company> FilterCompanies(this IQueryable<Company> query, string serviceCategory)
         {
             // Service Category Filter
 
-            if (string.IsNullOrEmpty(serviceCategory.ToString())) return query;
+            if (string.IsNullOrEmpty(serviceCategory)) return query;
 
-            ServiceCategory searchItem = (ServiceCategory)serviceCategory;
-
-            return query.Where(x => x.ServiceCategories.Contains(searchItem));
+            return query.Where(x => x.ServiceCategories.Contains(serviceCategory));
         }
 
         public static IQueryable<Company> SearchCompaniesOnMap(this IQueryable<Company> query, string mapBounds)

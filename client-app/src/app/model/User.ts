@@ -50,6 +50,21 @@ export enum AccountType {
     Customer
 }
 
+export function accountTypeSwitch(user: User) {
+    switch (user.accountType.toString()) {
+        case "Agent":
+            return "Property Agent"
+        case "Customer":
+            return "Individual Account"
+        case "Company":
+            return "Tradesperson"
+        case "Admin":
+            return "Administrator"
+        default:
+            return "Default Account"
+    }
+}
+
 export interface RoleFormValues {
     username: string;
     role: string;

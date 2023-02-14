@@ -1,7 +1,6 @@
 import { CompanyAddress } from './Company';
 import { Membership } from './Membership';
 import { AccessStatus } from './AccessStatus';
-import { ServiceCategory } from './ServiceCategory';
 import { Review } from "./Review";
 import { JobLifeCycle, JobNetworkRole } from './Job';
 import { Currency, Frequency, LifeCycleStatus, PriceQualifier, TransactionType } from './ListingAggregate/ListingEnums';
@@ -38,7 +37,7 @@ export interface UserJobDto {
     addedOn: Date;
     title: string;
     jobLifeCycle: JobLifeCycle;
-    serviceCategories: ServiceCategory[];
+    serviceCategories: string[];
     role: JobNetworkRole;
 }
 

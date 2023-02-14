@@ -30,6 +30,7 @@ export default observer(function BasicInfo({ step, setStep, values, setFieldValu
     const { userCompanies, loadingUserCompanies } = profileStore;
 
     const channel: number = Number(values.pricing?.transactionType);
+    const forRent: boolean = (channel === 0 || values.pricing.transactionType.toString() === "Rent");
     const tenure: number = Number(values.tenure);
     const term: number = Number(values.rentalTerm);
     const category: number = Number(values.category);
@@ -53,6 +54,30 @@ export default observer(function BasicInfo({ step, setStep, values, setFieldValu
                             </option>
                         ))}
                 </Field>
+            </div>
+
+            <p className="listing-forms__title">Select status: </p>
+            <div style={{ position: "relative" }}>
+                <span className="listing-forms__select-label" style={{}}>Listing lifecycle status</span>
+                <Field
+                    as="select"
+                    name="lifeCycleStatus"
+                    className='listing-forms__select-medium'
+                >
+                    {forRent ? rentLifecycleOptions.map((item: any) => (
+                        <option key={item.value} value={item.value} >{item.text}</option>
+                    ))
+                        : saleLifecycleOptions.map((item: any) => (
+                            <option key={item.value} value={item.value} >{item.text}</option>
+                        ))
+                    }
+                </Field>
+                <i style={{
+                    fontSize: "0.875rem", color: "#505050",
+                    position: "absolute", zIndex: "1", top: "0.2rem", left: "10rem"
+                }}>
+                    (please ensure this is always up-to-date)
+                </i>
             </div>
 
             <p className="listing-forms__title">Set publishing status: </p>
@@ -98,23 +123,22 @@ export default observer(function BasicInfo({ step, setStep, values, setFieldValu
                     }}
                 >Commercial</button>
             </section>
-
             <p className="listing-forms__title">Enter pricing information: </p>
             <section className="channel__container">
                 <button
                     className="channel__button"
-                    style={channel === 0 || values.pricing.transactionType.toString() === "Rent" ? { background: "#fff", cursor: "default", color: "#000", fontWeight: "bold" } : {}}
+                    style={forRent ? { background: "#fff", cursor: "default", color: "#000", fontWeight: "bold" } : {}}
                     type="button"
-                    disabled={channel === 0 ? true : false}
+                    disabled={forRent ? true : false}
                     onClick={() => {
                         setFieldValue("pricing.transactionType", TransactionType.rent);
                     }}
                 >For Rent</button>
                 <button
                     className="channel__button"
-                    style={channel === 1 || values.pricing.transactionType.toString() === "Sale" ? { background: "#fff", cursor: "default", color: "#000", fontWeight: "bold" } : {}}
+                    style={forRent ? {} : { background: "#fff", cursor: "default", color: "#000", fontWeight: "bold" }}
                     type="button"
-                    disabled={channel === 1 ? true : false}
+                    disabled={forRent ? false : true}
                     onClick={() => {
                         setFieldValue("pricing.transactionType", TransactionType.sale);
                     }}
@@ -128,9 +152,9 @@ export default observer(function BasicInfo({ step, setStep, values, setFieldValu
                     errorclassname="listing-forms__input-error"
                     name="pricing.price"
                     placeholder=""
-                    label={`Price - ${channel === 0 ? 'Rent' : 'Sale'} (£)`}
+                    label={`Price - ${forRent ? 'Rent' : 'Sale'} (£)`}
                 />
-                <div style={channel === 0 ? { position: "relative" } : { position: "relative", display: 'none' }}>
+                <div style={forRent ? { position: "relative" } : { position: "relative", display: 'none' }}>
                     <span className="listing-forms__select-label">Rent frequency</span>
                     <Field
                         as="select"
@@ -142,7 +166,7 @@ export default observer(function BasicInfo({ step, setStep, values, setFieldValu
                         ))}
                     </Field>
                 </div>
-                <div style={channel === 0 ? { position: "relative", display: 'none' } : { position: "relative" }}>
+                <div style={forRent ? { position: "relative", display: 'none' } : { position: "relative" }}>
                     <span className="listing-forms__select-label">Price qualifier</span>
                     <Field
                         as="select"
@@ -158,7 +182,7 @@ export default observer(function BasicInfo({ step, setStep, values, setFieldValu
 
             </section>
 
-            {channel === 0 &&
+            {forRent &&
                 <section className="listing-forms__container">
                     <div style={{ position: 'relative' }}>
                         <MyTextInput
@@ -205,7 +229,7 @@ export default observer(function BasicInfo({ step, setStep, values, setFieldValu
                     placeholder=""
                     label="Administration fees (£)"
                 />
-                {channel === 0 && <MyTextInput
+                {forRent && <MyTextInput
                     inputclassname="listing-forms__input-medium"
                     labelclassname="listing-forms__input-label"
                     errorclassname="listing-forms__input-error"
@@ -215,37 +239,12 @@ export default observer(function BasicInfo({ step, setStep, values, setFieldValu
                 />}
             </section>
 
-            <div style={channel === 0 ? { display: 'none' } : { padding: '1rem' }}>
+            <div style={forRent ? { display: 'none' } : { padding: '1rem' }}>
                 <Field type="checkbox" name="pricing.auction" style={{ transform: "scale(2)", accentColor: "#f0f0f0" }} />
                 <span style={{ paddingLeft: '0.75rem', fontSize: "1.15rem" }}>Tick this box for sale by <b>auction</b></span>
             </div>
 
-            <p className="listing-forms__title">Enter availability information: </p>
-            <section className="listing-forms__container">
-
-                <div style={{ position: "relative" }}>
-                    <span className="listing-forms__select-label" style={{}}>Listing lifecycle status</span>
-                    <Field
-                        as="select"
-                        name="lifeCycleStatus"
-                        className='listing-forms__select-medium'
-                    >
-                        {channel === 0 ? rentLifecycleOptions.map((item: any) => (
-                            <option key={item.value} value={item.value} >{item.text}</option>
-                        ))
-                            : saleLifecycleOptions.map((item: any) => (
-                                <option key={item.value} value={item.value} >{item.text}</option>
-                            ))
-                        }
-                    </Field>
-                    <i style={{
-                        fontSize: "0.875rem", color: "#505050",
-                        position: "absolute", zIndex: "1", top: "0.2rem", left: "10rem"
-                    }}>
-                        (please ensure this is always up-to-date)
-                    </i>
-                </div>
-            </section>
+            <p className="listing-forms__title">Enter important dates: </p>
 
             <section className="listing-forms__container">
                 <div style={{ position: "relative" }}>
@@ -270,7 +269,7 @@ export default observer(function BasicInfo({ step, setStep, values, setFieldValu
 
 
 
-            {channel === 0 && <>
+            {forRent && <>
                 <p className="listing-forms__title">Enter {category === 1 ? 'tenancy information' : 'bills included'}: </p>
                 {category === 1 &&
                     <>
@@ -323,7 +322,7 @@ export default observer(function BasicInfo({ step, setStep, values, setFieldValu
                 </div>
             </>}
 
-            {channel === 0 ? null :
+            {forRent ? null :
                 <>
                     <p className="listing-forms__title">Enter tenure information: </p>
                     <section className="listing-forms__container">
@@ -489,16 +488,12 @@ export default observer(function BasicInfo({ step, setStep, values, setFieldValu
 
             <section className="listing-forms__buttons-container">
                 <button className="listing-forms__button"
-                    onClick={() => {
-                        if (step <= 4 && step > 0) setStep(step - 1);
-                    }}
+                    onClick={() => setStep(0)}
                     type="button">
                     <span>Back to address</span>
                 </button>
                 <button className="listing-forms__button"
-                    onClick={() => {
-                        if (step >= 0 && step < 4) setStep(step + 1);
-                    }}
+                    onClick={() => setStep(2)}
                     type="button">
                     <span>Continue to details</span>
                 </button>

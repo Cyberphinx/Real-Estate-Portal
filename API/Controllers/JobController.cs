@@ -21,9 +21,16 @@ namespace API.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public async Task<IActionResult> GetJobs()
+        public async Task<IActionResult> GetJobs([FromQuery]JobParams param)
         {
-            return HandleResult(await Mediator.Send(new List.Query()));
+            return HandlePagedResult(await Mediator.Send(new List.Query{Params = param}));
+        }
+
+        [AllowAnonymous]
+        [HttpGet("all")]
+        public async Task<IActionResult> GetAllJobs()
+        {
+            return HandleResult(await Mediator.Send(new ListAll.Query()));
         }
 
         [HttpGet("{id}")]
@@ -32,6 +39,7 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new Details.Query{Id = id}));
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> CreateJob(Job job)
         {

@@ -4,6 +4,7 @@ namespace Domain.Enums
     {
         Customer,
         InterestedCompany,
-        ShortlistedCompany
+        ShortlistedCompany,
+        Finalist
     }
 }

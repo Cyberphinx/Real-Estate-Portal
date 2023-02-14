@@ -42,17 +42,20 @@ namespace Application.JobApplication
 
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
-                var user = await _context.Users.FirstOrDefaultAsync(x => x.UserName == _userAccessor.GetUsername());
-
                 request.Job.AddedOn = DateTime.UtcNow;
 
-                var customer = new JobNetwork()
+                var user = await _context.Users.FirstOrDefaultAsync(x => x.UserName == _userAccessor.GetUsername());
+
+                if (user != null)
                 {
-                    AppUser = user,
-                    Job = request.Job,
-                    Role = JobNetworkRole.Customer
-                };
-                request.Job.Networks.Add(customer);
+                    var customer = new JobNetwork()
+                    {
+                        AppUser = user,
+                        Job = request.Job,
+                        Role = JobNetworkRole.Customer
+                    };
+                    request.Job.Networks.Add(customer);
+                }
 
                 DateTime localFinishTime = request.Job.FinishBy.ToLocalTime();
                 request.Job.FinishBy = localFinishTime;

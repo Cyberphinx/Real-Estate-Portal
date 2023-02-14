@@ -9,6 +9,7 @@ using Application.Interfaces;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Domain.AppUserAggregate.Objects;
+using Domain.InvoiceAggregate;
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

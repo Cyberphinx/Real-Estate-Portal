@@ -11,9 +11,9 @@ export default function MediaWidgetCropper({imagePreview, setCropper}: Props) {
     return (
         <Cropper   
             src={imagePreview}
-            style={{height: 200, width: '100%'}}
-            initialAspectRatio={1}
-            aspectRatio={1}
+            style={{height:'13rem', width: '100%'}}
+            initialAspectRatio={16 / 9}
+            aspectRatio={16 / 9}
             preview='.img-preview'
             guides={false}
             viewMode={1}

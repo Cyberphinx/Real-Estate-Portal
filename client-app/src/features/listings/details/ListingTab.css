@@ -1,6 +1,5 @@
 .details-container {
-  /* height: calc(100vh - 240px); */
-  width: calc((100vw / 3) - 100px);
+  width: 35rem;
   border-top: none;
   border-right: 1px solid black;
   border-bottom: 1px solid black;
@@ -28,7 +27,7 @@
   top: 0;
   height: 40px;
   background-color: #f5f5f5;
-  width: calc((100vw / 3) - 100px);
+  width: 35rem;
   z-index: 24;
   border-bottom: 1px solid #fff;
 }
@@ -38,7 +37,7 @@
   top: 0;
   height: 40px;
   background-color: #f5f5f5;
-  width: calc((100vw / 3) - 100px);
+  width: 35rem;
   z-index: 24;
   border-bottom: 1px solid #fff;
 }

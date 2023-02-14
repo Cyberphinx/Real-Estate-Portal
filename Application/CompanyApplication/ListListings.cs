@@ -32,7 +32,7 @@ namespace Application.CompanyApplication
             public async Task<Result<PagedList<Stock>>> Handle(Query request, CancellationToken cancellationToken)
             {
                 var query = _context.Listings
-                    .WhereAgentListing(request.Params.CompanyId)
+                    .Branch(request.Params.CompanyId)
                     .SearchAgentListing(request.Params.SearchTerm)
                     .FilterAgentListing(request.Params.Channel, request.Params.PropertyTypes, request.Params.MinMaxPrice, request.Params.MinMaxBeds)
                     .SearchMapAgentListing(request.Params.MapBounds)

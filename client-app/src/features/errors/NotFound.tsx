@@ -1,7 +1,6 @@
 import React from "react";
 import './NotFound.css';
 import { Link } from "react-router-dom";
-import NavBar from "../../app/layout/NavBar";
 import Nav from "../../app/layout/Nav";
 
 export default function NotFound() {

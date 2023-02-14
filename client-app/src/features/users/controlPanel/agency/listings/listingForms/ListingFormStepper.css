@@ -28,6 +28,7 @@
 }
 
 .listingform-stepper__dot {
+  position: relative;
   width: 30px;
   height: 30px;
   color: #fff;
@@ -59,6 +60,7 @@
 }
 
 .listingform-stepper__dot-completed {
+  position: relative;
   width: 30px;
   height: 30px;
   color: #fff;
@@ -98,3 +100,23 @@
   text-decoration: none;
 }
 
+.listingform-stepper__tooltip{
+  visibility: hidden;
+  position: absolute;
+  top: 3rem;
+  left: -3rem;
+  width: 15rem;
+  color: #000;
+  background: #FCE700;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 0.3rem;
+  box-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+}
+
+#listingform-stepper__media-button:hover #listingform-stepper__media-tooltip{
+  visibility: visible;
+}
+#listingform-stepper__preview-button:hover #listingform-stepper__preview-tooltip{
+  visibility: visible;
+}

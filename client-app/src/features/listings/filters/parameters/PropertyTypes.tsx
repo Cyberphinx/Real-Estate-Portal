@@ -1,18 +1,17 @@
 import { observer } from "mobx-react-lite";
 import React, { useState } from "react";
+import { propertyOptions, propertyTypeOptions } from "../../../../app/common/form/options";
 import { useStore } from "../../../../app/stores/store";
 import './PropertyTypes.css';
 
 interface Props {
-    items: string[];
     checked: string[];
     onChange: (items: string[]) => void;
+    predicate: Map<any, any>;
 }
 
-export default observer(function PropertyTypes({ items, checked, onChange }: Props) {
-    const { listingStore } = useStore();
-    const { predicate, maxValues } = listingStore;
-    
+export default observer(function PropertyTypes({ checked, onChange, predicate }: Props) {
+
     const [checkedItems, setCheckedItems] = useState(checked || []);
 
     function handleChecked(value: string) {
@@ -24,30 +23,32 @@ export default observer(function PropertyTypes({ items, checked, onChange }: Pro
         onChange(newChecked);
     }
 
-
-
     return (
         <div className="types-dropdown">
-            {items.map((propertyType: string, index: number) => (
+            <div className="types-reset-button__wrapper" >
+                <button className="types-reset-button"
+                    onClick={() => {
+                        setCheckedItems([]);
+                        predicate.delete("propertyTypes");
+                    }}
+                >Reset</button>
+            </div>
+
+            {propertyTypeOptions.map((item: any) => (
                 <div
-                    key={index}
-                    className={checkedItems.includes(propertyType) ? "types-button-selected" : "types-button"}
-                    onClick={() => handleChecked(propertyType)}
+                    key={item.value}
+                    className={checkedItems.includes(item.value) ? "types-button-selected" : "types-button"}
+                    onClick={() => handleChecked(item.value)}
                 >
                     <input
                         type="checkbox"
-                        checked={checkedItems.includes(propertyType) ? true : false}
+                        checked={checkedItems.includes(item.value) ? true : false}
                         style={{ cursor: "pointer" }}
                     />
-                    <label style={{ cursor: "pointer", paddingLeft:"3px" }}>{propertyType}</label>
+                    <label style={{ cursor: "pointer", paddingLeft: "3px" }}>{item.text}</label>
                 </div>
             ))}
-            <button className="types-reset-button" 
-            onClick={() => {
-                setCheckedItems([]);
-                predicate.delete("propertyTypes");
-            }}
-                >Reset</button>
+
         </div>
     )
 });

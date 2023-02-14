@@ -16,7 +16,7 @@ export default observer(function UserDropdown() {
     return (
         <div className="user-dropdown">
             <button className="user-drop-button" style={{fontWeight:"600"}}
-                onClick={() => { cancelSelectListing(); cancelSelectCompany(); setActiveFeature(2); setActiveTab(2); }}
+                onClick={() => { cancelSelectListing(); cancelSelectCompany(); setActiveFeature(2); setActiveTab(0); }}
             ><Link className="user-drop-link" to={"/control-panel"} >Control Panel</Link></button>
 
             {user?.role.includes("Admin") &&

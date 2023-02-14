@@ -1,4 +1,4 @@
- using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -100,7 +100,7 @@ namespace Application.Extensions
                 bool invalidMaxPrice = priceList[1] < priceList[0];
                 bool zeroMaxPrice = priceList[1] == 0;
                 if (invalidMaxPrice || zeroMaxPrice) priceList[1] = priceCeilingRounded;
-                
+
                 query = query.Where(p => p.Pricing.Price >= priceList[0] && p.Pricing.Price <= priceList[1]);
             }
 
@@ -110,7 +110,7 @@ namespace Application.Extensions
             {
                 minMaxBedroomList.AddRange(minMaxBeds.ToLower().Split(",").ToList());
             }
-            
+
             foreach (var item in minMaxBedroomList)
             {
                 int result = Int32.Parse(item);
@@ -121,7 +121,7 @@ namespace Application.Extensions
                 bool invalidMaxBed = bedList[1] < bedList[0];
                 bool zeroMaxBed = bedList[1] == 0;
                 if (invalidMaxBed || zeroMaxBed) bedList[1] = bedroomsCeiling;
-                
+
                 query = query.Where(p => p.TotalBedrooms >= bedList[0] && p.TotalBedrooms <= bedList[1]);
             }
 
@@ -138,9 +138,9 @@ namespace Application.Extensions
             double MinLatitude = Convert.ToDouble(bounds[1]);
             double MaxLongitude = Convert.ToDouble(bounds[2]);
             double MaxLatitude = Convert.ToDouble(bounds[3]);
-            
-            return query.Where(p => 
-            p.ListingLocation.Latitude > MinLatitude && p.ListingLocation.Longitude > MinLongitude 
+
+            return query.Where(p =>
+            p.ListingLocation.Latitude > MinLatitude && p.ListingLocation.Longitude > MinLongitude
             && p.ListingLocation.Latitude < MaxLatitude && p.ListingLocation.Longitude < MaxLongitude);
         }
     }

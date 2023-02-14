@@ -53,14 +53,12 @@ export default observer(function ListingForm() {
                 listingReference: nanoid(10)
             };
             // setCurrentListing(newListing);
+            setListingFormStep(3);
             createListing(newListing.companyId, newListing).then(() => history.push(`/add-listing-media/${newListing.id}`));
-            if (listingFormStep >= 0 && listingFormStep < 4) setListingFormStep(listingFormStep + 1);
-            console.log("Branch Id / Company Id: ", newListing.companyId);
-            console.log("New listing: ", newListing);
         } else {
             // setCurrentListing(listing);
-            updateListing(listing).then(() => history.push(`/add-listing-media/${listing.id}`));;
-            console.log("Updated listing: ", listing);
+            setListingFormStep(3);
+            updateListing(listing).then(() => history.push(`/add-listing-media/${listing.id}`));
         }
     }
 
@@ -97,7 +95,7 @@ export default observer(function ListingForm() {
                                 <LoadingComponent content={'Loading listing form values...'} />
                                 :
                                 <div className="listing-form__contents">
-                                    <ListingFormStepper step={listingFormStep} setStep={setListingFormStep} values={values} />
+                                    <ListingFormStepper step={listingFormStep} setStep={setListingFormStep} values={values} dirty={dirty} />
                                     <div className="listing-form__toolbar">
                                         {id ? <h1 style={{ paddingTop: '2rem' }}>Edit listing:
                                             <span style={{ fontWeight: 'normal', color: '#6807F9', paddingLeft:'1rem'}}>{values.listingReference}</span>
@@ -117,12 +115,10 @@ export default observer(function ListingForm() {
                                     />
                                 </div>
                             }
-
                         </Form>
                     )}
                 </Formik>
             </div>
-
         </div>
     )
 })

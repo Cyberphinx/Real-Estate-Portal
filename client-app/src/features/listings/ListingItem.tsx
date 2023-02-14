@@ -8,6 +8,7 @@ import { priceQualifier, propertyType, rentFrequencyShort } from "../../app/mode
 import { ListingMediaDto } from "../../app/model/ListingAggregate/ListingObjects";
 import WatchButton from "../../app/common/WatchButton";
 import RefTag from "../../app/common/tags/RefTag";
+import priceFormatter from "../../app/common/PriceFormatter";
 
 interface Props {
     listing: Listing | undefined;
@@ -15,16 +16,23 @@ interface Props {
 }
 
 export default observer(function ListingItem({ listing, predicate }: Props) {
-    const { mapStore, listingStore } = useStore();
+    const { mapStore, listingStore, userStore } = useStore();
     const { setActiveListing } = mapStore;
     const { selectedListing } = listingStore;
+    const { user, isLoggedIn } = userStore;
 
-    // const addedDate = new Date(listing!.addedOn);
-    // const title = `Added on ${addedDate.toLocaleDateString()}`
+    function initialImage() {
+        let initialMedia: ListingMediaDto; 
+        if (listing!.listingMedia.some(m => m.isMain === true)) {
+            initialMedia = listing!.listingMedia.find(m => m.isMain === true)!;
+            return initialMedia;
+        } else {
+            initialMedia = listing!.listingMedia![0];
+            return initialMedia;
+        }
+    }
 
-    const priceFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: listing!.pricing.currency.toString().toUpperCase(), minimumFractionDigits: 0 });
-
-    const [image, setImage] = useState<ListingMediaDto>(listing!.listingMedia![0]);
+    const [image, setImage] = useState<ListingMediaDto>(initialImage);
     function handleImage(event: SyntheticEvent, state: ListingMediaDto) {
         event.stopPropagation();
         setImage(state);
@@ -35,14 +43,6 @@ export default observer(function ListingItem({ listing, predicate }: Props) {
         event.stopPropagation();
         scrollRef.current.scrollLeft += scrollOffset;
     };
-
-    // const address = `${listing?.listingLocation.propertyNumberOrName && (listing?.listingLocation.propertyNumberOrName + ", ")}
-    //     ${listing?.listingLocation.streetName && (listing?.listingLocation.streetName + ", ")}
-    //     ${listing?.listingLocation.locality && (listing?.listingLocation.locality + ", ")}
-    //     ${listing?.listingLocation.townOrCity && (listing?.listingLocation.townOrCity + ", ")}
-    //     ${listing?.listingLocation.county && (listing?.listingLocation.county + ", ")}
-    //     ${listing?.listingLocation.postalCode && (listing?.listingLocation.postalCode)}
-    //     `;
 
     const addressShort = `
         ${listing?.listingLocation.streetName && (listing?.listingLocation.streetName + ", ")}
@@ -80,7 +80,8 @@ export default observer(function ListingItem({ listing, predicate }: Props) {
                 <WatchButton listing={listing} />
                 <section className="gallery">
                     <div style={{ position: "relative" }}>
-                        <img src={image?.url} className="card-image" alt="property" />
+                        {listing!.listingMedia!.length > 0 ? <img src={image.url} className="card-image" alt="property" />
+                            : <img src='https://res.cloudinary.com/dwcsdudyn/image/upload/v1674919816/Placeholder/Placeholder_view_vector_uufvu4.svg' className="card-image" alt="property" />}
                         <span className="img-numbering">Image {listing!.listingMedia!.indexOf(image) + 1} of {listing?.listingMedia!.length}</span>
                         <button className="left-arr" onClick={(e) => handlePrev(e)}><img className="left-ico" src="/assets/previous.svg" alt="previous" /></button>
                         <button className="right-arr" onClick={(e) => handleNext(e)}><img className="right-ico" src="/assets/next.svg" alt="next" /></button>
@@ -98,11 +99,11 @@ export default observer(function ListingItem({ listing, predicate }: Props) {
                 </section>
                 <section className="card-overlay">
                     <div className="card-price" title={`${priceQualifier(listing!.pricing.priceQualifier)} in ${listing!.pricing.currency.toString().toUpperCase()}`}>
-                        <b style={{ fontSize: "1.125rem"}}>{priceFormat.format(listing!.pricing.price!)}</b>
+                        <b style={{ fontSize: "1.125rem" }}>{priceFormatter(listing!.pricing.price!, listing!.pricing.currency)}</b>
                         {predicate.get("channel") === "sale" ? null : <span style={{ fontSize: "10px" }}>{rentFrequencyShort(listing!)}</span>}
                     </div>
                     <div className="card-attribute">
-                        <p style={{ fontSize: "1rem", padding: "0px", margin: "0px" }}><span>{listing!.totalBedrooms}</span> Beds {propertyType(listing!)}</p>
+                        <p style={{ fontSize: "1rem", padding: "0px", margin: "0px" }}><span>{listing!.totalBedrooms}</span> Beds {listing?.propertyType && propertyType(listing!)}</p>
                     </div>
                 </section>
                 <section className="card-description">

@@ -1,8 +1,7 @@
+import React from "react";
+import { v4 as uuid } from 'uuid';
 import { Field, FieldArray } from "formik";
 import { observer } from "mobx-react-lite";
-import React from "react";
-import { Link } from "react-router-dom";
-import { v4 as uuid } from 'uuid';
 import ArrayInput from "../../../../../../app/common/form/ArrayInput";
 import MultiSelect from "../../../../../../app/common/form/MultiSelect";
 import MyTextArea from "../../../../../../app/common/form/MyTextArea";
@@ -16,6 +15,7 @@ import { ListingFormValues } from "../../../../../../app/model/ListingAggregate/
 import { FeatureSpace, Incentive, Parking, WhiteGoods } from "../../../../../../app/model/ListingAggregate/ListingEnums";
 import { useStore } from "../../../../../../app/stores/store";
 import './ListingForms.css';
+import { Link, useParams } from "react-router-dom";
 
 interface Props {
     step: number;
@@ -28,13 +28,12 @@ interface Props {
 }
 
 export default observer(function BasicInformation({ step, setStep, values, setFieldValue, isValid, dirty, isSubmitting }: Props) {
-    const { listingStore } = useStore();
-    const { setListingId } = listingStore;
+    const { id } = useParams<string>();
     const channel: number = Number(values.pricing?.transactionType);
     const category: number = Number(values.category);
 
     return (
-        <div style={{ width: '60rem', padding:'0 2.5rem 2.5rem 2.5rem' }}>
+        <div style={{ width: '60rem', padding: '0 2.5rem 2.5rem 2.5rem' }}>
             <p className="listing-forms__title">Enter listing attributes (tick all that applies): </p>
             <section className="listing-forms__checkbox-container" style={{ gap: '2rem' }}>
                 <label className={values.newBuild ? 'listing-forms__checkbox-label__checked' : 'listing-forms__checkbox-label'} >
@@ -446,18 +445,30 @@ export default observer(function BasicInformation({ step, setStep, values, setFi
 
             <section className="listing-forms__buttons-container">
                 <button className="listing-forms__button"
-                    onClick={() => {
-                        if (step <= 4 && step > 0) setStep(step - 1);
-                    }}
+                    onClick={() => setStep(1)}
                     type="button">
                     <span>Back to basic info</span>
                 </button>
 
-                <button className="listing-forms__button"
-                    disabled={!isValid || !dirty || isSubmitting}
-                    type="submit">
-                    <span>Save and continue to media</span>
-                </button>
+                {dirty || !id ?
+                    <button className="listing-forms__button"
+                        disabled={!isValid || isSubmitting}
+                        type="submit">
+                        <span style={isSubmitting ? { visibility: 'hidden' } : {}}>Save and continue to media</span>
+                        {isSubmitting && <span className="listing-forms__submitting" />}
+                    </button>
+                    :
+                    <button
+                        className="listing-forms__button"
+                        onClick={() => setStep(3)}
+                        type="button">
+                        <Link
+                            to={`/add-listing-media/${id}`}
+                            style={{ color: '#fff', textDecoration: 'none' }}
+                        >
+                            Continue to media
+                        </Link>
+                    </button>}
             </section>
 
         </div>

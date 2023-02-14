@@ -33,7 +33,7 @@ namespace Domain.ListingAggregate
         public string CommonholdDetails { get; set; }
         public List<Utility> ConnectedUtilities { get; set; }
         public int ConstructionYear { get; set; }
-        public ICollection<ListingMedia> ListingMedia { get; set; }
+        public ICollection<ListingMedia> ListingMedia { get; set; } = new List<ListingMedia>();
         public CookerType CookerType { get; set; }
         public CouncilTaxBand CouncilTaxBand { get; set; }
         public DecorativeCondition DecorativeCondition { get; set; }
@@ -71,7 +71,7 @@ namespace Domain.ListingAggregate
         public RentalTerm RentalTerm { get; set; }
         public bool Repossession { get; set; }
         public bool Retirement { get; set; }
-        public int SapRating { get; set; }
+        public string SapRating { get; set; }
         public ServiceCharge ServiceCharge { get; set; }
         public bool Serviced { get; set; }
         public bool SharedAccommodation { get; set; }
@@ -88,5 +88,6 @@ namespace Domain.ListingAggregate
         public Guid CompanyId { get; set; }
         public Company Company { get; set; }
         public ICollection<ListingWatcher> Watchers { get; set; } = new List<ListingWatcher>();
+        public ICollection<KeyPerson> KeyContacts { get; set; } = new List<KeyPerson>();
     }
 }

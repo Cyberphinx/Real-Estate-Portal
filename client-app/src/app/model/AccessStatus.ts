@@ -1,4 +1,5 @@
 export enum AccessStatus {
     Private,
-    Public
+    Public,
+    Archive
 }

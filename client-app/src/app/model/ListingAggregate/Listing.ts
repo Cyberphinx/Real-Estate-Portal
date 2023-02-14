@@ -56,7 +56,7 @@ export interface Listing {
     lifeCycleStatus: LifeCycleStatus;
     listedBuilding: boolean;
     listedBuildingGrade: ListedBuildingGrade;
-    listingMedia?: ListingMediaDto[];
+    listingMedia: ListingMediaDto[];
     listingReference: string;
     listingLocation: ListingLocation;
     livingRooms: number;
@@ -74,7 +74,7 @@ export interface Listing {
     rentalTerm: RentalTerm;
     repossession: boolean;
     retirement: boolean;
-    sapRating: number;
+    sapRating: string;
     serviceCharge: ServiceCharge;
     serviced: boolean;
     sharedAccommodation: boolean;
@@ -140,7 +140,7 @@ export class ListingFormValues {
     lifeCycleStatus?: LifeCycleStatus = undefined;
     listedBuilding?: boolean = false;
     listedBuildingGrade?: ListedBuildingGrade = undefined;
-    listingMedia?: ListingMediaDto[] = [];
+    listingMedia: ListingMediaDto[] = [];
     listingReference?: string = '';
     listingLocation: ListingLocation = {
         id: '',
@@ -180,7 +180,7 @@ export class ListingFormValues {
     rentalTerm?: RentalTerm = undefined;
     repossession?: boolean = undefined;
     retirement?: boolean = undefined;
-    sapRating?: number = undefined;
+    sapRating?: string = '';
     serviceCharge?: ServiceCharge = undefined;
     serviced?: boolean = undefined;
     sharedAccommodation?: boolean = undefined;

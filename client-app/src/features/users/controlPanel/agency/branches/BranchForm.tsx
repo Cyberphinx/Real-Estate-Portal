@@ -8,7 +8,6 @@ import { useStore } from "../../../../../app/stores/store";
 import { AccessStatus } from "../../../../../app/model/AccessStatus";
 import { RedressScheme } from "../../../../../app/model/Company";
 import { UnitOfTime } from "../../../../../app/model/Membership";
-import { ServiceCategory } from "../../../../../app/model/ServiceCategory";
 import MyTextInput from "../../../../../app/common/form/MyTextInput";
 
 interface Props {
@@ -71,14 +70,14 @@ export default observer(function BranchForm({ setBranchForm }: Props) {
         reviews: [],
         serviceLocations: "",
         summaryDescription: "",
-        serviceCategories: [ServiceCategory.EstateAgent],
+        serviceCategories: ['Estate Agent'],
         username: user!.username,
         error: null,
     }
 
     const validationSchema = Yup.object({
         companyName: Yup.string().required('The company name is required!'),
-        serviceCategory: Yup.number().required(),
+        serviceCategory: Yup.string().required(),
         companyAddress: Yup.object().shape({
             postalCode: Yup.string().required("The postcode is required"),
         }),
