@@ -1,6 +1,6 @@
 import { Location } from './../Location';
 import { CompanyAddress, CompanyContacts, RedressScheme } from "../Company";
-import { Currency, Frequency, PriceQualifier, TransactionType, UnitOfArea, UnitOfLength } from "./ListingEnums";
+import { Frequency, PriceQualifier, TransactionType, UnitOfArea, UnitOfLength } from "./ListingEnums";
 import { MediaType } from '../Media';
 
 export interface ListingMediaDto {
@@ -50,7 +50,7 @@ export interface Owner {
 export interface Pricing {
     id: string;
     transactionType: TransactionType;
-    currency: Currency;
+    currency: string;
     price: number | undefined;
     pricePerUnitArea: number | undefined;
     rentFrequency: Frequency;

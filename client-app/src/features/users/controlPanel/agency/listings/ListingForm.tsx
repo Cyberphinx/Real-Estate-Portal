@@ -6,13 +6,13 @@ import * as Yup from 'yup';
 import { Form, Formik } from "formik";
 import { ListingFormValues } from "../../../../../app/model/ListingAggregate/Listing";
 import { v4 as uuid } from 'uuid';
+import { nanoid } from "nanoid";
 import SwitchBoard from "./listingForms/SwitchBoard";
 import ListingFormStepper from "./listingForms/ListingFormStepper";
 import { observer } from "mobx-react-lite";
 import { useParams } from "react-router-dom";
 import LoadingComponent from "../../../../../app/common/loading/LoadingComponent";
 import Nav from "../../../../../app/layout/Nav";
-import { nanoid } from "nanoid";
 
 
 export default observer(function ListingForm() {

@@ -181,6 +181,13 @@ export const propertyOptions = [
     {text: 'Office', value: PropertyType.office},
 ]
 
+export const propertyOptionsRemovals = [
+    {text: 'House', value: 'House'},
+    {text: 'Flat', value: 'Flat'},
+    {text: 'Office', value: 'Office'},
+    {text: 'Other', value: 'Other'}
+]
+
 export const propertyTypeOptions = [
     {text: 'Barn conversion', value: PropertyType.barnConversion},
     {text: 'Block of flats', value: PropertyType.blockOfFlats},

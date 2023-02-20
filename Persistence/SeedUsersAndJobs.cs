@@ -12,6 +12,7 @@ using Domain.AppUserAggregate.Enums;
 using Microsoft.AspNetCore.Identity;
 using Domain;
 using Domain.MediaAggregate;
+using Domain.AppUserAggregate.Objects;
 
 namespace Persistence
 {
@@ -24,41 +25,36 @@ namespace Persistence
                 // SEED COMPANY USERS
                 var companyUsers = new List<AppUser>
                 {
-                    new AppUser{UserName = "handyman1", Email = "handy1@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Company},
-                    new AppUser{UserName = "handyman2", Email = "handy2@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Company},
-                    new AppUser{UserName = "handyman3", Email = "handy3@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Company},
-                    new AppUser{UserName = "handyman4", Email = "handy4@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Company},
-                    new AppUser{UserName = "handyman5", Email = "handy5@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Company},
-                    new AppUser{UserName = "handyman6", Email = "handy6@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Company},
-                    new AppUser{UserName = "moving2", Email = "move2@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Company},
-                    new AppUser{UserName = "moving3", Email = "move3@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Company},
-                    new AppUser{UserName = "moving4", Email = "move4@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Company},
-                    new AppUser{UserName = "moving5", Email = "move5@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Company},
-                    new AppUser{UserName = "moving6", Email = "move6@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Company},
-                    new AppUser{UserName = "cleaning1", Email = "cleaning1@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Company},
-                    new AppUser{UserName = "cleaning2", Email = "cleaning2@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Company},
-                    new AppUser{UserName = "cleaning3", Email = "cleaning3@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Company},
-                    new AppUser{UserName = "cleaning4", Email = "cleaning4@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Company},
-                    new AppUser{UserName = "cleaning5", Email = "cleaning5@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Company},
-                    new AppUser{UserName = "cleaning6", Email = "cleaning6@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Company},
-                    new AppUser{UserName = "electrician1", Email = "elec1@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Company},
-                    new AppUser{UserName = "electrician2", Email = "elec2@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Company},
-                    new AppUser{UserName = "electrician3", Email = "elec3@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Company},
-                    new AppUser{UserName = "electrician4", Email = "elec4@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Company},
-                    new AppUser{UserName = "electrician5", Email = "elec5@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Company},
-                    new AppUser{UserName = "electrician6", Email = "elec6@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Company},
-                    new AppUser{UserName = "plumber1", Email = "plumber1@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Company},
-                    new AppUser{UserName = "plumber2", Email = "plumber2@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Company},
-                    new AppUser{UserName = "plumber3", Email = "plumber3@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Company},
-                    new AppUser{UserName = "plumber4", Email = "plumber4@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Company},
-                    new AppUser{UserName = "plumber5", Email = "plumber5@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Company},
-                    new AppUser{UserName = "plumber6", Email = "plumber6@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Company},
-                    new AppUser{UserName = "architect1", Email = "architect1@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Company},
-                    new AppUser{UserName = "architect2", Email = "architect2@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Company},
-                    new AppUser{UserName = "architect3", Email = "architect3@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Company},
-                    new AppUser{UserName = "architect4", Email = "architect4@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Company},
-                    new AppUser{UserName = "architect5", Email = "architect5@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Company},
-                    new AppUser{UserName = "architect6", Email = "architect6@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Company},
+                    new AppUser{UserName = "handyman1", DisplayName = "Mr Handy", Email = "handy1@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "handyman2", DisplayName = "Handy Candy", Email = "handy2@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "handyman3", DisplayName = "Handyman Handyman", Email = "handy3@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "handyman4", DisplayName = "Handyman Company", Email = "handy4@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "handyman5", DisplayName = "Handyman Service", Email = "handy5@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "handyman6", DisplayName = "Repair Guys", Email = "handy6@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "cleaning1", DisplayName = "Ms Cleaner", Email = "cleaning1@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "cleaning2", DisplayName = "Ms Cleaning", Email = "cleaning2@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "cleaning3", DisplayName = "We Clean", Email = "cleaning3@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "cleaning4", DisplayName = "Blue Cleaners", Email = "cleaning4@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "cleaning5", DisplayName = "Clear Cleaners", Email = "cleaning5@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "cleaning6", DisplayName = "Sparkle Cleaners", Email = "cleaning6@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "electrician1", DisplayName = "Mr Electrician", Email = "elec1@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "electrician2", DisplayName = "Electrical Service", Email = "elec2@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "electrician3", DisplayName = "Electrician Group", Email = "elec3@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "electrician4", DisplayName = "Ms Electrician", Email = "elec4@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "electrician5", DisplayName = "Repair Electrics", Email = "elec5@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "electrician6", DisplayName = "Electricial Engineers", Email = "elec6@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "plumber1", DisplayName = "Mr Plumber", Email = "plumber1@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "plumber2", DisplayName = "Plumber Guys", Email = "plumber2@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "plumber3", DisplayName = "Plumbing Company", Email = "plumber3@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "plumber4", DisplayName = "Plumber Repairer", Email = "plumber4@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "plumber5", DisplayName = "Plumbing Service", Email = "plumber5@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "plumber6", DisplayName = "Plumbing Company", Email = "plumber6@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "garden1", DisplayName = "Mr Gardener", Email = "garden1@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "garden2", DisplayName = "Ms Gardener", Email = "garden2@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "garden3", DisplayName = "Gardener Group", Email = "garden3@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "garden4", DisplayName = "Landscape Gardener", Email = "garden4@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "garden5", DisplayName = "House Gardener", Email = "garden5@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "garden6", DisplayName = "Gardener Society", Email = "garden6@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
                 };
 
                 foreach (var companyOwner in companyUsers)
@@ -72,11 +68,121 @@ namespace Persistence
                 // SEED CUSTOMER USERS
                 var customerUsers = new List<AppUser>
                 {
-                    new AppUser{UserName = "lily", Email = "lily@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Customer},
-                    new AppUser{UserName = "Jack", Email = "jack@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Customer},
-                    new AppUser{UserName = "ruby", Email = "ruby@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Customer},
-                    new AppUser{UserName = "lucy", Email = "lucy@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Customer},
-                    new AppUser{UserName = "tom", Email = "tom@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Customer}
+                    new AppUser
+                    {
+                        UserName = "lily",
+                        DisplayName = "Lily Cole",
+                        Photos = new List<AppUserMedia>
+                        {
+                            new AppUserMedia
+                            {
+                                Id = "user_icon_001",
+                                Index = 0,
+                                Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1676849710/Placeholder/UserIcons/Creative-Tail-Halloween-black-cat_do4mcd.svg",
+                                IsMain = true,
+                                Caption = "User profile picture",
+                                Type = MediaType.Image
+                            }
+                        },
+                        Email = "lily@test.com",
+                        PhoneNumber = "07986787384",
+                        AddedOn = DateTime.Now,
+                        Country = "United Kingdom",
+                        Language = "English",
+                        AccountType = AccountType.Customer
+                    },
+                    new AppUser
+                    {
+                        UserName = "Jack",
+                        DisplayName = "Jack Sparrow",
+                        Photos = new List<AppUserMedia>
+                        {
+                            new AppUserMedia
+                            {
+                                Id = "user_icon_002",
+                                Index = 0,
+                                Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1676849710/Placeholder/UserIcons/Creative-Tail-Animal-tiger_amomuw.svg",
+                                IsMain = true,
+                                Caption = "User profile picture",
+                                Type = MediaType.Image
+                            }
+                        },
+                        Email = "jack@test.com",
+                        PhoneNumber = "07907858697",
+                        AddedOn = DateTime.Now,
+                        Country = "United Kingdom",
+                        Language = "English",
+                        AccountType = AccountType.Customer
+                    },
+                    new AppUser
+                    {
+                        UserName = "ruby",
+                        DisplayName = "Ruby Smith",
+                        Photos = new List<AppUserMedia>
+                        {
+                            new AppUserMedia
+                            {
+                                Id = "user_icon_003",
+                                Index = 0,
+                                Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1676849707/Placeholder/UserIcons/Creative-Tail-Animal-panda_wk7fmn.svg",
+                                IsMain = true,
+                                Caption = "User profile picture",
+                                Type = MediaType.Image
+                            }
+                        },
+                        Email = "ruby@test.com",
+                        PhoneNumber = "079876859604",
+                        AddedOn = DateTime.Now,
+                        Country = "United Kingdom",
+                        Language = "English",
+                        AccountType = AccountType.Customer
+                    },
+                    new AppUser
+                    {
+                        UserName = "lucy",
+                        DisplayName = "Lucy Reviere",
+                        Photos = new List<AppUserMedia>
+                        {
+                            new AppUserMedia
+                            {
+                                Id = "user_icon_004",
+                                Index = 0,
+                                Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1676849700/Placeholder/UserIcons/Creative-Tail-Animal-bear_ism3hi.svg",
+                                IsMain = true,
+                                Caption = "User profile picture",
+                                Type = MediaType.Image
+                            }
+                        },
+                        Email = "lucy@test.com",
+                        PhoneNumber = "07983457384",
+                        AddedOn = DateTime.Now,
+                        Country = "United Kingdom",
+                        Language = "English",
+                        AccountType = AccountType.Customer
+                    },
+                    new AppUser
+                    {
+                        UserName = "tom",
+                        DisplayName = "Thomas Engine",
+                        Photos = new List<AppUserMedia>
+                        {
+                            new AppUserMedia
+                            {
+                                Id = "user_icon_005",
+                                Index = 0,
+                                Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1676849700/Placeholder/UserIcons/Creative-Tail-Animal-butterfly_t4bupb.svg",
+                                IsMain = true,
+                                Caption = "User profile picture",
+                                Type = MediaType.Image
+                            }
+                        },
+                        Email = "tom@test.com",
+                        PhoneNumber = "07986456784",
+                        AddedOn = DateTime.Now,
+                        Country = "United Kingdom",
+                        Language = "English",
+                        AccountType = AccountType.Customer
+                    }
                 };
 
                 foreach (var customer in customerUsers)
@@ -86,16 +192,124 @@ namespace Persistence
                 }
                 // no need to SaveChangesAsync, becasue CreateAsync already saves it to the database, so we don't need to separately save changes
 
-
-
                 // SEED ESTATE AGENCY USERS
                 var agencyUsers = new List<AppUser>
                 {
-                    new AppUser{UserName = "agentsav", Email = "agentsav@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Agent},
-                    new AppUser{UserName = "agenthunt", Email = "agenthunt@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Agent},
-                    new AppUser{UserName = "agentroger", Email = "agentroger@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Agent},
-                    new AppUser{UserName = "agentpurple", Email = "agentpurple@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Agent},
-                    new AppUser{UserName = "agentewe", Email = "agentewe@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = Language.English, AccountType = AccountType.Agent},
+                    new AppUser
+                    {
+                        UserName = "agentsav",
+                        DisplayName = "Agent Sav",
+                        Photos = new List<AppUserMedia>
+                        {
+                            new AppUserMedia
+                            {
+                                Id = "user_icon_006",
+                                Index = 0,
+                                Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1676849711/Placeholder/UserIcons/Creative-Tail-Animal-zebra_ic3iuf.svg",
+                                IsMain = true,
+                                Caption = "User profile picture",
+                                Type = MediaType.Image
+                            }
+                        },
+                        Email = "agentsav@test.com",
+                        PhoneNumber = "0207865733",
+                        AddedOn = DateTime.Now,
+                        Country = "United Kingdom",
+                        Language = "English",
+                        AccountType = AccountType.Agent
+                    },
+                    new AppUser
+                    {
+                        UserName = "agenthunt",
+                        DisplayName = "Agent Hunt",
+                        Photos = new List<AppUserMedia>
+                        {
+                            new AppUserMedia
+                            {
+                                Id = "user_icon_007",
+                                Index = 0,
+                                Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1676849710/Placeholder/UserIcons/Creative-Tail-Animal-tiger_amomuw.svg",
+                                IsMain = true,
+                                Caption = "User profile picture",
+                                Type = MediaType.Image
+                            }
+                        },
+                        Email = "agenthunt@test.com",
+                        PhoneNumber = "0207864533",
+                        AddedOn = DateTime.Now,
+                        Country = "United Kingdom",
+                        Language = "English",
+                        AccountType = AccountType.Agent
+                    },
+                    new AppUser
+                    {
+                        UserName = "agentroger",
+                        DisplayName = "Agent Roger",
+                        Photos = new List<AppUserMedia>
+                        {
+                            new AppUserMedia
+                            {
+                                Id = "user_icon_008",
+                                Index = 0,
+                                Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1676849709/Placeholder/UserIcons/Creative-Tail-Animal-star-fish_wj4sxg.svg",
+                                IsMain = true,
+                                Caption = "User profile picture",
+                                Type = MediaType.Image
+                            }
+                        },
+                        Email = "agentroger@test.com",
+                        PhoneNumber = "0203455733",
+                        AddedOn = DateTime.Now,
+                        Country = "United Kingdom",
+                        Language = "English",
+                        AccountType = AccountType.Agent
+                    },
+                    new AppUser
+                    {
+                        UserName = "agentpurple",
+                        DisplayName = "Agent Purple",
+                        Photos = new List<AppUserMedia>
+                        {
+                            new AppUserMedia
+                            {
+                                Id = "user_icon_009",
+                                Index = 0,
+                                Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1676849708/Placeholder/UserIcons/Creative-Tail-Animal-penguin_p5een4.svg",
+                                IsMain = true,
+                                Caption = "User profile picture",
+                                Type = MediaType.Image
+                            }
+                        },
+                        Email = "agentpurple@test.com",
+                        PhoneNumber = "0207845633",
+                        AddedOn = DateTime.Now,
+                        Country = "United Kingdom",
+                        Language = "English",
+                        AccountType = AccountType.Agent
+                    },
+                    new AppUser
+                    {
+                        UserName = "agentewe",
+                        DisplayName = "Agent Ewe",
+                        Photos = new List<AppUserMedia>
+                        {
+                            new AppUserMedia
+                            {
+                                Id = "user_icon_010",
+                                Index = 0,
+                                Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1676849707/Placeholder/UserIcons/Creative-Tail-Animal-monkey_qh8s9w.svg",
+                                IsMain = true,
+                                Caption = "User profile picture",
+                                Type = MediaType.Image
+                            }
+                        },
+                        Email = "agentewe@test.com",
+                        PhoneNumber = "0207834533",
+                        AddedOn = DateTime.Now,
+                        Country = "United Kingdom",
+                        Language = "English",
+                        AccountType = AccountType.Agent
+                    },
                 };
 
                 foreach (var agent in agencyUsers)
@@ -109,10 +323,24 @@ namespace Persistence
                 var movingCompanyUser = new AppUser
                 {
                     UserName = "moving",
+                    DisplayName = "Moving Mountains",
+                    Photos = new List<AppUserMedia>
+                        {
+                            new AppUserMedia
+                            {
+                                Id = "user_icon_011",
+                                Index = 0,
+                                Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1676849711/Placeholder/UserIcons/Creative-Tail-Animal-wolf_cwibhv.svg",
+                                IsMain = true,
+                                Caption = "User profile picture",
+                                Type = MediaType.Image
+                            }
+                        },
                     Email = "moving@test.com",
+                    PhoneNumber = "07987676435",
                     AddedOn = DateTime.Now,
                     Country = "United Kingdom",
-                    Language = Language.English,
+                    Language = "English",
                     AccountType = AccountType.Removalist
                 };
 
@@ -126,19 +354,45 @@ namespace Persistence
                     new AppUser
                     {
                         UserName = "archon",
+                        DisplayName = "Archon",
+                        Photos = new List<AppUserMedia>
+                        {
+                            new AppUserMedia
+                            {
+                                Id = "user_icon_012",
+                                Index = 0,
+                                Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1676849708/Placeholder/UserIcons/Creative-Tail-Animal-penguin_p5een4.svg",
+                                IsMain = true,
+                                Caption = "User profile picture",
+                                Type = MediaType.Image
+                            }
+                        },
                         Email = "archon@tuta.io",
                         AddedOn = DateTime.Now,
                         Country = "United Kingdom",
-                        Language = Language.English,
+                        Language = "English",
                         AccountType = AccountType.Manager
                     },
                     new AppUser
                     {
                         UserName = "manager",
+                        DisplayName = "Sanctum Manager",
+                        Photos = new List<AppUserMedia>
+                        {
+                            new AppUserMedia
+                            {
+                                Id = "user_icon_013",
+                                Index = 0,
+                                Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1676849707/Placeholder/UserIcons/Creative-Tail-Animal-leopard_d1wrtj.svg",
+                                IsMain = true,
+                                Caption = "User profile picture",
+                                Type = MediaType.Image
+                            }
+                        },
                         Email = "manager@test.com",
                         AddedOn = DateTime.Now,
                         Country = "United Kingdom",
-                        Language = Language.English,
+                        Language = "English",
                         AccountType = AccountType.Manager
                     },
                 };
@@ -153,10 +407,23 @@ namespace Persistence
                 var adminUser = new AppUser
                 {
                     UserName = "sanctum",
+                    DisplayName = "Sanctum Admin",
+                        Photos = new List<AppUserMedia>
+                        {
+                            new AppUserMedia
+                            {
+                                Id = "user_icon_014",
+                                Index = 0,
+                                Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1676849703/Placeholder/UserIcons/Creative-Tail-Animal-dinosaur_bobhxi.svg",
+                                IsMain = true,
+                                Caption = "User profile picture",
+                                Type = MediaType.Image
+                            }
+                        },
                     Email = "info@sanctum.co.uk",
                     AddedOn = DateTime.Now,
                     Country = "United Kingdom",
-                    Language = Language.English,
+                    Language = "English",
                     AccountType = AccountType.Admin
                 };
 
@@ -175,7 +442,7 @@ namespace Persistence
                     new Job
                     {
                         AddedOn = DateTime.Today,
-                        FinishBy = new DateTime(2022, month, day),
+                        FinishBy = new DateTime(2023, month, day),
                         ServiceCategories = new List<string>
                         {
                             "Handyman"
@@ -229,6 +496,7 @@ namespace Persistence
                                 Longitude = -2.3425652500267837,
                             }
                         },
+                        JobReference = "L3hGXyZadf",
                         Networks = new List<JobNetwork>
                         {
                             new JobNetwork
@@ -250,13 +518,18 @@ namespace Persistence
                             {
                                 AppUser = companyUsers[2],
                                 Role = JobNetworkRole.InterestedCompany
+                            },
+                            new JobNetwork
+                            {
+                                AppUser = companyUsers[3],
+                                Role = JobNetworkRole.PaidCompany
                             }
                         }
                     },
                     new Job
                     {
                         AddedOn = DateTime.Today,
-                        FinishBy = new DateTime(2022, month, day),
+                        FinishBy = new DateTime(2023, month, day),
                         ServiceCategories = new List<string>
                         {
                             "Central Heating",
@@ -304,6 +577,7 @@ namespace Persistence
                                 Longitude = -0.046689965146428675
                             }
                         },
+                        JobReference = "L3herteadf",
                         Networks = new List<JobNetwork>
                         {
                             new JobNetwork
@@ -313,32 +587,32 @@ namespace Persistence
                             },
                             new JobNetwork
                             {
-                                AppUser = companyUsers[25],
+                                AppUser = companyUsers[10],
                                 Role = JobNetworkRole.InterestedCompany
                             },
                             new JobNetwork
                             {
-                                AppUser = companyUsers[26],
+                                AppUser = companyUsers[11],
                                 Role = JobNetworkRole.ShortlistedCompany
                             },
                             new JobNetwork
                             {
-                                AppUser = companyUsers[27],
-                                Role = JobNetworkRole.ShortlistedCompany
+                                AppUser = companyUsers[12],
+                                Role = JobNetworkRole.PaidCompany
                             },
                             new JobNetwork
                             {
-                                AppUser = companyUsers[28],
+                                AppUser = companyUsers[4],
+                                Role = JobNetworkRole.PaidCompany
+                            },
+                            new JobNetwork
+                            {
+                                AppUser = companyUsers[5],
                                 Role = JobNetworkRole.InterestedCompany
                             },
                             new JobNetwork
                             {
-                                AppUser = companyUsers[29],
-                                Role = JobNetworkRole.InterestedCompany
-                            },
-                            new JobNetwork
-                            {
-                                AppUser = companyUsers[30],
+                                AppUser = companyUsers[6],
                                 Role = JobNetworkRole.InterestedCompany
                             }
                         }
@@ -346,7 +620,7 @@ namespace Persistence
                     new Job
                     {
                         AddedOn = DateTime.Today,
-                        FinishBy = new DateTime(2022, month, day),
+                        FinishBy = new DateTime(2023, month, day),
                         ServiceCategories = new List<string>
                         {
                             "Bathroom Fitting",
@@ -401,6 +675,7 @@ namespace Persistence
                                 Longitude = -2.3425652500267837
                             }
                         },
+                        JobReference = "GXyL3hZadf",
                         Networks = new List<JobNetwork>
                         {
                             new JobNetwork
@@ -415,18 +690,132 @@ namespace Persistence
                             },
                             new JobNetwork
                             {
-                                AppUser = companyUsers[20],
+                                AppUser = companyUsers[8],
+                                Role = JobNetworkRole.PaidCompany
+                            },
+                            new JobNetwork
+                            {
+                                AppUser = companyUsers[13],
                                 Role = JobNetworkRole.ShortlistedCompany
                             },
                             new JobNetwork
                             {
-                                AppUser = companyUsers[21],
-                                Role = JobNetworkRole.ShortlistedCompany
-                            },
-                            new JobNetwork
-                            {
-                                AppUser = companyUsers[22],
+                                AppUser = companyUsers[14],
                                 Role = JobNetworkRole.InterestedCompany
+                            }
+                        }
+                    },
+                    new Job
+                    {
+                        AddedOn = DateTime.Today,
+                        FinishBy = new DateTime(2023, month, day),
+                        ServiceCategories = new List<string>
+                        {
+                            "Removals"
+                        },
+                        Title = "Move from A to B",
+                        Description = "Move from A to B Move from A to B Move from A to B",
+                        JobLifeCycle = JobLifeCycle.Open,
+                        JobLocations = new List<JobLocation>
+                        {
+                            new JobLocation
+                            {
+                                AddressType = "Pick up address",
+                                Index = 0,
+                                PropertyNumberOrName = "2-30",
+                                StreetName = "Everton St",
+                                Locality = "Swinton",
+                                TownOrCity = "Manchester",
+                                County = "England",
+                                PostalCode = "M27 0WL",
+                                Country = "United Kingdom",
+                                Latitude = 53.51009443733918,
+                                Longitude = -2.3425652500267837
+                            },
+                            new JobLocation
+                            {
+                                AddressType = "Drop off address",
+                                Index = 1,
+                                PropertyNumberOrName = "2-30",
+                                StreetName = "Everton St",
+                                Locality = "Swinton",
+                                TownOrCity = "Liverpool",
+                                County = "England",
+                                PostalCode = "M32 0EW",
+                                Country = "United Kingdom",
+                                Latitude = 52.51009443733918,
+                                Longitude = -1.3425652500267837
+                            }
+                        },
+                        JobReference = "sdrg54yZadf",
+                        Networks = new List<JobNetwork>
+                        {
+                            new JobNetwork
+                            {
+                                AppUser = customerUsers[3],
+                                Role = JobNetworkRole.Customer
+                            },
+                            new JobNetwork
+                            {
+                                AppUser = movingCompanyUser,
+                                Role = JobNetworkRole.PaidCompany
+                            }
+                        }
+                    },
+                    new Job
+                    {
+                        AddedOn = DateTime.Today,
+                        FinishBy = new DateTime(2023, month, day),
+                        ServiceCategories = new List<string>
+                        {
+                            "Removals"
+                        },
+                        Title = "Move from X to Z",
+                        Description = "Move from X to Z Move from X to Z Move from X to Z",
+                        JobLifeCycle = JobLifeCycle.Open,
+                        JobLocations = new List<JobLocation>
+                        {
+                            new JobLocation
+                            {
+                                AddressType = "Pick up address",
+                                Index = 0,
+                                PropertyNumberOrName = "2-30",
+                                StreetName = "Everton St",
+                                Locality = "Swinton",
+                                TownOrCity = "Manchester",
+                                County = "England",
+                                PostalCode = "M27 0WL",
+                                Country = "United Kingdom",
+                                Latitude = 53.51009443733918,
+                                Longitude = -2.3425652500267837
+                            },
+                            new JobLocation
+                            {
+                                AddressType = "Drop off address",
+                                Index = 1,
+                                PropertyNumberOrName = "2-30",
+                                StreetName = "Everton St",
+                                Locality = "Swinton",
+                                TownOrCity = "Liverpool",
+                                County = "England",
+                                PostalCode = "M32 0EW",
+                                Country = "United Kingdom",
+                                Latitude = 52.51009443733918,
+                                Longitude = -1.3425652500267837
+                            }
+                        },
+                        JobReference = "134GXyZadf",
+                        Networks = new List<JobNetwork>
+                        {
+                            new JobNetwork
+                            {
+                                AppUser = customerUsers[1],
+                                Role = JobNetworkRole.Customer
+                            },
+                            new JobNetwork
+                            {
+                                AppUser = movingCompanyUser,
+                                Role = JobNetworkRole.PaidCompany
                             }
                         }
                     },

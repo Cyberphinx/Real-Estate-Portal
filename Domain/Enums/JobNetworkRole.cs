@@ -5,6 +5,7 @@ namespace Domain.Enums
         Customer,
         InterestedCompany,
         ShortlistedCompany,
+        PaidCompany,
         Finalist
     }
 }

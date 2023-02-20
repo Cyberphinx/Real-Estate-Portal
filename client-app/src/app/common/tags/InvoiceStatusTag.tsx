@@ -1,6 +1,6 @@
 import React from "react";
+import { Invoice } from "../../model/Invoice";
 import { PaymentStatus, paymentStatusFormatter } from "../../model/PaymentStatus";
-import { Invoice } from "../../model/Profile";
 import './InvoiceStatusTag.css';
 
 interface Props {

@@ -11,6 +11,8 @@ import ProfileStore from "./profileStore";
 import AgentListingStore from "./agentListingStore";
 import InvoiceStore from "./invoiceStore";
 import MessageStore from "./messageStore";
+import RemovalistJobStore from "./removalistJobStore";
+import CalendarStore from "./calendarStore";
 
 interface Store {
     // class can also be used as types
@@ -26,6 +28,8 @@ interface Store {
     agentListingStore: AgentListingStore;
     invoiceStore: InvoiceStore;
     messageStore: MessageStore;
+    removalistJobStore: RemovalistJobStore;
+    calendarStore: CalendarStore;
 }
 
 export const store: Store = {
@@ -40,7 +44,9 @@ export const store: Store = {
     profileStore: new ProfileStore(),
     agentListingStore: new AgentListingStore(),
     invoiceStore: new InvoiceStore(),
-    messageStore: new MessageStore()
+    messageStore: new MessageStore(),
+    removalistJobStore: new RemovalistJobStore(),
+    calendarStore: new CalendarStore()
 }
 
 export const StoreContext = createContext(store);

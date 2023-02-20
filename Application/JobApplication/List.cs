@@ -17,12 +17,12 @@ namespace Application.JobApplication
 {
     public class List
     {
-        public class Query : IRequest<Result<PagedList<JobDto>>> 
+        public class Query : IRequest<Result<PagedList<JobPublicDto>>> 
         {
             public JobParams Params { get; set; }
         }
 
-        public class Handler : IRequestHandler<Query, Result<PagedList<JobDto>>>
+        public class Handler : IRequestHandler<Query, Result<PagedList<JobPublicDto>>>
         {
             private readonly DataContext _context;
             private readonly IMapper _mapper;
@@ -32,21 +32,23 @@ namespace Application.JobApplication
                 _context = context;
             }
 
-            public async Task<Result<PagedList<JobDto>>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Result<PagedList<JobPublicDto>>> Handle(Query request, CancellationToken cancellationToken)
             {
+                Console.WriteLine($"The request datetime: {request.Params.FinishBy}");
                 // paging, sorting, searching, filtering function
                 // nothing is taking place in the database in below method, we are just building up an expression tree using IQueryable<T>
                 var query = _context.Jobs
+                    .Where(x => !x.ServiceCategories.Contains("Removals")) // Filter out Removals jobs
                     .SearchJobTitles(request.Params.SearchTerm)
-                    .FilterJobs(request.Params.ServiceCategory)
+                    .FilterJobs(request.Params.ServiceCategory, request.Params.FinishBy)
                     .SearchJobsOnMap(request.Params.MapBounds)
                     .SortJobs(request.Params.OrderBy)
-                    .ProjectTo<JobDto>(_mapper.ConfigurationProvider) //Automapper projection mapping is much better than .include in terms of SQL query efficiency
+                    .ProjectTo<JobPublicDto>(_mapper.ConfigurationProvider) //Automapper projection mapping is much better than .include in terms of SQL query efficiency
                     .AsSplitQuery()
                     .AsQueryable();
 
-                return Result<PagedList<JobDto>>.Success(
-                   await PagedList<JobDto>.CreateAsync(query, request.Params.PageNumber, request.Params.PageSize)
+                return Result<PagedList<JobPublicDto>>.Success(
+                   await PagedList<JobPublicDto>.CreateAsync(query, request.Params.PageNumber, request.Params.PageSize)
                );
             }
         }

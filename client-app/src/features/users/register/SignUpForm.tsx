@@ -6,9 +6,8 @@ import * as Yup from 'yup';
 import { v4 as uuid } from 'uuid';
 import { useStore } from '../../../app/stores/store';
 import LoginForm from '../LoginForm';
-import { AccountType, Language } from '../../../app/model/User';
+import { AccountType } from '../../../app/model/User';
 import Switcher from './Switcher';
-import { Currency } from '../../../app/model/ListingAggregate/ListingEnums';
 import RegisterAgentStepThree from './agent/RegisterAgentStepThree';
 import RegisterSuccess from './RegisterSuccess';
 import { RedressScheme } from '../../../app/model/Company';
@@ -29,7 +28,7 @@ export default observer(function SignUpForm({ formType, setFormType }: Props) {
         accountType: 0,
         addedOn: new Date(),
         country: "United Kingdom",
-        language: Language.English,
+        language: "English",
         displayName: "",
         companyAccessStatus: 0,
         companyLegalName: "",
@@ -52,7 +51,7 @@ export default observer(function SignUpForm({ formType, setFormType }: Props) {
         redressScheme: RedressScheme.None,
         invoiceDescription: "",
         invoiceAmount: 0,
-        invoiceCurrency: Currency.gbp,
+        invoiceCurrency: "gbp",
         error: null
     }
 

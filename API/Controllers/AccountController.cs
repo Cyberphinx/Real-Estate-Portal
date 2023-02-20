@@ -71,6 +71,9 @@ namespace API.Controllers
             if (user.UserName == "lily") user.EmailConfirmed = true;
             if (user.UserName == "moving") user.EmailConfirmed = true;
             if (user.Email == "archon@tuta.io") user.EmailConfirmed = true;
+            if (user.Email == "jack@test.com") user.EmailConfirmed = true;
+            if (user.Email == "lucy@test.com") user.EmailConfirmed = true;
+            if (user.Email == "elec3@test.com") user.EmailConfirmed = true;
 
             if (!user.EmailConfirmed) return Unauthorized("Email not confirmed");
 

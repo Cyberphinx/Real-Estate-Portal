@@ -16,12 +16,12 @@ namespace Application.JobApplication
 {
     public class Details
     {
-        public class Query : IRequest<Result<JobDto>>
+        public class Query : IRequest<Result<JobPublicDto>>
         {
             public Guid Id { get; set; }
         }
 
-        public class Handler : IRequestHandler<Query, Result<JobDto>>
+        public class Handler : IRequestHandler<Query, Result<JobPublicDto>>
         {
             private readonly DataContext _context;
             private readonly IMapper _mapper;
@@ -32,14 +32,14 @@ namespace Application.JobApplication
                 _mapper = mapper;
             }
 
-            public async Task<Result<JobDto>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Result<JobPublicDto>> Handle(Query request, CancellationToken cancellationToken)
             {
                 var job =  await _context.Jobs
-                    .ProjectTo<JobDto>(_mapper.ConfigurationProvider)
+                    .ProjectTo<JobPublicDto>(_mapper.ConfigurationProvider)
                     .AsSplitQuery()
                     .FirstOrDefaultAsync(x => x.Id == request.Id);
 
-                return Result<JobDto>.Success(job);
+                return Result<JobPublicDto>.Success(job);
             }
         }
     }

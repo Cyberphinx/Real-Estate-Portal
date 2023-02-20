@@ -44,6 +44,7 @@ namespace Application.Core
                 .ForMember(x => x.AddedOn, o => o.MapFrom(s => s.Job.AddedOn))
                 .ForMember(x => x.Id, o => o.MapFrom(s => s.JobId))
                 .ForMember(x => x.JobLifeCycle, o => o.MapFrom(s => s.Job.JobLifeCycle))
+                .ForMember(x => x.JobReference, o => o.MapFrom(s => s.Job.JobReference))
                 .ForMember(x => x.ServiceCategories, o => o.MapFrom(s => s.Job.ServiceCategories))
                 .ForMember(x => x.Role, o => o.MapFrom(s => s.Role))
                 .ForMember(x => x.Title, o => o.MapFrom(s => s.Job.Title));
@@ -120,16 +121,34 @@ namespace Application.Core
             
             // Job Dtos
             CreateMap<JobMedia, JobMediaDto>();
+            
             CreateMap<JobLocation, JobLocationDto>();
+            CreateMap<JobLocation, JobLocationPublicDto>();
+
+            CreateMap<Job, JobCalendar>();
             
             CreateMap<JobMessage, JobMessageDto>()
                 .ForMember(x => x.Author, o => o.MapFrom(s => s.Author.UserName));
 
+            CreateMap<Job, JobPublicDto>()
+                .ForMember(x => x.JobMedia, o => o.MapFrom(s => s.JobMedia.OrderBy(x => x.Index)))
+                .ForMember(x => x.JobLocations, o => o.MapFrom(s => s.JobLocations.OrderBy(x => x.Index)))
+                .ForMember(x => x.Networks, o => o.MapFrom(s => s.Networks))
+                .ForMember(x => x.Messages, o => o.MapFrom(s => s.Messages));
+            
             CreateMap<Job, JobDto>()
                 .ForMember(x => x.JobMedia, o => o.MapFrom(s => s.JobMedia.OrderBy(x => x.Index)))
                 .ForMember(x => x.JobLocations, o => o.MapFrom(s => s.JobLocations.OrderBy(x => x.Index)))
                 .ForMember(x => x.Networks, o => o.MapFrom(s => s.Networks))
                 .ForMember(x => x.Messages, o => o.MapFrom(s => s.Messages));
+
+            CreateMap<JobNetwork, NetworkPublicDto>()
+                .ForMember(x => x.Description, o => o.MapFrom(s => s.AppUser.Description))
+                .ForMember(x => x.DisplayName, o => o.MapFrom(s => s.AppUser.DisplayName))
+                .ForMember(x => x.Image, o => o.MapFrom(s => s.AppUser.Photos.FirstOrDefault(x => x.IsMain).Url))
+                .ForMember(x => x.JobsCount, o => o.MapFrom(s => s.AppUser.Jobs.Count))
+                .ForMember(x => x.ReviewsCount, o => o.MapFrom(s => s.AppUser.Reviews.Count))
+                .ForMember(x => x.Role, o => o.MapFrom(s => s.Role));
 
             CreateMap<JobNetwork, NetworkDto>()
                 .ForMember(x => x.Description, o => o.MapFrom(s => s.AppUser.Description))
@@ -138,7 +157,9 @@ namespace Application.Core
                 .ForMember(x => x.JobsCount, o => o.MapFrom(s => s.AppUser.Jobs.Count))
                 .ForMember(x => x.ReviewsCount, o => o.MapFrom(s => s.AppUser.Reviews.Count))
                 .ForMember(x => x.Username, o => o.MapFrom(s => s.AppUser.UserName))
-                .ForMember(x => x.Role, o => o.MapFrom(s => s.Role));
+                .ForMember(x => x.Role, o => o.MapFrom(s => s.Role))
+                .ForMember(x => x.Phone, o => o.MapFrom(s => s.AppUser.PhoneNumber))
+                .ForMember(x => x.Email, o => o.MapFrom(s => s.AppUser.Email));
 
 
             // Invoice Dtos

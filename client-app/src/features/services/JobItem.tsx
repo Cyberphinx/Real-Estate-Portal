@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 import React, { SyntheticEvent, useRef, useState } from "react";
 import { dateFormatter } from "../../app/common/HelperFunctions";
-import { Job, JobMediaDto } from "../../app/model/Job";
+import { Job, JobMediaDto, NetworkDto } from "../../app/model/Job";
 import { useStore } from "../../app/stores/store";
 import './JobItem.css';
 
@@ -51,7 +51,10 @@ export default observer(function JobItem({ job }: Props) {
                 <div className="thread-subtitle">
                     <span className="thread-location">
                         {job.jobLocations[0].townOrCity}
-                    </span> - Posted by {job.customerName ? job.customerName : job.networks.find(x => x.role.toString() === "Customer")?.username} - {dateFormatter(job.addedOn)}
+                    </span> - Posted by {job.customerName ?
+                        job.customerName
+                        : job.networks.find(x => x.role.toString() === "Customer")?.displayName}
+                    - {dateFormatter(job.addedOn)}
                 </div>
                 <p className="thread-title">{job.title} </p>
                 <p className="thread-subtitle">{job.serviceCategories.map((category: string, index: number) => (

@@ -35,13 +35,20 @@ namespace Application.Extensions
             return query.Where(p => p.Title.Trim().ToLower().Contains(lowerCaseSearchTerm));
         }
 
-        public static IQueryable<Job> FilterJobs(this IQueryable<Job> query, string serviceCategory)
+        public static IQueryable<Job> FilterJobs(this IQueryable<Job> query, string serviceCategory, DateTime finishBy)
         {
             // Service Category Filter
+            if (!string.IsNullOrEmpty(serviceCategory)) query = query.Where(x => x.ServiceCategories.Contains(serviceCategory));
+            
+            // date filter (for calendar)
+            DateTime today = new DateTime(2000,10,10,0,0,0);
+            TimeSpan span = today - finishBy;
+            int differenceBetween = (int) span.TotalDays;
+            // Console.WriteLine($"Years between is: {differenceBetween}");
+            if (differenceBetween < 100000) query = query.Where(x => x.FinishBy == finishBy.ToLocalTime());
 
-            if (string.IsNullOrEmpty(serviceCategory)) return query;
 
-            return query.Where(x => x.ServiceCategories.Contains(serviceCategory));
+            return query;
         }
 
         public static IQueryable<Job> SearchJobsOnMap(this IQueryable<Job> query, string mapBounds)

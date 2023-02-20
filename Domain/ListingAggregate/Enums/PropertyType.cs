@@ -1,5 +1,19 @@
 namespace Domain.ListingAggregate.Enums
 {
+    // public enum PropertyType
+    // {
+    //     Houses,
+    //     Flats,
+    //     Bungalows,
+    //     MobileHomes,
+    //     CommercialProperty,
+    //     Land,
+    //     CharacterProperty,
+    //     Parking,
+    //     RetirementProperty,
+    //     SharedProperty,
+    // }
+
     public enum PropertyType
     {
         BarnConversion,

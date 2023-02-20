@@ -12,6 +12,7 @@ export default observer(function JobDetailsPage() {
     const { id } = useParams();
     const { jobStore, userStore } = useStore();
     const { loadJob, loadingJob, selectedJob: job, cancelSelectJob } = jobStore;
+    const { isLoggedIn, user } = userStore;
 
     const [applicant, setApplicant] = useState<NetworkDto>();
 
@@ -48,7 +49,7 @@ export default observer(function JobDetailsPage() {
                         <div className="thread-subtitle">
                             <span className="thread-location">
                                 {job.jobLocations[0].townOrCity}
-                            </span> - Posted by {job.networks.find(x => x.role.toString() === "Customer")?.username} - {dateFormatter(job.addedOn)}
+                            </span> - Posted by {job.networks.find(x => x.role.toString() === "Customer")?.displayName} - {dateFormatter(job.addedOn)}
                         </div>
                         <p className="thread-title">{job.title} </p>
                         <p className="thread-subtitle">{job.serviceCategories.map((category: string, index: number) => (
@@ -69,22 +70,28 @@ export default observer(function JobDetailsPage() {
 
                         <section className="job-applicants">
                             <div>
-                                <p>Shortlisted: </p>
+                                <p>Shortlisted applicants: </p>
                                 {job.networks.filter(x => x.role.toString() === "ShortlistedCompany").map((network: NetworkDto) => (
-                                    <div key={network.username}>
+                                    <div key={network.username} style={{ background: '#f5f5f5', margin: '1rem 0rem', padding: '0.3rem 1rem 1rem 1rem', borderRadius: '1rem' }}>
+                                        <h3>{network.displayName ? network.displayName : network.username}</h3>
                                         <button className="networker-button" onClick={() => setApplicant(network)}>
-                                            {network.displayName ? network.displayName : network.username}
+                                            View profile
                                         </button>
                                     </div>
                                 ))}
                             </div>
                             <div>
-                                <p>Interested: </p>
+                                <p>Interested applicants: </p>
                                 {job.networks.filter(x => x.role.toString() === "InterestedCompany").map((network: NetworkDto) => (
-                                    <div key={network.username}>
+                                    <div key={network.username} style={{ background: '#f5f5f5', margin: '1rem 0rem', padding: '0.3rem 1rem 1rem 1rem', borderRadius: '1rem' }}>
+                                        <h3>{network.displayName ? network.displayName : network.username}</h3>
                                         <button className="networker-button" onClick={() => setApplicant(network)}>
-                                            {network.displayName ? network.displayName : network.username}
+                                            View profile
                                         </button>
+                                        {isLoggedIn && user?.username === job.networks.find(x => x.role.toString() === "Customer")?.username &&
+                                            <button className="networker-button">Shortlist applicant</button>
+                                        }
+
                                     </div>
                                 ))}
                             </div>

@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { dateFormatter, dateFormatterShort } from "../../../../../app/common/HelperFunctions";
 import priceFormatter from "../../../../../app/common/PriceFormatter";
 import InvoiceStatusTag from "../../../../../app/common/tags/InvoiceStatusTag";
-import { Invoice, InvoiceItem } from "../../../../../app/model/Profile";
+import { Invoice, InvoiceItem } from "../../../../../app/model/Invoice";
 import { useStore } from "../../../../../app/stores/store";
 import PaymentModal from "../PaymentModal";
 import './MembershipTab.css';

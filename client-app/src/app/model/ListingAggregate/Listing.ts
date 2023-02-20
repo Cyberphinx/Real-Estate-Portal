@@ -4,7 +4,7 @@ import {
     Category, CentralHeating, CookerType, CouncilTaxBand, DecorativeCondition, 
     Eligibility, FurnishedState, Incentive,
     LifeCycleStatus, ListedBuildingGrade, FeatureSpace, Parking, PropertyType, 
-    RentalTerm, Tenure, Utility, UnitOfArea, TransactionType, Currency, Frequency, 
+    RentalTerm, Tenure, Utility, UnitOfArea, TransactionType, Frequency, 
     PriceQualifier, WhiteGoods, UniqueFeature
 } from "./ListingEnums";
 import { DetailedDescription, EpcRatings, ListingLocation, 
@@ -166,7 +166,7 @@ export class ListingFormValues {
     pricing: Pricing = {
         id: '',
         transactionType: TransactionType.rent,
-        currency: Currency.gbp,
+        currency: "gbp",
         price: undefined,
         pricePerUnitArea: undefined,
         rentFrequency: Frequency.perMonth,

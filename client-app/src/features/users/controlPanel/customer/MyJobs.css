@@ -1,0 +1,53 @@
+.my-jobs {
+  height: calc(100vh - 40px);
+  overflow-y: scroll;
+}
+
+#my-jobs::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+#my-jobs::-webkit-scrollbar-track {
+  background: none;
+  border: none;
+}
+
+#my-jobs::-webkit-scrollbar-thumb {
+  border-radius: 0.5rem;
+  background-image: linear-gradient(to bottom, #f675a8, #554994);
+  background-image: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(0, #554994),
+    color-stop(1, #f675a8)
+  );
+  border: none;
+}
+
+.my-jobs__container {
+    margin: 2.5rem;
+}
+
+.my-jobs__item {
+    margin-bottom: 1rem;
+    border: none;
+    border-radius: 1rem;
+    padding: 1rem 2.5rem 2.5rem 2.5rem;
+    background: #fff;
+}
+
+.my-jobs__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.my-jobs__edit-button {
+    font-size: 1rem;
+    padding: 0.3rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 1rem;
+}
+.my-jobs__edit-button:hover {
+    cursor: pointer;
+}

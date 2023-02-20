@@ -11,7 +11,9 @@ namespace Domain.InvoiceAggregate
     {
         public Guid Id { get; set; }
         public long Amount { get; set; }
-        public Currency Currency { get; set; }
+
+        // ISO 3-Letter Currency Code in lowercase
+        public string Currency { get; set; }
         public string Description { get; set; }
         public DateTime InvoiceDate { get; set; }
         public int InvoiceNumber { get; set; }

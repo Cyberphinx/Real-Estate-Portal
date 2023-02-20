@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import './Nav.css';
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useDetectOutsideClick } from "../hooks/useDetectOutsideClick";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../stores/store";
@@ -9,21 +9,24 @@ import UserDropdown from "../../features/users/UserDropdown";
 import Dropdown from "../../features/users/Dropdown";
 
 export default observer(function Nav() {
+    let location = useLocation();
+
     const dropdownRef = useRef(null);
     const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
     const toggle = () => setIsActive(!isActive);
     // const [testError, setTestError] = useState(false);
 
-    const sortingRef = useRef(null);
-    const [sortingActive, setSortingActive] = useDetectOutsideClick(sortingRef, false);
-    const toggleSorting = () => setSortingActive(!sortingActive);
+    // const sortingRef = useRef(null);
+    // const [sortingActive, setSortingActive] = useDetectOutsideClick(sortingRef, false);
+    // const toggleSorting = () => setSortingActive(!sortingActive);
 
-    const { listingStore, featureStore, userStore, companyStore, jobStore } = useStore();
+    const { listingStore, featureStore, userStore, companyStore } = useStore();
     const { cancelSelectListing } = listingStore;
     const { cancelSelectCompany } = companyStore;
-    const { activeFeature, setActiveFeature, isLocked, setLocked } = featureStore;
-    const { isLoggedIn } = userStore;
-    const { loadJobs } = jobStore;
+    const { setActiveFeature } = featureStore;
+    const { isLoggedIn, user } = userStore;
+
+
 
     return (
         <div>
@@ -31,16 +34,18 @@ export default observer(function Nav() {
             <ul className="nav-bar">
                 <li className="nav-bar-item"><img className="logo" src="/assets/sanctum.svg" alt="S" /></li>
                 <li className="nav-bar-item" style={{ paddingTop: '0.25rem' }}>
-                    <Link className="home-button" to={'/homepage'} onClick={() => setActiveFeature(0)}>SANCTUM</Link>
+                    <Link className="home-button" to={'/map'} onClick={() => { setActiveFeature(0) }}>SANCTUM</Link>
                 </li>
                 <li className="nav-bar-item">
-                    <button className={activeFeature === 0 ? "nav-button-selected" : "nav-button"}
+                    <button
+                        className={location.pathname === "/map" ? "nav-button-selected" : "nav-button"}
                         onClick={() => { setActiveFeature(0) }}>
                         <Link to={'/map'} style={{ color: '#000', textDecoration: 'none' }}>Map</Link>
                     </button>
                 </li>
                 <li className="nav-bar-item">
-                    <button className={activeFeature === 1 ? "nav-button-selected" : "nav-button"}
+                    <button
+                        className={location.pathname === "/services" ? "nav-button-selected" : "nav-button"}
                         onClick={() => {
                             cancelSelectListing();
                             cancelSelectCompany();
@@ -50,16 +55,24 @@ export default observer(function Nav() {
                     </button>
                 </li>
                 <li className="nav-bar-item">
-                    <button className="nav-button"
-                        onClick={() => { cancelSelectListing(); cancelSelectCompany(); }}>
+                    <button
+                        className={location.pathname === "/get-agent" ? "nav-button-selected" : "nav-button"}
+                        onClick={() => {
+                            cancelSelectListing();
+                            cancelSelectCompany();
+                        }}>
                         Get agent
                     </button>
                 </li>
 
                 <li className="nav-bar-item">
-                    <button className="nav-button"
-                        onClick={() => { cancelSelectListing(); cancelSelectCompany(); }}>
-                        Book moving company
+                    <button
+                        className={location.pathname === "/create-removals-job" ? "nav-button-selected" : "nav-button"}
+                        onClick={() => {
+                            cancelSelectListing();
+                            cancelSelectCompany();
+                        }}>
+                        <Link to={'/create-removals-job'} style={{ color: '#000', textDecoration: 'none' }}>Book moving company</Link>
                     </button>
                 </li>
 
@@ -68,16 +81,20 @@ export default observer(function Nav() {
                         <>
                             <li className="nav-bar-item-right">
                                 <div className="dropdown-container" ref={dropdownRef}>
-                                    <button className="user-button" onClick={toggle}>
+                                    <button
+                                        className={location.pathname === "/control-panel" ? "user-button-selected" : "user-button"}
+                                        onClick={toggle}>
                                         <img className="user-icon" src="/assets/user.svg" alt="user" />
                                         <img className="hamburger-icon" src="/assets/hamburger.svg" alt="dropdown" />
                                     </button>
                                     {isActive && <UserDropdown />}
                                 </div>
                             </li>
-                            {userStore.user?.username ? <li className="nav-bar-item-right">
-                                <button className="username-button" >
-                                    Logged in as {userStore.user?.username}
+                            {user && user.username ? <li className="nav-bar-item-right">
+                                <button
+                                    className="username-button"
+                                >
+                                    <span>Logged in as </span> <b>{user.username}</b>
                                 </button>
                             </li> : null}
                         </>

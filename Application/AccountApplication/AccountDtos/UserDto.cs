@@ -20,7 +20,7 @@ namespace Application.AccountApplication.AccountDtos
         public List<string> Role { get; set; }
         public string Image { get; set; }
         public string Country { get; set; }
-        public Language Language { get; set; }
+        public string Language { get; set; }
         public DateTime AddedOn { get; set; }
         
     }

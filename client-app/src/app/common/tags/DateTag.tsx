@@ -1,6 +1,4 @@
 import React from "react";
-import { Company } from "../../model/Company";
-import { Listing } from "../../model/ListingAggregate/Listing";
 import './DateTag.css';
 
 interface Props {

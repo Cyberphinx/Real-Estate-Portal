@@ -44,18 +44,11 @@ namespace Application.JobApplication
 
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
-                // var user = await _context.Users.FirstOrDefaultAsync(x => x.UserName == _userAccessor.GetUsername());
-
-                // var job = await _context.Jobs.FindAsync(request.Job.Id);
-
                 var job = await _context.Jobs
-                    .Where(x => x.Id == request.Job.Id)
-                    .AsSplitQuery()
-                    .FirstOrDefaultAsync();
+                    .Include(x => x.JobLocations)
+                    .FirstOrDefaultAsync(x => x.Id == request.Job.Id);
 
                 if (job == null) return null;
-
-                // request.Order.BuyerId = user.UserName;
 
                 // matching the property from the request to the database entity, ie. updating it
                 _mapper.Map(request.Job, job);

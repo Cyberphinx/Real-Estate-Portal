@@ -38,7 +38,7 @@ namespace Persistence.Migrations
                     Description = table.Column<string>(type: "text", nullable: true),
                     DisplayName = table.Column<string>(type: "text", nullable: true),
                     Country = table.Column<string>(type: "text", nullable: true),
-                    Language = table.Column<int>(type: "integer", nullable: false),
+                    Language = table.Column<string>(type: "text", nullable: true),
                     UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
@@ -107,12 +107,26 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Events",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    EventDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    EventDescription = table.Column<string>(type: "text", nullable: true),
+                    Username = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Events", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Invoices",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Amount = table.Column<long>(type: "bigint", nullable: false),
-                    Currency = table.Column<int>(type: "integer", nullable: false),
+                    Currency = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
                     InvoiceDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     InvoiceNumber = table.Column<int>(type: "integer", nullable: false),
@@ -137,6 +151,7 @@ namespace Persistence.Migrations
                     CustomerName = table.Column<string>(type: "text", nullable: true),
                     CustomerEmail = table.Column<string>(type: "text", nullable: true),
                     CustomerPhone = table.Column<string>(type: "text", nullable: true),
+                    CustomerImage = table.Column<string>(type: "text", nullable: true),
                     AddedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     FinishBy = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     ServiceCategories = table.Column<List<string>>(type: "text[]", nullable: true),
@@ -147,6 +162,7 @@ namespace Persistence.Migrations
                     Bedrooms = table.Column<int>(type: "integer", nullable: false),
                     Bathrooms = table.Column<int>(type: "integer", nullable: false),
                     PropertyType = table.Column<string>(type: "text", nullable: true),
+                    Commercial = table.Column<bool>(type: "boolean", nullable: false),
                     DeclaredlValue = table.Column<string>(type: "text", nullable: true),
                     StorageRequired = table.Column<bool>(type: "boolean", nullable: false),
                     StorageValue = table.Column<string>(type: "text", nullable: true),
@@ -635,7 +651,7 @@ namespace Persistence.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Amount = table.Column<long>(type: "bigint", nullable: false),
-                    Currency = table.Column<int>(type: "integer", nullable: false),
+                    Currency = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
                     Title = table.Column<string>(type: "text", nullable: true),
                     VatPercentage = table.Column<long>(type: "bigint", nullable: false),
@@ -889,7 +905,7 @@ namespace Persistence.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     TransactionType = table.Column<int>(type: "integer", nullable: false),
-                    Currency = table.Column<int>(type: "integer", nullable: false),
+                    Currency = table.Column<string>(type: "text", nullable: true),
                     Price = table.Column<double>(type: "double precision", nullable: false),
                     PricePerUnitArea = table.Column<double>(type: "double precision", nullable: false),
                     RentFrequency = table.Column<int>(type: "integer", nullable: false),
@@ -937,12 +953,12 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "1", "31af9df7-0d75-482e-82a7-50c04df8e156", "Company", "COMPANY" },
-                    { "2", "319e516f-84c3-4df4-988a-7505dbad223b", "Customer", "CUSTOMER" },
-                    { "3", "719b48cc-a322-4e2a-9f84-94d465629f11", "Agency", "AGENCY" },
-                    { "4", "49d6681b-e1a3-45e4-b804-1341db17252a", "Admin", "ADMIN" },
-                    { "5", "a86e34cd-03f2-432a-8c38-4a177ff12444", "Manager", "MANAGER" },
-                    { "6", "d85b46ad-1842-45fa-bd64-0a6d01149211", "Removalist", "REMOVALIST" }
+                    { "1", "a8669529-18af-47d4-b629-e8e65908d899", "Company", "COMPANY" },
+                    { "2", "35923334-e963-4a94-ac5f-185da8a14d95", "Customer", "CUSTOMER" },
+                    { "3", "16e9a8da-3363-4273-83c0-9a53d1727be7", "Agency", "AGENCY" },
+                    { "4", "36673e0b-f21c-4b4d-9a5e-9c399eebad7a", "Admin", "ADMIN" },
+                    { "5", "f2b0040a-e3af-4103-b32d-20f97f769c8d", "Manager", "MANAGER" },
+                    { "6", "9cba08f3-193f-4c85-bad4-cce20efca7ad", "Removalist", "REMOVALIST" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -1158,6 +1174,9 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "EmployeePhoto");
+
+            migrationBuilder.DropTable(
+                name: "Events");
 
             migrationBuilder.DropTable(
                 name: "Insurance");

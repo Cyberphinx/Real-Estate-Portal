@@ -96,6 +96,7 @@ namespace API.Extensions
             services.AddScoped<IUserAccessor, UserAccessor>();
             services.AddScoped<IMediaAccessor, MediaAccessor>();
             services.AddScoped<IListingAccessor, ListingAccessor>();
+            services.AddScoped<IJobAccessor, JobAccessor>();
             services.AddScoped<ICompanyAccessor, CompanyAccessor>();
             services.AddScoped<PaymentService>();
             services.AddScoped<EmailService>();

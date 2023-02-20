@@ -30,20 +30,6 @@ export enum CouncilTaxBand {
     i
 }
 
-export enum Currency {
-    aud,
-    cny,
-    eur,
-    gbp,
-    hkd,
-    jpy,
-    nok,
-    nzd,
-    sek,
-    sgd,
-    usd
-}
-
 export enum DecorativeCondition {
     excellent,
     good,

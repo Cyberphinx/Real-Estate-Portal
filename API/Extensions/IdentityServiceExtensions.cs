@@ -73,9 +73,24 @@ namespace API.Extensions
                 {
                     policy.Requirements.Add(new IsListingOwner());
                 });
+                opt.AddPolicy("IsJobOwner", policy =>
+                {
+                    policy.Requirements.Add(new IsJobOwner());
+                });
+                opt.AddPolicy("IsOwner", policy =>
+                {
+                    policy.Requirements.Add(new IsOwner());
+                });
+                opt.AddPolicy("LeadsAccess", policy =>
+                {
+                    policy.Requirements.Add(new LeadsAccess());
+                });
             });
             services.AddTransient<IAuthorizationHandler, IsCompanyOwnerHandler>();
             services.AddTransient<IAuthorizationHandler, IsListingOwnerHandler>();
+            services.AddTransient<IAuthorizationHandler, IsJobOwnerHandler>();
+            services.AddTransient<IAuthorizationHandler, IsOwnerHandler>();
+            services.AddTransient<IAuthorizationHandler, LeadsAccessHandler>();
 
 
             services.AddScoped<TokenService>();

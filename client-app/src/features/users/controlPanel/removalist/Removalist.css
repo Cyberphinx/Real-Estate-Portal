@@ -1,4 +1,4 @@
-.agent-container{
+.removalist-container{
   height: calc(100vh - 40px);
   padding-top: 40px;
   display: grid;
@@ -66,4 +66,9 @@
   font-size: 1rem;
   font-weight: bold;
   text-align: center;
+}
+
+.removalist-logout {
+  position: absolute;
+  top: 5rem;
 }

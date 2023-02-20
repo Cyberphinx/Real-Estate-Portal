@@ -10,7 +10,7 @@ namespace Application.ListingApplication.ListingDtos
     {
         public Guid Id { get; set; }
         public TransactionType TransactionType { get; set; }
-        public Currency Currency { get; set; }
+        public string Currency { get; set; }
         public double Price { get; set; }
         public double PricePerUnitArea { get; set; }
         public Frequency RentFrequency { get; set; }

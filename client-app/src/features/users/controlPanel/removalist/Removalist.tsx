@@ -12,22 +12,24 @@ interface Props {
 }
 
 export default observer(function Removalist({ user }: Props) {
-    const { profileStore, jobStore } = useStore();
+    const { profileStore, removalistJobStore, userStore, calendarStore } = useStore();
     const { activeTab, setActiveTab, loadHeadquarter, loadProfile, loadingProfile } = profileStore;
-    const { setPredicate, loadJobs } = jobStore;
+    const { jobs, loadRemovalsJobs, allJobs, loadAllRemovalsJobs } = removalistJobStore;
+    const { isLoggedIn } = userStore;
+    const { loadEvents } = calendarStore;
 
     useEffect(() => {
-        setPredicate("serviceCategory", "Removals");
-        loadJobs();
-    },[])
-
-    useEffect(() => {
-        loadProfile(user!.username);
-        loadHeadquarter(user!.username);
+        if (isLoggedIn && user && user.accountType.toString() === "Removalist") {
+            loadProfile(user.username);
+            loadHeadquarter(user.username);
+            loadRemovalsJobs();
+            loadAllRemovalsJobs();
+            loadEvents(user.username);
+        }
         return () => {
             setActiveTab(0);
         }
-    }, [loadProfile, loadHeadquarter, user!.username, setActiveTab])
+    },[isLoggedIn, user, loadRemovalsJobs, loadAllRemovalsJobs, loadEvents, setActiveTab, loadProfile, loadHeadquarter,])
 
     function getTab() {
         switch (activeTab) {
@@ -35,17 +37,14 @@ export default observer(function Removalist({ user }: Props) {
                 return (<RemovalsJobs />)
             case 1:
                 return (<></>)
-            case 2:
-                return (<></>)
         }
     }
 
     return (
-        <div className="agent-container" style={{ backgroundImage: 'linear-gradient(to bottom left, rgba(246,117,168, 0.5), rgba(177,178,255,0.5))' }}>
+        <div className="removalist-container" style={{ backgroundImage: 'linear-gradient(to bottom left, rgba(246,117,168, 0.5), rgba(177,178,255,0.5))' }}>
             {loadingProfile ? <LoadingComponent content='Loading profile...' /> :
                 <>
                     <section className="agent-section-one">
-                        
                         <ul className="agent-menu">
                             <li>
                                 <button
@@ -53,48 +52,13 @@ export default observer(function Removalist({ user }: Props) {
                                     disabled={activeTab === 0 ? true : false}
                                     onClick={() => setActiveTab(0)}>Jobs</button>
                             </li>
-
                             <li>
                                 <button
                                     className={activeTab === 1 ? "agent-menu-button__active" : "agent-menu-button"}
                                     disabled={activeTab === 1 ? true : false}
                                     onClick={() => setActiveTab(1)}>Statistics</button>
                             </li>
-
-                            <li>
-                                <button
-                                    className={activeTab === 2 ? "agent-menu-button__active" : "agent-menu-button"}
-                                    disabled={activeTab === 2 ? true : false}
-                                    onClick={() => setActiveTab(2)}>Settings</button>
-                            </li>
                         </ul>
-
-                        {/* <hr className="agent-divider" />
-
-                        <ul className="agent-menu">
-                            <li>
-                                <button
-                                    className="agent-menu-button"
-                                    style={activeTab === 4 ? { background: "#FFC300", color: "#000", cursor: "default", borderLeft: "2px solid #000" } : {}}
-                                    disabled={activeTab === 4 ? true : false}
-                                    onClick={() => setActiveTab(4)}>Profile</button>
-                            </li>
-                            <li>
-                                <button
-                                    className="agent-menu-button"
-                                    style={activeTab === 3 ? { background: "#FFC300", color: "#000", cursor: "default", borderLeft: "2px solid #000" } : {}}
-                                    disabled={activeTab === 3 ? true : false}
-                                    onClick={() => setActiveTab(3)}>Membership</button>
-                            </li>
-                            <li>
-                                <button
-                                    className="agent-menu-button"
-                                    style={activeTab === 2 ? { background: "#FFC300", color: "#000", cursor: "default", borderLeft: "2px solid #000" } : {}}
-                                    disabled={activeTab === 2 ? true : false}
-                                    onClick={() => setActiveTab(2)}>Settings</button>
-                            </li>
-                        </ul> */}
-
                     </section>
 
                     <section className="agent-section-two">
@@ -102,7 +66,7 @@ export default observer(function Removalist({ user }: Props) {
                     </section>
 
                     <section className="agent-section-three">
-                            <RemovalistDashboard user={user} />
+                            <RemovalistDashboard user={user} jobs={jobs} allJobs={allJobs} />
                     </section>
                 </>
             }

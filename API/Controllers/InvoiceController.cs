@@ -49,6 +49,13 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new Details.Query{Id = id}));
         }
 
+
+        [HttpGet("all")]
+        public async Task<ActionResult> GetInvoices()
+        {
+            return HandleResult(await Mediator.Send(new List.Query()));
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddInvoice(Domain.InvoiceAggregate.Invoice invoice)
         {

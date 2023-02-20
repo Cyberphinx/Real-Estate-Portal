@@ -12,6 +12,9 @@ using Microsoft.EntityFrameworkCore;
 using Persistence;
 using Domain;
 using Domain.Enums;
+using Microsoft.AspNetCore.Identity;
+using Domain.AppUserAggregate;
+using Domain.AppUserAggregate.Enums;
 
 namespace Application.JobApplication
 {
@@ -34,6 +37,7 @@ namespace Application.JobApplication
         {
             private readonly DataContext _context;
             private readonly IUserAccessor _userAccessor;
+
             public Handler(DataContext context, IUserAccessor userAccessor)
             {
                 _userAccessor = userAccessor;
@@ -42,11 +46,14 @@ namespace Application.JobApplication
 
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
+
+
+                // set AddedOn time
                 request.Job.AddedOn = DateTime.UtcNow;
 
                 var user = await _context.Users.FirstOrDefaultAsync(x => x.UserName == _userAccessor.GetUsername());
 
-                if (user != null)
+                if (user != null && user.AccountType == AccountType.Customer)
                 {
                     var customer = new JobNetwork()
                     {
@@ -55,6 +62,29 @@ namespace Application.JobApplication
                         Role = JobNetworkRole.Customer
                     };
                     request.Job.Networks.Add(customer);
+                }
+                else
+                {
+                    // get a random user icon for anonymous booking
+                    var random = new Random();
+                    int iconIndex = random.Next(0, 47);
+
+                    var getIcon = new UserIcons();
+                    var newIcon = getIcon.GetUserIcon(iconIndex);
+                    request.Job.CustomerImage = newIcon;
+                }
+
+
+                if (request.Job.ServiceCategories.Contains("Removals"))
+                {
+                    var removalist = await _context.Users.FirstOrDefaultAsync(x => x.AccountType == AccountType.Removalist);
+                    var paidCompany = new JobNetwork()
+                    {
+                        AppUser = removalist,
+                        Job = request.Job,
+                        Role = JobNetworkRole.PaidCompany
+                    };
+                    request.Job.Networks.Add(paidCompany);
                 }
 
                 DateTime localFinishTime = request.Job.FinishBy.ToLocalTime();

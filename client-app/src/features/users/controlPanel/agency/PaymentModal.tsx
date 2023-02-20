@@ -2,11 +2,11 @@ import './PaymentModal.css';
 import { observer } from "mobx-react-lite";
 import React from 'react';
 import { useStore } from '../../../../app/stores/store';
-import { Invoice } from '../../../../app/model/Profile';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import priceFormatter from '../../../../app/common/PriceFormatter';
 import StripeForm from '../../register/payment/StripeForm';
+import { Invoice } from '../../../../app/model/Invoice';
 
 const stripePromise = loadStripe('pk_test_51L6i4NELV0KnfWeJgoqaVUo7jOES7YMDlWgtdHdwAXRsd2ExfVwP7sU9DhIyjES0JN7yly88c9HKpp0lBvtjIakX00pl6UGKM9');
 

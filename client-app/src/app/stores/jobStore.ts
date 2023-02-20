@@ -15,7 +15,8 @@ export default class JobStore {
   loadingNext = false;
   pagination: Pagination | null = null;
   pagingParams = new PagingParams(1, 12);
-  predicate = new Map().set("orderBy", "_");
+  nonExistentDate = new Date(1000, 10, 10,0,0,0);
+  predicate = new Map().set("orderBy", "_").set("finishBy", this.nonExistentDate as Date); 
 
   constructor() {
     makeAutoObservable(this);
@@ -36,7 +37,7 @@ export default class JobStore {
     this.pagingParams = pagingParams;
   }
 
-  setPredicate = (predicate: string, value: string | string[]) => {
+  setPredicate = (predicate: string, value: string | string[] | Date) => {
     switch (predicate) {
       case "orderBy":
         this.predicate.delete("orderBy");
@@ -64,6 +65,12 @@ export default class JobStore {
         this.predicate.delete("searchTerm");
         this.predicate.set("mapBounds", value);
         break;
+      case "finishBy":
+        this.predicate.delete("finishBy");
+        this.predicate.delete("mapBounds");
+        this.predicate.delete("searchTerm");
+        this.predicate.set("finishBy", value);
+        break;
     }
   }
 
@@ -72,7 +79,11 @@ export default class JobStore {
     params.append("pageNumber", this.pagingParams.pageNumber.toString());
     params.append("pageSize", this.pagingParams.pageSize.toString());
     this.predicate.forEach((value, key) => {
-      params.append(key, value);
+      if (key === "finishBy") {
+        params.append(key, (value as Date).toISOString())
+      } else {
+        params.append(key, value);
+      }
     })
     return params;
   }
@@ -130,6 +141,28 @@ export default class JobStore {
       this.setLoadingJob(true);
       try {
         job = await agent.Jobs.details(id);
+        this.setJob(job);
+        runInAction(() => this.selectedJob = job);
+        this.setLoadingJob(false);
+        return job;
+      } catch (error) {
+        console.log(error);
+        this.setLoadingJob(false);
+      }
+    }
+  }
+
+  loadJobWithLeads = async (id: string) => {
+    // using "let" instead of "const" means that we can modify what's inside the variable
+    let job = this.getJob(id);
+    if (job) {
+      this.selectedJob = job;
+      return job;
+    }
+    else {
+      this.setLoadingJob(true);
+      try {
+        job = await agent.Jobs.detailsLeads(id);
         this.setJob(job);
         runInAction(() => this.selectedJob = job);
         this.setLoadingJob(false);

@@ -53,7 +53,7 @@ export default observer(function AgentListings() {
             countAgentListings(userCompanies[0].id);
             setCurrentBranch(userCompanies[0]);
         };
-    }, [loadUserCompanies, loadAgentListings, isLoggedIn, user, setPredicate, activeTab]);
+    }, [loadUserCompanies, loadAgentListings, isLoggedIn, user, setPredicate, activeTab, userCompanies, countAgentListings]);
 
     function handleGetNext() {
         setLoadingNext(true);
@@ -92,7 +92,6 @@ export default observer(function AgentListings() {
     const sortingRef = useRef(null);
     const [sortingActive, setSortingActive] = useDetectOutsideClick(sortingRef, false);
     const toggleSorting = () => setSortingActive(!sortingActive);
-
 
 
 

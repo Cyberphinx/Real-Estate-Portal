@@ -5,7 +5,7 @@ import { makeAutoObservable } from 'mobx';
 import { User } from "../model/User";
 import agent from '../api/agent';
 import { store } from './store';
-import { Invoice } from '../model/Profile';
+import { Invoice } from '../model/Invoice';
 
 export default class InvoiceStore {
     invoice: Invoice | null = null;

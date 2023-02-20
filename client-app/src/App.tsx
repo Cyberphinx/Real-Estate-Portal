@@ -16,6 +16,10 @@ import ListingForm from './features/users/controlPanel/agency/listings/ListingFo
 import ListingMediaForm from './features/users/controlPanel/agency/listings/ListingMediaForm';
 import ControlPanel from './features/users/controlPanel/ControlPanel';
 import ListingFormPreview from './features/users/controlPanel/agency/listings/ListingFormPreview';
+import CreateRemovalsJob from './features/services/removals/CreateRemovalsJob';
+import CreateJob from './features/services/jobs/CreateJob';
+import RemovalsJobConfirmation from './features/services/removals/RemovalsJobConfirmation';
+import CreateInvoice from './features/users/invoice/CreateInvoice';
 
 function App() {
   const {commonStore, userStore} = useStore();
@@ -33,8 +37,7 @@ function App() {
     <div style={{overflow: "hidden"}}>
       <Toast />
       <Routes>
-        <Route path="/" element={<Navigate replace to="/homepage" />} />
-        <Route path="/homepage" element={<HomePage />} />
+        <Route path="/" element={<Navigate replace to="/map" />} />
         <Route path="/map" element={<HomePage />} />
         <Route path="/services" element={<HomePage />} />
         <Route path='/listing/:id' element={<ListingDetailsPage />} />
@@ -50,6 +53,10 @@ function App() {
         <Route path='/manage/:id' element={<ListingForm />} />
         <Route path='/add-listing-media/:id' element={<ListingMediaForm />} />
         <Route path='/preview/:id' element={<ListingFormPreview />} />
+        <Route path='/create-removals-job' element={<CreateRemovalsJob />} />
+        <Route path='/removals-job-confirmation/:id' element={<RemovalsJobConfirmation />} />
+        <Route path='/create-job' element={<CreateJob />} />
+        <Route path='/invoice/:id' element={<CreateInvoice />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </div>

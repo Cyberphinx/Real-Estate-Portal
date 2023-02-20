@@ -16,7 +16,7 @@ namespace Domain.AppUserAggregate
         public string Description { get; set; }
         public string DisplayName { get; set; }
         public string Country { get; set; }
-        public Language Language { get; set; }
+        public string Language { get; set; }
         public Membership Membership { get; set; }
         
         // public ICollection<Invoice> Invoices { get; set; } = new List<Invoice>();

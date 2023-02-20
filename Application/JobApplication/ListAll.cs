@@ -17,9 +17,9 @@ namespace Application.JobApplication
 {
     public class ListAll
     {
-        public class Query : IRequest<Result<List<JobDto>>> { }
+        public class Query : IRequest<Result<List<JobPublicDto>>> { }
 
-        public class Handler : IRequestHandler<Query, Result<List<JobDto>>>
+        public class Handler : IRequestHandler<Query, Result<List<JobPublicDto>>>
         {
             private readonly DataContext _context;
             private readonly IMapper _mapper;
@@ -29,15 +29,15 @@ namespace Application.JobApplication
                 _context = context;
             }
 
-            public async Task<Result<List<JobDto>>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Result<List<JobPublicDto>>> Handle(Query request, CancellationToken cancellationToken)
             {
                 var jobs = await _context.Jobs
                     .OrderByDescending(x => x.AddedOn)
-                    .ProjectTo<JobDto>(_mapper.ConfigurationProvider)
+                    .ProjectTo<JobPublicDto>(_mapper.ConfigurationProvider)
                     .AsSplitQuery()
                     .ToListAsync();
 
-                return Result<List<JobDto>>.Success(jobs);
+                return Result<List<JobPublicDto>>.Success(jobs);
             }
         }
     }

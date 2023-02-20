@@ -1,6 +1,5 @@
 import { CompanyAddress, RedressScheme } from './Company';
 import { AccessStatus } from './AccessStatus';
-import { Currency } from './ListingAggregate/ListingEnums';
 
 export interface User {
     accountType: AccountType;
@@ -12,7 +11,7 @@ export interface User {
     role: string[];
     image?: string;
     country: string;
-    language: Language;
+    language: string;
     addedOn: Date;
 }
 
@@ -29,7 +28,7 @@ export interface RegisterFormValues {
     accountType: AccountType;
     addedOn: Date;
     country: string;
-    language: Language;
+    language: string;
     displayName?: string; // max length is 20 characters
     companyAccessStatus?: AccessStatus;
     companyLegalName?: string;
@@ -40,7 +39,7 @@ export interface RegisterFormValues {
     redressScheme: RedressScheme;
     invoiceDescription?: string;
     invoiceAmount?: number; // in the smallest currency unit, ie. Cents
-    invoiceCurrency?: Currency; 
+    invoiceCurrency?: string; 
 }
 
 export enum AccountType {
@@ -53,15 +52,17 @@ export enum AccountType {
 export function accountTypeSwitch(user: User) {
     switch (user.accountType.toString()) {
         case "Agent":
-            return "Property Agent"
+            return "Property agent"
         case "Customer":
-            return "Individual Account"
+            return "Individual account"
         case "Company":
             return "Tradesperson"
         case "Admin":
             return "Administrator"
+        case "Removalist":
+            return "Removalist account"
         default:
-            return "Default Account"
+            return "Default account"
     }
 }
 
@@ -70,14 +71,4 @@ export interface RoleFormValues {
     role: string;
 }
 
-export enum Language {
-    German,
-    English,
-    Spanish,
-    Italian,
-    French,
-    Portuguese,
-    Chinese,
-    Japanese
-}
 

@@ -258,7 +258,7 @@ namespace Persistence
                 newListing.Pricing = new Pricing
                 {
                     TransactionType = TransactionType.Rent,
-                    Currency = Currency.GBP,
+                    Currency = "gbp",
                     Price = rnd.Next(800, 8000),
                     RentFrequency = Frequency.PerMonth,
                     PriceQualifier = PriceQualifier.FixedPrice,
@@ -524,7 +524,7 @@ namespace Persistence
                 newListing.Pricing = new Pricing
                 {
                     TransactionType = TransactionType.Sale,
-                    Currency = Currency.GBP,
+                    Currency = "gbp",
                     Price = rnd.Next(50000, 2000000),
                     RentFrequency = Frequency.PerMonth,
                     PriceQualifier = PriceQualifier.FixedPrice,

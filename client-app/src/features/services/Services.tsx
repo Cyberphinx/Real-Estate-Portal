@@ -23,7 +23,7 @@ export default observer(function Services() {
     function postAJob(event: SyntheticEvent) {
 
     }
-    
+
     function loginPrompt(event: SyntheticEvent) {
         event.stopPropagation();
         openModal(<LoginForm />);
@@ -42,8 +42,11 @@ export default observer(function Services() {
                     <button className="service-hub-button">Inventory Clerk</button>
                 </div>
                 <div style={{ padding: "8px" }}>
-                    <button className="service-hub-button-master" style={{ float: "right" }}>Tradesperson sign up</button>
-                    <button className="service-hub-button-master" onClick={(e) => { isLoggedIn ? postAJob(e) : loginPrompt(e) }} style={{ float: "right" }}>Post a job</button>
+                    <button className="service-hub-button-master"
+                        onClick={(e) => { isLoggedIn ? postAJob(e) : loginPrompt(e) }}
+                        style={{ float: "right" }}>
+                        <Link to={'/create-job'} style={{ color: '#000', textDecoration: 'none' }}>Post a job</Link>
+                    </button>
                 </div>
             </div>
             <div className="forum-container">

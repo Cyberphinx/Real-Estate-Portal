@@ -16,5 +16,7 @@ namespace Application.JobApplication.JobDtos
         public int ReviewsCount { get; set; }
         public string Username { get; set; }
         public JobNetworkRole Role { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
     }
 }

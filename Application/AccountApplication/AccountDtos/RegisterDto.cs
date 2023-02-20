@@ -28,7 +28,7 @@ namespace Application.AccountApplication.AccountDtos
         public AccountType AccountType { get; set; }
         public DateTime AddedOn { get; set; }
         public string Country { get; set; }
-        public Language Language { get; set; }
+        public string Language { get; set; }
         
         [MaxLength(20, ErrorMessage = "Max length is 20")]
         public string DisplayName { get; set; }
@@ -47,6 +47,8 @@ namespace Application.AccountApplication.AccountDtos
 
         // the amount needs to be in the smallest currency unit, ie. Cents
         public long InvoiceAmount { get; set; }
-        public Currency InvoiceCurrency { get; set; }
+
+        // ISO 3-Letter Currency Code in lowercase
+        public string InvoiceCurrency { get; set; }
     }
 }

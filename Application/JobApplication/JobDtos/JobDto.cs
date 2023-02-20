@@ -15,6 +15,7 @@ namespace Application.JobApplication.JobDtos
         public string CustomerName { get; set; }
         public string CustomerEmail { get; set; }
         public string CustomerPhone { get; set; }
+        public string CustomerImage { get; set; }
         public DateTime AddedOn { get; set; }
         public DateTime FinishBy { get; set; }
         public List<string> ServiceCategories { get; set; }

@@ -14,5 +14,6 @@ namespace Application.JobApplication.JobDtos
         public MediaType Type { get; set; }
         public string Caption { get; set; }
         public bool IsMain { get; set; }
+        public Guid JobId { get; set; }
     }
 }

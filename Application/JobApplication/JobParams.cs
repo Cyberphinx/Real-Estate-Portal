@@ -9,6 +9,7 @@ namespace Application.JobApplication
     public class JobParams : PagingParams
     {
         public DateTime AddedOn { get; set; } = DateTime.UtcNow;
+        public DateTime FinishBy { get; set; } = DateTime.UtcNow;
         public string OrderBy { get; set; }
         public string SearchTerm { get; set; }
         public string ServiceCategory { get; set; }
@@ -16,6 +17,5 @@ namespace Application.JobApplication
         public string MinMaxBeds { get; set; }
         public string MapBounds { get; set; }
         public string Channel { get; set; }
-
     }
 }

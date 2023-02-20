@@ -58,8 +58,8 @@ namespace Persistence.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("boolean");
 
-                    b.Property<int>("Language")
-                        .HasColumnType("integer");
+                    b.Property<string>("Language")
+                        .HasColumnType("text");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("boolean");
@@ -236,6 +236,26 @@ namespace Persistence.Migrations
                     b.HasIndex("AppUserId");
 
                     b.ToTable("RefreshToken");
+                });
+
+            modelBuilder.Entity("Domain.CalendarAggregate.CalendarEvent", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("EventDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("EventDescription")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Events");
                 });
 
             modelBuilder.Entity("Domain.CompanyAggregate.Company", b =>
@@ -590,8 +610,8 @@ namespace Persistence.Migrations
                     b.Property<string>("ClientSecret")
                         .HasColumnType("text");
 
-                    b.Property<int>("Currency")
-                        .HasColumnType("integer");
+                    b.Property<string>("Currency")
+                        .HasColumnType("text");
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
@@ -634,8 +654,8 @@ namespace Persistence.Migrations
                     b.Property<long>("Amount")
                         .HasColumnType("bigint");
 
-                    b.Property<int>("Currency")
-                        .HasColumnType("integer");
+                    b.Property<string>("Currency")
+                        .HasColumnType("text");
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
@@ -671,7 +691,13 @@ namespace Persistence.Migrations
                     b.Property<int>("Bedrooms")
                         .HasColumnType("integer");
 
+                    b.Property<bool>("Commercial")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("CustomerEmail")
+                        .HasColumnType("text");
+
+                    b.Property<string>("CustomerImage")
                         .HasColumnType("text");
 
                     b.Property<string>("CustomerName")
@@ -1206,8 +1232,8 @@ namespace Persistence.Migrations
                     b.Property<bool>("Auction")
                         .HasColumnType("boolean");
 
-                    b.Property<int>("Currency")
-                        .HasColumnType("integer");
+                    b.Property<string>("Currency")
+                        .HasColumnType("text");
 
                     b.Property<Guid>("ListingId")
                         .HasColumnType("uuid");
@@ -1346,42 +1372,42 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "31af9df7-0d75-482e-82a7-50c04df8e156",
+                            ConcurrencyStamp = "a8669529-18af-47d4-b629-e8e65908d899",
                             Name = "Company",
                             NormalizedName = "COMPANY"
                         },
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "319e516f-84c3-4df4-988a-7505dbad223b",
+                            ConcurrencyStamp = "35923334-e963-4a94-ac5f-185da8a14d95",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
                             Id = "3",
-                            ConcurrencyStamp = "719b48cc-a322-4e2a-9f84-94d465629f11",
+                            ConcurrencyStamp = "16e9a8da-3363-4273-83c0-9a53d1727be7",
                             Name = "Agency",
                             NormalizedName = "AGENCY"
                         },
                         new
                         {
                             Id = "4",
-                            ConcurrencyStamp = "49d6681b-e1a3-45e4-b804-1341db17252a",
+                            ConcurrencyStamp = "36673e0b-f21c-4b4d-9a5e-9c399eebad7a",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "5",
-                            ConcurrencyStamp = "a86e34cd-03f2-432a-8c38-4a177ff12444",
+                            ConcurrencyStamp = "f2b0040a-e3af-4103-b32d-20f97f769c8d",
                             Name = "Manager",
                             NormalizedName = "MANAGER"
                         },
                         new
                         {
                             Id = "6",
-                            ConcurrencyStamp = "d85b46ad-1842-45fa-bd64-0a6d01149211",
+                            ConcurrencyStamp = "9cba08f3-193f-4c85-bad4-cce20efca7ad",
                             Name = "Removalist",
                             NormalizedName = "REMOVALIST"
                         });

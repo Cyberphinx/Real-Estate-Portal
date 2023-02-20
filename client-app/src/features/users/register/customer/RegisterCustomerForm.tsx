@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import '.././SignUp.css';
 import { observer } from "mobx-react-lite";
 import MyTextInput from '../../../../app/common/form/MyTextInput';
-import { AccountType, Language } from '../../../../app/model/User';
+import { AccountType } from '../../../../app/model/User';
 
 interface Props {
     isValid: boolean;
@@ -15,7 +15,7 @@ export default observer(function RegisterCustomerForm({isValid, dirty, isSubmitt
 
     useEffect(() => {
         setFieldValue("country", "United Kingdom");
-        setFieldValue("language", Language.English);
+        setFieldValue("language", "English");
         setFieldValue("accountType", AccountType.Customer);
     }, [])
 

@@ -178,8 +178,6 @@ export default observer(function BasicInfo({ step, setStep, values, setFieldValu
                         ))}
                     </Field>
                 </div>
-
-
             </section>
 
             {forRent &&

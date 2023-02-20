@@ -1,5 +1,5 @@
 import { ListingMediaDto } from './../model/ListingAggregate/ListingObjects';
-import { Profile, WatcherListingDto, UserJobDto, UserCompanyDto, Invoice } from './../model/Profile';
+import { Profile, WatcherListingDto, UserJobDto, UserCompanyDto } from './../model/Profile';
 import { MaxValue } from './../model/MaxValue';
 import { User, RoleFormValues, LoginFormValues, RegisterFormValues } from './../model/User';
 import axios, { AxiosResponse } from "axios";
@@ -8,7 +8,9 @@ import { store } from '../stores/store';
 import { history } from '../..';
 import { PaginatedResult } from '../model/Pagination';
 import { Listing, ListingFormValues } from '../model/ListingAggregate/Listing';
-import { Job, JobFormValues } from '../model/Job';
+import { Job, JobFormValues, JobMediaDto } from '../model/Job';
+import { CalendarEvent } from '../model/CalendarEvent';
+import { Invoice } from '../model/Invoice';
 
 // adding fake delay
 const sleep = (delay: number) => {
@@ -140,18 +142,32 @@ const Companies = {
 
 const Jobs = {
   listAll: () => requests.get<Job[]>("/job/all"),
+  listAllRemovals: () => requests.get<Job[]>("/job/allRemovals"),
   list: (params: URLSearchParams) => axios.get<PaginatedResult<Job[]>>("/job", { params }).then(responseBody),
+  listRemovals: (params: URLSearchParams) => axios.get<PaginatedResult<Job[]>>("/job/removals", { params }).then(responseBody),
   details: (id: string) => requests.get<Job>(`/job/${id}`),
+  detailsLeads: (id: string) => requests.get<Job>(`/job/${id}/leads`),
   create: (job: JobFormValues) => requests.post<void>('/job', job),
   update: (job: JobFormValues) => requests.put<void>(`/job/${job.id}`, job),
   delete: (id: string) => requests.del<void>(`/job/${id}`),
   applyJob: (jobId: string) => requests.post(`/job/apply/${jobId}`, {}),
-  shortlistJobApplicant: (jobId: string, username: string) => requests.post(`/job/shortlist/${jobId}/${username}`, {})
+  shortlistJobApplicant: (jobId: string, username: string) => requests.post(`/job/shortlist/${jobId}/${username}`, {}),
+  uploadMedia: (jobId: string, file: Blob) => {
+    let formData = new FormData();
+    formData.append('File', file);
+    return axios.post<JobMediaDto>(`/job/media/${jobId}`, formData, {
+      headers: { 'Content-type': 'multipart/form-data' }
+    })
+  },
+  setMainImage: (jobId: string, jobMediaId: string) => requests.post(`/job/${jobId}/setMainImage/${jobMediaId}`, {}),
+  deleteMedia: (jobId: string, jobMediaId: string) => requests.del(`/job/${jobId}/${jobMediaId}`)
 }
 
-// const Payments = {
-//   createPaymentIntent: () => requests.post('payments', {})
-// }
+const Calendar = {
+  create: (event: CalendarEvent, username: string) => requests.post<void>(`/calendar/${username}`, event),
+  list: (username: string) => requests.get<CalendarEvent[]>(`/calendar/${username}`),
+  delete: (id: string, username: string) => requests.del<void>(`/calendar/${username}/${id}`)
+}
 
 const Invoices = {
   getFirstInvoice: () => requests.get<Invoice>("/invoice")
@@ -163,6 +179,7 @@ const agent = {
   Companies,
   Jobs,
   Profiles,
+  Calendar,
   Invoices
 };
 

@@ -36,12 +36,10 @@ export default observer(function ListingAddress({ step, setStep, setFieldValue, 
     };
     var layerControl = L.control.layers(baseMaps);
 
-    const [rawData, setRawData] = useState<any>();
     const currentLat: number = getFieldMeta("listingLocation.latitude").value;
     const currentLng: number = getFieldMeta("listingLocation.longitude").value;
     const [latitude, setLatitude] = useState<number | undefined>(51.505);
     const [longitude, setLongitude] = useState<number | undefined>(-0.09);
-    // const [showInputs, setShowInputs] = useState<boolean>(false);
 
     const provider = new LocationIQProvider({
         params: {
@@ -99,7 +97,36 @@ export default observer(function ListingAddress({ step, setStep, setFieldValue, 
         map.on('geosearch/showlocation', function (e: any) {
             markerGroup.clearLayers();
             console.log(e);
-            setRawData(e.location);
+
+            // setting the variables from Geocoding raw data
+            let rawData = e.location;
+
+            let name = rawData.raw.address.name ? rawData.raw.address.name : '';
+            let house_number = rawData.raw.address.house_number ? rawData.raw.address.house_number : '';
+            let road = rawData.raw.address.road ? rawData.raw.address.road : '';
+            let neighbourhood = rawData.raw.address.neighbourhood ? rawData.raw.address.neighbourhood : '';
+            let suburb = rawData.raw.address.suburb ? rawData.raw.address.suburb : '';
+            let island = rawData.raw.address.island ? rawData.raw.address.island : '';
+            let county = rawData.raw.address.county ? rawData.raw.address.county : '';
+            let state = rawData.raw.address.state ? rawData.raw.address.state : '';
+
+            let propertyNumberOrName = name ? (house_number ? `${name}, ${house_number}` : name) : house_number;
+            let streetName = road ? (neighbourhood ? `${road}, ${neighbourhood}` : road) : neighbourhood;
+            let locality = suburb ? (island ? `${suburb}, ${island}` : suburb) : island;
+            let countyValue = county ? (state ? `${county}, ${state}` : county) : state;
+
+            // filling the form from Geocoding raw data
+            setFieldValue("listingLocation.displayAddress", rawData.label ? rawData.label : '');
+            setFieldValue("listingLocation.propertyNumberOrName", propertyNumberOrName);
+            setFieldValue("listingLocation.streetName", streetName);
+            setFieldValue("listingLocation.locality", locality);
+            setFieldValue("listingLocation.townOrCity", rawData.raw.address.city ? rawData.raw.address.city : '');
+            setFieldValue("listingLocation.county", countyValue);
+            setFieldValue("listingLocation.postalCode", rawData.raw.address.postcode ? rawData.raw.address.postcode : '');
+            setFieldValue("listingLocation.country", rawData.raw.address.country ? rawData.raw.address.country : '');
+            setFieldValue("listingLocation.latitude", rawData.y ? rawData.y : 0);
+            setFieldValue("listingLocation.longitude", rawData.x ? rawData.x : 0);
+
             var newMarker = L.marker([e.location.y, e.location.x], {
                 draggable: true,
                 autoPan: true,
@@ -125,64 +152,6 @@ export default observer(function ListingAddress({ step, setStep, setFieldValue, 
 
     // LEAFLET END
 
-    const [displayAddress, setDisplayAddress] = useState<string>("");
-    const [name, setName] = useState<string>("");
-    const [house_number, setHouse_number] = useState<string>("");
-    const [road, setRoad] = useState<string>("");
-    const [neighbourhood, setNeighbourhood] = useState<string>("");
-    const [suburb, setSuburb] = useState<string>("");
-    const [island, setIsland] = useState<string>("");
-    const [city, setCity] = useState<string>("");
-    const [county, setCounty] = useState<string>("");
-    const [state, setState] = useState<string>("");
-    const [postcode, setPostcode] = useState<string>("");
-    const [country, setCountry] = useState<string>("");
-
-    const propertyNumberOrName = name ? (house_number ? `${name}, ${house_number}` : name) : house_number;
-    const streetName = road ? (neighbourhood ? `${road}, ${neighbourhood}` : road) : neighbourhood;
-    const locality = suburb ? (island ? `${suburb}, ${island}` : suburb) : island;
-    const countyValue = county ? (state ? `${county}, ${state}` : county) : state;
-
-    useEffect(() => {
-        if (rawData) {
-            // setting the state variables from Geocoding raw data
-            setDisplayAddress(rawData.label ? rawData.label : '');
-            setName(rawData.raw.address.name ? rawData.raw.address.name : '');
-            setHouse_number(rawData.raw.address.house_number ? rawData.raw.address.house_number : '');
-            setRoad(rawData.raw.address.road ? rawData.raw.address.road : '');
-            setNeighbourhood(rawData.raw.address.neighbourhood ? rawData.raw.address.neighbourhood : '');
-            setSuburb(rawData.raw.address.suburb ? rawData.raw.address.suburb : '');
-            setIsland(rawData.raw.address.island ? rawData.raw.address.island : '');
-            setCity(rawData.raw.address.city ? rawData.raw.address.city : '');
-            setCounty(rawData.raw.address.county ? rawData.raw.address.county : '');
-            setState(rawData.raw.address.state ? rawData.raw.address.state : '');
-            setPostcode(rawData.raw.address.postcode ? rawData.raw.address.postcode : '');
-            setCountry(rawData.raw.address.country ? rawData.raw.address.country : '');
-            setLatitude(rawData.y ? rawData.y : 0);
-            setLongitude(rawData.x ? rawData.x : 0);
-
-            setFieldValue("listingLocation.displayAddress", displayAddress);
-            setFieldValue("listingLocation.propertyNumberOrName", propertyNumberOrName);
-            setFieldValue("listingLocation.streetName", streetName);
-            setFieldValue("listingLocation.locality", locality);
-            setFieldValue("listingLocation.townOrCity", city);
-            setFieldValue("listingLocation.county", countyValue);
-            setFieldValue("listingLocation.postalCode", postcode);
-            setFieldValue("listingLocation.country", country);
-            setFieldValue("listingLocation.latitude", latitude);
-            setFieldValue("listingLocation.longitude", longitude);
-            // setShowInputs(true);
-        }
-    }, [rawData, setFieldValue, displayAddress, propertyNumberOrName, streetName, locality, city, countyValue, postcode, country])
-
-    // const mapRef = useRef<any>();
-    // const resizeMap = (mapRef: RefObject<any>) => {
-    //     const resizeObserver = new ResizeObserver(() => mapRef.current?.invalidateSize())
-    //     const container = document.getElementById('map-container')
-    //     if (container) {
-    //         resizeObserver.observe(container)
-    //     }
-    // }
 
     return (
         <div style={{ position: "relative", padding:'0 2.5rem 1.5rem 2.5rem' }}>

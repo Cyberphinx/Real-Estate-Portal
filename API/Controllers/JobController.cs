@@ -23,20 +23,47 @@ namespace API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetJobs([FromQuery]JobParams param)
         {
+            // get public jobs without customer's contact details (without Removals jobs)
             return HandlePagedResult(await Mediator.Send(new List.Query{Params = param}));
+        }
+
+        [Authorize(Roles = "Removalist")]
+        [HttpGet("removals")]
+        public async Task<IActionResult> GetRemovalsJobsLeads([FromQuery]JobParams param)
+        {
+            // get Removals jobs with customer's contact details (for specific moving company only)
+            return HandlePagedResult(await Mediator.Send(new ListRemovals.Query{Params = param}));
         }
 
         [AllowAnonymous]
         [HttpGet("all")]
         public async Task<IActionResult> GetAllJobs()
         {
+            // get all public jobs without customer's contact details
             return HandleResult(await Mediator.Send(new ListAll.Query()));
+        }
+
+        [AllowAnonymous]
+        [HttpGet("allRemovals")]
+        public async Task<IActionResult> GetAllRemovalsJobs()
+        {
+            // get all Removals jobs for calendar view (for specific moving company only)
+            return HandleResult(await Mediator.Send(new ListAllRemovals.Query()));
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult> GetJob(Guid id)
         {
+            // get a public job without customer's contact details
             return HandleResult(await Mediator.Send(new Details.Query{Id = id}));
+        }
+
+        [Authorize(Policy = "LeadsAccess")]
+        [HttpGet("{jobId}/leads")]
+        public async Task<ActionResult> GetJobWithLeads(Guid jobId)
+        {
+            // get a paid job leads with customer's contact details
+            return HandleResult(await Mediator.Send(new DetailsWithLeads.Query{Id = jobId}));
         }
 
         [AllowAnonymous]
@@ -46,10 +73,32 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new Create.Command{Job = job}));
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> EditJob(Guid id, Job job)
+        [Authorize(Policy = "IsJobOwner")]
+        [HttpPost("media/{jobId}")]
+        public async Task<IActionResult> AddMedia([FromForm] AddMedia.Command command)
         {
-            job.Id = id;
+            return HandleResult(await Mediator.Send(command));
+        }
+
+        [Authorize(Policy = "IsJobOwner")]
+        [HttpPost("{jobId}/setMainImage/{jobMediaId}")]
+        public async Task<IActionResult> SetMainImage(string jobId, string jobMediaId)
+        {
+            return HandleResult(await Mediator.Send(new SetMainImage.Command{JobId = jobId, JobMediaId = jobMediaId}));
+        }
+
+        [Authorize(Policy = "IsJobOwner")]
+        [HttpDelete("{jobId}/{jobMediaId}")]
+        public async Task<IActionResult> DeleteMedia(string jobId, string jobMediaId)
+        {
+            return HandleResult(await Mediator.Send(new DeleteMedia.Command{JobId = jobId, JobMediaId = jobMediaId}));
+        }
+
+        [Authorize(Policy = "IsJobOwner")]
+        [HttpPut("{jobId}")]
+        public async Task<IActionResult> EditJob(Guid jobId, Job job)
+        {
+            job.Id = jobId;
             return HandleResult(await Mediator.Send(new Edit.Command{Job = job}));
         }
         

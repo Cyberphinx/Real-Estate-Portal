@@ -1,0 +1,191 @@
+.removals-forms__title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-top: 3rem;
+}
+
+.removals-forms__container {
+  padding-top: 1rem;
+  display: flex;
+  gap: 1rem;
+  position: relative;
+  flex-wrap: wrap;
+  align-items: stretch;
+  justify-content: space-between;
+}
+
+.removals-forms__input-label {
+  position: absolute;
+  top: 0.2rem;
+  left: 0.625rem;
+  z-index: 1;
+  color: #000;
+  font-weight: bold;
+  font-size: 0.875rem;
+}
+
+.removals-forms__input-error {
+  position: absolute;
+  z-index: 1;
+  top: 0.2rem;
+  left: 0.425rem;
+  padding: 0 0.2rem;
+  background: #cc0000;
+  margin: 0px;
+  font-size: 0.875rem;
+  font-weight: bold;
+  color: #fff;
+  border: 1px solid #cc0000;
+  z-index: 1;
+}
+
+.removals-forms__input-long {
+  border: 1px solid #ccc;
+  border-radius: 0.4rem;
+  width: 58.65rem;
+  padding: 2rem 0.625rem 0.625rem 0.625rem;
+  font-size: 1.125rem;
+}
+
+.removals-forms__input-medium {
+  border: 1px solid #ccc;
+  border-radius: 0.4rem;
+  width: 28rem;
+  padding: 2rem 0.625rem 0.625rem 0.625rem;
+  font-size: 1.125rem;
+}
+
+.removals-forms__input-small {
+  border: 1px solid #ccc;
+  border-radius: 0.4rem;
+  width: 18rem;
+  padding: 2rem 0.625rem 0.625rem 0.625rem;
+  font-size: 1.125rem;
+}
+
+.removals-forms__input-xs {
+  border: 1px solid #ccc;
+  border-radius: 0.4rem;
+  width: 12.8rem;
+  padding: 2rem 0.625rem 0.625rem 0.625rem;
+  font-size: 1.125rem;
+}
+
+.removals-forms__button-neutral {
+  padding: 0.5rem 1rem;
+  color: #000;
+  font-weight: bold;
+  font-size: 1rem;
+  background: #f0f0f0;
+  border: 1px solid #000;
+  border-radius: 0.3rem;
+}
+.removals-forms__button-neutral:hover {
+  cursor: pointer;
+  background: #f8f8f9;
+}
+
+/* search result start */
+.removals-forms__search {
+  margin-top: -10px;
+  border: 1px solid #ccc;
+  border-radius: 0.3rem;
+  background: #fff;
+}
+.removals-forms__search-item {
+  border-bottom: 1px solid #ccc;
+  margin: 0;
+  padding: 1rem;
+}
+.removals-forms__search-item:hover {
+  cursor: pointer;
+  background: #f5f5f5;
+}
+.removals-forms__search-item:hover .removals-forms__search-item-name {
+  cursor: pointer;
+  background: #f5f5f5;
+}
+.removals-forms__search-item-name {
+  margin: 0;
+  padding: 0;
+}
+
+.date-input__highlight {
+  color: #c0c0c0;
+  background: #f5f5f5;
+  border: 1px solid #c0c0c0;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.date-input__highlight:hover {
+  cursor: default;
+  color: #c0c0c0;
+  background: #f5f5f5;
+  border: 1px solid #c0c0c0;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.removals-forms__buttons-container {
+  position: relative;
+  padding: 1rem 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.removals-forms__button {
+  position: relative;
+  padding: 0.5rem 2.5rem;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.25rem;
+  background-image: linear-gradient(to bottom left, #ed0cef, #6807f9);
+  border: none;
+  border-radius: 0.3rem;
+}
+.removals-forms__button:hover {
+  cursor: pointer;
+  background-image: linear-gradient(
+    to bottom left,
+    rgba(237, 12, 239, 0.8),
+    rgba(104, 7, 249, 0.8)
+  );
+}
+.removals-forms__button:disabled {
+  cursor: default;
+  background-image: linear-gradient(
+    to bottom left,
+    rgba(237, 12, 239, 0.2),
+    rgba(104, 7, 249, 0.2)
+  );
+}
+
+/* LOADING SPINNER START */
+.removals-forms__submitting::after {
+  font-size: 1rem;
+  position: absolute;
+  content: "";
+  width: 20px;
+  height: 20px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  border: 3px solid #fff;
+  border-top-color: #ed0cef;
+  border-radius: 50%;
+  animation: removals-forms__spinner 1s ease infinite;
+}
+
+@keyframes removals-forms__spinner {
+  from {
+    transform: rotate(0turn);
+  }
+
+  to {
+    transform: rotate(1turn);
+  }
+}
+/* LOADING SPINNER END */

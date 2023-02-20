@@ -7,6 +7,7 @@ import './DateInput.css';
 
 export default function DateInput(props: Partial<ReactDatePickerProps>) {
     const [field, meta, helpers] = useField(props.name!);
+
     return (
         <>
             <DatePicker
