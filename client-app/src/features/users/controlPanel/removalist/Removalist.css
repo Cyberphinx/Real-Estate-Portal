@@ -2,7 +2,7 @@
   height: calc(100vh - 40px);
   padding-top: 40px;
   display: grid;
-  grid-template-columns: 190px 3fr 1fr;
+  grid-template-columns: 190px 3fr 1.5fr;
 }
 
 .agent-section-one {

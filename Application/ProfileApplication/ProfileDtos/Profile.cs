@@ -19,6 +19,6 @@ namespace Application.ProfileApplication.ProfileDtos
         public MembershipDto Membership { get; set; }
         public ICollection<PhotoDto> Photos { get; set; }
         public ICollection<AppUserReviewDto> Reviews { get; set; }
-        public ICollection<InvoiceDto> Invoices { get; set; }
+        public ICollection<UserInvoiceDto> Invoices { get; set; }
     }
 }

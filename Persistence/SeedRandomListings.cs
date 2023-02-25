@@ -67,6 +67,7 @@ namespace Persistence
                     {
                         new ListingMedia
                         {
+                            Id = Nanoid.Nanoid.Generate(size:10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157050/Placeholder/Listings/ronnie-george-9gGvNWBeOq4_zzpq0z.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 1",
@@ -74,84 +75,98 @@ namespace Persistence
                         },
                         new ListingMedia
                         {
+                            Id = Nanoid.Nanoid.Generate(size:10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/webaliser-_TPTXZd9mOo_yxhvvk.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 2"
                         },
                         new ListingMedia
                         {
+                            Id = Nanoid.Nanoid.Generate(size:10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/bailey-anselme-Bkp3gLygyeA_jbeyqw.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 3"
                         },
                         new ListingMedia
                         {
+                            Id = Nanoid.Nanoid.Generate(size:10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/avi-waxman-f9qZuKoZYoY_fpqamd.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 4"
                         },
                         new ListingMedia
                         {
+                            Id = Nanoid.Nanoid.Generate(size:10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157050/Placeholder/Listings/chuttersnap-awL_YCtPGv4_mevzcz.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 5"
                         },
                         new ListingMedia
                         {
+                            Id = Nanoid.Nanoid.Generate(size:10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/sean-pollock-PhYq704ffdA_juovuh.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 6"
                         },
                         new ListingMedia
                         {
+                            Id = Nanoid.Nanoid.Generate(size:10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/jason-briscoe-UV81E0oXXWQ_d1oc5k.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 7"
                         },
                         new ListingMedia
                         {
+                            Id = Nanoid.Nanoid.Generate(size:10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/etienne-beauregard-riverin-B0aCvAVSX8E_epmt4d.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 8"
                         },
                         new ListingMedia
                         {
+                            Id = Nanoid.Nanoid.Generate(size:10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/francesca-tosolini-tHkJAMcO3QE_y8pp1o.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 9"
                         },
                         new ListingMedia
                         {
+                            Id = Nanoid.Nanoid.Generate(size:10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/grant-lemons-jTCLppdwSEc_gvvge5.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 10"
                         },
                         new ListingMedia
                         {
+                            Id = Nanoid.Nanoid.Generate(size:10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/naomi-hebert-MP0bgaS_d1c_izjtsb.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 11"
                         },
                         new ListingMedia
                         {
+                            Id = Nanoid.Nanoid.Generate(size:10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157299/Placeholder/Listings/ionut-vlad-idXQEOxhmvU_svt1mo.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 12"
                         },
                         new ListingMedia
                         {
+                            Id = Nanoid.Nanoid.Generate(size:10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/krystal-black-V5OEpF12pzw_ekn1te.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 13"
                         },
                         new ListingMedia
                         {
+                            Id = Nanoid.Nanoid.Generate(size:10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/ronnie-george-9gGvNWBeOq4_yuw3yd.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 14"
                         },
                         new ListingMedia
                         {
+                            Id = Nanoid.Nanoid.Generate(size:10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/roam-in-color-z3QZ6gjGRt4_evs1kc.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 15"
@@ -170,6 +185,7 @@ namespace Persistence
                         },
                         new DetailedDescription
                         {
+                            Index = 0,
                             Heading = "Room One",
                             Length = rnd.Next(10, 50),
                             Width = 20,
@@ -178,6 +194,7 @@ namespace Persistence
                         },
                         new DetailedDescription
                         {
+                            Index = 1,
                             Heading = "Room Two",
                             Length = 5,
                             Width = 7,
@@ -186,6 +203,7 @@ namespace Persistence
                         },
                         new DetailedDescription
                         {
+                            Index = 2,
                             Heading = "Room Three",
                             Length = 12,
                             Width = 25,
@@ -194,6 +212,7 @@ namespace Persistence
                         },
                         new DetailedDescription
                         {
+                            Index = 3,
                             Heading = "Room Four",
                             Length = 20,
                             Width = 15,
@@ -202,6 +221,7 @@ namespace Persistence
                         },
                         new DetailedDescription
                         {
+                            Index = 4,
                             Heading = "Room Five",
                             Length = 13,
                             Width = 8,
@@ -338,6 +358,7 @@ namespace Persistence
                     {
                         new ListingMedia
                         {
+                            Id = Nanoid.Nanoid.Generate(size:10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/naomi-hebert-MP0bgaS_d1c_izjtsb.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 1",
@@ -345,84 +366,98 @@ namespace Persistence
                         },
                         new ListingMedia
                         {
+                            Id = Nanoid.Nanoid.Generate(size:10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/krystal-black-V5OEpF12pzw_ekn1te.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 2"
                         },
                         new ListingMedia
                         {
+                            Id = Nanoid.Nanoid.Generate(size:10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/roam-in-color-z3QZ6gjGRt4_evs1kc.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 3"
                         },
                         new ListingMedia
                         {
+                            Id = Nanoid.Nanoid.Generate(size:10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157299/Placeholder/Listings/ionut-vlad-idXQEOxhmvU_svt1mo.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 4"
                         },
                         new ListingMedia
                         {
+                            Id = Nanoid.Nanoid.Generate(size:10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/webaliser-_TPTXZd9mOo_yxhvvk.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 5"
                         },
                         new ListingMedia
                         {
+                            Id = Nanoid.Nanoid.Generate(size:10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/ronnie-george-9gGvNWBeOq4_yuw3yd.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 6"
                         },
                         new ListingMedia
                         {
+                            Id = Nanoid.Nanoid.Generate(size:10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/bailey-anselme-Bkp3gLygyeA_jbeyqw.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 7"
                         },
                         new ListingMedia
                         {
+                            Id = Nanoid.Nanoid.Generate(size:10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/jason-briscoe-UV81E0oXXWQ_d1oc5k.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 8"
                         },
                         new ListingMedia
                         {
+                            Id = Nanoid.Nanoid.Generate(size:10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/etienne-beauregard-riverin-B0aCvAVSX8E_epmt4d.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 9"
                         },
                         new ListingMedia
                         {
+                            Id = Nanoid.Nanoid.Generate(size:10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/francesca-tosolini-tHkJAMcO3QE_y8pp1o.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 10"
                         },
                         new ListingMedia
                         {
+                            Id = Nanoid.Nanoid.Generate(size:10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/grant-lemons-jTCLppdwSEc_gvvge5.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 11"
                         },
                         new ListingMedia
                         {
+                            Id = Nanoid.Nanoid.Generate(size:10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/sean-pollock-PhYq704ffdA_juovuh.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 12"
                         },
                         new ListingMedia
                         {
+                            Id = Nanoid.Nanoid.Generate(size:10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157050/Placeholder/Listings/chuttersnap-awL_YCtPGv4_mevzcz.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 13"
                         },
                         new ListingMedia
                         {
+                            Id = Nanoid.Nanoid.Generate(size:10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/avi-waxman-f9qZuKoZYoY_fpqamd.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 14"
                         },
                         new ListingMedia
                         {
+                            Id = Nanoid.Nanoid.Generate(size:10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/sean-pollock-PhYq704ffdA_w9meyd.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 15"
@@ -436,11 +471,13 @@ namespace Persistence
                     {
                         new DetailedDescription
                         {
+                            Index = 0,
                             Heading = "Summary",
                             Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ultricies turpis mi, at ultrices urna finibus eget. Pellentesque a magna lectus. Pellentesque molestie mollis justo eu congue. Donec nibh leo, tempor eu interdum sit amet, lobortis vitae justo. Quisque mollis nisl risus, sed iaculis diam lobortis vel. Pellentesque nisl tortor, scelerisque aliquam purus fringilla, blandit dictum orci. Cras cursus lacinia erat vel mattis. Proin vehicula mi in risus accumsan, at finibus magna laoreet. Cras nisl turpis, lobortis et arcu eget, tincidunt tempor lacus. Praesent posuere elit at felis lacinia, sed venenatis tellus convallis. Duis vel rhoncus nisl, nec lobortis dui. Sed sed convallis odio. Proin convallis mi ut eros accumsan interdum. Etiam elementum diam at sagittis aliquam. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc et faucibus nisi, lobortis venenatis mi.",
                         },
                         new DetailedDescription
                         {
+                            Index = 1,
                             Heading = "Room One",
                             Length = rnd.Next(10, 50),
                             Width = 20,
@@ -449,6 +486,7 @@ namespace Persistence
                         },
                         new DetailedDescription
                         {
+                            Index = 2,
                             Heading = "Room Two",
                             Length = 5,
                             Width = 7,
@@ -457,6 +495,7 @@ namespace Persistence
                         },
                         new DetailedDescription
                         {
+                            Index = 3,
                             Heading = "Room Three",
                             Length = 12,
                             Width = 25,
@@ -465,6 +504,7 @@ namespace Persistence
                         },
                         new DetailedDescription
                         {
+                            Index = 4,
                             Heading = "Room Four",
                             Length = 20,
                             Width = 15,
@@ -473,6 +513,7 @@ namespace Persistence
                         },
                         new DetailedDescription
                         {
+                            Index = 5,
                             Heading = "Room Five",
                             Length = 13,
                             Width = 8,

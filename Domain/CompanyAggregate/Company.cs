@@ -21,7 +21,7 @@ namespace Domain.CompanyAggregate
         public ICollection<CompanyDescription> CompanyDescriptions { get; set; }
         public string CompanyReference { get; set; }
         public string CompanyRegistrationNumber { get; set; }
-        public CompanyType CompanyType { get; set; }
+        public string CompanyType { get; set; } // ie. Sole Trader, Limited Company, Partnership, LLP, Public Company, etc.
         public string DisplayName { get; set; }
         public string IcoRegistrationNumber { get; set; }
         public ICollection<Insurance> Insurances { get; set; }
@@ -34,7 +34,9 @@ namespace Domain.CompanyAggregate
         public string ServiceLocations { get; set; }
         public string SummaryDescription { get; set; }
         public List<string> ServiceCategories { get; set; }
+        public string TermsAndConditions { get; set; } // ie. the download url of the T&C pdf
         public string Username { get; set; }
+        public string VatNumber { get; set; }
 
     }
 }

@@ -44,7 +44,8 @@ namespace Infrastructure.Security
             // find the selected company
             var company = _dbContext.Companies
                 .ProjectTo<CompanyDto>(_mapper.ConfigurationProvider)
-                .FirstOrDefaultAsync(x => x.Id == companyId).Result;
+                .FirstOrDefaultAsync(x => x.Id == companyId)
+                .Result;
 
             if (company == null) return Task.CompletedTask;
 

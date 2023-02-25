@@ -152,15 +152,6 @@ export default class CompanyStore {
     this.selectedCompany = undefined;
   }
 
-  loadMyCompany = async () => {
-    try {
-      const myCompany = await agent.Companies.detailsmycompany();
-      this.myCompany = myCompany;
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   setEditMode = (value: boolean) => { this.editMode = value };
 
   createCompany = async (value: CompanyFormValues) => {

@@ -9,15 +9,15 @@ interface Props {
     dirty: boolean;
     isSubmitting: boolean;
     setFieldValue: (field: string, value: any, shouldValidate?: boolean | undefined) => void;
+    formType: number;
+    setFormType: (value: number) => void;
 }
 
-export default observer(function RegisterCustomerForm({isValid, dirty, isSubmitting, setFieldValue}: Props) {
+export default observer(function RegisterCustomerForm({isValid, dirty, isSubmitting, formType, setFormType, setFieldValue}: Props) {
 
     useEffect(() => {
-        setFieldValue("country", "United Kingdom");
-        setFieldValue("language", "English");
-        setFieldValue("accountType", AccountType.Customer);
-    }, [])
+        if (formType !== 0) setFormType(0);
+    }, [formType])
 
     return (
         <div>
@@ -25,6 +25,9 @@ export default observer(function RegisterCustomerForm({isValid, dirty, isSubmitt
             <MyTextInput inputclassname='register-input-style' errorclassname='register-form-error' name="username" placeholder="Username" />
             <br />
             <MyTextInput inputclassname='register-input-style' errorclassname='register-form-error' name="email" placeholder="Email" />
+            <br />
+            <p className='form-section-value'>Maximum 20 characters: </p>
+            <MyTextInput inputclassname='register-input-style' errorclassname='register-form-error' name="displayName" placeholder="Display name" />
             <br />
             <p className='form-section-value'>Minimum 8 characters, a mix of letters, number and special character: </p>
             <MyTextInput inputclassname='register-input-style' errorclassname='register-form-error' name="password" placeholder="Password" type="password" />

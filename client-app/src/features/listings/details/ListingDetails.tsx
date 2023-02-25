@@ -1,6 +1,8 @@
 import { observer } from "mobx-react-lite";
-import React from "react";
+import React, { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { dateFormatterShort } from "../../../app/common/HelperFunctions";
+import ScrollToTop from "../../../app/layout/ScrollToTop";
 import { Listing } from "../../../app/model/ListingAggregate/Listing";
 import { CookerType, CouncilTaxBand, FurnishedState, LifeCycleStatus, RentalTerm, UnitOfLength, Utility } from "../../../app/model/ListingAggregate/ListingEnums";
 import { DetailedDescription } from "../../../app/model/ListingAggregate/ListingObjects";

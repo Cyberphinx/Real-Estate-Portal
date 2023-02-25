@@ -24,7 +24,6 @@ interface Props {
 export default observer(function Switcher({ isValid, dirty, isSubmitting, setFieldValue,
     handleChange, formType, setFieldTouched, validateField, getFieldMeta, setFormType }: Props) {
 
-
     const accountIndex = getFieldMeta("accountType").value.toString();
 
     function selectForm() {
@@ -92,6 +91,8 @@ export default observer(function Switcher({ isValid, dirty, isSubmitting, setFie
                     dirty={dirty}
                     isSubmitting={isSubmitting}
                     setFieldValue={setFieldValue}
+                    formType={formType}
+                    setFormType={setFormType}
                 />;
             default:
                 return <RegisterCustomerForm
@@ -99,10 +100,11 @@ export default observer(function Switcher({ isValid, dirty, isSubmitting, setFie
                     dirty={dirty}
                     isSubmitting={isSubmitting}
                     setFieldValue={setFieldValue}
+                    formType={formType}
+                    setFormType={setFormType}
                 />;
         }
     }
-
 
     return (
         <div>

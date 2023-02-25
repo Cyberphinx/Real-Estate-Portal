@@ -12,18 +12,19 @@ interface Props {
 }
 
 export default observer(function Removalist({ user }: Props) {
-    const { profileStore, removalistJobStore, userStore, calendarStore } = useStore();
+    const { profileStore, removalistJobStore, userStore, calendarStore, jobInvoiceStore } = useStore();
     const { activeTab, setActiveTab, loadHeadquarter, loadProfile, loadingProfile } = profileStore;
     const { jobs, loadRemovalsJobs, allJobs, loadAllRemovalsJobs } = removalistJobStore;
     const { isLoggedIn } = userStore;
     const { loadEvents } = calendarStore;
+    const { loadInvoices, loadingInvoices, invoices } = jobInvoiceStore;
 
     useEffect(() => {
         if (isLoggedIn && user && user.accountType.toString() === "Removalist") {
             loadProfile(user.username);
             loadHeadquarter(user.username);
             loadRemovalsJobs();
-            loadAllRemovalsJobs();
+            loadAllRemovalsJobs(); // for calendar
             loadEvents(user.username);
         }
         return () => {

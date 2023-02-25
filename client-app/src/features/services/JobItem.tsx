@@ -42,10 +42,20 @@ export default observer(function JobItem({ job }: Props) {
     //     }
     // }
 
+    const customer = job.networks.find(x => x.role.toString() === "Customer");
+
+    const userIcon = () => {
+        if (job.customerImage && job.customerImage.length > 0) return job.customerImage;
+
+        if (customer && customer.image.length > 0)  return customer.image;
+
+        return "https://res.cloudinary.com/dwcsdudyn/image/upload/v1676849709/Placeholder/UserIcons/Creative-Tail-Animal-sheep_civgh4.svg"
+    }
+
     return (
         <article className="thread-container">
             <div className="thread-author">
-                <img className="default-user-icon" src="/assets/default-user-icon.jpg" alt="user" />
+                <img className="default-user-icon" src={userIcon()} alt="user" />
             </div>
             <div className="thread-post">
                 <div className="thread-subtitle">
@@ -53,7 +63,7 @@ export default observer(function JobItem({ job }: Props) {
                         {job.jobLocations[0].townOrCity}
                     </span> - Posted by {job.customerName ?
                         job.customerName
-                        : job.networks.find(x => x.role.toString() === "Customer")?.displayName}
+                        : customer?.displayName}
                     - {dateFormatter(job.addedOn)}
                 </div>
                 <p className="thread-title">{job.title} </p>

@@ -36,33 +36,61 @@ namespace API.Controllers
             _context = context;
         }
 
-        [Authorize]
-        [HttpPost]
-        public async Task<ActionResult<InvoiceDto>> CreateOrUpdatePaymentIntent()
-        {
-            // find the invoice by username
-            var invoice = await _context.Invoices
-                .Where(i => i.Username == User.Identity.Name)
-                .FirstOrDefaultAsync();
+        // [Authorize]
+        // [HttpPost]
+        // public async Task<ActionResult<UserInvoiceDto>> CreateOrUpdateUserPaymentIntent()
+        // {
+        //     // find the invoice by username
+        //     var invoice = await _context.UserInvoices
+        //         .Where(i => i.Username == User.Identity.Name)
+        //         .FirstOrDefaultAsync();
 
-            if (invoice == null) return NotFound();
+        //     if (invoice == null) return NotFound();
 
-            // create payment intent
-            var intent = await _paymentService.CreateOrUpdatePaymentIntent(invoice);
+        //     // create payment intent
+        //     var intent = await _paymentService.CreateOrUpdatePaymentIntent(invoice);
 
-            if (intent == null) return BadRequest(new ProblemDetails { Title = "Problem creating payment intent" });
+        //     if (intent == null) return BadRequest(new ProblemDetails { Title = "Problem creating payment intent" });
 
-            invoice.PaymentIntentId = invoice.PaymentIntentId ?? intent.Id;
-            invoice.ClientSecret = invoice.ClientSecret ?? intent.ClientSecret;
+        //     invoice.PaymentIntentId = invoice.PaymentIntentId ?? intent.Id;
+        //     invoice.ClientSecret = invoice.ClientSecret ?? intent.ClientSecret;
 
-            _context.Update(invoice);
+        //     _context.Update(invoice);
 
-            var result = await _context.SaveChangesAsync() > 0;
+        //     var result = await _context.SaveChangesAsync() > 0;
 
-            if (!result) return BadRequest(new ProblemDetails { Title = "Problem updating the current invoice with intent" });
+        //     if (!result) return BadRequest(new ProblemDetails { Title = "Problem updating the current invoice with intent" });
 
-            return invoice.MapInvoiceToDto();
-        }
+        //     return invoice.MapInvoiceToDto();
+        // }
+
+        // [Authorize]
+        // [HttpPost]
+        // public async Task<ActionResult<JobInvoiceDto>> CreateOrUpdateJobPaymentIntent()
+        // {
+        //     // find the invoice by username
+        //     var invoice = await _context.JobInvoices
+        //         .Where(i => i.Username == User.Identity.Name)
+        //         .FirstOrDefaultAsync();
+
+        //     if (invoice == null) return NotFound();
+
+        //     // create payment intent
+        //     var intent = await _paymentService.CreateOrUpdatePaymentIntent(invoice);
+
+        //     if (intent == null) return BadRequest(new ProblemDetails { Title = "Problem creating payment intent" });
+
+        //     invoice.PaymentIntentId = invoice.PaymentIntentId ?? intent.Id;
+        //     invoice.ClientSecret = invoice.ClientSecret ?? intent.ClientSecret;
+
+        //     _context.Update(invoice);
+
+        //     var result = await _context.SaveChangesAsync() > 0;
+
+        //     if (!result) return BadRequest(new ProblemDetails { Title = "Problem updating the current invoice with intent" });
+
+        //     return invoice.MapInvoiceToDto();
+        // }
 
         [AllowAnonymous]
         [HttpPost("webhook")]
@@ -75,7 +103,7 @@ namespace API.Controllers
 
             var charge = (Charge)stripeEvent.Data.Object;
 
-            var invoice = await _context.Invoices.FirstOrDefaultAsync(x =>
+            var invoice = await _context.UserInvoices.FirstOrDefaultAsync(x =>
                 x.PaymentIntentId == charge.PaymentIntentId);
 
             // var user = await _userManager.Users.Include(m => m.Membership).FirstOrDefaultAsync(x => x.UserName == invoice.Username);

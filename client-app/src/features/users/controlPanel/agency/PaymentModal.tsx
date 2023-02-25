@@ -6,15 +6,15 @@ import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import priceFormatter from '../../../../app/common/PriceFormatter';
 import StripeForm from '../../register/payment/StripeForm';
-import { Invoice } from '../../../../app/model/Invoice';
+import { UserInvoice } from '../../../../app/model/Invoice';
 
 const stripePromise = loadStripe('pk_test_51L6i4NELV0KnfWeJgoqaVUo7jOES7YMDlWgtdHdwAXRsd2ExfVwP7sU9DhIyjES0JN7yly88c9HKpp0lBvtjIakX00pl6UGKM9');
 
 interface Props {
-    invoice: Invoice;
+    invoice: UserInvoice;
 }
 
-export default observer(function SignUp({invoice}:Props) {
+export default observer(function SignUp({ invoice }:Props) {
     const { modalStore } = useStore();
     const { closeModal } = modalStore;
 

@@ -9,15 +9,15 @@ import './PaymentWrapper.css';
 const stripePromise = loadStripe('pk_test_51L6i4NELV0KnfWeJgoqaVUo7jOES7YMDlWgtdHdwAXRsd2ExfVwP7sU9DhIyjES0JN7yly88c9HKpp0lBvtjIakX00pl6UGKM9');
 
 export default observer(function PaymentWrapper() {
-    const { userStore, invoiceStore } = useStore();
+    const { userStore, userInvoiceStore } = useStore();
     const { isLoggedIn, user } = userStore;
-    const { loadFirstInvoice, loadingInvoice, clientSecret } = invoiceStore;
+    const { loadFirstInvoice, loadingInvoice, clientSecret } = userInvoiceStore;
 
     useEffect(() => {
         if (isLoggedIn && user?.accountType.toString() === "Agent") {
             loadFirstInvoice();
         }
-    }, [loadFirstInvoice, isLoggedIn]);
+    }, [loadFirstInvoice, isLoggedIn, user?.accountType]);
 
     const appearance: any = {
         theme: 'stripe',

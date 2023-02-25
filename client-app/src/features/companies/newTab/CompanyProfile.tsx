@@ -39,7 +39,7 @@ export default function CompanyProfile({ company, user, setEditMode }: Props) {
                     <h3>Company insurances: </h3>
                     <div>{company?.insurances.map((insurance: Insurance) => (
                         <div key={insurance.id}>
-                            <p>{insurance.type} - {insurance.provider}</p>
+                            <p>{insurance.insuranceType} - {insurance.provider}</p>
                         </div>
                     ))}</div>
                 </div>

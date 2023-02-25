@@ -17,26 +17,25 @@ import RemovalsJobForm from "./RemovalsJobForm";
 export default observer(function CreateRemovalsJob() {
     const { id } = useParams<string>();
     const { removalistJobStore, jobStore, userStore, calendarStore } = useStore();
-    const { removalsJobFormStep, setRemovalsJobFormStep, loadAllRemovalsJobs, allJobs, loadingJobs } = removalistJobStore;
+    const { loadAllRemovalsJobs, loadingJobs } = removalistJobStore;
     const { loadJob, createJob, updateJob, loadingJob } = jobStore;
     const { isLoggedIn, user } = userStore;
     const { loadEvents } = calendarStore;
 
     const [currentRemovalsJobValues, setCurrentRemovalsJobValues] = useState<JobFormValues>(new JobFormValues());
 
+    // this is for editing an existing job data
     useEffect(() => {
         if (id) loadJob(id).then(jobValues => setCurrentRemovalsJobValues(new JobFormValues(jobValues)));
     }, [id, loadJob]);
 
+    // this is for the calender availability data
     useEffect(() => {
         loadAllRemovalsJobs();
         loadEvents("moving");
     }, [loadAllRemovalsJobs, loadEvents])
 
     function handleFormSubmit(job: JobFormValues) {
-        // let correctDate = new Date(job.finishBy!);
-        // correctDate.setTime(correctDate.getTime() - correctDate.getTimezoneOffset() * 60 * 1000);
-
         if (!job.id) {
             let newJob = {
                 ...job,
@@ -44,7 +43,7 @@ export default observer(function CreateRemovalsJob() {
                 jobReference: nanoid(10),
                 serviceCategories: ["Removals"],
                 jobLifeCycle: JobLifeCycle.Open,
-                title: `Moving from ${job.jobLocations![0].townOrCity} ${job.jobLocations![0].postalCode} to ${job.jobLocations![1].townOrCity} ${job.jobLocations![1].postalCode}`
+                title: `Relocation from ${job.jobLocations![0].townOrCity} ${job.jobLocations![0].postalCode} to ${job.jobLocations![1].townOrCity} ${job.jobLocations![1].postalCode}`
             };
             createJob(newJob).then(() => history.push(`/removals-job-confirmation/${newJob.id}`));
         } else {
@@ -85,6 +84,11 @@ export default observer(function CreateRemovalsJob() {
             }
             )
         }
+        if (isLoggedIn && user) {
+            currentRemovalsJobValues.customerName = user.displayName;
+            currentRemovalsJobValues.customerEmail = user.email;
+            currentRemovalsJobValues.customerPhone = user.phoneNumber;
+        }
         return currentRemovalsJobValues;
     }
 
@@ -106,7 +110,7 @@ export default observer(function CreateRemovalsJob() {
     return (
         <div>
             <Nav />
-            <div style={{ display: 'flex', justifyContent: 'center', backgroundImage: "linear-gradient(to top left, #FFCEFE, #AEE2FF)" }}>
+            <div className="removals-form__container">
                 <Formik
                     initialValues={initialValues()}
                     enableReinitialize
@@ -128,10 +132,8 @@ export default observer(function CreateRemovalsJob() {
                                     <RemovalsJobForm
                                         values={values}
                                         setFieldValue={setFieldValue}
-                                        step={removalsJobFormStep}
-                                        setStep={setRemovalsJobFormStep}
                                         isValid={isValid}
-                                        isSubmitting={false}
+                                        isSubmitting={isSubmitting}
                                     />
                                 </div>
                             }

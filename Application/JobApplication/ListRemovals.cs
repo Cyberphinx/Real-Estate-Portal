@@ -17,12 +17,12 @@ namespace Application.JobApplication
 {
     public class ListRemovals
     {
-        public class Query : IRequest<Result<PagedList<JobDto>>> 
+        public class Query : IRequest<Result<PagedList<JobRemovalsDto>>> 
         {
             public JobParams Params { get; set; }
         }
 
-        public class Handler : IRequestHandler<Query, Result<PagedList<JobDto>>>
+        public class Handler : IRequestHandler<Query, Result<PagedList<JobRemovalsDto>>>
         {
             private readonly DataContext _context;
             private readonly IMapper _mapper;
@@ -32,7 +32,7 @@ namespace Application.JobApplication
                 _context = context;
             }
 
-            public async Task<Result<PagedList<JobDto>>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Result<PagedList<JobRemovalsDto>>> Handle(Query request, CancellationToken cancellationToken)
             {
                 Console.WriteLine($"The request datetime in UTC time: {request.Params.FinishBy}");
                 Console.WriteLine($"The request datetime in LOCAL time: {request.Params.FinishBy.ToLocalTime()}");
@@ -44,12 +44,12 @@ namespace Application.JobApplication
                     .FilterJobs(request.Params.ServiceCategory, request.Params.FinishBy)
                     .SearchJobsOnMap(request.Params.MapBounds)
                     .SortJobs(request.Params.OrderBy)
-                    .ProjectTo<JobDto>(_mapper.ConfigurationProvider) //Automapper projection mapping is much better than .include in terms of SQL query efficiency
+                    .ProjectTo<JobRemovalsDto>(_mapper.ConfigurationProvider) //Automapper projection mapping is much better than .include in terms of SQL query efficiency
                     .AsSplitQuery()
                     .AsQueryable();
 
-                return Result<PagedList<JobDto>>.Success(
-                   await PagedList<JobDto>.CreateAsync(query, request.Params.PageNumber, request.Params.PageSize)
+                return Result<PagedList<JobRemovalsDto>>.Success(
+                   await PagedList<JobRemovalsDto>.CreateAsync(query, request.Params.PageNumber, request.Params.PageSize)
                );
             }
         }

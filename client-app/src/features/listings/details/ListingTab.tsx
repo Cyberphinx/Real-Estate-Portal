@@ -10,6 +10,7 @@ import ListingDetails from "./ListingDetails";
 import ListingContact from "./ListingContact";
 import WatchButton from "../../../app/common/WatchButton";
 import { ListingMediaDto } from "../../../app/model/ListingAggregate/ListingObjects";
+import ScrollToTop from "../../../app/layout/ScrollToTop";
 
 interface Props {
     listing: Listing | undefined;

@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { dateFormatter, dateFormatterShort } from "../../../../../app/common/HelperFunctions";
 import priceFormatter from "../../../../../app/common/PriceFormatter";
 import InvoiceStatusTag from "../../../../../app/common/tags/InvoiceStatusTag";
-import { Invoice, InvoiceItem } from "../../../../../app/model/Invoice";
+import { InvoiceItem, UserInvoice } from "../../../../../app/model/Invoice";
 import { useStore } from "../../../../../app/stores/store";
 import PaymentModal from "../PaymentModal";
 import './MembershipTab.css';
@@ -65,11 +65,11 @@ export default observer(function MembershipTab() {
                         <button className="account-edit-button">Add</button>
                     </div>
 
-                    <p className="account-tab-subtitle">Invoices</p>
+                    {/* <p className="account-tab-subtitle">Invoices</p>
                     <div style={{ position: "relative" }}>
                         <p className="account-tab-label">Invoices</p>
                         <p className="account-tab-value">Total invoices for this account: {profile?.invoices.length}</p>
-                        {profile?.invoices.map((invoice: Invoice) => (
+                        {profile?.invoices.map((invoice: UserInvoice) => (
                             <div key={invoice.id} className="invoice-container">
                                 <InvoiceStatusTag invoice={invoice} />
                                 <div style={{ paddingRight: "20px" }}>
@@ -148,7 +148,7 @@ export default observer(function MembershipTab() {
                                 </button>
                             </div>
                         ))}
-                    </div>
+                    </div> */}
                 </section>
         </div>
     )

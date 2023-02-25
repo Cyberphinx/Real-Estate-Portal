@@ -1,11 +1,10 @@
-import { CompanyAddress } from './Company';
+import { CompanyAddress, CompanyContacts, CompanyDescription, CompanyReview, CompanyType, Insurance } from './Company';
 import { Membership } from './Membership';
 import { AccessStatus } from './AccessStatus';
 import { Review } from "./Review";
 import { JobLifeCycle, JobNetworkRole } from './Job';
 import { Frequency, LifeCycleStatus, PriceQualifier, TransactionType } from './ListingAggregate/ListingEnums';
-import { MediaType } from './Media';
-import { Invoice } from './Invoice';
+import { Media, MediaType } from './Media';
 
 export interface Profile {
     username: string;
@@ -16,7 +15,6 @@ export interface Profile {
     photos: PhotoDto[];
     membership: Membership;
     reviews: AppUserReview[];
-    invoices: Invoice[];
 }
 
 export interface PhotoDto {
@@ -60,13 +58,28 @@ export interface WatcherListingDto {
 export interface UserCompanyDto {
     id: string;
     accessStatus: AccessStatus;
+    addedOn: Date;
+    companyAddress: CompanyAddress;
+    companyContacts: CompanyContacts;
+    companyMedia: Media[];
+    companyDescriptions: CompanyDescription[];
     companyReference: string;
+    companyRegistrationNumber: string;
+    companyType: string;
     displayName: string;
+    icoRegistrationNumber: string;
+    insurances: Insurance[];
     isMain: boolean;
+    lastMofidied: Date;
     legalName: string;
     listingsCount: number;
+    redressScheme: string;
+    reviews: CompanyReview[];
+    serviceLocations: string;
     summaryDescription: string;
+    serviceCategories: string[];
+    termsAndConditions: string;
     username: string;
-    companyAddress: CompanyAddress;
+    vatNumber: string;
 }
 

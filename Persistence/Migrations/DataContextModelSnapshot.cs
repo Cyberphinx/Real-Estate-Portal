@@ -67,6 +67,9 @@ namespace Persistence.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<string>("NewEmail")
+                        .HasColumnType("text");
+
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)");
@@ -104,6 +107,89 @@ namespace Persistence.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.AppUserAggregate.Objects.AppUserInvoice", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<long>("Amount")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ClientSecret")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Currency")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Index")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("InvoiceDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsQuotation")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("PaymentIntentId")
+                        .HasColumnType("text");
+
+                    b.Property<int>("PaymentStatus")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("text");
+
+                    b.Property<long>("VatPercentage")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("UserInvoices");
+                });
+
+            modelBuilder.Entity("Domain.AppUserAggregate.Objects.AppUserInvoiceItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<long>("Amount")
+                        .HasColumnType("bigint");
+
+                    b.Property<Guid>("AppUserInvoiceId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Currency")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Index")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("text");
+
+                    b.Property<long>("VatPercentage")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserInvoiceId");
+
+                    b.ToTable("AppUserInvoiceItem");
                 });
 
             modelBuilder.Entity("Domain.AppUserAggregate.Objects.AppUserMedia", b =>
@@ -276,8 +362,8 @@ namespace Persistence.Migrations
                     b.Property<string>("CompanyRegistrationNumber")
                         .HasColumnType("text");
 
-                    b.Property<int>("CompanyType")
-                        .HasColumnType("integer");
+                    b.Property<string>("CompanyType")
+                        .HasColumnType("text");
 
                     b.Property<string>("DisplayName")
                         .HasColumnType("text");
@@ -306,7 +392,13 @@ namespace Persistence.Migrations
                     b.Property<string>("SummaryDescription")
                         .HasColumnType("text");
 
+                    b.Property<string>("TermsAndConditions")
+                        .HasColumnType("text");
+
                     b.Property<string>("Username")
+                        .HasColumnType("text");
+
+                    b.Property<string>("VatNumber")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -495,11 +587,11 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<int>("ClientMoneyProtection")
-                        .HasColumnType("integer");
-
                     b.Property<Guid>("CompanyId")
                         .HasColumnType("uuid");
+
+                    b.Property<string>("Currency")
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("Expiry")
                         .HasColumnType("timestamp with time zone");
@@ -507,14 +599,23 @@ namespace Persistence.Migrations
                     b.Property<string>("IndemnityLimit")
                         .HasColumnType("text");
 
+                    b.Property<int>("Index")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("InsurancePolicy")
+                        .HasColumnType("text");
+
+                    b.Property<string>("InsuranceScheme")
+                        .HasColumnType("text");
+
+                    b.Property<string>("InsuranceType")
+                        .HasColumnType("text");
+
                     b.Property<string>("PolicyNumber")
                         .HasColumnType("text");
 
                     b.Property<string>("Provider")
                         .HasColumnType("text");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -598,84 +699,6 @@ namespace Persistence.Migrations
                     b.ToTable("EmployeePhoto");
                 });
 
-            modelBuilder.Entity("Domain.InvoiceAggregate.Invoice", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<long>("Amount")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("ClientSecret")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Currency")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("InvoiceDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<int>("InvoiceNumber")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("JobReference")
-                        .HasColumnType("text");
-
-                    b.Property<string>("PaymentIntentId")
-                        .HasColumnType("text");
-
-                    b.Property<int>("PaymentStatus")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Username")
-                        .HasColumnType("text");
-
-                    b.Property<long>("VatPercentage")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Invoices");
-                });
-
-            modelBuilder.Entity("Domain.InvoiceAggregate.InvoiceItem", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<long>("Amount")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Currency")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
-
-                    b.Property<Guid>("InvoiceId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("text");
-
-                    b.Property<long>("VatPercentage")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("InvoiceId");
-
-                    b.ToTable("InvoiceItem");
-                });
-
             modelBuilder.Entity("Domain.JobAggregate.Job", b =>
                 {
                     b.Property<Guid>("Id")
@@ -742,6 +765,92 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Jobs");
+                });
+
+            modelBuilder.Entity("Domain.JobAggregate.Objects.JobInvoice", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<long>("Amount")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("ClientSecret")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Currency")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Index")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("InvoiceDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsQuotation")
+                        .HasColumnType("boolean");
+
+                    b.Property<Guid>("JobId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("PaymentIntentId")
+                        .HasColumnType("text");
+
+                    b.Property<int>("PaymentStatus")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("SellerUsername")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("text");
+
+                    b.Property<long>("VatPercentage")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("JobId");
+
+                    b.ToTable("JobInvoices");
+                });
+
+            modelBuilder.Entity("Domain.JobAggregate.Objects.JobInvoiceItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<long>("Amount")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Currency")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Index")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("JobInvoiceId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("text");
+
+                    b.Property<long>("VatPercentage")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("JobInvoiceId");
+
+                    b.ToTable("JobInvoiceItem");
                 });
 
             modelBuilder.Entity("Domain.JobAggregate.Objects.JobLocation", b =>
@@ -1372,42 +1481,42 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "a8669529-18af-47d4-b629-e8e65908d899",
+                            ConcurrencyStamp = "61341e52-a848-42bb-ab0b-0d40ef78a7e3",
                             Name = "Company",
                             NormalizedName = "COMPANY"
                         },
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "35923334-e963-4a94-ac5f-185da8a14d95",
+                            ConcurrencyStamp = "3bb7e062-7ea1-4f8c-a9d0-9849a8a65759",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
                             Id = "3",
-                            ConcurrencyStamp = "16e9a8da-3363-4273-83c0-9a53d1727be7",
+                            ConcurrencyStamp = "44636d1c-027e-4a08-b5c7-1781e0a2e2a7",
                             Name = "Agency",
                             NormalizedName = "AGENCY"
                         },
                         new
                         {
                             Id = "4",
-                            ConcurrencyStamp = "36673e0b-f21c-4b4d-9a5e-9c399eebad7a",
+                            ConcurrencyStamp = "2d54f083-cecf-433b-8474-10aa1a0f590d",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "5",
-                            ConcurrencyStamp = "f2b0040a-e3af-4103-b32d-20f97f769c8d",
+                            ConcurrencyStamp = "eb84ebaa-9437-453b-b581-b55fd38c2469",
                             Name = "Manager",
                             NormalizedName = "MANAGER"
                         },
                         new
                         {
                             Id = "6",
-                            ConcurrencyStamp = "9cba08f3-193f-4c85-bad4-cce20efca7ad",
+                            ConcurrencyStamp = "27f1ea9e-1c9e-47c8-b915-0c8c2047abee",
                             Name = "Removalist",
                             NormalizedName = "REMOVALIST"
                         });
@@ -1517,6 +1626,26 @@ namespace Persistence.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.AppUserAggregate.Objects.AppUserInvoice", b =>
+                {
+                    b.HasOne("Domain.AppUserAggregate.AppUser", "AppUser")
+                        .WithMany("Invoices")
+                        .HasForeignKey("AppUserId");
+
+                    b.Navigation("AppUser");
+                });
+
+            modelBuilder.Entity("Domain.AppUserAggregate.Objects.AppUserInvoiceItem", b =>
+                {
+                    b.HasOne("Domain.AppUserAggregate.Objects.AppUserInvoice", "AppUserInvoice")
+                        .WithMany("Items")
+                        .HasForeignKey("AppUserInvoiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUserInvoice");
                 });
 
             modelBuilder.Entity("Domain.AppUserAggregate.Objects.AppUserMedia", b =>
@@ -1635,15 +1764,26 @@ namespace Persistence.Migrations
                     b.Navigation("Employee");
                 });
 
-            modelBuilder.Entity("Domain.InvoiceAggregate.InvoiceItem", b =>
+            modelBuilder.Entity("Domain.JobAggregate.Objects.JobInvoice", b =>
                 {
-                    b.HasOne("Domain.InvoiceAggregate.Invoice", "Invoice")
-                        .WithMany("Items")
-                        .HasForeignKey("InvoiceId")
+                    b.HasOne("Domain.JobAggregate.Job", "Job")
+                        .WithMany("Invoices")
+                        .HasForeignKey("JobId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Invoice");
+                    b.Navigation("Job");
+                });
+
+            modelBuilder.Entity("Domain.JobAggregate.Objects.JobInvoiceItem", b =>
+                {
+                    b.HasOne("Domain.JobAggregate.Objects.JobInvoice", "JobInvoice")
+                        .WithMany("Items")
+                        .HasForeignKey("JobInvoiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("JobInvoice");
                 });
 
             modelBuilder.Entity("Domain.JobAggregate.Objects.JobLocation", b =>
@@ -1861,6 +2001,8 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.AppUserAggregate.AppUser", b =>
                 {
+                    b.Navigation("Invoices");
+
                     b.Navigation("Jobs");
 
                     b.Navigation("Membership");
@@ -1872,6 +2014,11 @@ namespace Persistence.Migrations
                     b.Navigation("Reviews");
 
                     b.Navigation("SavedListings");
+                });
+
+            modelBuilder.Entity("Domain.AppUserAggregate.Objects.AppUserInvoice", b =>
+                {
+                    b.Navigation("Items");
                 });
 
             modelBuilder.Entity("Domain.CompanyAggregate.Company", b =>
@@ -1898,13 +2045,10 @@ namespace Persistence.Migrations
                     b.Navigation("Portfolio");
                 });
 
-            modelBuilder.Entity("Domain.InvoiceAggregate.Invoice", b =>
-                {
-                    b.Navigation("Items");
-                });
-
             modelBuilder.Entity("Domain.JobAggregate.Job", b =>
                 {
+                    b.Navigation("Invoices");
+
                     b.Navigation("JobLocations");
 
                     b.Navigation("JobMedia");
@@ -1912,6 +2056,11 @@ namespace Persistence.Migrations
                     b.Navigation("Messages");
 
                     b.Navigation("Networks");
+                });
+
+            modelBuilder.Entity("Domain.JobAggregate.Objects.JobInvoice", b =>
+                {
+                    b.Navigation("Items");
                 });
 
             modelBuilder.Entity("Domain.ListingAggregate.Listing", b =>

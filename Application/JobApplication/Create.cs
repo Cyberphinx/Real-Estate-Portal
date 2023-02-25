@@ -46,8 +46,6 @@ namespace Application.JobApplication
 
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
-
-
                 // set AddedOn time
                 request.Job.AddedOn = DateTime.UtcNow;
 

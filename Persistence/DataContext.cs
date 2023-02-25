@@ -11,7 +11,6 @@ using Microsoft.EntityFrameworkCore;
 using Domain.TrackingAggregate;
 using Domain.AppUserAggregate.Objects;
 using Domain.EmployeeAggregate;
-using Domain.InvoiceAggregate;
 using Domain.CalendarAggregate;
 
 namespace Persistence
@@ -28,11 +27,12 @@ namespace Persistence
         public DbSet<Job> Jobs { get; set; }
         public DbSet<JobNetwork> JobNetworks { get; set; }
         public DbSet<JobMessage> JobMessages { get; set; }
-        public DbSet<Invoice> Invoices { get; set; }
         public DbSet<Tracking> TrackingData { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<KeyPerson> KeyPersons { get; set; }
         public DbSet<CalendarEvent> Events { get; set; }
+        public DbSet<AppUserInvoice> UserInvoices { get; set; }
+        public DbSet<JobInvoice> JobInvoices { get; set; }
 
         // public DbSet<ListingMedia> ListingMedia { get; set; }
         // public DbSet<CompanyMedia> CompanyMedia { get; set; }

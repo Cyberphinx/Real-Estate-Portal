@@ -19,9 +19,6 @@ export default class RemovalistJobStore {
   nonExistentDate = new Date(1000, 10, 10,0,0,0);
   predicate = new Map().set("orderBy", "_").set("finishBy", this.nonExistentDate as Date); 
 
-  // form steps
-  removalsJobFormStep: number = 0;
-
   constructor() {
     makeAutoObservable(this);
 
@@ -161,9 +158,5 @@ export default class RemovalistJobStore {
   // prepare job for view
   get jobs() {
     return Array.from(this.removalistJobRegistry.values());
-  }
-
-  setRemovalsJobFormStep = (value: number) => {
-    this.removalsJobFormStep = value;
   }
 }

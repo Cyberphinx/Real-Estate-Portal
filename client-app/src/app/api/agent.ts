@@ -10,7 +10,7 @@ import { PaginatedResult } from '../model/Pagination';
 import { Listing, ListingFormValues } from '../model/ListingAggregate/Listing';
 import { Job, JobFormValues, JobMediaDto } from '../model/Job';
 import { CalendarEvent } from '../model/CalendarEvent';
-import { Invoice } from '../model/Invoice';
+import { JobInvoice, JobInvoiceFormValues, UserInvoice } from '../model/Invoice';
 
 // adding fake delay
 const sleep = (delay: number) => {
@@ -131,7 +131,6 @@ const Listings = {
 const Companies = {
   list: (params: URLSearchParams) => axios.get<PaginatedResult<Company[]>>("/company", { params }).then(responseBody),
   details: (id: string) => requests.get<Company>(`/company/${id}`),
-  detailsmycompany: () => requests.get<Company>(`/company/owner`),
   create: (company: CompanyFormValues) => requests.post<Company>('/company', company),
   update: (company: CompanyFormValues) => requests.put<Company>(`/company/${company.id}`, company),
   delete: (id: string) => requests.del<void>(`/company/${id}`),
@@ -170,7 +169,9 @@ const Calendar = {
 }
 
 const Invoices = {
-  getFirstInvoice: () => requests.get<Invoice>("/invoice")
+  getFirstUserInvoice: () => requests.get<UserInvoice>("/invoice"),
+  createJobInvoice: (invoice: JobInvoiceFormValues, jobId: string) => requests.post<void>(`/invoice/job/${jobId}`, invoice),
+  list: () => requests.get<JobInvoice[]>("/invoice/seller"),
 }
 
 const agent = {

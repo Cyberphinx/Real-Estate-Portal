@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { dateFormatterShort } from "../../../../../app/common/HelperFunctions";
 import LoadingComponent from "../../../../../app/common/loading/LoadingComponent";
@@ -7,11 +7,21 @@ import priceFormatter from "../../../../../app/common/PriceFormatter";
 import DateTag from "../../../../../app/common/tags/DateTag";
 import { Job, JobLifeCycle, JobLocation } from "../../../../../app/model/Job";
 import { useStore } from "../../../../../app/stores/store";
+import JobInvoices from "./JobInvoices";
 import "./RemovalsJobs.css";
 
 export default observer(function RemovalsJobs() {
     const { removalistJobStore } = useStore();
     const { jobs, loadingJobs } = removalistJobStore;
+
+    const [showInvoices, setShowInvoices] = useState<boolean>(false);
+    const [currentJobId, setCurrentJobId] = useState<string | undefined>(undefined);
+
+    // function handleShowInvoices(jobId: string) {
+    //     if (jobId === currentJobId) {
+    //         setShowInvoices(true);
+    //     }
+    // }
 
     const address = (address: JobLocation) =>
         `${address.propertyNumberOrName && (address.propertyNumberOrName + ", ")}
@@ -22,9 +32,9 @@ export default observer(function RemovalsJobs() {
         ${address.postalCode && (address.postalCode)}
         `;
 
-    const username = (job: Job) => {
-        return job.customerName ? job.customerName : job.networks.find(x => x.role.toString() === "Customer")?.username;
-    }
+    // const username = (job: Job) => {
+    //     return job.customerName ? job.customerName : job.networks.find(x => x.role.toString() === "Customer")?.username;
+    // }
 
     const displayName = (job: Job) => {
         return job.customerName ? job.customerName : job.networks.find(x => x.role.toString() === "Customer")?.displayName;
@@ -70,7 +80,7 @@ export default observer(function RemovalsJobs() {
                     </button>
                 </div> */}
 
-            <div className="view-listing__container">
+            <div style={{ padding: '0 2.5rem' }}>
                 {loadingJobs ?
                     <div style={{ position: 'absolute', left: '40%', top: '60%' }}>
                         <LoadingComponent content={'Loading...'} />
@@ -99,9 +109,9 @@ export default observer(function RemovalsJobs() {
                                         <span className="removals-jobs__tag" style={{ background: '#FF78F0' }}>
                                             Move date: {dateFormatterShort(job.finishBy)}
                                         </span>
-                                        <span className="removals-jobs__tag" style={{ background: '#2192FF' }}>
-                                            Added on: {dateFormatterShort(job.addedOn)}
-                                        </span>
+                                        {/* <span className="removals-jobs__tag" style={{ background: '#2192FF' }}>
+                                            Invoices: {job.invoicesCount}
+                                        </span> */}
                                         <span className="removals-jobs__tag" style={{ background: '#00FFD1', color: '#000' }}>
                                             {job.jobLifeCycle}
                                         </span>
@@ -117,15 +127,37 @@ export default observer(function RemovalsJobs() {
                                         <p className="removals-jobs__subtitle">Job description:</p>
                                         <p className="removals-jobs__description">{job.description}</p>
                                     </div>
+                                    {showInvoices && <JobInvoices job={job} showInvoices={showInvoices} currentJobId={currentJobId} />}
                                 </div>
+
                             </div>
 
+                            <div className="removals-jobs__footer">
+                                {/* <button className="removals-jobs__quote-button">Create quotation</button>
+                                <button className="removals-jobs__quote-button">View quotations</button> */}
+                                <button className="removals-jobs__invoice-button">
+                                    <Link to={`/creat-invoice/job/${job.id}`} target="_blank"
+                                        style={{ color: '#fff', textDecoration: 'none' }}
+                                    >New invoice</Link>
+                                </button>
+                                <button
+                                    className="removals-jobs__invoice-button"
+                                    onClick={() => {
+                                        setCurrentJobId(job.id);
+                                        if (job.invoices[0].jobId === currentJobId && showInvoices === false) setShowInvoices(true);
+                                        if (job.invoices[0].jobId === currentJobId && showInvoices === true) setShowInvoices(false);
+                                    }}
+                                >
+                                    <span>{showInvoices && currentJobId === job.invoices[0].jobId ? 'Hide ' : 'Show '}</span>
+                                    <span>{job.invoicesCount > 0 && job.invoicesCount} invoices</span>
+                                </button>
+                            </div>
 
-                            <button className="view-listing__edit-button">
-                                <Link to={`/invoice/${job.id}`} target="_blank"
+                            {/* <button className="view-listing__edit-button">
+                                <Link to={`/creat-invoice/job/${job.id}`} target="_blank"
                                     style={{ color: '#fff', textDecoration: 'none' }}
                                 >Invoice</Link>
-                            </button>
+                            </button> */}
                         </div>
                     ))
                 }

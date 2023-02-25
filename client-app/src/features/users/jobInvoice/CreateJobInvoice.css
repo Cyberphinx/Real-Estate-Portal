@@ -1,0 +1,18 @@
+.job-invoice-form__company-info {
+    padding-left: 2.5rem;
+    width: 28rem;
+    background: #fff;
+    padding: 2.5rem;
+    border-radius: 0.5rem;
+}
+
+.job-invoice-form__footer {
+    margin-top: 3rem;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 2.5rem;
+    background: #fff;
+    padding: 2.5rem;
+    border-radius: 0.5rem;
+}

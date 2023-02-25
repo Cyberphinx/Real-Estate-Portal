@@ -11,22 +11,23 @@ import MyTextArea from "../../../app/common/form/MyTextArea";
 import MyTextInput from "../../../app/common/form/MyTextInput";
 import { dateFormatterShort } from "../../../app/common/HelperFunctions";
 import { CalendarEvent } from "../../../app/model/CalendarEvent";
+import { Field } from "formik";
 
 interface Props {
-    step: number;
-    setStep: (value: number) => void;
     values: JobFormValues;
     setFieldValue: (field: string, value: any, shouldValidate?: boolean | undefined) => void;
     isValid: boolean;
     isSubmitting: boolean;
 }
 
-export default observer(function RemovalsJobForm({ values, setFieldValue, step, setStep, isValid, isSubmitting }: Props) {
+export default observer(function RemovalsJobForm({ values, setFieldValue, isValid, isSubmitting }: Props) {
     const { featureStore, userStore, removalistJobStore, calendarStore } = useStore();
     const { setActiveFeature } = featureStore;
     const { user, isLoggedIn } = userStore;
     const { allJobs } = removalistJobStore;
     const { events } = calendarStore;
+
+    const [showContactsInputs, setShowContactsInputs] = useState<boolean>();
 
     const [marks, setMarks] = useState<Set<string>>(new Set());
     const greyDates = useCallback(() => {
@@ -52,6 +53,7 @@ export default observer(function RemovalsJobForm({ values, setFieldValue, step, 
         }
     }, [allJobs, events, greyDates])
 
+
     return (
         <div style={{ width: "60rem", padding: '0 2.5rem 1.5rem 2.5rem' }}>
 
@@ -69,19 +71,29 @@ export default observer(function RemovalsJobForm({ values, setFieldValue, step, 
                         minDate={new Date()}
                         dayClassName={(date: Date) => marks.has(dateFormatterShort(date)) ? "date-input__highlight" : null}
                     />
-                    {/* <i className="listing-forms__tooltip" style={{ left: "7.5rem" }}>
-                        (fully booked dates are in grey)
-                    </i> */}
+                    <i className="listing-forms__tooltip" style={{ left: "6rem" }}>
+                        (unavailable dates are circled in grey)
+                    </i>
                 </div>
             </section>
 
-            <p className="listing-forms__title">Briefly describe the job requirements: </p>
+            <p className="removals-forms__title">Select any additional service: </p>
+            <div style={{ padding: '1rem' }}>
+                <Field type="checkbox" name="packingRequired" style={{ transform: "scale(2)", accentColor: "#f0f0f0" }} />
+                <span style={{ paddingLeft: '0.75rem', fontSize: "1.15rem" }}>Packing service</span>
+            </div>
+            <div style={{ padding: '1rem' }}>
+                <Field type="checkbox" name="storageRequired" style={{ transform: "scale(2)", accentColor: "#f0f0f0" }} />
+                <span style={{ paddingLeft: '0.75rem', fontSize: "1.15rem" }}>Storage service</span>
+            </div>
+
+            <p className="listing-forms__title">Briefly describe any specific requirements or instructions: </p>
             <section className="listing-forms__container">
                 <MyTextArea
                     inputclassname="listing-forms__textarea-long"
                     labelclassname="listing-forms__textarea-label"
                     errorclassname="listing-forms__input-error"
-                    placeholder=""
+                    placeholder="For example, pianos / awkward access / house has no lift / limited parking "
                     name="description"
                     label="Job description"
                     rows={5}
@@ -89,40 +101,38 @@ export default observer(function RemovalsJobForm({ values, setFieldValue, step, 
                 />
             </section>
 
-            {!isLoggedIn || user?.accountType.toString() !== "Customer" ?
-                <>
-                    <p className="removals-forms__title">Enter your contact details: </p>
-                    <section className="listing-forms__container">
-                        <div style={{ position: 'relative' }}>
-                            <MyTextInput
-                                inputclassname="listing-forms__input-medium"
-                                labelclassname="listing-forms__input-label"
-                                errorclassname="listing-forms__input-error"
-                                name="customerName"
-                                placeholder=""
-                                label={`Name`}
-                            />
-                            <MyTextInput
-                                inputclassname="listing-forms__input-medium"
-                                labelclassname="listing-forms__input-label"
-                                errorclassname="listing-forms__input-error"
-                                name="customerEmail"
-                                placeholder=""
-                                label={`Email`}
-                            />
-                            <MyTextInput
-                                inputclassname="listing-forms__input-medium"
-                                labelclassname="listing-forms__input-label"
-                                errorclassname="listing-forms__input-error"
-                                name="customerPhone"
-                                placeholder=""
-                                label={`Phone`}
-                            />
-                        </div>
-                    </section>
-                </>
-                : null
-            }
+            <p className="removals-forms__title">Enter your contact details: </p>
+            <section className="removals-forms__contacts-container">
+                <MyTextInput
+                    inputclassname="listing-forms__input-medium"
+                    labelclassname="listing-forms__input-label"
+                    errorclassname="listing-forms__input-error"
+                    name="customerName"
+                    placeholder=""
+                    label={`Name`}
+                />
+                <MyTextInput
+                    inputclassname="listing-forms__input-medium"
+                    labelclassname="listing-forms__input-label"
+                    errorclassname="listing-forms__input-error"
+                    name="customerEmail"
+                    placeholder=""
+                    label={`Email`}
+                />
+                <div style={{ position: 'relative' }}>
+                    <MyTextInput
+                        inputclassname="listing-forms__input-medium"
+                        labelclassname="listing-forms__input-label"
+                        errorclassname="listing-forms__input-error"
+                        name="customerPhone"
+                        placeholder=""
+                        label={`Phone`}
+                    />
+                    <i className="listing-forms__tooltip" style={{ left: "3.5rem" }}>
+                        (include Country code prefix, eg. "0044" or "+44")
+                    </i>
+                </div>
+            </section>
 
             <section className="removals-forms__buttons-container" style={{ paddingTop: '4rem' }}>
                 <button

@@ -7,7 +7,7 @@ using Application.Core;
 using MediatR;
 using Persistence;
 
-namespace Application.InvoiceApplication
+namespace Application.JobInvoiceApplication
 {
     public class Delete
     {
@@ -26,7 +26,7 @@ namespace Application.InvoiceApplication
 
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
-                var invoice = await _context.Invoices.FindAsync(request.Id);
+                var invoice = await _context.JobInvoices.FindAsync(request.Id);
 
                 if (invoice == null) return null;
 

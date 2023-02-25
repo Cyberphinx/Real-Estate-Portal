@@ -18,7 +18,7 @@ namespace Application.CompanyApplication.CompanyDtos
         public ICollection<CompanyDescriptionDto> CompanyDescriptions { get; set; }
         public string CompanyReference { get; set; }
         public string CompanyRegistrationNumber { get; set; }
-        public CompanyType CompanyType { get; set; }
+        public string CompanyType { get; set; }
         public string DisplayName { get; set; }
         public string IcoRegistrationNumber { get; set; }
         public ICollection<InsuranceDto> Insurances { get; set; }
@@ -31,6 +31,8 @@ namespace Application.CompanyApplication.CompanyDtos
         public string ServiceLocations { get; set; }
         public string SummaryDescription { get; set; }
         public List<string> ServiceCategories { get; set; }
+        public string TermsAndConditions { get; set; }
         public string Username { get; set; }
+        public string VatNumber { get; set; }
     }
 }

@@ -2,7 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.Extensions;
 using Application.JobApplication;
+using Domain;
+using Domain.Enums;
 using Domain.JobAggregate;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -72,6 +75,66 @@ namespace API.Controllers
         {
             return HandleResult(await Mediator.Send(new Create.Command{Job = job}));
         }
+
+        // [AllowAnonymous]
+        // [HttpPost]
+        // public async Task<IActionResult> CreateJob(Job job)
+        // {
+        //     // create the job
+        //     var result = await Mediator.Send(new Create.Command{Job = job});
+        //     if (result == null) return NotFound();
+        //     if (result.IsSuccess && result.Value == null) return NotFound();
+        //     if (!result.IsSuccess) BadRequest(result.Error);
+
+        //     // BELOW IS FOR EMAIL CONFIRMATIONS
+        //     var origin = Request.Headers["origin"];
+        //     // var origin = "https://localhost:5000/api";
+        //     var jobUrl = $"{origin}/job/{job.Id}";
+        //     var homepage = $"{origin}/map";
+
+        //     var messageToCustomer = $"<p>Your job has been successfully created on Sanctum:</p><p><a href='{homepage}'>Click to view job</a></p><p>Our moving team will get in contact with you shortly.</p>";
+
+        //     var messageToSeller = "";
+        //     if (job.ServiceCategories.Contains("Removals"))
+        //     {
+        //         var seller = job.Networks.FirstOrDefault(x => x.Role == JobNetworkRole.PaidCompany && x.AppUser.AccountType == Domain.AppUserAggregate.Enums.AccountType.Removalist);
+        //         messageToSeller = $"<p>Please login to view the job on Sanctum:</p><p><a href='{homepage}'>Click to view job</a></p><p>Please find below customer's contact details:</p><p>Please contact them as soon as possible to provide quotation.</p>";
+        //     }
+
+        //     // RETRIEVE CUSTOMER CONTACT DETAILS
+
+        //     // var job = await _context.Jobs.Include(x => x.Networks).ThenInclude(x => x.AppUser).FirstOrDefaultAsync(x => x.Id == invoice.JobId);
+        //     // if (job == null) return NotFound("Cannot find the job that is associated with the invoice");
+
+        //     var customer = job.MapJobToCustomerContactsDto();
+
+        //     // SendinBlue - send quotation/invoice email to customer
+        //     var emailToCutomer = new EmailDto
+        //     {
+        //         RecipientName = customer.CustomerName,
+        //         RecipientEmail = customer.CustomerEmail,
+        //         // RecipientPhone = customer.CustomerPhone,
+        //         Subject = "You have received a quote via Sanctum" : "You have received an invoice via Sanctum",
+        //         Body = quoteToCustomer : invoiceToCustomer,
+        //         AccountType = Domain.AppUserAggregate.Enums.AccountType.Customer
+        //     };
+        //     await _emailService.SendEmailAsync(emailToCutomer);
+
+
+        //     // SendinBlue - send quotation/invoice email to seller
+        //     var emailToSeller = new EmailDto
+        //     {
+        //         RecipientName = seller.DisplayName,
+        //         RecipientEmail = seller.Email,
+        //         // RecipientPhone = seller.PhoneNumber,
+        //         Subject = invoice.IsQuotation ? "You have issued a quote via Sanctum" : "You have issued an invoice via Sanctum",
+        //         Body = invoice.IsQuotation ? quoteToSeller : invoiceToSeller,
+        //         AccountType = seller.AccountType
+        //     };
+        //     await _emailService.SendEmailAsync(emailToSeller);
+
+        //     return Ok("Job created successfully - please check email");
+        // }
 
         [Authorize(Policy = "IsJobOwner")]
         [HttpPost("media/{jobId}")]

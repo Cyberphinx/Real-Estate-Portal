@@ -1,14 +1,14 @@
 import React from "react";
-import { Invoice } from "../../model/Invoice";
+import { JobInvoice, UserInvoice } from "../../model/Invoice";
 import { PaymentStatus, paymentStatusFormatter } from "../../model/PaymentStatus";
 import './InvoiceStatusTag.css';
 
 interface Props {
-    invoice: Invoice | null;
+    invoice: JobInvoice | UserInvoice | null;
 }
 
 export default function InvoiceStatusTag({ invoice }: Props) {
-    const tagStyle = (invoice: Invoice) => {
+    const tagStyle = (invoice: JobInvoice | UserInvoice) => {
         switch (invoice?.paymentStatus.toString()) {
             case "Unpaid":
                 return "payment-tag red"

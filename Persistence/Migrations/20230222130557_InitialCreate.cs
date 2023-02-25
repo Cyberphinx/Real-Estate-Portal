@@ -37,6 +37,7 @@ namespace Persistence.Migrations
                     AddedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: true),
                     DisplayName = table.Column<string>(type: "text", nullable: true),
+                    NewEmail = table.Column<string>(type: "text", nullable: true),
                     Country = table.Column<string>(type: "text", nullable: true),
                     Language = table.Column<string>(type: "text", nullable: true),
                     UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
@@ -68,7 +69,7 @@ namespace Persistence.Migrations
                     AddedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CompanyReference = table.Column<string>(type: "text", nullable: true),
                     CompanyRegistrationNumber = table.Column<string>(type: "text", nullable: true),
-                    CompanyType = table.Column<int>(type: "integer", nullable: false),
+                    CompanyType = table.Column<string>(type: "text", nullable: true),
                     DisplayName = table.Column<string>(type: "text", nullable: true),
                     IcoRegistrationNumber = table.Column<string>(type: "text", nullable: true),
                     IsMain = table.Column<bool>(type: "boolean", nullable: false),
@@ -78,6 +79,7 @@ namespace Persistence.Migrations
                     ServiceLocations = table.Column<string>(type: "text", nullable: true),
                     SummaryDescription = table.Column<string>(type: "text", nullable: true),
                     ServiceCategories = table.Column<List<string>>(type: "text[]", nullable: true),
+                    TermsAndConditions = table.Column<string>(type: "text", nullable: true),
                     Username = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
@@ -118,29 +120,6 @@ namespace Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Events", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Invoices",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Amount = table.Column<long>(type: "bigint", nullable: false),
-                    Currency = table.Column<string>(type: "text", nullable: true),
-                    Description = table.Column<string>(type: "text", nullable: true),
-                    InvoiceDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    InvoiceNumber = table.Column<int>(type: "integer", nullable: false),
-                    PaymentStatus = table.Column<int>(type: "integer", nullable: false),
-                    Title = table.Column<string>(type: "text", nullable: true),
-                    Username = table.Column<string>(type: "text", nullable: true),
-                    JobReference = table.Column<string>(type: "text", nullable: true),
-                    VatPercentage = table.Column<long>(type: "bigint", nullable: false),
-                    PaymentIntentId = table.Column<string>(type: "text", nullable: true),
-                    ClientSecret = table.Column<string>(type: "text", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Invoices", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -392,6 +371,34 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UserInvoices",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    AppUserId = table.Column<string>(type: "text", nullable: true),
+                    Amount = table.Column<long>(type: "bigint", nullable: false),
+                    Currency = table.Column<string>(type: "text", nullable: true),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    InvoiceDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Index = table.Column<int>(type: "integer", nullable: false),
+                    IsQuotation = table.Column<bool>(type: "boolean", nullable: false),
+                    PaymentStatus = table.Column<int>(type: "integer", nullable: false),
+                    Title = table.Column<string>(type: "text", nullable: true),
+                    VatPercentage = table.Column<long>(type: "bigint", nullable: false),
+                    PaymentIntentId = table.Column<string>(type: "text", nullable: true),
+                    ClientSecret = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserInvoices", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserInvoices_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CompanyAddress",
                 columns: table => new
                 {
@@ -517,8 +524,10 @@ namespace Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Type = table.Column<int>(type: "integer", nullable: false),
-                    ClientMoneyProtection = table.Column<int>(type: "integer", nullable: false),
+                    Currency = table.Column<string>(type: "text", nullable: true),
+                    InsurancePolicy = table.Column<string>(type: "text", nullable: true),
+                    InsuranceScheme = table.Column<string>(type: "text", nullable: true),
+                    InsuranceType = table.Column<string>(type: "text", nullable: true),
                     Provider = table.Column<string>(type: "text", nullable: true),
                     PolicyNumber = table.Column<string>(type: "text", nullable: true),
                     IndemnityLimit = table.Column<string>(type: "text", nullable: true),
@@ -646,24 +655,31 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "InvoiceItem",
+                name: "JobInvoices",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    JobId = table.Column<Guid>(type: "uuid", nullable: false),
+                    SellerUsername = table.Column<string>(type: "text", nullable: true),
                     Amount = table.Column<long>(type: "bigint", nullable: false),
                     Currency = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
+                    InvoiceDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Index = table.Column<int>(type: "integer", nullable: false),
+                    IsQuotation = table.Column<bool>(type: "boolean", nullable: false),
+                    PaymentStatus = table.Column<int>(type: "integer", nullable: false),
                     Title = table.Column<string>(type: "text", nullable: true),
                     VatPercentage = table.Column<long>(type: "bigint", nullable: false),
-                    InvoiceId = table.Column<Guid>(type: "uuid", nullable: false)
+                    PaymentIntentId = table.Column<string>(type: "text", nullable: true),
+                    ClientSecret = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_InvoiceItem", x => x.Id);
+                    table.PrimaryKey("PK_JobInvoices", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_InvoiceItem_Invoices_InvoiceId",
-                        column: x => x.InvoiceId,
-                        principalTable: "Invoices",
+                        name: "FK_JobInvoices_Jobs_JobId",
+                        column: x => x.JobId,
+                        principalTable: "Jobs",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -770,6 +786,30 @@ namespace Persistence.Migrations
                         name: "FK_JobNetworks_Jobs_JobId",
                         column: x => x.JobId,
                         principalTable: "Jobs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AppUserInvoiceItem",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    AppUserInvoiceId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Index = table.Column<int>(type: "integer", nullable: false),
+                    Amount = table.Column<long>(type: "bigint", nullable: false),
+                    Currency = table.Column<string>(type: "text", nullable: true),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    Title = table.Column<string>(type: "text", nullable: true),
+                    VatPercentage = table.Column<long>(type: "bigint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppUserInvoiceItem", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AppUserInvoiceItem_UserInvoices_AppUserInvoiceId",
+                        column: x => x.AppUserInvoiceId,
+                        principalTable: "UserInvoices",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -948,18 +988,53 @@ namespace Persistence.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "JobInvoiceItem",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    JobInvoiceId = table.Column<Guid>(type: "uuid", nullable: false),
+                    JobInvoiceItemId = table.Column<Guid>(type: "uuid", nullable: true),
+                    Index = table.Column<int>(type: "integer", nullable: false),
+                    Amount = table.Column<long>(type: "bigint", nullable: false),
+                    Currency = table.Column<string>(type: "text", nullable: true),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    Title = table.Column<string>(type: "text", nullable: true),
+                    VatPercentage = table.Column<long>(type: "bigint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_JobInvoiceItem", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_JobInvoiceItem_JobInvoiceItem_JobInvoiceItemId",
+                        column: x => x.JobInvoiceItemId,
+                        principalTable: "JobInvoiceItem",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_JobInvoiceItem_JobInvoices_JobInvoiceId",
+                        column: x => x.JobInvoiceId,
+                        principalTable: "JobInvoices",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "1", "a8669529-18af-47d4-b629-e8e65908d899", "Company", "COMPANY" },
-                    { "2", "35923334-e963-4a94-ac5f-185da8a14d95", "Customer", "CUSTOMER" },
-                    { "3", "16e9a8da-3363-4273-83c0-9a53d1727be7", "Agency", "AGENCY" },
-                    { "4", "36673e0b-f21c-4b4d-9a5e-9c399eebad7a", "Admin", "ADMIN" },
-                    { "5", "f2b0040a-e3af-4103-b32d-20f97f769c8d", "Manager", "MANAGER" },
-                    { "6", "9cba08f3-193f-4c85-bad4-cce20efca7ad", "Removalist", "REMOVALIST" }
+                    { "1", "c8600bb9-059b-4570-8c5b-6298b7c96b90", "Company", "COMPANY" },
+                    { "2", "d377d57b-48f1-4f65-90a9-fdfc4a106075", "Customer", "CUSTOMER" },
+                    { "3", "2bbfe9bc-b7cf-42c1-bf0a-c1c308f5c550", "Agency", "AGENCY" },
+                    { "4", "60e1e59e-df5b-4815-b018-f83f321aeaaf", "Admin", "ADMIN" },
+                    { "5", "db60d430-3c0e-47b5-a4bb-129554da7fea", "Manager", "MANAGER" },
+                    { "6", "2c872f78-d374-44b2-b355-816a54155dd1", "Removalist", "REMOVALIST" }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AppUserInvoiceItem_AppUserInvoiceId",
+                table: "AppUserInvoiceItem",
+                column: "AppUserInvoiceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AppUserMedia_AppUserId",
@@ -1052,9 +1127,19 @@ namespace Persistence.Migrations
                 column: "CompanyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_InvoiceItem_InvoiceId",
-                table: "InvoiceItem",
-                column: "InvoiceId");
+                name: "IX_JobInvoiceItem_JobInvoiceId",
+                table: "JobInvoiceItem",
+                column: "JobInvoiceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_JobInvoiceItem_JobInvoiceItemId",
+                table: "JobInvoiceItem",
+                column: "JobInvoiceItemId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_JobInvoices_JobId",
+                table: "JobInvoices",
+                column: "JobId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_JobLocation_JobId",
@@ -1129,10 +1214,18 @@ namespace Persistence.Migrations
                 table: "ServiceCharge",
                 column: "ListingId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserInvoices_AppUserId",
+                table: "UserInvoices",
+                column: "AppUserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "AppUserInvoiceItem");
+
             migrationBuilder.DropTable(
                 name: "AppUserMedia");
 
@@ -1182,7 +1275,7 @@ namespace Persistence.Migrations
                 name: "Insurance");
 
             migrationBuilder.DropTable(
-                name: "InvoiceItem");
+                name: "JobInvoiceItem");
 
             migrationBuilder.DropTable(
                 name: "JobLocation");
@@ -1224,22 +1317,25 @@ namespace Persistence.Migrations
                 name: "TrackingData");
 
             migrationBuilder.DropTable(
+                name: "UserInvoices");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Invoices");
-
-            migrationBuilder.DropTable(
-                name: "Jobs");
+                name: "JobInvoices");
 
             migrationBuilder.DropTable(
                 name: "Employees");
 
             migrationBuilder.DropTable(
+                name: "Listings");
+
+            migrationBuilder.DropTable(
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Listings");
+                name: "Jobs");
 
             migrationBuilder.DropTable(
                 name: "Companies");

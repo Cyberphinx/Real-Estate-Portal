@@ -16,7 +16,7 @@ export interface Company {
     companyDescriptions: CompanyDescription[];
     companyReference: string;
     companyRegistrationNumber: string;
-    companyType: CompanyType;
+    companyType: string;
     displayName: string;
     icoRegistrationNumber: string;
     insurances: Insurance[];
@@ -29,7 +29,9 @@ export interface Company {
     serviceLocations: string;
     summaryDescription: string;
     serviceCategories: string[];
+    termsAndConditions: string;
     username: string;
+    vatNumber: string;
 }
 
 export class Company implements Company {
@@ -48,7 +50,7 @@ export class CompanyFormValues {
     companyDescriptions?: CompanyDescription[];
     companyReference: string = "";
     companyRegistrationNumber: string = "";
-    companyType?: CompanyType;
+    companyType: string = '';
     displayName: string = "";
     icoRegistrationNumber?: string;
     insurances?: Insurance[];
@@ -61,7 +63,9 @@ export class CompanyFormValues {
     serviceLocations?: string;
     summaryDescription: string = "";
     serviceCategories: string[] = [];
+    termsAndConditions: string = '';
     username: string = "";
+    vatNumber: string = '';
 
     constructor(company?: CompanyFormValues) {
         if (company) {
@@ -87,7 +91,9 @@ export class CompanyFormValues {
             this.serviceLocations = company.serviceLocations;
             this.summaryDescription = company.summaryDescription;
             this.serviceCategories = company.serviceCategories;
+            this.termsAndConditions = company.termsAndConditions;
             this.username = company.username;
+            this.vatNumber = company.vatNumber;
         }
     }
 }
@@ -108,8 +114,11 @@ export interface CompanyDescription {
 
 export interface Insurance {
     id: string;
-    type: InsuranceType;
-    clientMoneyProtection: CmpScheme;
+    currency: string;
+    index: number;
+    insurancePolicy: string;
+    insuranceScheme: string;
+    insuranceType: string;
     provider: string;
     policyNumber: string;
     indemnityLimit: string;

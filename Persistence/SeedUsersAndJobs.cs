@@ -25,36 +25,36 @@ namespace Persistence
                 // SEED COMPANY USERS
                 var companyUsers = new List<AppUser>
                 {
-                    new AppUser{UserName = "handyman1", DisplayName = "Mr Handy", Email = "handy1@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
-                    new AppUser{UserName = "handyman2", DisplayName = "Handy Candy", Email = "handy2@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
-                    new AppUser{UserName = "handyman3", DisplayName = "Handyman Handyman", Email = "handy3@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
-                    new AppUser{UserName = "handyman4", DisplayName = "Handyman Company", Email = "handy4@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
-                    new AppUser{UserName = "handyman5", DisplayName = "Handyman Service", Email = "handy5@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
-                    new AppUser{UserName = "handyman6", DisplayName = "Repair Guys", Email = "handy6@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
-                    new AppUser{UserName = "cleaning1", DisplayName = "Ms Cleaner", Email = "cleaning1@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
-                    new AppUser{UserName = "cleaning2", DisplayName = "Ms Cleaning", Email = "cleaning2@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
-                    new AppUser{UserName = "cleaning3", DisplayName = "We Clean", Email = "cleaning3@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
-                    new AppUser{UserName = "cleaning4", DisplayName = "Blue Cleaners", Email = "cleaning4@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
-                    new AppUser{UserName = "cleaning5", DisplayName = "Clear Cleaners", Email = "cleaning5@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
-                    new AppUser{UserName = "cleaning6", DisplayName = "Sparkle Cleaners", Email = "cleaning6@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
-                    new AppUser{UserName = "electrician1", DisplayName = "Mr Electrician", Email = "elec1@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
-                    new AppUser{UserName = "electrician2", DisplayName = "Electrical Service", Email = "elec2@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
-                    new AppUser{UserName = "electrician3", DisplayName = "Electrician Group", Email = "elec3@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
-                    new AppUser{UserName = "electrician4", DisplayName = "Ms Electrician", Email = "elec4@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
-                    new AppUser{UserName = "electrician5", DisplayName = "Repair Electrics", Email = "elec5@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
-                    new AppUser{UserName = "electrician6", DisplayName = "Electricial Engineers", Email = "elec6@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
-                    new AppUser{UserName = "plumber1", DisplayName = "Mr Plumber", Email = "plumber1@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
-                    new AppUser{UserName = "plumber2", DisplayName = "Plumber Guys", Email = "plumber2@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
-                    new AppUser{UserName = "plumber3", DisplayName = "Plumbing Company", Email = "plumber3@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
-                    new AppUser{UserName = "plumber4", DisplayName = "Plumber Repairer", Email = "plumber4@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
-                    new AppUser{UserName = "plumber5", DisplayName = "Plumbing Service", Email = "plumber5@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
-                    new AppUser{UserName = "plumber6", DisplayName = "Plumbing Company", Email = "plumber6@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
-                    new AppUser{UserName = "garden1", DisplayName = "Mr Gardener", Email = "garden1@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
-                    new AppUser{UserName = "garden2", DisplayName = "Ms Gardener", Email = "garden2@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
-                    new AppUser{UserName = "garden3", DisplayName = "Gardener Group", Email = "garden3@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
-                    new AppUser{UserName = "garden4", DisplayName = "Landscape Gardener", Email = "garden4@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
-                    new AppUser{UserName = "garden5", DisplayName = "House Gardener", Email = "garden5@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
-                    new AppUser{UserName = "garden6", DisplayName = "Gardener Society", Email = "garden6@test.com", AddedOn = DateTime.Now, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "handyman1", DisplayName = "Mr Handy", Email = "handy1@test.com", AddedOn = DateTime.UtcNow, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "handyman2", DisplayName = "Handy Candy", Email = "handy2@test.com", AddedOn = DateTime.UtcNow, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "handyman3", DisplayName = "Handyman Handyman", Email = "handy3@test.com", AddedOn = DateTime.UtcNow, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "handyman4", DisplayName = "Handyman Company", Email = "handy4@test.com", AddedOn = DateTime.UtcNow, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "handyman5", DisplayName = "Handyman Service", Email = "handy5@test.com", AddedOn = DateTime.UtcNow, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "handyman6", DisplayName = "Repair Guys", Email = "handy6@test.com", AddedOn = DateTime.UtcNow, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "cleaning1", DisplayName = "Ms Cleaner", Email = "cleaning1@test.com", AddedOn = DateTime.UtcNow, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "cleaning2", DisplayName = "Ms Cleaning", Email = "cleaning2@test.com", AddedOn = DateTime.UtcNow, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "cleaning3", DisplayName = "We Clean", Email = "cleaning3@test.com", AddedOn = DateTime.UtcNow, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "cleaning4", DisplayName = "Blue Cleaners", Email = "cleaning4@test.com", AddedOn = DateTime.UtcNow, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "cleaning5", DisplayName = "Clear Cleaners", Email = "cleaning5@test.com", AddedOn = DateTime.UtcNow, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "cleaning6", DisplayName = "Sparkle Cleaners", Email = "cleaning6@test.com", AddedOn = DateTime.UtcNow, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "electrician1", DisplayName = "Mr Electrician", Email = "elec1@test.com", AddedOn = DateTime.UtcNow, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "electrician2", DisplayName = "Electrical Service", Email = "elec2@test.com", AddedOn = DateTime.UtcNow, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "electrician3", DisplayName = "Electrician Group", Email = "elec3@test.com", AddedOn = DateTime.UtcNow, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "electrician4", DisplayName = "Ms Electrician", Email = "elec4@test.com", AddedOn = DateTime.UtcNow, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "electrician5", DisplayName = "Repair Electrics", Email = "elec5@test.com", AddedOn = DateTime.UtcNow, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "electrician6", DisplayName = "Electricial Engineers", Email = "elec6@test.com", AddedOn = DateTime.UtcNow, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "plumber1", DisplayName = "Mr Plumber", Email = "plumber1@test.com", AddedOn = DateTime.UtcNow, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "plumber2", DisplayName = "Plumber Guys", Email = "plumber2@test.com", AddedOn = DateTime.UtcNow, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "plumber3", DisplayName = "Plumbing Company", Email = "plumber3@test.com", AddedOn = DateTime.UtcNow, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "plumber4", DisplayName = "Plumber Repairer", Email = "plumber4@test.com", AddedOn = DateTime.UtcNow, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "plumber5", DisplayName = "Plumbing Service", Email = "plumber5@test.com", AddedOn = DateTime.UtcNow, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "plumber6", DisplayName = "Plumbing Company", Email = "plumber6@test.com", AddedOn = DateTime.UtcNow, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "garden1", DisplayName = "Mr Gardener", Email = "garden1@test.com", AddedOn = DateTime.UtcNow, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "garden2", DisplayName = "Ms Gardener", Email = "garden2@test.com", AddedOn = DateTime.UtcNow, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "garden3", DisplayName = "Gardener Group", Email = "garden3@test.com", AddedOn = DateTime.UtcNow, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "garden4", DisplayName = "Landscape Gardener", Email = "garden4@test.com", AddedOn = DateTime.UtcNow, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "garden5", DisplayName = "House Gardener", Email = "garden5@test.com", AddedOn = DateTime.UtcNow, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
+                    new AppUser{UserName = "garden6", DisplayName = "Gardener Society", Email = "garden6@test.com", AddedOn = DateTime.UtcNow, Country = "United Kingdom", Language = "English", AccountType = AccountType.Company},
                 };
 
                 foreach (var companyOwner in companyUsers)
@@ -86,7 +86,7 @@ namespace Persistence
                         },
                         Email = "lily@test.com",
                         PhoneNumber = "07986787384",
-                        AddedOn = DateTime.Now,
+                        AddedOn = DateTime.UtcNow,
                         Country = "United Kingdom",
                         Language = "English",
                         AccountType = AccountType.Customer
@@ -109,7 +109,7 @@ namespace Persistence
                         },
                         Email = "jack@test.com",
                         PhoneNumber = "07907858697",
-                        AddedOn = DateTime.Now,
+                        AddedOn = DateTime.UtcNow,
                         Country = "United Kingdom",
                         Language = "English",
                         AccountType = AccountType.Customer
@@ -132,7 +132,7 @@ namespace Persistence
                         },
                         Email = "ruby@test.com",
                         PhoneNumber = "079876859604",
-                        AddedOn = DateTime.Now,
+                        AddedOn = DateTime.UtcNow,
                         Country = "United Kingdom",
                         Language = "English",
                         AccountType = AccountType.Customer
@@ -155,7 +155,7 @@ namespace Persistence
                         },
                         Email = "lucy@test.com",
                         PhoneNumber = "07983457384",
-                        AddedOn = DateTime.Now,
+                        AddedOn = DateTime.UtcNow,
                         Country = "United Kingdom",
                         Language = "English",
                         AccountType = AccountType.Customer
@@ -178,7 +178,7 @@ namespace Persistence
                         },
                         Email = "tom@test.com",
                         PhoneNumber = "07986456784",
-                        AddedOn = DateTime.Now,
+                        AddedOn = DateTime.UtcNow,
                         Country = "United Kingdom",
                         Language = "English",
                         AccountType = AccountType.Customer
@@ -213,7 +213,7 @@ namespace Persistence
                         },
                         Email = "agentsav@test.com",
                         PhoneNumber = "0207865733",
-                        AddedOn = DateTime.Now,
+                        AddedOn = DateTime.UtcNow,
                         Country = "United Kingdom",
                         Language = "English",
                         AccountType = AccountType.Agent
@@ -236,7 +236,7 @@ namespace Persistence
                         },
                         Email = "agenthunt@test.com",
                         PhoneNumber = "0207864533",
-                        AddedOn = DateTime.Now,
+                        AddedOn = DateTime.UtcNow,
                         Country = "United Kingdom",
                         Language = "English",
                         AccountType = AccountType.Agent
@@ -259,7 +259,7 @@ namespace Persistence
                         },
                         Email = "agentroger@test.com",
                         PhoneNumber = "0203455733",
-                        AddedOn = DateTime.Now,
+                        AddedOn = DateTime.UtcNow,
                         Country = "United Kingdom",
                         Language = "English",
                         AccountType = AccountType.Agent
@@ -282,7 +282,7 @@ namespace Persistence
                         },
                         Email = "agentpurple@test.com",
                         PhoneNumber = "0207845633",
-                        AddedOn = DateTime.Now,
+                        AddedOn = DateTime.UtcNow,
                         Country = "United Kingdom",
                         Language = "English",
                         AccountType = AccountType.Agent
@@ -305,7 +305,7 @@ namespace Persistence
                         },
                         Email = "agentewe@test.com",
                         PhoneNumber = "0207834533",
-                        AddedOn = DateTime.Now,
+                        AddedOn = DateTime.UtcNow,
                         Country = "United Kingdom",
                         Language = "English",
                         AccountType = AccountType.Agent
@@ -336,9 +336,9 @@ namespace Persistence
                                 Type = MediaType.Image
                             }
                         },
-                    Email = "moving@test.com",
-                    PhoneNumber = "07987676435",
-                    AddedOn = DateTime.Now,
+                    Email = "quintessa@tuta.io",
+                    PhoneNumber = "00447592206803",
+                    AddedOn = DateTime.UtcNow,
                     Country = "United Kingdom",
                     Language = "English",
                     AccountType = AccountType.Removalist
@@ -368,7 +368,7 @@ namespace Persistence
                             }
                         },
                         Email = "archon@tuta.io",
-                        AddedOn = DateTime.Now,
+                        AddedOn = DateTime.UtcNow,
                         Country = "United Kingdom",
                         Language = "English",
                         AccountType = AccountType.Manager
@@ -390,7 +390,7 @@ namespace Persistence
                             }
                         },
                         Email = "manager@test.com",
-                        AddedOn = DateTime.Now,
+                        AddedOn = DateTime.UtcNow,
                         Country = "United Kingdom",
                         Language = "English",
                         AccountType = AccountType.Manager
@@ -421,7 +421,8 @@ namespace Persistence
                             }
                         },
                     Email = "info@sanctum.co.uk",
-                    AddedOn = DateTime.Now,
+                    PhoneNumber = "00447592206803",
+                    AddedOn = DateTime.UtcNow,
                     Country = "United Kingdom",
                     Language = "English",
                     AccountType = AccountType.Admin
@@ -713,27 +714,29 @@ namespace Persistence
                         {
                             "Removals"
                         },
-                        Title = "Move from A to B",
-                        Description = "Move from A to B Move from A to B Move from A to B",
+                        Title = "Relocation from Edinburgh EH6 8TB to Liverpool M32 0EW",
+                        Description = "Aenean finibus massa eu leo lacinia, ac ullamcorper libero commodo. Aenean id accumsan felis. Phasellus vitae viverra sapien. Cras eleifend nunc et lorem efficitur, ac efficitur elit imperdiet. Sed nec fermentum purus. Suspendisse potenti. Vestibulum condimentum, felis mattis aliquet pulvinar, massa quam euismod neque, sit amet luctus magna tortor ut enim. Phasellus sed porta sapien. Curabitur quis mollis est. Suspendisse id elementum sem, ut varius ex. Curabitur accumsan bibendum nisi quis lacinia.",
                         JobLifeCycle = JobLifeCycle.Open,
                         JobLocations = new List<JobLocation>
                         {
                             new JobLocation
                             {
+                                DisplayAddress = "6, Gordon Street, Leith Links, City of Edinburgh, Scotland, EH6 8TB",
                                 AddressType = "Pick up address",
                                 Index = 0,
-                                PropertyNumberOrName = "2-30",
-                                StreetName = "Everton St",
-                                Locality = "Swinton",
-                                TownOrCity = "Manchester",
-                                County = "England",
-                                PostalCode = "M27 0WL",
+                                PropertyNumberOrName = "6",
+                                StreetName = "Gordon Street",
+                                Locality = "Leith Links",
+                                TownOrCity = "City of Edinburgh",
+                                County = "Scotland",
+                                PostalCode = "EH6 8TB",
                                 Country = "United Kingdom",
                                 Latitude = 53.51009443733918,
                                 Longitude = -2.3425652500267837
                             },
                             new JobLocation
                             {
+                                DisplayAddress = "2-30, Everton St, Swinton, Liverpool, England, M32 0EW",
                                 AddressType = "Drop off address",
                                 Index = 1,
                                 PropertyNumberOrName = "2-30",
@@ -770,19 +773,20 @@ namespace Persistence
                         {
                             "Removals"
                         },
-                        Title = "Move from X to Z",
-                        Description = "Move from X to Z Move from X to Z Move from X to Z",
+                        Title = "Relocation from Liverpool L25 8QA to Bristol BS1 0EW",
+                        Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus dictum, massa sed tristique aliquam, augue erat mollis urna, in mollis eros tellus sit amet eros. Fusce lectus libero, malesuada id pellentesque nec, tempor at purus. Quisque diam nisi, suscipit in vehicula sit amet, sodales pellentesque lectus. Duis a auctor eros. Nullam ex nunc, ultrices nec mi vel, vulputate porttitor turpis. Phasellus tristique urna et ex fermentum, in dapibus massa dignissim. Suspendisse rutrum ut nulla non auctor. Cras ultricies, nunc ut dapibus pharetra, dolor leo elementum est, sit amet egestas ligula libero eu nibh. Maecenas finibus facilisis tincidunt.",
                         JobLifeCycle = JobLifeCycle.Open,
                         JobLocations = new List<JobLocation>
                         {
                             new JobLocation
                             {
+                                DisplayAddress = "8 Speke Road, Woolton, Liverpool, England, L25 8QA",
                                 AddressType = "Pick up address",
                                 Index = 0,
-                                PropertyNumberOrName = "2-30",
-                                StreetName = "Everton St",
-                                Locality = "Swinton",
-                                TownOrCity = "Manchester",
+                                PropertyNumberOrName = "8",
+                                StreetName = "Speke Road",
+                                Locality = "Woolton",
+                                TownOrCity = "Liverpool",
                                 County = "England",
                                 PostalCode = "M27 0WL",
                                 Country = "United Kingdom",
@@ -796,9 +800,9 @@ namespace Persistence
                                 PropertyNumberOrName = "2-30",
                                 StreetName = "Everton St",
                                 Locality = "Swinton",
-                                TownOrCity = "Liverpool",
+                                TownOrCity = "Bristol",
                                 County = "England",
-                                PostalCode = "M32 0EW",
+                                PostalCode = "BS1 0EW",
                                 Country = "United Kingdom",
                                 Latitude = 52.51009443733918,
                                 Longitude = -1.3425652500267837

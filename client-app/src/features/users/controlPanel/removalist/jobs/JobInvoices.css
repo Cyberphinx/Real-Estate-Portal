@@ -1,0 +1,9 @@
+.removals-jobs__invoices {
+    margin: 0 2.5rem 2.5rem 0;
+}
+
+.removals-jobs__invoices-items {
+    padding: 1rem 2.5rem;
+    border: 1px solid #ccc;
+    border-radius: 3rem;
+}

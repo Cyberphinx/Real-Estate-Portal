@@ -3,32 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Application.CompanyApplication;
 using Application.Core;
 using Application.Interfaces;
-using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using Domain.AppUserAggregate.Objects;
-using Domain.InvoiceAggregate;
+using Domain.JobAggregate;
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
+using Domain;
+using Domain.Enums;
+using Microsoft.AspNetCore.Identity;
+using Domain.JobAggregate.Objects;
+using Domain.AppUserAggregate.Enums;
 
-namespace Application.InvoiceApplication
+namespace Application.JobInvoiceApplication
 {
     public class Create
     {
         public class Command : IRequest<Result<Unit>>
         {
-            public Invoice Invoice { get; set; }
+            public JobInvoice JobInvoice { get; set; }
         }
 
         public class CommandValidator : AbstractValidator<Command>
         {
             public CommandValidator()
             {
-                RuleFor(x => x.Invoice).SetValidator(new InvoiceValidator());
+                RuleFor(x => x.JobInvoice).SetValidator(new InvoiceValidator());
             }
         }
 
@@ -36,22 +37,29 @@ namespace Application.InvoiceApplication
         {
             private readonly DataContext _context;
             private readonly IUserAccessor _userAccessor;
-            private readonly IMapper _mapper;
-            public Handler(DataContext context, IUserAccessor userAccessor, IMapper mapper)
+
+            public Handler(DataContext context, IUserAccessor userAccessor)
             {
-                _mapper = mapper;
                 _userAccessor = userAccessor;
                 _context = context;
             }
 
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
-                DateTime localStartTime = request.Invoice.InvoiceDate.ToLocalTime();
+                // set Invoice datetime
+                request.JobInvoice.InvoiceDate = DateTime.UtcNow;
 
-                await _context.Invoices.AddAsync(request.Invoice);
+                var user = await _context.Users.FirstOrDefaultAsync(x => x.UserName == _userAccessor.GetUsername());
 
-                // SaveChangesAsync actually returns an integer of state entries written to the database
+                if (user == null) return null;
+
+                request.JobInvoice.SellerUsername = user.UserName;
+
+                await _context.JobInvoices.AddAsync(request.JobInvoice);
+
                 var result = await _context.SaveChangesAsync() > 0;
+
+                if (!result) return Result<Unit>.Failure("Failed to create job invoice");
 
                 return Result<Unit>.Success(Unit.Value);
             }

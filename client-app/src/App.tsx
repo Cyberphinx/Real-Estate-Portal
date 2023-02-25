@@ -19,7 +19,8 @@ import ListingFormPreview from './features/users/controlPanel/agency/listings/Li
 import CreateRemovalsJob from './features/services/removals/CreateRemovalsJob';
 import CreateJob from './features/services/jobs/CreateJob';
 import RemovalsJobConfirmation from './features/services/removals/RemovalsJobConfirmation';
-import CreateInvoice from './features/users/invoice/CreateInvoice';
+import CreateJobInvoice from './features/users/jobInvoice/CreateJobInvoice';
+import ViewJobInvoice from './features/users/jobInvoice/ViewJobInvoice';
 
 function App() {
   const {commonStore, userStore} = useStore();
@@ -56,7 +57,8 @@ function App() {
         <Route path='/create-removals-job' element={<CreateRemovalsJob />} />
         <Route path='/removals-job-confirmation/:id' element={<RemovalsJobConfirmation />} />
         <Route path='/create-job' element={<CreateJob />} />
-        <Route path='/invoice/:id' element={<CreateInvoice />} />
+        <Route path='/creat-invoice/job/:jobId' element={<CreateJobInvoice />} />
+        <Route path='/view-job-invoice/:invoiceId' element={<ViewJobInvoice />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </div>

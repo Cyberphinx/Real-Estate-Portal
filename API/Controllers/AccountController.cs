@@ -25,6 +25,7 @@ using Domain;
 using Application.AccountApplication;
 using Application.AccountApplication.AccountDtos;
 using Domain.InvoiceAggregate;
+using Domain.MediaAggregate;
 
 namespace API.Controllers
 {
@@ -107,6 +108,26 @@ namespace API.Controllers
                 return ValidationProblem();
             }
 
+            // get a random user icon for anonymous booking
+            var random = new Random();
+            int iconIndex = random.Next(0, 47);
+
+            var getIcon = new UserIcons();
+            var newIcon = getIcon.GetUserIcon(iconIndex);
+
+            var photos = new List<AppUserMedia>();
+            var mainPhoto = new AppUserMedia
+            {
+                Id = Guid.NewGuid().ToString(),
+                Index = 0,
+                Url = newIcon,
+                Type = MediaType.Image,
+                Caption = "Profile picture",
+                IsMain = true,
+                IsLogo = false
+            };
+            photos.Add(mainPhoto);
+
             // create a new AppUser object
             var user = new AppUser
             {
@@ -118,6 +139,7 @@ namespace API.Controllers
                 Country = registerDto.Country,
                 Language = registerDto.Language,
                 DisplayName = registerDto.DisplayName,
+                Photos = photos
             };
 
             // if the user is an estate agent, create a headquarter company, a membership, and an invoice with a payment intent for stripe
@@ -144,29 +166,34 @@ namespace API.Controllers
                     RedressScheme = registerDto.RedressScheme
                 };
 
-                var items = new List<InvoiceItem>();
-                var invoiceItem = new InvoiceItem
+                var items = new List<AppUserInvoiceItem>();
+                var invoiceItem = new AppUserInvoiceItem
                 {
                     Amount = registerDto.InvoiceAmount,
                     Currency = registerDto.InvoiceCurrency,
                     Description = "",
                     Title = "Property Agent Sign Up fee",
+                    Index = 0,
                     VatPercentage = 20
                 };
                 items.Add(invoiceItem);
 
-                var invoice = new Invoice
+                // generate a shorter id for InvoiceReference
+                var invoiceRef = Nanoid.Nanoid.Generate(size: 10);
+
+                var invoice = new AppUserInvoice
                 {
                     Amount = registerDto.InvoiceAmount,
                     Currency = registerDto.InvoiceCurrency,
                     Description = registerDto.InvoiceDescription,
                     InvoiceDate = DateTime.UtcNow,
-                    InvoiceNumber = 1,
+                    Index = 1,
+                    IsQuotation = false,
                     Items = items,
                     PaymentStatus = PaymentStatus.InProgress,
                     Title = "Property Agent Sign Up fee",
-                    Username = registerDto.Username,
-                    VatPercentage = 20
+                    VatPercentage = 20,
+                    AppUser = user
                 };
 
                 var membership = new Membership
@@ -181,7 +208,7 @@ namespace API.Controllers
 
                 await _context.Companies.AddAsync(company);
 
-                await _context.Invoices.AddAsync(invoice);
+                await _context.UserInvoices.AddAsync(invoice);
                 await CreateOrUpdatePaymentIntent(invoice);
             };
 
@@ -267,7 +294,7 @@ namespace API.Controllers
             {
                 RecipientName = user.UserName,
                 RecipientEmail = user.Email,
-                Subject = "Please verify email",
+                Subject = "Please verify email for Sanctum",
                 Body = message
             };
             await _emailService.SendEmailAsync(verificationEmail);
@@ -362,7 +389,7 @@ namespace API.Controllers
             {
                 await _userManager.RemoveFromRoleAsync(user, assignRoleDto.Role);
             }
-            else 
+            else
             {
                 await _userManager.AddToRoleAsync(user, assignRoleDto.Role);
             }
@@ -431,12 +458,12 @@ namespace API.Controllers
             };
         }
 
-        private async Task<ActionResult<InvoiceDto>> CreateOrUpdatePaymentIntent(Invoice invoice)
+        private async Task<ActionResult<UserInvoiceDto>> CreateOrUpdatePaymentIntent(AppUserInvoice invoice)
         {
             if (invoice == null) return NotFound();
 
             // create payment intent
-            var intent = await _paymentService.CreateOrUpdatePaymentIntent(invoice);
+            var intent = await _paymentService.CreateOrUpdateUserPaymentIntent(invoice);
 
             if (intent == null) return BadRequest(new ProblemDetails { Title = "Problem creating payment intent" });
 
@@ -449,7 +476,7 @@ namespace API.Controllers
 
             if (!result) return BadRequest(new ProblemDetails { Title = "Problem updating the current invoice with intent" });
 
-            return invoice.MapInvoiceToDto();
+            return invoice.MapUserInvoiceToDto();
         }
     }
 }

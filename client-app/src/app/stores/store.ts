@@ -9,10 +9,11 @@ import MapStore from "./mapStore";
 import JobStore from "./jobStore";
 import ProfileStore from "./profileStore";
 import AgentListingStore from "./agentListingStore";
-import InvoiceStore from "./invoiceStore";
 import MessageStore from "./messageStore";
 import RemovalistJobStore from "./removalistJobStore";
 import CalendarStore from "./calendarStore";
+import JobInvoiceStore from "./jobInvoiceStore";
+import UserInvoiceStore from "./userInvoiceStore";
 
 interface Store {
     // class can also be used as types
@@ -26,7 +27,8 @@ interface Store {
     mapStore: MapStore;
     profileStore: ProfileStore;
     agentListingStore: AgentListingStore;
-    invoiceStore: InvoiceStore;
+    jobInvoiceStore: JobInvoiceStore;
+    userInvoiceStore: UserInvoiceStore;
     messageStore: MessageStore;
     removalistJobStore: RemovalistJobStore;
     calendarStore: CalendarStore;
@@ -43,7 +45,8 @@ export const store: Store = {
     mapStore: new MapStore(),
     profileStore: new ProfileStore(),
     agentListingStore: new AgentListingStore(),
-    invoiceStore: new InvoiceStore(),
+    jobInvoiceStore: new JobInvoiceStore(),
+    userInvoiceStore: new UserInvoiceStore(),
     messageStore: new MessageStore(),
     removalistJobStore: new RemovalistJobStore(),
     calendarStore: new CalendarStore()

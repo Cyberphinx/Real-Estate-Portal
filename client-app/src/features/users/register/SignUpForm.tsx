@@ -6,11 +6,12 @@ import * as Yup from 'yup';
 import { v4 as uuid } from 'uuid';
 import { useStore } from '../../../app/stores/store';
 import LoginForm from '../LoginForm';
-import { AccountType } from '../../../app/model/User';
+import { AccountType, RegisterFormValues } from '../../../app/model/User';
 import Switcher from './Switcher';
 import RegisterAgentStepThree from './agent/RegisterAgentStepThree';
 import RegisterSuccess from './RegisterSuccess';
 import { RedressScheme } from '../../../app/model/Company';
+import ModalStore from '../../../app/stores/modalStore';
 
 interface Props {
     formType: number;
@@ -18,14 +19,41 @@ interface Props {
 }
 
 export default observer(function SignUpForm({ formType, setFormType }: Props) {
-    const { userStore: { register }, featureStore: { setActiveFeature }, modalStore: { openModal, closeModal, setPaymentForm } } = useStore();
+    const { userStore, featureStore, modalStore } = useStore();
+    const { register } = userStore;
+    const { setActiveFeature } = featureStore;
+    const { openModal, closeModal, setPaymentForm } = modalStore;
 
-    const initialValues = {
+    const initialValues = [{
+        // number 0 is for Customer sign up
         email: "",
         password: "",
         username: "",
         phoneNumber: "",
-        accountType: 0,
+        accountType: AccountType.Customer,
+        addedOn: new Date(),
+        country: "United Kingdom",
+        language: "English",
+        displayName: "",
+        companyAccessStatus: 0,
+        companyLegalName: "",
+        isMainCompany: true,
+        legalCompanyAddress: undefined,
+        companyNumber: "",
+        icoNumber: "",
+        redressScheme: "",
+        invoiceDescription: "",
+        invoiceAmount: 0,
+        invoiceCurrency: "gbp",
+        error: null
+    },
+    // number 1 is for Agent sign up
+    {
+        email: "",
+        password: "",
+        username: "",
+        phoneNumber: "",
+        accountType: AccountType.Agent,
         addedOn: new Date(),
         country: "United Kingdom",
         language: "English",
@@ -48,31 +76,71 @@ export default observer(function SignUpForm({ formType, setFormType }: Props) {
         },
         companyNumber: "",
         icoNumber: "",
-        redressScheme: RedressScheme.None,
+        redressScheme: "",
         invoiceDescription: "",
         invoiceAmount: 0,
         invoiceCurrency: "gbp",
         error: null
-    }
+    },
+    // number 2 is for Customer sign up
+    {
+        email: "",
+        password: "",
+        username: "",
+        phoneNumber: "",
+        accountType: AccountType.Company,
+        addedOn: new Date(),
+        country: "United Kingdom",
+        language: "English",
+        displayName: "",
+        companyAccessStatus: 0,
+        companyLegalName: "",
+        isMainCompany: true,
+        legalCompanyAddress: {
+            id: uuid(),
+            displayAddress: "",
+            propertyNumberOrName: "",
+            streetName: "",
+            locality: "",
+            townOrCity: "",
+            county: "",
+            postalCode: "",
+            country: "United Kingdom",
+            latitude: 0,
+            longitude: 0,
+        },
+        companyNumber: "",
+        icoNumber: "",
+        redressScheme: "",
+        invoiceDescription: "",
+        invoiceAmount: 0,
+        invoiceCurrency: "gbp",
+        error: null
+    }]
 
     const registerValidation = [
+        // number 0 is for Customer sign up
         Yup.object({
             username: Yup.string().required("Username is required"),
+            displayName: Yup.string().required("Display name is required").max(20, "Display name must be under 20 characters"),
             email: Yup.string().required("Email is required").email("Email must be a valid email"),
             password: Yup.string().required("Password is required"),
         }),
+        // number 1 is for Agent sign up
         Yup.object({
             username: Yup.string().required("Username is required"),
             email: Yup.string().required("Email is required").email("Email must be a valid email"),
             password: Yup.string().required("Password is required"),
             companyLegalName: Yup.string().required("Legal business name is required"),
-            displayName: Yup.string().required("Displayname is required").max(20, "Display name must be under 20 characters"),
+            displayName: Yup.string().required("Display name is required").max(20, "Display name must be under 20 characters"),
             legalCompanyAddress: Yup.object({
                 postalCode: Yup.string().required("Postcode is required")
             })
         }),
+        // number 2 is for Tradesperson sign up
         Yup.object({
             username: Yup.string().required("Username is required"),
+            displayName: Yup.string().required("Display name is required").max(20, "Display name must be under 20 characters"),
             email: Yup.string().required("Email is required").email("Email must be a valid email"),
             password: Yup.string().required("Password is required"),
         })
@@ -86,7 +154,7 @@ export default observer(function SignUpForm({ formType, setFormType }: Props) {
 
     return (
         <Formik
-            initialValues={initialValues}
+            initialValues={initialValues[formType]}
             onSubmit={(values, { setErrors, setSubmitting }) => {
                 register(values, setSubmitting, paymentModal, successModal).catch(error => setErrors({ error }));
                 setActiveFeature(0);

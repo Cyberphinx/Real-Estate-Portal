@@ -24,7 +24,6 @@ namespace Application.JobApplication.JobDtos
         public ICollection<JobMediaDto> JobMedia { get; set; }
         public ICollection<JobLocationPublicDto> JobLocations { get; set; }
         public ICollection<NetworkPublicDto> Networks { get; set; }
-        public ICollection<JobMessageDto> Messages { get; set; }
         public int Bedrooms { get; set; }
         public int Bathrooms { get; set; }
         public string PropertyType { get; set; }

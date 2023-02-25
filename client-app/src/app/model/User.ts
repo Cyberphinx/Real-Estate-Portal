@@ -36,7 +36,7 @@ export interface RegisterFormValues {
     legalCompanyAddress?: CompanyAddress;
     companyNumber?: string;
     icoNumber: string;
-    redressScheme: RedressScheme;
+    redressScheme: string;
     invoiceDescription?: string;
     invoiceAmount?: number; // in the smallest currency unit, ie. Cents
     invoiceCurrency?: string; 

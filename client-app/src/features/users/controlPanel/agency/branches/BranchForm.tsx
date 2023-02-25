@@ -46,6 +46,7 @@ export default observer(function BranchForm({ setBranchForm }: Props) {
         commpanyDescriptions: [],
         companyReference: "",
         companyRegistrationNumber: "",
+        companyType: '',
         displayName: "",
         insurances: [],
         isMain: false,
@@ -72,6 +73,8 @@ export default observer(function BranchForm({ setBranchForm }: Props) {
         summaryDescription: "",
         serviceCategories: ['Estate Agent'],
         username: user!.username,
+        termsAndConditions: '',
+        vatNumber: '',
         error: null,
     }
 

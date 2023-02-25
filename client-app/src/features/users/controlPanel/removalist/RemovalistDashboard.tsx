@@ -25,6 +25,9 @@ export default observer(function RemovalistDashboard({ user, jobs, allJobs }: Pr
     const { setPredicate, predicate, nonExistentDate, loadingJobs } = removalistJobStore;
     const { events, createEvent, deleteEvent, loading } = calendarStore;
 
+
+
+
     // LEAFLET START
     // const apikey = process.env.REACT_APP_LOCATION_IQ;
     // const locationIQLink = `https://{s}-tiles.locationiq.com/v3/streets/r/{z}/{x}/{y}.png?key=${apikey}`;
@@ -147,6 +150,14 @@ export default observer(function RemovalistDashboard({ user, jobs, allJobs }: Pr
         setTitle(theTitle);
     }
 
+    const address = `${headquarter?.companyAddress.propertyNumberOrName && (headquarter?.companyAddress.propertyNumberOrName + ", ")}
+    ${headquarter?.companyAddress.streetName && (headquarter?.companyAddress.streetName + ", ")}
+    ${headquarter?.companyAddress.locality && (headquarter?.companyAddress.locality + ", ")}
+    ${headquarter?.companyAddress.townOrCity && (headquarter?.companyAddress.townOrCity + ", ")}
+    ${headquarter?.companyAddress.county && (headquarter?.companyAddress.county + ", ")}
+    ${headquarter?.companyAddress.postalCode && (headquarter?.companyAddress.postalCode)}
+    `;
+
     return (
         <div className="removalist-dashboard">
             {/* <div id="agencymap" /> */}
@@ -166,7 +177,7 @@ export default observer(function RemovalistDashboard({ user, jobs, allJobs }: Pr
                         <h4>{item}</h4>
                     </div>
                 ))} */}
-                
+
                 <Calendar
                     onClickDay={(date, event) => showJobsOfDate(date, jobs.length)}
                     tileClassName={({ date, view }) => highlightDates(date, view)}
@@ -251,14 +262,20 @@ export default observer(function RemovalistDashboard({ user, jobs, allJobs }: Pr
             </div>
 
             <div className="removalist-dashboard__section-four">
-                <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', padding: '0', margin: '0' }}>{user?.displayName ? user.displayName : user?.username}</h1>
-                {/* <p>Account type: {user && accountTypeSwitch(user!)}</p> */}
-                <p>Email address: {user?.email}</p>
+                <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', padding: '0', margin: '0' }}>
+                    {user?.displayName ? user.displayName : user?.username}
+                </h1>
                 <p>Country: {user?.country}</p>
                 <p>Language: {user?.language}</p>
-                <p>Change password</p>
-                <p>Membership status: Active</p>
-                <p>Invoices</p>
+                <p>Membership: Active</p>
+                <p>Account email: {user?.email}</p>
+                <p>Account type: {user && accountTypeSwitch(user!)}</p>
+                {/* <button>Edit account settings</button> */}
+                <hr style={{margin:'2.5rem'}} />
+                <p>{headquarter?.legalName}</p>
+                <p>{address}</p>
+                {/* <button>View company</button> */}
+                {/* <button>Edit company</button> */}
             </div>
         </div>
     )

@@ -6,6 +6,7 @@ using Application.CompanyApplication;
 using Domain.CompanyAggregate;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Primitives;
 using Persistence;
 
 namespace API.Controllers
@@ -70,12 +71,12 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new DeleteRange.Command()));
         }
 
-        [Authorize(Roles = "Admin")]
-        [HttpPost("{seed}")]
-        public async Task Seed()
-        {
-            await SeedCompanies.SeedData(_db);
-        }
+        // [Authorize(Roles = "Admin")]
+        // [HttpPost("{seed}")]
+        // public async Task Seed()
+        // {
+        //     await SeedCompanies.SeedData(_db);
+        // }
 
         [HttpGet("listings")]
         public async Task<IActionResult> GetCompanyListings([FromQuery]AgentListingParams param)

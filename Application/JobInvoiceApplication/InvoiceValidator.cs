@@ -4,10 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using FluentValidation;
 using Domain.InvoiceAggregate;
+using Domain.JobAggregate.Objects;
 
-namespace Application.InvoiceApplication
+namespace Application.JobInvoiceApplication
 {
-    public class InvoiceValidator : AbstractValidator<Invoice>
+    public class InvoiceValidator : AbstractValidator<JobInvoice>
     {
         public InvoiceValidator()
         {

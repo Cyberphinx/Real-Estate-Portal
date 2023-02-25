@@ -1,0 +1,66 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Confirmation email from Sanctum</title>
+</head>
+
+<body>
+    <div style="
+        font-family: Arial, Helvetica, sans-serif; 
+        margin: auto;  
+        padding: 20px; 
+        width: 570px; 
+        border-radius: 20px;
+        background-image: linear-gradient(to bottom right, rgba(233, 0, 100, 0.2), rgba(51, 47, 208, 0.2));
+        background-size: cover;
+        ">
+        <article style="
+            background: rgba(255,255,255,1); 
+            box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
+            padding: 20px 30px 30px 30px; 
+            border-radius: 20px;
+            margin: 10px auto;">
+            <p style="display:none">------------------------------------------------------------</p>
+            <p style="color:#000000; text-align: center; font-size: 2rem; font-weight:bold; padding: 0 20px;">
+                Dear {0}, you have issued a quotation to {1}
+            </p>
+            <p>Quotation date: {2}</p>
+            <p>Quotation number: {3}</p>
+            <p>Job title: {4}</p>
+            <p>Job reference: {5}</p>
+            <p>------------------------------------------------------------</p>
+            <p>Total NET: {6}</p>  
+            <p>Total VAT: {7}</p>  
+            <p>Total amount due: {8}</p>
+        </article>
+
+        <article style="
+        background: rgba(255,255,255,1); 
+        box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
+        padding: 20px 30px 30px 30px; 
+        border-radius: 20px;
+        margin: 20px auto;">
+            <p style="display:none">------------------------------------------------------------</p>
+            <p style="color:#000000; text-align: center;font-size: 2rem; font-weight:bold; padding: 0 20px;">
+                Questions?
+            </p>
+            <p>Email customer: {16}</p>
+            <p>Call customer: {17}</p>
+            <p>Customer name: {1}</p>
+            <p>Customer address: {18}</p>
+        </article>
+
+        <article style="padding-top: 15px; text-align: center;">
+            <p style="display:none">------------------------------------------------------------</p>
+            <p style="font-size: 0.85rem;">SANCTUM - Real estate platform</p>
+            <p style="font-size: 0.85rem;">https://sanctum.co.uk</p>
+            <p style="font-size: 0.85rem;">info@sanctum.co.uk</p>
+            <p style="font-size: 0.85rem;">Cerberus Cybernetics Ltd.</p>
+        </article>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,3 +1,4 @@
+import { JobInvoice } from './Invoice';
 import { Location } from './Location';
 import { MediaType } from './Media';
 import { Message } from './Message';
@@ -63,6 +64,8 @@ export interface Job {
     jobLifeCycle: JobLifeCycle;
     jobMedia: JobMediaDto[];
     jobLocations: JobLocation[];
+    invoicesCount: number;
+    invoices: JobInvoice[];
     networks: NetworkDto[];
     messages: Message[];
     bedrooms: number;
