@@ -85,15 +85,15 @@ namespace API.Controllers
         [HttpGet("customer/{invoiceId}")]
         public async Task<ActionResult> GetInvoiceAsCustomer(Guid invoiceId)
         {
-            return HandleResult(await Mediator.Send(new DetailsAsCustomer.Query { InvoiceId = invoiceId }));
+            return HandleResult(await Mediator.Send(new Details.Query { InvoiceId = invoiceId }));
         }
 
         // get a single Job invoice in order to pay for it via Stripe
         [Authorize(Policy = "IsJobInvoiceSeller")]
-        [HttpGet("seller /{invoiceId}")]
+        [HttpGet("seller/{invoiceId}")]
         public async Task<ActionResult> GetInvoiceAsSeller(Guid invoiceId)
         {
-            return HandleResult(await Mediator.Send(new DetailsAsCustomer.Query { InvoiceId = invoiceId }));
+            return HandleResult(await Mediator.Send(new Details.Query { InvoiceId = invoiceId }));
         }
 
 

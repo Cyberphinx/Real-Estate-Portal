@@ -117,6 +117,7 @@ export class JobInvoiceFormValues {
 
 export interface InvoiceItem {
     id?: string;
+    index: number;
     amount: number;
     currency: string;
     description: string;

@@ -43,7 +43,7 @@ export default observer(function JobInvoices({ job, showInvoices, currentJobId }
                                         <td>{dateFormatter(invoice.invoiceDate)}</td>
                                         <th>{PriceFormatter(invoice.amount, invoice.currency)}</th>
                                         <td>{invoice.paymentStatus}</td>
-                                        <td><Link to={`/view-invoice/${invoice.id}`} target="_blank"
+                                        <td><Link to={`/view-job-invoice/${invoice.id}`} target="_blank"
                                         >View invoice</Link></td>
                                     </tr>
                                 ))}

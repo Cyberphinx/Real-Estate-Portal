@@ -4,14 +4,13 @@ import '../../listings/newTab/ListingDetailsPage.css';
 import { useParams } from "react-router-dom";
 import { useStore } from "../../../app/stores/store";
 import LoadingComponent from "../../../app/common/loading/LoadingComponent";
-import Close from "../../map/toolbar/Close";
 import { CompanyDescription } from "../../../app/model/Company";
 import { Media } from "../../../app/model/Media";
 import Nav from "../../../app/layout/Nav";
 
 export default observer(function CompanyDetailsPage() {
     const { id } = useParams<string>();
-    const { companyStore, featureStore } = useStore();
+    const { companyStore } = useStore();
     const { company, loadCompany, loadingCompany, cancelSelectCompany } = companyStore;
 
     useEffect(() => {

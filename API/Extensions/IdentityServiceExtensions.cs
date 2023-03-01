@@ -85,6 +85,10 @@ namespace API.Extensions
                 {
                     policy.Requirements.Add(new IsJobInvoiceCustomer());
                 });
+                opt.AddPolicy("IsJobInvoiceSeller", policy =>
+                {
+                    policy.Requirements.Add(new IsJobInvoiceSeller());
+                });
                 opt.AddPolicy("LeadsAccess", policy =>
                 {
                     policy.Requirements.Add(new LeadsAccess());
@@ -95,6 +99,7 @@ namespace API.Extensions
             services.AddTransient<IAuthorizationHandler, IsJobOwnerHandler>();
             services.AddTransient<IAuthorizationHandler, IsOwnerHandler>();
             services.AddTransient<IAuthorizationHandler, IsJobInvoiceCustomerHandler>();
+            services.AddTransient<IAuthorizationHandler, IsJobInvoiceSellerHandler>();
             services.AddTransient<IAuthorizationHandler, LeadsAccessHandler>();
 
 

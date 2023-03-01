@@ -172,6 +172,8 @@ const Invoices = {
   getFirstUserInvoice: () => requests.get<UserInvoice>("/invoice"),
   createJobInvoice: (invoice: JobInvoiceFormValues, jobId: string) => requests.post<void>(`/invoice/job/${jobId}`, invoice),
   list: () => requests.get<JobInvoice[]>("/invoice/seller"),
+  detailsAsSeller: (invoiceId: string) => requests.get<JobInvoice>(`/invoice/seller/${invoiceId}`),
+  detailsAsCustomer: (invoiceId: string) => requests.get<JobInvoice>(`/invoice/customer/${invoiceId}`),
 }
 
 const agent = {

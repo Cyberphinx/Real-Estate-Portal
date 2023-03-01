@@ -15,19 +15,36 @@ export default class JobInvoiceStore {
         makeAutoObservable(this)
     }
 
-    // loadInvoice = async (id: string) => {
-    //     this.loadingInvoice = true;
-    //     try {
-    //         const invoice = await agent.Invoices.details(id);
-    //         runInAction(() => {
-    //             this.invoice = invoice;
-    //             this.setClientSecret(invoice.clientSecret);
-    //         });
-    //     } catch (error) {
-    //         console.log(error);
-    //         this.loadingInvoice = false;
-    //     }
-    // }
+    loadInvoiceAsSeller = async (invoiceId: string) => {
+        this.loadingInvoice = true;
+        try {
+            const invoice = await agent.Invoices.detailsAsSeller(invoiceId);
+            runInAction(() => {
+                this.invoice = invoice;
+                this.loadingInvoice = false;
+            });
+            return invoice;
+        } catch (error) {
+            console.log(error);
+            this.loadingInvoice = false;
+        }
+    }
+
+    loadInvoiceAsCustomer = async (invoiceId: string) => {
+        this.loadingInvoice = true;
+        try {
+            const invoice = await agent.Invoices.detailsAsCustomer(invoiceId);
+            runInAction(() => {
+                this.invoice = invoice;
+                this.setClientSecret(invoice.clientSecret);
+                this.loadingInvoice = false;
+            });
+            return invoice;
+        } catch (error) {
+            console.log(error);
+            this.loadingInvoice = false;
+        }
+    }
 
     private setClientSecret = (clientSecret: string | undefined) => {
         this.clientSecret = clientSecret;

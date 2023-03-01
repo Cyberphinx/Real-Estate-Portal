@@ -1,0 +1,47 @@
+.job-invoice__header {
+  padding: 2.5rem;
+  background: #fff;
+}
+
+.job-invoice__attribute-table {
+    padding-bottom: 5rem;
+    margin-left: auto;
+    margin-right: 0;
+}
+.job-invoice__attribute-table > tbody > tr > th {
+    text-align: left;
+}
+
+.job-invoice__attribute {
+    padding-top: 0;
+    margin-top: -1rem;
+    font-size: 0.85rem;
+}
+
+.job-invoice__table {
+  border-top: 3px solid black;
+  border-bottom: 3px solid black;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.job-invoice__table > tbody > tr > td {
+  border-top: 1px solid #ccc;
+}
+
+.job-invoice__company-info {
+  position: absolute;
+  color: grey;
+  text-align: left;
+}
+
+.job-invoice__footer {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 1rem;
+  background: #fff;
+  padding: 2.5rem;
+  padding-top: 8rem;
+  font-size: 1rem;
+}

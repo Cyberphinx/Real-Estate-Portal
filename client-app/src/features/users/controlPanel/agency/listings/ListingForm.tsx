@@ -20,7 +20,7 @@ export default observer(function ListingForm() {
     const { listingStore, profileStore, featureStore, userStore } = useStore();
     const { user, isLoggedIn } = userStore;
     const { createListing, updateListing, loadListing, loadingListing } = listingStore;
-    const { userCompanies, loadingUserCompanies, loadUserCompanies, setActiveTab } = profileStore;
+    const { loadUserCompanies } = profileStore;
     const { listingFormStep, setListingFormStep, activeFeature, setActiveFeature } = featureStore;
 
     const [currentListingValues, setCurrentListingValues] = useState<ListingFormValues>(new ListingFormValues());
