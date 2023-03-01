@@ -17,6 +17,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Persistence;
+using FluentValidation.AspNetCore;
+using FluentValidation;
 
 namespace API.Extensions
 {
@@ -29,6 +31,9 @@ namespace API.Extensions
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
             });
+
+            services.AddFluentValidationAutoValidation();
+            services.AddValidatorsFromAssemblyContaining<Create>();
 
             // the original code that was overriden by below for .AddDbContext
             // services.AddDbContext<DataContext>(options =>
@@ -90,7 +95,7 @@ namespace API.Extensions
                     policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("https://locationiq.org");
                 });
             });
-
+            
             services.AddMediatR(typeof(List.Handler).Assembly);
             services.AddAutoMapper(typeof(MappingProfiles).Assembly);
             services.AddScoped<IUserAccessor, UserAccessor>();

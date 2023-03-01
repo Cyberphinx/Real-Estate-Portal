@@ -1,19 +1,9 @@
 using API.Extensions;
 using API.Middleware;
-using API.Services;
 using API.SignalR;
 using Application.ListingApplication;
-using Domain;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Authorization;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Persistence;
 
 namespace API
 {
@@ -30,25 +20,10 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.AddControllers(opt =>
-            {
-                // becasue we are using Role based authorization, the below policy is canceclled
-                // authorization policy
-                // var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-                // opt.Filters.Add(new AuthorizeFilter(policy));
-            })
-                .AddFluentValidation(config =>
-                {
-                    // only need to specify once (ie. "Create), then it will work for the whole project/assembly
-                    config.RegisterValidatorsFromAssemblyContaining<Create>();
-
-                });
+            
+            services.AddControllers();
             services.AddApplicationServices(_config);
             services.AddIdentityServices(_config);
-            // services.AddIdentityCore<AppUser>()
-            //     .AddRoles<IdentityRole>()
-            //     .AddEntityFrameworkStores<DataContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
