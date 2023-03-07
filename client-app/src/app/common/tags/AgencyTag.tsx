@@ -9,11 +9,17 @@ interface Props {
 }
 
 export default function AgencyTag({ listing, fontSize }: Props) {
+
+    function getAgencyName() {
+        if (listing && listing.company && listing?.company.displayName) return listing?.company.displayName;
+        else if (listing && listing.agency) return listing.agency;
+        else return "Agency";
+    }
     
     return (
         <div style={{ position: "relative" }}>
             <span className="agency-tag" style={{fontSize:fontSize}} >
-                {listing?.company.displayName }
+                {getAgencyName()}
             </span>
         </div>
     );

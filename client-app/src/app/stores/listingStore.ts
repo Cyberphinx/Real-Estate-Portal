@@ -143,8 +143,22 @@ export default class ListingStore {
         this.setLoadingListing(false);
       }
     }
-
   }
+
+  loadExtractedListings = async () => {
+    this.setLoadingInitial(true);
+    // Asynchronous code is inside Try Catch block
+    try {
+      const result = await agent.Spiders.listAll();
+      result.forEach(listing => {
+        this.setListing(listing);
+      });
+      this.setLoadingInitial(false);
+    } catch (error) {
+      console.log(error);
+      this.setLoadingInitial(false);
+    }
+  };
 
   setLoadingInitial = (state: boolean) => {
     this.loadingInitial = state;

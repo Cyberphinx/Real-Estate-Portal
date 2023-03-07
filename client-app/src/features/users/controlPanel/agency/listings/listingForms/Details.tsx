@@ -303,14 +303,6 @@ export default observer(function BasicInformation({ step, setStep, values, setFi
             <section className="listing-forms__container">
                 <MultiSelect
                     setFieldValue={setFieldValue}
-                    fieldName={"featureSpaces"}
-                    fieldValues={values.featureSpaces}
-                    enumType={FeatureSpace}
-                    options={spacesOptions}
-                    label={"Feature spaces"}
-                />
-                <MultiSelect
-                    setFieldValue={setFieldValue}
                     fieldName={"parking"}
                     fieldValues={values.parking}
                     enumType={Parking}

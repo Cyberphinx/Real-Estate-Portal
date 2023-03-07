@@ -19,7 +19,7 @@ export default observer(function HomePage() {
     const { featureStore, listingStore, mapStore, jobStore, companyStore, userStore, profileStore, modalStore } = useStore();
     const { activeFeature } = featureStore;
     const { loadJobs } = jobStore;
-    const { listings, selectedListing,  loadListings } = listingStore;
+    const { listings, selectedListing,  loadListings, loadExtractedListings } = listingStore;
     const { companies, selectedCompany, loadCompanies } = companyStore;
     const { zoom, bounds } = mapStore;
     const { user, isLoggedIn } = userStore;
@@ -28,8 +28,8 @@ export default observer(function HomePage() {
     const location = useLocation();
 
     useEffect(() => {
-        loadListings();
-    }, [loadListings])
+        loadExtractedListings();
+    }, [loadExtractedListings])
 
     useEffect(() => {
         loadJobs();

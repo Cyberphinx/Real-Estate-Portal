@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import { Form, Formik } from "formik";
 import { ListingFormValues } from "../../../../../app/model/ListingAggregate/Listing";
 import { v4 as uuid } from 'uuid';
-import { nanoid } from "nanoid";
+import { customAlphabet, nanoid } from "nanoid";
 import SwitchBoard from "./listingForms/SwitchBoard";
 import ListingFormStepper from "./listingForms/ListingFormStepper";
 import { observer } from "mobx-react-lite";
@@ -22,6 +22,8 @@ export default observer(function ListingForm() {
     const { createListing, updateListing, loadListing, loadingListing } = listingStore;
     const { loadUserCompanies } = profileStore;
     const { listingFormStep, setListingFormStep, activeFeature, setActiveFeature } = featureStore;
+
+    const nanoid = customAlphabet("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 10)
 
     const [currentListingValues, setCurrentListingValues] = useState<ListingFormValues>(new ListingFormValues());
 
@@ -50,7 +52,7 @@ export default observer(function ListingForm() {
                     ...listing.pricing,
                     id: uuid()
                 },
-                listingReference: nanoid(10)
+                listingReference: nanoid()
             };
             // setCurrentListing(newListing);
             setListingFormStep(3);

@@ -7,6 +7,7 @@ namespace Domain.ListingAggregate.Enums
         Leasehold,
         ShareOfFreehold,
         Commonhold,
-        SharedOwnership
+        SharedOwnership,
+        Other
     }
 }

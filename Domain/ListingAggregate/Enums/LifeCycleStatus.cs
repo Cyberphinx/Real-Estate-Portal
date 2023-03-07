@@ -4,9 +4,12 @@ namespace Domain.ListingAggregate.Enums
     {
         Available,
         UnderOffer,
+        ReferencesPending,
         SoldSubjectToContract,
         Sold,
         LetAgreed,
-        Let
+        Let,
+        OnHold,
+        Other
     }
 }

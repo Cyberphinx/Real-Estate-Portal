@@ -1,12 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Domain.CompanyAggregate;
 using Domain.ListingAggregate.Enums;
 using Domain.ListingAggregate.Objects;
 using Domain.Enums;
-using Domain.MediaAggregate;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.ListingAggregate
 {
@@ -14,26 +12,27 @@ namespace Domain.ListingAggregate
     {
         public Guid Id { get; set; }
         public bool Accessibility { get; set; }
-        public DateTime AddedOn { get; set; }
+        public AccessStatus AccessStatus { get; set; }
+        public double Acreage { get; set; } // acres of land that the property has
+        public string Agency { get; set; } // from web scraping
+        public DateTime AddedOn { get; set; } = DateTime.UtcNow;
         public string AdministrationFees { get; set; }
         public double AnnualBusinessRates { get; set; }
         public double AreaTotal { get; set; }
         public UnitOfArea AreaUnits { get; set; }
-        public AccessStatus AccessStatus { get; set; }
         public int AvailableBedrooms { get; set; }
         public DateTime AvailableFromDate { get; set; }
         public int Bathrooms { get; set; }
-        public List<Utility> BillsIncluded { get; set; }
+        public List<string> BillsIncluded { get; set; }
         public bool BusinessForSale { get; set; }
-        public List<Incentive> BuyerIncentives { get; set; }
+        public List<string> BuyerIncentives { get; set; }
         public Category Category { get; set; }
         public CentralHeating CentralHeating { get; set; }
         public bool ChainFree { get; set; }
         public List<string> CommercialUseClass { get; set; }
         public string CommonholdDetails { get; set; }
-        public List<Utility> ConnectedUtilities { get; set; }
+        public List<string> ConnectedUtilities { get; set; }
         public int ConstructionYear { get; set; }
-        public ICollection<ListingMedia> ListingMedia { get; set; } = new List<ListingMedia>();
         public CookerType CookerType { get; set; }
         public CouncilTaxBand CouncilTaxBand { get; set; }
         public DecorativeCondition DecorativeCondition { get; set; }
@@ -54,6 +53,7 @@ namespace Domain.ListingAggregate
         public LifeCycleStatus LifeCycleStatus { get; set; }
         public bool ListedBuilding { get; set; }
         public ListedBuildingGrade ListedBuildingGrade { get; set; }
+        public ICollection<ListingMedia> ListingMedia { get; set; } = new List<ListingMedia>();
         public string ListingReference { get; set; }
         public ListingLocation ListingLocation { get; set; }
         public int LivingRooms { get; set; }
@@ -61,8 +61,7 @@ namespace Domain.ListingAggregate
         public UnitOfTime MinimumContractLengthUnits { get; set; }
         public bool NewBuild { get; set; }
         public DateTime OpenDay { get; set; }
-        public List<FeatureSpace> FeatureSpaces { get; set; }
-        public List<Parking> Parking { get; set; }
+        public bool Parking { get; set; }
         public bool PetsAllowed { get; set; }
         public Pricing Pricing { get; set; }
         public PropertyType PropertyType { get; set; }
@@ -74,6 +73,7 @@ namespace Domain.ListingAggregate
         public string SapRating { get; set; }
         public ServiceCharge ServiceCharge { get; set; }
         public bool Serviced { get; set; }
+        public string SourceUri { get; set; } // for web scraping
         public bool SharedAccommodation { get; set; }
         public string SharedOwnershipDetails { get; set; }
         public bool SmokersConsidered { get; set; }
@@ -83,8 +83,7 @@ namespace Domain.ListingAggregate
         public Eligibility TenantEligibilityStudents { get; set; }
         public Tenure Tenure { get; set; }
         public int TotalBedrooms { get; set; }
-        public List<UniqueFeature> UniqueFeatures { get; set; }
-        public List<WhiteGoods> WhiteGoods { get; set; }
+        public List<string> WhiteGoods { get; set; }
         public Guid CompanyId { get; set; }
         public Company Company { get; set; }
         public ICollection<ListingWatcher> Watchers { get; set; } = new List<ListingWatcher>();

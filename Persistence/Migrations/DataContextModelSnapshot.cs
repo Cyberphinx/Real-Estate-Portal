@@ -18,10 +18,10 @@ namespace Persistence.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.0")
+                .HasAnnotation("ProductVersion", "7.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "property_type", new[] { "barn_conversion", "block_of_flats", "bungalow", "business_park", "chalet", "chateau", "cottage", "country_house", "detached", "detached_bungalow", "end_terrace", "equestrian", "farm", "farmhouse", "finca", "flat", "hotel", "houseboat", "industrial", "land", "leisure", "light_industrial", "link_detached", "lodge", "longere", "maisonette", "mews", "office", "park_home", "parking", "pub_bar", "restaurant", "retail", "riad", "semi_detached", "semi_detached_bungalow", "studio", "terraced", "terraced_bungalow", "town_house", "villa", "warehouse" });
+            NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "property_type", new[] { "barn_conversion", "block_of_flats", "bungalow", "business_park", "chalet", "chateau", "cottage", "country_house", "detached", "detached_bungalow", "end_terrace", "equestrian", "farm", "farmhouse", "finca", "flat", "hotel", "houseboat", "industrial", "land", "leisure", "light_industrial", "link_detached", "lodge", "longere", "maisonette", "mews", "office", "other", "park_home", "parking", "pub_bar", "restaurant", "retail", "riad", "semi_detached", "semi_detached_bungalow", "studio", "terraced", "terraced_bungalow", "town_house", "villa", "warehouse" });
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("Domain.AppUserAggregate.AppUser", b =>
@@ -1010,10 +1010,16 @@ namespace Persistence.Migrations
                     b.Property<bool>("Accessibility")
                         .HasColumnType("boolean");
 
+                    b.Property<double>("Acreage")
+                        .HasColumnType("double precision");
+
                     b.Property<DateTime>("AddedOn")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("AdministrationFees")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Agency")
                         .HasColumnType("text");
 
                     b.Property<double>("AnnualBusinessRates")
@@ -1034,14 +1040,8 @@ namespace Persistence.Migrations
                     b.Property<int>("Bathrooms")
                         .HasColumnType("integer");
 
-                    b.Property<int[]>("BillsIncluded")
-                        .HasColumnType("integer[]");
-
                     b.Property<bool>("BusinessForSale")
                         .HasColumnType("boolean");
-
-                    b.Property<int[]>("BuyerIncentives")
-                        .HasColumnType("integer[]");
 
                     b.Property<int>("Category")
                         .HasColumnType("integer");
@@ -1052,17 +1052,11 @@ namespace Persistence.Migrations
                     b.Property<bool>("ChainFree")
                         .HasColumnType("boolean");
 
-                    b.Property<List<string>>("CommercialUseClass")
-                        .HasColumnType("text[]");
-
                     b.Property<string>("CommonholdDetails")
                         .HasColumnType("text");
 
                     b.Property<Guid>("CompanyId")
                         .HasColumnType("uuid");
-
-                    b.Property<int[]>("ConnectedUtilities")
-                        .HasColumnType("integer[]");
 
                     b.Property<int>("ConstructionYear")
                         .HasColumnType("integer");
@@ -1091,17 +1085,8 @@ namespace Persistence.Migrations
                     b.Property<string>("EirPotentialRating")
                         .HasColumnType("text");
 
-                    b.Property<List<string>>("FeatureList")
-                        .HasColumnType("text[]");
-
                     b.Property<bool>("FeatureProperty")
                         .HasColumnType("boolean");
-
-                    b.Property<int[]>("FeatureSpaces")
-                        .HasColumnType("integer[]");
-
-                    b.Property<List<string>>("FloorLevels")
-                        .HasColumnType("text[]");
 
                     b.Property<int>("Floors")
                         .HasColumnType("integer");
@@ -1145,8 +1130,8 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("OpenDay")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int[]>("Parking")
-                        .HasColumnType("integer[]");
+                    b.Property<bool>("Parking")
+                        .HasColumnType("boolean");
 
                     b.Property<bool>("PetsAllowed")
                         .HasColumnType("boolean");
@@ -1184,6 +1169,9 @@ namespace Persistence.Migrations
                     b.Property<bool>("SmokersConsidered")
                         .HasColumnType("boolean");
 
+                    b.Property<string>("SourceUri")
+                        .HasColumnType("text");
+
                     b.Property<string>("SummaryDescription")
                         .HasColumnType("text");
 
@@ -1201,12 +1189,6 @@ namespace Persistence.Migrations
 
                     b.Property<int>("TotalBedrooms")
                         .HasColumnType("integer");
-
-                    b.Property<int[]>("UniqueFeatures")
-                        .HasColumnType("integer[]");
-
-                    b.Property<int[]>("WhiteGoods")
-                        .HasColumnType("integer[]");
 
                     b.HasKey("Id");
 
@@ -1353,8 +1335,8 @@ namespace Persistence.Migrations
                     b.Property<double>("PricePerUnitArea")
                         .HasColumnType("double precision");
 
-                    b.Property<int>("PriceQualifier")
-                        .HasColumnType("integer");
+                    b.Property<string>("PriceQualifier")
+                        .HasColumnType("text");
 
                     b.Property<int>("RentFrequency")
                         .HasColumnType("integer");
@@ -1481,42 +1463,36 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "61341e52-a848-42bb-ab0b-0d40ef78a7e3",
                             Name = "Company",
                             NormalizedName = "COMPANY"
                         },
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "3bb7e062-7ea1-4f8c-a9d0-9849a8a65759",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
                             Id = "3",
-                            ConcurrencyStamp = "44636d1c-027e-4a08-b5c7-1781e0a2e2a7",
                             Name = "Agency",
                             NormalizedName = "AGENCY"
                         },
                         new
                         {
                             Id = "4",
-                            ConcurrencyStamp = "2d54f083-cecf-433b-8474-10aa1a0f590d",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "5",
-                            ConcurrencyStamp = "eb84ebaa-9437-453b-b581-b55fd38c2469",
                             Name = "Manager",
                             NormalizedName = "MANAGER"
                         },
                         new
                         {
                             Id = "6",
-                            ConcurrencyStamp = "27f1ea9e-1c9e-47c8-b915-0c8c2047abee",
                             Name = "Removalist",
                             NormalizedName = "REMOVALIST"
                         });

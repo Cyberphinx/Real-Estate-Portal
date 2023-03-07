@@ -7,25 +7,27 @@ import {
     RentalTerm, Tenure, Utility, UnitOfArea, TransactionType, Frequency, 
     PriceQualifier, WhiteGoods, UniqueFeature
 } from "./ListingEnums";
-import { DetailedDescription, EpcRatings, ListingLocation, 
+import { DetailedDescription, ListingLocation, 
     ListingMediaDto, 
     Owner, Pricing, ServiceCharge, WatcherDto, } from "./ListingObjects";
 
 export interface Listing {
     id: string;
     accessibility: boolean;
+    accessStatus: AccessStatus;
+    acreage: number;
+    agency: string;
     addedOn: Date;
     administrationFees: string;
     annualBusinessRates: number;
     areaTotal: number;
     areaUnits: UnitOfArea;
-    accessStatus: AccessStatus;
     availableBedrooms: number;
     availableFromDate: Date;
     bathrooms: number;
-    billsIncluded: Utility[];
+    billsIncluded: string[];
     businessForSale: boolean;
-    buyerIncentives: Incentive[];
+    buyerIncentives: string[];
     company: Owner;
     companyId: string;
     category: Category;
@@ -33,14 +35,13 @@ export interface Listing {
     chainFree: boolean;
     commercialUseClass: string[];
     commonholdDetails: string;
-    connectedUtilities: Utility[];
+    connectedUtilities: string[];
     constructionYear: number;
     cookerType: CookerType;
     councilTaxBand: CouncilTaxBand;
     decorativeCondition: DecorativeCondition;
     deposit: number;
     detailedDescriptions: DetailedDescription[];
-    epcRatings: EpcRatings;
     eerCurrentRating: string;
     eerPotentialRating: string;
     eirCurrentRating: string;
@@ -64,8 +65,7 @@ export interface Listing {
     minimumContractLengthUnits: UnitOfTime;
     newBuild: boolean;
     openDay: Date;
-    featureSpaces: FeatureSpace[];
-    parking: Parking[];
+    parking: boolean;
     petsAllowed: boolean;
     pricing: Pricing;
     propertyType: PropertyType;
@@ -77,6 +77,7 @@ export interface Listing {
     sapRating: string;
     serviceCharge: ServiceCharge;
     serviced: boolean;
+    sourceUri: string;
     sharedAccommodation: boolean;
     sharedOwnershipDetails: string;
     smokersConsidered: boolean;
@@ -86,8 +87,7 @@ export interface Listing {
     tenantEligibilityStudents: Eligibility;
     tenure: Tenure;
     totalBedrooms: number;
-    uniqueFeatures: UniqueFeature[];
-    whiteGoods: WhiteGoods[];
+    whiteGoods: string[];
     watchers: WatcherDto[];
 }
 
@@ -100,25 +100,27 @@ export class Listing implements Listing {
 export class ListingFormValues {
     id?: string = '';
     accessibility?: boolean = undefined;
+    accessStatus: AccessStatus = AccessStatus.Public;
+    acreage?: number;
+    agency?: string;
     addedOn: Date = new Date();
     administrationFees?: string = '';
     annualBusinessRates?: number = undefined;
     areaTotal?: number = undefined;
     areaUnits: UnitOfArea = UnitOfArea.SqMetres;
-    accessStatus: AccessStatus = AccessStatus.Private;
     availableBedrooms?: number = undefined;
     availableFromDate?: Date = undefined;
     bathrooms?: number = undefined;
-    billsIncluded?: Utility[] = [];
+    billsIncluded?: string[] = [];
     businessForSale?: boolean = undefined;
-    buyerIncentives?: Incentive[] = [];
+    buyerIncentives?: string[] = [];
     category?: Category = Category.residential;
     centralHeating?: CentralHeating = undefined;
-    chainFree: boolean = false;
+    chainFree: boolean = true;
     companyId: string = '';
     commercialUseClass?: string[] = [];
     commonholdDetails: string = ''
-    connectedUtilities?: Utility[] = [];
+    connectedUtilities?: string[] = [];
     constructionYear?: number = undefined;
     cookerType?: CookerType = undefined;
     councilTaxBand?: CouncilTaxBand = undefined;
@@ -160,8 +162,7 @@ export class ListingFormValues {
     minimumContractLengthUnits?: UnitOfTime = UnitOfTime.Months;
     newBuild?: boolean = undefined;
     openDay?: Date = undefined;
-    featureSpaces?: FeatureSpace[] = [];
-    parking?: Parking[] = [];
+    parking?: boolean = true;
     petsAllowed?: boolean = undefined;
     pricing: Pricing = {
         id: '',
@@ -170,7 +171,7 @@ export class ListingFormValues {
         price: undefined,
         pricePerUnitArea: undefined,
         rentFrequency: Frequency.perMonth,
-        priceQualifier: PriceQualifier.from,
+        priceQualifier: "",
         auction: false,
         areaUnits: UnitOfArea.SqMetres
     };
@@ -183,6 +184,7 @@ export class ListingFormValues {
     sapRating?: string = '';
     serviceCharge?: ServiceCharge = undefined;
     serviced?: boolean = undefined;
+    sourceUri?: string;
     sharedAccommodation?: boolean = undefined;
     sharedOwnershipDetails?: string = '';
     smokersConsidered?: boolean = undefined;
@@ -192,19 +194,20 @@ export class ListingFormValues {
     tenantEligibilityStudents?: Eligibility = undefined;
     tenure?: Tenure = 1;
     totalBedrooms?: number = undefined;
-    uniqueFeatures?: UniqueFeature[] = [];
-    whiteGoods?: WhiteGoods[] = [];
+    whiteGoods?: string[] = [];
 
     constructor(listing?: ListingFormValues) {
         if (listing) {
             this.id = listing.id;
             this.accessibility = listing.accessibility;
+            this.accessStatus = listing.accessStatus;
+            this.acreage = listing.acreage;
+            this.agency = listing.agency;
             this.addedOn = listing.addedOn;
             this.administrationFees = listing.administrationFees;
             this.annualBusinessRates = listing.annualBusinessRates;
             this.areaTotal = listing.areaTotal;
             this.areaUnits = listing.areaUnits;
-            this.accessStatus = listing.accessStatus;
             this.availableBedrooms = listing.availableBedrooms;
             this.availableFromDate = listing.availableFromDate;
             this.bathrooms = listing.bathrooms;
@@ -228,6 +231,7 @@ export class ListingFormValues {
             this.eerPotentialRating = listing.eerPotentialRating;
             this.eirCurrentRating = listing.eirCurrentRating;
             this.eirPotentialRating = listing.eirPotentialRating;
+            this.featureProperty = listing.featureProperty;
             this.featureList = listing.featureList;
             this.floorLevels = listing.floorLevels;
             this.floors = listing.floors;
@@ -243,9 +247,9 @@ export class ListingFormValues {
             this.listingLocation = listing.listingLocation;
             this.livingRooms = listing.livingRooms;
             this.minimumContractLength = listing.minimumContractLength;
+            this.minimumContractLengthUnits = listing.minimumContractLengthUnits;
             this.newBuild = listing.newBuild;
             this.openDay = listing.openDay;
-            this.featureSpaces = listing.featureSpaces;
             this.parking = listing.parking;
             this.petsAllowed = listing.petsAllowed;
             this.pricing = listing.pricing;
@@ -258,6 +262,7 @@ export class ListingFormValues {
             this.sapRating = listing.sapRating;
             this.serviceCharge = listing.serviceCharge;
             this.serviced = listing.serviced;
+            this.sourceUri = listing.sourceUri;
             this.sharedAccommodation = listing.sharedAccommodation;
             this.sharedOwnershipDetails = listing.sharedOwnershipDetails;
             this.smokersConsidered = listing.smokersConsidered;
@@ -267,7 +272,6 @@ export class ListingFormValues {
             this.tenantEligibilityStudents = listing.tenantEligibilityStudents;
             this.tenure = listing.tenure;
             this.totalBedrooms = listing.totalBedrooms;
-            this.uniqueFeatures = listing.uniqueFeatures;
             this.whiteGoods = listing.whiteGoods;
         }
     }

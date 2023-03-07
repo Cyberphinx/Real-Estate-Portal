@@ -3,14 +3,12 @@ import './ListingTab.css';
 import { observer } from "mobx-react-lite";
 import { Listing } from "../../../app/model/ListingAggregate/Listing";
 import { useStore } from "../../../app/stores/store";
-import ContactForm from "./ListingContact";
 import ListingBookmark from "./ListingBookmark";
 import ListingOverview from "./ListingOverview";
 import ListingDetails from "./ListingDetails";
 import ListingContact from "./ListingContact";
 import WatchButton from "../../../app/common/WatchButton";
 import { ListingMediaDto } from "../../../app/model/ListingAggregate/ListingObjects";
-import ScrollToTop from "../../../app/layout/ScrollToTop";
 
 interface Props {
     listing: Listing | undefined;

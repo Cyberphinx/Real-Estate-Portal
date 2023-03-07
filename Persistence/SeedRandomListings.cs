@@ -45,10 +45,11 @@ namespace Persistence
                 newListing.AvailableBedrooms = 3;
                 newListing.AvailableFromDate = new DateTime(2022, month, day);
                 newListing.Bathrooms = 2;
-                newListing.BillsIncluded = new List<Utility>
+                newListing.BillsIncluded = new List<string>
                     {
-                        Utility.SatelliteCableTv,
-                        Utility.Water
+                        "Satellite Cable Tv",
+                        "Water",
+                        "Gardening service"
                     };
                 newListing.BusinessForSale = false;
                 newListing.BuyerIncentives = null;
@@ -57,17 +58,17 @@ namespace Persistence
                 newListing.CentralHeating = CentralHeating.Full;
                 newListing.ChainFree = true;
                 newListing.CommercialUseClass = null;
-                newListing.ConnectedUtilities = new List<Utility>
+                newListing.ConnectedUtilities = new List<string>
                     {
-                        Utility.SatelliteCableTv,
-                        Utility.Water
+                        "Satellite Cable Tv",
+                        "Water"
                     };
                 newListing.ConstructionYear = 2018;
                 newListing.ListingMedia = new List<ListingMedia>
                     {
                         new ListingMedia
                         {
-                            Id = Nanoid.Nanoid.Generate(size:10),
+                            Id = await Nanoid.Nanoid.GenerateAsync("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157050/Placeholder/Listings/ronnie-george-9gGvNWBeOq4_zzpq0z.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 1",
@@ -75,98 +76,98 @@ namespace Persistence
                         },
                         new ListingMedia
                         {
-                            Id = Nanoid.Nanoid.Generate(size:10),
+                            Id = await Nanoid.Nanoid.GenerateAsync("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/webaliser-_TPTXZd9mOo_yxhvvk.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 2"
                         },
                         new ListingMedia
                         {
-                            Id = Nanoid.Nanoid.Generate(size:10),
+                            Id = await Nanoid.Nanoid.GenerateAsync("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/bailey-anselme-Bkp3gLygyeA_jbeyqw.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 3"
                         },
                         new ListingMedia
                         {
-                            Id = Nanoid.Nanoid.Generate(size:10),
+                            Id = await Nanoid.Nanoid.GenerateAsync("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/avi-waxman-f9qZuKoZYoY_fpqamd.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 4"
                         },
                         new ListingMedia
                         {
-                            Id = Nanoid.Nanoid.Generate(size:10),
+                            Id = await Nanoid.Nanoid.GenerateAsync("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157050/Placeholder/Listings/chuttersnap-awL_YCtPGv4_mevzcz.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 5"
                         },
                         new ListingMedia
                         {
-                            Id = Nanoid.Nanoid.Generate(size:10),
+                            Id = await Nanoid.Nanoid.GenerateAsync("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/sean-pollock-PhYq704ffdA_juovuh.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 6"
                         },
                         new ListingMedia
                         {
-                            Id = Nanoid.Nanoid.Generate(size:10),
+                            Id = await Nanoid.Nanoid.GenerateAsync("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/jason-briscoe-UV81E0oXXWQ_d1oc5k.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 7"
                         },
                         new ListingMedia
                         {
-                            Id = Nanoid.Nanoid.Generate(size:10),
+                            Id = await Nanoid.Nanoid.GenerateAsync("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/etienne-beauregard-riverin-B0aCvAVSX8E_epmt4d.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 8"
                         },
                         new ListingMedia
                         {
-                            Id = Nanoid.Nanoid.Generate(size:10),
+                            Id = await Nanoid.Nanoid.GenerateAsync("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/francesca-tosolini-tHkJAMcO3QE_y8pp1o.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 9"
                         },
                         new ListingMedia
                         {
-                            Id = Nanoid.Nanoid.Generate(size:10),
+                            Id = await Nanoid.Nanoid.GenerateAsync("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/grant-lemons-jTCLppdwSEc_gvvge5.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 10"
                         },
                         new ListingMedia
                         {
-                            Id = Nanoid.Nanoid.Generate(size:10),
+                            Id = await Nanoid.Nanoid.GenerateAsync("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/naomi-hebert-MP0bgaS_d1c_izjtsb.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 11"
                         },
                         new ListingMedia
                         {
-                            Id = Nanoid.Nanoid.Generate(size:10),
+                            Id = await Nanoid.Nanoid.GenerateAsync("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157299/Placeholder/Listings/ionut-vlad-idXQEOxhmvU_svt1mo.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 12"
                         },
                         new ListingMedia
                         {
-                            Id = Nanoid.Nanoid.Generate(size:10),
+                            Id = await Nanoid.Nanoid.GenerateAsync("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/krystal-black-V5OEpF12pzw_ekn1te.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 13"
                         },
                         new ListingMedia
                         {
-                            Id = Nanoid.Nanoid.Generate(size:10),
+                            Id = await Nanoid.Nanoid.GenerateAsync("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/ronnie-george-9gGvNWBeOq4_yuw3yd.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 14"
                         },
                         new ListingMedia
                         {
-                            Id = Nanoid.Nanoid.Generate(size:10),
+                            Id = await Nanoid.Nanoid.GenerateAsync("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/roam-in-color-z3QZ6gjGRt4_evs1kc.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 15"
@@ -235,10 +236,11 @@ namespace Persistence
                 newListing.EirPotentialRating = "B";
                 newListing.FeatureList = new List<string>
                     {
-                        "Clean",
-                        "Modern",
-                        "Bright",
-                        "Garden"
+                        "Private garden",
+                        "Conservatory",
+                        "Fireplace",
+                        "Wooden floors",
+                        "Burglar alarm"
                     };
                 newListing.FurnishedState = FurnishedState.Unfurnished;
                 newListing.FloorLevels = new List<string> { "Ground floor", "First floor" };
@@ -268,24 +270,17 @@ namespace Persistence
                 newListing.MinimumContractLengthUnits = UnitOfTime.Months;
                 newListing.NewBuild = false;
                 newListing.OpenDay = new DateTime(2022, month, day);
-                newListing.FeatureSpaces = new List<FeatureSpace>
-                {
-                    FeatureSpace.Balcony,
-                    FeatureSpace.PrivateGarden,
-                    FeatureSpace.Conservatory,
-                    FeatureSpace.UtilityRoom
-                };
                 newListing.Pricing = new Pricing
                 {
                     TransactionType = TransactionType.Rent,
                     Currency = "gbp",
                     Price = rnd.Next(800, 8000),
                     RentFrequency = Frequency.PerMonth,
-                    PriceQualifier = PriceQualifier.FixedPrice,
+                    PriceQualifier = "FixedPrice",
                     Auction = false
                 };
                 newListing.PropertyType = PropertyType.Detached;
-                newListing.Parking = null;
+                newListing.Parking = true;
                 newListing.PetsAllowed = false;
                 newListing.RateableValue = 0;
                 newListing.RentalTerm = RentalTerm.LongTerm;
@@ -304,19 +299,12 @@ namespace Persistence
                 newListing.TenantEligibilityDss = Eligibility.Excluded;
                 newListing.TenantEligibilityStudents = Eligibility.Accepted;
                 newListing.Tenure = Tenure.Leasehold;
-                newListing.UniqueFeatures = new List<UniqueFeature>
+                newListing.WhiteGoods = new List<string>
                 {
-                    UniqueFeature.DoubleGlazing,
-                    UniqueFeature.PorterSecurity,
-                    UniqueFeature.BurglarAlarm,
-                    UniqueFeature.WoodenFloors
-                };
-                newListing.WhiteGoods = new List<WhiteGoods>
-                {
-                    WhiteGoods.CookerStove,
-                    WhiteGoods.Fridge,
-                    WhiteGoods.Freezer,
-                    WhiteGoods.Dishwasher
+                    "CookerStove",
+                    "Fridge",
+                    "Freezer",
+                    "Dishwasher"
                 };
 
                 listings.Add(newListing);
@@ -336,10 +324,11 @@ namespace Persistence
                 newListing.AvailableBedrooms = 3;
                 newListing.AvailableFromDate = new DateTime(2022, month, day);
                 newListing.Bathrooms = 2;
-                newListing.BillsIncluded = new List<Utility>
+                newListing.BillsIncluded = new List<string>
                     {
-                        Utility.SatelliteCableTv,
-                        Utility.Water
+                        "Satellite Cable Tv",
+                        "Water",
+                        "Gardening service"
                     };
                 newListing.BusinessForSale = false;
                 newListing.BuyerIncentives = null;
@@ -348,17 +337,17 @@ namespace Persistence
                 newListing.CentralHeating = CentralHeating.Full;
                 newListing.ChainFree = true;
                 newListing.CommercialUseClass = null;
-                newListing.ConnectedUtilities = new List<Utility>
+                newListing.ConnectedUtilities = new List<string>
                     {
-                        Utility.SatelliteCableTv,
-                        Utility.Water
+                        "SatelliteCableTv",
+                        "Water"
                     };
                 newListing.ConstructionYear = 2018;
                 newListing.ListingMedia = new List<ListingMedia>
                     {
                         new ListingMedia
                         {
-                            Id = Nanoid.Nanoid.Generate(size:10),
+                            Id = await Nanoid.Nanoid.GenerateAsync("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/naomi-hebert-MP0bgaS_d1c_izjtsb.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 1",
@@ -366,98 +355,98 @@ namespace Persistence
                         },
                         new ListingMedia
                         {
-                            Id = Nanoid.Nanoid.Generate(size:10),
+                            Id = await Nanoid.Nanoid.GenerateAsync("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/krystal-black-V5OEpF12pzw_ekn1te.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 2"
                         },
                         new ListingMedia
                         {
-                            Id = Nanoid.Nanoid.Generate(size:10),
+                            Id = await Nanoid.Nanoid.GenerateAsync("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/roam-in-color-z3QZ6gjGRt4_evs1kc.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 3"
                         },
                         new ListingMedia
                         {
-                            Id = Nanoid.Nanoid.Generate(size:10),
+                            Id = await Nanoid.Nanoid.GenerateAsync("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157299/Placeholder/Listings/ionut-vlad-idXQEOxhmvU_svt1mo.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 4"
                         },
                         new ListingMedia
                         {
-                            Id = Nanoid.Nanoid.Generate(size:10),
+                            Id = await Nanoid.Nanoid.GenerateAsync("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/webaliser-_TPTXZd9mOo_yxhvvk.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 5"
                         },
                         new ListingMedia
                         {
-                            Id = Nanoid.Nanoid.Generate(size:10),
+                            Id = await Nanoid.Nanoid.GenerateAsync("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/ronnie-george-9gGvNWBeOq4_yuw3yd.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 6"
                         },
                         new ListingMedia
                         {
-                            Id = Nanoid.Nanoid.Generate(size:10),
+                            Id = await Nanoid.Nanoid.GenerateAsync("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/bailey-anselme-Bkp3gLygyeA_jbeyqw.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 7"
                         },
                         new ListingMedia
                         {
-                            Id = Nanoid.Nanoid.Generate(size:10),
+                            Id = await Nanoid.Nanoid.GenerateAsync("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/jason-briscoe-UV81E0oXXWQ_d1oc5k.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 8"
                         },
                         new ListingMedia
                         {
-                            Id = Nanoid.Nanoid.Generate(size:10),
+                            Id = await Nanoid.Nanoid.GenerateAsync("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/etienne-beauregard-riverin-B0aCvAVSX8E_epmt4d.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 9"
                         },
                         new ListingMedia
                         {
-                            Id = Nanoid.Nanoid.Generate(size:10),
+                            Id = await Nanoid.Nanoid.GenerateAsync("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/francesca-tosolini-tHkJAMcO3QE_y8pp1o.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 10"
                         },
                         new ListingMedia
                         {
-                            Id = Nanoid.Nanoid.Generate(size:10),
+                            Id = await Nanoid.Nanoid.GenerateAsync("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/grant-lemons-jTCLppdwSEc_gvvge5.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 11"
                         },
                         new ListingMedia
                         {
-                            Id = Nanoid.Nanoid.Generate(size:10),
+                            Id = await Nanoid.Nanoid.GenerateAsync("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/sean-pollock-PhYq704ffdA_juovuh.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 12"
                         },
                         new ListingMedia
                         {
-                            Id = Nanoid.Nanoid.Generate(size:10),
+                            Id = await Nanoid.Nanoid.GenerateAsync("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157050/Placeholder/Listings/chuttersnap-awL_YCtPGv4_mevzcz.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 13"
                         },
                         new ListingMedia
                         {
-                            Id = Nanoid.Nanoid.Generate(size:10),
+                            Id = await Nanoid.Nanoid.GenerateAsync("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157049/Placeholder/Listings/avi-waxman-f9qZuKoZYoY_fpqamd.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 14"
                         },
                         new ListingMedia
                         {
-                            Id = Nanoid.Nanoid.Generate(size:10),
+                            Id = await Nanoid.Nanoid.GenerateAsync("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 10),
                             Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1671157293/Placeholder/Listings/sean-pollock-PhYq704ffdA_w9meyd.jpg",
                             Type = MediaType.Image,
                             Caption = "Photo 15"
@@ -527,10 +516,10 @@ namespace Persistence
                 newListing.EirPotentialRating = "B";
                 newListing.FeatureList = new List<string>
                     {
-                        "Clean",
-                        "Modern",
-                        "Bright",
-                        "Garden"
+                        "Porter security",
+                        "Balcony",
+                        "Private garden",
+                        "Double glazing"
                     };
                 newListing.FurnishedState = FurnishedState.Unfurnished;
                 newListing.FloorLevels = new List<string> { "First floor", "Second floor" };
@@ -555,24 +544,17 @@ namespace Persistence
                 newListing.LivingRooms = 2;
                 newListing.NewBuild = false;
                 newListing.OpenDay = new DateTime(2022, month, day);
-                newListing.FeatureSpaces = new List<FeatureSpace>
-                {
-                    FeatureSpace.Balcony,
-                    FeatureSpace.Basement,
-                    FeatureSpace.CommunalGarden,
-                    FeatureSpace.Outbuildings
-                };
                 newListing.Pricing = new Pricing
                 {
                     TransactionType = TransactionType.Sale,
                     Currency = "gbp",
                     Price = rnd.Next(50000, 2000000),
                     RentFrequency = Frequency.PerMonth,
-                    PriceQualifier = PriceQualifier.FixedPrice,
+                    PriceQualifier = "FixedPrice",
                     Auction = false
                 };
                 newListing.PropertyType = PropertyType.Detached;
-                newListing.Parking = new List<Parking> { Parking.SingleGarage, Parking.OffStreetParking };
+                newListing.Parking = true;
                 newListing.PetsAllowed = false;
                 newListing.RateableValue = 0;
                 newListing.RentalTerm = RentalTerm.LongTerm;
@@ -590,19 +572,12 @@ namespace Persistence
                 newListing.Tenure = 0;
                 newListing.MinimumContractLength = 6;
                 newListing.MinimumContractLengthUnits = UnitOfTime.Months;
-                newListing.UniqueFeatures = new List<UniqueFeature>
+                newListing.WhiteGoods = new List<string>
                 {
-                    UniqueFeature.DoubleGlazing,
-                    UniqueFeature.PorterSecurity,
-                    UniqueFeature.BurglarAlarm,
-                    UniqueFeature.WoodenFloors
-                };
-                newListing.WhiteGoods = new List<WhiteGoods>
-                {
-                    WhiteGoods.CookerStove,
-                    WhiteGoods.Fridge,
-                    WhiteGoods.Freezer,
-                    WhiteGoods.Dishwasher
+                    "CookerStove",
+                    "Fridge / Freezer",
+                    "Washing machine",
+                    "Dishwasher"
                 };
 
                 listings.Add(newListing);

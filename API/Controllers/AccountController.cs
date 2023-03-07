@@ -179,7 +179,7 @@ namespace API.Controllers
                 items.Add(invoiceItem);
 
                 // generate a shorter id for InvoiceReference
-                var invoiceRef = Nanoid.Nanoid.Generate(size: 10);
+                var invoiceRef = await Nanoid.Nanoid.GenerateAsync("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 10);
 
                 var invoice = new AppUserInvoice
                 {

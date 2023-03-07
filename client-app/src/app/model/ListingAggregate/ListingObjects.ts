@@ -23,14 +23,6 @@ export interface DetailedDescription {
     listingId: string;
 }
 
-export interface EpcRatings {
-    id: string;
-    eerCurrentRating: number;
-    eerPotentialRating: number;
-    eirCurrentRating: number;
-    eirPotentialRating: number;
-}
-
 export interface ListingLocation extends Location {
     id: string;
 }
@@ -54,7 +46,7 @@ export interface Pricing {
     price: number | undefined;
     pricePerUnitArea: number | undefined;
     rentFrequency: Frequency;
-    priceQualifier: PriceQualifier;
+    priceQualifier: string;
     auction: boolean;
     areaUnits: UnitOfArea;
 }

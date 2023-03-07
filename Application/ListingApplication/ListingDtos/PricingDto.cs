@@ -14,7 +14,7 @@ namespace Application.ListingApplication.ListingDtos
         public double Price { get; set; }
         public double PricePerUnitArea { get; set; }
         public Frequency RentFrequency { get; set; }
-        public PriceQualifier PriceQualifier { get; set; }
+        public string PriceQualifier { get; set; }
         public bool Auction { get; set; }
         public UnitOfArea AreaUnits { get; set; }
     }

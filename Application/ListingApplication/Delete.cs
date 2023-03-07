@@ -37,7 +37,7 @@ namespace Application.ListingApplication
                 // SaveChangesAsync actually returns an integer of state entries written to the database
                 var result = await _context.SaveChangesAsync() > 0;
 
-                if (!result) return Result<Unit>.Failure("Failed to delete the sales advert");
+                if (!result) return Result<Unit>.Failure("Failed to delete the listing");
 
                 // return something to tell the system to move on, Unit.Value means nothing.
                 return Result<Unit>.Success(Unit.Value);

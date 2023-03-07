@@ -10,6 +10,7 @@ import priceFormatter from "../../app/common/PriceFormatter";
 import * as ReactDOMServer from 'react-dom/server';
 import AgencyTag from "../../app/common/tags/AgencyTag";
 import RefTag from "../../app/common/tags/RefTag";
+import { ListingMediaDto } from "../../app/model/ListingAggregate/ListingObjects";
 
 interface Props {
     points: GeoJSON.Feature[];
@@ -22,7 +23,7 @@ export default observer(function ListingMarker({ points, clusters, supercluster 
     const { mapStore, listingStore, companyStore } = useStore();
     const { selectListing, contacts, setContacts, cancelSelectListing, selectedListing, predicate } = listingStore;
     const { setZoom, activeListing, setBounds } = mapStore;
-    const { selectedCompany, cancelSelectCompany} = companyStore;
+    const { selectedCompany, cancelSelectCompany } = companyStore;
 
     const maxZoom = 20;
     const map = useMap();
@@ -81,7 +82,7 @@ export default observer(function ListingMarker({ points, clusters, supercluster 
         });
         const iconActive = L.divIcon({
             html: ReactDOMServer.renderToString(
-                <div className="point-marker-price-active" style={{width: `calc(0.5rem * ${size})`, height: '1rem'}}>
+                <div className="point-marker-price-active" style={{ width: `calc(0.5rem * ${size})`, height: '1rem' }}>
                     {price}
                 </div>
             )
@@ -89,7 +90,7 @@ export default observer(function ListingMarker({ points, clusters, supercluster 
         });
         const iconSelected = L.divIcon({
             html: ReactDOMServer.renderToString(
-                <div className="point-marker-price-selected" style={{width: `calc(0.5rem * ${size})`, height: '1rem'}}>
+                <div className="point-marker-price-selected" style={{ width: `calc(0.5rem * ${size})`, height: '1rem' }}>
                     {price}
                 </div>
             )
@@ -199,7 +200,10 @@ export default observer(function ListingMarker({ points, clusters, supercluster 
                                     <div className="snippets-container" style={{ gridTemplateColumns: `repeat(${supercluster.getLeaves(cluster.id, Infinity, 0).length}, 1fr)` }}>
                                         {supercluster.getLeaves(cluster.id, Infinity, 0).map((item: any) => (
                                             <div key={item.properties.listing.id} className="snippet-container">
-                                                <img className="tiny-snippet" src={item.properties.listing.listingMedia[0]?.url} alt="listing" />
+                                                <img className="tiny-snippet"
+                                                    src={item.properties.listing.listingMedia.filter((x: ListingMediaDto) => x.type.toString() === "Image" && x.id.startsWith('ListingMedia/img'))[0]?.url}
+                                                    alt={item.properties.listing.listingMedia.filter((x: ListingMediaDto) => x.type.toString() === "Image" && x.id.startsWith('ListingMedia/img'))[0]?.caption}
+                                                />
                                                 <article className="marker-text">
                                                     <b>{priceFormatter(item.properties.listing.pricing.price, item.properties.listing.pricing.currency)}</b>
                                                     {predicate.get("channel") === "sale" ? null : <span>{rentFrequency(item.properties.listing)}</span>}

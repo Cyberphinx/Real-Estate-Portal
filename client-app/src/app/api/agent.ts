@@ -128,6 +128,10 @@ const Listings = {
   deleteMedia: (listingId: string, listingMediaId: string) => requests.del(`/listing/${listingId}/${listingMediaId}`),
 };
 
+const Spiders = {
+  listAll: () => requests.get<Listing[]>("/spiders")
+};
+
 const Companies = {
   list: (params: URLSearchParams) => axios.get<PaginatedResult<Company[]>>("/company", { params }).then(responseBody),
   details: (id: string) => requests.get<Company>(`/company/${id}`),
@@ -179,6 +183,7 @@ const Invoices = {
 const agent = {
   Account,
   Listings,
+  Spiders,
   Companies,
   Jobs,
   Profiles,

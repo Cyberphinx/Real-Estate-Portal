@@ -15,7 +15,7 @@ namespace Application.ProfileApplication.ProfileDtos
         public string Image { get; set; }
         public LifeCycleStatus LifeCycleStatus { get; set; }
         public double Price { get; set; }
-        public PriceQualifier PriceQualifier { get; set; }
+        public string PriceQualifier { get; set; }
         public string Currency { get; set; }
         public Frequency RentFrequency { get; set; }
         public string City { get; set; }

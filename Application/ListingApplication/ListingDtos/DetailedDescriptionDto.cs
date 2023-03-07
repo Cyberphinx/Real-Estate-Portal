@@ -9,6 +9,7 @@ namespace Application.ListingApplication.ListingDtos
     public class DetailedDescriptionDto
     {
         public Guid Id { get; set; }
+        public int Index { get; set; }
         public string Heading { get; set; }
         public string Text { get; set; }
         public double Length { get; set; }

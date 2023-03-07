@@ -110,9 +110,11 @@ export enum Incentive {
 export enum LifeCycleStatus {
     available,
     underOffer,
+    referencesPending,
     soldSubjectToContract,
     sold,
     letAgreed,
+    onHold,
     let
 }
 
@@ -219,6 +221,7 @@ export enum PropertyType {
     maisonette,
     mews,
     office,
+    other,
     parkHome,
     parking,
     pubBar,
@@ -300,7 +303,8 @@ export enum Tenure {
     leasehold,
     shareOfFreehold,
     commonhold,
-    sharedOwnership
+    sharedOwnership,
+    other
 }
 
 export enum TransactionType {

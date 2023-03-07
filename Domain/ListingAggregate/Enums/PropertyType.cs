@@ -1,19 +1,5 @@
 namespace Domain.ListingAggregate.Enums
 {
-    // public enum PropertyType
-    // {
-    //     Houses,
-    //     Flats,
-    //     Bungalows,
-    //     MobileHomes,
-    //     CommercialProperty,
-    //     Land,
-    //     CharacterProperty,
-    //     Parking,
-    //     RetirementProperty,
-    //     SharedProperty,
-    // }
-
     public enum PropertyType
     {
         BarnConversion,
@@ -44,6 +30,7 @@ namespace Domain.ListingAggregate.Enums
         Maisonette,
         Mews,
         Office,
+        Other,
         ParkHome,
         Parking,
         PubBar,

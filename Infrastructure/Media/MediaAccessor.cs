@@ -27,6 +27,8 @@ namespace Application.MediaApplication
         {
             if (file.Length > 0)
             {
+                // store content of the file in memory, that's why we have "using" statement here
+                // so once we finish this statement, the stream of data is going to be disposed automatically
                 await using var stream = file.OpenReadStream();
                 var uploadParams = new ImageUploadParams
                 {

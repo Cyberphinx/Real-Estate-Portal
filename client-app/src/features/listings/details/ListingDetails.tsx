@@ -18,7 +18,7 @@ export default observer(function ListingDetails({ listing }: Props) {
 
     return (
         <div>
-            <article className='listing-detailed-info-container'>
+            {/* <article className='listing-detailed-info-container'>
                 <h3 className="listing-details-title">Basic information</h3>
                 <p className="listing-details-text">Status: {listing?.lifeCycleStatus}</p>
                 {listing.newBuild ? <p className="listing-details-text">New home: Yes </p> : null}
@@ -27,8 +27,8 @@ export default observer(function ListingDetails({ listing }: Props) {
                 <p className="listing-details-text">Date available: {dateFormatterShort(listing!.availableFromDate)}</p>
                 <p className="listing-details-text">Minimum contract length: {listing?.minimumContractLength} {listing.minimumContractLengthUnits}</p>
                 <p className="listing-details-text">Rental term: {listing.rentalTerm}</p>
-                <div className="listing-details-text">All bills included: {listing.billsIncluded.map((bill: Utility, index: number) => (
-                    <span key={index}>{Utility[bill]}, </span>
+                <div className="listing-details-text">All bills included: {listing.billsIncluded && listing.billsIncluded.map((bill: string, index: number) => (
+                    <span key={index}>{bill}, </span>
                 ))}</div>
                 <p className="listing-details-text">Council tax band: {listing.councilTaxBand}</p>
                 <p className="listing-details-text">EPC rating: {listing.eerCurrentRating}</p>
@@ -57,20 +57,34 @@ export default observer(function ListingDetails({ listing }: Props) {
                 <h3 className="listing-details-title">Commercial information</h3>
                 <p className="listing-details-text">Business for sale: {listing.businessForSale}</p>
                 <p className="listing-details-text">Commercial use class: {listing.commercialUseClass}</p>
-            </article>
+            </article> */}
+        
+        <div className='listing-detailed-info-container'>
+                {listing?.featureList && listing?.featureList.map((feature: string, index: number) => (
+                    <div key={index} style={{marginBottom:'2rem'}}>
+                        <article>
+                            <b className="listing-details-title">{feature}</b>
+                        </article>
+                    </div>
+                ))}
+            </div>
 
-            {listing?.detailedDescriptions.map((description: DetailedDescription) => (
-                <div key={description.id} className='listing-detailed-info-container'>
-                    <article>
-                        <b className="listing-details-title">{description.heading}</b>
-                        <span className="listing-details-dimensions">
-                            {description.area !== 0
-                                && ` (${description.length} x ${description.width} = ${description.area} sq ${description.unit})`}
-                        </span>
-                    </article>
-                    <p className="listing-details-text">{description.text}</p>
-                </div>
-            ))}
+            <div className='listing-detailed-info-container'>
+                {listing?.detailedDescriptions.map((description: DetailedDescription) => (
+                    <div key={description.id} style={{marginBottom:'2rem'}}>
+                        <article>
+                            <b className="listing-details-title">{description.heading}</b>
+                            <span className="listing-details-dimensions">
+                                {description.area !== 0
+                                    && ` (${description.length} x ${description.width} = ${description.area} sq ${description.unit})`}
+                            </span>
+                        </article>
+                        {/* <p className="listing-details-text">{description.text}</p> */}
+                        <div dangerouslySetInnerHTML={{ __html: description.text }} />
+                    </div>
+                ))}
+            </div>
+
         </div>
 
     )

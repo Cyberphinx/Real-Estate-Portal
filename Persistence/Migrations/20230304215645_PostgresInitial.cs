@@ -5,14 +5,18 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace Persistence.Migrations
 {
-    public partial class InitialCreate : Migration
+    /// <inheritdoc />
+    public partial class PostgresInitial : Migration
     {
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterDatabase()
-                .Annotation("Npgsql:Enum:property_type", "barn_conversion,block_of_flats,bungalow,business_park,chalet,chateau,cottage,country_house,detached,detached_bungalow,end_terrace,equestrian,farm,farmhouse,finca,flat,hotel,houseboat,industrial,land,leisure,light_industrial,link_detached,lodge,longere,maisonette,mews,office,park_home,parking,pub_bar,restaurant,retail,riad,semi_detached,semi_detached_bungalow,studio,terraced,terraced_bungalow,town_house,villa,warehouse");
+                .Annotation("Npgsql:Enum:property_type", "barn_conversion,block_of_flats,bungalow,business_park,chalet,chateau,cottage,country_house,detached,detached_bungalow,end_terrace,equestrian,farm,farmhouse,finca,flat,hotel,houseboat,industrial,land,leisure,light_industrial,link_detached,lodge,longere,maisonette,mews,office,other,park_home,parking,pub_bar,restaurant,retail,riad,semi_detached,semi_detached_bungalow,studio,terraced,terraced_bungalow,town_house,villa,warehouse");
 
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
@@ -80,7 +84,8 @@ namespace Persistence.Migrations
                     SummaryDescription = table.Column<string>(type: "text", nullable: true),
                     ServiceCategories = table.Column<List<string>>(type: "text[]", nullable: true),
                     TermsAndConditions = table.Column<string>(type: "text", nullable: true),
-                    Username = table.Column<string>(type: "text", nullable: true)
+                    Username = table.Column<string>(type: "text", nullable: true),
+                    VatNumber = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -525,6 +530,7 @@ namespace Persistence.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Currency = table.Column<string>(type: "text", nullable: true),
+                    Index = table.Column<int>(type: "integer", nullable: false),
                     InsurancePolicy = table.Column<string>(type: "text", nullable: true),
                     InsuranceScheme = table.Column<string>(type: "text", nullable: true),
                     InsuranceType = table.Column<string>(type: "text", nullable: true),
@@ -551,24 +557,22 @@ namespace Persistence.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Accessibility = table.Column<bool>(type: "boolean", nullable: false),
+                    AccessStatus = table.Column<int>(type: "integer", nullable: false),
+                    Acreage = table.Column<double>(type: "double precision", nullable: false),
+                    Agency = table.Column<string>(type: "text", nullable: true),
                     AddedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     AdministrationFees = table.Column<string>(type: "text", nullable: true),
                     AnnualBusinessRates = table.Column<double>(type: "double precision", nullable: false),
                     AreaTotal = table.Column<double>(type: "double precision", nullable: false),
                     AreaUnits = table.Column<int>(type: "integer", nullable: false),
-                    AccessStatus = table.Column<int>(type: "integer", nullable: false),
                     AvailableBedrooms = table.Column<int>(type: "integer", nullable: false),
                     AvailableFromDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Bathrooms = table.Column<int>(type: "integer", nullable: false),
-                    BillsIncluded = table.Column<int[]>(type: "integer[]", nullable: true),
                     BusinessForSale = table.Column<bool>(type: "boolean", nullable: false),
-                    BuyerIncentives = table.Column<int[]>(type: "integer[]", nullable: true),
                     Category = table.Column<int>(type: "integer", nullable: false),
                     CentralHeating = table.Column<int>(type: "integer", nullable: false),
                     ChainFree = table.Column<bool>(type: "boolean", nullable: false),
-                    CommercialUseClass = table.Column<List<string>>(type: "text[]", nullable: true),
                     CommonholdDetails = table.Column<string>(type: "text", nullable: true),
-                    ConnectedUtilities = table.Column<int[]>(type: "integer[]", nullable: true),
                     ConstructionYear = table.Column<int>(type: "integer", nullable: false),
                     CookerType = table.Column<int>(type: "integer", nullable: false),
                     CouncilTaxBand = table.Column<int>(type: "integer", nullable: false),
@@ -579,8 +583,6 @@ namespace Persistence.Migrations
                     EirCurrentRating = table.Column<string>(type: "text", nullable: true),
                     EirPotentialRating = table.Column<string>(type: "text", nullable: true),
                     FeatureProperty = table.Column<bool>(type: "boolean", nullable: false),
-                    FeatureList = table.Column<List<string>>(type: "text[]", nullable: true),
-                    FloorLevels = table.Column<List<string>>(type: "text[]", nullable: true),
                     Floors = table.Column<int>(type: "integer", nullable: false),
                     FurnishedState = table.Column<int>(type: "integer", nullable: false),
                     GroundRent = table.Column<double>(type: "double precision", nullable: false),
@@ -595,8 +597,7 @@ namespace Persistence.Migrations
                     MinimumContractLengthUnits = table.Column<int>(type: "integer", nullable: false),
                     NewBuild = table.Column<bool>(type: "boolean", nullable: false),
                     OpenDay = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    FeatureSpaces = table.Column<int[]>(type: "integer[]", nullable: true),
-                    Parking = table.Column<int[]>(type: "integer[]", nullable: true),
+                    Parking = table.Column<bool>(type: "boolean", nullable: false),
                     PetsAllowed = table.Column<bool>(type: "boolean", nullable: false),
                     PropertyType = table.Column<int>(type: "integer", nullable: false),
                     RateableValue = table.Column<int>(type: "integer", nullable: false),
@@ -606,6 +607,7 @@ namespace Persistence.Migrations
                     Retirement = table.Column<bool>(type: "boolean", nullable: false),
                     SapRating = table.Column<string>(type: "text", nullable: true),
                     Serviced = table.Column<bool>(type: "boolean", nullable: false),
+                    SourceUri = table.Column<string>(type: "text", nullable: true),
                     SharedAccommodation = table.Column<bool>(type: "boolean", nullable: false),
                     SharedOwnershipDetails = table.Column<string>(type: "text", nullable: true),
                     SmokersConsidered = table.Column<bool>(type: "boolean", nullable: false),
@@ -615,8 +617,6 @@ namespace Persistence.Migrations
                     TenantEligibilityStudents = table.Column<int>(type: "integer", nullable: false),
                     Tenure = table.Column<int>(type: "integer", nullable: false),
                     TotalBedrooms = table.Column<int>(type: "integer", nullable: false),
-                    UniqueFeatures = table.Column<int[]>(type: "integer[]", nullable: true),
-                    WhiteGoods = table.Column<int[]>(type: "integer[]", nullable: true),
                     CompanyId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
@@ -949,7 +949,7 @@ namespace Persistence.Migrations
                     Price = table.Column<double>(type: "double precision", nullable: false),
                     PricePerUnitArea = table.Column<double>(type: "double precision", nullable: false),
                     RentFrequency = table.Column<int>(type: "integer", nullable: false),
-                    PriceQualifier = table.Column<int>(type: "integer", nullable: false),
+                    PriceQualifier = table.Column<string>(type: "text", nullable: true),
                     Auction = table.Column<bool>(type: "boolean", nullable: false),
                     AreaUnits = table.Column<int>(type: "integer", nullable: false),
                     ListingId = table.Column<Guid>(type: "uuid", nullable: false)
@@ -994,7 +994,6 @@ namespace Persistence.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     JobInvoiceId = table.Column<Guid>(type: "uuid", nullable: false),
-                    JobInvoiceItemId = table.Column<Guid>(type: "uuid", nullable: true),
                     Index = table.Column<int>(type: "integer", nullable: false),
                     Amount = table.Column<long>(type: "bigint", nullable: false),
                     Currency = table.Column<string>(type: "text", nullable: true),
@@ -1005,11 +1004,6 @@ namespace Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_JobInvoiceItem", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_JobInvoiceItem_JobInvoiceItem_JobInvoiceItemId",
-                        column: x => x.JobInvoiceItemId,
-                        principalTable: "JobInvoiceItem",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_JobInvoiceItem_JobInvoices_JobInvoiceId",
                         column: x => x.JobInvoiceId,
@@ -1023,12 +1017,12 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "1", "c8600bb9-059b-4570-8c5b-6298b7c96b90", "Company", "COMPANY" },
-                    { "2", "d377d57b-48f1-4f65-90a9-fdfc4a106075", "Customer", "CUSTOMER" },
-                    { "3", "2bbfe9bc-b7cf-42c1-bf0a-c1c308f5c550", "Agency", "AGENCY" },
-                    { "4", "60e1e59e-df5b-4815-b018-f83f321aeaaf", "Admin", "ADMIN" },
-                    { "5", "db60d430-3c0e-47b5-a4bb-129554da7fea", "Manager", "MANAGER" },
-                    { "6", "2c872f78-d374-44b2-b355-816a54155dd1", "Removalist", "REMOVALIST" }
+                    { "1", null, "Company", "COMPANY" },
+                    { "2", null, "Customer", "CUSTOMER" },
+                    { "3", null, "Agency", "AGENCY" },
+                    { "4", null, "Admin", "ADMIN" },
+                    { "5", null, "Manager", "MANAGER" },
+                    { "6", null, "Removalist", "REMOVALIST" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -1132,11 +1126,6 @@ namespace Persistence.Migrations
                 column: "JobInvoiceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_JobInvoiceItem_JobInvoiceItemId",
-                table: "JobInvoiceItem",
-                column: "JobInvoiceItemId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_JobInvoices_JobId",
                 table: "JobInvoices",
                 column: "JobId");
@@ -1221,6 +1210,7 @@ namespace Persistence.Migrations
                 column: "AppUserId");
         }
 
+        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
