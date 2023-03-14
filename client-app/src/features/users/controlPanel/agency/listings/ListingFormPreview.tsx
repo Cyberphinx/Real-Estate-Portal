@@ -4,7 +4,6 @@ import { Link, useParams } from "react-router-dom";
 import LoadingComponent from "../../../../../app/common/loading/LoadingComponent";
 import Nav from "../../../../../app/layout/Nav";
 import { Listing } from "../../../../../app/model/ListingAggregate/Listing";
-import { ListingMediaDto } from "../../../../../app/model/ListingAggregate/ListingObjects";
 import { useStore } from "../../../../../app/stores/store";
 import ListingDetails from "../../../../listings/details/ListingDetails";
 import ListingOverview from "../../../../listings/details/ListingOverview";
@@ -15,8 +14,6 @@ export default observer(function ListingFormPreview() {
     const { listingStore: { loadListing, loadingListing }, featureStore, profileStore } = useStore();
     const { listingFormStep, setListingFormStep } = featureStore;
     const { setActiveTab } = profileStore;
-
-    const [image, setImage] = useState<ListingMediaDto>();
 
     const [currentListing, setCurrentListing] = useState<Listing>();
     useEffect(() => {
@@ -42,7 +39,7 @@ export default observer(function ListingFormPreview() {
                             <div style={{margin:'auto', width:'60rem', paddingTop:'2rem' }}>
                                 {currentListing &&
                                     <div>
-                                        <ListingOverview listing={currentListing}  image={image} setImage={setImage} />
+                                        <ListingOverview listing={currentListing} />
                                         <ListingDetails listing={currentListing} />
                                     </div>
                                 }

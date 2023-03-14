@@ -18,6 +18,7 @@ namespace Domain.AppUserAggregate
         public string NewEmail { get; set; } // to be used during the process of changing email address
         public string Country { get; set; }
         public string Language { get; set; }
+        public DateTime LastModified { get; set; }
         public Membership Membership { get; set; }
         public ICollection<JobNetwork> Jobs { get; set; }
         public ICollection<AppUserMedia> Photos { get; set; }

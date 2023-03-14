@@ -9,7 +9,6 @@ import nFormatter from "../../app/common/nFormatter";
 import priceFormatter from "../../app/common/PriceFormatter";
 import * as ReactDOMServer from 'react-dom/server';
 import AgencyTag from "../../app/common/tags/AgencyTag";
-import RefTag from "../../app/common/tags/RefTag";
 import { ListingMediaDto } from "../../app/model/ListingAggregate/ListingObjects";
 
 interface Props {
@@ -21,9 +20,12 @@ interface Props {
 
 export default observer(function ListingMarker({ points, clusters, supercluster }: Props) {
     const { mapStore, listingStore, companyStore } = useStore();
-    const { selectListing, contacts, setContacts, cancelSelectListing, selectedListing, predicate } = listingStore;
+    const { selectListing, contacts, setContacts, cancelSelectListing, selectedListing, predicate,
+         selectListingForImage, setImage, cancelSelectListingForImage } = listingStore;
     const { setZoom, activeListing, setBounds } = mapStore;
     const { selectedCompany, cancelSelectCompany } = companyStore;
+
+    // const listingBigImages = listing.listingMedia.filter(x => x.type.toString() === "Image" && x.id.startsWith('Sanctum/img'));
 
     const maxZoom = 20;
     const map = useMap();
@@ -186,8 +188,14 @@ export default observer(function ListingMarker({ points, clusters, supercluster 
                                         const leaves = supercluster.getLeaves(cluster.id, Infinity, 0);
                                         if (selectedCompany) cancelSelectCompany();
                                         if (selectedListing?.id === leaves[0].properties.listing.id) {
+                                            cancelSelectListingForImage();
                                             cancelSelectListing();
                                         } else {
+                                            let mainImage = leaves[0].properties.listing.listingMedia.find((x: ListingMediaDto) => x.isMain === true);
+                                            let initialImage = mainImage ? mainImage 
+                                            : leaves[0].properties.listing.listingMedia.filter((x: ListingMediaDto) => x.type.toString() === "Image" && x.id.startsWith('Sanctum/img'))[0];
+                                            setImage(initialImage);
+                                            selectListingForImage(leaves[0].properties.listing.id);
                                             selectListing(leaves[0].properties.listing.id);
                                         }
                                         if (contacts === true) setContacts(false);
@@ -201,8 +209,14 @@ export default observer(function ListingMarker({ points, clusters, supercluster 
                                         {supercluster.getLeaves(cluster.id, Infinity, 0).map((item: any) => (
                                             <div key={item.properties.listing.id} className="snippet-container">
                                                 <img className="tiny-snippet"
-                                                    src={item.properties.listing.listingMedia.filter((x: ListingMediaDto) => x.type.toString() === "Image" && x.id.startsWith('ListingMedia/img'))[0]?.url}
-                                                    alt={item.properties.listing.listingMedia.filter((x: ListingMediaDto) => x.type.toString() === "Image" && x.id.startsWith('ListingMedia/img'))[0]?.caption}
+                                                    src={item.properties.listing.listingMedia
+                                                        .filter((x: ListingMediaDto) =>
+                                                            x.type.toString() === "Image"
+                                                            && x.id.startsWith('Sanctum/img'))[0]?.url}
+                                                    alt={item.properties.listing.listingMedia
+                                                        .filter((x: ListingMediaDto) =>
+                                                            x.type.toString() === "Image"
+                                                            && x.id.startsWith('Sanctum/img'))[0]?.caption}
                                                 />
                                                 <article className="marker-text">
                                                     <b>{priceFormatter(item.properties.listing.pricing.price, item.properties.listing.pricing.currency)}</b>
@@ -227,8 +241,14 @@ export default observer(function ListingMarker({ points, clusters, supercluster 
                             click: () => {
                                 if (selectedCompany) cancelSelectCompany();
                                 if (selectedListing?.id === cluster.properties.listing.id) {
+                                    cancelSelectListingForImage();
                                     cancelSelectListing();
                                 } else {
+                                    let mainImage = cluster.properties.listing.listingMedia.find((x: ListingMediaDto) => x.isMain === true);
+                                    let initialImage = mainImage ? mainImage 
+                                        : cluster.properties.listing.listingMedia.filter((x: ListingMediaDto) => x.type.toString() === "Image" && x.id.startsWith('Sanctum/img'))[0];
+                                    setImage(initialImage);
+                                    selectListingForImage(cluster.properties.listing.id);
                                     selectListing(cluster.properties.listing.id);
                                 }
                                 if (contacts === true) setContacts(false);
@@ -238,7 +258,10 @@ export default observer(function ListingMarker({ points, clusters, supercluster 
                         <Tooltip direction="bottom" offset={[15, 10]}>
                             <AgencyTag listing={cluster.properties.listing} fontSize={"10px"} />
                             <img className="marker-snippet"
-                                src={cluster.properties.listing.listingMedia[0]?.url}
+                                src={cluster.properties.listing.listingMedia
+                                    .filter((x: ListingMediaDto) =>
+                                        x.type.toString() === "Image"
+                                        && x.id.startsWith('Sanctum/img'))[0].url}
                                 alt="listing"
                                 onLoad={() => setImgLoaded(true)}
                                 style={imgLoaded ? {} : { display: "none" }}

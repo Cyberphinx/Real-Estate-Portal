@@ -1,14 +1,17 @@
-# fly.toml file generated for sanctum on 2023-01-07T18:42:04Z
+# fly.toml file generated for fragrant-water-1016 on 2023-03-11T15:30:50Z
 
-app = "sanctum"
+app = "fragrant-water-1016"
 kill_signal = "SIGINT"
 kill_timeout = 5
+primary_region = "lhr"
 processes = []
 
 [env]
   ASPNETCORE_URLS = "http://+:8080"
+  Cloudinary__ApiKey = "491748623171896"
+  Cloudinary__CloudName = "dwcsdudyn"
+  SendinBlue_User = "Sanctum"
   StripeSettings__PublishableKey = "pk_test_51L6i4NELV0KnfWeJgoqaVUo7jOES7YMDlWgtdHdwAXRsd2ExfVwP7sU9DhIyjES0JN7yly88c9HKpp0lBvtjIakX00pl6UGKM9"
-  SendinBlue_User="Sanctum"
 
 [experimental]
   allowed_public_ports = []

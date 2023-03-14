@@ -1,17 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Application.Core;
 using Application.ListingApplication;
-using Domain;
 using Domain.ListingAggregate;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Persistence;
 
 namespace API.Controllers
-{   
+{
     public class ListingController : BaseApiController
     {
         private readonly DataContext _db;
@@ -85,18 +79,21 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new Edit.Command{Listing = listing}));
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteListing(Guid id)
+        [Authorize(Policy = "IsListingOwner")]
+        [HttpDelete("{listingId}")]
+        public async Task<IActionResult> DeleteListing(Guid listingId)
         {
-            return HandleResult(await Mediator.Send(new Delete.Command{Id = id}));
+            return HandleResult(await Mediator.Send(new Delete.Command{Id = listingId}));
         }
 
+        [Authorize(Policy = "IsCompanyOwner")]
         [HttpDelete("agency/{companyId}")]
         public async Task<IActionResult> DeleteListings(Guid companyId)
         {
             return HandleResult(await Mediator.Send(new DeleteRange.Command{CompanyId = companyId}));
         }
-
+        
+        [Authorize(Roles = "Admin")]
         [HttpPost("seed/{companyId}/{amount}")]
         public async Task Seed(Guid companyId, int amount)
         {

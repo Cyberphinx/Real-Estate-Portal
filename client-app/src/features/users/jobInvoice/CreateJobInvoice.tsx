@@ -128,12 +128,12 @@ export default observer(function CreateJobInvoice() {
                                                         <div style={{ display: 'grid', gridTemplateRows: '2rem 2rem' }}>
                                                             <a
                                                                 href={headquarter.termsAndConditions}
-                                                                target="_blank" >
+                                                                target="_blank" rel="noreferrer noopener nofollow" >
                                                                 Click to view terms & conditions
                                                             </a>
                                                             <a
                                                                 href={headquarter.insurances.find(x => x.index === 0)?.insurancePolicy}
-                                                                target="_blank" >
+                                                                target="_blank" rel="noreferrer noopener nofollow" >
                                                                 Click to view insurance policy
                                                             </a>
                                                         </div>

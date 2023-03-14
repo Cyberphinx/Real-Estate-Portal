@@ -7,8 +7,7 @@ import MyTextInput from "../../../app/common/form/MyTextInput";
 import { InvoiceItem, JobInvoiceFormValues } from "../../../app/model/Invoice";
 import { NetworkDto } from "../../../app/model/Job";
 import { useStore } from "../../../app/stores/store";
-import { Field, FieldArray } from "formik";
-import { Link } from "react-router-dom";
+import { FieldArray } from "formik";
 import PriceFormatter from "../../../app/common/PriceFormatter";
 
 

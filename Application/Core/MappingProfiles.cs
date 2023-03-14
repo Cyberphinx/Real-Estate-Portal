@@ -15,10 +15,7 @@ using Application.JobInvoiceApplication.JobInvoiceDtos;
 using Application.ListingApplication.ListingDtos;
 using Domain.AppUserAggregate.Objects;
 using Application.MessageApplication;
-using Domain.EmployeeAggregate;
-using Application.EmployeeApplication.EmployeeDtos;
 using System;
-using Domain.Enums;
 
 namespace Application.Core
 {
@@ -52,7 +49,15 @@ namespace Application.Core
                 .ForMember(x => x.Title, o => o.MapFrom(s => s.Job.Title));
 
             // Listing Dtos
-            CreateMap<Listing, Listing>();
+            CreateMap<Listing, Listing>(); // this is for editing the listing (map from payload to database entity)
+            CreateMap<Listing, ListingDto>()
+                .ForMember(x => x.Company, o => o.MapFrom(s => s.Company))
+                .ForMember(x => x.ListingMedia, o => o.MapFrom(s => s.ListingMedia.OrderBy(x => x.Index)))
+                .ForMember(x => x.DetailedDescriptions, o => o.MapFrom(s => s.DetailedDescriptions.OrderBy(x => x.Index)))
+                .ForMember(x => x.Wacthers, o => o.MapFrom(s => s.Watchers));
+
+            CreateMap<Listing, ListingCompareDto>()
+                .ForMember(x => x.Price, o => o.MapFrom(x => x.Pricing.Price));
 
             CreateMap<Listing, Stock>()
                 .ForMember(x => x.Image, o => o.MapFrom(
@@ -64,10 +69,12 @@ namespace Application.Core
 
             CreateMap<ListingMedia, ListingMediaDto>();
             CreateMap<DetailedDescription, DetailedDescriptionDto>()
-            .ForMember(x => x.Area, o => o.MapFrom(s => s.Length * s.Width));
+                .ForMember(x => x.Area, o => o.MapFrom(s => s.Length * s.Width));
             CreateMap<ListingLocation, ListingLocationDto>();
             CreateMap<Pricing, PricingDto>();
             CreateMap<ServiceCharge, ServiceChargeDto>();
+            CreateMap<ChangeLog, ChangeLogDto>();
+            CreateMap<KeyContact, KeyContactDto>();
 
             CreateMap<ListingWatcher, WatcherDto>()
                 .ForMember(x => x.Username, o => o.MapFrom(s => s.AppUser.UserName))
@@ -89,14 +96,9 @@ namespace Application.Core
                 .ForMember(x => x.City, o => o.MapFrom(s => s.Listing.ListingLocation.TownOrCity))
                 .ForMember(x => x.Postcode, o => o.MapFrom(s => s.Listing.ListingLocation.PostalCode));
 
-            CreateMap<Listing, ListingDto>()
-                .ForMember(x => x.Company, o => o.MapFrom(s => s.Company))
-                .ForMember(x => x.ListingMedia, o => o.MapFrom(s => s.ListingMedia.OrderBy(x => x.Index)))
-                .ForMember(x => x.DetailedDescriptions, o => o.MapFrom(s => s.DetailedDescriptions.OrderBy(x => x.Index)))
-                .ForMember(x => x.Wacthers, o => o.MapFrom(s => s.Watchers));
-
             // Company Dtos
-            CreateMap<Company, Company>();
+            CreateMap<Company, Company>();  // this is for editing the listing (map from payload to database entity)
+            CreateMap<Company, CompanyMinimalDto>();  // this is for editing the listing (map from payload to database entity)
             CreateMap<CompanyMedia, CompanyMediaDto>();
             CreateMap<Company, Owner>()
                 .ForMember(x => x.Logo, o => o.MapFrom(s => s.CompanyMedia.FirstOrDefault(x => x.IsLogo).Url));
@@ -140,7 +142,7 @@ namespace Application.Core
                 .ForMember(x => x.JobLocations, o => o.MapFrom(s => s.JobLocations.OrderBy(x => x.Index)))
                 .ForMember(x => x.Networks, o => o.MapFrom(s => s.Networks))
                 .ForMember(x => x.Messages, o => o.MapFrom(s => s.Messages));
-            
+
             CreateMap<Job, JobRemovalsDto>()
                 .ForMember(x => x.JobMedia, o => o.MapFrom(s => s.JobMedia.OrderBy(x => x.Index)))
                 .ForMember(x => x.JobLocations, o => o.MapFrom(s => s.JobLocations.OrderBy(x => x.Index)))
@@ -196,38 +198,6 @@ namespace Application.Core
                 .ForMember(x => x.DisplayName, o => o.MapFrom(s => s.Author.DisplayName))
                 .ForMember(x => x.Image, o => o.MapFrom(s => s.Author.Photos.FirstOrDefault(x => x.IsMain).Url));
 
-            // Employee Dtos
-            CreateMap<Employee, EmployeeDto>()
-                .ForMember(x => x.Portfolio, o => o.MapFrom(s => s.Portfolio))
-                .ForMember(x => x.Photo, o => o.MapFrom(s => s.Photo.Url));
-
-            CreateMap<KeyPerson, Stock>()
-                .ForMember(x => x.Id, o => o.MapFrom(s => s.Listing.Id))
-                .ForMember(x => x.AccessStatus, o => o.MapFrom(s => s.Listing.AccessStatus))
-                .ForMember(x => x.AddedOn, o => o.MapFrom(s => s.Listing.AddedOn))
-                .ForMember(x => x.AvailableBedrooms, o => o.MapFrom(s => s.Listing.AvailableBedrooms))
-                .ForMember(x => x.Bathrooms, o => o.MapFrom(s => s.Listing.Bathrooms))
-                .ForMember(x => x.Image, o => o.MapFrom(s => s.Listing.ListingMedia.FirstOrDefault(x => x.IsMain).Url))
-                .ForMember(x => x.LifeCycleStatus, o => o.MapFrom(s => s.Listing.LifeCycleStatus))
-                .ForMember(x => x.ListingReference, o => o.MapFrom(s => s.Listing.ListingReference))
-                .ForMember(x => x.ListingLocation, o => o.MapFrom(s => s.Listing.ListingLocation))
-                .ForMember(x => x.Pricing, o => o.MapFrom(s => s.Listing.Pricing))
-                .ForMember(x => x.PropertyType, o => o.MapFrom(s => s.Listing.PropertyType))
-                .ForMember(x => x.TotalBedrooms, o => o.MapFrom(s => s.Listing.TotalBedrooms))
-                .ForMember(x => x.Agency, o => o.MapFrom(s => s.Listing.Company.DisplayName));
-
-            CreateMap<KeyPerson, KeyContact>()
-                .ForMember(x => x.Id, o => o.MapFrom(s => s.Employee.Id))
-                .ForMember(x => x.AddedOn, o => o.MapFrom(s => s.Employee.AddedOn))
-                .ForMember(x => x.FirstName, o => o.MapFrom(s => s.Employee.FirstName))
-                .ForMember(x => x.LastName, o => o.MapFrom(s => s.Employee.LastName))
-                .ForMember(x => x.Photo, o => o.MapFrom(s => s.Employee.Photo.Url))
-                .ForMember(x => x.JobTitle, o => o.MapFrom(s => s.Employee.JobTitle))
-                .ForMember(x => x.Description, o => o.MapFrom(s => s.Employee.Description))
-                .ForMember(x => x.Email, o => o.MapFrom(s => s.Employee.Email))
-                .ForMember(x => x.Landline, o => o.MapFrom(s => s.Employee.Landline))
-                .ForMember(x => x.Mobile, o => o.MapFrom(s => s.Employee.Mobile))
-                .ForMember(x => x.Website, o => o.MapFrom(s => s.Employee.Website));
         }
     }
 }

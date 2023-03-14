@@ -24,6 +24,7 @@ namespace Domain.JobAggregate
         public JobLifeCycle JobLifeCycle { get; set; }
         public ICollection<JobMedia> JobMedia { get; set; }
         public ICollection<JobLocation> JobLocations { get; set; }
+        public DateTime LastModified { get; set; }
         public ICollection<JobNetwork> Networks { get; set; } = new List<JobNetwork>();
         public ICollection<JobInvoice> Invoices { get; set; } = new List<JobInvoice>();
         public ICollection<JobMessage> Messages { get; set; } = new List<JobMessage>();

@@ -2,12 +2,11 @@ import { AccessStatus } from "../AccessStatus";
 import { UnitOfTime } from "../Membership";
 import {
     Category, CentralHeating, CookerType, CouncilTaxBand, DecorativeCondition, 
-    Eligibility, FurnishedState, Incentive,
-    LifeCycleStatus, ListedBuildingGrade, FeatureSpace, Parking, PropertyType, 
-    RentalTerm, Tenure, Utility, UnitOfArea, TransactionType, Frequency, 
-    PriceQualifier, WhiteGoods, UniqueFeature
+    Eligibility, FurnishedState, 
+    LifeCycleStatus, ListedBuildingGrade, PropertyType, 
+    RentalTerm, Tenure, UnitOfArea, TransactionType, Frequency, 
 } from "./ListingEnums";
-import { DetailedDescription, ListingLocation, 
+import { ChangeLog, DetailedDescription, ListingLocation, 
     ListingMediaDto, 
     Owner, Pricing, ServiceCharge, WatcherDto, } from "./ListingObjects";
 
@@ -33,6 +32,7 @@ export interface Listing {
     category: Category;
     centralHeating: CentralHeating;
     chainFree: boolean;
+    changeLogs: ChangeLog[];
     commercialUseClass: string[];
     commonholdDetails: string;
     connectedUtilities: string[];
@@ -54,6 +54,7 @@ export interface Listing {
     groundRent: number;
     groundRentReviewPeriod: string;
     leaseExpiry: string;
+    lastModified: Date;
     lifeCycleStatus: LifeCycleStatus;
     listedBuilding: boolean;
     listedBuildingGrade: ListedBuildingGrade;

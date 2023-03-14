@@ -10,6 +10,7 @@ import { store } from './store';
 export default class ListingStore {
   listingRegistry = new Map<string, Listing>();
   selectedListing: Listing | undefined = undefined;
+  selectedListingForImage: Listing | undefined = undefined;
   listingId: string | undefined = undefined;
   loading = false;
   uploading = false;
@@ -20,6 +21,7 @@ export default class ListingStore {
   loadingWatching = false;
   currentListing: Listing | undefined = undefined;
   files: any = [];
+  image: ListingMediaDto | undefined = undefined;
 
 
   // Pagination
@@ -185,8 +187,16 @@ export default class ListingStore {
     this.selectedListing = this.listingRegistry.get(id);
   }
 
+  selectListingForImage = (id: string) => {
+    this.selectedListingForImage = this.listingRegistry.get(id);
+  }
+
   cancelSelectListing = () => {
     this.selectedListing = undefined;
+  }
+
+  cancelSelectListingForImage = () => {
+    this.selectedListingForImage = undefined;
   }
 
 
@@ -349,5 +359,8 @@ export default class ListingStore {
   setCurrentListing = (values: Listing) => this.currentListing = values;
 
   setFiles = (values: any) => this.files = values;
+
+  setImage = (value: ListingMediaDto) => this.image = value;
+
 
 }

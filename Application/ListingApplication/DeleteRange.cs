@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Core;
+using Application.Interfaces;
 using Domain.ListingAggregate;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -21,8 +22,10 @@ namespace Application.ListingApplication
         public class Handler : IRequestHandler<Command, Result<Unit>>
         {
             private readonly DataContext _context;
-            public Handler(DataContext context)
+            private readonly IMediaAccessor _mediaAccessor;
+            public Handler(DataContext context, IMediaAccessor mediaAccessor)
             {
+                _mediaAccessor = mediaAccessor;
                 _context = context;
             }
 
@@ -33,9 +36,14 @@ namespace Application.ListingApplication
                     .ToListAsync();
 
                 // Loop over the database contents
-                foreach (Listing item in existingData)
+                foreach (Listing listing in existingData)
                 {
-                    _context.Listings.Remove(item);
+                    foreach (var media in listing.ListingMedia)
+                    {
+                        var mediaResult = await _mediaAccessor.DeleteMedia(media.Id);
+                        if (mediaResult == null) Console.WriteLine("Failed to delete media from Cloudinary");
+                    }
+                    _context.Listings.Remove(listing);
                 }
 
                 var result = await _context.SaveChangesAsync() > 0;

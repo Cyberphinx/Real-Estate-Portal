@@ -3,6 +3,12 @@ import { CompanyAddress, CompanyContacts, RedressScheme } from "../Company";
 import { Frequency, PriceQualifier, TransactionType, UnitOfArea, UnitOfLength } from "./ListingEnums";
 import { MediaType } from '../Media';
 
+export interface ChangeLog {
+    id: string;
+    lastModified: Date;
+    description: string;
+}
+
 export interface ListingMediaDto {
     id: string;
     index: number;

@@ -8,7 +8,6 @@ import ListingOverview from "./ListingOverview";
 import ListingDetails from "./ListingDetails";
 import ListingContact from "./ListingContact";
 import WatchButton from "../../../app/common/WatchButton";
-import { ListingMediaDto } from "../../../app/model/ListingAggregate/ListingObjects";
 
 interface Props {
     listing: Listing | undefined;
@@ -21,10 +20,9 @@ export default observer(function ListingTab({ listing }: Props) {
     const multiListings: Listing[] = listings.filter(x => x.listingLocation.latitude === listing?.listingLocation.latitude && x.listingLocation.longitude === listing?.listingLocation.longitude);
 
     const [tab, setTab] = useState<number>(0);
-    const [image, setImage] = useState<ListingMediaDto>();
 
     const features = [
-        <ListingOverview listing={listing!} image={image} setImage={setImage} />,
+        <ListingOverview listing={listing!} />,
         <ListingDetails listing={listing!} />,
         <ListingContact listing={listing} />
     ]

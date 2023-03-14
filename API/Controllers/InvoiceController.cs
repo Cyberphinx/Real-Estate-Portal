@@ -1,13 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 using API.Extensions;
 using API.Services;
 using Application.CompanyApplication.CompanyDtos;
-using Application.JobApplication.JobDtos;
 using Application.JobInvoiceApplication;
 using Application.JobInvoiceApplication.JobInvoiceDtos;
 using Application.ProfileApplication.ProfileDtos;
@@ -16,22 +10,16 @@ using AutoMapper.QueryableExtensions;
 using Domain;
 using Domain.AppUserAggregate;
 using Domain.AppUserAggregate.Objects;
-using Domain.CompanyAggregate;
-using Domain.Enums;
 using Domain.JobAggregate;
 using Domain.JobAggregate.Objects;
 using Infrastructure.Email;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Primitives;
 using MimeKit;
 using Persistence;
-using Stripe;
 
 namespace API.Controllers
 {

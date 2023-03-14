@@ -1,47 +1,34 @@
-import React, { SyntheticEvent, useEffect, useRef, useState } from "react";
+import React, { SyntheticEvent, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Listing } from "../../../app/model/ListingAggregate/Listing";
-import { ListingMediaDto } from "../../../app/model/ListingAggregate/ListingObjects";
+import { ChangeLog, ListingMediaDto } from "../../../app/model/ListingAggregate/ListingObjects";
 import './ListingOverview.css';
 import priceFormatter from "../../../app/common/PriceFormatter";
-import { Frequency, propertyTypeLong, rentFrequency } from "../../../app/model/ListingAggregate/ListingEnums";
+import { lifeCycleStatusText, propertyTypeLong, rentFrequency } from "../../../app/model/ListingAggregate/ListingEnums";
+import { dateFormatter } from "../../../app/common/HelperFunctions";
+import { useStore } from "../../../app/stores/store";
+import { observer } from "mobx-react-lite";
 
 
 interface Props {
     listing: Listing;
-    image: ListingMediaDto | undefined;
-    setImage: (value: ListingMediaDto) => void;
 }
 
-export default function ListingOverview({ listing, image, setImage }: Props) {
+export default observer(function ListingOverview({ listing }: Props) {
+    const { listingStore } = useStore();
+    const { image, setImage } = listingStore;
 
-    const listingImages = listing.listingMedia.filter(x => x.type.toString() === "Image");
-    const listingBigImages = listing.listingMedia.filter(x => x.type.toString() === "Image" && x.id.startsWith('ListingMedia/img'));
-    const listingThumbnails = listing.listingMedia.filter(x => x.type.toString() === "Image" && x.id.startsWith('ListingMedia/tbn'));
-    const listingDocuments = listing.listingMedia.filter(x => x.type.toString() === "Document");
+    const listingImages = listing.listingMedia.filter(x => x.type.toString() === "Image").sort();
+    const listingBigImages = listing.listingMedia.filter(x => x.type.toString() === "Image" && x.id.startsWith('Sanctum/img'))
+    const listingThumbnails = listing.listingMedia.filter(x => x.type.toString() === "Image" && x.id.startsWith('Sanctum/tbn'))
+    const listingDocuments = listing.listingMedia.filter(x => x.type.toString() === "Document").sort();
 
-    function initialImage() {
-        let initialMedia: ListingMediaDto; 
-        if (listingImages.some(m => m.isMain === true)) {
-            initialMedia = listingImages.find(m => m.isMain === true)!;
-            return initialMedia;
-        } else {
-            initialMedia = listingBigImages[0];
-            return initialMedia;
-        }
-    }
-
-    // const [image, setImage] = useState<ListingMediaDto>(initialImage);
     function handleImage(event: SyntheticEvent, state: ListingMediaDto) {
         event.stopPropagation();
-        const imageReference = state.id.substring(state.id.indexOf("_"), state.id.length);
-        const image = listingImages.find(x => x.id === `ListingMedia/img${imageReference}`);
-        setImage(image!);
+        let imageReference = state.id.substring(state.id.indexOf("_"), state.id.length);
+        let img = listingImages.find(x => x.id === `Sanctum/img${imageReference}`);
+        setImage(img!);
     }
-
-    useEffect(() => {
-        if (listing) setImage(initialImage());
-    }, [listing, setImage])
 
     const scrollRef = useRef<any>(null);
     const scroll = (event: SyntheticEvent, scrollOffset: number) => {
@@ -102,23 +89,29 @@ export default function ListingOverview({ listing, image, setImage }: Props) {
                 <span style={{ fontSize: "1.25rem", fontWeight: "bold" }}>{priceFormatter(listing!.pricing.price!, listing!.pricing.currency)}</span>
                 {(listing?.pricing.transactionType.toString() === "Rent") && <span style={{ fontSize: "1.25rem" }}> {rentFrequency(listing!)} </span>}
                 <span style={{ fontSize: "1.25rem", fontWeight: "bold" }}> {listing.pricing.transactionType.toString() === "Sale" && listing.pricing.priceQualifier.toString()}</span>
-                <p style={{ fontSize: "1.25rem" }}>Status: <b>{listing.lifeCycleStatus.toString()}</b></p>
-                
+                <p style={{ fontSize: "1.25rem" }}>Status: <b>{lifeCycleStatusText(listing)}</b></p>
+
                 <p style={{ fontSize: "1.125rem" }}>{listing!.totalBedrooms} beds {listing.bathrooms} baths {listing.propertyType && propertyTypeLong(listing!)}</p>
                 <p style={{ fontSize: "1rem" }}>Address: {listing.listingLocation.displayAddress}</p>
                 <p style={{ fontSize: "1rem" }}>Listing reference: {listing.listingReference}</p>
+                <p style={{ fontSize: "1rem" }}>{listing.sourceUri}</p>
             </article>
             <article className="header-container">
                 <p style={{ fontSize: "1.125rem" }}>{listing.summaryDescription}</p>
             </article>
-            <article className="header-container" style={listingDocuments.length > 0 ? {} : {display:'none'}}>
+            <article className="header-container" style={listingDocuments.length > 0 ? {} : { display: 'none' }}>
                 {listingDocuments.map((document: ListingMediaDto) => (
-                    <div id={document.id} style={{padding:'1rem'}}>
-                        <a href={document.url}  rel="nofollow" target="_blank">{document.caption}</a>
+                    <div key={document.id} style={{ padding: '1rem' }}>
+                        <a href={document.url} rel="noreferrer noopener nofollow" target="_blank">{document.caption}</a>
                     </div>
+                ))}
+            </article>
+            <article className="header-container" style={listingDocuments.length > 0 ? {} : { display: 'none' }}>
+                {listing.changeLogs.map((log: ChangeLog) => (
+                    <p key={log.id}>{dateFormatter(log.lastModified)}: {log.description}</p>
                 ))}
             </article>
         </div>
 
     )
-}
+})

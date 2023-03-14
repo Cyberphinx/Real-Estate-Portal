@@ -1,6 +1,7 @@
 import { observer } from "mobx-react-lite";
 import React, { useEffect, useState } from "react";
 import { Listing } from "../../app/model/ListingAggregate/Listing";
+import { ListingMediaDto } from "../../app/model/ListingAggregate/ListingObjects";
 import { useStore } from "../../app/stores/store";
 import ListingItem from "./ListingItem";
 import './ListingPaging.css';
@@ -10,10 +11,11 @@ interface Props {
     supercluster: any;
 }
 
-export default observer(function ListingPaging({ clusters, supercluster }: Props) {
+export default observer(function ListingPaging({ clusters }: Props) {
     const { listingStore, featureStore, companyStore } = useStore();
     const { predicate, listings, selectListing, contacts, setContacts,
-        cancelSelectListing, selectedListing, combinedListing } = listingStore;
+        cancelSelectListing, selectedListing, combinedListing, setImage,
+        selectListingForImage, cancelSelectListingForImage } = listingStore;
     const { cancelSelectCompany } = companyStore;
     const { isLocked } = featureStore;
 
@@ -98,8 +100,14 @@ export default observer(function ListingPaging({ clusters, supercluster }: Props
                                 onClick={() => {
                                     cancelSelectCompany();
                                     if (selectedListing?.id !== listing.id) {
+                                        let mainImage = listing.listingMedia.find(x => x.isMain === true);
+                                        let initialImage = mainImage ? mainImage 
+                                        : listing.listingMedia.filter(x => x.type.toString() === "Image" && x.id.startsWith('Sanctum/img'))[0];
+                                        setImage(initialImage);
+                                        selectListingForImage(listing.id);
                                         selectListing(listing.id);
                                     } else {
+                                        cancelSelectListingForImage();
                                         cancelSelectListing();
                                     }
                                     if (contacts === true) setContacts(false);
@@ -116,8 +124,17 @@ export default observer(function ListingPaging({ clusters, supercluster }: Props
                                 onClick={() => {
                                     cancelSelectCompany();
                                     if (selectedListing?.id !== item.properties.listing.id) {
+
+                                        let mainImage = item.properties.listing.listingMedia.find((x: ListingMediaDto) => x.isMain === true);
+                                        let initialImage = mainImage ? mainImage 
+                                        : item.properties.listing.listingMedia.filter((x: ListingMediaDto) => x.type.toString() === "Image" && x.id.startsWith('Sanctum/img'))[0];
+                                        setImage(initialImage)
+
+                                        selectListingForImage(item.properties.listing.id);
+
                                         selectListing(item.properties.listing.id);
                                     } else {
+                                        cancelSelectListingForImage();
                                         cancelSelectListing();
                                     }
                                     if (contacts === true) setContacts(false);

@@ -39,6 +39,11 @@ namespace API.Middleware
                     ? new AppException(context.Response.StatusCode, ex.Message, ex.StackTrace?.ToString())
                     : new AppException(context.Response.StatusCode, "Server Error");
                 
+                // temp modification for showing Stack Trace in production
+                // var repsonse = _env.IsDevelopment()
+                //     ? new AppException(context.Response.StatusCode, ex.Message, ex.StackTrace?.ToString())
+                //     : new AppException(context.Response.StatusCode, ex.Message, ex.StackTrace?.ToString());
+                
                 var options = new JsonSerializerOptions{PropertyNamingPolicy = JsonNamingPolicy.CamelCase};
 
                 var json = JsonSerializer.Serialize(repsonse, options);

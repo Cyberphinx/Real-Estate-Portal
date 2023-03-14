@@ -246,7 +246,7 @@ namespace Persistence
                 newListing.FloorLevels = new List<string> { "Ground floor", "First floor" };
                 newListing.Floors = 2;
                 newListing.GroundRent = 450;
-                newListing.LifeCycleStatus = LifeCycleStatus.Available;
+                newListing.LifeCycleStatus = LifeCycleStatus.ForRent;
                 newListing.ListingReference = $"{company.DisplayName}_{x}";
                 newListing.ListingLocation = new ListingLocation
                 {
@@ -525,7 +525,7 @@ namespace Persistence
                 newListing.FloorLevels = new List<string> { "First floor", "Second floor" };
                 newListing.Floors = 2;
                 newListing.GroundRent = 450;
-                newListing.LifeCycleStatus = LifeCycleStatus.Available;
+                newListing.LifeCycleStatus = LifeCycleStatus.ForSale;
                 newListing.ListingReference = $"{company.DisplayName}_{x}";
                 newListing.ListingLocation = new ListingLocation
                 {

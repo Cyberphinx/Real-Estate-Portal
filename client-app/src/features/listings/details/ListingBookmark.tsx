@@ -10,7 +10,7 @@ interface Props {
 
 export default observer(function ListingBookmark({ multiListings }: Props) {
     const { listingStore } = useStore();
-    const { selectListing, selectedListing } = listingStore;
+    const { selectListing, selectedListing, selectListingForImage } = listingStore;
 
     return (
         <div className="listing-bookmark">
@@ -18,7 +18,12 @@ export default observer(function ListingBookmark({ multiListings }: Props) {
                 <section className="listing-bookmark-container">
                     {multiListings.map((item: Listing, index: number) => (
                         <div key={item.id} className="multiple-index">
-                            <button className={item.id === selectedListing.id ? "selected-index-button" : "index-button"} onClick={() => selectListing(item.id)}>
+                            <button
+                                className={item.id === selectedListing.id ? "selected-index-button" : "index-button"}
+                                onClick={() => {
+                                    selectListingForImage(item.id)
+                                    selectListing(item.id)
+                                }}>
                                 <p className="index-numbering">Unit {index + 1}</p>
                             </button>
                         </div>

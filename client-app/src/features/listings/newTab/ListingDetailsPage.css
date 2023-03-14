@@ -2,7 +2,7 @@
   height: calc(100vh - 2.5rem);
   padding-top: 2.5rem;
   display: grid;
-  grid-template-columns: 20vw 60vw 20vw;
+  grid-template-columns: 20vw 50vw 30vw;
   background-image: linear-gradient(to bottom left, rgba(199,128,250, 0.5), rgba(253,138,138, 0.5));
 }
 
@@ -14,14 +14,8 @@
 }
 
 .listing-page__section-two {
-  height: calc(100vh - 7.5rem);
-  padding: 2.5rem;
+  padding: 1rem;
   overflow-y: auto;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: 1rem;
 }
 
 #listing-page__section-two::-webkit-scrollbar {
@@ -44,17 +38,16 @@
   height: calc(100vh - 7.5rem);
   background: rgba(255,255,255,0.6);
   border-radius: 3rem 0 0 3rem;
-  padding: 2.5rem;
+  padding: 2.5rem 2.5rem 2.5rem 4rem;
+  overflow: auto;
 }
 
 .listing-content__wrapper {
-  width: 27vw;
-  height: 15vw;
+  margin-bottom: 1rem;
 }
 
 .content-image {
-  width: 27vw;
-  height: 15vw;
+  width: calc(50vw - 2rem);
   object-fit: cover;
   border-radius: 1rem;
 }

@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Domain.TrackingAggregate;
 using Domain.AppUserAggregate.Objects;
-using Domain.EmployeeAggregate;
 using Domain.CalendarAggregate;
 
 namespace Persistence
@@ -28,8 +27,6 @@ namespace Persistence
         public DbSet<JobNetwork> JobNetworks { get; set; }
         public DbSet<JobMessage> JobMessages { get; set; }
         public DbSet<Tracking> TrackingData { get; set; }
-        public DbSet<Employee> Employees { get; set; }
-        public DbSet<KeyPerson> KeyPersons { get; set; }
         public DbSet<CalendarEvent> Events { get; set; }
         public DbSet<AppUserInvoice> UserInvoices { get; set; }
         public DbSet<JobInvoice> JobInvoices { get; set; }
@@ -82,19 +79,6 @@ namespace Persistence
             builder.Entity<ListingWatcher>()
                 .HasOne(x => x.Listing)
                 .WithMany(x => x.Watchers)
-                .HasForeignKey(x => x.ListingId);
-
-            // Many to many relationship between Listing, Company and Employee
-            builder.Entity<KeyPerson>(x => x.HasKey(x => new { x.ListingId, x.EmployeeId }));
-
-            builder.Entity<KeyPerson>()
-                .HasOne(x => x.Employee)
-                .WithMany(x => x.Portfolio)
-                .HasForeignKey(x => x.EmployeeId);
-            
-            builder.Entity<KeyPerson>()
-                .HasOne(x => x.Listing)
-                .WithMany(x => x.KeyContacts)
                 .HasForeignKey(x => x.ListingId);
 
             // Cascade delete for all AppUser's children

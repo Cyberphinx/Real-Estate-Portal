@@ -41,12 +41,14 @@ namespace Application.CompanyApplication
 
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
-                request.Company.Username = _userAccessor.GetUsername();
+                // request.Company.Username = _userAccessor.GetUsername();
 
                 // Random rnd = new Random();
                 // int random = rnd.Next(1, 9999);  // creates a number between 1 and 9999
                 // string discriminator = random.ToString("D4");
                 // request.Company.CompanyReference = $"{request.Company.Username}{discriminator}"; 
+
+                request.Company.AddedOn = DateTime.UtcNow;
 
                 await _context.Companies.AddAsync(request.Company);
 

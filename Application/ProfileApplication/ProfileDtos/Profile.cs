@@ -15,6 +15,7 @@ namespace Application.ProfileApplication.ProfileDtos
         public string Description { get; set; }
         public string Country { get; set; }
         public string Language { get; set; }
+        public DateTime LastModified { get; set; }
         public string Image { get; set; }
         public MembershipDto Membership { get; set; }
         public ICollection<PhotoDto> Photos { get; set; }

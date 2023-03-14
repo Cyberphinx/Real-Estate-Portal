@@ -1,17 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './SignUp.css';
-import { Formik, Form, Field } from "formik";
+import { Formik, Form } from "formik";
 import { observer } from "mobx-react-lite";
 import * as Yup from 'yup';
 import { v4 as uuid } from 'uuid';
 import { useStore } from '../../../app/stores/store';
 import LoginForm from '../LoginForm';
-import { AccountType, RegisterFormValues } from '../../../app/model/User';
+import { AccountType } from '../../../app/model/User';
 import Switcher from './Switcher';
 import RegisterAgentStepThree from './agent/RegisterAgentStepThree';
 import RegisterSuccess from './RegisterSuccess';
-import { RedressScheme } from '../../../app/model/Company';
-import ModalStore from '../../../app/stores/modalStore';
 
 interface Props {
     formType: number;
@@ -22,7 +20,7 @@ export default observer(function SignUpForm({ formType, setFormType }: Props) {
     const { userStore, featureStore, modalStore } = useStore();
     const { register } = userStore;
     const { setActiveFeature } = featureStore;
-    const { openModal, closeModal, setPaymentForm } = modalStore;
+    const { openModal, closeModal } = modalStore;
 
     const initialValues = [{
         // number 0 is for Customer sign up
@@ -172,11 +170,11 @@ export default observer(function SignUpForm({ formType, setFormType }: Props) {
                                 Sign Up
                             </p>
                             {/* <h3>{getFieldMeta("accountType").value!.toString()}</h3> */}
-                            <Field as="select" name="accountType" className='account-select-style'>
+                            {/* <Field as="select" name="accountType" className='account-select-style'>
                                 <option value={AccountType.Customer} >( Individual )</option>
                                 <option value={AccountType.Agent} >( Estate Agent )</option>
                                 <option value={AccountType.Company} >( Tradesperson )</option>
-                            </Field>
+                            </Field> */}
                         </div>
 
                         <p style={{ textAlign: "left", fontSize: "0.75rem", fontWeight: "normal", padding: "0rem 1.25rem" }}>
@@ -201,10 +199,8 @@ export default observer(function SignUpForm({ formType, setFormType }: Props) {
                         <div className='register-suggestion'>Already on Sanctum? <button className='register-suggestion-button'
                             type='button'
                             onClick={() => {
-                                {
-                                    closeModal();
-                                    openModal(<LoginForm />);
-                                }
+                                closeModal();
+                                openModal(<LoginForm />);
                             }}>
                             Log In</button>
                         </div>

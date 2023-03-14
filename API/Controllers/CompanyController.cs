@@ -1,12 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Application.CompanyApplication;
 using Domain.CompanyAggregate;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Primitives;
 using Persistence;
 
 namespace API.Controllers
@@ -85,7 +80,7 @@ namespace API.Controllers
         }
 
         [HttpGet("listings-count/{companyId}")]
-        public async Task<IActionResult> GountCompanyListings(Guid companyId)
+        public async Task<IActionResult> CountCompanyListings(Guid companyId)
         {
             return HandleResult(await Mediator.Send(new ListListingsCounts.Query{companyId = companyId}));
         }

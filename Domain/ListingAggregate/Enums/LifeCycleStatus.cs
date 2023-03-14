@@ -2,7 +2,8 @@ namespace Domain.ListingAggregate.Enums
 {
     public enum LifeCycleStatus
     {
-        Available,
+        ForSale,
+        ForRent,
         UnderOffer,
         ReferencesPending,
         SoldSubjectToContract,
@@ -10,6 +11,7 @@ namespace Domain.ListingAggregate.Enums
         LetAgreed,
         Let,
         OnHold,
+        OffMarket,
         Other
     }
 }

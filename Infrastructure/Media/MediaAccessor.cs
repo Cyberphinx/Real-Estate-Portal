@@ -1,15 +1,13 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Application.Interfaces;
+using Application.MediaApplication;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
-using Infrastructure.Media;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 
-namespace Application.MediaApplication
+namespace Infrastructure.Media
 {
     public class MediaAccessor : IMediaAccessor
     {

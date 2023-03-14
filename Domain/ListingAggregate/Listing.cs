@@ -4,7 +4,6 @@ using Domain.CompanyAggregate;
 using Domain.ListingAggregate.Enums;
 using Domain.ListingAggregate.Objects;
 using Domain.Enums;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.ListingAggregate
 {
@@ -15,7 +14,7 @@ namespace Domain.ListingAggregate
         public AccessStatus AccessStatus { get; set; }
         public double Acreage { get; set; } // acres of land that the property has
         public string Agency { get; set; } // from web scraping
-        public DateTime AddedOn { get; set; } = DateTime.UtcNow;
+        public DateTime AddedOn { get; set; }
         public string AdministrationFees { get; set; }
         public double AnnualBusinessRates { get; set; }
         public double AreaTotal { get; set; }
@@ -29,6 +28,7 @@ namespace Domain.ListingAggregate
         public Category Category { get; set; }
         public CentralHeating CentralHeating { get; set; }
         public bool ChainFree { get; set; }
+        public ICollection<ChangeLog> ChangeLogs { get; set; } = new List<ChangeLog>();
         public List<string> CommercialUseClass { get; set; }
         public string CommonholdDetails { get; set; }
         public List<string> ConnectedUtilities { get; set; }
@@ -49,6 +49,7 @@ namespace Domain.ListingAggregate
         public FurnishedState FurnishedState { get; set; }
         public double GroundRent { get; set; }
         public string GroundRentReviewPeriod { get; set; }
+        public DateTime LastModified { get; set; }
         public string LeaseExpiry { get; set; }
         public LifeCycleStatus LifeCycleStatus { get; set; }
         public bool ListedBuilding { get; set; }
@@ -87,6 +88,6 @@ namespace Domain.ListingAggregate
         public Guid CompanyId { get; set; }
         public Company Company { get; set; }
         public ICollection<ListingWatcher> Watchers { get; set; } = new List<ListingWatcher>();
-        public ICollection<KeyPerson> KeyContacts { get; set; } = new List<KeyPerson>();
+        public ICollection<KeyContact> KeyContacts { get; set; } = new List<KeyContact>();
     }
 }

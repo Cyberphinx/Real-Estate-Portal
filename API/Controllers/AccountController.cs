@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 using API.Services;
 using Domain.Enums;
 using Domain.AppUserAggregate;
@@ -17,14 +13,12 @@ using Microsoft.EntityFrameworkCore;
 using Persistence;
 using Application.ProfileApplication.ProfileDtos;
 using API.Extensions;
-using Microsoft.AspNetCore.Http;
 using Infrastructure.Email;
 using Microsoft.AspNetCore.WebUtilities;
 using System.Text;
 using Domain;
 using Application.AccountApplication;
 using Application.AccountApplication.AccountDtos;
-using Domain.InvoiceAggregate;
 using Domain.MediaAggregate;
 
 namespace API.Controllers
@@ -330,6 +324,7 @@ namespace API.Controllers
             return userDtos;
         }
 
+        // activate the membership of a company account
         [Authorize(Roles = "Admin")]
         [HttpGet("activate")]
         public async Task<IActionResult> ActivateAccount(string username)

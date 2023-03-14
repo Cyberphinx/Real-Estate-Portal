@@ -25,6 +25,7 @@ namespace Application.JobApplication.JobDtos
         public JobLifeCycle JobLifeCycle { get; set; }
         public ICollection<JobMediaDto> JobMedia { get; set; }
         public ICollection<JobLocationDto> JobLocations { get; set; }
+        public DateTime LastModified { get; set; }
         public ICollection<NetworkDto> Networks { get; set; }
         public ICollection<JobMessageDto> Messages { get; set; }
         public int Bedrooms { get; set; }

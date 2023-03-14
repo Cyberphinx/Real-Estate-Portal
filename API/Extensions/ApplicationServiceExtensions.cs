@@ -27,21 +27,12 @@ namespace API.Extensions
         // this class just helps to clean up the Startup.cs a bit to avoid clutter
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
         {
+            services.AddEndpointsApiExplorer();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
             });
 
-            services.AddFluentValidationAutoValidation();
-            services.AddValidatorsFromAssemblyContaining<Create>();
-
-            // the original code that was overriden by below for .AddDbContext
-            // services.AddDbContext<DataContext>(options =>
-            // {
-            //     options.UseNpgsql(config.GetConnectionString("DefaultConnection")).UseSnakeCaseNamingConvention()
-            // });
-
-            // code for .AddDbContext for fly io postgres connection
             services.AddDbContext<DataContext>(options =>
             {
                 var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
@@ -54,7 +45,6 @@ namespace API.Extensions
                 {
                     // Use connection string from file.
                     connStr = config.GetConnectionString("DefaultConnection");
-                    // options.UseNpgsql(connStr).UseSnakeCaseNamingConvention();
                     options.UseNpgsql(connStr, p => p.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery));
                 }
                 else
@@ -95,9 +85,12 @@ namespace API.Extensions
                     policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("https://locationiq.org");
                 });
             });
-            
+
             services.AddMediatR(typeof(List.Handler).Assembly);
             services.AddAutoMapper(typeof(MappingProfiles).Assembly);
+            services.AddFluentValidationAutoValidation();
+            services.AddValidatorsFromAssemblyContaining<Create>();
+            services.AddHttpContextAccessor();
             services.AddScoped<IUserAccessor, UserAccessor>();
             services.AddScoped<IMediaAccessor, MediaAccessor>();
             services.AddScoped<IListingAccessor, ListingAccessor>();

@@ -2,7 +2,6 @@ import { observer } from "mobx-react-lite";
 import React from "react";
 import "./JobInvoices.css";
 import { Job } from "../../../../../app/model/Job";
-import { useStore } from "../../../../../app/stores/store";
 import { JobInvoice } from "../../../../../app/model/Invoice";
 import { dateFormatter } from "../../../../../app/common/HelperFunctions";
 import PriceFormatter from "../../../../../app/common/PriceFormatter";
@@ -14,9 +13,7 @@ interface Props {
     currentJobId: string | undefined;
 }
 
-export default observer(function JobInvoices({ job, showInvoices, currentJobId }: Props) {
-    const { removalistJobStore, jobInvoiceStore } = useStore();
-    const { jobs, loadingJobs } = removalistJobStore;
+export default observer(function JobInvoices({ job, currentJobId }: Props) {
 
     return (
         <div className="removals-jobs__invoices">

@@ -23,19 +23,6 @@ var app = builder.Build();
 // Configure the HTTP request pipeline. MIDDLEWARE SECTION - ORDERING IS IMPORTANT
 app.UseMiddleware<ExceptionMiddleware>();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1"));
-}
-else
-{
-    app.Use(async (context, next) =>
-    {
-        context.Response.Headers.Add("Strict-Transport-Security", "max-age=31536000");
-        await next.Invoke();
-    });
-}
 
 // Security Header:  X-Content-Type-Options: this header prevents the MIME sniffing of the contents
 app.UseXContentTypeOptions();
@@ -52,22 +39,26 @@ app.UseCsp(opt => opt
         "https://fonts.googleapis.com/",
         "https://unpkg.com/leaflet@1.8.0/dist/leaflet.css",
         "https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.79.0/dist/L.Control.Locate.min.css",
-        "https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.css"
+        "https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.css",
+        "https://fonts.gstatic.com/"
         )
         .UnsafeInline())
-    .FontSources(s => s.Self().CustomSources("https://fonts.googleapis.com/"))
+    .FontSources(s => s.Self().CustomSources(
+        "https://fonts.googleapis.com/",
+        "https://fonts.gstatic.com/"
+        ))
     .FormActions(s => s.Self())
     .FrameAncestors(s => s.Self())
     .ImageSources(s => s.Self().CustomSources(
-        "data:",
-        "blob:",
         "https://a-tiles.locationiq.com",
         "https://b-tiles.locationiq.com",
         "https://c-tiles.locationiq.com",
         "https://unpkg.com/leaflet@1.8.0/",
         "https://picsum.photos/",
         "https://i.picsum.photos",
-        "https://res.cloudinary.com"
+        "https://res.cloudinary.com",
+        "https://api.tomtom.com/",
+        "http://www.w3.org/2000/svg"
         ))
     .ScriptSources(s => s.Self().CustomSources(
         "https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.79.0/dist/L.Control.Locate.min.js",
@@ -83,26 +74,35 @@ app.UseCsp(opt => opt
 
 // app.UseHttpsRedirection();
 
-app.UseRouting();
+// app.UseRouting();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1"));
+}
+else
+{
+    app.Use(async (context, next) =>
+    {
+        context.Response.Headers.Add("Strict-Transport-Security", "max-age=31536000");
+        await next.Invoke();
+    });
+}
+
+app.UseCors("CorsPolicy");
+
+app.UseAuthentication(); // Authentication must be before Authorization
+app.UseAuthorization();
 
 // DefaultFiles means that it will look for index.html inside wwwroot folder
 app.UseDefaultFiles();
 // This command by default serves static files from wwwroot folder
 app.UseStaticFiles();
 
-app.UseCors("CorsPolicy");
-app.UseAuthentication(); // Authentication must be before Authorization
-app.UseAuthorization();
-
-// app.UseEndpoints(endpoints =>
-// {
-//     endpoints.MapControllers();
-//     endpoints.MapHub<ChatHub>("/chat");
-//     endpoints.MapFallbackToController("Index", "Fallback");
-// });
-
 app.MapControllers();
 app.MapHub<ChatHub>("/chat");
+app.MapFallbackToController("Index", "Fallback");
 
 // "using" statement automatically cleans up after itself, when its finishes
 // there is garbage collector in c#, but we don't have control over when that runs, therefore the "using" statement

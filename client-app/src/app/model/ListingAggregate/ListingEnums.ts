@@ -108,14 +108,46 @@ export enum Incentive {
 }
 
 export enum LifeCycleStatus {
-    available,
+    forSale,
+    forRent,
     underOffer,
     referencesPending,
     soldSubjectToContract,
     sold,
     letAgreed,
+    let,
     onHold,
-    let
+    offMarket,
+    other
+}
+
+export const lifeCycleStatusText = (listing: Listing) => {
+    switch (listing.lifeCycleStatus.toString()) {
+        case "ForSale":
+            return "ForSale"
+        case "ForRent":
+            return "ForRent"
+        case "UnderOffer":
+            return "Under offer"
+        case "ReferencesPending":
+            return "References pending"
+        case "SoldSubjectToContract":
+            return "Sold subject to contract"
+        case "Sold":
+            return "Sold"
+        case "LetAgreed":
+            return "Let agreed"
+        case "Let":
+            return "Let"
+        case "OnHold":
+            return "On hold"
+        case "OffMarket":
+            return "OffMarket"
+        case "Other":
+            return "Other"
+        default:
+            return ""
+    }
 }
 
 export enum ListedBuildingGrade {

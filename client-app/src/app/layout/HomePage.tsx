@@ -14,12 +14,14 @@ import ListingTab from "../../features/listings/details/ListingTab";
 import CompanyTab from "../../features/companies/details/CompanyTab";
 import { useLocation } from "react-router-dom";
 import ConfirmEmail from "../../features/users/register/ConfirmEmail";
+import useWindowSize from "../hooks/useWindowSize";
+import NavMobile from "./NavMobile";
 
 export default observer(function HomePage() {
     const { featureStore, listingStore, mapStore, jobStore, companyStore, userStore, profileStore, modalStore } = useStore();
     const { activeFeature } = featureStore;
     const { loadJobs } = jobStore;
-    const { listings, selectedListing,  loadListings, loadExtractedListings } = listingStore;
+    const { listings, selectedListing, loadListings, loadExtractedListings } = listingStore;
     const { companies, selectedCompany, loadCompanies } = companyStore;
     const { zoom, bounds } = mapStore;
     const { user, isLoggedIn } = userStore;
@@ -27,9 +29,11 @@ export default observer(function HomePage() {
 
     const location = useLocation();
 
+    const { width } = useWindowSize();
+
     useEffect(() => {
-        loadExtractedListings();
-    }, [loadExtractedListings])
+        loadListings();
+    }, [loadListings])
 
     useEffect(() => {
         loadJobs();
@@ -99,10 +103,21 @@ export default observer(function HomePage() {
 
     return (
         <div style={{ position: "relative" }}>
-            <Nav />
-            {features[activeFeature]}
-            {selectedListing && <ListingTab listing={selectedListing} />}
-            {selectedCompany && <CompanyTab company={selectedCompany} />}
+            {width < 641 ?
+                <>
+                    <NavMobile />
+                    <div style={{padding:'6rem 1rem 1rem 1rem',textAlign:'center'}}>
+                        <p style={{fontSize:'1.5rem'}}>Mobile version coming soon.</p>
+                        <p style={{fontSize:'1rem'}}>For the time being, please visit on a bigger screen device for best user experience.</p>
+                    </div>
+                </>
+                :
+                <>
+                    <Nav />
+                    {features[activeFeature]}
+                    {selectedListing && <ListingTab listing={selectedListing} />}
+                    {selectedCompany && <CompanyTab company={selectedCompany} />}
+                </>}
         </div>
     )
 });

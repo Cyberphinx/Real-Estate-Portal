@@ -31,6 +31,7 @@ namespace Application.ListingApplication.ListingDtos
         public Category Category { get; set; }
         public CentralHeating CentralHeating { get; set; }
         public bool ChainFree { get; set; }
+        public ICollection<ChangeLogDto> ChangeLogs { get; set; }
         public List<string> CommercialUseClass { get; set; }
         public string CommonholdDetails { get; set; }
         public List<string> ConnectedUtilities { get; set; }
@@ -52,6 +53,7 @@ namespace Application.ListingApplication.ListingDtos
         public FurnishedState FurnishedState { get; set; }
         public double GroundRent { get; set; }
         public string GroundRentReviewPeriod { get; set; }
+        public DateTime LastModified { get; set; }
         public string LeaseExpiry { get; set; }
         public LifeCycleStatus LifeCycleStatus { get; set; }
         public bool ListedBuilding { get; set; }
@@ -89,6 +91,6 @@ namespace Application.ListingApplication.ListingDtos
         public Guid CompanyId { get; set; }
         public Owner Company { get; set; }
         public ICollection<WatcherDto> Wacthers { get; set; }
-        public ICollection<KeyContact> KeyContacts { get; set; }
+        public ICollection<KeyContactDto> KeyContacts { get; set; }
     }
 }

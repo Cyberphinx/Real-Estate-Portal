@@ -89,14 +89,14 @@ export const parkingOptions = [
 ]
 
 export const rentLifecycleOptions = [
-    {text: 'Available', value: LifeCycleStatus.available},
+    {text: 'For sale', value: LifeCycleStatus.forSale},
     {text: 'Under offer', value: LifeCycleStatus.underOffer},
     {text: 'Let agreed', value: LifeCycleStatus.letAgreed},
     {text: 'Let', value: LifeCycleStatus.let}
 ]
 
 export const saleLifecycleOptions = [
-    {text: 'Available', value: LifeCycleStatus.available},
+    {text: 'For sale', value: LifeCycleStatus.forSale},
     {text: 'Under offer', value: LifeCycleStatus.underOffer},
     {text: 'Sold subject to contract', value: LifeCycleStatus.soldSubjectToContract},
     {text: 'Sold', value: LifeCycleStatus.sold}
