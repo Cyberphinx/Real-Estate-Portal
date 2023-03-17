@@ -10,7 +10,8 @@ interface Props {
 
 export default observer(function ListingBookmark({ multiListings }: Props) {
     const { listingStore } = useStore();
-    const { selectListing, selectedListing, selectListingForImage } = listingStore;
+    const { selectListing, selectedListing, selectListingForImage, setImage,
+        cancelSelectListingForImage } = listingStore;
 
     return (
         <div className="listing-bookmark">
@@ -21,6 +22,10 @@ export default observer(function ListingBookmark({ multiListings }: Props) {
                             <button
                                 className={item.id === selectedListing.id ? "selected-index-button" : "index-button"}
                                 onClick={() => {
+                                    let mainImage = item.listingMedia.find(x => x.isMain === true);
+                                    let initialImage = mainImage ? mainImage
+                                        : item.listingMedia.filter(x => x.type.toString() === "Image" && x.id.startsWith('Sanctum/img'))[0];
+                                    setImage(initialImage);
                                     selectListingForImage(item.id)
                                     selectListing(item.id)
                                 }}>

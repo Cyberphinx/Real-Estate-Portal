@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import { Listing } from "../../../app/model/ListingAggregate/Listing";
 import { ChangeLog, ListingMediaDto } from "../../../app/model/ListingAggregate/ListingObjects";
 import './ListingOverview.css';
-import priceFormatter from "../../../app/common/PriceFormatter";
 import { lifeCycleStatusText, propertyTypeLong, rentFrequency } from "../../../app/model/ListingAggregate/ListingEnums";
 import { dateFormatter } from "../../../app/common/HelperFunctions";
 import { useStore } from "../../../app/stores/store";
 import { observer } from "mobx-react-lite";
+import PriceFormatter from "../../../app/common/PriceFormatter";
 
 
 interface Props {
@@ -17,6 +17,8 @@ interface Props {
 export default observer(function ListingOverview({ listing }: Props) {
     const { listingStore } = useStore();
     const { image, setImage } = listingStore;
+
+    const price = PriceFormatter(listing!.pricing.price!, listing!.pricing.currency);
 
     const listingImages = listing.listingMedia.filter(x => x.type.toString() === "Image").sort();
     const listingBigImages = listing.listingMedia.filter(x => x.type.toString() === "Image" && x.id.startsWith('Sanctum/img'))
@@ -86,8 +88,8 @@ export default observer(function ListingOverview({ listing }: Props) {
                 </div>
             </section>}
             <article className="header-container">
-                <span style={{ fontSize: "1.25rem", fontWeight: "bold" }}>{priceFormatter(listing!.pricing.price!, listing!.pricing.currency)}</span>
-                {(listing?.pricing.transactionType.toString() === "Rent") && <span style={{ fontSize: "1.25rem" }}> {rentFrequency(listing!)} </span>}
+                <span style={{ fontSize: "1.25rem", fontWeight: "bold" }}>{price}</span>
+                {(listing?.pricing.transactionType.toString() === "Rent") && <span style={{ fontSize: "1.25rem" }}> {price === 'POA' ? null : rentFrequency(listing!)} </span>}
                 <span style={{ fontSize: "1.25rem", fontWeight: "bold" }}> {listing.pricing.transactionType.toString() === "Sale" && listing.pricing.priceQualifier.toString()}</span>
                 <p style={{ fontSize: "1.25rem" }}>Status: <b>{lifeCycleStatusText(listing)}</b></p>
 

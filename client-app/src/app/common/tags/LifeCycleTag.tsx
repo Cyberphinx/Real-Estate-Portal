@@ -23,7 +23,7 @@ export default function LifeCycleTag({ listing }: Props) {
             case "Sold":
                 return { backgroundColor: '#E90064' }
             case "LetAgreed":
-                return { backgroundColor: '#FFED00' }
+                return { backgroundColor: '#FF5F00' }
             case "Let":
                 return { backgroundColor: '#E90064' }
             case "OnHold":
@@ -39,8 +39,10 @@ export default function LifeCycleTag({ listing }: Props) {
 
     function LifeCycleText(lifeCycleText: string) {
         switch (lifeCycleText) {
-            case "Available":
-                return "Available"
+            case "ForSale":
+                return "For Sale"
+            case "ForRent":
+                return "For Rent"
             case "UnderOffer":
                 return "Under Offer"
             case "ReferencesPending":
@@ -55,6 +57,8 @@ export default function LifeCycleTag({ listing }: Props) {
                 return "Let"
             case "OnHold":
                 return "On Hold"
+            case "OffMarket":
+                return "Off Market"
             case "Other":
                 return "Other"
             default:

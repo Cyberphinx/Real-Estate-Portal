@@ -258,10 +258,7 @@ export default observer(function ListingMarker({ points, clusters, supercluster 
                         <Tooltip direction="bottom" offset={[15, 10]}>
                             <AgencyTag listing={cluster.properties.listing} fontSize={"10px"} />
                             <img className="marker-snippet"
-                                src={cluster.properties.listing.listingMedia
-                                    .filter((x: ListingMediaDto) =>
-                                        x.type.toString() === "Image"
-                                        && x.id.startsWith('Sanctum/img'))[0].url}
+                                src={cluster.properties.listing.listingMedia.find((x: ListingMediaDto) => x.isMain === true)?.url}
                                 alt="listing"
                                 onLoad={() => setImgLoaded(true)}
                                 style={imgLoaded ? {} : { display: "none" }}

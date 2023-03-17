@@ -58,7 +58,8 @@ app.UseCsp(opt => opt
         "https://i.picsum.photos",
         "https://res.cloudinary.com",
         "https://api.tomtom.com/",
-        "http://www.w3.org/2000/svg"
+        "http://www.w3.org/2000/svg",
+        "https://d29a6tqnmy116t.cloudfront.net"
         ))
     .ScriptSources(s => s.Self().CustomSources(
         "https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.79.0/dist/L.Control.Locate.min.js",

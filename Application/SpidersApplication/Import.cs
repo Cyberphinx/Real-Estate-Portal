@@ -10,7 +10,6 @@ using Application.ListingApplication.ListingDtos;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Domain.ListingAggregate;
-using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
@@ -131,13 +130,15 @@ namespace Application.SpidersApplication
                             Console.WriteLine($"DELETE: {existingListing.SourceUri}");
                             deletedListingsCount++;
                             // remove media from Cloudinary first
-                            foreach (var media in existingListing.ListingMedia)
+                            foreach (var media in existingListing.ListingMedia.ToList())
                             {
-                                var deleteMediaResult = await _mediaAccessor.DeleteMedia(media.Id);
-                                if (deleteMediaResult == null) Console.WriteLine($"Problem deleting {media.Id} from Cloudinary");
+                                // deleting from Cloudinary
+                                // var deleteMediaResult = await _mediaAccessor.DeleteMedia(media.Id);
+                                // if (deleteMediaResult == null) Console.WriteLine($"Problem deleting {media.Id} from Cloudinary");
 
                                 Console.WriteLine($"{media.Id} deleted");
 
+                                // remove from listing
                                 existingListing.ListingMedia.Remove(media);
                             }
 
@@ -151,6 +152,8 @@ namespace Application.SpidersApplication
                         }
                     }
                 }
+
+                Console.WriteLine($"🎈 {request.Listings.Count()} listings injected by Sanctum Spiders (New: {newListingsCount}, Updated: {updatedListingsCount}, Deleted: {deletedListingsCount})");
 
                 return Result<string>.Success($"Total injected listings: {request.Listings.Count()} (New: {newListingsCount}, Updated: {updatedListingsCount}, Deleted: {deletedListingsCount})");
             }

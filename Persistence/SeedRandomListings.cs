@@ -279,7 +279,7 @@ namespace Persistence
                     PriceQualifier = "FixedPrice",
                     Auction = false
                 };
-                newListing.PropertyType = PropertyType.Detached;
+                newListing.PropertyType = PropertyType.DetachedHouse;
                 newListing.Parking = true;
                 newListing.PetsAllowed = false;
                 newListing.RateableValue = 0;
@@ -553,7 +553,7 @@ namespace Persistence
                     PriceQualifier = "FixedPrice",
                     Auction = false
                 };
-                newListing.PropertyType = PropertyType.Detached;
+                newListing.PropertyType = PropertyType.DetachedHouse;
                 newListing.Parking = true;
                 newListing.PetsAllowed = false;
                 newListing.RateableValue = 0;

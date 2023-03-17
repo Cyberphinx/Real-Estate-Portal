@@ -124,25 +124,25 @@ export enum LifeCycleStatus {
 export const lifeCycleStatusText = (listing: Listing) => {
     switch (listing.lifeCycleStatus.toString()) {
         case "ForSale":
-            return "ForSale"
+            return "For Sale"
         case "ForRent":
-            return "ForRent"
+            return "For Rent"
         case "UnderOffer":
-            return "Under offer"
+            return "Under Offer"
         case "ReferencesPending":
-            return "References pending"
+            return "References Pending"
         case "SoldSubjectToContract":
-            return "Sold subject to contract"
+            return "Sold Subject To Contract"
         case "Sold":
             return "Sold"
         case "LetAgreed":
-            return "Let agreed"
+            return "Let Agreed"
         case "Let":
             return "Let"
         case "OnHold":
-            return "On hold"
+            return "On Hold"
         case "OffMarket":
-            return "OffMarket"
+            return "Off Market"
         case "Other":
             return "Other"
         default:
@@ -225,49 +225,121 @@ export const priceQualifier = (priceQualifier: PriceQualifier) => {
 }
 
 export enum PropertyType {
-    barnConversion,
-    blockOfFlats,
-    bungalow,
-    businessPark,
-    chalet,
-    chateau,
-    cottage,
-    countryHouse,
-    detached,
-    detachedBungalow,
-    endTerrace,
-    equestrian,
-    farm,
-    farmhouse,
-    finca,
-    flat,
-    hotel,
-    houseboat,
-    industrial,
-    land,
-    leisure,
-    lightIndustrial,
-    linkDetached,
-    lodge,
-    longere,
-    maisonette,
+    notSpecified,
+    terracedHouse,
+    endOfTerraceHouse,
+    semiDetachedHouse,
+    detachedHouse,
     mews,
-    office,
-    other,
-    parkHome,
-    parking,
-    pubBar,
-    restaurant,
-    retail,
-    riad,
-    semiDetached,
-    semiDetachedBungalow,
+    clusterHouse,
+    groundFlat,
+    flat,
     studio,
-    terraced,
+    groundMaisonette,
+    maisonette,
+    bungalow,
     terracedBungalow,
+    semiDetachedBungalow,
+    detachedBungalow,
+    mobileHome,
+    commercialProperty,
+    land,
+    linkDetachedHouse,
     townHouse,
+    cottage,
+    chalet,
+    characterProperty,
+    house,
     villa,
-    warehouse
+    apartment,
+    penthouse,
+    finca,
+    barnConversion,
+    servicedApartments,
+    parking,
+    shelteredHousing,
+    retirementProperty,
+    houseShare,
+    flatShare,
+    parkHome,
+    garages,
+    farmHouse,
+    equestrianFacility,
+    duplex,
+    triplex,
+    longere,
+    gite,
+    barn,
+    unconvertedBarn,
+    trulli,
+    mill,
+    commercialMill,
+    ruins,
+    restaurant,
+    cafe,
+    castle,
+    villageHouse,
+    caveHouse,
+    cortijo,
+    farmLand,
+    plot,
+    countryHouse,
+    stoneHouse,
+    caravan,
+    lodge,
+    logCabin,
+    manorHouse,
+    statelyHome,
+    offPlan,
+    semiDetachedVilla,
+    detachedVilla,
+    barNightClub,
+    shop,
+    riad,
+    houseBoat,
+    hotelRoom,
+    blockOfApartments,
+    privateHalls,
+    office,
+    businessPark,
+    servicedOffice,
+    retailPropertyHighStreet,
+    retailPropertyOutOfTown,
+    convenienceStore,
+    garage,
+    hairdresserBarberShop,
+    petrolStation,
+    postOffice,
+    pub,
+    workshopAndRetailSpace,
+    distributionWarehouse,
+    factory,
+    heavyIndustrial,
+    industrialPark,
+    lightIndustrial,
+    storage,
+    showroom,
+    warehouse,
+    commercialLand,
+    commercialDevelopment,
+    industrialDevelopment,
+    residentialDevelopment,
+    dataCentre,
+    farm,
+    healthcareFacility,
+    marineProperty,
+    mixedUse,
+    researchAndDevelopmentFacility,
+    sciencePark,
+    guestHouse,
+    hospitality,
+    leisureFacility,
+    takeaway,
+    childcareFacility,
+    smallholding,
+    placeOfWorship,
+    tradeCounter,
+    coachHouse
 }
 
 export function PropertyTypesArray() {
