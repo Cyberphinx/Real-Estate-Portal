@@ -19,7 +19,7 @@ export class PagingParams {
     pageNumber;
     pageSize;
 
-    constructor(pageNumber = 1, pageSize = 100) {
+    constructor(pageNumber = 1, pageSize = 1000) {
         // these are same as "Initialize field from parameter" in C#
         this.pageNumber = pageNumber;
         this.pageSize = pageSize;

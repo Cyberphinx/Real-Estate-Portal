@@ -8,6 +8,6 @@ namespace Domain.ListingAggregate.Enums
         ShareOfFreehold,
         Commonhold,
         SharedOwnership,
-        Other
+        NotSpecified
     }
 }

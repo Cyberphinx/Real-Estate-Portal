@@ -39,7 +39,7 @@ export default observer(function TestErrors() {
                 <p className="close-modal-button">&times;</p>
             </div>
             <div>
-                <h1>Test Error component</h1>
+                <p>Test Error component</p>
                 <div>
                     <div>
                         <button onClick={handleNotFound}>Not Found</button>

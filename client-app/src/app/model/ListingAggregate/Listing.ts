@@ -6,7 +6,7 @@ import {
     LifeCycleStatus, ListedBuildingGrade, PropertyType, 
     RentalTerm, Tenure, UnitOfArea, TransactionType, Frequency, 
 } from "./ListingEnums";
-import { ChangeLog, DetailedDescription, ListingLocation, 
+import { ChangeLog, DetailedDescription, KeyContact, ListingLocation, 
     ListingMediaDto, 
     Owner, Pricing, ServiceCharge, WatcherDto, } from "./ListingObjects";
 
@@ -82,6 +82,7 @@ export interface Listing {
     sharedAccommodation: boolean;
     sharedOwnershipDetails: string;
     smokersConsidered: boolean;
+    spiderTag: string;
     summaryDescription: string;
     tenanted: boolean;
     tenantEligibilityDss: Eligibility;
@@ -90,6 +91,7 @@ export interface Listing {
     totalBedrooms: number;
     whiteGoods: string[];
     watchers: WatcherDto[];
+    keyContacts: KeyContact[];
 }
 
 export class Listing implements Listing {

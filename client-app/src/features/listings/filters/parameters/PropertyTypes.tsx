@@ -1,7 +1,6 @@
 import { observer } from "mobx-react-lite";
 import React, { useState } from "react";
-import { propertyOptions, propertyTypeOptions } from "../../../../app/common/form/options";
-import { useStore } from "../../../../app/stores/store";
+import { propertyTypeOptions } from "../../../../app/common/form/options";
 import './PropertyTypes.css';
 
 interface Props {
@@ -38,11 +37,11 @@ export default observer(function PropertyTypes({ checked, onChange, predicate }:
                 <div
                     key={item.value}
                     className={checkedItems.includes(item.value) ? "types-button-selected" : "types-button"}
-                    onClick={() => handleChecked(item.value)}
                 >
                     <input
                         type="checkbox"
                         checked={checkedItems.includes(item.value) ? true : false}
+                        onChange={() => handleChecked(item.value)}
                         style={{ cursor: "pointer" }}
                     />
                     <label style={{ cursor: "pointer", paddingLeft: "3px" }}>{item.text}</label>

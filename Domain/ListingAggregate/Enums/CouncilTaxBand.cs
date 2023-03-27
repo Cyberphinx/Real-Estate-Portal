@@ -10,6 +10,7 @@ namespace Domain.ListingAggregate.Enums
         F,
         G,
         H,
-        I
+        I,
+        NotSpecified
     }
 }

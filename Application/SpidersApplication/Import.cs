@@ -9,6 +9,7 @@ using Application.Interfaces;
 using Application.ListingApplication.ListingDtos;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Domain;
 using Domain.ListingAggregate;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -37,125 +38,124 @@ namespace Application.SpidersApplication
 
             public async Task<Result<string>> Handle(Command request, CancellationToken cancellationToken)
             {
+                var startTime = DateTime.UtcNow;
+
                 if (request.Listings == null) return null;
 
-                var existingListings = await _context.Listings
-                    .OrderByDescending(x => x.LastModified).ThenBy(x => x.ListingReference)
-                    .ProjectTo<ListingDto>(_mapper.ConfigurationProvider)
-                    .ToListAsync();
-                
-                int newListingsCount = 0;
-                int updatedListingsCount = 0;
-                int deletedListingsCount = 0;
+                // get the web sraping signature (spider tag)
+                var spiderTag = request.Listings[0].SpiderTag;
+                var agency = request.Listings[0].Agency;
+                Console.WriteLine($"Injection spider tag is: {spiderTag}");
+                var existingSpiderTag = await _context.Injections.AnyAsync(x => x.SpiderTag == spiderTag && x.Agency == agency);
+                if (!existingSpiderTag)
+                {
+                    // the spider tag (web scraping signature) cannot be found in the injection records of the agency, 
+                    // then create a new record for this web scraping cycle
+                    Injection injection = new Injection
+                    {
+                        AddedOn = DateTime.UtcNow,
+                        Agency = agency,
+                        SpiderTag = spiderTag
+                    };
+                    _context.Injections.Add(injection);
+                    var result = await _context.SaveChangesAsync() > 0;
+                    if (!result) Console.WriteLine("Failed to add spider tag");
+                }
 
+                // get company Id
+                var company = await _context.Companies
+                    .ProjectTo<CompanyMinimalDto>(_mapper.ConfigurationProvider)
+                    .FirstOrDefaultAsync(x => x.CompanyReference == agency);
+                var companyId = company.Id;
+
+                // Add or Update listings
+                int newCount = 0;
+                int updateCount = 0;
+                int noChangeCount = 0;
+                // int deleteCount = 0; // deletion is handled by Purge.cs
+
+                // check if fresh data is not empty
                 if (request.Listings != null)
                 {
-                    if (existingListings != null)
+                    // Loop over fresh data
+                    foreach (var injectedListing in request.Listings)
                     {
-                        // Loop over fresh data
-                        foreach (var injectedListing in request.Listings)
+                        Console.WriteLine($"Checking injected listing {injectedListing.SourceUri}");
+
+                        // set Company Id to all fresh data
+                        injectedListing.CompanyId = companyId;
+
+                        var existingListing = await _context.Listings
+                            .Include(x => x.ChangeLogs)
+                            .Include(x => x.DetailedDescriptions)
+                            .Include(x => x.KeyContacts)
+                            .Include(x => x.ListingLocation)
+                            .Include(x => x.ListingMedia)
+                            .Include(x => x.Pricing)
+                            .Include(x => x.ServiceCharge)
+                            .Include(x => x.Watchers)
+                            .FirstOrDefaultAsync(x => x.SourceUri == injectedListing.SourceUri);
+
+                        if (existingListing != null)
                         {
-                            Console.WriteLine($"Checking injected listing {injectedListing.SourceUri}");
-
-                            // set company Id
-                            var company = await _context.Companies
-                                .ProjectTo<CompanyMinimalDto>(_mapper.ConfigurationProvider)
-                                .FirstOrDefaultAsync(x => x.CompanyReference == injectedListing.Agency);
-
-                            injectedListing.CompanyId = company.Id;
-
-                            var existingListing = existingListings.FirstOrDefault(x => x.SourceUri == injectedListing.SourceUri);
-                            if (existingListing != null)
+                            // if it already exist, and its lastModified date is different, then update it
+                            if (injectedListing.LastModified != existingListing.LastModified)
                             {
-                                // if it already exist, update it
-                                if (injectedListing.LastModified != existingListing.LastModified)
-                                {
-                                    updatedListingsCount++;
-                                    Console.WriteLine(
-                                        $"UPDATE: existing timestamp {existingListing.LastModified}, new timestamp {injectedListing.LastModified}. {injectedListing.SourceUri}");
-                                    _mapper.Map(injectedListing, existingListing);
-                                    var result = await _context.SaveChangesAsync() > 0;
-                                    if (!result) Console.WriteLine($"Failed to save updated listing {existingListing.SourceUri}");
+                                Console.WriteLine(
+                                    $"UPDATE: existing timestamp {existingListing.LastModified}, new timestamp {injectedListing.LastModified}. {injectedListing.SourceUri}");
 
-                                    Console.WriteLine($"{updatedListingsCount} - {existingListing.SourceUri} updated");
-                                }
+                                // no need to remove listing media individually, unless they are hosted on a cloud storage
+                                // (remember to .Include listing media)
+                                // if (existingListing.ListingMedia != null)
+                                // {
+                                //     foreach (var media in existingListing.ListingMedia.ToList())
+                                //     {
+                                //         Console.WriteLine($"Remove {media.Id} - {media.CopyFromUrl}");
+                                //         existingListing.ListingMedia.Remove(media);
+                                //     }
+                                // }
+
+                                Console.WriteLine($"Remove {existingListing.ListingReference} - {existingListing.SourceUri}");
+                                _context.Remove(existingListing);
+
+                                Console.WriteLine($"Replace by {injectedListing.ListingReference} - {injectedListing.SourceUri}");
+                                _context.Add(injectedListing);
+
+                                // mapper doesn't work because the entities are not from the same database for "HttpPut" function
+                                // _mapper.Map(injectedListing, existingListing);
+
+                                var result = await _context.SaveChangesAsync() > 0;
+                                if (!result) Console.WriteLine($"Failed to save updated listing {injectedListing.SourceUri}");
+
+                                Console.WriteLine($"{updateCount} - {injectedListing.ListingReference} - {injectedListing.SourceUri} updated");
+
+                                updateCount++;
                             }
                             else
                             {
-                                // if it doesn't exist, add new  
-                                newListingsCount++;                              
-                                Console.WriteLine($"NEW: {injectedListing.SourceUri}");
-                                _context.Listings.Add(injectedListing);
-                                var result = await _context.SaveChangesAsync() > 0;
-                                if (!result) Console.WriteLine($"Failed to add new listing {injectedListing.SourceUri}");
-                                
-                                Console.WriteLine($"{newListingsCount} - {injectedListing.SourceUri} added");
+                                noChangeCount++;
                             }
                         }
-                    }
-                    else
-                    {
-                        // if database is empty, add all
-                        Console.WriteLine($"Current database is empty");
-
-                        foreach (var injectedListing in request.Listings)
+                        else
                         {
-                            // set company Id
-                            var company = await _context.Companies
-                                .ProjectTo<CompanyMinimalDto>(_mapper.ConfigurationProvider)
-                                .FirstOrDefaultAsync(x => x.CompanyReference == injectedListing.Agency);
-                            injectedListing.CompanyId = company.Id;
+                            // if it doesn't exist, add new  
+                            newCount++;
 
-                            newListingsCount++;
+                            Console.WriteLine($"NEW: {injectedListing.SourceUri}");
                             _context.Listings.Add(injectedListing);
                             var result = await _context.SaveChangesAsync() > 0;
                             if (!result) Console.WriteLine($"Failed to add new listing {injectedListing.SourceUri}");
-                            
-                            Console.WriteLine($"{newListingsCount} - {injectedListing.SourceUri} added");
-                        }
 
-                    }
-                }
-
-                if (existingListings != null)
-                {
-                    // Loop over database contents
-                    foreach (var existingListing in existingListings)
-                    {
-                        Console.WriteLine($"Checking existing listing {existingListing.SourceUri}");
-                        var match = request.Listings.Any(x => x.SourceUri == existingListing.SourceUri);
-                        if (!match)
-                        {
-                            // if a listing can no longer be found, delete it and its associated media
-                            Console.WriteLine($"DELETE: {existingListing.SourceUri}");
-                            deletedListingsCount++;
-                            // remove media from Cloudinary first
-                            foreach (var media in existingListing.ListingMedia.ToList())
-                            {
-                                // deleting from Cloudinary
-                                // var deleteMediaResult = await _mediaAccessor.DeleteMedia(media.Id);
-                                // if (deleteMediaResult == null) Console.WriteLine($"Problem deleting {media.Id} from Cloudinary");
-
-                                Console.WriteLine($"{media.Id} deleted");
-
-                                // remove from listing
-                                existingListing.ListingMedia.Remove(media);
-                            }
-
-                            // and then remove listing
-                            Listing listing = _context.Listings.Find(existingListing.Id);
-                            _context.Listings.Remove(listing);
-                            var result = await _context.SaveChangesAsync() > 0;
-                            if (!result) Console.WriteLine($"Failed to delete listing {existingListing.SourceUri}");
-
-                            Console.WriteLine($"{deletedListingsCount} - {existingListing.SourceUri} deleted");
+                            Console.WriteLine($"{newCount} - {injectedListing.ListingReference} - {injectedListing.SourceUri} added");
                         }
                     }
                 }
 
-                Console.WriteLine($"🎈 {request.Listings.Count()} listings injected by Sanctum Spiders (New: {newListingsCount}, Updated: {updatedListingsCount}, Deleted: {deletedListingsCount})");
+                var endTime = DateTime.UtcNow;
 
-                return Result<string>.Success($"Total injected listings: {request.Listings.Count()} (New: {newListingsCount}, Updated: {updatedListingsCount}, Deleted: {deletedListingsCount})");
+                Console.WriteLine($"🎈 {DateTime.Now} - {spiderTag}: {request.Listings.Count()} {request.Listings[0].Agency} listings injected from Sanctum Spiders (New: {newCount}, Unchanged: {noChangeCount}, Updated: {updateCount}). (Time spent: {(endTime - startTime).TotalMinutes} minutes, Start time: {startTime} - endTime: {endTime}). Don't forget to purge legacy listings after all injections have been completed.");
+
+                return Result<string>.Success($"🎈 {DateTime.Now} - {spiderTag}: {request.Listings.Count()} {request.Listings[0].Agency} listings injected from Sanctum Spiders (New: {newCount}, Unchanged: {noChangeCount}, Updated: {updateCount}). (Time spent: {(endTime - startTime).TotalMinutes} minutes, Start time: {startTime} - endTime: {endTime}). Don't forget to purge legacy listings after all injections have been completed.");
             }
         }
     }

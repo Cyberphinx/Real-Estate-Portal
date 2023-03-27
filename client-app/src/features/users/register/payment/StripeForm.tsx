@@ -13,8 +13,6 @@ import { useStore } from "../../../../app/stores/store";
 
 export default observer(function StripeForm() {
     const baseUrl = process.env.REACT_APP_BASE_URL;
-    const {featureStore} = useStore();
-    const {setToast} = featureStore;
 
     const stripe = useStripe();
     const elements = useElements();

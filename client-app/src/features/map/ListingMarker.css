@@ -74,8 +74,8 @@
 .marker-title {
   /* border: 1px solid black; */
   width: 220px;
-  display: grid;
-  grid-template-columns: 2fr 1fr;
+  display: flex;
+  justify-content: space-between;
 }
 .marker-text {
   /* border: 1px solid #fff; */

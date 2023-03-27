@@ -75,7 +75,7 @@ export default observer(function AgentDashboard({ user }: Props) {
             <div id="agencymap" />
             <div>
                 <div className="agency-dashboard__section-two">
-                    <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', padding: '0', margin: '0' }}>{user?.displayName ? user.displayName : user?.username}</h1>
+                    <p style={{ fontSize: '1.5rem', fontWeight: 'bold', padding: '0', margin: '0' }}>{user?.displayName ? user.displayName : user?.username}</p>
                     <p>Account type: {user && accountTypeSwitch(user!)}</p>
                     <p>Email address: {user?.email}</p>
                     <p>Country: {user?.country}</p>

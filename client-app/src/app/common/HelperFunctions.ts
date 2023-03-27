@@ -1,3 +1,5 @@
+import { values } from "mobx";
+
 export function capitalizeFirstLetter(string: string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
@@ -8,6 +10,10 @@ export function dateFormatter(date: Date) {
 
 export function dateFormatterShort(date: Date) {
     return new Date(date).toLocaleDateString();
+}
+
+export function PascalToNormal(value: string) {
+    return value = value.replace(/([A-Z])/g, ' $1').trim();
 }
 
 export const icons: string[] = [
@@ -65,4 +71,16 @@ export function getRandomInt(min: number, max: number) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+export function truncate(value: string, maxLength: number) {
+    if (value.length <= maxLength) return value; // Nothing to do
+    let coma = value.indexOf(",");
+    // let newValue = value.slice(coma + 1);
+    let newValue = value.substring(coma + 1);
+    if (newValue.length >= maxLength) {
+    let secondComa = newValue.indexOf(",");
+        newValue = newValue.substring(secondComa + 1);
+    }
+    return newValue;
 }

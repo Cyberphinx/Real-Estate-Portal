@@ -4,12 +4,13 @@ import { Marker, useMap, Tooltip } from 'react-leaflet';
 import L from "leaflet";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../app/stores/store";
-import { propertyType, rentFrequency } from "../../app/model/ListingAggregate/ListingEnums";
+import { rentFrequency, rentFrequencyShort } from "../../app/model/ListingAggregate/ListingEnums";
 import nFormatter from "../../app/common/nFormatter";
 import priceFormatter from "../../app/common/PriceFormatter";
 import * as ReactDOMServer from 'react-dom/server';
 import AgencyTag from "../../app/common/tags/AgencyTag";
 import { ListingMediaDto } from "../../app/model/ListingAggregate/ListingObjects";
+import { PascalToNormal } from "../../app/common/HelperFunctions";
 
 interface Props {
     points: GeoJSON.Feature[];
@@ -21,7 +22,7 @@ interface Props {
 export default observer(function ListingMarker({ points, clusters, supercluster }: Props) {
     const { mapStore, listingStore, companyStore } = useStore();
     const { selectListing, contacts, setContacts, cancelSelectListing, selectedListing, predicate,
-         selectListingForImage, setImage, cancelSelectListingForImage } = listingStore;
+        selectListingForImage, setImage, cancelSelectListingForImage } = listingStore;
     const { setZoom, activeListing, setBounds } = mapStore;
     const { selectedCompany, cancelSelectCompany } = companyStore;
 
@@ -108,8 +109,9 @@ export default observer(function ListingMarker({ points, clusters, supercluster 
         }
     }
 
-    // get map bounds
-    function updateMap() {
+    // update map in response to user moves
+    const onMove = useCallback(() => {
+        // get map bounds 
         const b = map.getBounds();
         setBounds([
             b.getSouthWest().lng,
@@ -118,21 +120,21 @@ export default observer(function ListingMarker({ points, clusters, supercluster 
             b.getNorthEast().lat,
         ]);
         setZoom(map.getZoom());
-    }
-
-    // function autoSearchMapDebounnced() {
-    //     if (t) clearTimeout(t);
-    //     setT(window.setTimeout(() => setPredicate("mapBounds", String(bounds)), 500));
-    // }
-
-    // update map in response to user moves
-    const onMove = useCallback(() => {
-        updateMap();
-    }, [map]);
+    }, [map, setZoom, setBounds]);
+    
     // load map initially
     useEffect(() => {
-        updateMap();
-    }, [map]);
+        // get map bounds
+        const b = map.getBounds();
+        setBounds([
+            b.getSouthWest().lng,
+            b.getSouthWest().lat,
+            b.getNorthEast().lng,
+            b.getNorthEast().lat,
+        ]);
+        setZoom(map.getZoom());
+    }, [map, setZoom, setBounds]);
+
     // load map when it moves
     useEffect(() => {
         map.on("move", onMove);
@@ -192,8 +194,9 @@ export default observer(function ListingMarker({ points, clusters, supercluster 
                                             cancelSelectListing();
                                         } else {
                                             let mainImage = leaves[0].properties.listing.listingMedia.find((x: ListingMediaDto) => x.isMain === true);
-                                            let initialImage = mainImage ? mainImage 
-                                            : leaves[0].properties.listing.listingMedia.filter((x: ListingMediaDto) => x.type.toString() === "Image" && x.id.startsWith('Sanctum/img'))[0];
+                                            let initialImage = mainImage ? mainImage
+                                                : leaves[0].properties.listing.listingMedia.filter(
+                                                    (x: ListingMediaDto) => x.type.toString() === "Image" && x.id.startsWith('Sanctum/img'))[0];
                                             setImage(initialImage);
                                             selectListingForImage(leaves[0].properties.listing.id);
                                             selectListing(leaves[0].properties.listing.id);
@@ -222,7 +225,10 @@ export default observer(function ListingMarker({ points, clusters, supercluster 
                                                     <b>{priceFormatter(item.properties.listing.pricing.price, item.properties.listing.pricing.currency)}</b>
                                                     {predicate.get("channel") === "sale" ? null : <span>{rentFrequency(item.properties.listing)}</span>}
                                                 </article>
-                                                <p className="marker-text">{item.properties.listing.totalBedrooms} Beds {propertyType(item.properties.listing)}</p>
+                                                <p className="marker-text">
+                                                    {item.properties.listing.totalBedrooms > 0 && <span>{item.properties.listing.totalBedrooms} Beds </span>}
+                                                    {PascalToNormal(item.properties.listing.propertyType.toString())}
+                                                </p>
                                             </div>
                                         ))}
                                     </div>
@@ -245,7 +251,7 @@ export default observer(function ListingMarker({ points, clusters, supercluster 
                                     cancelSelectListing();
                                 } else {
                                     let mainImage = cluster.properties.listing.listingMedia.find((x: ListingMediaDto) => x.isMain === true);
-                                    let initialImage = mainImage ? mainImage 
+                                    let initialImage = mainImage ? mainImage
                                         : cluster.properties.listing.listingMedia.filter((x: ListingMediaDto) => x.type.toString() === "Image" && x.id.startsWith('Sanctum/img'))[0];
                                     setImage(initialImage);
                                     selectListingForImage(cluster.properties.listing.id);
@@ -256,7 +262,7 @@ export default observer(function ListingMarker({ points, clusters, supercluster 
                         }}
                     >
                         <Tooltip direction="bottom" offset={[15, 10]}>
-                            <AgencyTag listing={cluster.properties.listing} fontSize={"10px"} />
+                            {/* <AgencyTag listing={cluster.properties.listing} fontSize={"10px"} /> */}
                             <img className="marker-snippet"
                                 src={cluster.properties.listing.listingMedia.find((x: ListingMediaDto) => x.isMain === true)?.url}
                                 alt="listing"
@@ -266,9 +272,12 @@ export default observer(function ListingMarker({ points, clusters, supercluster 
                             <section className="marker-title">
                                 <div className="marker-text">
                                     <b>{priceFormatter(cluster.properties.listing.pricing.price, cluster.properties.listing.pricing.currency)}</b>
-                                    {predicate.get("channel") === "sale" ? null : <span>{rentFrequency(cluster.properties.listing)}</span>}
+                                    {predicate.get("channel") === "sale" ? null : <span>{rentFrequencyShort(cluster.properties.listing)}</span>}
                                 </div>
-                                <p className="marker-text">{cluster.properties.listing.totalBedrooms} Beds {propertyType(cluster.properties.listing)}</p>
+                                <p className="marker-text">
+                                    {cluster.properties.listing.totalBedrooms > 0 && <span>{cluster.properties.listing.totalBedrooms} Beds </span>}
+                                    {PascalToNormal(cluster.properties.listing.propertyType.toString())}
+                                </p>
                             </section>
                         </Tooltip>
                     </Marker>

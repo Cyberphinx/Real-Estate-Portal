@@ -25,9 +25,9 @@ export default observer(function AdminPanel() {
             {user?.role.includes("Admin") &&
                 <div className="admin-grid-container">
                     <div className="admin-grid-panel">
-                        <h1>Total rent/sale listings: {pagination?.totalItems}</h1>
+                        <p>Total rent/sale listings: {pagination?.totalItems}</p>
                         <div style={{ position: "relative" }}>
-                            <h1>Total user accounts: {users?.length}</h1>
+                            <p>Total user accounts: {users?.length}</p>
                             {loadingUsers && <LoadingComponent content={null} />}
                             <h3>List of user accounts:</h3>
                             <>
@@ -42,7 +42,7 @@ export default observer(function AdminPanel() {
                         </div>
 
                         <div style={{ position: "relative" }}>
-                            <h1>Total companies: {companies.length}</h1>
+                            <p>Total companies: {companies.length}</p>
                             {loadingInitial && <LoadingComponent content={null} />}
                             <h3>List of companies:</h3>
                             <ol>
@@ -59,7 +59,7 @@ export default observer(function AdminPanel() {
 
                     </div>
                     <div className="admin-grid-panel">
-                        <h1>Total branches: </h1>
+                        <p>Total branches: </p>
                     </div>
                 </div>
             }

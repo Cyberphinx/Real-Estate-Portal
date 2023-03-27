@@ -50,6 +50,8 @@ app.UseCsp(opt => opt
     .FormActions(s => s.Self())
     .FrameAncestors(s => s.Self())
     .ImageSources(s => s.Self().CustomSources(
+        "data:",
+        "blob:",
         "https://a-tiles.locationiq.com",
         "https://b-tiles.locationiq.com",
         "https://c-tiles.locationiq.com",
@@ -59,7 +61,9 @@ app.UseCsp(opt => opt
         "https://res.cloudinary.com",
         "https://api.tomtom.com/",
         "http://www.w3.org/2000/svg",
-        "https://d29a6tqnmy116t.cloudfront.net"
+        "https://d29a6tqnmy116t.cloudfront.net",
+        "https://www.rogerparry.net/",
+        "https://mr1.homeflow-assets.co.uk/"
         ))
     .ScriptSources(s => s.Self().CustomSources(
         "https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.79.0/dist/L.Control.Locate.min.js",

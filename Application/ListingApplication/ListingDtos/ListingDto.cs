@@ -81,6 +81,7 @@ namespace Application.ListingApplication.ListingDtos
         public bool SharedAccommodation { get; set; }
         public string SharedOwnershipDetails { get; set; }
         public bool SmokersConsidered { get; set; }
+        public string SpiderTag { get; set; }
         public string SummaryDescription { get; set; }
         public bool Tenanted { get; set; }
         public Eligibility TenantEligibilityDss { get; set; }

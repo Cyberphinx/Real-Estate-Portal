@@ -21,7 +21,7 @@ export default observer(function HomePage() {
     const { featureStore, listingStore, mapStore, jobStore, companyStore, userStore, profileStore, modalStore } = useStore();
     const { activeFeature } = featureStore;
     const { loadJobs } = jobStore;
-    const { listings, selectedListing, loadListings, loadExtractedListings } = listingStore;
+    const { listings, selectedListing, loadListings } = listingStore;
     const { companies, selectedCompany, loadCompanies } = companyStore;
     const { zoom, bounds } = mapStore;
     const { user, isLoggedIn } = userStore;
@@ -90,7 +90,7 @@ export default observer(function HomePage() {
         points: points,
         bounds: bounds,
         zoom: zoom,
-        options: { radius: 100, maxZoom: 20 }
+        options: { radius: 80, maxZoom: 16 }
     });
 
 

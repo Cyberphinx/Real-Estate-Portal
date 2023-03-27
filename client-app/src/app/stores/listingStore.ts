@@ -22,6 +22,7 @@ export default class ListingStore {
   currentListing: Listing | undefined = undefined;
   files: any = [];
   image: ListingMediaDto | undefined = undefined;
+  imageNotFound = false;
 
 
   // Pagination
@@ -41,7 +42,7 @@ export default class ListingStore {
       () => this.predicate.keys(),
       () => {
         // restart from page 1
-        this.pagingParams = new PagingParams(1, 100);
+        this.pagingParams = new PagingParams(1, 1000);
         this.listingRegistry.clear();
         this.loadListings();
       }
@@ -144,6 +145,34 @@ export default class ListingStore {
         console.log(error);
         this.setLoadingListing(false);
       }
+    }
+  }
+
+  loadListingByRef = async (listingReference: string) => {
+    this.setLoadingListing(true);
+    try {
+      var listing = await agent.Listings.detailsByRef(listingReference);
+      this.setListing(listing);
+      runInAction(() => this.selectedListing = listing);
+      this.setLoadingListing(false);
+      return listing;
+    } catch (error) {
+      console.log(error);
+      this.setLoadingListing(false);
+    }
+  }
+
+  loadListingByUrl = async (sourceUri: string) => {
+    this.setLoadingListing(true);
+    try {
+      var listing = await agent.Listings.detailsByUrl(sourceUri);
+      this.setListing(listing);
+      runInAction(() => this.selectedListing = listing);
+      this.setLoadingListing(false);
+      return listing;
+    } catch (error) {
+      console.log(error);
+      this.setLoadingListing(false);
     }
   }
 
@@ -361,6 +390,8 @@ export default class ListingStore {
   setFiles = (values: any) => this.files = values;
 
   setImage = (value: ListingMediaDto) => this.image = value;
+
+  setImageNotFound = (value: boolean) => this.imageNotFound = value;
 
 
 }

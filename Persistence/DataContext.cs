@@ -21,6 +21,7 @@ namespace Persistence
         }
 
         public DbSet<Listing> Listings { get; set; }
+        public DbSet<Injection> Injections { get; set; }
         public DbSet<ListingWatcher> ListingWatchers { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<Job> Jobs { get; set; }

@@ -5,6 +5,7 @@ import agent from "../api/agent";
 import { history } from './../../index';
 import { store } from './store';
 import { Pagination, PagingParams } from '../model/Pagination';
+import { router } from '../router/routes';
 
 export default class CompanyStore {
   companyRegistry = new Map<string, Company>();
@@ -158,7 +159,7 @@ export default class CompanyStore {
     try {
       const company = await agent.Companies.create(value);
       this.selectedCompany = company;
-      history.push("/");
+      router.navigate("/");
       store.modalStore.closeModal();
     } catch (error) {
       throw error;

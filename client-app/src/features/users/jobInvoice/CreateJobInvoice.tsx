@@ -3,7 +3,6 @@ import { observer } from "mobx-react-lite";
 import React, { useEffect, useState } from "react";
 import "./CreateJobInvoice.css";
 import { Link, useParams } from "react-router-dom";
-import { history } from "../../../index";
 import { v4 as uuid } from 'uuid';
 import * as Yup from 'yup';
 import LoadingComponent from "../../../app/common/loading/LoadingComponent";
@@ -12,6 +11,7 @@ import { JobInvoiceFormValues } from "../../../app/model/Invoice";
 import { useStore } from "../../../app/stores/store";
 import { PaymentStatus } from "../../../app/model/PaymentStatus";
 import JobInvoiceForm from "./JobInvoiceForm";
+import { router } from "../../../app/router/routes";
 
 export default observer(function CreateJobInvoice() {
     const { jobId } = useParams<string>();
@@ -50,7 +50,7 @@ export default observer(function CreateJobInvoice() {
     }
 
     function handleFormSubmit(invoice: JobInvoiceFormValues) {
-        if (jobId) createInvoice(invoice, jobId).then(() => history.push(`/control-panel`));
+        if (jobId) createInvoice(invoice, jobId).then(() => router.navigate(`/control-panel`));
     }
 
     const validation = () => {

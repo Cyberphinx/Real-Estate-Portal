@@ -1,12 +1,11 @@
 .life-cycle-tag {
     position: absolute;
     right: 0px;
-    font-size: 12px;
+    font-size: 0.8rem;
     z-index: 10;
-    padding: 3px 6px;
-    /* border: 1px solid black; */
-    border-radius: 3px;
+    padding: 3px 0.8rem;
+    border: 1px solid black;
+    border-radius: 0.8rem;
     font-weight: bold;
-    background-color: #FFED00;
     color: #000;
   }

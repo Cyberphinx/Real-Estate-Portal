@@ -23,7 +23,7 @@ export interface Company {
     isMain: boolean;
     lastMofidied: Date;
     legalName: string;
-    listings: Stock[];
+    listingsCount: number;
     redressScheme: string;
     reviews: CompanyReview[];
     serviceLocations: string;
@@ -57,7 +57,7 @@ export class CompanyFormValues {
     isMain: boolean =  false;
     lastModified: Date = new Date();
     legalName: string = "";
-    listings?: Stock[];
+    listingsCount?: number;
     redressScheme?: string = '';
     reviews?: CompanyReview[];
     serviceLocations?: string;
@@ -85,7 +85,7 @@ export class CompanyFormValues {
             this.isMain = company.isMain;
             this.lastModified = company.lastModified;
             this.legalName = company.legalName;
-            this.listings = company.listings;
+            this.listingsCount = company.listingsCount;
             this.redressScheme = company.redressScheme;
             this.reviews = company.reviews;
             this.serviceLocations = company.serviceLocations;

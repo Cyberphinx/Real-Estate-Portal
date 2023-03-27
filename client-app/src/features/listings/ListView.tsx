@@ -44,7 +44,7 @@ export default observer(function ListView({ clusters, supercluster }: Props) {
     }, [clusters, setCombinedListing]);
 
     return (
-        <div className="listings-container" >
+        <div className="listings-container" id='listing-container' >
             <div className='listing-counter-container'>
                 <ListingCounter loadMore={handleGetNext} />
             </div>
@@ -68,15 +68,19 @@ export default observer(function ListView({ clusters, supercluster }: Props) {
                                 onClick={handleGetNext}
                                 disabled={(pagination?.totalPages === pagination?.currentPage) || pagination!.totalItems < 1}
                             >
-                                <span className={"button-" + (loadingNext ? "loading" : "text")} style={{ paddingBottom: "20px" }}>Load {pagination?.itemsPerPage} More</span>
+                                <span
+                                    className={"button-" + (loadingNext ? "loading" : "text")}
+                                    style={{ paddingBottom: "20px" }}>
+                                    Load {pagination?.itemsPerPage} More
+                                </span>
                             </button>
                         </section>
                     </div>
                 )}
             </div>
-            <div style={{padding:"1rem"}}>
+            <div style={{ padding: "1rem" }}>
                 <p style={{ textAlign: "center", fontSize: "12px" }}>Contact us: info@sanctum.co.uk</p>
-                <p style={{textAlign:"center", fontSize:"12px"}}>© {new Date().getFullYear() } Cerberus Cybernetics Ltd, All Rights Reserved.</p>
+                <p style={{ textAlign: "center", fontSize: "12px" }}>© {new Date().getFullYear()} Cerberus Cybernetics Ltd, All Rights Reserved.</p>
             </div>
         </div>
     );

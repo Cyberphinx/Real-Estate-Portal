@@ -36,7 +36,7 @@ export default observer(function CompanyDetailsPage() {
                         <div className="listing-descriptions-container">
                             {company.companyDescriptions.map((description: CompanyDescription) => (
                                 <article key={description.id}>
-                                    <h1>{description.heading}</h1>
+                                    <p>{description.heading}</p>
                                     <p>{description.text}</p>
                                 </article>
                             ))}
@@ -45,9 +45,9 @@ export default observer(function CompanyDetailsPage() {
 
                     <section>
                         <div className="listing-contacts-container">
-                            <h1>Phone</h1>
+                            <p>Phone</p>
                             <p>{company.companyContacts.phone}</p>
-                            <h1>Email</h1>
+                            <p>Email</p>
                             <p>{company.companyContacts.email}</p>
                         </div>
                     </section>

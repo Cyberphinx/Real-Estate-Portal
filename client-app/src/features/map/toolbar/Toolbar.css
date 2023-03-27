@@ -4,11 +4,11 @@
   border-bottom: 1px solid #aaaeb3;
   border-left: 1px solid black;
   border-radius: 5px 5px 0px 0px;
-  height: 27px;
-  width: 35rem;
+  height: 30px;
+  width: calc(((100vw * 0.618) * 0.382) + 1rem);
   position: fixed;
-  top: 140px;
-  left: calc((100vw / 3) + 20px);
+  top: 90px;
+  left: calc((100vw * 0.382) + 10px);
   color: #000;
   background: #dcdcdc;
   margin: auto;

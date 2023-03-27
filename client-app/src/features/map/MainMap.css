@@ -3,7 +3,7 @@
   top: 20px;
   right: 0px;
   height: calc(100vh - 20px);
-  width: calc((100vw / 3) * 2);
+  width: calc(100vw * 0.618);
   /* width: 100vw; */
   overflow: hidden;
   background-color: #fff;
@@ -29,6 +29,21 @@
 }
 .leaflet-top, .leaflet-bottom {z-index: 2 !important}
 
+
 .leaflet-control-geosearch {
   top: 20px;
+  width: 500px;
+}
+
+.leaflet-geosearch-bar form {
+  font-size: 0.95rem;
+}
+
+.leaflet-geosearch-bar form input {
+  font-size: 0.95rem;
+}
+
+.leaflet-control-geosearch button.reset {
+  font-size: 1.5rem;
+  padding-right: 1rem;
 }

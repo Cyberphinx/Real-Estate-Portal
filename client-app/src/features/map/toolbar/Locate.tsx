@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import React, { useCallback, useEffect } from "react";
+import React from "react";
 import { useMap } from "react-leaflet";
 import { Listing } from "../../../app/model/ListingAggregate/Listing";
 import { useStore } from "../../../app/stores/store";

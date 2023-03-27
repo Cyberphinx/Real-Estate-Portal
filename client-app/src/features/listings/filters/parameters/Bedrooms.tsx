@@ -31,7 +31,6 @@ export default observer(function Bedrooms({ onChange }: Props) {
     }
 
     return (
-        // <h1 style={{color:"red"}}>BEDROOMS</h1>
         <Formik
             initialValues={{ minBeds: "", maxBeds: "" }}
             onSubmit={(values) => {

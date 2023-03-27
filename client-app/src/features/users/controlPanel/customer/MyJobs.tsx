@@ -3,14 +3,12 @@ import "./MyJobs.css";
 import { UserJobDto } from "../../../../app/model/Profile";
 import { useStore } from "../../../../app/stores/store";
 import { Link } from "react-router-dom";
-import { JobLifeCycle } from "../../../../app/model/Job";
 import LoadingComponent from "../../../../app/common/loading/LoadingComponent";
 import { observer } from "mobx-react-lite";
 
 export default observer(function MyJobs() {
-    const { profileStore, jobStore, userStore } = useStore();
-    const { profile, userJobs, loadUserJobs, loadingUserJobs } = profileStore;
-    const { selectJob, selectedJob, jobs } = jobStore;
+    const { profileStore, userStore } = useStore();
+    const { userJobs, loadUserJobs, loadingUserJobs } = profileStore;
     const { user, isLoggedIn } = userStore;
 
     const [searchTerm, setSearchTerm] = useState<string>("_");

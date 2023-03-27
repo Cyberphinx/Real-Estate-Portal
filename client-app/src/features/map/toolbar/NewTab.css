@@ -1,6 +1,6 @@
 .new-tab-button {
   position: relative;
-  top: 4px;
+  top: 5px;
   right: 5px;
   background: none;
   border: none;
@@ -14,7 +14,7 @@
 }
 
 .new-tab-icon {
-  width: 16px;
+  width: 18px;
   object-fit: contain;
 }
 

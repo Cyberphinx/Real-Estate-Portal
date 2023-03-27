@@ -58,20 +58,21 @@ export default observer(function ListingDetails({ listing }: Props) {
                 <p className="listing-details-text">Business for sale: {listing.businessForSale}</p>
                 <p className="listing-details-text">Commercial use class: {listing.commercialUseClass}</p>
             </article> */}
-        
-        <div className='listing-detailed-info-container'>
-                {listing?.featureList && listing?.featureList.map((feature: string, index: number) => (
-                    <div key={index} style={{marginBottom:'2rem'}}>
-                        <article>
-                            <b className="listing-details-title">{feature}</b>
-                        </article>
-                    </div>
-                ))}
-            </div>
+
+            {listing?.featureList &&
+                <div className='listing-detailed-info-container'>
+                    {listing?.featureList.map((feature: string, index: number) => (
+                        <div key={index} style={{ marginBottom: '2rem' }}>
+                            <article>
+                                <b className="listing-details-title">{feature}</b>
+                            </article>
+                        </div>
+                    ))}
+                </div>}
 
             <div className='listing-detailed-info-container'>
                 {listing?.detailedDescriptions.map((description: DetailedDescription) => (
-                    <div key={description.id} style={{marginBottom:'2rem'}}>
+                    <div key={description.id} style={{ marginBottom: '2rem' }}>
                         <article>
                             <b className="listing-details-title">{description.heading}</b>
                             <span className="listing-details-dimensions">

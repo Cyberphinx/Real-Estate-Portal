@@ -2,8 +2,8 @@
   /* border: 1px solid grey; */
   position: absolute;
   z-index: 401;
-  right: calc((100vw / 3) - 90px);
-  top: 75px;
+  right: calc(((100vw * 0.618) / 2) - 90px);
+  top: 70px;
 }
 
 .loading-markers {
@@ -21,11 +21,11 @@
 }
 
 .search-map {
-  min-width: 160px;
+  min-height: 2.5rem;
   /* box-sizing: border-box; */
   border: 2px solid rgba(0, 0, 0, 0.2);
   border-radius: 5px;
-  font-size: 14px;
+  font-size: 1rem;
   background: #fff;
   cursor: pointer;
   position: relative;
@@ -48,7 +48,7 @@
 .refresh-icon{
   background: none;
   border-radius: 50%;
-  width: 20px;
+  width: 1.5rem;
   padding: 5px;
 }
 .refresh-text{

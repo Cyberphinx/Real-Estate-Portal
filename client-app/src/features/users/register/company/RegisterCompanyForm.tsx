@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import '.././SignUp.css';
 import { observer } from "mobx-react-lite";
-import { AccountType } from '../../../../app/model/User';
 
 interface Props {
     isValid: boolean;
@@ -11,12 +10,6 @@ interface Props {
 }
 
 export default observer(function RegisterCompanyForm({setFieldValue}: Props) {
-
-    useEffect(() => {
-        setFieldValue("country", "United Kingdom");
-        setFieldValue("language", "English");
-        setFieldValue("accountType", AccountType.Company);
-    }, [])
 
     return (
         <div>

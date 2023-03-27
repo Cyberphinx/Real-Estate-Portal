@@ -100,9 +100,9 @@ export default observer(function AgentListings() {
 
             <div className="view-listings__toolbar">
                 {loadingCompany ? null
-                    : <h1 className="view-listings__title">
+                    : <p className="view-listings__title">
                         <span style={{ color: '#6807F9', paddingLeft: '1rem' }}>{totalCount} listings</span>
-                    </h1>}
+                    </p>}
 
                 <button className="view-listings__create-button">
                     <Link

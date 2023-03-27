@@ -12,7 +12,7 @@ export default observer(function ServerError() {
         <div>
             <Nav />
             <div className="server-error-container">
-                <h1>500 Server Error</h1>
+                <p>500 Server Error</p>
                 <h5 style={{fontSize: "16px"}}>{commonStore.error?.message}</h5>
                 <div>{commonStore.error?.details &&
                     <div style={{paddingBottom:'2rem'}}>

@@ -9,15 +9,6 @@ export interface ChangeLog {
     description: string;
 }
 
-export interface ListingMediaDto {
-    id: string;
-    index: number;
-    url: string;
-    type: MediaType;
-    caption: string;
-    isMain: boolean;
-}
-
 export interface DetailedDescription {
     id: string;
     heading: string;
@@ -29,9 +20,30 @@ export interface DetailedDescription {
     listingId: string;
 }
 
+export interface KeyContact {
+    id: string
+    agency: string
+    name: string
+    phone: string
+    mobile: any
+    email: string
+    address: string
+}
+
 export interface ListingLocation extends Location {
     id: string;
 }
+
+export interface ListingMediaDto {
+    id: string;
+    index: number;
+    url: string;
+    type: MediaType;
+    caption: string;
+    isMain: boolean;
+}
+
+
 
 export interface Owner {
     id: string;

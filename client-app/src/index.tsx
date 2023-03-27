@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
+import { RouterProvider, unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
 import { store, StoreContext } from './app/stores/store';
 import {createBrowserHistory} from 'history';
-import ScrollToTop from './app/layout/ScrollToTop';
+import { router } from './app/router/routes';
 // import 'react-calendar/dist/Calendar.css';
 
 export const history = createBrowserHistory();
@@ -16,9 +16,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <StoreContext.Provider value={store}>
-    <HistoryRouter history={history}>
-        <App />
-    </HistoryRouter>
+    <RouterProvider router={router} />
   </StoreContext.Provider>
 );
 

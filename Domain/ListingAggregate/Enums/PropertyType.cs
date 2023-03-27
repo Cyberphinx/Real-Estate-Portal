@@ -16,6 +16,7 @@ namespace Domain.ListingAggregate.Enums
         Maisonette,
         Bungalow,
         TerracedBungalow,
+        EndOfTerraceBungalow,
         SemiDetachedBungalow,
         DetachedBungalow,
         MobileHome,

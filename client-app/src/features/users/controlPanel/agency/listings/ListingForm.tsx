@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useStore } from "../../../../../app/stores/store";
 import './ListingForm.css';
-import { history } from '../../../../../index';
 import * as Yup from 'yup';
 import { Form, Formik } from "formik";
 import { ListingFormValues } from "../../../../../app/model/ListingAggregate/Listing";
 import { v4 as uuid } from 'uuid';
-import { customAlphabet, nanoid } from "nanoid";
+import { customAlphabet } from "nanoid";
 import SwitchBoard from "./listingForms/SwitchBoard";
 import ListingFormStepper from "./listingForms/ListingFormStepper";
 import { observer } from "mobx-react-lite";
 import { useParams } from "react-router-dom";
 import LoadingComponent from "../../../../../app/common/loading/LoadingComponent";
 import Nav from "../../../../../app/layout/Nav";
+import { router } from "../../../../../app/router/routes";
 
 
 export default observer(function ListingForm() {
@@ -56,11 +56,11 @@ export default observer(function ListingForm() {
             };
             // setCurrentListing(newListing);
             setListingFormStep(3);
-            createListing(newListing.companyId, newListing).then(() => history.push(`/add-listing-media/${newListing.id}`));
+            createListing(newListing.companyId, newListing).then(() => router.navigate(`/add-listing-media/${newListing.id}`));
         } else {
             // setCurrentListing(listing);
             setListingFormStep(3);
-            updateListing(listing).then(() => history.push(`/add-listing-media/${listing.id}`));
+            updateListing(listing).then(() => router.navigate(`/add-listing-media/${listing.id}`));
         }
     }
 

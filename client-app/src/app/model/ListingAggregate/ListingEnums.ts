@@ -18,7 +18,6 @@ export enum CookerType {
 }
 
 export enum CouncilTaxBand {
-    none,
     a,
     b,
     c,
@@ -27,7 +26,8 @@ export enum CouncilTaxBand {
     f,
     g,
     h,
-    i
+    i,
+    notSpecified
 }
 
 export enum DecorativeCondition {
@@ -353,48 +353,6 @@ export function PropertyTypesArray() {
     return items;
 }
 
-export const propertyType = (listing: Listing) => {
-    switch (listing.propertyType.toString()) {
-        case "BarnConversion":
-            return "Barn conversion"
-        case "Detached":
-            return "Detached"
-        case "Flat":
-            return "Flat"
-        case "ParkHome":
-            return "Park home"
-        case "Terraced":
-            return "Terraced"
-        case "SemiDetached":
-            return "Semi-detached"
-        case "Land":
-            return "Land"
-        default:
-            return "Property"
-    }
-}
-
-export const propertyTypeLong = (listing: Listing) => {
-    switch (listing.propertyType.toString()) {
-        case "BarnConversion":
-            return "barn conversion"
-        case "Detached":
-            return "detached house"
-        case "Flat":
-            return "flat/apartment"
-        case "ParkHome":
-            return "park home"
-        case "Terraced":
-            return "terraced house"
-        case "SemiDetached":
-            return "semi-detached house"
-        case "Land":
-            return "land / farm"
-        default:
-            return "property"
-    }
-}
-
 export enum RentalTerm {
     fixedTerm,
     longTerm,
@@ -408,7 +366,7 @@ export enum Tenure {
     shareOfFreehold,
     commonhold,
     sharedOwnership,
-    other
+    notSpecified
 }
 
 export enum TransactionType {

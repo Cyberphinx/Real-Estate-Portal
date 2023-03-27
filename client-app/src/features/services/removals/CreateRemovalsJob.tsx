@@ -7,11 +7,11 @@ import { observer } from "mobx-react-lite";
 import { JobFormValues, JobLifeCycle } from "../../../app/model/Job";
 import { useParams } from "react-router-dom";
 import { useStore } from "../../../app/stores/store";
-import { history } from "../../../index";
 import { Form, Formik } from "formik";
 import Nav from "../../../app/layout/Nav";
 import LoadingComponent from "../../../app/common/loading/LoadingComponent";
 import RemovalsJobForm from "./RemovalsJobForm";
+import { router } from "../../../app/router/routes";
 
 
 export default observer(function CreateRemovalsJob() {
@@ -45,9 +45,9 @@ export default observer(function CreateRemovalsJob() {
                 jobLifeCycle: JobLifeCycle.Open,
                 title: `Relocation from ${job.jobLocations![0].townOrCity} ${job.jobLocations![0].postalCode} to ${job.jobLocations![1].townOrCity} ${job.jobLocations![1].postalCode}`
             };
-            createJob(newJob).then(() => history.push(`/removals-job-confirmation/${newJob.id}`));
+            createJob(newJob).then(() => router.navigate(`/removals-job-confirmation/${newJob.id}`));
         } else {
-            updateJob(job).then(() => history.push(`/removals-job-confirmation/${job.id}`));
+            updateJob(job).then(() => router.navigate(`/removals-job-confirmation/${job.id}`));
         }
     }
 
@@ -124,10 +124,10 @@ export default observer(function CreateRemovalsJob() {
                                 :
                                 <div className="removals-form__contents">
                                     <div className="listing-form__toolbar">
-                                        {id ? <h1 style={{ paddingTop: '2rem' }}>Edit moving company booking:
+                                        {id ? <p style={{ paddingTop: '2rem' }}>Edit moving company booking:
                                             <span style={{ fontWeight: 'normal', color: '#6807F9', paddingLeft: '1rem' }}>{values.jobReference}</span>
-                                        </h1>
-                                            : <h1 style={{ paddingTop: '2rem' }}>Book moving company</h1>}
+                                        </p>
+                                            : <p style={{ paddingTop: '2rem' }}>Book moving company</p>}
                                     </div>
                                     <RemovalsJobForm
                                         values={values}

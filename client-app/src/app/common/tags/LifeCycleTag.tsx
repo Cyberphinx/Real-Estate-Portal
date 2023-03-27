@@ -11,27 +11,27 @@ export default function LifeCycleTag({ listing }: Props) {
     function LifeCycleColor(lifeCycleText: string) {
         switch (lifeCycleText) {
             case "ForSale":
-                return { backgroundColor: '#38E54D' }
+                return { display: 'none' }
             case "ForRent":
-                return { backgroundColor: '#38E54D' }
+                return { display: 'none' }
             case "UnderOffer":
-                return { backgroundColor: '#FFED00' }
+                return { backgroundColor: '#dcdcdc', color:'#505050', border:'1px solid white' }
             case "ReferencesPending":
-                return { backgroundColor: '#FFED00' }
+                return { backgroundColor: '#dcdcdc', color:'#505050', border:'1px solid white' }
             case "SoldSubjectToContract":
-                return { backgroundColor: '#FFED00' }
-            case "Sold":
-                return { backgroundColor: '#E90064' }
+                return { backgroundColor: '#dcdcdc', color:'#505050', border:'1px solid white' }
             case "LetAgreed":
-                return { backgroundColor: '#FF5F00' }
+                return { backgroundColor: '#dcdcdc', color:'#505050', border:'1px solid white' }
+            case "Sold":
+                return { backgroundColor: 'black', color:'white' }
             case "Let":
-                return { backgroundColor: '#E90064' }
+                return { backgroundColor: 'black', color:'white' }
             case "OnHold":
-                return { backgroundColor: '#DCDCDC' }
+                return { backgroundColor: '#dcdcdc' }
             case "OffMarket":
-                return { backgroundColor: '#DCDCDC' }
+                return { backgroundColor: '#dcdcdc' }
             case "Other":
-                return { backgroundColor: '#DCDCDC' }
+                return { backgroundColor: '#dcdcdc' }
             default:
                 return { backgroundColor: '#FFED00' }
         }

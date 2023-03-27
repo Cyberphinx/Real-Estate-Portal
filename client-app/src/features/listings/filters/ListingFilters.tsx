@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useDetectOutsideClick } from "../../../app/hooks/useDetectOutsideClick";
 import { useStore } from "../../../app/stores/store";
 import './ListingFilters.css';
@@ -7,13 +7,11 @@ import Price from "./parameters/Price";
 import PropertyTypes from "./parameters/PropertyTypes";
 import Bedrooms from "./parameters/Bedrooms";
 import OrderBy from "./parameters/OrderBy";
-import { Link } from "react-router-dom";
-import { Job } from "../../../app/model/Job";
-import { PropertyTypesArray } from "../../../app/model/ListingAggregate/ListingEnums";
+import { useDebounce } from "../../../app/hooks/useDebounce";
 
 export default observer(function ListingFilters() {
     const { listingStore, featureStore } = useStore();
-    const { predicate, setPredicate } = listingStore;
+    const { predicate, setPredicate, loadListingByRef } = listingStore;
     const { isLocked, setLocked } = featureStore;
 
     const bedsRef = useRef(null);
@@ -41,10 +39,8 @@ export default observer(function ListingFilters() {
     const [sortingActive, setSortingActive] = useDetectOutsideClick(sortingRef, false);
     const toggleSorting = () => setSortingActive(!sortingActive);
 
+
     return (
-        //     <section className="listing-filters-two">
-        //         <PropertyTypes items={items} checked={predicate.get("propertyTypes")} onChange={(items: string[]) => setPredicate("propertyTypes", items)} />
-        //     </section>
         <div className="filters-container">
             <ul className="filters-buttons-container">
                 <li className="filters-item__channel" >
@@ -104,26 +100,17 @@ export default observer(function ListingFilters() {
                         />}
                     </div>
                 </li>
-                <li className="filters-item" >
-                    <button className="filters-button">Filters</button>
-                </li>
-
-                {/* {jobs.map((job: Job, index: number) => (
-                    <li key={job.id}>
-                        <button><Link to={`/job/${job?.id}`} target="_blank">Job{index}</Link></button>
-                    </li>
-                ))} */}
 
                 <li className="filters-item-right">
                     <button className="lock-button" onClick={() => setLocked()}>
                         {isLocked === true ?
                             <div>
                                 <img className="lock-icon" src="/assets/static.svg" alt="lock" />
-                                <span className="lock-tooltip">Static list </span>
+                                <span className="lock-tooltip">Update list as I move the map</span>
                             </div>
                             : <div>
                                 <img className="lock-icon" src="/assets/dynamic.svg" alt="lock" />
-                                <span className="lock-tooltip">Dynamic list</span>
+                                <span className="lock-tooltip">Fixed list</span>
                             </div>}
                     </button>
                 </li>

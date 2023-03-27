@@ -17,7 +17,7 @@ export default observer(function Removalist({ user }: Props) {
     const { jobs, loadRemovalsJobs, allJobs, loadAllRemovalsJobs } = removalistJobStore;
     const { isLoggedIn } = userStore;
     const { loadEvents } = calendarStore;
-    const { loadInvoices, loadingInvoices, invoices } = jobInvoiceStore;
+    // const { loadInvoices, loadingInvoices, invoices } = jobInvoiceStore;
 
     useEffect(() => {
         if (isLoggedIn && user && user.accountType.toString() === "Removalist") {

@@ -20,7 +20,7 @@ export default function CompanyProfile({ company, user, setEditMode }: Props) {
                         {user?.role.includes("Company") && company?.username === user.username &&
                             <button className="edit-company-button" onClick={() => setEditMode(true)}>Edit Profile</button>
                         }
-                        <h1>{company?.displayName}</h1>
+                        <p>{company?.displayName}</p>
                         <p><b>{company?.summaryDescription}</b></p>
                     </div>
                 </div>

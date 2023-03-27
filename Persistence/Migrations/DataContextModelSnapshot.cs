@@ -21,7 +21,7 @@ namespace Persistence.Migrations
                 .HasAnnotation("ProductVersion", "7.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "property_type", new[] { "barn_conversion", "block_of_flats", "bungalow", "business_park", "chalet", "chateau", "cottage", "country_house", "detached", "detached_bungalow", "end_terrace", "equestrian", "farm", "farmhouse", "finca", "flat", "hotel", "houseboat", "industrial", "land", "leisure", "light_industrial", "link_detached", "lodge", "longere", "maisonette", "mews", "office", "other", "park_home", "parking", "pub_bar", "restaurant", "retail", "riad", "semi_detached", "semi_detached_bungalow", "studio", "terraced", "terraced_bungalow", "town_house", "villa", "warehouse" });
+            NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "property_type", new[] { "not_specified", "terraced_house", "end_of_terrace_house", "semi_detached_house", "detached_house", "mews", "cluster_house", "ground_flat", "flat", "studio", "ground_maisonette", "maisonette", "bungalow", "terraced_bungalow", "end_of_terrace_bungalow", "semi_detached_bungalow", "detached_bungalow", "mobile_home", "commercial_property", "land", "link_detached_house", "town_house", "cottage", "chalet", "character_property", "house", "villa", "apartment", "penthouse", "finca", "barn_conversion", "serviced_apartments", "parking", "sheltered_housing", "retirement_property", "house_share", "flat_share", "park_home", "garages", "farm_house", "equestrian_facility", "duplex", "triplex", "longere", "gite", "barn", "unconverted_barn", "trulli", "mill", "commercial_mill", "ruins", "restaurant", "cafe", "castle", "village_house", "cave_house", "cortijo", "farm_land", "plot", "country_house", "stone_house", "caravan", "lodge", "log_cabin", "manor_house", "stately_home", "off_plan", "semi_detached_villa", "detached_villa", "bar_night_club", "shop", "riad", "house_boat", "hotel_room", "block_of_apartments", "private_halls", "office", "business_park", "serviced_office", "retail_property_high_street", "retail_property_out_of_town", "convenience_store", "garage", "hairdresser_barber_shop", "petrol_station", "post_office", "pub", "workshop_and_retail_space", "distribution_warehouse", "factory", "heavy_industrial", "industrial_park", "light_industrial", "storage", "showroom", "warehouse", "commercial_land", "commercial_development", "industrial_development", "residential_development", "data_centre", "farm", "healthcare_facility", "marine_property", "mixed_use", "research_and_development_facility", "science_park", "guest_house", "hospitality", "leisure_facility", "takeaway", "childcare_facility", "smallholding", "place_of_worship", "trade_counter", "coach_house" });
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("Domain.AppUserAggregate.AppUser", b =>
@@ -633,6 +633,26 @@ namespace Persistence.Migrations
                     b.ToTable("Insurance");
                 });
 
+            modelBuilder.Entity("Domain.Injection", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("AddedOn")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Agency")
+                        .HasColumnType("text");
+
+                    b.Property<string>("SpiderTag")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Injections");
+                });
+
             modelBuilder.Entity("Domain.JobAggregate.Job", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1116,6 +1136,9 @@ namespace Persistence.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<string>("SourceUri")
+                        .HasColumnType("text");
+
+                    b.Property<string>("SpiderTag")
                         .HasColumnType("text");
 
                     b.Property<string>("SummaryDescription")

@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import '.././SignUp.css';
 import { observer } from "mobx-react-lite";
 import MyTextInput from '../../../../app/common/form/MyTextInput';
-import { AccountType } from '../../../../app/model/User';
 
 interface Props {
     isValid: boolean;

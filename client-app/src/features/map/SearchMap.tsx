@@ -1,15 +1,13 @@
 import { observer } from "mobx-react-lite";
-import React, { useState } from "react";
+import React from "react";
 import './SearchMap.css';
 import { useStore } from "../../app/stores/store";
-import { Form, Formik } from "formik";
 import LoadingComponent from "../../app/common/loading/LoadingComponent";
 import { useMap } from "react-leaflet";
 
 export default observer(function SearchMap() {
-    const { mapStore, listingStore, companyStore } = useStore();
+    const { mapStore, listingStore } = useStore();
     const { bounds } = mapStore;
-    const { loadingCompanies } = companyStore;
     const { setPredicate, loadingInitial } = listingStore
 
     const map = useMap();

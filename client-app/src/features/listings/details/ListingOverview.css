@@ -10,36 +10,45 @@
 }
 
 .details-image {
-  height: calc(100vh / 2);
+  height: calc(100vh * 0.382);
   width: 100%;
   object-fit: cover;
 }
+.details-image__container:hover .image-numbering {
+  visibility: visible;
+}
+.details-image__container:hover .right-arrow {
+  visibility: visible;
+}
+.details-image__container:hover .left-arrow {
+  visibility: visible;
+}
 .image-numbering {
+  visibility: hidden;
   position: absolute;
   bottom: 1rem;
-  left: 14rem;
+  min-width: 100px;
+  left: calc((((100vw * 0.618) * 0.382) + 1rem) / 2 - 62px);
   font-size: 1rem;
-  color: #000;
-  background-color: #fff;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.3);
   border: none;
-  border-radius: 3px;
-  padding: 2px 5px 3px 5px;
+  text-align: center;
+  padding: 3px 12px;
 }
 .details-carousel {
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
   white-space: nowrap;
   display: grid;
   grid-gap: 5px;
   position: relative;
 }
-.details-carousel:hover .right-arrow-thumbnails {
-  visibility: visible;
-}
-.details-carousel:hover .left-arrow-thumbnails {
+.details-carousel:hover .thumbnail-numbering {
   visibility: visible;
 }
 .details-thumbnail {
-  height: calc(100vh / 9);
+  height: calc((100vh * 0.382) * 0.382);
   width: 100%;
   object-fit: cover;
   padding: 0px 5px 0px 0px;
@@ -49,23 +58,24 @@
   cursor: pointer;
 }
 .thumbnail-numbering {
+  visibility: hidden;
   position: absolute;
-  top: 3px;
-  left: 3px;
-  font-size: 16px;
-  color: #000;
-  background: #fff;
+  width: calc(((100vh * 0.382) * 0.382) + 11px);
+  left: 0;
+  bottom: 4px;
+  font-size: 1rem;
+  color: white;
+  background: rgba(0, 0, 0, 0.3);
   border: none;
-  border-radius: 3px;
-  padding: 0px 3px 2px 3px;
+  padding: 0px 3px 2px 6px;
 }
 .details-thumbnail:hover + span {
   cursor: pointer;
-  color: #000;
-  background: #ffc300;
+  background: rgba(0, 0, 0, 0.6);
 }
 
 .right-arrow {
+  visibility: hidden;
   position: absolute;
   top: 50%;
   right: 3px;
@@ -90,6 +100,7 @@
 }
 
 .left-arrow {
+  visibility: hidden;
   position: absolute;
   top: 50%;
   left: 3px;

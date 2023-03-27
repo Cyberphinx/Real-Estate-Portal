@@ -41,9 +41,9 @@ export default observer(function CreateRemovalsJob() {
                     <div className="removals-form__contents">
                         <div style={{ padding: '5rem 2.5rem 0rem 2.5rem', textAlign: 'center' }}>
                             <img src="https://res.cloudinary.com/dwcsdudyn/image/upload/v1673305279/Icons/greentick_ubm9ce.svg" alt="succeeded" style={{ width: "5rem" }} />
-                            <h1 style={{ paddingTop: '2rem' }}>
+                            <p style={{ paddingTop: '2rem' }}>
                                 Booking received!
-                            </h1>
+                            </p>
 
                             <p style={{ fontSize: '1.25rem', paddingTop: '2.5rem' }}>Thank you for your booking, {name}! We'll contact you shortly!</p>
                             <p style={{ fontSize: '1.25rem', paddingTop: '0.5rem' }}>Please check the confirmation email sent to {email}</p>

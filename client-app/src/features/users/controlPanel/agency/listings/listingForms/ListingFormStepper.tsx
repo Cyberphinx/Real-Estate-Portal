@@ -20,7 +20,7 @@ export default observer(function ListingFormStepper({ step, setStep, values, dir
                     <button
                         className='listingform-stepper__button'
                         type="button"
-                        disabled={!values?.listingReference || step == 0}
+                        disabled={!values?.listingReference || step === 0}
                         style={values?.listingReference && step !== 0 ? { cursor: 'pointer' } : { cursor: 'default' }}
                         onClick={() => {
                             if (values?.listingReference) setStep(0);
@@ -44,7 +44,7 @@ export default observer(function ListingFormStepper({ step, setStep, values, dir
                     <button
                         className='listingform-stepper__button'
                         type="button"
-                        disabled={!values?.listingReference || step == 1}
+                        disabled={!values?.listingReference || step === 1}
                         style={values?.listingReference && step !== 1 ? { cursor: 'pointer' } : { cursor: 'default' }}
                         onClick={() => {
                             if (values?.listingReference) setStep(1);
@@ -68,7 +68,7 @@ export default observer(function ListingFormStepper({ step, setStep, values, dir
                     <button
                         className='listingform-stepper__button'
                         type="button"
-                        disabled={!values?.listingReference || step == 2}
+                        disabled={!values?.listingReference || step === 2}
                         style={values?.listingReference && step !== 2 ? { cursor: 'pointer' } : { cursor: 'default' }}
                         onClick={() => {
                             if (values?.listingReference) setStep(2);
@@ -93,7 +93,7 @@ export default observer(function ListingFormStepper({ step, setStep, values, dir
                         id='listingform-stepper__media-button'
                         className='listingform-stepper__button'
                         type="button"
-                        disabled={!values?.listingReference || step == 3 || dirty}
+                        disabled={!values?.listingReference || step === 3 || dirty}
                         style={values?.listingReference && step !== 3 && !dirty ? { cursor: 'pointer' } : { cursor: 'default' }}
                         onClick={() => {
                             if (values?.listingReference) setStep(3);
@@ -101,7 +101,7 @@ export default observer(function ListingFormStepper({ step, setStep, values, dir
                     >
                         <Link
                             to={`/add-listing-media/${values?.id}`}
-                            style={!values?.listingReference || step == 3 || dirty ?
+                            style={!values?.listingReference || step === 3 || dirty ?
                                 { color: '#fff', textDecoration: 'none', pointerEvents: 'none' }
                                 : { color: '#fff', textDecoration: 'none' }}
                         >
@@ -121,7 +121,7 @@ export default observer(function ListingFormStepper({ step, setStep, values, dir
                         </Link>
                         <Link
                             to={`/add-listing-media/${values?.id}`}
-                            style={!values?.listingReference || step == 3 || dirty ?
+                            style={!values?.listingReference || step === 3 || dirty ?
                                 { color: '#fff', textDecoration: 'none', pointerEvents: 'none' }
                                 : { color: '#fff', textDecoration: 'none' }}
                         >
@@ -136,7 +136,7 @@ export default observer(function ListingFormStepper({ step, setStep, values, dir
                         id='listingform-stepper__preview-button'
                         className='listingform-stepper__button'
                         type="button"
-                        disabled={!values?.listingReference || step == 4 || dirty}
+                        disabled={!values?.listingReference || step === 4 || dirty}
                         style={values?.listingReference && step !== 4 && !dirty ? { cursor: 'pointer' } : { cursor: 'default' }}
                         onClick={() => {
                             if (values?.listingReference) setStep(4);
@@ -144,7 +144,7 @@ export default observer(function ListingFormStepper({ step, setStep, values, dir
                     >
                         <Link
                             to={`/preview/${values?.id}`}
-                            style={!values?.listingReference || step == 4 || dirty ?
+                            style={!values?.listingReference || step === 4 || dirty ?
                                 { color: '#fff', textDecoration: 'none', pointerEvents: 'none' }
                                 : { color: '#fff', textDecoration: 'none' }}
                         >
@@ -164,7 +164,7 @@ export default observer(function ListingFormStepper({ step, setStep, values, dir
                         </Link>
                         <Link
                             to={`/preview/${values?.id}`}
-                            style={!values?.listingReference || step == 4 || dirty ?
+                            style={!values?.listingReference || step === 4 || dirty ?
                                 { color: '#fff', textDecoration: 'none', pointerEvents: 'none' }
                                 : { color: '#fff', textDecoration: 'none' }}
                         >

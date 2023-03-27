@@ -49,7 +49,14 @@ namespace Application.Core
                 .ForMember(x => x.Title, o => o.MapFrom(s => s.Job.Title));
 
             // Listing Dtos
-            CreateMap<Listing, Listing>(); // this is for editing the listing (map from payload to database entity)
+            // this is for editing the listing (map from payload to database entity)
+            CreateMap<Listing, Listing>() 
+                .ForMember(x => x.ListingMedia, o => o.MapFrom(s => s.ListingMedia.OrderBy(x => x.Index)))
+                .ForMember(x => x.KeyContacts, o => o.MapFrom(s => s.KeyContacts.OrderBy(x => x.Name)))
+                .ForMember(x => x.ChangeLogs, o => o.MapFrom(s => s.ChangeLogs.OrderByDescending(x => x.LastModified)))
+                .ForMember(x => x.DetailedDescriptions, o => o.MapFrom(s => s.DetailedDescriptions.OrderBy(x => x.Index)))
+                .ForMember(x => x.Watchers, o => o.MapFrom(s => s.Watchers.OrderBy(x => x.AddedOn)));
+
             CreateMap<Listing, ListingDto>()
                 .ForMember(x => x.Company, o => o.MapFrom(s => s.Company))
                 .ForMember(x => x.ListingMedia, o => o.MapFrom(s => s.ListingMedia.OrderBy(x => x.Index)))
@@ -67,15 +74,29 @@ namespace Application.Core
                 .ForMember(x => x.Pricing, o => o.MapFrom(s => s.Pricing))
                 .ForMember(x => x.Agency, o => o.MapFrom(s => s.Company.DisplayName));
 
+            CreateMap<ListingMedia, ListingMedia>();
             CreateMap<ListingMedia, ListingMediaDto>();
+
+            CreateMap<DetailedDescription, DetailedDescription>();
             CreateMap<DetailedDescription, DetailedDescriptionDto>()
                 .ForMember(x => x.Area, o => o.MapFrom(s => s.Length * s.Width));
+            
+            CreateMap<ListingLocation, ListingLocation>();
             CreateMap<ListingLocation, ListingLocationDto>();
+
+            CreateMap<Pricing, Pricing>();
             CreateMap<Pricing, PricingDto>();
+
+            CreateMap<ServiceCharge, ServiceCharge>();
             CreateMap<ServiceCharge, ServiceChargeDto>();
+
+            CreateMap<ChangeLog, ChangeLog>();
             CreateMap<ChangeLog, ChangeLogDto>();
+
+            CreateMap<KeyContact, KeyContact>();
             CreateMap<KeyContact, KeyContactDto>();
 
+            CreateMap<ListingWatcher, ListingWatcher>();
             CreateMap<ListingWatcher, WatcherDto>()
                 .ForMember(x => x.Username, o => o.MapFrom(s => s.AppUser.UserName))
                 .ForMember(x => x.DisplayName, o => o.MapFrom(s => s.AppUser.DisplayName))
@@ -117,7 +138,7 @@ namespace Application.Core
                 .ForMember(x => x.CompanyDescriptions, o => o.MapFrom(s => s.CompanyDescriptions.OrderBy(x => x.Index)))
                 .ForMember(x => x.Insurances, o => o.MapFrom(s => s.Insurances.OrderBy(x => x.Index)))
                 .ForMember(x => x.Reviews, o => o.MapFrom(s => s.Reviews))
-                .ForMember(x => x.Listings, o => o.MapFrom(s => s.Listings));
+                .ForMember(x => x.ListingsCount, o => o.MapFrom(s => s.Listings.Count()));
 
             CreateMap<Company, UserCompanyDto>()
                 .ForMember(x => x.ListingsCount, o => o.MapFrom(s => s.Listings.Count))

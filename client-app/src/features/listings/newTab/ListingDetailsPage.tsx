@@ -4,12 +4,13 @@ import './ListingDetailsPage.css';
 import { useParams } from "react-router-dom";
 import { useStore } from "../../../app/stores/store";
 import LoadingComponent from "../../../app/common/loading/LoadingComponent";
-import { ListingMediaDto, DetailedDescription } from "../../../app/model/ListingAggregate/ListingObjects";
-import { propertyTypeLong, rentFrequency } from "../../../app/model/ListingAggregate/ListingEnums";
+import { ListingMediaDto, DetailedDescription, KeyContact } from "../../../app/model/ListingAggregate/ListingObjects";
+import { rentFrequency } from "../../../app/model/ListingAggregate/ListingEnums";
 import { Listing } from "../../../app/model/ListingAggregate/Listing";
 import Nav from "../../../app/layout/Nav";
 import priceFormatter from "../../../app/common/PriceFormatter";
 import ListingMediaModal from "./ListingMediaModal";
+import { PascalToNormal } from "../../../app/common/HelperFunctions";
 
 export default observer(function ListingDetailsPage() {
     const { id } = useParams<string>();
@@ -43,17 +44,39 @@ export default observer(function ListingDetailsPage() {
             <div className="listing-page__container">
                 <section className="listing-page__section-one">
                     <div>
-                        <span style={{ fontSize: "2rem", fontWeight: "600" }}>{priceFormatter(currentListing!.pricing.price!, currentListing!.pricing.currency)}</span>
+                        <span style={{ fontSize: "1.5rem", fontWeight: "bold" }}>{priceFormatter(currentListing!.pricing.price!, currentListing!.pricing.currency)}</span>
                         {(currentListing?.pricing.transactionType.toString() === "Rent") && <span style={{ fontSize: "16px" }}> {rentFrequency(currentListing!)} </span>}
-                        <p style={{ fontSize: "1rem" }}>{currentListing!.totalBedrooms} beds {currentListing.bathrooms} baths {propertyTypeLong(currentListing!)}</p>
-                        <p style={{ fontSize: "1rem" }}>Address: {currentListing.listingLocation.displayAddress}</p>
+                        <p style={{ fontSize: "1.25rem" }}>
+                            {currentListing!.totalBedrooms} beds 
+                            {currentListing.bathrooms > 0 && <span>{currentListing.bathrooms} baths</span>} {PascalToNormal(currentListing.propertyType.toString())}
+                        </p>
+                        <p style={{ fontSize: "1.25rem" }}>Address:</p>
+                        <h1 style={{ fontSize: "1.25rem", fontWeight: "bold" }}>{currentListing.listingLocation.displayAddress}</h1>
                     </div>
-                    <br />
-                    <p style={{ fontSize: "1.25rem", fontWeight: "600" }}>{currentListing.company.displayName}</p>
-                    <p style={{ fontSize: "1.25rem", fontWeight: "600" }}>Phone</p>
-                    <p>{currentListing.company.companyContacts.phone}</p>
-                    <p style={{ fontSize: "1.25rem", fontWeight: "600" }}>Email</p>
-                    <p>{currentListing.company && address}</p>
+                    <hr />
+                    {currentListing.keyContacts.length > 0 ?
+                        currentListing.keyContacts.map((contact: KeyContact) => (
+                            <div style={{ paddingTop: '1rem' }}>
+                                <h2 style={{ fontSize: "1.25rem", fontWeight: "bold" }}>{currentListing.company.displayName} - {contact.name}</h2>
+                                <p style={{ fontSize: "1rem" }}>Phone:</p>
+                                <p style={{ fontSize: "1rem", fontWeight: "bold" }}>{contact.phone}</p>
+                                {contact.mobile && <>
+                                    <p style={{ fontSize: "1rem" }}>Mobile:</p>
+                                    <p style={{ fontSize: "1rem", fontWeight: "bold" }}>{contact.mobile}</p>
+                                </>}
+                                <p style={{ fontSize: "1rem" }}>Email:</p>
+                                <p style={{ fontSize: "1rem", fontWeight: "bold" }}>{contact.email}</p>
+                                <p style={{ fontSize: "1rem" }}>Address:</p>
+                                <p style={{ fontSize: "1rem", fontWeight: "bold" }}>{contact.address}</p>
+                            </div>
+                        ))
+                        : <>
+                            <h2 style={{ fontSize: "1rem", fontWeight: "bold" }}>{currentListing.company.displayName}</h2>
+                            <p style={{ fontSize: "1rem", fontWeight: "bold" }}>Phone</p>
+                            <p>{currentListing.company.companyContacts.phone}</p>
+                            <p style={{ fontSize: "1rem", fontWeight: "bold" }}>Email</p>
+                            <p>{currentListing.company && address}</p>
+                        </>}
                 </section>
 
                 <section className="listing-page__section-two" id="listing-page__section-two" >
@@ -65,7 +88,6 @@ export default observer(function ListingDetailsPage() {
                 </section>
 
                 <section className="listing-page__section-three">
-
                     {currentListing.detailedDescriptions.map((description: DetailedDescription) => (
                         <div key={description.id}>
                             <article>
@@ -75,12 +97,6 @@ export default observer(function ListingDetailsPage() {
                                         && ` (${description.length} x ${description.width} = ${description.area} sq ${description.unit})`}
                                 </span>
                             </article>
-                            {/* <h1>{description.heading}</h1>
-                                <span>
-                                    {description.area !== 0
-                                        && ` (${description.length} x ${description.width} = ${description.area} sq ${UnitOfLength[description.unit]})`}
-                                </span>
-                                <p>{description.text}</p> */}
                             <div dangerouslySetInnerHTML={{ __html: description.text }} />
                         </div>
                     ))}

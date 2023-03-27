@@ -1,12 +1,11 @@
 import { AccountType } from './../model/User';
-import { history } from '../../index';
 import { runInAction } from 'mobx';
 import { RoleFormValues, RegisterFormValues, LoginFormValues } from '../model/User';
 import { makeAutoObservable } from 'mobx';
 import { User } from "../model/User";
 import agent from '../api/agent';
 import { store } from './store';
-import { Router, Navigate } from 'react-router-dom';
+import { router } from '../router/routes';
 
 export default class UserStore {
     user: User | null = null;
@@ -31,7 +30,7 @@ export default class UserStore {
             store.commonStore.setToken(user.token);
             this.startRefreshTokenTimer(user);
             runInAction(() => this.user = user);
-            history.push("/");
+            router.navigate("/control-panel");
             store.modalStore.closeModal();
             store.featureStore.setToast("show success", "Login successful!");
             setSubmitting(false);
@@ -45,7 +44,7 @@ export default class UserStore {
         store.commonStore.setToken(null);
         window.localStorage.removeItem("jwt");
         this.user = null;
-        history.push("/");
+        router.navigate("/");
         store.featureStore.setToast("show info", "Successfully logged out!");
     }
 
@@ -84,24 +83,24 @@ export default class UserStore {
             switch (creds.accountType) {
                 case AccountType.Customer:
                     store.modalStore.closeModal();
-                    history.push(`/account/registerSuccess?email=${creds.email}`);
+                    router.navigate(`/account/registerSuccess?email=${creds.email}`);
                     store.modalStore.openModal(successModal);
                     store.featureStore.setToast("show success", "Account successfully created!");
                     break;
                 case AccountType.Agent:
                     store.modalStore.closeModal();
-                    history.push(`/account/registerSuccess?email=${creds.email}`);
+                    router.navigate(`/account/registerSuccess?email=${creds.email}`);
                     store.modalStore.openModal(successModal);
                     store.featureStore.setToast("show success", "Account successfully created!");
                     // store.modalStore.openModal(paymentModal);
                     // if (store.modalStore.formType !== 3) store.modalStore.setFormType(3);
                     break;
                 case AccountType.Company:
-                    history.push("/");
+                    router.navigate("/");
                     store.modalStore.closeModal();
                     break;
                 default:
-                    history.push("/");
+                    router.navigate("/");
                     store.modalStore.closeModal();
                     break;
             }
@@ -117,7 +116,7 @@ export default class UserStore {
     assignrole = async (role: RoleFormValues) => {
         try {
             await agent.Account.assignrole(role);
-            history.push("/");
+            router.navigate("/");
         } catch (error) {
             throw error;
         }

@@ -34,8 +34,6 @@ namespace Application.JobApplication
 
             public async Task<Result<PagedList<JobRemovalsDto>>> Handle(Query request, CancellationToken cancellationToken)
             {
-                Console.WriteLine($"The request datetime in UTC time: {request.Params.FinishBy}");
-                Console.WriteLine($"The request datetime in LOCAL time: {request.Params.FinishBy.ToLocalTime()}");
                 // paging, sorting, searching, filtering function
                 // nothing is taking place in the database in below method, we are just building up an expression tree using IQueryable<T>
                 var query = _context.Jobs

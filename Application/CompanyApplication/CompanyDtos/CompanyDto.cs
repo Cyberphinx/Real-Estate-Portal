@@ -25,7 +25,10 @@ namespace Application.CompanyApplication.CompanyDtos
         public bool IsMain { get; set; }
         public DateTime LastModified { get; set; }
         public string LegalName { get; set; }
-        public ICollection<Stock> Listings { get; set; }
+
+        public int ListingsCount { get; set; }
+
+        // public ICollection<Stock> Listings { get; set; }
         public string RedressScheme { get; set; } 
         public ICollection<CompanyReviewDto> Reviews { get; set; }
         public string ServiceLocations { get; set; }

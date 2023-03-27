@@ -7,7 +7,6 @@ using Domain.AppUserAggregate;
 using Domain.JobAggregate;
 using Domain.JobAggregate.Enums;
 using Domain.JobAggregate.Objects;
-using Domain.LocationAggregate;
 using Domain.AppUserAggregate.Enums;
 using Microsoft.AspNetCore.Identity;
 using Domain;
@@ -197,8 +196,8 @@ namespace Persistence
                 {
                     new AppUser
                     {
-                        UserName = "agentsav",
-                        DisplayName = "Agent Sav",
+                        UserName = "agent-one",
+                        DisplayName = "Agent One",
                         Photos = new List<AppUserMedia>
                         {
                             new AppUserMedia
@@ -211,7 +210,7 @@ namespace Persistence
                                 Type = MediaType.Image
                             }
                         },
-                        Email = "agentsav@test.com",
+                        Email = "agent-one@test.com",
                         PhoneNumber = "0207865733",
                         AddedOn = DateTime.UtcNow,
                         Country = "United Kingdom",
@@ -220,8 +219,8 @@ namespace Persistence
                     },
                     new AppUser
                     {
-                        UserName = "agenthunt",
-                        DisplayName = "Agent Hunt",
+                        UserName = "agent-two",
+                        DisplayName = "Agent Two",
                         Photos = new List<AppUserMedia>
                         {
                             new AppUserMedia
@@ -234,7 +233,7 @@ namespace Persistence
                                 Type = MediaType.Image
                             }
                         },
-                        Email = "agenthunt@test.com",
+                        Email = "agent-two@test.com",
                         PhoneNumber = "0207864533",
                         AddedOn = DateTime.UtcNow,
                         Country = "United Kingdom",
@@ -243,8 +242,8 @@ namespace Persistence
                     },
                     new AppUser
                     {
-                        UserName = "agentroger",
-                        DisplayName = "Agent Roger",
+                        UserName = "agent-three",
+                        DisplayName = "Agent Three",
                         Photos = new List<AppUserMedia>
                         {
                             new AppUserMedia
@@ -257,59 +256,13 @@ namespace Persistence
                                 Type = MediaType.Image
                             }
                         },
-                        Email = "agentroger@test.com",
+                        Email = "agent-three@test.com",
                         PhoneNumber = "0203455733",
                         AddedOn = DateTime.UtcNow,
                         Country = "United Kingdom",
                         Language = "English",
                         AccountType = AccountType.Agent
-                    },
-                    new AppUser
-                    {
-                        UserName = "agentpurple",
-                        DisplayName = "Agent Purple",
-                        Photos = new List<AppUserMedia>
-                        {
-                            new AppUserMedia
-                            {
-                                Id = "user_icon_009",
-                                Index = 0,
-                                Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1676849708/Placeholder/UserIcons/Creative-Tail-Animal-penguin_p5een4.svg",
-                                IsMain = true,
-                                Caption = "User profile picture",
-                                Type = MediaType.Image
-                            }
-                        },
-                        Email = "agentpurple@test.com",
-                        PhoneNumber = "0207845633",
-                        AddedOn = DateTime.UtcNow,
-                        Country = "United Kingdom",
-                        Language = "English",
-                        AccountType = AccountType.Agent
-                    },
-                    new AppUser
-                    {
-                        UserName = "agentewe",
-                        DisplayName = "Agent Ewe",
-                        Photos = new List<AppUserMedia>
-                        {
-                            new AppUserMedia
-                            {
-                                Id = "user_icon_010",
-                                Index = 0,
-                                Url = "https://res.cloudinary.com/dwcsdudyn/image/upload/v1676849707/Placeholder/UserIcons/Creative-Tail-Animal-monkey_qh8s9w.svg",
-                                IsMain = true,
-                                Caption = "User profile picture",
-                                Type = MediaType.Image
-                            }
-                        },
-                        Email = "agentewe@test.com",
-                        PhoneNumber = "0207834533",
-                        AddedOn = DateTime.UtcNow,
-                        Country = "United Kingdom",
-                        Language = "English",
-                        AccountType = AccountType.Agent
-                    },
+                    }
                 };
 
                 foreach (var agent in agencyUsers)

@@ -37,6 +37,20 @@ namespace API.Controllers
         }
 
         [AllowAnonymous]
+        [HttpGet("ref/{listingReference}")]
+        public async Task<IActionResult> GetListingByRef(string listingReference)
+        {
+            return HandleResult(await Mediator.Send(new DetailsByRef.Query{ListingReference = listingReference}));
+        }
+
+        [AllowAnonymous]
+        [HttpGet("uri/{sourceUri}")]
+        public async Task<IActionResult> GetListingBySourceUri(string sourceUri)
+        {
+            return HandleResult(await Mediator.Send(new DetailsByUrl.Query{SourceUri = sourceUri}));
+        }
+        
+        [AllowAnonymous]
         [HttpGet("max")]
         public async Task<IActionResult> GetMaxValues()
         {

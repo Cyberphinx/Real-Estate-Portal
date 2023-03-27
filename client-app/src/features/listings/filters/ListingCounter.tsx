@@ -23,12 +23,12 @@ export default observer(function ListingCounter({ loadMore }: Props) {
                     <span>
                         {loadingInitial && !loadingNext
                             ? "Loading properties..."
-                            : `Showing ${combinedListing.length} of ${pagination?.totalItems} results`}
+                            : `Showing ${pagination?.totalItems} results`}
                     </span>
                     : <span>
                         {loadingInitial && !loadingNext
                             ? "Loading properties..."
-                            : `Showing ${currentTotalInView} ${listings.length} of ${pagination?.totalItems} results`}
+                            : `Showing ${listings.length} of ${pagination?.totalItems} results`}
                     </span>
                 }
                 {predicate.has("searchTerm")
@@ -42,7 +42,7 @@ export default observer(function ListingCounter({ loadMore }: Props) {
                     onClick={loadMore}
                     disabled={notPaginated}
                 >
-                    Load 100 More
+                    Load {pagination?.itemsPerPage} More
                 </button>}
             </div>
         </div>

@@ -8,7 +8,7 @@ export default function NotFound() {
         <div>
             <Nav />
             <div className="not-found-container">
-                <h1 className="error-code">404 ERROR</h1>
+                <p className="error-code">404 ERROR</p>
                 <h5 className="error-message">Page Not Found</h5>
                 <p className="error-description">The page you are looking for might have been removed, had its name changed or is temporarily unavailable.</p>
                 <Link className="back-home-button" to={"/"}>BACK TO HOME</Link>

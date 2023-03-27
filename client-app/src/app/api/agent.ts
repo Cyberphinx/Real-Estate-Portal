@@ -5,12 +5,12 @@ import { User, RoleFormValues, LoginFormValues, RegisterFormValues } from './../
 import axios, { AxiosResponse } from "axios";
 import { Company, CompanyFormValues, Stock } from '../model/Company';
 import { store } from '../stores/store';
-import { history } from '../..';
 import { PaginatedResult } from '../model/Pagination';
 import { Listing, ListingFormValues } from '../model/ListingAggregate/Listing';
 import { Job, JobFormValues, JobMediaDto } from '../model/Job';
 import { CalendarEvent } from '../model/CalendarEvent';
 import { JobInvoice, JobInvoiceFormValues, UserInvoice } from '../model/Invoice';
+import { router } from '../router/routes';
 
 // adding fake delay
 const sleep = (delay: number) => {
@@ -45,7 +45,7 @@ axios.interceptors.response.use(
           store.featureStore.setToast("show warn", data);
         }
         if (config.method === "get" && data.errors.hasOwnProperty("id")) {
-          history.push("/not-found");
+          router.navigate("/not-found");
         }
         if (data.errors) {
           const validationStateErrors = [];
@@ -64,11 +64,11 @@ axios.interceptors.response.use(
         }
         break;
       case 404:
-        history.push("/not-found");
+        router.navigate("/not-found");
         break;
       case 500:
         store.commonStore.setServerError(data);
-        history.push("/server-error");
+        router.navigate("/server-error");
         break;
     }
     return Promise.reject(error);
@@ -112,6 +112,8 @@ const Listings = {
   listAll: () => requests.get<Listing[]>("/listing/all"),
   list: (params: URLSearchParams) => axios.get<PaginatedResult<Listing[]>>("/listing", { params }).then(responseBody),
   details: (id: string) => requests.get<Listing>(`/listing/${id}`),
+  detailsByRef: (listingReference: string) => requests.get<Listing>(`/ref/${listingReference}`),
+  detailsByUrl: (sourceUri: string) => requests.get<Listing>(`/uri/${sourceUri}`),
   getMax: () => requests.get<MaxValue[]>("/listing/max"),
   create: (companyId: string, listing: ListingFormValues) => requests.post<Listing>(`/listing/${companyId}`, listing),
   update: (listing: ListingFormValues) => requests.put<Listing>(`/listing/${listing.id}`, listing),
