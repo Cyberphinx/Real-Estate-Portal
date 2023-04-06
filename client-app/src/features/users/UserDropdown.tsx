@@ -5,10 +5,9 @@ import { useStore } from "../../app/stores/store";
 import { Link } from "react-router-dom";
 
 export default observer(function UserDropdown() {
-    const { userStore, featureStore, companyStore, listingStore, modalStore, profileStore } = useStore();
+    const { userStore, featureStore, companyStore, listingStore, profileStore } = useStore();
     const { logout, user } = userStore;
-    const { setActiveFeature, setActiveAgencyPanel } = featureStore;
-    const { myCompany, } = companyStore;
+    const { setActiveFeature } = featureStore;
     const { cancelSelectListing } = listingStore;
     const { cancelSelectCompany } = companyStore;
     const { setActiveTab } = profileStore;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './SignUp.css';
 import { observer } from "mobx-react-lite";
 import { useStore } from '../../../app/stores/store';

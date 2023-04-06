@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 // custom hook to make React Apps responsive
 // To use the hook, we just need to import it where we need, call it, and use the width wherever we want to hide or show certain elements

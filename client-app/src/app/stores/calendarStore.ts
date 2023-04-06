@@ -1,4 +1,3 @@
-import { history } from '../../index';
 import { runInAction } from 'mobx';
 import { makeAutoObservable } from 'mobx';
 import agent from '../api/agent';

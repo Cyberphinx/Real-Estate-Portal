@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import LoadingComponent from "../../../../app/common/loading/LoadingComponent";
 import priceFormatter from "../../../../app/common/PriceFormatter";
@@ -14,13 +14,11 @@ import './Watchlist.css';
 
 
 export default observer(function Watchlist() {
-    const { profileStore, agentListingStore, userStore, featureStore, companyStore } = useStore();
-    const { userCompanies, loadUserCompanies, loadingUserCompanies, activeTab } = profileStore;
-    const { user, isLoggedIn } = userStore;
+    const { agentListingStore, featureStore, companyStore } = useStore();
     const { loadAgentListings, loadingAgentListings, agentListings, predicate, setPredicate,
         setPagingParams, loadingNext, setLoadingNext, pagination, totalCount, countAgentListings } = agentListingStore;
     const { setActiveFeature } = featureStore;
-    const { loadCompany, loadingCompany } = companyStore;
+    const { loadingCompany } = companyStore;
 
     const lifecycleStyle = (listing: Stock) => {
         switch (listing.lifeCycleStatus.toString()) {
@@ -46,30 +44,30 @@ export default observer(function Watchlist() {
     }
 
 
-    const bedsRef = useRef(null);
-    const [bedsPanel, setBedsPanel] = useDetectOutsideClick(bedsRef, false);
-    const toggleBeds = () => {
-        setBedsPanel(!bedsPanel);
-    };
+    // const bedsRef = useRef(null);
+    // const [bedsPanel, setBedsPanel] = useDetectOutsideClick(bedsRef, false);
+    // const toggleBeds = () => {
+    //     setBedsPanel(!bedsPanel);
+    // };
 
-    const priceRef = useRef(null);
-    const [pricePanel, setPricePanel] = useDetectOutsideClick(priceRef, false);
-    const togglePrice = () => {
-        setBedsPanel(false);
-        setPricePanel(!pricePanel);
-    };
+    // const priceRef = useRef(null);
+    // const [pricePanel, setPricePanel] = useDetectOutsideClick(priceRef, false);
+    // const togglePrice = () => {
+    //     setBedsPanel(false);
+    //     setPricePanel(!pricePanel);
+    // };
 
-    const typesRef = useRef(null);
-    const [typesPanel, setTypesPanel] = useDetectOutsideClick(typesRef, false);
-    const toggleTypes = () => {
-        setBedsPanel(false);
-        setPricePanel(false);
-        setTypesPanel(!typesPanel);
-    };
+    // const typesRef = useRef(null);
+    // const [typesPanel, setTypesPanel] = useDetectOutsideClick(typesRef, false);
+    // const toggleTypes = () => {
+    //     setBedsPanel(false);
+    //     setPricePanel(false);
+    //     setTypesPanel(!typesPanel);
+    // };
 
-    const sortingRef = useRef(null);
-    const [sortingActive, setSortingActive] = useDetectOutsideClick(sortingRef, false);
-    const toggleSorting = () => setSortingActive(!sortingActive);
+    // const sortingRef = useRef(null);
+    // const [sortingActive, setSortingActive] = useDetectOutsideClick(sortingRef, false);
+    // const toggleSorting = () => setSortingActive(!sortingActive);
 
 
 
@@ -101,7 +99,7 @@ export default observer(function Watchlist() {
                 </li>
 
                 <li className='view-listings__filters-item'>
-                    <div ref={typesRef}>
+                    {/* <div ref={typesRef}>
                         <button
                             className={typesPanel ? "view-listings__filters-button-selected"
                                 : (predicate.has("propertyTypes") ? "view-listings__filters-button-selected"
@@ -114,7 +112,7 @@ export default observer(function Watchlist() {
                             onChange={(items: string[]) => setPredicate("propertyTypes", items)}
                             predicate={predicate}
                         />}
-                    </div>
+                    </div> */}
                 </li>
 
                 <li className='view-listings__filters-item'>

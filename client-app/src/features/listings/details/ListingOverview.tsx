@@ -1,7 +1,7 @@
 import React, { SyntheticEvent } from "react";
 import { Link } from "react-router-dom";
 import { Listing } from "../../../app/model/ListingAggregate/Listing";
-import { ListingMediaDto } from "../../../app/model/ListingAggregate/ListingObjects";
+import { KeyContact, ListingMediaDto } from "../../../app/model/ListingAggregate/ListingObjects";
 import './ListingOverview.css';
 import { lifeCycleStatusText, rentFrequency } from "../../../app/model/ListingAggregate/ListingEnums";
 import { useStore } from "../../../app/stores/store";
@@ -25,6 +25,8 @@ export default observer(function ListingOverview({ listing }: Props) {
     const listingBigImages = listing.listingMedia.filter(x => x.type.toString() === "Image" && x.id.startsWith('Sanctum/img'))
     const listingThumbnails = listing.listingMedia.filter(x => x.type.toString() === "Image" && x.id.startsWith('Sanctum/tbn'))
     const listingDocuments = listing.listingMedia.filter(x => x.type.toString() === "Document").sort();
+
+    const transaction = listing.pricing.transactionType.toString();
 
     const placeholder = 'https://res.cloudinary.com/dwcsdudyn/image/upload/v1674919816/Placeholder/Placeholder_view_vector_uufvu4.svg';
 
@@ -52,6 +54,17 @@ export default observer(function ListingOverview({ listing }: Props) {
         }
         else {
             return null;
+        }
+    }
+    
+    function getStatus() {
+        switch (transaction) {
+            case 'Sale':
+                return 'For Sale';
+            case 'Rent':
+                return 'For Rent';  
+            default:
+                return '';
         }
     }
 
@@ -105,10 +118,13 @@ export default observer(function ListingOverview({ listing }: Props) {
                 </div>
             </section>}
             <article className="header-container">
+                <span style={{ fontSize: "1.25rem", fontWeight: "bold" }}>{transaction === "Sale" && listing.pricing.priceQualifier.toString()} </span>
                 <span style={{ fontSize: "1.25rem", fontWeight: "bold" }}>{price}</span>
                 {(listing?.pricing.transactionType.toString() === "Rent") && <span style={{ fontSize: "1.25rem" }}> {price === 'POA' ? null : rentFrequency(listing!)} </span>}
-                <span style={{ fontSize: "1.25rem", fontWeight: "bold" }}> {listing.pricing.transactionType.toString() === "Sale" && listing.pricing.priceQualifier.toString()}</span>
-                <p style={{ fontSize: "1.25rem" }}>Status: <b>{lifeCycleStatusText(listing)}</b></p>
+                
+                <p style={{ fontSize: "1.25rem" }}>Status:
+                    <b> {lifeCycleStatusText(listing) === 'Other' ? getStatus() : lifeCycleStatusText(listing)}</b>
+                </p>
 
                 <p style={{ fontSize: "1.125rem" }}>
                     {listing!.totalBedrooms > 0 && <span>{listing!.totalBedrooms} beds </span>}
@@ -116,9 +132,20 @@ export default observer(function ListingOverview({ listing }: Props) {
                     {listing.propertyType && PascalToNormal(listing.propertyType.toString())}
                 </p>
                 <p style={{ fontSize: "1rem" }}>Address: {listing.listingLocation.displayAddress}</p>
-                <p>Property agent: {listing.company.displayName}</p>
-                {/* <p style={{ fontSize: "1rem" }}>Listing reference: {listing.listingReference}</p> */}
-                {/* <p style={{ fontSize: "1rem" }}>{listing.sourceUri}</p> */}
+                {listing.keyContacts && listing.keyContacts.length > 0 ?
+                    listing.keyContacts.map((contact: KeyContact) => (
+                        <div key={contact.id}>
+                            <p style={{ fontSize: "1rem" }}>Agent: {listing.company.displayName} - {contact.name}</p>
+                            <p style={{ fontSize: "1rem" }}>Phone: {contact.phone}</p>
+                            <p style={{ fontSize: "1rem" }}>Email: {contact.email}</p>
+                        </div>
+                    ))
+                    : <div>
+                        <p>Agent: {listing.company.displayName}</p>
+                        <p>Phone: {listing.company.companyContacts.phone}</p>
+                        <p>Email: {listing.company.companyContacts.email}</p>
+                    </div>
+                }
             </article>
             {listing.summaryDescription && <article className="header-container">
                 <p style={{ fontSize: "1.125rem" }}>{listing.summaryDescription}</p>

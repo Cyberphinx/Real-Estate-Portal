@@ -13,7 +13,7 @@ export default observer(function Price({ onChange }: Props) {
     const { listingStore } = useStore();
     const { predicate, maxValues } = listingStore;
 
-    const [minMax, setMinMax] = useState<string[]>([]);
+    // const [minMax, setMinMax] = useState<string[]>([]);
 
     function handleSetMinMax(min: number | string, max: number | string) {
         let newMinMax: string[] = [];
@@ -26,7 +26,7 @@ export default observer(function Price({ onChange }: Props) {
             else max = 0;
         }
         newMinMax = [min.toString(), max.toString()];
-        setMinMax(newMinMax);
+        // setMinMax(newMinMax);
         onChange(newMinMax);
     }
 

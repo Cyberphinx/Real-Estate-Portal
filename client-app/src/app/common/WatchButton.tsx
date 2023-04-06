@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import React, { SyntheticEvent, useEffect, useState } from "react";
+import React, { SyntheticEvent, useState } from "react";
 import LoginForm from "../../features/users/LoginForm";
 import { Listing } from "../model/ListingAggregate/Listing";
 import { WatcherListingDto } from "../model/Profile";

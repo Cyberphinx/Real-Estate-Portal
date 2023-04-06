@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import './CompanyMarker.css';
 import { Marker, useMap, Tooltip } from 'react-leaflet';
 import L from "leaflet";
@@ -55,21 +55,39 @@ export default observer(function CompanyMarker({ points }: Props) {
         else return icon;
     };
 
-    // get map bounds
-    function updateMap() {
-        const b: L.LatLngBounds = map.getBounds();
+    // update map in response to user moves
+    const onMove = useCallback(() => {
+        // get map bounds 
+        const b = map.getBounds();
         setBounds([
             b.getSouthWest().lng,
             b.getSouthWest().lat,
             b.getNorthEast().lng,
-            b.getNorthEast().lat
+            b.getNorthEast().lat,
         ]);
         setZoom(map.getZoom());
-    }
+    }, [map, setZoom, setBounds]);
 
+    // load map initially
     useEffect(() => {
-        updateMap();
-    }, []);
+        // get map bounds
+        const b = map.getBounds();
+        setBounds([
+            b.getSouthWest().lng,
+            b.getSouthWest().lat,
+            b.getNorthEast().lng,
+            b.getNorthEast().lat,
+        ]);
+        setZoom(map.getZoom());
+    }, [map, setZoom, setBounds]);
+
+    // load map when it moves
+    useEffect(() => {
+        map.on("move", onMove);
+        return () => {
+            map.off("move", onMove);
+        };
+    }, [map, onMove]);
 
     const { clusters, supercluster } = useSupercluster({
         points: points,
@@ -77,8 +95,6 @@ export default observer(function CompanyMarker({ points }: Props) {
         zoom: zoom,
         options: { radius: 100, maxZoom: 20 }
     });
-
-    map.on("move", updateMap);
 
     function leavesOverlap(id: any) {
         const leaves = supercluster.getLeaves(id, Infinity, 0);
@@ -171,9 +187,9 @@ export default observer(function CompanyMarker({ points }: Props) {
                         }}
                     >
                         <Tooltip direction="top" offset={[3, -3]}>
-                            <b>{cluster.properties.company.displayName}</b>
-                            <p style={{ margin: "0px", padding: "0px", fontSize: "10px", color: "grey" }}>#{cluster.properties.company.companyReference}</p>
-                            <p style={{ margin: "0px", padding: "0px", fontSize: "10px" }}>Listings: {cluster.properties.company.listingsCount}</p>
+                            <b style={{ margin: "0px", padding: "0px", fontSize: "1rem" }}>{cluster.properties.company.displayName}</b>
+                            <p style={{ margin: "0px", padding: "0px", fontSize: "0.85rem", color: "grey" }}>#{cluster.properties.company.companyReference}</p>
+                            <p style={{ margin: "0px", padding: "0px", fontSize: "0.85rem" }}>Listings: {cluster.properties.company.listingsCount}</p>
                         </Tooltip>
                     </Marker>
                 );

@@ -1,4 +1,4 @@
-import React, { RefObject, useRef, useState } from "react";
+import React, { RefObject, useRef } from "react";
 import './MainMap.css';
 import { MapContainer, TileLayer, ZoomControl, LayersControl } from 'react-leaflet'
 import { observer } from "mobx-react-lite";
@@ -21,7 +21,7 @@ interface Props {
 }
 
 export default observer(function MainMap({ points, clusters, supercluster, companyPoints }: Props) {
-    const { featureStore, listingStore, companyStore, mapStore } = useStore();
+    const { listingStore, companyStore, mapStore } = useStore();
     const { selectedListing } = listingStore;
     const { selectedCompany } = companyStore;
     const { displayAgents } = mapStore;

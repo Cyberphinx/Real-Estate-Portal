@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import './MediaUpload.css';
 import { useParams } from "react-router-dom";
 import { useStore } from "../../stores/store";
@@ -37,6 +37,7 @@ export default observer(function MediaUploadSimple({ uploadMedia }: Props) {
                     files.map((file: any) => (
                         <div key={file.path} id='media-upload__preview-wrapper' style={{ position: 'relative' }}>
                             <img className="media-upload__preview"
+                                alt="listing-preview"
                                 style={file.size < 75000 ? { border: '3px solid #FF1E1E', margin: '-3px' } : {}}
                                 src={file.preview} />
                             <span className="media-upload__preview-label">File size: {FormatBytes(file.size)}

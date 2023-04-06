@@ -1,17 +1,13 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import './RemovalistDashboard.css';
 import { observer } from "mobx-react-lite";
-import { GeoSearchControl, LocationIQProvider } from "leaflet-geosearch";
-import L from "leaflet";
 import { v4 as uuid } from 'uuid';
-import { nanoid } from "nanoid";
 import { accountTypeSwitch, User } from "../../../../app/model/User";
 import { useStore } from "../../../../app/stores/store";
 import Calendar, { Detail } from "react-calendar";
 import { Job } from "../../../../app/model/Job";
 import { dateFormatterShort } from "../../../../app/common/HelperFunctions";
 import { CalendarEvent } from "../../../../app/model/CalendarEvent";
-import { runInAction } from "mobx";
 
 interface Props {
     user: User | null;
@@ -21,7 +17,7 @@ interface Props {
 
 export default observer(function RemovalistDashboard({ user, jobs, allJobs }: Props) {
     const { profileStore, removalistJobStore, calendarStore } = useStore();
-    const { profile, headquarter } = profileStore;
+    const { headquarter } = profileStore;
     const { setPredicate, predicate, nonExistentDate, loadingJobs } = removalistJobStore;
     const { events, createEvent, deleteEvent, loading } = calendarStore;
 

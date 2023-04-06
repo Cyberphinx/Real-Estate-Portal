@@ -31,7 +31,7 @@ export default function LifeCycleTag({ listing }: Props) {
             case "OffMarket":
                 return { backgroundColor: '#dcdcdc' }
             case "Other":
-                return { backgroundColor: '#dcdcdc' }
+                return { display: 'none' }
             default:
                 return { backgroundColor: '#FFED00' }
         }

@@ -10,7 +10,7 @@ interface Props {
 }
 
 export default observer(function Locate({selectedItem}: Props) {
-    const {mapStore:{lat, long, setLat, setLong}} = useStore();
+    const {mapStore:{setLat, setLong}} = useStore();
     const map = useMap();
 
     // const flyBack = useCallback(() => {

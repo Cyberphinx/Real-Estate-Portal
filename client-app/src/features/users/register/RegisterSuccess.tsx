@@ -8,7 +8,7 @@ import './SignUp.css';
 export default observer(function RegisterSuccessModal() {
     const { featureStore, modalStore } = useStore();
     const { setToast } = featureStore;
-    const { closeModal, openModal } = modalStore;
+    const { closeModal } = modalStore;
 
     const email = useQuery().get('email') as string;
 

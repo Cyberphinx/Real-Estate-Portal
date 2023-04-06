@@ -7,7 +7,7 @@ export function useHorizontalScroll() {
     const el: any = elRef.current;
     if (el) {
       const onWheel = (e: any) => {
-        if (e.deltaY == 0) return;
+        if (e.deltaY === 0) return;
         e.preventDefault();
         el.scrollTo({
           left: el.scrollLeft + e.deltaY,

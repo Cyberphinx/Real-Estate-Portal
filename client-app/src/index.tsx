@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { RouterProvider, unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
+import { RouterProvider } from 'react-router-dom';
 import { store, StoreContext } from './app/stores/store';
 import {createBrowserHistory} from 'history';
 import { router } from './app/router/routes';

@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import './ListView.css';
 import { observer } from "mobx-react-lite";
 import { useStore } from '../../app/stores/store';
 import { PagingParams } from '../../app/model/Pagination';
-import ListingFilters from './filters/ListingFilters';
 import LoadingPlaceholder from '../../app/common/loading/LoadingPlaceholder';
 import ListingCounter from './filters/ListingCounter';
 import ListingPaging from './ListingPaging';

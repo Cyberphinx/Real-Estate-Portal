@@ -1,4 +1,4 @@
-import { CompanyAddress, RedressScheme } from './Company';
+import { CompanyAddress } from './Company';
 import { AccessStatus } from './AccessStatus';
 
 export interface User {

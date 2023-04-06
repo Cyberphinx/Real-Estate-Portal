@@ -21,13 +21,10 @@ interface Props {
 }
 
 export default observer(function RemovalsJobForm({ values, setFieldValue, isValid, isSubmitting }: Props) {
-    const { featureStore, userStore, removalistJobStore, calendarStore } = useStore();
+    const { featureStore, removalistJobStore, calendarStore } = useStore();
     const { setActiveFeature } = featureStore;
-    const { user, isLoggedIn } = userStore;
     const { allJobs } = removalistJobStore;
     const { events } = calendarStore;
-
-    const [showContactsInputs, setShowContactsInputs] = useState<boolean>();
 
     const [marks, setMarks] = useState<Set<string>>(new Set());
     const greyDates = useCallback(() => {

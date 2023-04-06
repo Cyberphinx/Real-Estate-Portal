@@ -14,7 +14,7 @@ export default observer(function ListingCounter({ loadMore }: Props) {
 
     const notPaginated = pagination?.totalPages === pagination?.currentPage;
     const sameNumbers = combinedListing.length === listings.length;
-    const currentTotalInView = isLocked || sameNumbers ? "" : `${combinedListing.length} in map area among `;
+    // const currentTotalInView = isLocked || sameNumbers ? "" : `${combinedListing.length} in map area among `;
 
     return (
         <div className="listing-counter">

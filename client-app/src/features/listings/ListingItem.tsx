@@ -5,9 +5,7 @@ import { observer } from "mobx-react-lite";
 import { useStore } from "../../app/stores/store";
 import { rentFrequencyShort } from "../../app/model/ListingAggregate/ListingEnums";
 import { ListingMediaDto } from "../../app/model/ListingAggregate/ListingObjects";
-import WatchButton from "../../app/common/WatchButton";
 import LifeCycleTag from "../../app/common/tags/LifeCycleTag";
-import DateTag from "../../app/common/tags/DateTag";
 import PriceFormatter from "../../app/common/PriceFormatter";
 import { PascalToNormal, truncate } from "../../app/common/HelperFunctions";
 import { useHorizontalScroll } from "../../app/hooks/useHorizontalScroll";
@@ -20,7 +18,7 @@ interface Props {
 export default observer(function ListingItem({ listing, predicate }: Props) {
     const { mapStore, listingStore } = useStore();
     const { setActiveListing } = mapStore;
-    const { selectedListing, selectListing, selectedListingForImage, selectListingForImage, image, setImage, setImageNotFound } = listingStore;
+    const { selectedListing, selectListing, selectListingForImage, image, setImage, setImageNotFound } = listingStore;
 
     const price = PriceFormatter(listing!.pricing.price!, listing!.pricing.currency);
 
@@ -34,7 +32,7 @@ export default observer(function ListingItem({ listing, predicate }: Props) {
 
     function handleImage(event: SyntheticEvent, state: ListingMediaDto) {
         event.stopPropagation();
-        if (selectedListing != undefined) selectListing(listing.id);
+        if (selectedListing !== undefined) selectListing(listing.id);
         selectListingForImage(listing.id);
         let imageReference = state.id.substring(state.id.indexOf("_"), state.id.length);
         let img = listingImages.find(x => x.id === `Sanctum/img${imageReference}`);
@@ -42,37 +40,6 @@ export default observer(function ListingItem({ listing, predicate }: Props) {
     }
 
     const scrollRef = useHorizontalScroll();
-
-    // function handlePrev(event: SyntheticEvent) {
-    //     event.stopPropagation();
-
-    //     if (selectedListing != undefined) selectListing(listing.id);
-    //     selectListingForImage(listing.id);
-
-    //     let currentImage = listingBigImages!.indexOf(image!) < 0 ? mainImage! : image!;
-
-    //     if (listingBigImages!.indexOf(currentImage) === 0) return null;
-    //     else {
-    //         setImage(listingBigImages![listingBigImages!.indexOf(currentImage) - 1]);
-    //     }
-    // }
-
-    // function handleNext(event: SyntheticEvent) {
-    //     event.stopPropagation();
-
-    //     if (selectedListing != undefined) selectListing(listing.id);
-    //     selectListingForImage(listing.id);
-
-    //     let currentImage = listingBigImages!.indexOf(image!) < 0 ? mainImage! : image!;
-
-
-    //     if (listingBigImages!.indexOf(currentImage) < listingBigImages!.length - 1) {
-    //         setImage(listingBigImages![listingBigImages!.indexOf(currentImage) + 1]);
-    //     }
-    //     else {
-    //         return null;
-    //     }
-    // }
 
     return (
         <div className="cards"
@@ -103,12 +70,6 @@ export default observer(function ListingItem({ listing, predicate }: Props) {
                         <span className="img-numbering">Image {
                             listingBigImages!.indexOf(image!) === -1 ? listingBigImages!.indexOf(mainImage!) + 1 : listingBigImages!.indexOf(image!) + 1
                         } of {listingBigImages!.length}</span>
-                        {/* <button className="left-arr" onClick={(e) => handlePrev(e)}>
-                            <img className="left-ico" src="/assets/previous.svg" alt="previous" />
-                        </button>
-                        <button className="right-arr" onClick={(e) => handleNext(e)}>
-                            <img className="right-ico" src="/assets/next.svg" alt="next" />
-                        </button> */}
                     </div>
                     <div
                         className="carousel"

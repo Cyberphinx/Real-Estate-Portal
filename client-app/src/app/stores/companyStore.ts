@@ -1,8 +1,6 @@
-import { Stock } from './../model/Company';
 import { Company, CompanyFormValues } from '../model/Company';
 import { makeAutoObservable, reaction, runInAction } from "mobx";
 import agent from "../api/agent";
-import { history } from './../../index';
 import { store } from './store';
 import { Pagination, PagingParams } from '../model/Pagination';
 import { router } from '../router/routes';

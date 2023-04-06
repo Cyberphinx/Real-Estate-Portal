@@ -4,31 +4,28 @@ import { observer } from "mobx-react-lite";
 import { GeoSearchControl, LocationIQProvider } from "leaflet-geosearch";
 import L from "leaflet";
 import { accountTypeSwitch, User } from "../../../../app/model/User";
-import { useStore } from "../../../../app/stores/store";
 
 interface Props {
     user: User | null;
 }
 
 export default observer(function AgentDashboard({ user }: Props) {
-    const { profileStore } = useStore();
-    const { profile, headquarter } = profileStore;
     
     // LEAFLET START
     const apikey = process.env.REACT_APP_LOCATION_IQ;
     const locationIQLink = `https://{s}-tiles.locationiq.com/v3/streets/r/{z}/{x}/{y}.png?key=${apikey}`;
 
-    const apikeyTomtom = process.env.REACT_APP_TOMTOM;
-    const tomtomLink = `https://api.tomtom.com/map/1/tile/sat/main/{z}/{x}/{y}.jpg?key=${apikeyTomtom}`;
+    // const apikeyTomtom = process.env.REACT_APP_TOMTOM;
+    // const tomtomLink = `https://api.tomtom.com/map/1/tile/sat/main/{z}/{x}/{y}.jpg?key=${apikeyTomtom}`;
 
     const mapView = L.tileLayer(locationIQLink, { attribution: '&copy <a href="https://locationiq.com/?ref=maps">LocationIQ</a>' });
-    const satelliteView = L.tileLayer(tomtomLink, { attribution: '&copy <a href="https://www.tomtom.com/products/satellite-imagery/">TomTom</a>' });
+    // const satelliteView = L.tileLayer(tomtomLink, { attribution: '&copy <a href="https://www.tomtom.com/products/satellite-imagery/">TomTom</a>' });
 
-    var baseMaps = {
-        "Map view": mapView,
-        "Satellite view": satelliteView
-    };
-    var layerControl = L.control.layers(baseMaps);
+    // var baseMaps = {
+    //     "Map view": mapView,
+    //     "Satellite view": satelliteView
+    // };
+    // var layerControl = L.control.layers(baseMaps);
 
     const provider = new LocationIQProvider({
         params: {

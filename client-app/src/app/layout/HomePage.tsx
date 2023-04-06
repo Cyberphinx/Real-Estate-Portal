@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import './HomePage.css';
 import { useStore } from "../stores/store";
 import { observer } from "mobx-react-lite";
@@ -43,16 +43,20 @@ export default observer(function HomePage() {
         loadCompanies();
     }, [loadCompanies])
 
-    useEffect(() => {
-        if (isLoggedIn) {
-            loadUserListings(user!.username);
-        };
-    }, [isLoggedIn, user])
+    const loadUserLists = useCallback(() =>{
+        loadUserListings(user!.username);
+    }, [user, loadUserListings])
 
     useEffect(() => {
-        console.log(location.pathname);
+        if (isLoggedIn) {
+            loadUserLists();
+        };
+    }, [isLoggedIn])
+
+    useEffect(() => {
+        // console.log(location.pathname);
         if (location.pathname === "/account/verifyEmail") modalStore.openModal(<ConfirmEmail />);
-    }, [])
+    }, [location.pathname])
 
     // map data into "feature" GeoJson objects
     const points: GeoJSON.Feature[] = listings.map(

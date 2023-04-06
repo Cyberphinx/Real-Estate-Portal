@@ -1,6 +1,5 @@
-import { makeAutoObservable, runInAction } from 'mobx';
+import { makeAutoObservable } from 'mobx';
 import { Message } from "../model/Message";
-import { store } from './store';
 
 
 export default class MessageStore {

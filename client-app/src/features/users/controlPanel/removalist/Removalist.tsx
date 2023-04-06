@@ -12,7 +12,7 @@ interface Props {
 }
 
 export default observer(function Removalist({ user }: Props) {
-    const { profileStore, removalistJobStore, userStore, calendarStore, jobInvoiceStore } = useStore();
+    const { profileStore, removalistJobStore, userStore, calendarStore } = useStore();
     const { activeTab, setActiveTab, loadHeadquarter, loadProfile, loadingProfile } = profileStore;
     const { jobs, loadRemovalsJobs, allJobs, loadAllRemovalsJobs } = removalistJobStore;
     const { isLoggedIn } = userStore;

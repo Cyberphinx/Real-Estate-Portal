@@ -8,16 +8,15 @@ import {
 import { StripePaymentElementOptions } from "@stripe/stripe-js";
 import '.././SignUp.css';
 import { observer } from "mobx-react-lite";
-import { useStore } from "../../../../app/stores/store";
 
 
 export default observer(function StripeForm() {
-    const baseUrl = process.env.REACT_APP_BASE_URL;
+    // const baseUrl = process.env.REACT_APP_BASE_URL;
 
     const stripe = useStripe();
     const elements = useElements();
 
-    const [email, setEmail] = useState<string | undefined>('');
+    // const [email, setEmail] = useState<string | undefined>('');
     const [message, setMessage] = useState<string | undefined | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -93,7 +92,7 @@ export default observer(function StripeForm() {
         <form id="payment-form" onSubmit={handleSubmit}>
             <LinkAuthenticationElement
                 id="link-authentication-element"
-                onChange={(e: any) => setEmail(e.target.value)}
+                // onChange={(e: any) => setEmail(e.target.value)}
             />
             <PaymentElement id="payment-element" options={paymentElementOptions} />
             <br />

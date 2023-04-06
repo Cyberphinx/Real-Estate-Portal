@@ -6,7 +6,6 @@ import RegisterCompanyForm from './company/RegisterCompanyForm';
 import RegisterAgentStepOne from './agent/RegisterAgentStepOne';
 import RegisterAgentStepTwo from './agent/RegisterAgentStepTwo';
 import Stepper from './agent/agentStepper/Stepper';
-import { useStore } from '../../../app/stores/store';
 
 interface Props {
     isValid: boolean;

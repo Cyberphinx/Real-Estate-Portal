@@ -9,11 +9,10 @@ import MyTextInput from "../../../../../../app/common/form/MyTextInput";
 import {
     conditionOptions, cookerOptions, furnishedOptions, goodsOptions,
     heatingOptions, incentiveOptions, listedBuildingGradeOptions, parkingOptions,
-    propertyTypeOptions, spacesOptions, unitOfAreaOptions
+    propertyTypeOptions, unitOfAreaOptions
 } from "../../../../../../app/common/form/options";
 import { ListingFormValues } from "../../../../../../app/model/ListingAggregate/Listing";
-import { FeatureSpace, Incentive, Parking, WhiteGoods } from "../../../../../../app/model/ListingAggregate/ListingEnums";
-import { useStore } from "../../../../../../app/stores/store";
+import { Incentive, Parking, WhiteGoods } from "../../../../../../app/model/ListingAggregate/ListingEnums";
 import './ListingForms.css';
 import { Link, useParams } from "react-router-dom";
 

@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 import React, { SyntheticEvent, useRef, useState } from "react";
 import { dateFormatter } from "../../app/common/HelperFunctions";
-import { Job, JobMediaDto, NetworkDto } from "../../app/model/Job";
+import { Job, JobMediaDto } from "../../app/model/Job";
 import { useStore } from "../../app/stores/store";
 import './JobItem.css';
 
@@ -13,10 +13,10 @@ interface Props {
 export default observer(function JobItem({ job }: Props) {
     const { userStore, profileStore } = useStore();
 
-    const [image, setImage] = useState<JobMediaDto>(job!.jobMedia[0]);
+    // const [image, setImage] = useState<JobMediaDto>(job!.jobMedia[0]);
     function handleImage(event: SyntheticEvent, state: JobMediaDto) {
         event.stopPropagation();
-        setImage(state);
+        // setImage(state);
     }
 
     const scrollRef = useRef<any>(null);

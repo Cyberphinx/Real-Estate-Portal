@@ -8,7 +8,7 @@ import LoadingComponent from "../../../app/common/loading/LoadingComponent";
 import Nav from "../../../app/layout/Nav";
 import { InvoiceItem } from "../../../app/model/Invoice";
 import PriceFormatter from "../../../app/common/PriceFormatter";
-import { dateFormatter, dateFormatterShort } from "../../../app/common/HelperFunctions";
+import { dateFormatterShort } from "../../../app/common/HelperFunctions";
 
 export default observer(function ViewJobInvoice() {
     const { invoiceId } = useParams<string>();
@@ -196,12 +196,12 @@ export default observer(function ViewJobInvoice() {
                                     <div style={{ display: 'grid', gridTemplateRows: '1fr 1fr', gap:'1rem' }}>
                                         <a
                                             href={headquarter.termsAndConditions}
-                                            target="_blank" >
+                                            target="_blank" rel="noreferrer" >
                                             Click to view terms & conditions
                                         </a>
                                         <a
                                             href={headquarter.insurances.find(x => x.index === 0)?.insurancePolicy}
-                                            target="_blank" >
+                                            target="_blank" rel="noreferrer" >
                                             Click to view insurance policy
                                         </a>
                                     </div>

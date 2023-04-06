@@ -39,8 +39,6 @@ export default observer(function ListingMediaForm() {
         deleteMedia(listingId, media);
     }
 
-    const n = 8;
-
     return (
         <div>
             <Nav />

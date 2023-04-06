@@ -1,5 +1,5 @@
 import { UserCompanyDto } from './../model/Profile';
-import { runInAction, reaction } from 'mobx';
+import { runInAction } from 'mobx';
 import { makeAutoObservable } from 'mobx';
 import agent from '../api/agent';
 import { Profile, UserJobDto, WatcherListingDto } from '../model/Profile';

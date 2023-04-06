@@ -1,6 +1,6 @@
 import { Form, Formik } from "formik";
 import { observer } from "mobx-react-lite";
-import React, { MutableRefObject, useState } from "react";
+import React, { useState } from "react";
 import MyTextInput from "../../../../app/common/form/MyTextInput";
 import { useStore } from "../../../../app/stores/store";
 import './Bedrooms.css';
@@ -13,7 +13,7 @@ export default observer(function Bedrooms({ onChange }: Props) {
     const { listingStore } = useStore();
     const { predicate, maxValues } = listingStore;
 
-    const [minMax, setMinMax] = useState<string[]>([]);
+    // const [minMax, setMinMax] = useState<string[]>([]);
 
     function handleSetMinMax(min: number | string, max: number | string) {
         let newMinMax: string[] = [];
@@ -26,7 +26,7 @@ export default observer(function Bedrooms({ onChange }: Props) {
             else max = 0;
         }
         newMinMax = [min.toString(), max.toString()];
-        setMinMax(newMinMax);
+        // setMinMax(newMinMax);
         onChange(newMinMax);
     }
 

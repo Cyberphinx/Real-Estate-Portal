@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { useDetectOutsideClick } from "../../../app/hooks/useDetectOutsideClick";
 import { useStore } from "../../../app/stores/store";
 import './ListingFilters.css';
@@ -7,11 +7,10 @@ import Price from "./parameters/Price";
 import PropertyTypes from "./parameters/PropertyTypes";
 import Bedrooms from "./parameters/Bedrooms";
 import OrderBy from "./parameters/OrderBy";
-import { useDebounce } from "../../../app/hooks/useDebounce";
 
 export default observer(function ListingFilters() {
     const { listingStore, featureStore } = useStore();
-    const { predicate, setPredicate, loadListingByRef } = listingStore;
+    const { predicate, setPredicate } = listingStore;
     const { isLocked, setLocked } = featureStore;
 
     const bedsRef = useRef(null);

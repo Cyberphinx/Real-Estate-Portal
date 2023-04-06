@@ -1,8 +1,7 @@
 import { observer } from "mobx-react-lite";
 import './AgentsLayerControl.css';
-import React, { SyntheticEvent } from "react";
+import React from "react";
 import { useStore } from "../../app/stores/store";
-import LoadingComponent from "../../app/common/loading/LoadingComponent";
 
 export default observer(function AgentsLayerControl() {
     const { mapStore, companyStore } = useStore();

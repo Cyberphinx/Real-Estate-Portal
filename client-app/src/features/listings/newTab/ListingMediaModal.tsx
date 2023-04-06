@@ -1,7 +1,6 @@
 import React from "react";
 import './ListingMediaModal.css';
 import { ListingMediaDto } from "../../../app/model/ListingAggregate/ListingObjects";
-import Close from "../../map/toolbar/Close";
 import { useStore } from "../../../app/stores/store";
 import { observer } from "mobx-react-lite";
 

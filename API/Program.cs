@@ -63,7 +63,10 @@ app.UseCsp(opt => opt
         "http://www.w3.org/2000/svg",
         "https://d29a6tqnmy116t.cloudfront.net",
         "https://www.rogerparry.net/",
-        "https://mr1.homeflow-assets.co.uk/"
+        "https://mr0.homeflow-assets.co.uk/",
+        "https://mr1.homeflow-assets.co.uk/",
+        "https://mr2.homeflow-assets.co.uk/",
+        "https://mr3.homeflow-assets.co.uk/"
         ))
     .ScriptSources(s => s.Self().CustomSources(
         "https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.79.0/dist/L.Control.Locate.min.js",

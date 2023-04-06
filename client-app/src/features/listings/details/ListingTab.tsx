@@ -6,7 +6,6 @@ import { useStore } from "../../../app/stores/store";
 import ListingBookmark from "./ListingBookmark";
 import ListingOverview from "./ListingOverview";
 import ListingDetails from "./ListingDetails";
-import ListingContact from "./ListingContact";
 import WatchButton from "../../../app/common/WatchButton";
 import ListingChangeLog from "./ListingChangeLog";
 
@@ -25,7 +24,6 @@ export default observer(function ListingTab({ listing }: Props) {
     const features = [
         <ListingOverview listing={listing!} />,
         <ListingDetails listing={listing!} />,
-        <ListingContact listing={listing} />,
         <ListingChangeLog listing={listing} />
     ]
 
@@ -36,8 +34,7 @@ export default observer(function ListingTab({ listing }: Props) {
                 <div style={{ margin: "0px 5px" }}>
                     <button className={tab === 0 ? "sticky-nav-button-active" : "sticky-nav-button"} onClick={() => setTab(0)}>Overview</button>
                     <button className={tab === 1 ? "sticky-nav-button-active" : "sticky-nav-button"} onClick={() => setTab(1)}>Details</button>
-                    <button className={tab === 2 ? "sticky-nav-button-active" : "sticky-nav-button"} onClick={() => setTab(2)}>Contact agent</button>
-                    <button className={tab === 3 ? "sticky-nav-button-active" : "sticky-nav-button"} onClick={() => setTab(3)}>Change Log</button>
+                    <button className={tab === 2 ? "sticky-nav-button-active" : "sticky-nav-button"} onClick={() => setTab(2)}>Change Log</button>
                 </div>
                 <div style={{ position: "absolute", top: "0.3rem", right: "3rem" }}>
                     <WatchButton listing={listing} />

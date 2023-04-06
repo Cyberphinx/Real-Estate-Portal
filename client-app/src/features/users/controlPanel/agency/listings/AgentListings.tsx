@@ -23,7 +23,7 @@ export default observer(function AgentListings() {
     const { setActiveFeature } = featureStore;
     const { loadCompany, loadingCompany } = companyStore;
 
-    const [currentBranch, setCurrentBranch] = useState<UserCompanyDto>();
+    // const [currentBranch, setCurrentBranch] = useState<UserCompanyDto>();
 
     const lifecycleStyle = (listing: Stock) => {
         switch (listing.lifeCycleStatus.toString()) {
@@ -51,7 +51,7 @@ export default observer(function AgentListings() {
         if (userCompanies.length > 0) {
             setPredicate("companyId", userCompanies[0].id);
             countAgentListings(userCompanies[0].id);
-            setCurrentBranch(userCompanies[0]);
+            // setCurrentBranch(userCompanies[0]);
         };
     }, [loadUserCompanies, loadAgentListings, isLoggedIn, user, setPredicate, activeTab, userCompanies, countAgentListings]);
 
@@ -64,34 +64,34 @@ export default observer(function AgentListings() {
     function handleChangeBranch(companyId: string) {
         setPredicate("companyId", companyId);
         countAgentListings(companyId);
-        loadCompany(companyId).then((value: any) => setCurrentBranch(value));
+        // loadCompany(companyId).then((value: any) => setCurrentBranch(value));
     }
 
 
-    const bedsRef = useRef(null);
-    const [bedsPanel, setBedsPanel] = useDetectOutsideClick(bedsRef, false);
-    const toggleBeds = () => {
-        setBedsPanel(!bedsPanel);
-    };
+    // const bedsRef = useRef(null);
+    // const [bedsPanel, setBedsPanel] = useDetectOutsideClick(bedsRef, false);
+    // const toggleBeds = () => {
+    //     setBedsPanel(!bedsPanel);
+    // };
 
-    const priceRef = useRef(null);
-    const [pricePanel, setPricePanel] = useDetectOutsideClick(priceRef, false);
-    const togglePrice = () => {
-        setBedsPanel(false);
-        setPricePanel(!pricePanel);
-    };
+    // const priceRef = useRef(null);
+    // const [pricePanel, setPricePanel] = useDetectOutsideClick(priceRef, false);
+    // const togglePrice = () => {
+    //     setBedsPanel(false);
+    //     setPricePanel(!pricePanel);
+    // };
 
-    const typesRef = useRef(null);
-    const [typesPanel, setTypesPanel] = useDetectOutsideClick(typesRef, false);
-    const toggleTypes = () => {
-        setBedsPanel(false);
-        setPricePanel(false);
-        setTypesPanel(!typesPanel);
-    };
+    // const typesRef = useRef(null);
+    // const [typesPanel, setTypesPanel] = useDetectOutsideClick(typesRef, false);
+    // const toggleTypes = () => {
+    //     setBedsPanel(false);
+    //     setPricePanel(false);
+    //     setTypesPanel(!typesPanel);
+    // };
 
-    const sortingRef = useRef(null);
-    const [sortingActive, setSortingActive] = useDetectOutsideClick(sortingRef, false);
-    const toggleSorting = () => setSortingActive(!sortingActive);
+    // const sortingRef = useRef(null);
+    // const [sortingActive, setSortingActive] = useDetectOutsideClick(sortingRef, false);
+    // const toggleSorting = () => setSortingActive(!sortingActive);
 
 
 
@@ -146,7 +146,7 @@ export default observer(function AgentListings() {
                 </li>
 
                 <li className='view-listings__filters-item'>
-                    <div ref={typesRef}>
+                    {/* <div ref={typesRef}>
                         <button
                             className={typesPanel ? "view-listings__filters-button-selected"
                                 : (predicate.has("propertyTypes") ? "view-listings__filters-button-selected"
@@ -159,7 +159,7 @@ export default observer(function AgentListings() {
                             onChange={(items: string[]) => setPredicate("propertyTypes", items)}
                             predicate={predicate}
                         />}
-                    </div>
+                    </div> */}
                 </li>
 
                 <li className='view-listings__filters-item'>

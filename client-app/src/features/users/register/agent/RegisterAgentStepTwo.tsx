@@ -11,7 +11,7 @@ interface Props {
 }
 
 export default observer(function RegisterAgentStepTwo({ isValid, dirty, isSubmitting, setFieldValue, setFormType }: Props) {
-    const [paymentType, setPaymentType] = useState<number>(0);
+    // const [paymentType, setPaymentType] = useState<number>(0);
 
     useEffect(() => {
         setFieldValue("invoiceAmount", 600000);
@@ -19,17 +19,17 @@ export default observer(function RegisterAgentStepTwo({ isValid, dirty, isSubmit
         setFieldValue("invoiceDescription", `One-off payment of £6000.`);
     }, [])
 
-    const amount = [
-        6600,
-        1100,
-        550
-    ]
+    // const amount = [
+    //     6600,
+    //     1100,
+    //     550
+    // ]
 
-    const duration = [
-        "one-off payment",
-        "for 6 months",
-        "for 1 year"
-    ]
+    // const duration = [
+    //     "one-off payment",
+    //     "for 6 months",
+    //     "for 1 year"
+    // ]
 
     return (
         <div>

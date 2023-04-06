@@ -1,6 +1,6 @@
-import { makeAutoObservable, reaction, runInAction } from "mobx";
+import { makeAutoObservable, reaction} from "mobx";
 import agent from "../api/agent";
-import { Job, JobFormValues } from "../model/Job";
+import { Job } from "../model/Job";
 import { Pagination, PagingParams } from "../model/Pagination";
 
 export default class RemovalistJobStore {

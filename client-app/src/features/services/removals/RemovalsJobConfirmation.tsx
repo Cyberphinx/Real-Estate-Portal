@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./CreateRemovalsJob.css";
 import { observer } from "mobx-react-lite";
 import { Job } from "../../../app/model/Job";
@@ -10,11 +10,9 @@ import LoadingComponent from "../../../app/common/loading/LoadingComponent";
 
 export default observer(function CreateRemovalsJob() {
     const { id } = useParams<string>();
-    const { removalistJobStore, jobStore, userStore } = useStore();
+    const {  jobStore, } = useStore();
     const { selectedJob, loadJobWithLeads, loadingJob } = jobStore;
-    const { isLoggedIn } = userStore;
 
-    const [currentJob, setCurrentJob] = useState<Job>();
 
     useEffect(() => {
         if (id) loadJobWithLeads(id);

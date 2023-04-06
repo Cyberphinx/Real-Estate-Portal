@@ -2,7 +2,6 @@ import { JobInvoice } from './Invoice';
 import { Location } from './Location';
 import { MediaType } from './Media';
 import { Message } from './Message';
-import { v4 as uuid } from 'uuid';
 
 export enum JobLifeCycle {
     Open,

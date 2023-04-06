@@ -8,7 +8,6 @@ import { rentFrequency, rentFrequencyShort } from "../../app/model/ListingAggreg
 import nFormatter from "../../app/common/nFormatter";
 import priceFormatter from "../../app/common/PriceFormatter";
 import * as ReactDOMServer from 'react-dom/server';
-import AgencyTag from "../../app/common/tags/AgencyTag";
 import { ListingMediaDto } from "../../app/model/ListingAggregate/ListingObjects";
 import { PascalToNormal } from "../../app/common/HelperFunctions";
 

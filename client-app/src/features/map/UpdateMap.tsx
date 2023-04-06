@@ -12,7 +12,7 @@ export default function UpdateMap({listing}: Props) {
     const { lat, long, setLat, setLong } = mapStore;
     const {isLocked} = featureStore;
 
-    const map = useMap();
+    // const map = useMap();
 
     useEffect(() => {
         if (listing && isLocked) {

@@ -1,5 +1,5 @@
 import React, { SyntheticEvent, useEffect, useRef, useState } from "react";
-import '../../listings/details/ListingOverview.css';
+import './CompanyOverview.css';
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
 import { Company } from "../../../app/model/Company";
@@ -17,10 +17,10 @@ export default observer(function CompanyOverview({ company }: Props) {
         setCompanyImage(state);
     }
     const scrollRef = useRef<any>(null);
-    const scroll = (event: SyntheticEvent, scrollOffset: number) => {
-        event.stopPropagation();
-        scrollRef.current.scrollLeft += scrollOffset;
-    };
+    // const scroll = (event: SyntheticEvent, scrollOffset: number) => {
+    //     event.stopPropagation();
+    //     scrollRef.current.scrollLeft += scrollOffset;
+    // };
     
     useEffect(() => {
         setCompanyImage(company!.companyMedia[0]);
@@ -74,8 +74,8 @@ export default observer(function CompanyOverview({ company }: Props) {
                                 </div>
                             ))}
                         </section>
-                        <button className="left-arrow-thumbnails" onClick={(e) => scroll(e, -240)}><img className="left-icon" src="/assets/previous.svg" alt="previous" /></button>
-                        <button className="right-arrow-thumbnails" onClick={(e) => scroll(e, 240)}><img className="right-icon" src="/assets/next.svg" alt="next" /></button>
+                        {/* <button className="left-arrow-thumbnails" onClick={(e) => scroll(e, -240)}><img className="left-icon" src="/assets/previous.svg" alt="previous" /></button> */}
+                        {/* <button className="right-arrow-thumbnails" onClick={(e) => scroll(e, 240)}><img className="right-icon" src="/assets/next.svg" alt="next" /></button> */}
                     </div>
                 </section>
 
@@ -84,6 +84,7 @@ export default observer(function CompanyOverview({ company }: Props) {
                         <p>Phone: {company?.companyContacts.phone}</p>
                         <p>Email: {company?.companyContacts.email}</p>
                         <p>Address: {address}</p>
+                        <p>Property listings: {company?.listingsCount}</p>
                 </article>
             </div>
     );

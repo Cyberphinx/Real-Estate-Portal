@@ -5,7 +5,6 @@ import Close from "./Close";
 import Locate from "./Locate";
 import NewTab from "./NewTab";
 import './Toolbar.css';
-import Watch from "./Watch";
 
 export default function Toolbar() {
     const {listingStore} = useStore()

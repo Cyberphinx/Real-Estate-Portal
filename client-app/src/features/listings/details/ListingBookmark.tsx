@@ -10,8 +10,7 @@ interface Props {
 
 export default observer(function ListingBookmark({ multiListings }: Props) {
     const { listingStore } = useStore();
-    const { selectListing, selectedListing, selectListingForImage, setImage,
-        cancelSelectListingForImage } = listingStore;
+    const { selectListing, selectedListing, selectListingForImage, setImage } = listingStore;
 
     return (
         <div className="listing-bookmark">
